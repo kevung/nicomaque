@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/internal/dores"
-	"github.com/PileOfCells/backgammon-tournoi/rules"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	"github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/internal/dores"
+	"github.com/kevung/nicomaque/rules"
+	"github.com/kevung/nicomaque/sim"
 )
 
 // testdata/prevision.json fige Forecast : un journal coupé en cours de tournoi, l'instant de la

@@ -3,7 +3,7 @@ package tournoi
 import (
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // Le rythme d'un tournoi : enveloppes de rules (rules/prevision.go) sur l'état.

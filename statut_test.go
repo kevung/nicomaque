@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	tournoi "github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/sim"
 )
 
 // Statut d'un joueur (statut.go) : « est-ce que je joue ? ».

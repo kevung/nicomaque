@@ -9,8 +9,8 @@ import (
 	"sort"
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // PGain : probabilité que A (PR a) batte B (PR b) en N points, formule Elo/FIBS (3 PR = 100 Elo).

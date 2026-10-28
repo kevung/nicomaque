@@ -5,7 +5,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // Propose renvoie les actions à effectuer maintenant. Le TD en confirme tout ou partie ; chaque

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
+	tournoi "github.com/kevung/nicomaque"
 )
 
 // lanceUnMatch : lance la première proposition et renvoie l'événement correspondant.

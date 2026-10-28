@@ -21,10 +21,10 @@ import (
 	"strings"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/players"
-	"github.com/PileOfCells/backgammon-tournoi/render"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	tournoi "github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/players"
+	"github.com/kevung/nicomaque/render"
+	"github.com/kevung/nicomaque/sim"
 )
 
 var formats = map[string]tournoi.Config{

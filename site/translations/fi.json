@@ -3,7 +3,7 @@
   "index": [
     "Nicomaque",
     "**Nicomaque** on backgammon-turnausten moottori. Se ei ole ohjelma, joka avataan: se on kirjasto, jota muut ohjelmat käyttävät turnauksen johtamiseen — pelaajien ilmoittamiseen, otteluparien muodostamiseen, kaavioiden ylläpitoon ja tulosluettelon tuottamiseen.",
-    "Se on kirjoitettu Go-kielellä ilman yhtään riippuvuutta, ja sen voi lukea kokonaan. Se julkaistaan vapaalla lisenssillä ja sen koodi on [GitHubissa](https://github.com/PileOfCells/backgammon-tournoi).",
+    "Se on kirjoitettu Go-kielellä ilman yhtään riippuvuutta, ja sen voi lukea kokonaan. Se julkaistaan vapaalla lisenssillä ja sen koodi on [GitHubissa](https://github.com/kevung/nicomaque).",
     "Mitä se tekee",
     "Turnauksenjohtaja viettää päivänsä vastaten yhteen ainoaan kysymykseen: *kuka pelaa ketä vastaan, juuri nyt, ja missä pöydässä?* Nicomaque vastaa tähän kysymykseen eikä mihinkään muuhun.",
     "Se ehdottaa milloin tahansa luetteloa toimista — aloita tämä ottelu tässä pöydässä, anna tämä vapaakierros, arvo tämä kaavio, siirry seuraavaan vaiheeseen, sulje turnaus. Johtaja vahvistaa ne, jotka haluaa. Jokaisesta vahvistuksesta tulee **tapahtuma**, joka lisätään päiväkirjaan, ja turnauksen tila rakennetaan uudelleen tästä päiväkirjasta.",

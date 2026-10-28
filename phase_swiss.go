@@ -1,6 +1,6 @@
 package tournoi
 
-import "github.com/PileOfCells/backgammon-tournoi/rules"
+import "github.com/kevung/nicomaque/rules"
 
 // ---- Suisse à vies : appariement dans le groupe de même nombre de défaites ----
 

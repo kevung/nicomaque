@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // Prizes répartit une dotation par place sur un classement avec ex æquo : les joueurs classés

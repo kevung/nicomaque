@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
+	tournoi "github.com/kevung/nicomaque"
 )
 
 func propositionAvec(acts []tournoi.Action, p tournoi.PlayerID) *tournoi.Action {

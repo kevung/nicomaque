@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	tournoi "github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/sim"
 )
 
 // TestAvertissementDesLeResultatOrdinaire : un score au-delà de la longueur annoncée doit se

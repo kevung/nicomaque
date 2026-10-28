@@ -35,8 +35,8 @@ msgstr "**Nicomaque** ist eine Turnier-Engine für Backgammon. Es ist kein Progr
 msgid ""
 "Il est écrit en Go, sans aucune dépendance, et se lit en entier. Il est "
 "publié sous une licence libre et son code est sur "
-"[GitHub](https://github.com/PileOfCells/backgammon-tournoi)."
-msgstr "Sie ist in Go geschrieben, ohne jede Abhängigkeit, und lässt sich vollständig lesen. Sie steht unter einer freien Lizenz, ihr Quelltext liegt auf [GitHub](https://github.com/PileOfCells/backgammon-tournoi)."
+"[GitHub](https://github.com/kevung/nicomaque)."
+msgstr "Sie ist in Go geschrieben, ohne jede Abhängigkeit, und lässt sich vollständig lesen. Sie steht unter einer freien Lizenz, ihr Quelltext liegt auf [GitHub](https://github.com/kevung/nicomaque)."
 
 #: ../../index.md:10
 msgid "Ce qu'il fait"

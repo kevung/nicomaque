@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/PileOfCells/backgammon-tournoi"
+	"github.com/kevung/nicomaque"
 )
 
 // FromCSV lit un CSV (séparateur ; , ou tabulation détecté ; en-têtes reconnus de façon souple :

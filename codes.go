@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // Codes structurés : le moteur n'émet aucune phrase destinée à l'affichage.

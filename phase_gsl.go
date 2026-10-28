@@ -1,6 +1,6 @@
 package tournoi
 
-import "github.com/PileOfCells/backgammon-tournoi/rules"
+import "github.com/kevung/nicomaque/rules"
 
 // ---- Blocs GSL : suisse à 2 vies dont l'appariement est figé par blocs de petits groupes ----
 //

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
+	tournoi "github.com/kevung/nicomaque"
 )
 
 // TestRetireApresUneVictoireDansChaqueFormat (#25) : un joueur gagne son premier match puis se

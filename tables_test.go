@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
+	tournoi "github.com/kevung/nicomaque"
 )
 
 // tournoiDeTest : un tournoi suisse avec n joueurs, prêt à proposer.

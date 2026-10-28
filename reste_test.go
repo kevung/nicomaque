@@ -5,9 +5,9 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/rules"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	"github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/rules"
+	"github.com/kevung/nicomaque/sim"
 )
 
 // TestRemainingMatchesEncadre : à chaque événement d'un tournoi simulé, rules.RemainingMatches

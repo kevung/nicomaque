@@ -12,7 +12,7 @@ package render
 import (
 	"fmt"
 
-	"github.com/PileOfCells/backgammon-tournoi"
+	"github.com/kevung/nicomaque"
 )
 
 // Term est un mot du rendu lui-même — un en-tête de colonne, un état de table — par opposition

@@ -35,8 +35,8 @@ msgstr "**Nicomaque** はバックギャモンのトーナメント運営エン�
 msgid ""
 "Il est écrit en Go, sans aucune dépendance, et se lit en entier. Il est "
 "publié sous une licence libre et son code est sur "
-"[GitHub](https://github.com/PileOfCells/backgammon-tournoi)."
-msgstr "Go で書かれ、依存ライブラリは一つもなく、全体を読み通せます。フリーライセンスで公開され、コードは [GitHub](https://github.com/PileOfCells/backgammon-tournoi) にあります。"
+"[GitHub](https://github.com/kevung/nicomaque)."
+msgstr "Go で書かれ、依存ライブラリは一つもなく、全体を読み通せます。フリーライセンスで公開され、コードは [GitHub](https://github.com/kevung/nicomaque) にあります。"
 
 #: ../../index.md:10
 msgid "Ce qu'il fait"

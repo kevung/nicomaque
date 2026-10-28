@@ -1,3 +1,3 @@
-module github.com/PileOfCells/backgammon-tournoi
+module github.com/kevung/nicomaque
 
 go 1.22

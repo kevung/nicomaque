@@ -13,9 +13,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/render"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	"github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/render"
+	"github.com/kevung/nicomaque/sim"
 )
 
 var formats = map[string]tournoi.Config{

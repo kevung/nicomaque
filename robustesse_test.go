@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	tournoi "github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/sim"
 )
 
 // ---- Bascule Σvies = 2^k en mode rondes ----

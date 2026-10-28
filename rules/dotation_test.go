@@ -6,7 +6,7 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // Un rang nul ou négatif n'est pas une place du barème : pas de prix, et pas de panique.

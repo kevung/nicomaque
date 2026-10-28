@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/internal/dores"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	"github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/internal/dores"
+	"github.com/kevung/nicomaque/sim"
 )
 
 // testdata/trace_moteur.json fige ce que le moteur PROPOSE et CLASSE à chaque pas d'un tournoi

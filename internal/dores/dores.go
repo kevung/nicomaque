@@ -14,7 +14,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // ---- Dotation (dotation.json) ----

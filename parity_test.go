@@ -5,8 +5,8 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	"github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/sim"
 )
 
 // TestParity mesure P(meilleur gagne), P(top 4), matchs et durée sur 64 joueurs à 7 points,

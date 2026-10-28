@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi/internal/dores"
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/internal/dores"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // Les fichiers dorés de testdata, rejoués contre les fonctions pures. Ils ont été produits par le

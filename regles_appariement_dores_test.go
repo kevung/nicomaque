@@ -7,10 +7,10 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/internal/dores"
-	"github.com/PileOfCells/backgammon-tournoi/rules"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	"github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/internal/dores"
+	"github.com/kevung/nicomaque/rules"
+	"github.com/kevung/nicomaque/sim"
 )
 
 // rules/testdata/appariements.json : des instantanés de phase (rules.Phase) pris par le moteur

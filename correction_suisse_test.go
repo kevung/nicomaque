@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
+	tournoi "github.com/kevung/nicomaque"
 )
 
 // suisseMain : un suisse 2 vies continu où les matchs sont lancés à la main, pour fixer qui joue

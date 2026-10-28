@@ -1,7 +1,7 @@
 # Le site
 
 Site publié sur GitHub Pages à chaque poussée sur `main` :
-<https://pileofcells.github.io/backgammon-tournoi/>
+<https://kevung.github.io/nicomaque/>
 
 ## Construire
 

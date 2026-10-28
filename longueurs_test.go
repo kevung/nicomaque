@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
+	tournoi "github.com/kevung/nicomaque"
 )
 
 // tire : confirme le tirage proposé (tableaux, poules, blocs).

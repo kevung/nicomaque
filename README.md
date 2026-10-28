@@ -1,4 +1,7 @@
-# tournoi — moteur de tournoi de backgammon (Go)
+# Nicomaque — moteur de tournoi de backgammon (Go)
+
+Le module est `github.com/kevung/nicomaque` ; le paquet Go s'appelle `tournoi`. Le projet reprend
+`github.com/PileOfCells/backgammon-tournoi` (jusqu'à v0.7.0), dont il conserve tout l'historique.
 
 Bibliothèque Go sans dépendance, à intégrer dans un logiciel web dans le même processus.
 Journal d'événements, état reconstruit par `Replay`, propositions d'actions pour le directeur de
@@ -11,10 +14,10 @@ pour reconstruire le moteur à partir d'elle seule, est dans `docs/specification
 Les deux existent aussi en PDF à côté.
 
 **Documentation en ligne, en neuf langues :**
-<https://pileofcells.github.io/backgammon-tournoi/>
+<https://kevung.github.io/nicomaque/>
 
 ```bash
-go get github.com/PileOfCells/backgammon-tournoi
+go get github.com/kevung/nicomaque
 ```
 
 ## Formats

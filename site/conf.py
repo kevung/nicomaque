@@ -48,7 +48,7 @@ html_short_title = "Nicomaque"
 html_static_path = []
 html_copy_source = False
 html_show_sphinx = False
-html_baseurl = "https://pileofcells.github.io/backgammon-tournoi/"
+html_baseurl = "https://kevung.github.io/nicomaque/"
 templates_path = ["_templates"]
 html_sidebars = {
     "**": [

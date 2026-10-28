@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // State est l'état complet d'un tournoi, reconstruit à partir du journal.

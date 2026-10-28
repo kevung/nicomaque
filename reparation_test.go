@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	tournoi "github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/sim"
 )
 
 // tableauDe8 : un tableau de 8 joueurs, tiré, dont on joue `tours` tours. Le vainqueur est

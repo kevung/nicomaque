@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // ---- Passage vers rules : instantanés, sections, libellés ----

@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
+	tournoi "github.com/kevung/nicomaque"
 )
 
 // tableauTire : un tableau de 8 joueurs dont le tirage est fait, rien de lancé.

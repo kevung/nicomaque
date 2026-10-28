@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	"github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/sim"
 )
 
 var maj = flag.Bool("update", false, "réécrire les fichiers témoins de testdata/")

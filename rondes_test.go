@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
+	tournoi "github.com/kevung/nicomaque"
 )
 
 func championnat(n, tables int) (*tournoi.State, time.Time, error) {

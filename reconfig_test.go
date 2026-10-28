@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	tournoi "github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/sim"
 )
 
 // suisseCommence : un suisse de n joueurs dont un match est lancé — le cas où la phase est

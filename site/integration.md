@@ -9,7 +9,7 @@ Le moteur ne persiste rien et n'affiche rien. L'hôte conserve un **journal** �
 d'événements — et le moteur en reconstruit l'état à la demande.
 
 ```go
-import tournoi "github.com/PileOfCells/backgammon-tournoi"
+import tournoi "github.com/kevung/nicomaque"
 ```
 
 Trois appels suffisent à comprendre la boucle :
@@ -77,8 +77,8 @@ grille des tables, le tableau des vies, le classement, et la feuille d'apparieme
 ## L'essayer sans rien écrire
 
 ```bash
-git clone https://github.com/PileOfCells/backgammon-tournoi
-cd backgammon-tournoi
+git clone https://github.com/kevung/nicomaque
+cd nicomaque
 
 # Simuler un tournoi complet et écrire les pages
 go run ./cmd/tournoi-demo -format suisse_tableau -joueurs 32 -etapes -sortie demo

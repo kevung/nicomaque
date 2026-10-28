@@ -3,7 +3,7 @@ package tournoi
 import (
 	"fmt"
 
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // ---- Poules toutes rondes, qualification sans départage (barrage à 2 vies entre ex æquo) ----

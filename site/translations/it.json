@@ -3,7 +3,7 @@
   "index": [
     "Nicomaque",
     "**Nicomaque** è un motore di tornei di backgammon. Non è un programma che si apre: è una libreria che altri programmi usano per dirigere un torneo — iscrivere i giocatori, abbinare le partite, tenere i tabelloni, produrre la classifica.",
-    "È scritto in Go, senza alcuna dipendenza, e si legge per intero. È pubblicato con una licenza libera e il suo codice è su [GitHub](https://github.com/PileOfCells/backgammon-tournoi).",
+    "È scritto in Go, senza alcuna dipendenza, e si legge per intero. È pubblicato con una licenza libera e il suo codice è su [GitHub](https://github.com/kevung/nicomaque).",
     "Che cosa fa",
     "Un direttore di torneo passa la giornata a rispondere a una sola domanda: *chi gioca contro chi, adesso, e su quale tavolo?* Nicomaque risponde a questa domanda, e a nient'altro.",
     "In ogni momento propone un elenco di azioni — avviare questa partita su questo tavolo, assegnare questo turno di riposo, sorteggiare questo tabellone, passare alla fase successiva, chiudere il torneo. Il direttore conferma ciò che vuole. Ogni conferma diventa un **evento** aggiunto a un giornale, e lo stato del torneo è ricostruito a partire da quel giornale.",

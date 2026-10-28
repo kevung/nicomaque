@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
+	tournoi "github.com/kevung/nicomaque"
 )
 
 // TestFicheCorrigeeSansToucherAuRetrait (N23) : corriger le club d'une joueuse retirée corrige la

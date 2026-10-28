@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	"github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/sim"
 )
 
 func configs() map[string]tournoi.Config {

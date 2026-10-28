@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/internal/dores"
+	"github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/internal/dores"
 )
 
 // Le fichier doré rules/testdata/feuille.json, rejoué ici contre les ENVELOPPES : Batches et

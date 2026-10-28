@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/sim"
+	tournoi "github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/sim"
 )
 
 // TestPoolRetenueEtPourcentages : 24 joueurs à 20 €, 10 % de retenue, 50/30/20 %. Les montants

@@ -35,8 +35,8 @@ msgstr "Το **Nicomaque** είναι μια μηχανή διεξαγωγής �
 msgid ""
 "Il est écrit en Go, sans aucune dépendance, et se lit en entier. Il est "
 "publié sous une licence libre et son code est sur "
-"[GitHub](https://github.com/PileOfCells/backgammon-tournoi)."
-msgstr "Είναι γραμμένη σε Go, χωρίς καμία εξάρτηση, και διαβάζεται ολόκληρη. Δημοσιεύεται με ελεύθερη άδεια και ο κώδικάς της βρίσκεται στο [GitHub](https://github.com/PileOfCells/backgammon-tournoi)."
+"[GitHub](https://github.com/kevung/nicomaque)."
+msgstr "Είναι γραμμένη σε Go, χωρίς καμία εξάρτηση, και διαβάζεται ολόκληρη. Δημοσιεύεται με ελεύθερη άδεια και ο κώδικάς της βρίσκεται στο [GitHub](https://github.com/kevung/nicomaque)."
 
 #: ../../index.md:10
 msgid "Ce qu'il fait"

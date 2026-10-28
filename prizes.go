@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // La dotation d'un tournoi réel.

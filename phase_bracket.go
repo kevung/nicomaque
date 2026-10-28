@@ -3,7 +3,7 @@ package tournoi
 import (
 	"fmt"
 
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // ---- Tableaux : élimination simple, tableau à vies (exemptions), consolante, dernière chance,

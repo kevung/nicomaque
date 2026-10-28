@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	tournoi "github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/players"
+	tournoi "github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/players"
 )
 
 // TestAllerRetourSansPerte : l'annuaire de l'hôte s'exporte et se réimporte d'un tournoi à

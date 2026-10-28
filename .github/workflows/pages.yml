@@ -4,7 +4,7 @@
 # traduite retombe sur le français : c'est le comportement natif de gettext, et il est voulu —
 # mieux vaut une page à moitié française qu'une page absente.
 #
-# L'URL est https://pileofcells.github.io/backgammon-tournoi/ et elle est STABLE : elle est citée
+# L'URL est https://kevung.github.io/nicomaque/ et elle est STABLE : elle est citée
 # depuis le logiciel hôte. La racine redirige vers le français et liste les neuf langues.
 name: Site
 

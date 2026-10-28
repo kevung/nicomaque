@@ -1,6 +1,6 @@
 package tournoi
 
-import "github.com/PileOfCells/backgammon-tournoi/rules"
+import "github.com/kevung/nicomaque/rules"
 
 // Têtes de série, en option et éteintes par défaut.
 //

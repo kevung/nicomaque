@@ -3,7 +3,7 @@
   "index": [
     "Nicomaque",
     "**Nicomaque** is a backgammon tournament engine. It is not an application you open: it is a library that other software uses to run a tournament — registering players, pairing matches, keeping the brackets, producing the standings.",
-    "It is written in Go, with no dependency at all, and can be read from end to end. It is released under a free licence and its code is on [GitHub](https://github.com/PileOfCells/backgammon-tournoi).",
+    "It is written in Go, with no dependency at all, and can be read from end to end. It is released under a free licence and its code is on [GitHub](https://github.com/kevung/nicomaque).",
     "What it does",
     "A tournament director spends the day answering a single question: *who plays whom, right now, and on which table?* Nicomaque answers that question, and nothing else.",
     "At any moment it proposes a list of actions — start this match on that table, give this bye, draw this bracket, move to the next phase, close the tournament. The director confirms whichever he wants. Each confirmation becomes an **event** appended to a journal, and the state of the tournament is rebuilt from that journal.",

@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/PileOfCells/backgammon-tournoi"
-	"github.com/PileOfCells/backgammon-tournoi/rules"
+	"github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/rules"
 )
 
 // Renderer produit les composants d'affichage. Tout ce qui est traduisible passe par L ; la
