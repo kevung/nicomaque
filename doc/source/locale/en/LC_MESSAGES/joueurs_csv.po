@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/joueurs_csv.rst:4
+msgid "Import et export de joueurs (``players``)"
+msgstr "Player import and export (``players``)"
+
+#: ../../source/joueurs_csv.rst:10
+msgid "Import souple destiné aux exports HelloAsso, FFBG ou tableur :"
+msgstr "Flexible import intended for HelloAsso, FFBG or spreadsheet exports:"
+
+#: ../../source/joueurs_csv.rst:12
+msgid "BOM UTF-8 retiré ;"
+msgstr "UTF-8 BOM removed;"
+
+#: ../../source/joueurs_csv.rst:13
+msgid ""
+"séparateur **détecté** sur la première ligne parmi ``;``, ``,`` et "
+"tabulation (celui qui apparaît le plus souvent, dans cet ordre à égalité "
+"; ``,`` si aucun n'apparaît) ;"
+msgstr ""
+"separator **detected** on the first line among ``;``, ``,`` and tab (the "
+"one that appears most often, in that order in case of a tie; ``,`` if "
+"none appears);"
+
+#: ../../source/joueurs_csv.rst:15
+msgid "lecture tolérante (``FieldsPerRecord = -1``, ``LazyQuotes``) ;"
+msgstr "tolerant reading (``FieldsPerRecord = -1``, ``LazyQuotes``);"
+
+#: ../../source/joueurs_csv.rst:16
+msgid "un fichier vide est une erreur (``csv vide``) ;"
+msgstr "an empty file is an error (``csv vide``);"
+
+#: ../../source/joueurs_csv.rst:17
+msgid ""
+"colonnes reconnues sur l'en-tête, en minuscules et sans espaces aux "
+"extrémités : un en-tête **égal** à l'un des mots-clés l'emporte, sinon le"
+" premier en-tête qui en **contient** un : ``id`` ; nom (``nom complet``, "
+"``name``, ``nom``) ; prénom (``prénom``, ``prenom``, ``first``) ; nom de "
+"famille (``nom de famille``, ``last``) ; ``club`` ; PR (``cote``, ``pr``,"
+" ``rating``, ``elo``). La priorité à l'égalité exacte évite que « prénom "
+"» soit pris pour la colonne ``pr`` d'un fichier qui a une vraie colonne "
+"de cote ;"
+msgstr ""
+"columns recognised from the header, lowercased and trimmed of surrounding"
+" spaces: a header **equal** to one of the keywords wins, otherwise the "
+"first header that **contains** one: ``id``; name (``nom complet``, "
+"``name``, ``nom``); first name (``prénom``, ``prenom``, ``first``); last "
+"name (``nom de famille``, ``last``); ``club``; PR (``cote``, ``pr``, "
+"``rating``, ``elo``). Priority to exact equality prevents \"prénom\" from"
+" being taken for the ``pr`` column of a file that has a real rating "
+"column;"
+
+#: ../../source/joueurs_csv.rst:23
+msgid "si ni colonne de nom ni colonne de prénom : erreur ;"
+msgstr "if there is neither a name column nor a first-name column: error;"
+
+#: ../../source/joueurs_csv.rst:24
+msgid ""
+"le nom est la colonne « nom », sauf si elle est vide, ou si prénom et nom"
+" de famille existent tous deux et que le prénom est renseigné — auquel "
+"cas c'est la concaténation prénom + nom de famille ;"
+msgstr ""
+"the name is the \"nom\" column, unless it is empty, or both first name "
+"and last name exist and the first name is filled in — in which case it is"
+" the concatenation first name + last name;"
+
+#: ../../source/joueurs_csv.rst:27
+msgid "une ligne sans nom est ignorée ;"
+msgstr "a row without a name is ignored;"
+
+#: ../../source/joueurs_csv.rst:28
+msgid ""
+"l'identifiant est la colonne ``id`` si elle est renseignée, sinon un "
+"**slug** du nom ; en cas de collision, l'identifiant devient le slug du "
+"nom suivi de ``-2``, ``-3``\\ … ;"
+msgstr ""
+"the identifier is the ``id`` column if filled in, otherwise a **slug** of"
+" the name; in case of collision, the identifier becomes the name slug "
+"followed by ``-2``, ``-3``\\ …;"
+
+#: ../../source/joueurs_csv.rst:30
+msgid ""
+"le PR accepte la virgule décimale ; une valeur illisible laisse "
+"``Rating`` à 0."
+msgstr ""
+"the PR accepts the decimal comma; an unreadable value leaves ``Rating`` "
+"at 0."
+
+#: ../../source/joueurs_csv.rst:32
+msgid ""
+"Le slug conserve les minuscules ASCII, les chiffres et les caractères "
+"non-ASCII (donc les lettres accentuées), remplace espace, tiret, souligné"
+" et apostrophe par un tiret, supprime le reste, puis élague les tirets "
+"aux extrémités."
+msgstr ""
+"The slug keeps lowercase ASCII letters, digits and non-ASCII characters "
+"(hence accented letters), replaces space, hyphen, underscore and "
+"apostrophe with a hyphen, removes the rest, then trims hyphens at the "
+"ends."
+
+#: ../../source/joueurs_csv.rst:40
+msgid ""
+"Export dans le format que ``FromCSV`` relit : séparateur point-virgule, "
+"colonnes ``nom``, ``club``, ``cote``. C'est l'annuaire de l'hôte, qu'on "
+"exporte pour le réimporter d'un tournoi à l'autre et qu'un organisateur "
+"ouvre dans un tableur. Une cote inconnue (0) sort en cellule vide, et non"
+" en « 0 » qui se lirait comme un joueur parfait ; elle revient à 0 à la "
+"relecture. Une colonne ``id`` n'est ajoutée en tête que si elle est "
+"**nécessaire** : quand au moins un identifiant diffère de celui que "
+"``FromCSV`` dériverait du nom (slug, avec les mêmes suffixes de "
+"collision), pour qu'un identifiant venu d'ailleurs ne se perde pas."
+msgstr ""
+"Export in the format that ``FromCSV`` reads back: semicolon separator, "
+"columns ``nom``, ``club``, ``cote``. This is the host's directory, "
+"exported so as to be re-imported from one tournament to the next and "
+"opened by an organiser in a spreadsheet. An unknown rating (0) comes out "
+"as an empty cell, and not as \"0\", which would read as a perfect player;"
+" it returns to 0 when read back. An ``id`` column is added at the front "
+"only if it is **necessary**: when at least one identifier differs from "
+"the one ``FromCSV`` would derive from the name (slug, with the same "
+"collision suffixes), so that an identifier coming from elsewhere is not "
+"lost."

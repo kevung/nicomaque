@@ -1,0 +1,400 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/guide_utilisateur.rst:4
+msgid "Guide du directeur de tournoi"
+msgstr "Tournament director guide"
+
+#: ../../source/guide_utilisateur.rst:6
+msgid ""
+"Cette page suit une journée de tournoi, étape par étape. Pour chaque "
+"tâche elle indique ce que fait le moteur, l'événement écrit au journal "
+"et, entre crochets, la commande correspondante de la console ``tournoi-"
+"td`` (voir :ref:`cli`). Elle ne suppose pas de savoir programmer."
+msgstr ""
+"This page follows a tournament day, step by step. For each task it states"
+" what the engine does, the event written to the journal and, in square "
+"brackets, the corresponding command of the ``tournoi-td`` console (see "
+":ref:`cli`). It does not assume any programming knowledge."
+
+#: ../../source/guide_utilisateur.rst:11
+msgid "Inscrire les joueurs"
+msgstr "Registering players"
+
+#: ../../source/guide_utilisateur.rst:13
+msgid ""
+"Un joueur a un identifiant, un nom, et facultativement un club et une "
+"cote (PR : plus elle est basse, plus le joueur est fort). Un joueur sans "
+"cote n'est pas traité comme un joueur parfait."
+msgstr ""
+"A player has an identifier, a name, and optionally a club and a rating "
+"(PR: the lower it is, the stronger the player). A player without a rating"
+" is not treated as a perfect player."
+
+#: ../../source/guide_utilisateur.rst:16
+msgid ""
+"Inscription d'un joueur : événement ``player_added`` [``ajoute <nom> "
+"[club] [pr]``]."
+msgstr ""
+"Registering one player: ``player_added`` event [``ajoute <nom> [club] "
+"[pr]``]."
+
+#: ../../source/guide_utilisateur.rst:17
+msgid ""
+"Inscription d'une liste : fichier CSV d'une billetterie ou d'un tableur "
+"[``import <fichier.csv>``] ; la liste se réexporte au même format "
+"[``exporte <fichier.csv>``]. Le format est décrit dans "
+":ref:`joueurs_csv`."
+msgstr ""
+"Registering a list: CSV file from a ticketing system or a spreadsheet "
+"[``import <fichier.csv>``]; the list can be re-exported in the same "
+"format [``exporte <fichier.csv>``]. The format is described in "
+":ref:`joueurs_csv`."
+
+#: ../../source/guide_utilisateur.rst:20
+msgid ""
+"Correction d'un nom ou d'un club : événement ``player_updated``. Le "
+"joueur garde son état."
+msgstr ""
+"Correcting a name or a club: ``player_updated`` event. The player keeps "
+"their state."
+
+#: ../../source/guide_utilisateur.rst:23
+msgid "Lancer les matchs"
+msgstr "Starting matches"
+
+#: ../../source/guide_utilisateur.rst:25
+msgid ""
+"Le moteur propose un match dès que deux joueurs peuvent se rencontrer : "
+"deux joueurs, une longueur en points et une table [``propose``, puis ``ok"
+" <n>`` ou ``ok tous``]. Chaque match confirmé est un événement "
+"``match_started``."
+msgstr ""
+"The engine proposes a match as soon as two players can meet: two players,"
+" a length in points and a table [``propose``, then ``ok <n>`` or ``ok "
+"tous``]. Each confirmed match is a ``match_started`` event."
+
+#: ../../source/guide_utilisateur.rst:29
+msgid "Tables"
+msgstr "Tables"
+
+#: ../../source/guide_utilisateur.rst:30
+msgid ""
+"Le moteur attribue la plus petite table libre. Une table peut être "
+"déclarée **indisponible** ou **réservée** ; le moteur la saute. S'il ne "
+"reste aucune table libre, la proposition est remplacée par une attente "
+"avec sa raison. Un match peut changer de table (``table_changed``)."
+msgstr ""
+"The engine assigns the lowest free table. A table can be declared "
+"**unavailable** or **reserved**; the engine skips it. If no free table "
+"remains, the proposal is replaced by a wait with its reason. A match can "
+"change table (``table_changed``)."
+
+#: ../../source/guide_utilisateur.rst:34
+msgid "Mode continu"
+msgstr "Continuous mode"
+
+#: ../../source/guide_utilisateur.rst:35
+msgid ""
+"Au suisse, par défaut, un match est proposé dès que deux joueurs du même "
+"groupe sont libres."
+msgstr ""
+"In the Swiss, by default, a match is proposed as soon as two players of "
+"the same group are free."
+
+#: ../../source/guide_utilisateur.rst:37
+msgid "Micro-rondes"
+msgstr "Micro-rounds"
+
+#: ../../source/guide_utilisateur.rst:38
+msgid ""
+"Avec ``batch_minutes``, les appariements se font par lots à heure fixe ; "
+"le moteur indique l'heure du prochain lot. Un joueur ne peut alors plus "
+"choisir son adversaire en retardant l'annonce de son résultat."
+msgstr ""
+"With ``batch_minutes``, pairings are made in batches at a fixed time; the"
+" engine indicates the time of the next batch. A player can then no longer"
+" choose their opponent by delaying the announcement of their result."
+
+#: ../../source/guide_utilisateur.rst:42
+msgid "Rondes"
+msgstr "Rounds"
+
+#: ../../source/guide_utilisateur.rst:43
+msgid ""
+"Avec le mode ``rounds``, tous les joueurs jouent la même ronde et la "
+"suivante n'est proposée qu'une fois la ronde entière terminée."
+msgstr ""
+"With the ``rounds`` mode, all players play the same round and the next "
+"one is proposed only once the entire round is finished."
+
+#: ../../source/guide_utilisateur.rst:47
+msgid "Saisir les résultats"
+msgstr "Entering results"
+
+#: ../../source/guide_utilisateur.rst:49
+msgid ""
+"Le résultat est le vainqueur, et le score si on le connaît [``resultat "
+"<match> <vainqueur> [scoreA scoreB]``] : événement ``result``. Chaque "
+"résultat libère deux joueurs et produit de nouvelles propositions."
+msgstr ""
+"The result is the winner, and the score if known [``resultat <match> "
+"<vainqueur> [scoreA scoreB]``]: ``result`` event. Each result frees two "
+"players and produces new proposals."
+
+#: ../../source/guide_utilisateur.rst:54
+msgid "Gérer les imprévus"
+msgstr "Handling the unexpected"
+
+#: ../../source/guide_utilisateur.rst:57
+msgid "Situation"
+msgstr "Situation"
+
+#: ../../source/guide_utilisateur.rst:57
+msgid "Ce que fait le moteur"
+msgstr "What the engine does"
+
+#: ../../source/guide_utilisateur.rst:59
+msgid "Joueur arrivé après le tirage"
+msgstr "Player arriving after the draw"
+
+#: ../../source/guide_utilisateur.rst:59
+msgid ""
+"Il énumère les places d'exemption libres [``places``] et y installe le "
+"joueur sans refaire le tirage [``retardataire <nom> <place>``]. Sans "
+"place libre, le joueur est inscrit et le moteur indique où il entrera."
+msgstr ""
+"It lists the free bye slots [``places``] and places the player in one "
+"without redoing the draw [``retardataire <nom> <place>``]. With no free "
+"slot, the player is registered and the engine indicates where they will "
+"enter."
+
+#: ../../source/guide_utilisateur.rst:64
+msgid "Joueur qui s'absente"
+msgstr "Player who is away for a while"
+
+#: ../../source/guide_utilisateur.rst:64
+msgid ""
+"Déclaré **indisponible** jusqu'à une heure ou une ronde : il n'est plus "
+"apparié et ne perd ni vie, ni rang, ni place de tableau."
+msgstr ""
+"Declared **unavailable** until a time or a round: they are no longer "
+"paired and lose neither life, nor rank, nor bracket slot."
+
+#: ../../source/guide_utilisateur.rst:67
+msgid "Joueur qui joue dans une autre épreuve"
+msgstr "Player who is playing in another event"
+
+#: ../../source/guide_utilisateur.rst:67
+msgid "L'hôte le signale à chaque proposition"
+msgstr "The host reports them at each proposal"
+
+#: ../../source/guide_utilisateur.rst:68
+msgid "de la salle"
+msgstr "of the playing hall"
+
+#: ../../source/guide_utilisateur.rst:68
+msgid "(``External.BusyPlayers``) ; rien n'est écrit au journal."
+msgstr "(``External.BusyPlayers``); nothing is written to the journal."
+
+#: ../../source/guide_utilisateur.rst:70
+msgid "Joueur qui part"
+msgstr "Player who leaves"
+
+#: ../../source/guide_utilisateur.rst:70
+msgid ""
+"Retrait immédiat (ses matchs en cours sont perdus par forfait) [``forfait"
+" <joueur>``], ou retrait après son match en cours."
+msgstr ""
+"Immediate withdrawal (their matches in progress are lost by forfeit) "
+"[``forfait <joueur>``], or withdrawal after their current match."
+
+#: ../../source/guide_utilisateur.rst:73
+msgid "Joueur absent pour un match"
+msgstr "Player absent for one match"
+
+#: ../../source/guide_utilisateur.rst:73
+msgid ""
+"Forfait sur ce match seulement (``ForfeitEvent``) : il reste dans le "
+"tournoi et suit le chemin d'un perdant."
+msgstr ""
+"Forfeit on that match only (``ForfeitEvent``): they remain in the "
+"tournament and follow the path of a loser."
+
+#: ../../source/guide_utilisateur.rst:76
+msgid "Qualifié de poule qui part avant le"
+msgstr "Pool qualifier who leaves before the"
+
+#: ../../source/guide_utilisateur.rst:76
+msgid "Le moteur propose de repêcher le suivant de sa"
+msgstr "The engine proposes to repechage the next player of their"
+
+#: ../../source/guide_utilisateur.rst:77
+msgid "tirage du tableau"
+msgstr "bracket draw"
+
+#: ../../source/guide_utilisateur.rst:77
+msgid "poule (``repechage``). Sans confirmation, la place devient une exemption."
+msgstr "pool (``repechage``). Without confirmation, the place becomes a bye."
+
+#: ../../source/guide_utilisateur.rst:79
+msgid "Match lancé par erreur"
+msgstr "Match started by mistake"
+
+#: ../../source/guide_utilisateur.rst:79
+msgid "Annulation [``annule <match>``] : la place redevient libre."
+msgstr "Cancellation [``annule <match>``]: the slot becomes free again."
+
+#: ../../source/guide_utilisateur.rst:81
+msgid "Longueur de match à changer"
+msgstr "Match length to change"
+
+#: ../../source/guide_utilisateur.rst:81
+msgid "[``longueur <points>``] : s'applique aux prochains matchs de la phase."
+msgstr "[``longueur <points>``]: applies to the next matches of the phase."
+
+#: ../../source/guide_utilisateur.rst:83
+msgid "Configuration à changer"
+msgstr "Configuration to change"
+
+#: ../../source/guide_utilisateur.rst:83
+msgid "La configuration entière est remplacée [``configure <fichier.json>``]."
+msgstr "The entire configuration is replaced [``configure <fichier.json>``]."
+
+#: ../../source/guide_utilisateur.rst:88
+msgid "Corriger une erreur"
+msgstr "Correcting an error"
+
+#: ../../source/guide_utilisateur.rst:90
+msgid ""
+"Le journal n'est jamais modifié. Un résultat faux se corrige par un "
+"événement ``result_corrected`` [``corrige <match> <vainqueur> [scoreA "
+"scoreB]``] ; l'état est recalculé à partir de tout le journal."
+msgstr ""
+"The journal is never modified. A wrong result is corrected by a "
+"``result_corrected`` event [``corrige <match> <vainqueur> [scoreA "
+"scoreB]``]; the state is recomputed from the whole journal."
+
+#: ../../source/guide_utilisateur.rst:94
+msgid ""
+"**Dans un tableau**, si le match corrigé avait des suites, les matchs "
+"suivants ont été joués par les mauvais joueurs. Le moteur émet un "
+"avertissement et propose la réparation : annuler en série les matchs "
+"incohérents, puis relancer les bons. Rien n'est annulé sans confirmation."
+msgstr ""
+"**In a bracket**, if the corrected match had follow-ups, the following "
+"matches were played by the wrong players. The engine issues a warning and"
+" proposes the repair: cancel the inconsistent matches in series, then "
+"restart the right ones. Nothing is cancelled without confirmation."
+
+#: ../../source/guide_utilisateur.rst:97
+msgid ""
+"**Au suisse**, le moteur indique ce que la correction change aux vies (un"
+" joueur sans vie qui joue encore, un joueur qui retrouve une vie)."
+msgstr ""
+"**In the Swiss**, the engine indicates what the correction changes in the"
+" lives (a player with no life who is still playing, a player who regains "
+"a life)."
+
+#: ../../source/guide_utilisateur.rst:99
+msgid ""
+"**Après la clôture**, le tournoi peut être rouvert [``rouvre``] : le "
+"classement final est effacé, la correction appliquée, et le classement "
+"recalculé à la clôture suivante."
+msgstr ""
+"**After closing**, the tournament can be reopened [``rouvre``]: the final"
+" standings are erased, the correction applied, and the standings "
+"recomputed at the next closing."
+
+#: ../../source/guide_utilisateur.rst:103
+msgid "Pauses"
+msgstr "Breaks"
+
+#: ../../source/guide_utilisateur.rst:105
+msgid ""
+"Les pauses sont déclarées dans la configuration (``Config.Breaks``). Un "
+"match dont la fin attendue tombe pendant une pause reste proposé, "
+"accompagné d'un avertissement."
+msgstr ""
+"Breaks are declared in the configuration (``Config.Breaks``). A match "
+"whose expected end falls during a break remains proposed, accompanied by "
+"a warning."
+
+#: ../../source/guide_utilisateur.rst:109
+msgid "Classement et dotation"
+msgstr "Standings and prize distribution"
+
+#: ../../source/guide_utilisateur.rst:111
+msgid ""
+"Le classement est disponible à tout moment [``classement``]. Les joueurs "
+"y sont placés par ce qu'ils ont atteint : vainqueur, finaliste, éliminé à"
+" tel tour, éliminé avec tant de victoires. Les ex æquo restent ex æquo. "
+"Un joueur retiré est classé sur son parcours, avec la note « retiré »."
+msgstr ""
+"The standings are available at any time [``classement``]. Players are "
+"placed there by what they reached: winner, finalist, eliminated at such "
+"round, eliminated with such number of wins. Ties remain tied. A withdrawn"
+" player is ranked on their record, with the note \"withdrawn\"."
+
+#: ../../source/guide_utilisateur.rst:116
+msgid ""
+"La dotation se calcule sur ce classement à partir d'un droit d'entrée, "
+"d'une retenue d'organisation et d'un barème en pourcentages ou en "
+"montants. Chaque prix est tronqué à l'unité, les unités restantes vont "
+"aux plus grands restes (à égalité, au mieux classé) : quand le barème "
+"totalise 100 %, la somme distribuée est exactement le pool après retenue."
+" Une consolante peut avoir son propre barème. Le détail est dans "
+":ref:`classement`."
+msgstr ""
+"The prize distribution is computed on these standings from an entry fee, "
+"an organiser's retention and a prize scale in percentages or amounts. "
+"Each prize is truncated to the unit, the remaining units go to the "
+"largest remainders (in case of equality, to the best ranked): when the "
+"scale totals 100%, the sum distributed is exactly the pool after "
+"retention. A consolation can have its own scale. The details are in "
+":ref:`classement`."
+
+#: ../../source/guide_utilisateur.rst:122
+msgid ""
+"Pour chaque joueur, le moteur répond aussi à la question « est-ce que je "
+"joue ? » : en jeu, exempté, qualifié, pas encore fixé, éliminé, vainqueur"
+" ou retiré (voir :ref:`statut`)."
+msgstr ""
+"For each player, the engine also answers the question \"am I playing?\": "
+"in play, bye, qualified, not yet determined, eliminated, winner or "
+"withdrawn (see :ref:`statut`)."
+
+#: ../../source/guide_utilisateur.rst:126
+msgid "Affichage en salle"
+msgstr "Display in the playing hall"
+
+#: ../../source/guide_utilisateur.rst:128
+msgid ""
+"Le paquet ``render`` produit des pages HTML autonomes, lisibles hors "
+"ligne : écran de salle (actions, grille des tables, matchs en cours, "
+"arbres, classement) et feuille d'appariements A4 avec une case de score "
+"par joueur. La console ``tournoi-td`` régénère ``affichage.html`` après "
+"chaque commande."
+msgstr ""
+"The ``render`` package produces standalone HTML pages, readable offline: "
+"playing hall screen (actions, table grid, matches in progress, trees, "
+"standings) and A4 pairing sheet with a score box per player. The "
+"``tournoi-td`` console regenerates ``affichage.html`` after each command."

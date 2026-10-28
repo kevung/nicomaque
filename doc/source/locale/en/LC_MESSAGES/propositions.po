@@ -1,0 +1,470 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/propositions.rst:4
+msgid "Moteur de propositions"
+msgstr "Proposal engine"
+
+#: ../../source/propositions.rst:7
+msgid "``Propose``"
+msgstr "``Propose``"
+
+#: ../../source/propositions.rst:20
+msgid ""
+"C'est le point d'entrée principal du moteur (``engine.go``). Il ne "
+"modifie pas l'état : il travaille sur une copie superficielle de "
+"``State``, réglée à l'heure ``now`` (dont dépendent les indisponibilités "
+"à échéance), si bien qu'un hôte peut l'appeler sous verrou de lecture. "
+"Hors du temps et de ``External``, il ne dépend que du journal déjà "
+"appliqué."
+msgstr ""
+"This is the main entry point of the engine (``engine.go``). It does not "
+"modify the state: it works on a shallow copy of ``State``, set to the "
+"time ``now`` (on which the time-limited unavailabilities depend), so that"
+" a host can call it under a read lock. Apart from time and ``External``, "
+"it depends only on the journal already applied."
+
+#: ../../source/propositions.rst:25
+msgid ""
+"``External`` est ce que l'hôte sait de la salle et que le journal de ce "
+"tournoi ignore : les tables où joue, en ce moment, **une autre épreuve** "
+"dirigée dans la même salle. Ce n'est pas un événement : l'occupation par "
+"l'extérieur change à chaque match de l'autre épreuve, elle n'appartient "
+"pas à l'histoire de celle-ci, et le rejeu n'en a pas besoin — le "
+"``match_started`` confirmé porte la table effectivement prise. Les "
+"tirages et les passages de phase n'en dépendent pas."
+msgstr ""
+"``External`` is what the host knows about the playing hall and the "
+"journal of this tournament does not: the tables where **another event** "
+"run in the same hall is currently playing. It is not an event: occupancy "
+"by the outside changes with each match of the other event, it does not "
+"belong to the history of this one, and the replay does not need it — the "
+"confirmed ``match_started`` carries the table actually taken. Draws and "
+"phase changes do not depend on it."
+
+#: ../../source/propositions.rst:31
+msgid ""
+"``BusyPlayers`` dit quels joueurs de **ce** tournoi jouent en ce moment "
+"dans une autre épreuve de la salle — un joueur inscrit à deux épreuves y "
+"a deux ``PlayerID``, et c'est l'hôte qui les relie. Un identifiant "
+"inconnu est ignoré. Ces joueurs sont écartés des appariements dynamiques "
+"(suisse, barrages de poule) et la file porte, au suisse, une attente par "
+"joueur en vie (``wait``, raison ``player_busy``, ``A`` = le joueur) ; "
+"dans un graphe, leur match reste proposé mais **retenu** — raison "
+"``player_busy``, sans table. Une indisponibilité "
+"(``player_unavailable``), écrite au journal, l'emporte dans la raison. "
+"Rien n'est écrit : le TD qui lance quand même le match à la main est "
+"obéi, et le rejeu l'ignore."
+msgstr ""
+"``BusyPlayers`` says which players of **this** tournament are currently "
+"playing in another event of the playing hall — a player registered in two"
+" events has two ``PlayerID`` there, and it is the host that links them. "
+"An unknown identifier is ignored. These players are excluded from dynamic"
+" pairings (Swiss, pool play-offs) and, in the Swiss, the queue carries "
+"one wait per living player (``wait``, reason ``player_busy``, ``A`` = the"
+" player); in a graph, their match stays proposed but **held** — reason "
+"``player_busy``, with no table. An unavailability "
+"(``player_unavailable``), written to the journal, takes precedence in the"
+" reason. Nothing is written: the TD who starts the match by hand anyway "
+"is obeyed, and the replay ignores it."
+
+#: ../../source/propositions.rst:74
+msgid ""
+"``withAbsences`` ne fait rien hors d'un suisse ; dans un suisse, elle "
+"ajoute une attente ``player_unavailable`` par joueur en vie indisponible "
+"(``Until`` ou ``Round`` disent quand il revient), puis une attente "
+"``player_busy`` par joueur en vie occupé ailleurs, ni absent ni en match "
+"ici. Un joueur n'a qu'une attente."
+msgstr ""
+"``withAbsences`` does nothing outside a Swiss; in a Swiss, it adds one "
+"``player_unavailable`` wait per living unavailable player (``Until`` or "
+"``Round`` say when they return), then one ``player_busy`` wait per living"
+" player busy elsewhere, neither absent nor in a match here. A player has "
+"only one wait."
+
+#: ../../source/propositions.rst:79
+msgid ""
+"Les raisons d'attente sont des codes (``ReasonCode``, ``codes.go``) : "
+"``matches_running``, ``no_pairing``, ``waiting_batch``, "
+"``waiting_table``, ``player_unavailable``, ``player_busy``. Le libellé de"
+" ``next_phase`` est un ``Label`` de genre ``phase`` dont ``Text`` porte "
+"le nom de phase saisi par l'organisateur (ou le nom par défaut de "
+"``PhaseName``)."
+msgstr ""
+"The waiting reasons are codes (``ReasonCode``, ``codes.go``): "
+"``matches_running``, ``no_pairing``, ``waiting_batch``, "
+"``waiting_table``, ``player_unavailable``, ``player_busy``. The label of "
+"``next_phase`` is a ``Label`` of kind ``phase`` whose ``Text`` carries "
+"the phase name entered by the organiser (or the default name from "
+"``PhaseName``)."
+
+#: ../../source/propositions.rst:84
+msgid ""
+"L'ordre du repli est important : **attendre la fin des matchs en cours a "
+"priorité sur la clôture de la phase**. Le cas ``no_pairing`` ne devrait "
+"pas se produire dans un tournoi sain ; il signale une impasse (par "
+"exemple deux joueurs libres qui se sont déjà rencontrés et "
+"``allow_rematch`` désactivé — situation que les replis du suisse évitent,"
+" voir :ref:`format_suisse`)."
+msgstr ""
+"The order of the fallback matters: **waiting for the matches in progress "
+"to finish takes priority over closing the phase**. The ``no_pairing`` "
+"case should not occur in a healthy tournament; it signals a dead end (for"
+" example two free players who have already met and ``allow_rematch`` "
+"disabled — a situation the Swiss fallbacks avoid, see "
+":ref:`format_suisse`)."
+
+#: ../../source/propositions.rst:90
+msgid "Fin de phase"
+msgstr "End of phase"
+
+#: ../../source/propositions.rst:97
+msgid "Kind"
+msgstr "Kind"
+
+#: ../../source/propositions.rst:97
+msgid "Condition (``rules.PhaseDone``)"
+msgstr "Condition (``rules.PhaseDone``)"
+
+#: ../../source/propositions.rst:99
+msgid "``swiss_lives``"
+msgstr "``swiss_lives``"
+
+#: ../../source/propositions.rst:99
+msgid "``swissDone`` (voir :ref:`format_suisse`)"
+msgstr "``swissDone`` (see :ref:`format_suisse`)"
+
+#: ../../source/propositions.rst:100
+msgid "``gsl``"
+msgstr "``gsl``"
+
+#: ../../source/propositions.rst:100
+msgid "``gslDone`` (voir :ref:`format_gsl`)"
+msgstr "``gslDone`` (see :ref:`format_gsl`)"
+
+#: ../../source/propositions.rst:101
+msgid "``round_robin``"
+msgstr "``round_robin``"
+
+#: ../../source/propositions.rst:101
+msgid "``Drawn && AllDone(Sections) && barragesDone``"
+msgstr "``Drawn && AllDone(Sections) && barragesDone``"
+
+#: ../../source/propositions.rst:102
+msgid "``bracket``, ``lives_bracket``"
+msgstr "``bracket``, ``lives_bracket``"
+
+#: ../../source/propositions.rst:102
+msgid "``Drawn && AllDone(Sections)``"
+msgstr "``Drawn && AllDone(Sections)``"
+
+#: ../../source/propositions.rst:105
+msgid ""
+"``rules.AllDone`` : tous les nœuds de toutes les sections sont ``Done`` "
+"(un match sauté compte comme fait). Une phase de tableau non encore tirée"
+" n'est jamais « faite ». ``s.bilan(ph)`` est l'instantané ``rules.Phase``"
+" de la phase, construit par ``regles.go`` sans les adversaires ni les "
+"joueurs occupés."
+msgstr ""
+"``rules.AllDone``: all nodes of all sections are ``Done`` (a skipped "
+"match counts as done). A bracket phase not yet drawn is never \"done\". "
+"``s.bilan(ph)`` is the ``rules.Phase`` snapshot of the phase, built by "
+"``regles.go`` without the opponents or the busy players."
+
+#: ../../source/propositions.rst:111
+msgid "Matchs en cours"
+msgstr "Matches in progress"
+
+#: ../../source/propositions.rst:120
+msgid "Réparation d'un graphe désaccordé"
+msgstr "Repair of an out-of-sync graph"
+
+#: ../../source/propositions.rst:122
+msgid ""
+"Corriger un résultat de tableau après coup recalcule l'état et lève "
+"l'avertissement ``bracket_wrong_players`` ; le directeur se trouve alors "
+"devant un arbre faux, avec les matchs suivants déjà joués par les "
+"mauvaises personnes. ``proposeRepair`` (``reparation.go``) émet la "
+"réparation comme des propositions ORDINAIRES, en tête de liste :"
+msgstr ""
+"Correcting a bracket result after the fact recomputes the state and "
+"raises the ``bracket_wrong_players`` warning; the director then faces a "
+"wrong tree, with the following matches already played by the wrong "
+"people. ``proposeRepair`` (``reparation.go``) issues the repair as "
+"ORDINARY proposals, at the head of the list:"
+
+#: ../../source/propositions.rst:134
+msgid ""
+"Un demi-finaliste faux fait une finale fausse, même si la finale oppose "
+"bien les deux joueurs que le graphe attendait : elle les attendait pour "
+"de mauvaises raisons. D'où l'annulation **en série**. Les annulations "
+"sont proposées du plus profond au moins profond — on défait le plus "
+"récent d'abord, comme sur le papier."
+msgstr ""
+"A wrong semi-finalist makes a wrong final, even if the final does pit the"
+" two players the graph expected: it expected them for the wrong reasons. "
+"Hence the cancellation **in series**. The cancellations are proposed from"
+" the deepest to the shallowest — the most recent is undone first, as on "
+"paper."
+
+#: ../../source/propositions.rst:139
+msgid ""
+"Les relances correctes ne sont pas fabriquées : une fois les annulations "
+"confirmées, les places redeviennent libres et sont proposées comme "
+"n'importe quel match prêt, à l'appel suivant. Tant que le TD n'a rien "
+"confirmé, il n'y a rien à relancer."
+msgstr ""
+"The correct restarts are not fabricated: once the cancellations are "
+"confirmed, the slots become free again and are proposed like any ready "
+"match, at the next call. As long as the TD has confirmed nothing, there "
+"is nothing to restart."
+
+#: ../../source/propositions.rst:143
+msgid ""
+"**Rien n'est appliqué d'office.** Ne rien confirmer laisse l'état tel "
+"quel, avertissement compris : un directeur peut préférer laisser le "
+"tableau tel qu'il a été joué et le noter à la main."
+msgstr ""
+"**Nothing is applied automatically.** Confirming nothing leaves the state"
+" as it is, warning included: a director may prefer to leave the bracket "
+"as it was played and note it by hand."
+
+#: ../../source/propositions.rst:146
+msgid ""
+"**Dans un suisse**, il n'y a pas de graphe à réparer, mais une correction"
+" peut éliminer un joueur en plein match "
+"(``correction_eliminates_running``). ``proposeSwissRepair`` propose "
+"alors, en tête de liste avec les autres réparations, un ``cancel_match`` "
+"par match en cours concerné (avec son ``Round``). Le TD peut aussi "
+"laisser finir le match : son adversaire perdra peut-être une vie contre "
+"un joueur éliminé, et c'est sa décision."
+msgstr ""
+"**In a Swiss**, there is no graph to repair, but a correction can "
+"eliminate a player in the middle of a match "
+"(``correction_eliminates_running``). ``proposeSwissRepair`` then "
+"proposes, at the head of the list with the other repairs, one "
+"``cancel_match`` per match in progress concerned (with its ``Round``). "
+"The TD can also let the match finish: their opponent may lose a life "
+"against an eliminated player, and that is their decision."
+
+#: ../../source/propositions.rst:152
+msgid ""
+"Corollaire dans ``recompute`` (``state.go``) : ``GMatch.MatchID`` repart "
+"**vide** au recalcul, et n'est reposé que pour les matchs non annulés ; "
+"les places dérivées d'un autre match repartent elles aussi vides "
+"(``Players[k] = Src[k].Player``). Sans cela, une place dont le match "
+"vient d'être annulé garderait son identifiant, ``rules.Ready`` "
+"l'écarterait, et le tableau resterait bloqué à l'endroit même qu'on veut "
+"rejouer."
+msgstr ""
+"Corollary in ``recompute`` (``state.go``): ``GMatch.MatchID`` starts "
+"**empty** again at recomputation, and is set again only for the non-"
+"cancelled matches; the slots derived from another match also start empty "
+"again (``Players[k] = Src[k].Player``). Without this, a slot whose match "
+"has just been cancelled would keep its identifier, ``rules.Ready`` would "
+"skip it, and the bracket would remain stuck at the very place one wants "
+"to replay."
+
+#: ../../source/propositions.rst:159
+msgid "Micro-rondes et pauses"
+msgstr "Micro-rounds and breaks"
+
+#: ../../source/propositions.rst:161
+msgid ""
+"Le moteur n'a pas d'horloge. Le temps entre par ``ProposeAt(now)`` — "
+"l'hôte donne la sienne — ou, à défaut, par l'horodatage du dernier "
+"événement du journal (``Propose()`` = ``ProposeAt(s.Last)``). Seul ce qui"
+" dépend du temps change avec ``now`` : les micro-rondes, les pauses et "
+"les indisponibilités à échéance. Le reste — appariements, tirages, "
+"passage de phase — ne dépend que du journal, et le rejeu n'est donc pas "
+"affecté : ce qui est rejoué, ce sont les événements, pas les "
+"propositions."
+msgstr ""
+"The engine has no clock. Time enters through ``ProposeAt(now)`` — the "
+"host supplies its own — or, failing that, through the timestamp of the "
+"last event of the journal (``Propose()`` = ``ProposeAt(s.Last)``). Only "
+"what depends on time changes with ``now``: micro-rounds, breaks and time-"
+"limited unavailabilities. The rest — pairings, draws, phase change — "
+"depends only on the journal, so the replay is unaffected: what is "
+"replayed is the events, not the proposals."
+
+#: ../../source/propositions.rst:169
+msgid "Micro-rondes (``batch_minutes``)"
+msgstr "Micro-rounds (``batch_minutes``)"
+
+#: ../../source/propositions.rst:171
+msgid ""
+"L'appariement au fil de l'eau rend le suisse continu manipulable par "
+"l'heure d'annonce d'un résultat : celui qui finit à 14 h 03 choisit son "
+"adversaire en annonçant à 14 h 04 ou à 14 h 20. "
+"``PhaseConfig.BatchMinutes`` (``batch_minutes``) ferme cette porte : les "
+"joueurs libres attendent l'échéance, puis tous ceux d'un même groupe de "
+"défaites sont appariés d'un coup."
+msgstr ""
+"Pairing on the fly makes the continuous Swiss manipulable through the "
+"time a result is announced: whoever finishes at 14h03 chooses their "
+"opponent by announcing at 14h04 or at 14h20. ``PhaseConfig.BatchMinutes``"
+" (``batch_minutes``) closes this door: free players wait for the "
+"deadline, then all those of the same losses group are paired at once."
+
+#: ../../source/propositions.rst:189
+msgid ""
+"L'horodatage du dernier lot **n'est stocké nulle part** : c'est le départ"
+" du dernier match lancé dans la phase, un lot étant exactement cela — un "
+"paquet de matchs lancés ensemble. Le déduire évite un champ d'état de "
+"plus à tenir juste après une correction ou une annulation."
+msgstr ""
+"The timestamp of the last batch **is stored nowhere**: it is the start of"
+" the last match started in the phase, a batch being exactly that — a "
+"bundle of matches started together. Deducing it avoids one more state "
+"field to keep correct right after a correction or a cancellation."
+
+#: ../../source/propositions.rst:193
+msgid ""
+"``Action.Until`` porte l'échéance pour que l'hôte affiche un compte à "
+"rebours. ``Validate`` refuse ``batch_minutes`` négatif, en mode "
+"``rounds`` (une ronde est déjà un lot) et hors ``swiss_lives``."
+msgstr ""
+"``Action.Until`` carries the deadline so that the host can display a "
+"countdown. ``Validate`` rejects a negative ``batch_minutes``, in "
+"``rounds`` mode (a round is already a batch) and outside ``swiss_lives``."
+
+#: ../../source/propositions.rst:199
+msgid "Pauses (``Config.Breaks``)"
+msgstr "Breaks (``Config.Breaks``)"
+
+#: ../../source/propositions.rst:208
+msgid ""
+"``Validate`` refuse une pause qui finit avant de commencer. "
+"``flagBreaks`` (``horaires.go``) :"
+msgstr ""
+"``Validate`` rejects a break that ends before it starts. ``flagBreaks`` "
+"(``horaires.go``):"
+
+#: ../../source/propositions.rst:216
+msgid ""
+"``Expected(n)`` est la durée attendue d'un match de *n* points "
+"(``rules.ExpectedDuration``, à partir de ``Config.MinPerPoint``, voir "
+":ref:`horloge`)."
+msgstr ""
+"``Expected(n)`` is the expected duration of a match of *n* points "
+"(``rules.ExpectedDuration``, from ``Config.MinPerPoint``, see "
+":ref:`horloge`)."
+
+#: ../../source/propositions.rst:219
+msgid ""
+"**Rien n'est bloqué.** Le directeur sait des choses que le moteur ignore "
+"— que ces deux-là mangeront après, que la pause est indicative, que la "
+"salle ferme de toute façon. On le lui dit, il décide ; c'est la règle de "
+"tous les avertissements du moteur."
+msgstr ""
+"**Nothing is blocked.** The director knows things the engine does not — "
+"that these two will eat afterwards, that the break is indicative, that "
+"the playing hall closes anyway. They are told, they decide; this is the "
+"rule for all of the engine's warnings."
+
+#: ../../source/propositions.rst:223
+msgid ""
+"L'avertissement tombe dès que le match **rencontre** la pause, et pas "
+"seulement s'il s'y termine : un match lancé à midi moins dix et attendu "
+"pour 13 h 30 fait manquer le repas tout autant."
+msgstr ""
+"The warning goes off as soon as the match **meets** the break, and not "
+"only if it ends in it: a match started at ten to noon and expected to "
+"last until 13h30 makes people miss the meal just as much."
+
+#: ../../source/propositions.rst:227
+msgid "Attribution des tables"
+msgstr "Table assignment"
+
+#: ../../source/propositions.rst:246
+msgid ""
+"``AvailableFor`` (``tables.go``) écarte les tables hors service "
+"(``Tables.Unavailable``), celles au-delà de ``Count`` et celles qui sont "
+"réservées (``Tables.Reserved``, des ``TableRule``) à une autre section ou"
+" à une autre phase. ``dehors`` est ``External.BusyTables`` : les tables "
+"où joue une autre épreuve de la salle. La table proposée est donc "
+"toujours **la plus petite libre**. Une action qui n'en trouve pas garde "
+"``Table = 0`` et porte la raison ``waiting_table`` : elle reste "
+"confirmable (le moteur ne bloque pas), le TD saisit une table ou attend "
+"qu'une se libère. Voir :ref:`configuration` pour la forme de "
+"``Config.Tables``."
+msgstr ""
+"``AvailableFor`` (``tables.go``) excludes out-of-service tables "
+"(``Tables.Unavailable``), those beyond ``Count`` and those reserved "
+"(``Tables.Reserved``, ``TableRule`` entries) for another section or another "
+"phase. ``dehors`` is ``External.BusyTables``: the tables where another "
+"event of the playing hall is playing. The proposed table is therefore "
+"always **the lowest free one**. An action that finds none keeps ``Table ="
+" 0`` and carries the reason ``waiting_table``: it remains confirmable "
+"(the engine does not block), and the TD enters a table or waits for one "
+"to free up. See :ref:`configuration` for the shape of ``Config.Tables``."
+
+#: ../../source/propositions.rst:255
+msgid "Générateur pseudo-aléatoire"
+msgstr "Pseudo-random generator"
+
+#: ../../source/propositions.rst:273
+msgid ""
+"Le moteur construit la graine par ``State.seed()`` (``regles.go``) et la "
+"passe à ``rules.Pair`` ; le générateur est **recréé à chaque appel** et "
+"ne dépend que de la graine, du nombre d'événements et de la phase "
+"(``Seed.Draw``). Une ronde de suisse par rondes a le sien, "
+"``Seed.Round(r)``, qui ne dépend que de la graine, de la phase et du "
+"numéro de ronde (voir :ref:`format_suisse`). Toute implémentation visant "
+"la compatibilité binaire avec la référence doit reproduire le générateur "
+"``math/rand`` de Go (source *Additive Lagged Fibonacci* de la "
+"bibliothèque standard) et sa méthode ``Shuffle``. **Une implémentation "
+"dans un autre langage ne pourra pas reproduire les propositions à "
+"l'identique** ; elle reproduira en revanche exactement les états et les "
+"classements à partir d'un journal donné, puisque les tirages y sont "
+"matérialisés. C'est la propriété qui compte."
+msgstr ""
+"The engine builds the seed with ``State.seed()`` (``regles.go``) and "
+"passes it to ``rules.Pair``; the generator is **recreated at each call** "
+"and depends only on the seed, the number of events and the phase "
+"(``Seed.Draw``). A round of a Swiss by rounds has its own, "
+"``Seed.Round(r)``, which depends only on the seed, the phase and the "
+"round number (see :ref:`format_suisse`). Any implementation aiming at "
+"binary compatibility with the reference must reproduce Go's ``math/rand``"
+" generator (the *Additive Lagged Fibonacci* source of the standard "
+"library) and its ``Shuffle`` method. **An implementation in another "
+"language will not be able to reproduce the proposals identically**; it "
+"will, however, reproduce exactly the states and standings from a given "
+"journal, since the draws are materialised in it. That is the property "
+"that matters."
+
+#: ../../source/propositions.rst:284
+msgid "Utilitaires d'ordre"
+msgstr "Ordering utilities"
+
+#: ../../source/propositions.rst:290
+msgid ""
+"Renvoie une **copie** triée par ordre croissant de l'identifiant "
+"(comparaison de chaînes). C'est le préalable obligatoire à tout mélange "
+"aléatoire ou tri partiel : sans lui, l'ordre d'entrée dépendrait de "
+"l'itération d'une map, et les propositions ne seraient plus "
+"déterministes."
+msgstr ""
+"Returns a **copy** sorted in increasing order of identifier (string "
+"comparison). This is the mandatory prerequisite for any random shuffle or"
+" partial sort: without it, the input order would depend on map iteration,"
+" and the proposals would no longer be deterministic."

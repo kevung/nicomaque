@@ -1,0 +1,489 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/etat.rst:4
+msgid "Reconstruction de l'état"
+msgstr "State reconstruction"
+
+#: ../../source/etat.rst:7
+msgid "``Replay`` et ``New``"
+msgstr "``Replay`` and ``New``"
+
+#: ../../source/etat.rst:14
+msgid "``Replay`` part d'un état neuf :"
+msgstr "``Replay`` starts from a new state:"
+
+#: ../../source/etat.rst:20
+msgid ""
+"puis applique les événements dans l'ordre, chacun passé par "
+"``Event.upgraded()`` : un événement de version 0 (libellé en texte) est "
+"converti en codes avant d'être appliqué, si bien que le moteur ne voit "
+"jamais de libellé texte. À la première erreur, ``Replay`` renvoie l'état "
+"partiel **et** une erreur enrichie : ``événement <i> (<kind>) : "
+"<erreur>``."
+msgstr ""
+"then applies the events in order, each passed through "
+"``Event.upgraded()``: a version 0 event (label as text) is converted to "
+"codes before being applied, so the engine never sees a text label. At the"
+" first error, ``Replay`` returns the partial state **and** an enriched "
+"error: ``événement <i> (<kind>) : <erreur>``."
+
+#: ../../source/etat.rst:25
+msgid ""
+"``New`` valide la configuration, construit l'événement ``created`` "
+"(``Version: JournalVersion``, soit 2) et l'applique ; elle renvoie "
+"l'état, l'événement (que l'hôte doit ajouter en tête de journal) et "
+"l'erreur éventuelle."
+msgstr ""
+"``New`` validates the configuration, builds the ``created`` event "
+"(``Version: JournalVersion``, i.e. 2) and applies it; it returns the "
+"state, the event (which the host must add at the head of the journal) and"
+" the possible error."
+
+#: ../../source/etat.rst:29
+msgid ""
+"Après chaque événement appliqué, ``Apply`` rafraîchit ``State.Infos`` "
+"(``refreshInfos``), incrémente ``NEvents`` et avance ``Last`` si "
+"l'horodatage de l'événement est plus récent ; les branches qui sortent "
+"tôt (retrait différé) passent par le même chemin (``seen``), pour ne pas "
+"fausser le générateur aléatoire, qui dépend de ``NEvents``."
+msgstr ""
+"After each applied event, ``Apply`` refreshes ``State.Infos`` "
+"(``refreshInfos``), increments ``NEvents`` and advances ``Last`` if the "
+"event's timestamp is more recent; the branches that exit early (deferred "
+"withdrawal) go through the same path (``seen``), so as not to skew the "
+"random generator, which depends on ``NEvents``."
+
+#: ../../source/etat.rst:35
+msgid "Entrée dans une phase"
+msgstr "Entering a phase"
+
+#: ../../source/etat.rst:41
+msgid ""
+"Ajoute ``p`` à ``ph.Entrants`` (sans doublon) et fixe ``ph.Lives[p] = "
+"lives``. Si ``p`` est déjà entrant, **rien n'est modifié** — y compris "
+"ses vies."
+msgstr ""
+"Adds ``p`` to ``ph.Entrants`` (without duplicates) and sets ``ph.Lives[p]"
+" = lives``. If ``p`` is already an entrant, **nothing is changed** — "
+"including their lives."
+
+#: ../../source/etat.rst:44
+msgid ""
+"Un inscrit entre dans la première phase à son ``player_added`` si la "
+"phase 0 n'est pas tirée et qu'elle est un suisse, ou qu'aucun match n'y "
+"est lancé ; il reçoit alors ``livesFor(cfg)``. Un retardataire placé sur "
+"une place d'exemption d'un tableau déjà tiré (``player_added`` avec "
+"``slot``) prend la place ``BYE`` de la ``Src``, entre avec **une** vie, "
+"et ``recompute`` est appelé."
+msgstr ""
+"A registrant enters the first phase at their ``player_added`` if phase 0 "
+"has not been drawn and is a Swiss, or if no match has been started in it;"
+" they then receive ``livesFor(cfg)``. A latecomer placed on a bye slot of"
+" an already drawn bracket (``player_added`` with ``slot``) takes the "
+"``BYE`` place of the ``Src``, enters with **one** life, and ``recompute``"
+" is called."
+
+#: ../../source/etat.rst:55
+msgid "Kind"
+msgstr "Kind"
+
+#: ../../source/etat.rst:55
+msgid "Vies à l'entrée"
+msgstr "Lives on entry"
+
+#: ../../source/etat.rst:57
+msgid "``swiss_lives``"
+msgstr "``swiss_lives``"
+
+#: ../../source/etat.rst:57
+msgid "``cfg.Lives``"
+msgstr "``cfg.Lives``"
+
+#: ../../source/etat.rst:58
+msgid "``gsl``"
+msgstr "``gsl``"
+
+#: ../../source/etat.rst:58
+msgid "2"
+msgstr "2"
+
+#: ../../source/etat.rst:59
+msgid "tout autre"
+msgstr "any other"
+
+#: ../../source/etat.rst:59
+msgid "1"
+msgstr "1"
+
+#: ../../source/etat.rst:63
+msgid "Passage d'une phase à la suivante"
+msgstr "Moving from one phase to the next"
+
+#: ../../source/etat.rst:91
+msgid ""
+"Le cas ``survivors`` est la branche par défaut : toute valeur d'``Entry``"
+" autre que ``all`` et ``top:N`` y tombe."
+msgstr ""
+"The ``survivors`` case is the default branch: any ``Entry`` value other "
+"than ``all`` and ``top:N`` falls into it."
+
+#: ../../source/etat.rst:94
+msgid ""
+"Après des poules, ``survivors(prev)`` = ``rrQualified(prev)`` "
+"(``rules.PoolQualified``), **repêchés compris** : un qualifié retiré "
+"n'entre pas, et son repêché (s'il y en a un) entre à sa place."
+msgstr ""
+"After pools, ``survivors(prev)`` = ``rrQualified(prev)`` "
+"(``rules.PoolQualified``), **repechaged players included**: a withdrawn "
+"qualifier does not enter, and their repechaged player (if any) enters in "
+"their place."
+
+#: ../../source/etat.rst:98
+msgid ""
+"C'est ici que se joue la **bascule à vies** : un joueur qui sort d'un "
+"suisse à 2 vies avec ses deux vies intactes entre dans un "
+"``lives_bracket`` avec 2 vies, ce qui lui vaudra une **exemption du "
+"premier tour**. Un joueur qui n'a plus qu'une vie entre au premier tour."
+msgstr ""
+"This is where the **switch-over with lives** happens: a player leaving a "
+"2-life Swiss with both lives intact enters a ``lives_bracket`` with 2 "
+"lives, which earns them a **first-round bye**. A player with only one "
+"life left enters in the first round."
+
+#: ../../source/etat.rst:102
+#, no-python-format
+msgid ""
+"``top:N`` est lu par ``Sscanf(\"%d\")`` ; un suffixe illisible donne ``N "
+"= 0``, donc une phase vide. Le préfixe est reconnu par ``len(Entry) > 4 "
+"&& Entry[:4] == \"top:\"``."
+msgstr ""
+"``top:N`` is read by ``Sscanf(\"%d\")``; an unreadable suffix gives ``N ="
+" 0``, hence an empty phase. The prefix is recognised by ``len(Entry) > 4 "
+"&& Entry[:4] == \"top:\"``."
+
+#: ../../source/etat.rst:106
+msgid "Vies restantes, joueurs en vie, survivants"
+msgstr "Remaining lives, players alive, survivors"
+
+#: ../../source/etat.rst:112
+msgid "Enveloppe de ``rules.RemainingLives(lives, losses, withdrawn)`` :"
+msgstr "Wrapper of ``rules.RemainingLives(lives, losses, withdrawn)``:"
+
+#: ../../source/etat.rst:123
+msgid "Les entrants (dans l'ordre de ``Entrants``) dont ``remainingLives > 0``."
+msgstr ""
+"The entrants (in the order of ``Entrants``) for whom ``remainingLives > "
+"0``."
+
+#: ../../source/etat.rst:130
+msgid "Kind de la phase quittée"
+msgstr "Kind of the phase being left"
+
+#: ../../source/etat.rst:130
+msgid "Survivants"
+msgstr "Survivors"
+
+#: ../../source/etat.rst:132
+msgid "``round_robin``"
+msgstr "``round_robin``"
+
+#: ../../source/etat.rst:132
+msgid "``rrQualified(ph)`` — les qualifiés des poules, barrages inclus"
+msgstr "``rrQualified(ph)`` — the pool qualifiers, play-offs included"
+
+#: ../../source/etat.rst:135
+msgid "``bracket``, ``lives_bracket``"
+msgstr "``bracket``, ``lives_bracket``"
+
+#: ../../source/etat.rst:135
+msgid ""
+"``bracketSurvivors(ph)`` — les entrants si le tableau n'est pas tiré ; le"
+" premier du classement si toutes les sections sont finies ; sinon les "
+"joueurs de note ``running``"
+msgstr ""
+"``bracketSurvivors(ph)`` — the entrants if the bracket is not drawn; the "
+"first of the standings if all sections are finished; otherwise the "
+"players with note ``running``"
+
+#: ../../source/etat.rst:139
+msgid "autres (``swiss_lives``, ``gsl``)"
+msgstr "others (``swiss_lives``, ``gsl``)"
+
+#: ../../source/etat.rst:139
+msgid "``alive(ph)``"
+msgstr "``alive(ph)``"
+
+#: ../../source/etat.rst:143
+msgid "Comptabilité d'un résultat"
+msgstr "Accounting for a result"
+
+#: ../../source/etat.rst:161
+msgid ""
+"La garde ``ph.Lives[loser] > 0`` évite d'enregistrer comme « éliminé » un"
+" joueur qui n'était pas entrant de la phase (cas pathologique après "
+"correction)."
+msgstr ""
+"The guard ``ph.Lives[loser] > 0`` avoids recording as \"eliminated\" a "
+"player who was not an entrant of the phase (pathological case after a "
+"correction)."
+
+#: ../../source/etat.rst:164
+msgid ""
+"``ElimOrder`` sert au classement des phases à vies : le **dernier "
+"éliminé** quand il ne reste qu'un joueur en vie est le finaliste."
+msgstr ""
+"``ElimOrder`` serves the standings of the phases with lives: the **last "
+"eliminated** when only one player remains alive is the finalist."
+
+#: ../../source/etat.rst:168
+msgid "Recalcul complet"
+msgstr "Full recomputation"
+
+#: ../../source/etat.rst:174
+msgid ""
+"Déclenché par ``player_withdrawn`` (immédiat), ``result_corrected``, "
+"``match_cancelled``, ``config_changed``, par ``player_added`` sur une "
+"place d'exemption (``slot``), et par ``result`` quand un retrait différé "
+"prend effet (l'un des deux joueurs du match vient de passer dans "
+"``Withdrawn``)."
+msgstr ""
+"Triggered by ``player_withdrawn`` (immediate), ``result_corrected``, "
+"``match_cancelled``, ``config_changed``, by ``player_added`` on a bye "
+"slot (``slot``), and by ``result`` when a deferred withdrawal takes "
+"effect (one of the two players of the match has just moved to "
+"``Withdrawn``)."
+
+#: ../../source/etat.rst:199
+msgid ""
+"Ce qui **n'est pas** réinitialisé : ``Byes`` et ``ByeRounds`` (un bye "
+"reste acquis), ``Entrants``, ``Lives``, ``Round``, ``Roster``, ``Drawn``,"
+" ``Repechages`` et ``Sections`` (structure)."
+msgstr ""
+"What is **not** reset: ``Byes`` and ``ByeRounds`` (a bye remains earned),"
+" ``Entrants``, ``Lives``, ``Round``, ``Roster``, ``Drawn``, "
+"``Repechages`` and ``Sections`` (structure)."
+
+#: ../../source/etat.rst:203
+msgid ""
+"``GMatch.MatchID`` repart vide à l'étape 1 et n'est reposé à l'étape 2 "
+"que pour les matchs non annulés : une place dont le match vient d'être "
+"annulé redevient lançable, au lieu de rester bloquée sur l'identifiant "
+"d'un match qui n'existe plus."
+msgstr ""
+"``GMatch.MatchID`` starts empty again at step 1 and is set again at step "
+"2 only for the non-cancelled matches: a slot whose match has just been "
+"cancelled becomes startable again, instead of staying blocked on the "
+"identifier of a match that no longer exists."
+
+#: ../../source/etat.rst:207
+msgid ""
+"L'étape 2 fait **deux passes** : relier toutes les places à leur match, "
+"puis rejouer les résultats. En une seule passe, ``resolve`` — appelée par"
+" ``onResult`` — verrait une place encore sans match dont un joueur est "
+"retiré, et la déclarerait gagnée par forfait (``Walkover``) alors que le "
+"match a été joué avant le retrait ; le classement ignorerait ce match, et"
+" une demi-finaliste retirée finirait dernière."
+msgstr ""
+"Step 2 makes **two passes**: link all the slots to their match, then "
+"replay the results. In a single pass, ``resolve`` — called by "
+"``onResult`` — would see a slot still without a match whose player is "
+"withdrawn, and would declare it won by forfeit (``Walkover``) although "
+"the match was played before the withdrawal; the standings would ignore "
+"that match, and a withdrawn semi-finalist would finish last."
+
+#: ../../source/etat.rst:213
+msgid ""
+"Les **places dérivées** (``GMatch.Players[k]`` dont la source est un "
+"autre match) repartent vides à l'étape 1 et sont refaites par ``resolve``"
+" : un match qui cesse d'être joué — correction, annulation, ou place "
+"d'exemption prise par un retardataire — ne laisse pas derrière lui le "
+"joueur qu'il avait fait avancer. Les places **fixes** (``Src[k].Player``,"
+" un joueur ou un ``BYE``) sont restaurées telles quelles."
+msgstr ""
+"The **derived slots** (``GMatch.Players[k]`` whose source is another "
+"match) start empty again at step 1 and are rebuilt by ``resolve``: a "
+"match that stops being played — correction, cancellation, or bye slot "
+"taken by a latecomer — does not leave behind the player it had advanced. "
+"The **fixed** slots (``Src[k].Player``, a player or a ``BYE``) are "
+"restored as they were."
+
+#: ../../source/etat.rst:220
+msgid "Contrôle de cohérence"
+msgstr "Consistency check"
+
+#: ../../source/etat.rst:226
+msgid ""
+"Les avertissements sont des ``Warning`` : un code et ses paramètres, "
+"jamais une phrase (le rendu français est ``Warning.String()``, "
+"``fr.go``)."
+msgstr ""
+"The warnings are ``Warning`` values: a code and its parameters, never a "
+"sentence (the French rendering is ``Warning.String()``, ``fr.go``)."
+
+#: ../../source/etat.rst:229
+#, no-python-brace-format
+msgid ""
+"Pour chaque match non annulé rattaché à un ``GMatch`` dont les deux "
+"places sont connues : si l'ensemble ``{m.A, m.B}`` diffère de "
+"``{g.Players[0], g.Players[1]}``, l'avertissement "
+"``bracket_wrong_players`` (``Match``, ``Section``, ``Label``, ``A``, "
+"``B``, ``ExpectedA`` = ``g.Players[0]``, ``ExpectedB`` = "
+"``g.Players[1]``)."
+msgstr ""
+"For each non-cancelled match attached to a ``GMatch`` whose two slots are"
+" known: if the set ``{m.A, m.B}`` differs from ``{g.Players[0], "
+"g.Players[1]}``, the warning ``bracket_wrong_players`` (``Match``, "
+"``Section``, ``Label``, ``A``, ``B``, ``ExpectedA`` = ``g.Players[0]``, "
+"``ExpectedB`` = ``g.Players[1]``)."
+
+#: ../../source/etat.rst:234
+msgid ""
+"Pour chaque match terminé de longueur ``> 0`` dont un score dépasse la "
+"longueur annoncée, l'avertissement ``score_over_length`` (``Match``, "
+"``Length``, ``ScoreA``, ``ScoreB``)."
+msgstr ""
+"For each finished match of length ``> 0`` where a score exceeds the "
+"announced length, the warning ``score_over_length`` (``Match``, "
+"``Length``, ``ScoreA``, ``ScoreB``)."
+
+#: ../../source/etat.rst:237
+msgid ""
+"Dans les phases ``swiss_lives``, deux avertissements disent ce qu'une "
+"correction (ou une annulation) a changé à la vie d'un joueur — un suisse "
+"n'a pas de graphe, donc pas de ``bracket_wrong_players`` :"
+msgstr ""
+"In the ``swiss_lives`` phases, two warnings say what a correction (or a "
+"cancellation) changed in a player's life — a Swiss has no graph, hence no"
+" ``bracket_wrong_players``:"
+
+#: ../../source/etat.rst:240
+msgid ""
+"``correction_eliminates_running`` (``Match``, ``Player``, ``A``, ``B``, "
+"``Label``) : un match **en cours** dont un joueur n'a plus aucune vie. "
+"Cela n'arrive pas dans un tournoi mené normalement — on ne lance pas un "
+"joueur éliminé — ; c'est la trace d'une correction d'un résultat "
+"antérieur qui l'a éliminé pendant qu'il jouait (un joueur retiré n'est "
+"pas signalé). L'annulation du match est proposée (``cancel_match``, "
+"``reparation.go`` ; voir :ref:`propositions`). L'avertissement tombe "
+"quand le match finit ou est annulé."
+msgstr ""
+"``correction_eliminates_running`` (``Match``, ``Player``, ``A``, ``B``, "
+"``Label``): a match **in progress** in which a player has no life left. "
+"This does not happen in a normally run tournament — an eliminated player "
+"is not started — ; it is the trace of a correction to an earlier result "
+"that eliminated them while they were playing (a withdrawn player is not "
+"flagged). Cancelling the match is proposed (``cancel_match``, "
+"``reparation.go``; see :ref:`propositions`). The warning goes away when "
+"the match finishes or is cancelled."
+
+#: ../../source/etat.rst:246
+msgid ""
+"``correction_revives`` (``Player``) : un joueur que la correction a rendu"
+" à la vie (``State.Revived``). Il est de nouveau appariable, et le moteur"
+" le dit jusqu'à ce qu'il rejoue — ou qu'une autre correction l'élimine de"
+" nouveau. ``Revived`` est tenu par ``noteRevived``, qui compare les "
+"joueurs en vie dans les phases suisses avant et après "
+"``result_corrected`` ou ``match_cancelled`` ; un ``match_started`` en "
+"retire ses deux joueurs. Les avertissements sont émis dans l'ordre des "
+"identifiants (``sortedIDs``)."
+msgstr ""
+"``correction_revives`` (``Player``): a player whom the correction brought"
+" back to life (``State.Revived``). They can be paired again, and the "
+"engine says so until they play again — or another correction eliminates "
+"them again. ``Revived`` is maintained by ``noteRevived``, which compares "
+"the players alive in the Swiss phases before and after "
+"``result_corrected`` or ``match_cancelled``; a ``match_started`` removes "
+"its two players from it. The warnings are emitted in identifier order "
+"(``sortedIDs``)."
+
+#: ../../source/etat.rst:253
+msgid ""
+"Et pour chaque table qui porte **plusieurs matchs en cours**, "
+"l'avertissement ``table_shared``, une fois par match arrivé en second "
+"dans ``MatchOrder``, avec ``Table``, ``Match`` (ce match), ``A``, ``B`` "
+"et ``Other`` (le premier occupant). Il est dérivé de l'état : il "
+"disparaît quand l'un des deux matchs se termine, est annulé ou change de "
+"table. Un match sans table (``Table = 0``) ne partage rien. Le score est "
+"**enregistré** malgré tout : pendant un tournoi, c'est la parole du TD "
+"qui fait foi ; le moteur le signale, il ne le refuse pas."
+msgstr ""
+"And for each table carrying **several matches in progress**, the warning "
+"``table_shared``, once per match that arrived second in ``MatchOrder``, "
+"with ``Table``, ``Match`` (this match), ``A``, ``B`` and ``Other`` (the "
+"first occupant). It is derived from the state: it disappears when one of "
+"the two matches finishes, is cancelled or changes table. A match without "
+"a table (``Table = 0``) shares nothing. The score is **recorded** anyway:"
+" during a tournament, the TD's word is authoritative; the engine flags "
+"it, it does not refuse it."
+
+#: ../../source/etat.rst:260
+msgid ""
+"``check`` est rappelée après **tout événement qui touche un match** : "
+"``result``, ``match_started`` et ``table_changed`` directement, les "
+"autres (``result_corrected``, ``match_cancelled``, ``player_withdrawn``, "
+"``config_changed``) par ``recompute``, qui la termine (puis de nouveau "
+"par ``noteRevived`` après une correction ou une annulation). Un "
+"avertissement qui n'apparaîtrait qu'après une correction sans rapport ne "
+"servirait à rien : le TD doit le voir au moment où il peut encore agir. "
+"``length_changed`` ne touche que les matchs FUTURS d'une phase et ne "
+"change donc rien à ce que ``check`` regarde."
+msgstr ""
+"``check`` is called again after **any event that touches a match**: "
+"``result``, ``match_started`` and ``table_changed`` directly, the others "
+"(``result_corrected``, ``match_cancelled``, ``player_withdrawn``, "
+"``config_changed``) through ``recompute``, which ends with it (then again"
+" through ``noteRevived`` after a correction or a cancellation). A warning"
+" that appeared only after an unrelated correction would be useless: the "
+"TD must see it at the moment they can still act. ``length_changed`` "
+"touches only the FUTURE matches of a phase and so changes nothing of what"
+" ``check`` looks at."
+
+#: ../../source/etat.rst:268
+msgid ""
+"Elle parcourt les **graphes** et non les matchs — chaque place connaît "
+"son match par ``MatchID`` — parce que chercher, pour chaque match, sa "
+"place dans toutes les sections serait quadratique, et ``check`` tourne à "
+"chaque résultat. L'ordre des avertissements est : pour chaque match dans "
+"l'ordre de ``MatchOrder`` (celui que le TD lit), "
+"``bracket_wrong_players`` puis ``score_over_length`` ; ensuite "
+"``correction_eliminates_running`` et ``correction_revives`` ; enfin "
+"``table_shared``."
+msgstr ""
+"It walks the **graphs** and not the matches — each slot knows its match "
+"through ``MatchID`` — because looking up, for each match, its slot in all"
+" the sections would be quadratic, and ``check`` runs at every result. The"
+" order of the warnings is: for each match in the order of ``MatchOrder`` "
+"(the one the TD reads), ``bracket_wrong_players`` then "
+"``score_over_length``; then ``correction_eliminates_running`` and "
+"``correction_revives``; finally ``table_shared``."
+
+#: ../../source/etat.rst:274
+msgid ""
+"``State.Warnings`` **doit être vide** dans un tournoi mené normalement ; "
+"c'est un invariant vérifié par les tests. Sa non-vacuité signale au TD "
+"qu'une correction a désynchronisé un tableau, ou qu'un score est "
+"incohérent."
+msgstr ""
+"``State.Warnings`` **must be empty** in a normally run tournament; this "
+"is an invariant checked by the tests. If it is non-empty, it tells the TD"
+" that a correction has desynchronised a bracket, or that a score is "
+"inconsistent."

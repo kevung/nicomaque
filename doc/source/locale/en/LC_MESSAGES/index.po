@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/index.rst:32
+msgid "Prise en main"
+msgstr "Getting started"
+
+#: ../../source/index.rst:40
+msgid "Formats"
+msgstr "Formats"
+
+#: ../../source/index.rst:46
+msgid "Référence du moteur"
+msgstr "Engine reference"
+
+#: ../../source/index.rst:60
+msgid "Paquets et outils"
+msgstr "Packages and tools"
+
+#: ../../source/index.rst:70
+msgid "Annexes"
+msgstr "Appendices"
+
+#: ../../source/index.rst:4
+msgid "Nicomaque"
+msgstr "Nicomaque"
+
+#: ../../source/index.rst:6
+msgid ""
+"Nicomaque est un moteur de tournoi de backgammon : une bibliothèque Go "
+"qu'un logiciel hôte intègre dans son propre processus pour diriger un "
+"tournoi. Il tient les inscriptions, propose les appariements et les "
+"tables, tient les tableaux et produit le classement et la dotation."
+msgstr ""
+"Nicomaque is a backgammon tournament engine: a Go library that host "
+"software embeds in its own process to run a tournament. It handles "
+"registrations, proposes pairings and tables, maintains the brackets and "
+"produces the standings and prize distribution."
+
+#: ../../source/index.rst:10
+msgid ""
+"**Langage** : Go 1.22, bibliothèque standard seule, aucune dépendance "
+"externe."
+msgstr "**Language**: Go 1.22, standard library only, no external dependency."
+
+#: ../../source/index.rst:11
+msgid ""
+"**Module** : ``github.com/kevung/nicomaque`` ; le paquet s'appelle "
+"``tournoi``."
+msgstr ""
+"**Module**: ``github.com/kevung/nicomaque``; the package is called "
+"``tournoi``."
+
+#: ../../source/index.rst:12
+msgid "**Licence** : MIT."
+msgstr "**License**: MIT."
+
+#: ../../source/index.rst:13
+msgid ""
+"**Formats** : suisse à vies, tableaux (élimination simple, consolante, "
+"dernière chance, double élimination), blocs GSL, poules toutes rondes, "
+"enchaînés en phases."
+msgstr ""
+"**Formats**: Swiss with lives, brackets (single elimination, consolation,"
+" last chance, double elimination), GSL blocks, round-robin pools, chained"
+" into phases."
+
+#: ../../source/index.rst:15
+msgid ""
+"**Statut** : validé par simulation ; le moteur n'a pas encore dirigé de "
+"tournoi réel (voir :ref:`limites`)."
+msgstr ""
+"**Status**: validated by simulation; the engine has not yet run a real "
+"tournament (see :ref:`limites`)."
+
+#: ../../source/index.rst:18
+msgid "Fonctionnement en quatre points :"
+msgstr "How it works, in four points:"
+
+#: ../../source/index.rst:20
+msgid ""
+"L'hôte conserve un **journal** : la liste ordonnée des événements du "
+"tournoi, en JSON."
+msgstr ""
+"The host keeps a **journal**: the ordered list of the tournament's "
+"events, in JSON."
+
+#: ../../source/index.rst:21
+msgid ""
+"Le moteur reconstruit l'état du tournoi à partir de ce journal "
+"(``Replay``)."
+msgstr "The engine rebuilds the tournament state from this journal (``Replay``)."
+
+#: ../../source/index.rst:22
+msgid ""
+"Le moteur **propose** des actions (lancer un match, donner un bye, tirer "
+"un tableau, passer à la phase suivante, clore) ; il n'en applique aucune "
+"de lui-même."
+msgstr ""
+"The engine **proposes** actions (start a match, give a bye, draw a "
+"bracket, move to the next phase, close); it applies none of them on its "
+"own."
+
+#: ../../source/index.rst:24
+msgid ""
+"Le directeur de tournoi confirme ; chaque confirmation devient un "
+"événement ajouté au journal."
+msgstr ""
+"The tournament director confirms; each confirmation becomes an event "
+"appended to the journal."
+
+#: ../../source/index.rst:26
+msgid ""
+"Le moteur n'a ni interface, ni stockage, ni texte affichable : tout ce "
+"qu'il renvoie est un code structuré que l'hôte traduit. Il ne départage "
+"pas : une égalité reste un ex æquo, ou se joue en barrage."
+msgstr ""
+"The engine has no interface, no storage and no displayable text: "
+"everything it returns is a structured code that the host translates. It "
+"does not break ties: a tie remains tied, or is played off in a play-off."
+
+#: ../../source/index.rst:30
+msgid "Ce qui a changé d'une version à l'autre est dans l':ref:`historique`."
+msgstr "What has changed from one version to another is in the :ref:`historique`."

@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/format_gsl.rst:4
+msgid "Blocs GSL (``gsl``)"
+msgstr "GSL blocks (``gsl``)"
+
+#: ../../source/format_gsl.rst:7
+msgid "Principe"
+msgstr "Principle"
+
+#: ../../source/format_gsl.rst:9
+msgid ""
+"Le format GSL est un suisse à 2 vies dont **l'appariement est figé par "
+"blocs** : au lieu d'apparier au fil de l'eau (manipulable par l'heure "
+"d'annonce d'un résultat), on constitue des groupes de 4 (ou 3, ou 2) "
+"joueurs et on joue le bloc entier avant d'en constituer un nouveau."
+msgstr ""
+"The GSL format is a 2-life Swiss in which **pairing is fixed by blocks**:"
+" instead of pairing as results come in (which can be manipulated through "
+"the time a result is announced), groups of 4 (or 3, or 2) players are "
+"formed and the entire block is played before a new one is formed."
+
+#: ../../source/format_gsl.rst:13
+msgid ""
+"Les joueurs à **0 défaite** sont répartis en groupes GSL (double "
+"élimination interne à 4 : ouverture, gagnants, perdants, décisif ; "
+"section de genre ``gsl``)."
+msgstr ""
+"Players with **0 losses** are split into GSL groups (internal 4-player "
+"double elimination: opening, winners, losers, decider; section of kind "
+"``gsl``)."
+
+#: ../../source/format_gsl.rst:15
+msgid ""
+"Les joueurs à **1 défaite** (une seule vie) sont répartis en mini-"
+"tableaux à élimination directe (section de genre ``se``)."
+msgstr ""
+"Players with **1 loss** (a single life) are split into single-elimination"
+" mini-brackets (section of kind ``se``)."
+
+#: ../../source/format_gsl.rst:17
+msgid ""
+"``Lives`` est forcé à 2 par ``Config.Validate`` ; ``Target``, s'il est "
+"donné, doit être une puissance de 2."
+msgstr ""
+"``Lives`` is forced to 2 by ``Config.Validate``; ``Target``, if given, "
+"must be a power of 2."
+
+#: ../../source/format_gsl.rst:20
+msgid ""
+"C'est la parade anti-manipulation recommandée par l'étude "
+"(:ref:`annexe_etude`), et elle a l'avantage de se caler naturellement sur"
+" les créneaux horaires (un bloc par créneau, repas compris)."
+msgstr ""
+"This is the anti-manipulation countermeasure recommended by the study "
+"(:ref:`annexe_etude`), and it has the advantage of fitting naturally onto"
+" time slots (one block per slot, meals included)."
+
+#: ../../source/format_gsl.rst:23
+msgid ""
+"La règle est dans ``rules`` (``rules/graphes_phase.go`` : ``Pair``, "
+"``Partition``, ``GSLBlockSections``) ; ``phase_gsl.go`` en est "
+"l'enveloppe (``proposeGSL``, ``applyGSLDraw``)."
+msgstr ""
+"The rule lives in ``rules`` (``rules/graphes_phase.go``: ``Pair``, "
+"``Partition``, ``GSLBlockSections``); ``phase_gsl.go`` is its wrapper "
+"(``proposeGSL``, ``applyGSLDraw``)."
+
+#: ../../source/format_gsl.rst:27
+msgid "Partition d'une liste en groupes"
+msgstr "Partitioning a list into groups"
+
+#: ../../source/format_gsl.rst:33
+msgid ""
+"La liste (**déjà mélangée** par l'appelant) est découpée en groupes de 4 "
+"autant que possible, le reste étant absorbé selon ``n mod 4`` :"
+msgstr ""
+"The list (**already shuffled** by the caller) is cut into groups of 4 as "
+"far as possible, the remainder being absorbed according to ``n mod 4``:"
+
+#: ../../source/format_gsl.rst:37
+msgid "``n mod 4``"
+msgstr "``n mod 4``"
+
+#: ../../source/format_gsl.rst:37
+msgid "Tailles produites"
+msgstr "Sizes produced"
+
+#: ../../source/format_gsl.rst:39
+msgid "0"
+msgstr "0"
+
+#: ../../source/format_gsl.rst:39
+msgid "``4, 4, …, 4``"
+msgstr "``4, 4, …, 4``"
+
+#: ../../source/format_gsl.rst:40
+msgid "3"
+msgstr "3"
+
+#: ../../source/format_gsl.rst:40
+msgid "``4, …, 4, 3``"
+msgstr "``4, …, 4, 3``"
+
+#: ../../source/format_gsl.rst:41
+msgid "2"
+msgstr "2"
+
+#: ../../source/format_gsl.rst:41
+msgid "``4, …, 4, 3, 3`` si ``n ≥ 4`` ; sinon ``2``"
+msgstr "``4, …, 4, 3, 3`` if ``n ≥ 4``; otherwise ``2``"
+
+#: ../../source/format_gsl.rst:42
+msgid "1"
+msgstr "1"
+
+#: ../../source/format_gsl.rst:42
+msgid "``4, …, 4, 3, 2`` si ``n ≥ 4`` ; sinon ``1``"
+msgstr "``4, …, 4, 3, 2`` if ``n ≥ 4``; otherwise ``1``"
+
+#: ../../source/format_gsl.rst:45
+msgid ""
+"Les groupes sont ensuite découpés dans l'ordre de la liste "
+"(``g[k:k+taille]``)."
+msgstr "The groups are then cut in list order (``g[k:k+taille]``)."
+
+#: ../../source/format_gsl.rst:47
+msgid ""
+"Un groupe de taille 1 (``n == 1``) n'est pas transformé en section : le "
+"joueur passe le bloc sans jouer, sans perdre de vie ni gagner de bye. Le "
+"groupe garde néanmoins son numéro."
+msgstr ""
+"A group of size 1 (``n == 1``) is not turned into a section: the player "
+"sits out the block without playing, without losing a life or gaining a "
+"bye. The group nevertheless keeps its number."
+
+#: ../../source/format_gsl.rst:51
+msgid "Fin de bloc, fin de phase"
+msgstr "End of block, end of phase"
+
+#: ../../source/format_gsl.rst:57
+msgid ""
+"Toutes les sections dont ``Block == Round`` (le bloc courant) sont "
+"terminées (``Section.Done``)."
+msgstr ""
+"All sections whose ``Block == Round`` (the current block) are finished "
+"(``Section.Done``)."
+
+#: ../../source/format_gsl.rst:70
+msgid "Proposition"
+msgstr "Proposal"
+
+#: ../../source/format_gsl.rst:104
+msgid ""
+"L'enveloppe (``State.actions``) ajoute au tirage ``Draw.Lives`` : les "
+"vies d'entrée des joueurs de la phase, à titre d'information."
+msgstr ""
+"The wrapper (``State.actions``) adds to the draw ``Draw.Lives``: the "
+"entry lives of the players of the phase, for information."
+
+#: ../../source/format_gsl.rst:107
+msgid ""
+"**La finale GSL est un match libre** (sans section) opposant le dernier "
+"joueur invaincu au dernier joueur à une défaite. Si l'invaincu gagne, "
+"l'autre atteint 2 défaites et la phase se termine. S'il perd, les deux "
+"joueurs ont une défaite chacun, ``alive`` vaut toujours 2, et le moteur "
+"repropose une finale : c'est une **recharge implicite** exactement "
+"équivalente à celle de la double élimination. C'est la raison pour "
+"laquelle un GSL à 64 joueurs produit 126 **ou** 127 matchs."
+msgstr ""
+"**The GSL final is a free match** (without a section) between the last "
+"undefeated player and the last player with one loss. If the undefeated "
+"player wins, the other reaches 2 losses and the phase ends. If they lose,"
+" both players have one loss each, ``alive`` is still 2, and the engine "
+"proposes a final again: this is an **implicit recharge** exactly "
+"equivalent to that of double elimination. This is why a 64-player GSL "
+"produces 126 **or** 127 matches."
+
+#: ../../source/format_gsl.rst:114
+msgid "Application du tirage"
+msgstr "Applying the draw"
+
+#: ../../source/format_gsl.rst:133
+msgid ""
+"Le type de section est déterminé par le **premier joueur du groupe** : "
+"c'est correct puisque la partition est faite séparément sur ``g0`` et "
+"``g1``, un groupe est donc homogène en nombre de défaites."
+msgstr ""
+"The section type is determined by the **first player of the group**: this"
+" is correct since the partition is made separately on ``g0`` and ``g1``, "
+"so a group is homogeneous in number of losses."
+
+#: ../../source/format_gsl.rst:137
+msgid ""
+"Les libellés des nœuds sont des codes : ``opening``, ``winners_match``, "
+"``losers_match``, ``decider`` dans un groupe de 4 ; ``opening``, "
+"``winners_match``, ``decider`` dans un groupe de 3 ; ``single_match`` "
+"dans un groupe de 2 ; ``single_elimination`` dans un mini-tableau."
+msgstr ""
+"Node labels are codes: ``opening``, ``winners_match``, ``losers_match``, "
+"``decider`` in a group of 4; ``opening``, ``winners_match``, ``decider`` "
+"in a group of 3; ``single_match`` in a group of 2; ``single_elimination``"
+" in a mini-bracket."
+
+#: ../../source/format_gsl.rst:141
+msgid ""
+"Le classement d'une phase GSL est celui d'une phase à vies "
+"(``rules.Rank``, comme le suisse, voir :ref:`format_suisse`)."
+msgstr ""
+"The standings of a GSL phase are those of a lives phase (``rules.Rank``, "
+"like the Swiss, see :ref:`format_suisse`)."

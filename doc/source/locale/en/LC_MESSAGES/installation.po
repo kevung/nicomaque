@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/installation.rst:4
+msgid "Installation"
+msgstr "Installation"
+
+#: ../../source/installation.rst:7
+msgid "Prérequis"
+msgstr "Prerequisites"
+
+#: ../../source/installation.rst:9
+msgid "Go 1.22 ou plus récent."
+msgstr "Go 1.22 or later."
+
+#: ../../source/installation.rst:10
+msgid ""
+"Aucune autre dépendance : le module n'utilise que la bibliothèque "
+"standard."
+msgstr "No other dependency: the module uses only the standard library."
+
+#: ../../source/installation.rst:13
+msgid "Ajouter le module à un projet"
+msgstr "Adding the module to a project"
+
+#: ../../source/installation.rst:23
+msgid ""
+"Le chemin de module est ``github.com/kevung/nicomaque`` depuis la version"
+" 0.8.0. Les versions 0.1.0 à 0.7.1 ont été publiées sous "
+"``github.com/PileOfCells/backgammon-tournoi`` ; ce module est déprécié et"
+" renvoie au nouveau (voir :ref:`historique`)."
+msgstr ""
+"The module path is ``github.com/kevung/nicomaque`` since version 0.8.0. "
+"Versions 0.1.0 to 0.7.1 were published under ``github.com/PileOfCells"
+"/backgammon-tournoi``; that module is deprecated and points to the new "
+"one (see :ref:`historique`)."
+
+#: ../../source/installation.rst:28
+msgid "Paquets"
+msgstr "Packages"
+
+#: ../../source/installation.rst:31
+msgid "Paquet"
+msgstr "Package"
+
+#: ../../source/installation.rst:31
+msgid "Contenu"
+msgstr "Contents"
+
+#: ../../source/installation.rst:33
+msgid "``github.com/kevung/nicomaque``"
+msgstr "``github.com/kevung/nicomaque``"
+
+#: ../../source/installation.rst:33
+msgid ""
+"le moteur : configuration, journal, état, propositions, classement, "
+"dotation"
+msgstr ""
+"the engine: configuration, journal, state, proposals, standings, prize "
+"distribution"
+
+#: ../../source/installation.rst:35
+msgid "``github.com/kevung/nicomaque/rules``"
+msgstr "``github.com/kevung/nicomaque/rules``"
+
+#: ../../source/installation.rst:35
+msgid ""
+"les règles en fonctions pures (appariement, classement, dotation, "
+"prévision), sans état"
+msgstr ""
+"the rules as pure functions (pairing, standings, prize distribution, "
+"forecasting), stateless"
+
+#: ../../source/installation.rst:37
+msgid "``github.com/kevung/nicomaque/render``"
+msgstr "``github.com/kevung/nicomaque/render``"
+
+#: ../../source/installation.rst:37
+msgid "pages HTML et SVG autonomes (voir :ref:`affichage`)"
+msgstr "standalone HTML and SVG pages (see :ref:`affichage`)"
+
+#: ../../source/installation.rst:38
+msgid "``github.com/kevung/nicomaque/sim``"
+msgstr "``github.com/kevung/nicomaque/sim``"
+
+#: ../../source/installation.rst:38
+msgid "simulation de tournois et prévision de fin (voir :ref:`simulation`)"
+msgstr "tournament simulation and end-time forecasting (see :ref:`simulation`)"
+
+#: ../../source/installation.rst:40
+msgid "``github.com/kevung/nicomaque/players``"
+msgstr "``github.com/kevung/nicomaque/players``"
+
+#: ../../source/installation.rst:40
+msgid "import et export de joueurs en CSV (voir :ref:`joueurs_csv`)"
+msgstr "import and export of players as CSV (see :ref:`joueurs_csv`)"
+
+#: ../../source/installation.rst:42
+msgid "``cmd/tournoi-demo``, ``cmd/tournoi-td``"
+msgstr "``cmd/tournoi-demo``, ``cmd/tournoi-td``"
+
+#: ../../source/installation.rst:42
+msgid "outils en ligne de commande (voir :ref:`cli`)"
+msgstr "command-line tools (see :ref:`cli`)"
+
+#: ../../source/installation.rst:46
+msgid "Essayer sans écrire de code"
+msgstr "Trying it without writing code"
+
+#: ../../source/installation.rst:48
+msgid "Depuis un clone du dépôt :"
+msgstr "From a clone of the repository:"
+
+#: ../../source/installation.rst:61
+msgid ""
+"Le dossier ``exemples/`` du dépôt contient les sorties de ``tournoi-demo "
+"-etapes`` pour sept formats ; ``exemples/index.html`` en est la galerie."
+msgstr ""
+"The ``exemples/`` folder of the repository contains the outputs of "
+"``tournoi-demo -etapes`` for seven formats; ``exemples/index.html`` is "
+"its gallery."
+
+#: ../../source/installation.rst:65
+msgid "Vérifier le module"
+msgstr "Checking the module"
+
+#: ../../source/installation.rst:72
+msgid "Le contenu des tests est décrit dans :ref:`annexe_tests`."
+msgstr "The content of the tests is described in :ref:`annexe_tests`."
+
+#: ../../source/installation.rst:75
+msgid "Construire cette documentation"
+msgstr "Building this documentation"

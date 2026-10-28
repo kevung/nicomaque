@@ -1,0 +1,152 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/limites.rst:4
+msgid "Limites connues"
+msgstr "Known limitations"
+
+#: ../../source/limites.rst:6
+msgid ""
+"Ce que le moteur ne fait pas, ou fait avec une restriction, dans la "
+"version publiée. La liste de travail détaillée est dans "
+"``docs/RESTE_A_FAIRE.md`` du dépôt."
+msgstr ""
+"What the engine does not do, or does with a restriction, in the published"
+" version. The detailed working list is in ``docs/RESTE_A_FAIRE.md`` in "
+"the repository."
+
+#: ../../source/limites.rst:10
+msgid "Validation"
+msgstr "Validation"
+
+#: ../../source/limites.rst:12
+msgid ""
+"Le moteur n'a pas encore dirigé de tournoi réel. La simulation couvre le "
+"déroulement mathématique d'un tournoi, pas les situations de salle. Un "
+"premier usage est recommandé sur un tournoi de club de 16 à 32 joueurs, "
+"en doublant sur papier."
+msgstr ""
+"The engine has not yet run a real tournament. The simulation covers the "
+"mathematical course of a tournament, not playing-hall situations. A first"
+" use is recommended at a club tournament of 16 to 32 players, running in "
+"parallel on paper."
+
+#: ../../source/limites.rst:15
+msgid ""
+"L'interface du directeur et la persistance du journal sont de la "
+"responsabilité du logiciel hôte : la reprise après panne suppose que "
+"l'hôte enregistre chaque événement au fil de l'eau."
+msgstr ""
+"The director's interface and the persistence of the journal are the "
+"responsibility of the host software: recovery after a crash assumes that "
+"the host records each event as it happens."
+
+#: ../../source/limites.rst:19
+msgid "Règles"
+msgstr "Rules"
+
+#: ../../source/limites.rst:21
+msgid ""
+"**Byes entre groupes** : en mode par rondes, la règle « pas de second bye"
+" tant que d'autres n'en ont pas eu » s'applique à l'intérieur d'un groupe"
+" de même nombre de défaites, pas entre groupes."
+msgstr ""
+"**Byes between groups**: in rounds mode, the rule \"no second bye while "
+"others have not had one\" applies within a same-losses group, not between"
+" groups."
+
+#: ../../source/limites.rst:24
+msgid ""
+"**Consolante et dernière chance** : pas d'option de saut (perdants du "
+"premier tour seulement, entrée jusqu'au tour *k*, consolante à tirage "
+"avec heure limite d'entrée)."
+msgstr ""
+"**Consolation and last chance**: no skip option (first-round losers only,"
+" entry up to round *k*, consolation drawn with an entry deadline)."
+
+#: ../../source/limites.rst:26
+msgid ""
+"**Revanches en consolante** : l'ordre inversé d'entrée évite la revanche "
+"immédiate, pas les suivantes ; leur fréquence n'est pas mesurée."
+msgstr ""
+"**Rematches in consolation**: the reversed entry order avoids the "
+"immediate rematch, not the following ones; their frequency has not been "
+"measured."
+
+#: ../../source/limites.rst:28
+msgid ""
+"**Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a "
+"pas été éprouvée en conditions réelles (durée du barrage)."
+msgstr ""
+"**Pools**: the three-way tie for two places, settled by a play-off, has "
+"not been tested under real conditions (play-off duration)."
+
+#: ../../source/limites.rst:30
+msgid ""
+"**Classement des places non gagnantes** : les règles (par tour atteint en"
+" tableau, par victoires au suisse, ex æquo partagés) restent à valider "
+"avec la FFBG."
+msgstr ""
+"**Standings of non-winning places**: the rules (by round reached in a "
+"bracket, by wins in the Swiss, ties shared) remain to be validated with "
+"the FFBG."
+
+#: ../../source/limites.rst:34
+msgid "Affichage"
+msgstr "Display"
+
+#: ../../source/limites.rst:36
+msgid ""
+"Pas d'écran joueur (« votre prochain match, votre table ») dans le paquet"
+" ``render``."
+msgstr ""
+"No player screen (\"your next match, your table\") in the ``render`` "
+"package."
+
+#: ../../source/limites.rst:39
+msgid "Modèle de l'étude"
+msgstr "Study model"
+
+#: ../../source/limites.rst:41
+msgid ""
+"L'effet de la longueur de match (exposant α) n'est pas fixé par les "
+"données disponibles."
+msgstr ""
+"The effect of match length (exponent α) is not settled by the available "
+"data."
+
+#: ../../source/limites.rst:42
+msgid ""
+"Le modèle de durée est une moyenne par point, indépendante du niveau et "
+"de la longueur."
+msgstr ""
+"The duration model is a per-point average, independent of level and "
+"length."
+
+#: ../../source/limites.rst:43
+msgid ""
+"Le simulateur de l'étude et ``sim`` diffèrent de 1 à 2 écarts types sur "
+"les probabilités de la double élimination et du GSL ; la cause n'est pas "
+"identifiée."
+msgstr ""
+"The study's simulator and ``sim`` differ by 1 to 2 standard deviations on"
+" the probabilities of double elimination and GSL; the cause has not been "
+"identified."

@@ -1,0 +1,403 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/cli.rst:4
+msgid "Outils en ligne de commande"
+msgstr "Command-line tools"
+
+#: ../../source/cli.rst:6
+msgid ""
+"Deux binaires accompagnent la bibliothèque. Ils servent à éprouver le "
+"moteur ; ce ne sont pas des logiciels de tournoi."
+msgstr ""
+"Two binaries come with the library. They are used to exercise the engine;"
+" they are not tournament software."
+
+#: ../../source/cli.rst:10
+msgid "Configurations nommées"
+msgstr "Named configurations"
+
+#: ../../source/cli.rst:12
+msgid ""
+"Les deux outils acceptent les mêmes noms de configuration (``tournoi-td``"
+" en a un de plus, ``suisse_rondes``) :"
+msgstr ""
+"Both tools accept the same configuration names (``tournoi-td`` has one "
+"more, ``suisse_rondes``):"
+
+#: ../../source/cli.rst:16
+msgid "Nom"
+msgstr "Name"
+
+#: ../../source/cli.rst:16
+msgid "Phases"
+msgstr "Phases"
+
+#: ../../source/cli.rst:18
+msgid "``suisse``"
+msgstr "``suisse``"
+
+#: ../../source/cli.rst:18
+msgid "suisse 2 vies continu, matchs en 7"
+msgstr "continuous Swiss with 2 lives, matches to 7"
+
+#: ../../source/cli.rst:19
+msgid "``suisse_rondes``"
+msgstr "``suisse_rondes``"
+
+#: ../../source/cli.rst:19
+msgid "suisse 2 vies par rondes (``tournoi-td`` seulement)"
+msgstr "Swiss with 2 lives in rounds (``tournoi-td`` only)"
+
+#: ../../source/cli.rst:20
+msgid "``suisse_tableau``"
+msgstr "``suisse_tableau``"
+
+#: ../../source/cli.rst:20
+msgid ""
+"suisse 2 vies, ``target: 16``, puis tableau à vies (9 points, finale en "
+"11)"
+msgstr ""
+"Swiss with 2 lives, ``target: 16``, then lives bracket (9 points, final "
+"to 11)"
+
+#: ../../source/cli.rst:22
+msgid "``gsl``"
+msgstr "``gsl``"
+
+#: ../../source/cli.rst:22
+msgid "blocs GSL, ``target: 16``, puis tableau à vies"
+msgstr "GSL blocks, ``target: 16``, then lives bracket"
+
+#: ../../source/cli.rst:23
+msgid "``elim``"
+msgstr "``elim``"
+
+#: ../../source/cli.rst:23
+msgid "élimination simple (9 points, finale en 11)"
+msgstr "single elimination (9 points, final to 11)"
+
+#: ../../source/cli.rst:24
+msgid "``conso``"
+msgstr "``conso``"
+
+#: ../../source/cli.rst:24
+msgid "tableau principal, consolante et dernière chance"
+msgstr "main bracket, consolation and last chance"
+
+#: ../../source/cli.rst:25
+msgid "``double``"
+msgstr "``double``"
+
+#: ../../source/cli.rst:25
+msgid "double élimination (consolante, réconciliation, recharge)"
+msgstr "double elimination (consolation, reconciliation, recharge)"
+
+#: ../../source/cli.rst:26
+msgid "``poules``"
+msgstr "``poules``"
+
+#: ../../source/cli.rst:26
+msgid "poules de 4 (2 qualifiés, matchs en 5), puis tableau"
+msgstr "pools of 4 (2 qualifiers, matches to 5), then bracket"
+
+#: ../../source/cli.rst:30
+msgid "``cmd/tournoi-demo``"
+msgstr "``cmd/tournoi-demo``"
+
+#: ../../source/cli.rst:32
+msgid "Simule un tournoi complet et écrit ses sorties dans un dossier."
+msgstr "Simulates a complete tournament and writes its outputs to a folder."
+
+#: ../../source/cli.rst:40 ../../source/cli.rst:67
+msgid "Option"
+msgstr "Option"
+
+#: ../../source/cli.rst:40 ../../source/cli.rst:67
+msgid "Rôle"
+msgstr "Role"
+
+#: ../../source/cli.rst:42 ../../source/cli.rst:70
+msgid "``-format``"
+msgstr "``-format``"
+
+#: ../../source/cli.rst:42
+msgid "configuration nommée (défaut ``suisse_tableau``)"
+msgstr "named configuration (default ``suisse_tableau``)"
+
+#: ../../source/cli.rst:43
+msgid "``-joueurs``"
+msgstr "``-joueurs``"
+
+#: ../../source/cli.rst:43
+msgid "effectif (défaut 32)"
+msgstr "number of players (default 32)"
+
+#: ../../source/cli.rst:44
+msgid "``-graine``"
+msgstr "``-graine``"
+
+#: ../../source/cli.rst:44
+msgid "graine (défaut 1)"
+msgstr "seed (default 1)"
+
+#: ../../source/cli.rst:45
+msgid "``-sortie``"
+msgstr "``-sortie``"
+
+#: ../../source/cli.rst:45
+msgid "dossier de sortie (défaut ``demo``)"
+msgstr "output folder (default ``demo``)"
+
+#: ../../source/cli.rst:46
+msgid "``-etapes``"
+msgstr "``-etapes``"
+
+#: ../../source/cli.rst:46
+#, no-python-format
+msgid "écrire aussi les pages d'affichage à 15 %, 40 %, 70 % et 100 % du journal"
+msgstr "also write the display pages at 15%, 40%, 70% and 100% of the journal"
+
+#: ../../source/cli.rst:47
+msgid "``-rejouer``"
+msgstr "``-rejouer``"
+
+#: ../../source/cli.rst:47
+msgid ""
+"rejouer un journal et afficher l'état, les actions proposées et les "
+"avertissements"
+msgstr "replay a journal and show the state, the proposed actions and the warnings"
+
+#: ../../source/cli.rst:51
+msgid ""
+"Fichiers produits : ``journal.json``, ``affichage.html``, "
+"``classement.csv``, un SVG par section, ``affichage_mi_tournoi.html`` "
+"(rejeu des deux tiers du journal) et, avec ``-etapes``, les pages "
+"``etapeK_*``. La console affiche aussi une prévision de fin (``Forecast``"
+" sur 50 tirages) et la durée effectivement simulée."
+msgstr ""
+"Files produced: ``journal.json``, ``affichage.html``, ``classement.csv``,"
+" one SVG per section, ``affichage_mi_tournoi.html`` (replay of the first "
+"two thirds of the journal) and, with ``-etapes``, the ``etapeK_*`` pages."
+" The console also shows a forecast of the end (``Forecast`` over 50 "
+"draws) and the duration actually simulated."
+
+#: ../../source/cli.rst:57
+msgid "``cmd/tournoi-td``"
+msgstr "``cmd/tournoi-td``"
+
+#: ../../source/cli.rst:59
+msgid ""
+"Console interactive de direction de tournoi. Le journal est réécrit après"
+" chaque commande et ``affichage.html`` régénéré à côté ; relancer la "
+"commande sur le même fichier reprend le tournoi."
+msgstr ""
+"Interactive tournament director console. The journal is rewritten after "
+"each command and ``affichage.html`` regenerated alongside; running the "
+"command again on the same file resumes the tournament."
+
+#: ../../source/cli.rst:69
+msgid "``-journal``"
+msgstr "``-journal``"
+
+#: ../../source/cli.rst:69
+msgid "fichier journal, créé s'il n'existe pas (défaut ``tournoi.json``)"
+msgstr "journal file, created if it does not exist (default ``tournoi.json``)"
+
+#: ../../source/cli.rst:70
+msgid "configuration nommée d'un nouveau tournoi (défaut ``suisse_tableau``)"
+msgstr "named configuration of a new tournament (default ``suisse_tableau``)"
+
+#: ../../source/cli.rst:71
+msgid "``-config``"
+msgstr "``-config``"
+
+#: ../../source/cli.rst:71
+msgid "configuration JSON d'un nouveau tournoi (prioritaire sur ``-format``)"
+msgstr "JSON configuration of a new tournament (takes precedence over ``-format``)"
+
+#: ../../source/cli.rst:72
+msgid "``-nom``"
+msgstr "``-nom``"
+
+#: ../../source/cli.rst:72
+msgid "nom du tournoi"
+msgstr "tournament name"
+
+#: ../../source/cli.rst:79
+msgid "Commande"
+msgstr "Command"
+
+#: ../../source/cli.rst:80
+msgid "Effet"
+msgstr "Effect"
+
+#: ../../source/cli.rst:81
+msgid "``ajoute <nom> [club] [pr]``"
+msgstr "``ajoute <nom> [club] [pr]``"
+
+#: ../../source/cli.rst:82
+msgid "inscrire un joueur (identifiant = nom en minuscules)"
+msgstr "register a player (identifier = name in lowercase)"
+
+#: ../../source/cli.rst:83
+msgid "``import <fichier.csv>``"
+msgstr "``import <fichier.csv>``"
+
+#: ../../source/cli.rst:84
+msgid "inscrire les joueurs d'un fichier CSV"
+msgstr "register the players from a CSV file"
+
+#: ../../source/cli.rst:85
+msgid "``exporte <fichier.csv>``"
+msgstr "``exporte <fichier.csv>``"
+
+#: ../../source/cli.rst:86
+msgid "écrire les joueurs inscrits dans un CSV que ``import`` relit"
+msgstr "write the registered players to a CSV that ``import`` can read back"
+
+#: ../../source/cli.rst:87
+msgid "``places``"
+msgstr "``places``"
+
+#: ../../source/cli.rst:88
+msgid "lister les places d'exemption libres pour un retardataire"
+msgstr "list the free bye slots for a latecomer"
+
+#: ../../source/cli.rst:89
+msgid "``retardataire <nom> <place>``"
+msgstr "``retardataire <nom> <place>``"
+
+#: ../../source/cli.rst:90
+msgid "inscrire un joueur sur une place libre, sans refaire le tirage"
+msgstr "register a player on a free slot, without redoing the draw"
+
+#: ../../source/cli.rst:91
+msgid "``propose``"
+msgstr "``propose``"
+
+#: ../../source/cli.rst:92
+msgid "afficher les actions proposées, numérotées"
+msgstr "show the proposed actions, numbered"
+
+#: ../../source/cli.rst:93
+msgid "``ok [n | tous]``"
+msgstr "``ok [n | tous]``"
+
+#: ../../source/cli.rst:94
+msgid "confirmer une proposition, ou toutes"
+msgstr "confirm one proposal, or all of them"
+
+#: ../../source/cli.rst:95
+msgid "``resultat <match> <vainqueur> [scoreA scoreB]``"
+msgstr "``resultat <match> <vainqueur> [scoreA scoreB]``"
+
+#: ../../source/cli.rst:96
+msgid "saisir un résultat"
+msgstr "enter a result"
+
+#: ../../source/cli.rst:97
+msgid "``corrige <match> <vainqueur> [scoreA scoreB]``"
+msgstr "``corrige <match> <vainqueur> [scoreA scoreB]``"
+
+#: ../../source/cli.rst:98
+msgid "corriger un résultat déjà saisi"
+msgstr "correct a result already entered"
+
+#: ../../source/cli.rst:99
+msgid "``annule <match>``"
+msgstr "``annule <match>``"
+
+#: ../../source/cli.rst:100
+msgid "annuler un match lancé par erreur"
+msgstr "cancel a match started by mistake"
+
+#: ../../source/cli.rst:101
+msgid "``forfait <joueur>``"
+msgstr "``forfait <joueur>``"
+
+#: ../../source/cli.rst:102
+msgid "retirer un joueur du tournoi"
+msgstr "withdraw a player from the tournament"
+
+#: ../../source/cli.rst:103
+msgid "``longueur <points>``"
+msgstr "``longueur <points>``"
+
+#: ../../source/cli.rst:104
+msgid "changer la longueur des prochains matchs de la phase en cours"
+msgstr "change the length of the upcoming matches of the current phase"
+
+#: ../../source/cli.rst:105
+msgid "``configure <fichier.json>``"
+msgstr "``configure <fichier.json>``"
+
+#: ../../source/cli.rst:106
+msgid "remplacer la configuration entière"
+msgstr "replace the entire configuration"
+
+#: ../../source/cli.rst:107
+msgid "``rouvre``"
+msgstr "``rouvre``"
+
+#: ../../source/cli.rst:108
+msgid "rouvrir un tournoi clos"
+msgstr "reopen a closed tournament"
+
+#: ../../source/cli.rst:109
+msgid "``matchs``, ``vies``, ``classement``, ``etat``"
+msgstr "``matchs``, ``vies``, ``classement``, ``etat``"
+
+#: ../../source/cli.rst:110
+msgid "consulter les matchs, les vies, le classement, l'état"
+msgstr "view the matches, the lives, the standings, the state"
+
+#: ../../source/cli.rst:111
+msgid "``simule``"
+msgstr "``simule``"
+
+#: ../../source/cli.rst:112
+msgid "jouer au hasard tous les matchs en cours"
+msgstr "play all matches in progress at random"
+
+#: ../../source/cli.rst:113
+msgid "``aide``, ``quitte``"
+msgstr "``aide``, ``quitte``"
+
+#: ../../source/cli.rst:114
+msgid "afficher l'aide, quitter"
+msgstr "show help, quit"
+
+#: ../../source/cli.rst:116
+msgid ""
+"Un joueur se désigne par son identifiant ou par une partie de son nom "
+"(erreur si plusieurs joueurs correspondent). ``ok tous`` s'interrompt "
+"après une action ``draw``, ``next_phase`` ou ``finish`` : l'état a changé"
+" et les propositions suivantes ne sont plus valables."
+msgstr ""
+"A player is designated by their identifier or by part of their name "
+"(error if several players match). ``ok tous`` stops after a ``draw``, "
+"``next_phase`` or ``finish`` action: the state has changed and the "
+"following proposals are no longer valid."
+
+#: ../../source/cli.rst:120
+msgid "Exemple de session :"
+msgstr "Example session:"

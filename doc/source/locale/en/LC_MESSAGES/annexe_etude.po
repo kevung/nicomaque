@@ -1,0 +1,476 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/annexe_etude.rst:4
+msgid "Étude des formats"
+msgstr "Study of the formats"
+
+#: ../../source/annexe_etude.rst:6
+msgid ""
+"Le choix des formats repose sur une étude par simulation menée en "
+"septembre 2026 avec un simulateur Python (non publié), puis vérifiée avec"
+" le paquet ``sim`` du dépôt."
+msgstr ""
+"The choice of formats rests on a simulation study carried out in "
+"September 2026 with a Python simulator (unpublished), then verified with "
+"the repository's ``sim`` package."
+
+#: ../../source/annexe_etude.rst:10
+msgid "Critères"
+msgstr "Criteria"
+
+#: ../../source/annexe_etude.rst:12
+msgid "Par ordre de priorité :"
+msgstr "In order of priority:"
+
+#: ../../source/annexe_etude.rst:14
+msgid "maximiser les chances des meilleurs joueurs **à durée donnée** ;"
+msgstr "maximise the chances of the best players **for a given duration**;"
+
+#: ../../source/annexe_etude.rst:15
+msgid "un format pilotable par un directeur de tournoi, y compris sur papier ;"
+msgstr "a format that a tournament director can run, including on paper;"
+
+#: ../../source/annexe_etude.rst:16
+msgid "aucun match inutile : chaque match élimine, qualifie ou classe ;"
+msgstr "no useless match: every match eliminates, qualifies or ranks;"
+
+#: ../../source/annexe_etude.rst:17
+msgid "aucun départage arithmétique ;"
+msgstr "no arithmetic tie-break;"
+
+#: ../../source/annexe_etude.rst:18
+msgid "tout effectif accepté (13, 47, 100 joueurs)."
+msgstr "any number of players accepted (13, 47, 100 players)."
+
+#: ../../source/annexe_etude.rst:21
+msgid "Modèle"
+msgstr "Model"
+
+#: ../../source/annexe_etude.rst:23
+msgid "Probabilité de gain"
+msgstr "Win probability"
+
+#: ../../source/annexe_etude.rst:24
+msgid "Formule Elo/FIBS avec la conversion 3 PR = 100 points Elo :"
+msgstr "Elo/FIBS formula with the conversion 3 PR = 100 Elo points:"
+
+#: ../../source/annexe_etude.rst:26
+msgid ""
+"D = \\frac{(b-a)\\times 100}{3} \\qquad P = \\frac{1}{1 + "
+"10^{-D\\sqrt{N}/2000}}"
+msgstr ""
+"D = \\frac{(b-a)\\times 100}{3} \\qquad P = \\frac{1}{1 + "
+"10^{-D\\sqrt{N}/2000}}"
+
+#: ../../source/annexe_etude.rst:30
+msgid ""
+"où *a* et *b* sont les PR des deux joueurs et *N* la longueur du match en"
+" points."
+msgstr ""
+"where *a* and *b* are the PRs of the two players and *N* the match length"
+" in points."
+
+#: ../../source/annexe_etude.rst:32
+msgid "Validation"
+msgstr "Validation"
+
+#: ../../source/annexe_etude.rst:33
+#, no-python-format
+msgid ""
+"Sur la base BMAB (33 238 matchs uniques), 1 PR d'écart vaut 2,8 % de "
+"chances de gain sur un match en 7 à 11 points (β = 0,036 à α = 0,5 ; "
+"valeur théorique 0,039)."
+msgstr ""
+"On the BMAB database (33,238 unique matches), a 1 PR difference is worth "
+"a 2.8% chance of winning a 7- to 11-point match (β = 0.036 at α = 0.5; "
+"theoretical value 0.039)."
+
+#: ../../source/annexe_etude.rst:36
+msgid "Effet de la longueur"
+msgstr "Effect of length"
+
+#: ../../source/annexe_etude.rst:37
+msgid ""
+"L'exposant α de *N* n'est pas identifiable avec ces données : la "
+"vraisemblance est plate entre 0 et 0,7, et α = 1 est exclu. Le PR du "
+"match donne α ≈ 0,23, intervalle de confiance [0 ; 0,53]. La valeur "
+"retenue, α = 0,5, s'appuie sur la mécanique du jeu (erreur cumulée "
+"proportionnelle à *N*, chance proportionnelle à √N), vérifiée sur les "
+"données. C'est la principale incertitude du modèle."
+msgstr ""
+"The exponent α of *N* cannot be identified with this data: the likelihood"
+" is flat between 0 and 0.7, and α = 1 is excluded. The match PR gives α ≈"
+" 0.23, confidence interval [0 ; 0.53]. The value retained, α = 0.5, rests"
+" on the mechanics of the game (cumulative error proportional to *N*, luck"
+" proportional to √N), verified on the data. This is the main uncertainty "
+"of the model."
+
+#: ../../source/annexe_etude.rst:43 ../../source/annexe_etude.rst:89
+msgid "Durée"
+msgstr "Duration"
+
+#: ../../source/annexe_etude.rst:44
+msgid ""
+"Environ 8 minutes par point en moyenne ; 11 minutes par point pour "
+"planifier une ronde, attente comprise."
+msgstr ""
+"About 8 minutes per point on average; 11 minutes per point for planning a"
+" round, waiting included."
+
+#: ../../source/annexe_etude.rst:48
+msgid "Résultats"
+msgstr "Results"
+
+#: ../../source/annexe_etude.rst:50
+msgid ""
+"Grilles à budget de temps constant, 32 et 64 joueurs, tournois de 8 h et "
+"de 16 h :"
+msgstr "Constant time-budget grids, 32 and 64 players, 8h and 16h tournaments:"
+
+#: ../../source/annexe_etude.rst:52
+msgid ""
+"**Un suisse à vies est une double élimination sans tableau** : chaque "
+"défaite compte pareil, tout effectif est admis, la fin est toujours "
+"résoluble sans départage."
+msgstr ""
+"**A Swiss with lives is a double elimination without a bracket**: every "
+"loss counts the same, any number of players is allowed, the end can "
+"always be resolved without a tie-break."
+
+#: ../../source/annexe_etude.rst:54
+msgid ""
+"**L'attente est le premier poste de perte** : un suisse synchrone fait "
+"attendre 10 à 15 fois plus qu'un suisse continu (174 minutes par joueur "
+"contre 12 sur 16 h), soit environ deux matchs."
+msgstr ""
+"**Waiting is the first source of loss**: a synchronous Swiss makes "
+"players wait 10 to 15 times more than a continuous Swiss (174 minutes per"
+" player against 12 over 16h), or about two matches."
+
+#: ../../source/annexe_etude.rst:57
+msgid ""
+"**Le continu est manipulable** par l'heure d'annonce d'un résultat. "
+"Parades : blocs GSL (appariement figé par les résultats) ou appariement "
+"par lots."
+msgstr ""
+"**Continuous mode can be manipulated** through the time at which a result"
+" is announced. Countermeasures: GSL blocks (pairing frozen by the "
+"results) or pairing by batches."
+
+#: ../../source/annexe_etude.rst:59
+#, no-python-format
+msgid ""
+"**La bascule « somme des vies = 2^k »** (2 vies = exemption du premier "
+"tour) est dans le groupe de tête, que la longueur compte ou non. "
+"L'élimination simple longue est la meilleure si √N est exact, la pire "
+"sinon. 3 vies et le format HSBT ne sont jamais gagnants ; le HSBT écarte "
+"l'information des rondes du samedi (environ 50 % du champ qualifié)."
+msgstr ""
+"**The \"sum of lives = 2^k\" switch-over** (2 lives = bye in the first "
+"round) is in the leading group, whether or not length counts. Long single"
+" elimination is the best if √N is exact, the worst otherwise. 3 lives and"
+" the HSBT format are never winners; HSBT discards the information from "
+"the Saturday rounds (about 50% of the field qualified)."
+
+#: ../../source/annexe_etude.rst:63
+msgid ""
+"**La répartition des longueurs entre les tours est presque neutre** : "
+"allonger la finale ne change pratiquement pas le résultat."
+msgstr ""
+"**The distribution of lengths between rounds is almost neutral**: "
+"lengthening the final practically does not change the result."
+
+#: ../../source/annexe_etude.rst:65
+#, no-python-format
+msgid ""
+"**Le format joue sur un facteur 2 à 3** : une fin de semaine fait gagner "
+"le meilleur joueur 4 à 9 % du temps (64 ou 32 joueurs), contre 1,6 à 3 % "
+"si le vainqueur était tiré au sort."
+msgstr ""
+"**The format makes a factor of 2 to 3 difference**: a weekend lets the "
+"best player win 4 to 9% of the time (64 or 32 players), against 1.6 to 3%"
+" if the winner were drawn by lot."
+
+#: ../../source/annexe_etude.rst:69
+msgid "Format recommandé"
+msgstr "Recommended format"
+
+#: ../../source/annexe_etude.rst:71
+msgid ""
+"Suisse 2 vies en continu (appariement aléatoire dans le groupe de même "
+"nombre de défaites, sans revanche, bye au groupe le plus bas), arrêt "
+"quand la somme des vies vaut 16 ou 32, puis tableau à exemptions avec des"
+" matchs plus longs. Variante non manipulable : blocs GSL calés sur les "
+"repas."
+msgstr ""
+"Swiss with 2 lives in continuous mode (random pairing within the same-"
+"losses group, no rematch, bye to the lowest group), stopping when the sum"
+" of lives is 16 or 32, then a bracket with byes and longer matches. Non-"
+"manipulable variant: GSL blocks timed to the meals."
+
+#: ../../source/annexe_etude.rst:75
+msgid ""
+"Choix qui en découlent : pas de finale à handicap ; tirage aléatoire des "
+"tableaux par défaut, les têtes de série restant une option (``seeding: "
+"\"rating\"``) ; un joueur retiré est classé sur son parcours, pas en "
+"queue de classement."
+msgstr ""
+"Choices that follow: no handicap final; random draw of brackets by "
+"default, seeded players remaining an option (``seeding: \"rating\"``); a "
+"withdrawn player is ranked on their run, not at the bottom of the "
+"standings."
+
+#: ../../source/annexe_etude.rst:80
+msgid "Chiffres de référence du moteur"
+msgstr "Engine reference figures"
+
+#: ../../source/annexe_etude.rst:82
+msgid ""
+"Mesures de ``go test -run TestParity -v ./`` : 1 500 tournois simulés de "
+"64 joueurs par format, matchs en 7 points, PR tirés selon une loi normale"
+" de moyenne 6 et d'écart-type 2, bornée entre 2 et 10. P(meilleur) est la"
+" probabilité que le joueur le plus fort gagne ; P(top 4) celle qu'un des "
+"quatre plus forts gagne. La durée est le temps de salle simulé avec un "
+"nombre de tables illimité."
+msgstr ""
+"Measurements from ``go test -run TestParity -v ./``: 1,500 simulated "
+"tournaments of 64 players per format, 7-point matches, PRs drawn from a "
+"normal distribution with mean 6 and standard deviation 2, bounded between"
+" 2 and 10. P(best) is the probability that the strongest player wins; "
+"P(top 4) that one of the four strongest wins. Duration is the simulated "
+"playing-hall time with an unlimited number of tables."
+
+#: ../../source/annexe_etude.rst:89
+msgid "Format"
+msgstr "Format"
+
+#: ../../source/annexe_etude.rst:89
+msgid "P(meilleur)"
+msgstr "P(best)"
+
+#: ../../source/annexe_etude.rst:89
+msgid "P(top 4)"
+msgstr "P(top 4)"
+
+#: ../../source/annexe_etude.rst:89
+msgid "Matchs"
+msgstr "Matches"
+
+#: ../../source/annexe_etude.rst:91
+msgid "Élimination simple"
+msgstr "Single elimination"
+
+#: ../../source/annexe_etude.rst:91
+msgid "3,8 %"
+msgstr "3.8%"
+
+#: ../../source/annexe_etude.rst:91
+msgid "14,6 %"
+msgstr "14.6%"
+
+#: ../../source/annexe_etude.rst:91
+msgid "63,0"
+msgstr "63.0"
+
+#: ../../source/annexe_etude.rst:91
+msgid "7 h 00"
+msgstr "7h00"
+
+#: ../../source/annexe_etude.rst:92
+msgid "Suisse 2 vies, continu"
+msgstr "Swiss 2 lives, continuous"
+
+#: ../../source/annexe_etude.rst:92
+msgid "3,5 %"
+msgstr "3.5%"
+
+#: ../../source/annexe_etude.rst:92
+msgid "16,5 %"
+msgstr "16.5%"
+
+#: ../../source/annexe_etude.rst:92 ../../source/annexe_etude.rst:93
+#: ../../source/annexe_etude.rst:95 ../../source/annexe_etude.rst:96
+msgid "126,5"
+msgstr "126.5"
+
+#: ../../source/annexe_etude.rst:92
+msgid "10 h 20"
+msgstr "10h20"
+
+#: ../../source/annexe_etude.rst:93
+msgid "Suisse 2 vies, par rondes"
+msgstr "Swiss 2 lives, by rounds"
+
+#: ../../source/annexe_etude.rst:93
+msgid "3,7 %"
+msgstr "3.7%"
+
+#: ../../source/annexe_etude.rst:93
+msgid "15,0 %"
+msgstr "15.0%"
+
+#: ../../source/annexe_etude.rst:93
+msgid "14 h 12"
+msgstr "14h12"
+
+#: ../../source/annexe_etude.rst:94
+msgid "Suisse 2 vies → tableau de 16"
+msgstr "Swiss 2 lives → bracket of 16"
+
+#: ../../source/annexe_etude.rst:94
+msgid "4,2 %"
+msgstr "4.2%"
+
+#: ../../source/annexe_etude.rst:94
+msgid "15,5 %"
+msgstr "15.5%"
+
+#: ../../source/annexe_etude.rst:94
+msgid "124,3"
+msgstr "124.3"
+
+#: ../../source/annexe_etude.rst:94
+msgid "9 h 45"
+msgstr "9h45"
+
+#: ../../source/annexe_etude.rst:95
+msgid "Blocs GSL"
+msgstr "GSL blocks"
+
+#: ../../source/annexe_etude.rst:95
+msgid "4,5 %"
+msgstr "4.5%"
+
+#: ../../source/annexe_etude.rst:95
+msgid "15,3 %"
+msgstr "15.3%"
+
+#: ../../source/annexe_etude.rst:95
+msgid "14 h 25"
+msgstr "14h25"
+
+#: ../../source/annexe_etude.rst:96
+msgid "Double élimination avec recharge"
+msgstr "Double elimination with recharge (bracket reset)"
+
+#: ../../source/annexe_etude.rst:96
+msgid "5,7 %"
+msgstr "5.7%"
+
+#: ../../source/annexe_etude.rst:96
+msgid "18,0 %"
+msgstr "18.0%"
+
+#: ../../source/annexe_etude.rst:96
+msgid "13 h 35"
+msgstr "13h35"
+
+#: ../../source/annexe_etude.rst:97
+msgid "Vainqueur tiré au sort"
+msgstr "Winner drawn by lot"
+
+#: ../../source/annexe_etude.rst:97
+msgid "1,6 %"
+msgstr "1.6%"
+
+#: ../../source/annexe_etude.rst:97
+msgid "6,3 %"
+msgstr "6.3%"
+
+#: ../../source/annexe_etude.rst:97
+msgid "—"
+msgstr "—"
+
+#: ../../source/annexe_etude.rst:100
+msgid "Incertitude : environ ±0,5 point sur P(meilleur) et ±1 point sur P(top 4)."
+msgstr "Uncertainty: about ±0.5 points on P(best) and ±1 point on P(top 4)."
+
+#: ../../source/annexe_etude.rst:102
+msgid "Lectures :"
+msgstr "Readings:"
+
+#: ../../source/annexe_etude.rst:104
+msgid ""
+"**Coût de l'attente** : le suisse 2 vies joue le même nombre de matchs en"
+" continu et par rondes (126,5), et dure 3 h 52 de plus par rondes."
+msgstr ""
+"**Cost of waiting**: the 2-life Swiss plays the same number of matches in"
+" continuous mode and by rounds (126.5), and lasts 3h52 longer by rounds."
+
+#: ../../source/annexe_etude.rst:106
+msgid ""
+"**Format recommandé** : le suisse 2 vies suivi d'un tableau de 16 a une "
+"qualité comparable au reste de la famille à deux vies pour la durée la "
+"plus courte de cette famille (9 h 45 contre 13 à 14 h)."
+msgstr ""
+"**Recommended format**: the 2-life Swiss followed by a bracket of 16 has "
+"a quality comparable to the rest of the two-life family for the shortest "
+"duration of that family (9h45 against 13 to 14h)."
+
+#: ../../source/annexe_etude.rst:109
+msgid ""
+"**Écarts de qualité** : sur P(top 4), la famille à deux vies (15,0 à 18,0"
+" %) devance l'élimination simple (14,6 %) au-delà de l'incertitude pour "
+"la double élimination et le suisse continu. Sur P(meilleur), seule la "
+"double élimination se détache ; les autres écarts sont de l'ordre du "
+"bruit de mesure."
+msgstr ""
+"**Quality gaps**: on P(top 4), the two-life family (15.0 to 18.0%) beats "
+"single elimination (14.6%) beyond the uncertainty for double elimination "
+"and continuous Swiss. On P(best), only double elimination stands out; the"
+" other gaps are of the order of measurement noise."
+
+#: ../../source/annexe_etude.rst:113
+#, no-python-format
+msgid ""
+"**Mode par rondes** : son générateur a changé en septembre 2026 (un "
+"tirage par ronde, pour que les appariements d'une ronde lancée en "
+"plusieurs vagues restent les mêmes). Sa valeur de P(meilleur) est passée "
+"de 4,9 à 3,7 % ; 9 000 tournois supplémentaires ramènent l'écart au bruit"
+" de mesure (4,3 % contre 4,6 %)."
+msgstr ""
+"**By-rounds mode**: its generator changed in September 2026 (one draw per"
+" round, so that the pairings of a round launched in several waves stay "
+"the same). Its P(best) value went from 4.9 to 3.7%; 9,000 additional "
+"tournaments bring the gap back to measurement noise (4.3% against 4.6%)."
+
+#: ../../source/annexe_etude.rst:118
+msgid ""
+"Le simulateur de l'étude et ``sim`` donnent les mêmes nombres de matchs "
+"et les mêmes durées, mais des probabilités qui diffèrent de 1 à 2 écarts "
+"types sur la double élimination et le GSL ; la cause n'est pas identifiée"
+" (voir :ref:`limites`). Ces chiffres sont des ordres de grandeur, pas des"
+" valeurs au dixième de point."
+msgstr ""
+"The study's simulator and ``sim`` give the same match counts and the same"
+" durations, but probabilities that differ by 1 to 2 standard deviations "
+"on double elimination and GSL; the cause is not identified (see "
+":ref:`limites`). These figures are orders of magnitude, not values to the"
+" tenth of a point."
+
+#: ../../source/annexe_etude.rst:123
+msgid ""
+"Ces mesures sont à refaire après tout changement de l'algorithme "
+"d'appariement."
+msgstr ""
+"These measurements must be redone after any change to the pairing "
+"algorithm."

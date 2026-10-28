@@ -1,0 +1,400 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/integration.rst:4
+msgid "Intégrer le moteur"
+msgstr "Integrating the engine"
+
+#: ../../source/integration.rst:6
+msgid ""
+"Cette page décrit ce que le logiciel hôte doit écrire pour utiliser le "
+"moteur. Le détail de chaque type et de chaque événement est dans la "
+":ref:`référence <modele>`."
+msgstr ""
+"This page describes what the host software must write in order to use the"
+" engine. The detail of each type and each event is in the :ref:`reference"
+" <modele>`."
+
+#: ../../source/integration.rst:10
+msgid "Répartition des rôles"
+msgstr "Division of roles"
+
+#: ../../source/integration.rst:13
+msgid "Le moteur"
+msgstr "The engine"
+
+#: ../../source/integration.rst:13
+msgid "L'hôte"
+msgstr "The host"
+
+#: ../../source/integration.rst:15
+msgid "reconstruit l'état à partir du journal"
+msgstr "rebuilds the state from the journal"
+
+#: ../../source/integration.rst:15
+msgid "stocke le journal, dans l'ordre, sans le modifier"
+msgstr "stores the journal, in order, without modifying it"
+
+#: ../../source/integration.rst:17
+msgid "propose les actions possibles"
+msgstr "proposes the possible actions"
+
+#: ../../source/integration.rst:17
+msgid "les affiche et recueille la décision du directeur"
+msgstr "displays them and collects the director's decision"
+
+#: ../../source/integration.rst:19
+msgid "convertit une action confirmée en événement"
+msgstr "converts a confirmed action into an event"
+
+#: ../../source/integration.rst:19
+msgid "ajoute l'événement au journal"
+msgstr "appends the event to the journal"
+
+#: ../../source/integration.rst:20
+msgid "renvoie des codes (libellés, avertissements,"
+msgstr "returns codes (labels, warnings,"
+
+#: ../../source/integration.rst:20
+msgid "traduit ces codes dans la langue de"
+msgstr "translates these codes into the language of"
+
+#: ../../source/integration.rst:21
+msgid "notes, raisons d'attente)"
+msgstr "notes, waiting reasons)"
+
+#: ../../source/integration.rst:21
+msgid "l'utilisateur"
+msgstr "the user"
+
+#: ../../source/integration.rst:22
+msgid "ne connaît pas l'heure"
+msgstr "does not know the time"
+
+#: ../../source/integration.rst:22
+msgid "fournit l'heure courante (``ProposeAt``)"
+msgstr "supplies the current time (``ProposeAt``)"
+
+#: ../../source/integration.rst:23
+msgid "ne connaît que son tournoi"
+msgstr "only knows its own tournament"
+
+#: ../../source/integration.rst:23
+msgid "signale les tables et joueurs occupés par d'autres épreuves (``External``)"
+msgstr "reports the tables and players occupied by other events (``External``)"
+
+#: ../../source/integration.rst:28
+msgid "Fonctions de base"
+msgstr "Basic functions"
+
+#: ../../source/integration.rst:31
+msgid "Appel"
+msgstr "Call"
+
+#: ../../source/integration.rst:31
+msgid "Rôle"
+msgstr "Role"
+
+#: ../../source/integration.rst:33
+msgid "``New(cfg, graine, now)``"
+msgstr "``New(cfg, graine, now)``"
+
+#: ../../source/integration.rst:33
+msgid "crée l'état et l'événement ``created``"
+msgstr "creates the state and the ``created`` event"
+
+#: ../../source/integration.rst:34
+msgid "``Replay(journal)``"
+msgstr "``Replay(journal)``"
+
+#: ../../source/integration.rst:34
+msgid "reconstruit l'état complet à partir du journal"
+msgstr "rebuilds the complete state from the journal"
+
+#: ../../source/integration.rst:35
+msgid "``State.Propose()``"
+msgstr "``State.Propose()``"
+
+#: ../../source/integration.rst:35
+msgid "actions proposées, à l'heure du dernier événement"
+msgstr "proposed actions, at the time of the last event"
+
+#: ../../source/integration.rst:36
+msgid "``State.ProposeAt(now)``"
+msgstr "``State.ProposeAt(now)``"
+
+#: ../../source/integration.rst:36
+msgid "actions proposées à l'heure ``now``"
+msgstr "proposed actions at time ``now``"
+
+#: ../../source/integration.rst:37
+msgid "``State.ProposeWith(now, ext)``"
+msgstr "``State.ProposeWith(now, ext)``"
+
+#: ../../source/integration.rst:37
+msgid "idem, avec les tables et joueurs occupés ailleurs"
+msgstr "same, with the tables and players occupied elsewhere"
+
+#: ../../source/integration.rst:38
+msgid "``State.EventFromAction(a, now)``"
+msgstr "``State.EventFromAction(a, now)``"
+
+#: ../../source/integration.rst:38
+msgid "événement correspondant à une action confirmée"
+msgstr "event corresponding to a confirmed action"
+
+#: ../../source/integration.rst:39
+msgid "``State.Apply(ev)``"
+msgstr "``State.Apply(ev)``"
+
+#: ../../source/integration.rst:39
+msgid "applique un événement à l'état"
+msgstr "applies an event to the state"
+
+#: ../../source/integration.rst:43
+msgid "La boucle"
+msgstr "The loop"
+
+#: ../../source/integration.rst:73
+msgid ""
+"Le journal se sérialise en JSON (``json.Marshal``). Une reprise après "
+"interruption est un ``Replay`` du journal enregistré. Le fichier "
+"``doc.go`` du dépôt contient un exemple complet."
+msgstr ""
+"The journal serializes to JSON (``json.Marshal``). Resuming after an "
+"interruption is a ``Replay`` of the saved journal. The repository's "
+"``doc.go`` file contains a complete example."
+
+#: ../../source/integration.rst:77
+msgid "Événements produits par l'hôte"
+msgstr "Events produced by the host"
+
+#: ../../source/integration.rst:79
+msgid ""
+"Ces événements ne viennent pas d'une action proposée ; l'hôte les "
+"construit directement."
+msgstr ""
+"These events do not come from a proposed action; the host builds them "
+"directly."
+
+#: ../../source/integration.rst:82
+msgid "Constructeur"
+msgstr "Constructor"
+
+#: ../../source/integration.rst:82
+msgid "Usage"
+msgstr "Usage"
+
+#: ../../source/integration.rst:84
+msgid "``PlayerAddedEvent``"
+msgstr "``PlayerAddedEvent``"
+
+#: ../../source/integration.rst:84
+msgid "inscrire un joueur"
+msgstr "register a player"
+
+#: ../../source/integration.rst:85
+msgid "``PlayerAddedAtSlotEvent``"
+msgstr "``PlayerAddedAtSlotEvent``"
+
+#: ../../source/integration.rst:85
+msgid ""
+"inscrire un retardataire sur une place d'exemption libre "
+"(``State.FreeSlots``)"
+msgstr "register a latecomer on a free bye slot (``State.FreeSlots``)"
+
+#: ../../source/integration.rst:87
+msgid "``PlayerUpdatedEvent``"
+msgstr "``PlayerUpdatedEvent``"
+
+#: ../../source/integration.rst:87
+msgid "corriger la fiche d'un joueur"
+msgstr "correct a player's record"
+
+#: ../../source/integration.rst:88
+msgid "``PlayerUnavailableEvent``,"
+msgstr "``PlayerUnavailableEvent``,"
+
+#: ../../source/integration.rst:88
+msgid "rendre un joueur indisponible jusqu'à une heure"
+msgstr "make a player unavailable until a time"
+
+#: ../../source/integration.rst:89
+msgid "``PlayerUnavailableUntilRoundEvent``"
+msgstr "``PlayerUnavailableUntilRoundEvent``"
+
+#: ../../source/integration.rst:89
+msgid "ou une ronde"
+msgstr "or a round"
+
+#: ../../source/integration.rst:90
+msgid "``PlayerAvailableEvent``"
+msgstr "``PlayerAvailableEvent``"
+
+#: ../../source/integration.rst:90
+msgid "le rendre disponible"
+msgstr "make them available again"
+
+#: ../../source/integration.rst:91
+msgid "``PlayerWithdrawnEvent``"
+msgstr "``PlayerWithdrawnEvent``"
+
+#: ../../source/integration.rst:91
+msgid "retirer un joueur immédiatement"
+msgstr "withdraw a player immediately"
+
+#: ../../source/integration.rst:92
+msgid "``PlayerWithdrawnAfterCurrentEvent``"
+msgstr "``PlayerWithdrawnAfterCurrentEvent``"
+
+#: ../../source/integration.rst:92
+msgid "le retirer après son match en cours"
+msgstr "withdraw them after their current match"
+
+#: ../../source/integration.rst:93
+msgid "``ForfeitEvent``"
+msgstr "``ForfeitEvent``"
+
+#: ../../source/integration.rst:93
+msgid "forfait sur un seul match"
+msgstr "forfeit on a single match"
+
+#: ../../source/integration.rst:94
+msgid "``ResultEvent``"
+msgstr "``ResultEvent``"
+
+#: ../../source/integration.rst:94
+msgid "saisir un résultat"
+msgstr "enter a result"
+
+#: ../../source/integration.rst:95
+msgid "``CorrectionEvent``"
+msgstr "``CorrectionEvent``"
+
+#: ../../source/integration.rst:95
+msgid "corriger un résultat"
+msgstr "correct a result"
+
+#: ../../source/integration.rst:96
+msgid "``CancelEvent``"
+msgstr "``CancelEvent``"
+
+#: ../../source/integration.rst:96
+msgid "annuler un match lancé par erreur"
+msgstr "cancel a match started by mistake"
+
+#: ../../source/integration.rst:97
+msgid "``TableChangedEvent``"
+msgstr "``TableChangedEvent``"
+
+#: ../../source/integration.rst:97
+msgid "changer la table d'un match"
+msgstr "change a match's table"
+
+#: ../../source/integration.rst:98
+msgid "``LengthChangedEvent``"
+msgstr "``LengthChangedEvent``"
+
+#: ../../source/integration.rst:98
+msgid "changer la longueur des matchs d'une phase"
+msgstr "change the match length of a phase"
+
+#: ../../source/integration.rst:99
+msgid "``ConfigChangedEvent``"
+msgstr "``ConfigChangedEvent``"
+
+#: ../../source/integration.rst:99
+msgid "remplacer la configuration entière"
+msgstr "replace the entire configuration"
+
+#: ../../source/integration.rst:100
+msgid "``ReopenedEvent``"
+msgstr "``ReopenedEvent``"
+
+#: ../../source/integration.rst:100
+msgid "rouvrir un tournoi clos"
+msgstr "reopen a closed tournament"
+
+#: ../../source/integration.rst:101
+msgid "``NoteEvent``"
+msgstr "``NoteEvent``"
+
+#: ../../source/integration.rst:101
+msgid "consigner une note libre"
+msgstr "record a free-form note"
+
+#: ../../source/integration.rst:105
+msgid "Règles à respecter"
+msgstr "Rules to follow"
+
+#: ../../source/integration.rst:107
+msgid ""
+"**Le journal n'est jamais modifié.** Une correction, une annulation, un "
+"retrait sont des événements ajoutés."
+msgstr ""
+"**The journal is never modified.** A correction, a cancellation, a "
+"withdrawal are events that are appended."
+
+#: ../../source/integration.rst:109
+msgid ""
+"**Rien de ce qui sort du moteur n'est un texte à afficher.** Libellés de "
+"match, notes de classement, avertissements et raisons d'attente sont des "
+"codes (voir :ref:`journal`). Le paquet racine fournit un rendu français "
+"(``fr.go``) pour la console et les exemples."
+msgstr ""
+"**Nothing that leaves the engine is text to be displayed.** Match labels,"
+" standings notes, warnings and waiting reasons are codes (see "
+":ref:`journal`). The root package provides a French rendering (``fr.go``)"
+" for the console and the examples."
+
+#: ../../source/integration.rst:112
+msgid ""
+"**Les tirages sont enregistrés.** L'événement ``draw`` contient le "
+"placement obtenu ; rejouer un journal ne dépend donc pas de l'algorithme "
+"de tirage."
+msgstr ""
+"**Draws are recorded.** The ``draw`` event contains the placement "
+"obtained; replaying a journal therefore does not depend on the draw "
+"algorithm."
+
+#: ../../source/integration.rst:114
+msgid ""
+"**Le moteur n'a pas d'horloge.** ``Propose()`` utilise l'horodatage du "
+"dernier événement ; pour les micro-rondes et les pauses, appeler "
+"``ProposeAt`` avec l'heure réelle."
+msgstr ""
+"**The engine has no clock.** ``Propose()`` uses the timestamp of the last"
+" event; for micro-rounds and breaks, call ``ProposeAt`` with the real "
+"time."
+
+#: ../../source/integration.rst:118
+msgid "Affichage"
+msgstr "Display"
+
+#: ../../source/integration.rst:120
+msgid ""
+"Le paquet ``render`` produit des pages HTML autonomes (un fichier, "
+"feuille de style embarquée, aucun script) à partir de l'état et d'un "
+"traducteur ``Labeler`` fourni par l'hôte. Voir :ref:`affichage`."
+msgstr ""
+"The ``render`` package produces self-contained HTML pages (a single file,"
+" embedded stylesheet, no script) from the state and a ``Labeler`` "
+"translator supplied by the host. See :ref:`affichage`."

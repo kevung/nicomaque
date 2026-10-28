@@ -1,0 +1,613 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/configuration.rst:4
+msgid "Configuration"
+msgstr "Configuration"
+
+#: ../../source/configuration.rst:7
+msgid "Structures"
+msgstr "Structures"
+
+#: ../../source/configuration.rst:79
+#, no-python-brace-format
+msgid ""
+"Deux formes anciennes restent lisibles : ``\"tables\": 12`` (un nombre) "
+"devient ``Tables{Count: 12}``, et ``\"prizes\": [100, 60, 40]`` (une "
+"liste de montants) devient la dotation de la clé ``\"all\"`` "
+"(``PrizeSectionAll``, le classement général). Une table réservée "
+"n'accueille que la section et la phase pour lesquelles elle l'est ; "
+"``Tables.AvailableFor(n, section, phase)`` le dit. La dotation (pool = "
+"droit d'entrée × inscrits, retenue, arrondi à l'unité par le plus fort "
+"reste, partage entre ex æquo) est décrite dans :ref:`classement`."
+msgstr ""
+"Two old forms remain readable: ``\"tables\": 12`` (a number) becomes "
+"``Tables{Count: 12}``, and ``\"prizes\": [100, 60, 40]`` (a list of "
+"amounts) becomes the prize distribution of the ``\"all\"`` key "
+"(``PrizeSectionAll``, the overall standings). A reserved table only hosts"
+" the section and phase for which it is reserved; ``Tables.AvailableFor(n,"
+" section, phase)`` tells which. The prize distribution (pool = entry fee "
+"× registered players, organiser's retention, rounding to the unit by the "
+"largest remainder, sharing between tied players) is described in "
+":ref:`classement`."
+
+#: ../../source/configuration.rst:87
+msgid "Signification des champs de phase"
+msgstr "Meaning of the phase fields"
+
+#: ../../source/configuration.rst:90
+msgid "Champ"
+msgstr "Field"
+
+#: ../../source/configuration.rst:90
+msgid "Formats concernés"
+msgstr "Applicable formats"
+
+#: ../../source/configuration.rst:90
+msgid "Signification"
+msgstr "Meaning"
+
+#: ../../source/configuration.rst:92
+msgid "``kind``"
+msgstr "``kind``"
+
+#: ../../source/configuration.rst:92 ../../source/configuration.rst:95
+#: ../../source/configuration.rst:101
+msgid "tous"
+msgstr "all"
+
+#: ../../source/configuration.rst:92
+msgid "``swiss_lives``, ``lives_bracket``, ``gsl``, ``bracket``, ``round_robin``"
+msgstr "``swiss_lives``, ``lives_bracket``, ``gsl``, ``bracket``, ``round_robin``"
+
+#: ../../source/configuration.rst:95
+msgid "``name``"
+msgstr "``name``"
+
+#: ../../source/configuration.rst:95
+msgid "Nom saisi par le TD ; vide = nom par défaut du format (``PhaseName``)"
+msgstr "Name entered by the TD; empty = the format's default name (``PhaseName``)"
+
+#: ../../source/configuration.rst:98
+msgid "``lives``"
+msgstr "``lives``"
+
+#: ../../source/configuration.rst:98 ../../source/configuration.rst:113
+#: ../../source/configuration.rst:119 ../../source/configuration.rst:122
+#: ../../source/configuration.rst:131 ../../source/configuration.rst:135
+#: ../../source/configuration.rst:138 ../../source/configuration.rst:245
+msgid "``swiss_lives``"
+msgstr "``swiss_lives``"
+
+#: ../../source/configuration.rst:98
+msgid "Nombre de vies (défaut 2). Forcé à 2 pour ``gsl``"
+msgstr "Number of lives (default 2). Forced to 2 for ``gsl``"
+
+#: ../../source/configuration.rst:101
+msgid "``length``"
+msgstr "``length``"
+
+#: ../../source/configuration.rst:101
+msgid "Longueur des matchs en points (obligatoire, > 0)"
+msgstr "Match length in points (required, > 0)"
+
+#: ../../source/configuration.rst:104
+msgid "``final_length``"
+msgstr "``final_length``"
+
+#: ../../source/configuration.rst:104 ../../source/configuration.rst:106
+msgid "tableaux"
+msgstr "brackets"
+
+#: ../../source/configuration.rst:104
+msgid "Longueur du dernier tour (0 = ``length``)"
+msgstr "Length of the last round (0 = ``length``)"
+
+#: ../../source/configuration.rst:106
+msgid "``lengths``"
+msgstr "``lengths``"
+
+#: ../../source/configuration.rst:106
+msgid ""
+"Longueur tour par tour, **du dernier tour vers le premier** "
+"(``[15,13,11,9]`` = finale 15, demies 13, quarts 11, reste 9). Plus "
+"précis que ``final_length`` et l'emporte sur lui ; une liste plus courte "
+"que le tableau retombe sur ``length``"
+msgstr ""
+"Round-by-round length, **from the last round to the first** "
+"(``[15,13,11,9]`` = final 15, semi-finals 13, quarter-finals 11, the rest"
+" 9). More precise than ``final_length`` and takes precedence over it; a "
+"list shorter than the bracket falls back to ``length``"
+
+#: ../../source/configuration.rst:113
+msgid "``length_late``"
+msgstr "``length_late``"
+
+#: ../../source/configuration.rst:113
+msgid ""
+"Longueur des matchs de fin de phase, quand il reste au plus "
+"``late_threshold`` joueurs en vie. Sans effet sans seuil (refusé par "
+"``Validate``) ; un ``length_changed`` du TD l'emporte"
+msgstr ""
+"Length of the end-of-phase matches, when at most ``late_threshold`` "
+"players remain alive. Has no effect without a threshold (refused by "
+"``Validate``); a TD's ``length_changed`` takes precedence"
+
+#: ../../source/configuration.rst:119
+msgid "``late_threshold``"
+msgstr "``late_threshold``"
+
+#: ../../source/configuration.rst:119
+msgid "Nombre de joueurs en vie à partir duquel ``length_late`` s'applique"
+msgstr "Number of players alive from which ``length_late`` applies"
+
+#: ../../source/configuration.rst:122
+msgid "``mode``"
+msgstr "``mode``"
+
+#: ../../source/configuration.rst:122
+msgid "``continuous`` (défaut) ou ``rounds``"
+msgstr "``continuous`` (default) or ``rounds``"
+
+#: ../../source/configuration.rst:124
+msgid "``batch_minutes``"
+msgstr "``batch_minutes``"
+
+#: ../../source/configuration.rst:124
+msgid "``swiss_lives`` continu"
+msgstr "continuous ``swiss_lives``"
+
+#: ../../source/configuration.rst:124
+msgid ""
+"Micro-rondes : les joueurs libres attendent l'échéance du prochain lot, "
+"puis tous ceux d'un même groupe de défaites sont appariés d'un coup. 0 = "
+"appariement au fil de l'eau. Refusé en mode ``rounds`` — une ronde EST un"
+" lot"
+msgstr ""
+"Micro-rounds: free players wait for the deadline of the next batch, then "
+"all those in the same same-losses group are paired at once. 0 = pairing "
+"as players become free. Refused in ``rounds`` mode — a round IS a batch"
+
+#: ../../source/configuration.rst:131
+msgid "``pairing``"
+msgstr "``pairing``"
+
+#: ../../source/configuration.rst:131
+msgid ""
+"``random`` (défaut) ou ``wins`` (apparier d'abord les joueurs les plus "
+"victorieux du groupe)"
+msgstr ""
+"``random`` (default) or ``wins`` (pair the group's players with the most "
+"wins first)"
+
+#: ../../source/configuration.rst:135
+msgid "``avoid_clubs``"
+msgstr "``avoid_clubs``"
+
+#: ../../source/configuration.rst:135
+msgid "Éviter les rencontres entre joueurs d'un même club quand c'est possible"
+msgstr "Avoid matches between players of the same club when possible"
+
+#: ../../source/configuration.rst:138
+msgid "``allow_rematch``"
+msgstr "``allow_rematch``"
+
+#: ../../source/configuration.rst:138
+msgid "Autoriser une seconde rencontre entre deux mêmes joueurs"
+msgstr "Allow a second match between the same two players"
+
+#: ../../source/configuration.rst:141
+msgid "``target``"
+msgstr "``target``"
+
+#: ../../source/configuration.rst:141
+msgid "``swiss_lives``, ``gsl``"
+msgstr "``swiss_lives``, ``gsl``"
+
+#: ../../source/configuration.rst:141
+msgid ""
+"Figer la phase quand Σ vies ≤ ``target`` (puissance de 2 ; suisse : 2 "
+"vies exigées)"
+msgstr ""
+"Freeze the phase when Σ lives ≤ ``target`` (power of 2; Swiss: 2 lives "
+"required)"
+
+#: ../../source/configuration.rst:144
+msgid "``consolation``"
+msgstr "``consolation``"
+
+#: ../../source/configuration.rst:144 ../../source/configuration.rst:164
+msgid "``bracket``, ``lives_bracket``"
+msgstr "``bracket``, ``lives_bracket``"
+
+#: ../../source/configuration.rst:144
+msgid "Consolante progressive alimentée par les perdants du principal"
+msgstr "Progressive consolation fed by the losers of the main bracket"
+
+#: ../../source/configuration.rst:147
+msgid "``last_chance``"
+msgstr "``last_chance``"
+
+#: ../../source/configuration.rst:147 ../../source/configuration.rst:150
+#: ../../source/configuration.rst:153
+msgid "idem"
+msgstr "same"
+
+#: ../../source/configuration.rst:147
+msgid "Dernière chance alimentée par les perdants de la consolante"
+msgstr "Last chance fed by the losers of the consolation"
+
+#: ../../source/configuration.rst:150
+msgid "``reconciliation``"
+msgstr "``reconciliation``"
+
+#: ../../source/configuration.rst:150
+msgid "Le vainqueur de la consolante affronte celui du principal (grande finale)"
+msgstr "The consolation winner faces the main bracket winner (grand final)"
+
+#: ../../source/configuration.rst:153
+msgid "``recharge``"
+msgstr "``recharge``"
+
+#: ../../source/configuration.rst:153
+msgid ""
+"Double élimination vraie : le vainqueur du principal doit être battu deux"
+" fois"
+msgstr "True double elimination: the main bracket winner must be beaten twice"
+
+#: ../../source/configuration.rst:156
+msgid "``group_size``"
+msgstr "``group_size``"
+
+#: ../../source/configuration.rst:156 ../../source/configuration.rst:158
+#: ../../source/configuration.rst:250
+msgid "``round_robin``"
+msgstr "``round_robin``"
+
+#: ../../source/configuration.rst:156
+msgid "Taille des poules (défaut 4)"
+msgstr "Pool size (default 4)"
+
+#: ../../source/configuration.rst:158
+msgid "``qualifiers``"
+msgstr "``qualifiers``"
+
+#: ../../source/configuration.rst:158
+msgid "Qualifiés par poule (défaut 2)"
+msgstr "Qualifiers per pool (default 2)"
+
+#: ../../source/configuration.rst:160
+msgid "``entry``"
+msgstr "``entry``"
+
+#: ../../source/configuration.rst:160
+msgid "toutes sauf la première"
+msgstr "all but the first"
+
+#: ../../source/configuration.rst:160
+msgid ""
+"``survivors`` (défaut : les survivants, avec leurs vies restantes si la "
+"phase est à vies), ``all``, ``top:N``"
+msgstr ""
+"``survivors`` (default: the survivors, with their remaining lives if the "
+"phase uses lives), ``all``, ``top:N``"
+
+#: ../../source/configuration.rst:164
+msgid "``seeding``"
+msgstr "``seeding``"
+
+#: ../../source/configuration.rst:164
+msgid ""
+"``\"\"`` (défaut) : tirage intégralement aléatoire. ``\"rating\"`` : "
+"placement classique par cote d'entrée (1 contre 16, 2 contre 15… ; "
+"``rules.SeedOrder``), les joueurs à 2 vies d'abord. **Le défaut vide est "
+"un choix de conception**, pas un oubli : l'étude conclut « pas de têtes "
+"de série protégées », c'est la culture du backgammon. Refusé sur un "
+"format sans tirage de tableau"
+msgstr ""
+"``\"\"`` (default): fully random draw. ``\"rating\"``: classic placement "
+"by entry rating (1 against 16, 2 against 15…; ``rules.SeedOrder``), "
+"players with 2 lives first. **The empty default is a design choice**, not"
+" an oversight: the study concludes \"no protected seeded players\", which"
+" is the culture of backgammon. Refused on a format without a bracket draw"
+
+#: ../../source/configuration.rst:177
+msgid "Validation et valeurs par défaut"
+msgstr "Validation and default values"
+
+#: ../../source/configuration.rst:179
+msgid ""
+"``Config.Validate() error`` **modifie la configuration en place** pour y "
+"écrire les défauts, et renvoie une erreur au premier problème. Elle est "
+"appelée par ``New``, par ``ParseConfig``, par ``CheckConfig`` et par "
+"``Apply`` sur ``created`` et ``config_changed`` : une configuration "
+"invalide ne peut donc pas entrer dans un journal."
+msgstr ""
+"``Config.Validate() error`` **modifies the configuration in place** to "
+"write the defaults into it, and returns an error at the first problem. It"
+" is called by ``New``, by ``ParseConfig``, by ``CheckConfig`` and by "
+"``Apply`` on ``created`` and ``config_changed``: an invalid configuration"
+" therefore cannot enter a journal."
+
+#: ../../source/configuration.rst:184
+msgid "Algorithme :"
+msgstr "Algorithm:"
+
+#: ../../source/configuration.rst:231
+msgid ""
+"``Entry`` n'est pas vérifiée : une valeur inconnue fait entrer les "
+"survivants, mais avec les vies par défaut du format (pas leurs vies "
+"restantes), et un ``top:N`` illisible donne une phase vide (voir "
+":ref:`etat`)."
+msgstr ""
+"``Entry`` is not checked: an unknown value makes the survivors enter, but"
+" with the format's default lives (not their remaining lives), and an "
+"unreadable ``top:N`` gives an empty phase (see :ref:`etat`)."
+
+#: ../../source/configuration.rst:235
+msgid ""
+"Le test de puissance de deux est ``Target & (Target-1) == 0`` (vrai aussi"
+" pour 0, d'où la garde ``Target != 0``)."
+msgstr ""
+"The power-of-two test is ``Target & (Target-1) == 0`` (also true for 0, "
+"hence the ``Target != 0`` guard)."
+
+#: ../../source/configuration.rst:238
+msgid ""
+"``Validate`` ne remplit **pas** ``Name`` : un hôte multilingue fabrique "
+"son propre nom. Le nom par défaut français est donné par ``PhaseName(p "
+"PhaseConfig) string`` (``fr.go``), qui renvoie ``p.Name`` s'il est saisi,"
+" sinon :"
+msgstr ""
+"``Validate`` does **not** fill in ``Name``: a multilingual host builds "
+"its own name. The French default name is given by ``PhaseName(p "
+"PhaseConfig) string`` (``fr.go``), which returns ``p.Name`` if it was "
+"entered, otherwise:"
+
+#: ../../source/configuration.rst:243
+msgid "Kind"
+msgstr "Kind"
+
+#: ../../source/configuration.rst:243 ../../source/configuration.rst:300
+msgid "Nom"
+msgstr "Name"
+
+#: ../../source/configuration.rst:245
+msgid "``Suisse <Lives> vies``"
+msgstr "``Suisse <Lives> vies``"
+
+#: ../../source/configuration.rst:246
+msgid "``lives_bracket``"
+msgstr "``lives_bracket``"
+
+#: ../../source/configuration.rst:246
+msgid "``Tableau final``"
+msgstr "``Tableau final``"
+
+#: ../../source/configuration.rst:247 ../../source/configuration.rst:305
+msgid "``gsl``"
+msgstr "``gsl``"
+
+#: ../../source/configuration.rst:247
+msgid "``Blocs GSL``"
+msgstr "``Blocs GSL``"
+
+#: ../../source/configuration.rst:248
+msgid "``bracket`` avec ``reconciliation``"
+msgstr "``bracket`` with ``reconciliation``"
+
+#: ../../source/configuration.rst:248
+msgid "``Double élimination``"
+msgstr "``Double élimination``"
+
+#: ../../source/configuration.rst:249
+msgid "``bracket`` sinon"
+msgstr "``bracket`` otherwise"
+
+#: ../../source/configuration.rst:249
+msgid "``Tableau``"
+msgstr "``Tableau``"
+
+#: ../../source/configuration.rst:250
+msgid "``Poules``"
+msgstr "``Poules``"
+
+#: ../../source/configuration.rst:251
+msgid "(autre)"
+msgstr "(other)"
+
+#: ../../source/configuration.rst:251
+msgid "``p.Kind``"
+msgstr "``p.Kind``"
+
+#: ../../source/configuration.rst:254
+msgid ""
+"**Note d'implémentation importante** : ``Validate`` étant idempotente et "
+"appliquée au rejeu, la configuration écrite dans l'événement ``created`` "
+"peut être partielle ; le rejeu produira la même configuration complétée. "
+"Une implémentation qui changerait les défauts changerait donc le sens des"
+" journaux anciens : les défauts font partie du contrat."
+msgstr ""
+"**Important implementation note**: since ``Validate`` is idempotent and "
+"applied on replay, the configuration written in the ``created`` event may"
+" be partial; the replay will produce the same completed configuration. An"
+" implementation that changed the defaults would therefore change the "
+"meaning of old journals: the defaults are part of the contract."
+
+#: ../../source/configuration.rst:260
+msgid "Modification en cours de tournoi"
+msgstr "Changes during a tournament"
+
+#: ../../source/configuration.rst:262
+msgid ""
+"L'événement ``config_changed`` porte la configuration **entière**, "
+"validée puis comparée à l'état (``acceptConfig``, ``reconfig.go``). "
+"``State.CheckConfig(next Config) error`` fait le même contrôle sans rien "
+"appliquer (prévisualisation d'un formulaire de réglages). Un refus est un"
+" ``*ConfigRefusal`` :"
+msgstr ""
+"The ``config_changed`` event carries the **entire** configuration, "
+"validated then compared to the state (``acceptConfig``, ``reconfig.go``)."
+" ``State.CheckConfig(next Config) error`` performs the same check without"
+" applying anything (preview for a settings form). A refusal is a "
+"``*ConfigRefusal``:"
+
+#: ../../source/configuration.rst:278
+msgid "Règles :"
+msgstr "Rules:"
+
+#: ../../source/configuration.rst:280
+msgid "moins de phases que de phases déjà ouvertes → ``removed`` ;"
+msgstr "fewer phases than phases already opened → ``removed``;"
+
+#: ../../source/configuration.rst:281
+msgid ""
+"``kind`` changé pour une phase ouverte : ``finished`` si elle est passée,"
+" ``drawn`` si elle est tirée, ``started`` si des matchs y sont lancés ; "
+"sinon accepté (les entrants reçoivent les vies du nouveau format, et la "
+"longueur courante celle de la nouvelle configuration) ;"
+msgstr ""
+"``kind`` changed for an open phase: ``finished`` if it is past, ``drawn``"
+" if it is drawn, ``started`` if matches have been started in it; "
+"otherwise accepted (entrants receive the lives of the new format, and the"
+" current length that of the new configuration);"
+
+#: ../../source/configuration.rst:284
+msgid ""
+"tableau (``bracket``, ``lives_bracket``) déjà tiré : ``consolation``, "
+"``last_chance``, ``reconciliation``, ``recharge`` et ``seeding`` sont "
+"figés (``drawn``) — à partir de la version 2 du journal seulement ; un "
+"``config_changed`` de version antérieure est accepté, sans effet ;"
+msgstr ""
+"bracket (``bracket``, ``lives_bracket``) already drawn: ``consolation``, "
+"``last_chance``, ``reconciliation``, ``recharge`` and ``seeding`` are "
+"frozen (``drawn``) — from journal version 2 only; a ``config_changed`` of"
+" an earlier version is accepted, without effect;"
+
+#: ../../source/configuration.rst:287
+msgid ""
+"tout le reste est accepté (bascule, longueurs, dotation, tables, pauses)."
+" La longueur courante d'une phase ouverte ne suit la configuration que si"
+" ``length`` a effectivement changé, pour ne pas effacer un "
+"``length_changed`` saisi par le TD."
+msgstr ""
+"everything else is accepted (switch-over, lengths, prize distribution, "
+"tables, breaks). The current length of an open phase follows the "
+"configuration only if ``length`` actually changed, so as not to erase a "
+"``length_changed`` entered by the TD."
+
+#: ../../source/configuration.rst:291
+msgid "Voir :ref:`journal`."
+msgstr "See :ref:`journal`."
+
+#: ../../source/configuration.rst:294
+msgid "Configurations types"
+msgstr "Typical configurations"
+
+#: ../../source/configuration.rst:296
+msgid ""
+"Chacun des deux binaires (``cmd/tournoi-demo``, ``cmd/tournoi-td``) a sa "
+"propre table ``formats`` de configurations nommées, à garder cohérentes ;"
+" ``suisse_rondes`` n'existe que dans ``tournoi-td`` :"
+msgstr ""
+"Each of the two binaries (``cmd/tournoi-demo``, ``cmd/tournoi-td``) has "
+"its own ``formats`` table of named configurations, which must be kept "
+"consistent; ``suisse_rondes`` exists only in ``tournoi-td``:"
+
+#: ../../source/configuration.rst:300
+msgid "Phases"
+msgstr "Phases"
+
+#: ../../source/configuration.rst:302
+msgid "``suisse``"
+msgstr "``suisse``"
+
+#: ../../source/configuration.rst:302
+msgid "``swiss_lives`` 7 points"
+msgstr "``swiss_lives`` 7 points"
+
+#: ../../source/configuration.rst:303
+msgid "``suisse_rondes``"
+msgstr "``suisse_rondes``"
+
+#: ../../source/configuration.rst:303
+msgid "``swiss_lives`` 7 points, ``mode: rounds`` (``tournoi-td`` seulement)"
+msgstr "``swiss_lives`` 7 points, ``mode: rounds`` (``tournoi-td`` only)"
+
+#: ../../source/configuration.rst:304
+msgid "``suisse_tableau``"
+msgstr "``suisse_tableau``"
+
+#: ../../source/configuration.rst:304
+msgid ""
+"``swiss_lives`` 7 pts ``target: 16``, puis ``lives_bracket`` 9 pts, "
+"finale 11"
+msgstr ""
+"``swiss_lives`` 7 pts ``target: 16``, then ``lives_bracket`` 9 pts, final"
+" 11"
+
+#: ../../source/configuration.rst:305
+msgid "``gsl`` 7 pts ``target: 16``, puis ``lives_bracket`` 9 pts"
+msgstr "``gsl`` 7 pts ``target: 16``, then ``lives_bracket`` 9 pts"
+
+#: ../../source/configuration.rst:306
+msgid "``elim``"
+msgstr "``elim``"
+
+#: ../../source/configuration.rst:306
+msgid "``bracket`` 9 pts, finale 11"
+msgstr "``bracket`` 9 pts, final 11"
+
+#: ../../source/configuration.rst:307
+msgid "``conso``"
+msgstr "``conso``"
+
+#: ../../source/configuration.rst:307
+msgid "``bracket`` 9 pts, ``consolation`` + ``last_chance``"
+msgstr "``bracket`` 9 pts, ``consolation`` + ``last_chance``"
+
+#: ../../source/configuration.rst:308
+msgid "``double``"
+msgstr "``double``"
+
+#: ../../source/configuration.rst:308
+msgid "``bracket`` 7 pts, ``consolation`` + ``reconciliation`` + ``recharge``"
+msgstr "``bracket`` 7 pts, ``consolation`` + ``reconciliation`` + ``recharge``"
+
+#: ../../source/configuration.rst:309
+msgid "``poules``"
+msgstr "``poules``"
+
+#: ../../source/configuration.rst:309
+msgid "``round_robin`` 5 pts (poules de 4, 2 qualifiés), puis ``bracket`` 9 pts"
+msgstr "``round_robin`` 5 pts (pools of 4, 2 qualifiers), then ``bracket`` 9 pts"
+
+#: ../../source/configuration.rst:312
+msgid ""
+"**Format recommandé par l'étude** : ``suisse_tableau`` — suisse 2 vies en"
+" continu, appariement aléatoire dans le groupe de même nombre de "
+"défaites, sans rematch, bascule à Σ vies = 16 ou 32, puis tableau à "
+"exemptions avec des matchs plus longs."
+msgstr ""
+"**Format recommended by the study**: ``suisse_tableau`` — continuous "
+"Swiss with 2 lives, random pairing within the same-losses group, no "
+"rematch, switch-over at Σ lives = 16 or 32, then a bracket with byes and "
+"longer matches."

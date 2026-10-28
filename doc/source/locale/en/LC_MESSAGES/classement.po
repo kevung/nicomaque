@@ -1,0 +1,329 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/classement.rst:4
+msgid "Classement et prix"
+msgstr "Standings and prizes"
+
+#: ../../source/classement.rst:7
+msgid "Concaténation des phases"
+msgstr "Concatenation of phases"
+
+#: ../../source/classement.rst:14
+msgid ""
+"Le classement général se lit **de la dernière phase atteinte à la "
+"première** : les joueurs éliminés plus tôt sont classés derrière. "
+"``Ranking`` calcule ``rules.Rank`` sur l'instantané de chaque phase "
+"ouverte, de la première à la dernière, et les passe à "
+"``rules.MergeRankings`` :"
+msgstr ""
+"The overall standings are read **from the last phase reached to the "
+"first**: players eliminated earlier are ranked behind. ``Ranking`` "
+"computes ``rules.Rank`` on the snapshot of each open phase, from first to"
+" last, and passes them to ``rules.MergeRankings``:"
+
+#: ../../source/classement.rst:36
+msgid ""
+"L'``offset`` s'incrémente de la **taille complète** du classement de "
+"phase (y compris les joueurs déjà vus) : cela garantit qu'aucun joueur "
+"d'une phase antérieure ne peut se glisser devant un joueur d'une phase "
+"postérieure, quelle que soit la répartition des ex æquo."
+msgstr ""
+"The ``offset`` is incremented by the **full size** of the phase standings"
+" (including players already seen): this guarantees that no player from an"
+" earlier phase can slip ahead of a player from a later phase, whatever "
+"the distribution of ties."
+
+#: ../../source/classement.rst:40
+msgid ""
+"La renumérotation finale produit un classement dense : 1, 2, 2, 4, 5, 5, "
+"5, 8… (rang = position du premier élément du groupe d'ex æquo)."
+msgstr ""
+"The final renumbering produces dense standings: 1, 2, 2, 4, 5, 5, 5, 8… "
+"(rank = position of the first element of the tied group)."
+
+#: ../../source/classement.rst:48
+msgid "``rules.Rank`` dispatche selon le format de la phase :"
+msgstr "``rules.Rank`` dispatches according to the format of the phase:"
+
+#: ../../source/classement.rst:51
+msgid "Kind"
+msgstr "Kind"
+
+#: ../../source/classement.rst:51
+msgid "Fonction (paquet ``rules``, ``classement.go``)"
+msgstr "Function (``rules`` package, ``classement.go``)"
+
+#: ../../source/classement.rst:53
+msgid "``bracket``, ``lives_bracket``"
+msgstr "``bracket``, ``lives_bracket``"
+
+#: ../../source/classement.rst:53
+msgid "``rankBracket`` (voir :ref:`format_tableaux`)"
+msgstr "``rankBracket`` (see :ref:`format_tableaux`)"
+
+#: ../../source/classement.rst:54
+msgid "``round_robin``"
+msgstr "``round_robin``"
+
+#: ../../source/classement.rst:54
+msgid "``rankPools`` (voir :ref:`format_poules`)"
+msgstr "``rankPools`` (see :ref:`format_poules`)"
+
+#: ../../source/classement.rst:55
+msgid "``swiss_lives``, ``gsl``"
+msgstr "``swiss_lives``, ``gsl``"
+
+#: ../../source/classement.rst:55
+msgid "``rankLives`` (voir :ref:`format_suisse`)"
+msgstr "``rankLives`` (see :ref:`format_suisse`)"
+
+#: ../../source/classement.rst:58
+msgid ""
+"Les notes (``Note``) sont des codes structurés, jamais des phrases : "
+"``winner``, ``finalist``, ``alive``, ``record``, ``forfeit``, "
+"``withdrawn``, ``running``, ``awaiting_draw``, ``unranked``, "
+"``section_exit``, ``section_winner``, ``pool_record``, avec leurs "
+"paramètres (``wins``, ``losses``, ``lives``, ``section``, ``qualified``, "
+"``sub``). Leur rendu français (``Note.String``, ``fr.go``) ne sert que la"
+" console, la démo, ``render/`` et l'export CSV."
+msgstr ""
+"Notes (``Note``) are structured codes, never sentences: ``winner``, "
+"``finalist``, ``alive``, ``record``, ``forfeit``, ``withdrawn``, "
+"``running``, ``awaiting_draw``, ``unranked``, ``section_exit``, "
+"``section_winner``, ``pool_record``, with their parameters (``wins``, "
+"``losses``, ``lives``, ``section``, ``qualified``, ``sub``). Their French"
+" rendering (``Note.String``, ``fr.go``) serves only the console, the "
+"demo, ``render/`` and the CSV export."
+
+#: ../../source/classement.rst:65
+msgid "Prix"
+msgstr "Prizes"
+
+#: ../../source/classement.rst:72
+msgid ""
+"Les prix sont indexés par place : ``prizes[0]`` est la dotation du "
+"premier, ``prizes[1]`` du deuxième, etc. Les ex æquo **partagent à parts "
+"égales les prix des places qu'ils occupent** :"
+msgstr ""
+"Prizes are indexed by place: ``prizes[0]`` is the prize for first, "
+"``prizes[1]`` for second, and so on. Tied players **share equally the "
+"prizes of the places they occupy**:"
+
+#: ../../source/classement.rst:83
+msgid ""
+"Exemple : deux joueurs ex æquo au rang 3, dotations ``[100, 60, 40, 20, "
+"10]`` → ils se partagent 40 + 20 = 60, soit 30 chacun ; le joueur suivant"
+" est au rang 5 et reçoit 10."
+msgstr ""
+"Example: two players tied at rank 3, prizes ``[100, 60, 40, 20, 10]`` → "
+"they share 40 + 20 = 60, i.e. 30 each; the next player is at rank 5 and "
+"receives 10."
+
+#: ../../source/classement.rst:86
+msgid ""
+"L'unité est libre (montant, pourcentage, part) : le moteur ne fait "
+"qu'additionner et diviser. Cette fonction est le partage entre ex æquo, "
+"et rien d'autre ; d'où viennent les montants par place est décrit dans la"
+" section suivante."
+msgstr ""
+"The unit is free (amount, percentage, share): the engine only adds and "
+"divides. This function is the sharing between tied players, and nothing "
+"else; where the per-place amounts come from is described in the next "
+"section."
+
+#: ../../source/classement.rst:91
+msgid "Pool, retenue, barème par section"
+msgstr "Pool, organiser's retention, per-section prize scale"
+
+#: ../../source/classement.rst:124
+msgid ""
+"Une affiche de tournoi annonce « 50/30/20 % » et non « 216/130/86 € » : "
+"le pool dépend du nombre d'inscrits, qu'on ne connaît qu'à la clôture des"
+" inscriptions."
+msgstr ""
+"A tournament poster announces \"50/30/20%\" and not \"216/130/86 €\": the"
+" pool depends on the number of entrants, which is only known when "
+"registration closes."
+
+#: ../../source/classement.rst:132
+#, no-python-format
+msgid ""
+"``PrizeAmounts(sec)`` (enveloppe de ``rules.PlaceAmounts``) : une section"
+" absente de ``Sections`` n'a pas de dotation (``nil``). Si le barème "
+"donne des ``Amounts``, ce sont eux, tels quels, ni arrondis ni ajustés "
+"(ils l'emportent sur ``Percents``, que ``Validate`` refuse de toute façon"
+" avec eux). S'il donne des ``Percents``, chaque place vaut "
+"``Distributable × pct/100`` (ramené au millionième, pour que le bruit "
+"binaire ne fasse pas perdre une unité), payée **à l'unité** — personne ne"
+" paie en centimes à une table de tournoi — par la **méthode du plus fort "
+"reste** (Hamilton) : chaque montant est tronqué à l'unité, puis les "
+"unités qui manquent pour atteindre la somme des parts exactes arrondie à "
+"l'unité vont, une chacune, aux places de plus grande partie décimale ; à "
+"égalité, à la mieux classée. La somme distribuée égale exactement cette "
+"somme arrondie (le pool distribuable arrondi quand le barème totalise 100"
+" %), aucun prix n'est négatif, chaque prix est à moins d'une unité de sa "
+"part exacte, et un barème décroissant donne des prix décroissants. "
+"Exemple : 4 × 25 % d'un pool de 10 font 2,5 chacun ; les deux unités "
+"restantes vont aux deux premiers, d'où 3/3/2/2."
+msgstr ""
+"``PrizeAmounts(sec)`` (wrapper of ``rules.PlaceAmounts``): a section "
+"absent from ``Sections`` has no prize distribution (``nil``). If the "
+"prize scale gives ``Amounts``, they are used as is, neither rounded nor "
+"adjusted (they take precedence over ``Percents``, which ``Validate`` "
+"refuses alongside them anyway). If it gives ``Percents``, each place is "
+"worth ``Distributable × pct/100`` (rounded to the millionth, so that "
+"binary noise does not cost a unit), paid **in whole units** — nobody pays"
+" in cents at a tournament table — by the **largest remainder method** "
+"(Hamilton): each amount is truncated to the unit, then the units missing "
+"to reach the sum of the exact shares rounded to the unit go, one each, to"
+" the places with the largest fractional part; in a tie, to the better "
+"ranked. The sum distributed exactly equals that rounded sum (the "
+"distributable pool rounded when the scale totals 100%), no prize is "
+"negative, each prize is within one unit of its exact share, and a "
+"decreasing scale gives decreasing prizes. Example: 4 × 25% of a pool of "
+"10 make 2.5 each; the two remaining units go to the first two, hence "
+"3/3/2/2."
+
+#: ../../source/classement.rst:146
+msgid ""
+"``SectionPrizes(sec)`` applique ``Prizes`` aux montants de "
+"``PrizeAmounts(sec)`` sur le classement de la section : "
+"``SectionRanking(sec)`` pour une section, et pour ``all`` le classement "
+"figé à la clôture (``State.Final``) s'il existe, sinon ``Ranking()``."
+msgstr ""
+"``SectionPrizes(sec)`` applies ``Prizes`` to the amounts of "
+"``PrizeAmounts(sec)`` on the section's standings: ``SectionRanking(sec)``"
+" for a section, and for ``all`` the standings frozen at closing "
+"(``State.Final``) if they exist, otherwise ``Ranking()``."
+
+#: ../../source/classement.rst:150
+msgid ""
+"``Sections`` est indexée par identifiant de section (``main``, ``conso``,"
+" ``last``, ``gf``, ``poule:A``\\ …), plus la clé réservée ``all`` pour le"
+" classement général — celui que ``Ranking()`` renvoie, et le seul qui "
+"existe dans un tournoi sans tableau."
+msgstr ""
+"``Sections`` is indexed by section identifier (``main``, ``conso``, "
+"``last``, ``gf``, ``poule:A``\\ …), plus the reserved key ``all`` for the"
+" overall standings — the one ``Ranking()`` returns, and the only one that"
+" exists in a tournament without a bracket."
+
+#: ../../source/classement.rst:154
+msgid ""
+"``SectionRanking(sec)`` est le classement PROPRE d'une section : ses "
+"joueurs, par tour atteint dans cette section, le vainqueur en tête. Il "
+"diffère du classement général, qui mélange les sections par priorité (un "
+"vainqueur de consolante passe derrière un demi-finaliste du principal). "
+"Une section de poule se classe par nombre de victoires, faute de tour "
+"atteint (ici, à la différence de ``PoolWins``, une victoire par forfait "
+"compte) ; un barrage, qui n'a pas de graphe, n'a pas de classement de "
+"section (liste vide). Dans les autres sections, le perdant d'un match "
+"prend la profondeur de ce tour (note ``section_exit``, ou ``forfeit`` "
+"s'il l'a perdu par forfait), le vainqueur du dernier match joué la "
+"profondeur maximale (note ``section_winner``), et un joueur sans sortie "
+"aussi (note ``running``). Un retiré dont le prochain match attend encore "
+"son adversaire est classé au tour de ce match (note ``withdrawn``), et "
+"non ``running``. Entre ex æquo, l'ordre est celui de première apparition "
+"dans le graphe. C'est ``rules.RankSection`` ; l'enveloppe cherche la "
+"section de la dernière phase vers la première, la plus récente qui porte "
+"ce nom comptant."
+msgstr ""
+"``SectionRanking(sec)`` is the section's OWN standings: its players, by "
+"round reached in that section, the winner at the top. It differs from the"
+" overall standings, which mix sections by priority (a consolation winner "
+"falls behind a semi-finalist of the main bracket). A pool section is "
+"ranked by number of wins, for lack of a round reached (here, unlike "
+"``PoolWins``, a win by forfeit counts); a play-off, which has no graph, "
+"has no section standings (empty list). In the other sections, the loser "
+"of a match takes the depth of that round (note ``section_exit``, or "
+"``forfeit`` if they lost it by forfeit), the winner of the last match "
+"played takes the maximum depth (note ``section_winner``), and so does a "
+"player with no exit (note ``running``). A withdrawn player whose next "
+"match is still awaiting its opponent is ranked at the round of that match"
+" (note ``withdrawn``), and not ``running``. Among tied players, the order"
+" is that of first appearance in the graph. This is ``rules.RankSection``;"
+" the wrapper looks for the section from the last phase to the first, the "
+"most recent one bearing that name counting."
+
+#: ../../source/classement.rst:167
+#, no-python-format
+msgid ""
+"``Config.Validate`` refuse une dotation incohérente : pourcentages ET "
+"montants dans le même barème, pourcentages (toutes sections confondues) "
+"totalisant plus de 100 % du pool, retenue hors [0, 100] %, droit "
+"d'entrée, retenue, pourcentage ou montant négatif. Une dotation fausse ne"
+" se voit qu'au moment de payer, devant les joueurs."
+msgstr ""
+"``Config.Validate`` refuses an inconsistent prize distribution: "
+"percentages AND amounts in the same scale, percentages (all sections "
+"combined) totalling more than 100% of the pool, organiser's retention "
+"outside [0, 100]%, a negative entry fee, retention, percentage or amount."
+" A wrong prize distribution only shows when it is time to pay, in front "
+"of the players."
+
+#: ../../source/classement.rst:172
+msgid ""
+"La forme liste (``\"prizes\": [100, 60, 40]``, une simple liste de "
+"montants) est également lue (``PrizePool.UnmarshalJSON``) et devient le "
+"barème en montants du classement général (``Sections[\"all\"].Amounts``) "
+": les journaux qui l'emploient se relisent sans être réécrits."
+msgstr ""
+"The list form (``\"prizes\": [100, 60, 40]``, a simple list of amounts) "
+"is also read (``PrizePool.UnmarshalJSON``) and becomes the amounts scale "
+"of the overall standings (``Sections[\"all\"].Amounts``): journals that "
+"use it are re-read without being rewritten."
+
+#: ../../source/classement.rst:177
+msgid "Export CSV"
+msgstr "CSV export"
+
+#: ../../source/classement.rst:183
+msgid ""
+"Séparateur ``;``, en-tête ``section;rang;id;nom;club;note;prix``. La "
+"première colonne dit à quel classement la ligne appartient : ``all`` pour"
+" le classement général (``State.Final``, figé à la clôture, s'il existe, "
+"sinon ``Ranking()``), toujours écrit, même sans dotation ; puis "
+"l'identifiant de chaque **section dotée**, dans l'ordre alphabétique, une"
+" section dont ``SectionRanking`` est vide étant omise. Les blocs sont "
+"contigus : un tableur les lit comme des tableaux séparés, un hôte qui "
+"n'en veut qu'un filtre sur la colonne. Les sections apparaissent parce "
+"qu'elles ont une dotation — sortir le classement de chaque groupe GSL "
+"d'un tournoi de cent joueurs noierait la feuille affichée au mur. Le prix"
+" est formaté avec deux décimales (``0.00`` sans dotation). La colonne "
+"``note`` est le rendu français de la note (``Note.String``). Un joueur "
+"absent de ``Players`` est écrit avec son identifiant en guise de nom et "
+"un club vide."
+msgstr ""
+"Separator ``;``, header ``section;rang;id;nom;club;note;prix``. The first"
+" column says which standings the row belongs to: ``all`` for the overall "
+"standings (``State.Final``, frozen at closing, if it exists, otherwise "
+"``Ranking()``), always written, even without a prize distribution; then "
+"the identifier of each **section with a prize distribution**, in "
+"alphabetical order, a section whose ``SectionRanking`` is empty being "
+"omitted. The blocks are contiguous: a spreadsheet reads them as separate "
+"tables, a host that wants only one filters on the column. Sections appear"
+" because they have a prize distribution — outputting the standings of "
+"every GSL group of a hundred-player tournament would drown the sheet "
+"posted on the wall. The prize is formatted with two decimals (``0.00`` "
+"without a prize distribution). The ``note`` column is the French "
+"rendering of the note (``Note.String``). A player absent from ``Players``"
+" is written with their identifier in place of the name and an empty club."

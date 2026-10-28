@@ -1,0 +1,1236 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:09+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/journal.rst:4
+msgid "Journal et événements"
+msgstr "Journal and events"
+
+#: ../../source/journal.rst:7
+msgid "Le catalogue des codes"
+msgstr "The catalogue of codes"
+
+#: ../../source/journal.rst:9
+msgid ""
+"Rien de ce qui sort du moteur n'est destiné à être affiché tel quel. Un "
+"logiciel hôte affiche un tournoi dans la langue de son utilisateur ; le "
+"moteur ne peut donc figer aucune langue, et surtout pas dans le journal, "
+"qui est conservé pour toujours."
+msgstr ""
+"Nothing that leaves the engine is meant to be displayed as is. A host "
+"software shows a tournament in its user's language; the engine therefore "
+"cannot fix any language, least of all in the journal, which is kept "
+"forever."
+
+#: ../../source/journal.rst:13
+msgid ""
+"Cinq familles de codes, toutes dans ``codes.go``, et les statuts de "
+"joueur (``statut.go``). Les valeurs des libellés, des notes et des noms "
+"de section sont définies une fois dans ``rules/codes.go`` ; ``codes.go`` "
+"les reprend sous ses propres types :"
+msgstr ""
+"Five families of codes, all in ``codes.go``, plus the player statuses "
+"(``statut.go``). The values of labels, notes and section names are "
+"defined once in ``rules/codes.go``; ``codes.go`` re-exports them under "
+"its own types:"
+
+#: ../../source/journal.rst:18
+msgid "Famille"
+msgstr "Family"
+
+#: ../../source/journal.rst:18
+msgid "Type"
+msgstr "Type"
+
+#: ../../source/journal.rst:18
+msgid "Où elle apparaît"
+msgstr "Where it appears"
+
+#: ../../source/journal.rst:20
+msgid "Libellés"
+msgstr "Labels"
+
+#: ../../source/journal.rst:20
+#, no-python-brace-format
+msgid "``Label{Kind, N, Losses, Match, Section, Text, Players, Spots, Sub}``"
+msgstr "``Label{Kind, N, Losses, Match, Section, Text, Players, Spots, Sub}``"
+
+#: ../../source/journal.rst:20
+msgid "``Event.Label``, ``Match.Label``, ``Action.Label``, ``GMatch.Label``"
+msgstr "``Event.Label``, ``Match.Label``, ``Action.Label``, ``GMatch.Label``"
+
+#: ../../source/journal.rst:23
+msgid "Notes de classement"
+msgstr "Standings notes"
+
+#: ../../source/journal.rst:23
+#, no-python-brace-format
+msgid "``Note{Kind, Wins, Losses, Lives, Section, Qualified, Sub}``"
+msgstr "``Note{Kind, Wins, Losses, Lives, Section, Qualified, Sub}``"
+
+#: ../../source/journal.rst:23
+msgid "``Rank.Note``"
+msgstr "``Rank.Note``"
+
+#: ../../source/journal.rst:25
+msgid "Avertissements"
+msgstr "Warnings"
+
+#: ../../source/journal.rst:25
+#, no-python-brace-format
+msgid ""
+"``Warning{Code, Match, Section, Label, A, B, ExpectedA, ExpectedB, "
+"Length, ScoreA, ScoreB, Player, Table, Other}``"
+msgstr ""
+"``Warning{Code, Match, Section, Label, A, B, ExpectedA, ExpectedB, "
+"Length, ScoreA, ScoreB, Player, Table, Other}``"
+
+#: ../../source/journal.rst:25
+msgid "``State.Warnings``, ``Action.Warn`` (le code seul)"
+msgstr "``State.Warnings``, ``Action.Warn`` (the code only)"
+
+#: ../../source/journal.rst:28
+msgid "Informations"
+msgstr "Information"
+
+#: ../../source/journal.rst:28
+#, no-python-brace-format
+msgid "``Info{Code, Player, Phase, Section, Label}``"
+msgstr "``Info{Code, Player, Phase, Section, Label}``"
+
+#: ../../source/journal.rst:28
+msgid "``State.Infos``"
+msgstr "``State.Infos``"
+
+#: ../../source/journal.rst:30
+msgid "Statuts"
+msgstr "Statuses"
+
+#: ../../source/journal.rst:30
+#, no-python-brace-format
+msgid "``PlayerStatus{Player, Kind, Phase, Section, Round, Label}``"
+msgstr "``PlayerStatus{Player, Kind, Phase, Section, Round, Label}``"
+
+#: ../../source/journal.rst:30
+msgid "``State.Statuses()``, ``State.StatusOf(p)``"
+msgstr "``State.Statuses()``, ``State.StatusOf(p)``"
+
+#: ../../source/journal.rst:33
+msgid "Raisons d'attente"
+msgstr "Waiting reasons"
+
+#: ../../source/journal.rst:33
+msgid "``ReasonCode``"
+msgstr "``ReasonCode``"
+
+#: ../../source/journal.rst:33
+msgid "``Action.Reason``"
+msgstr "``Action.Reason``"
+
+#: ../../source/journal.rst:36
+msgid ""
+"``Label.Sub`` compose un libellé dans un autre (« Bloc 2, groupe B : "
+"match décisif »). ``Label.Text`` est le **seul** champ texte admis, et il"
+" ne contient que ce que le TD a lui-même saisi — le nom d'une phase, la "
+"lettre d'une poule."
+msgstr ""
+"``Label.Sub`` nests one label inside another (\"Block 2, group B: "
+"deciding match\"). ``Label.Text`` is the **only** text field allowed, and"
+" it contains only what the TD entered personally — the name of a phase, "
+"the letter of a pool."
+
+#: ../../source/journal.rst:40
+msgid ""
+"Les valeurs des codes entrent dans le journal : les changer casse les "
+"journaux existants. C'est la raison d'être de ``Event.Version``."
+msgstr ""
+"Code values enter the journal: changing them breaks existing journals. "
+"This is the reason ``Event.Version`` exists."
+
+#: ../../source/journal.rst:43
+msgid ""
+"Les **noms de section** (``Section.Name``, ``Match.Section``, "
+"``Event.Section``) sont eux aussi des identifiants et non des libellés : "
+"``main``, ``conso``, ``last``, ``gf``, ``poule:A``, ``barrage:A``, et les"
+" groupes GSL (``B1G2``). Ils voyagent dans le journal et dans la base de "
+"l'hôte. Les poules sont nommées ``poule:A``, ``poule:B``… "
+"(``rules.PoolSectionName``), le barrage d'une poule ``barrage:`` suivi de"
+" la même lettre (``rules.BarrageSectionName``), les groupes GSL "
+"``B<bloc>G<groupe>``."
+msgstr ""
+"**Section names** (``Section.Name``, ``Match.Section``, "
+"``Event.Section``) are also identifiers rather than labels: ``main``, "
+"``conso``, ``last``, ``gf``, ``poule:A``, ``barrage:A``, and the GSL "
+"groups (``B1G2``). They travel in the journal and in the host's database."
+" Pools are named ``poule:A``, ``poule:B``… (``rules.PoolSectionName``), "
+"the play-off of a pool is ``barrage:`` followed by the same letter "
+"(``rules.BarrageSectionName``), and GSL groups are ``B<bloc>G<groupe>``."
+
+#: ../../source/journal.rst:50
+msgid ""
+"Un test du dépôt (``codes_test.go``) refuse toute chaîne accentuée ou "
+"contenant un espace qui sortirait du moteur — propositions, classement, "
+"avertissements, informations, journal — hors les champs que le TD a "
+"saisis (``text``, ``name``, ``club``). Un autre vérifie que chaque code a"
+" un rendu français dans ``fr.go``, et qu'aucun ne retombe sur sa valeur "
+"brute."
+msgstr ""
+"A repository test (``codes_test.go``) rejects any accented string, or any"
+" string containing a space, that would leave the engine — proposals, "
+"standings, warnings, information, journal — except in the fields entered "
+"by the TD (``text``, ``name``, ``club``). Another test checks that every "
+"code has a French rendering in ``fr.go``, and that none falls back to its"
+" raw value."
+
+#: ../../source/journal.rst:56
+msgid "Structure d'un événement"
+msgstr "Structure of an event"
+
+#: ../../source/journal.rst:119
+msgid ""
+"Un événement est une structure « plate » : tous les types partagent les "
+"mêmes champs, les champs inutiles restant vides. C'est un choix délibéré "
+"— il rend le journal lisible et évite la désérialisation polymorphe."
+msgstr ""
+"An event is a \"flat\" structure: all types share the same fields, and "
+"unused fields stay empty. This is a deliberate choice — it keeps the "
+"journal readable and avoids polymorphic deserialization."
+
+#: ../../source/journal.rst:123
+#, no-python-brace-format
+msgid ""
+"``Version`` est le format du journal (``JournalVersion`` = 2). Un "
+"événement sans ce champ (version 0) vient d'un journal antérieur aux "
+"codes structurés et est **converti à la lecture** : ``Replay`` applique "
+"``Event.upgraded()`` à chaque événement, qui transforme un libellé texte "
+"« Ronde k » en ``Label{Kind: round, N: k}`` et renseigne ``Round`` (voir "
+":ref:`annexe_tests` pour la compatibilité ascendante). La version 2 ne "
+"change que la règle de ``config_changed`` (voir « Journaux anciens » à la"
+" section ``config_changed``). Les constructeurs d'événements de "
+"``events.go`` posent la version : un ``Event`` écrit à la main sans "
+"version serait relu comme un journal ancien."
+msgstr ""
+"``Version`` is the journal format (``JournalVersion`` = 2). An event "
+"without this field (version 0) comes from a journal that predates "
+"structured codes and is **converted on reading**: ``Replay`` applies "
+"``Event.upgraded()`` to each event, which turns a text label \"Round k\" "
+"into ``Label{Kind: round, N: k}`` and fills in ``Round`` (see "
+":ref:`annexe_tests` for backward compatibility). Version 2 only changes "
+"the rule of ``config_changed`` (see \"Old journals\" in the "
+"``config_changed`` section). The event constructors in ``events.go`` set "
+"the version: an ``Event`` written by hand without a version would be read"
+" back as an old journal."
+
+#: ../../source/journal.rst:132
+msgid ""
+"``Label`` est un **code**, pas une chaîne (voir « Le catalogue des codes "
+"» ci-dessus). À la lecture, un libellé JSON qui est une chaîne (journaux "
+"de version 0) est accepté et rangé tel quel dans ``Label.Text``."
+msgstr ""
+"``Label`` is a **code**, not a string (see \"The catalogue of codes\" "
+"above). On reading, a JSON label that is a string (version 0 journals) is"
+" accepted and stored as is in ``Label.Text``."
+
+#: ../../source/journal.rst:136
+msgid ""
+"``Seq`` est un numéro d'ordre facultatif renseigné par l'hôte (les "
+"binaires du dépôt écrivent ``Seq = len(journal)`` avant l'ajout). Le "
+"moteur **ne le lit pas** : l'ordre du tableau fait foi."
+msgstr ""
+"``Seq`` is an optional sequence number set by the host (the repository's "
+"binaries write ``Seq = len(journal)`` before appending). The engine "
+"**does not read it**: the order of the array is authoritative."
+
+#: ../../source/journal.rst:139
+msgid "``Time`` est l'horodatage. Le moteur l'utilise pour :"
+msgstr "``Time`` is the timestamp. The engine uses it for:"
+
+#: ../../source/journal.rst:141
+msgid "l'horodatage de début et de fin des matchs ;"
+msgstr "the start and end timestamps of matches;"
+
+#: ../../source/journal.rst:142
+msgid ""
+"la mise à jour de ``State.Last`` (le maximum des horodatages vus), qui "
+"sert d'heure à ``Propose()`` ;"
+msgstr ""
+"updating ``State.Last`` (the maximum of the timestamps seen), which "
+"serves as the time for ``Propose()``;"
+
+#: ../../source/journal.rst:144
+msgid ""
+"l'heure de l'état pendant l'application de l'événement (``s.clock = "
+"ev.Time``), à laquelle une indisponibilité à échéance (``Until``) est "
+"comparée."
+msgstr ""
+"the state's time while the event is being applied (``s.clock = "
+"ev.Time``), against which an unavailability with a deadline (``Until``) "
+"is compared."
+
+#: ../../source/journal.rst:147
+msgid "Il n'exige pas la monotonie."
+msgstr "It does not require monotonicity."
+
+#: ../../source/journal.rst:150
+msgid "Champs utilisés par type"
+msgstr "Fields used by type"
+
+#: ../../source/journal.rst:153 ../../source/journal.rst:479
+msgid "Kind"
+msgstr "Kind"
+
+#: ../../source/journal.rst:153
+msgid "Champs lus"
+msgstr "Fields read"
+
+#: ../../source/journal.rst:155 ../../source/journal.rst:229
+msgid "``created``"
+msgstr "``created``"
+
+#: ../../source/journal.rst:155
+msgid "``Config`` (obligatoire), ``Seed``"
+msgstr "``Config`` (required), ``Seed``"
+
+#: ../../source/journal.rst:157 ../../source/journal.rst:243
+msgid "``player_added``"
+msgstr "``player_added``"
+
+#: ../../source/journal.rst:157
+msgid ""
+"``Player`` (obligatoire, ``ID`` non vide) ; retardataire : ``Phase``, "
+"``Section``, ``Slot``"
+msgstr ""
+"``Player`` (required, non-empty ``ID``); latecomer: ``Phase``, "
+"``Section``, ``Slot``"
+
+#: ../../source/journal.rst:160 ../../source/journal.rst:336
+msgid "``player_withdrawn``"
+msgstr "``player_withdrawn``"
+
+#: ../../source/journal.rst:160
+msgid "``ID``, ``AfterCurrent``"
+msgstr "``ID``, ``AfterCurrent``"
+
+#: ../../source/journal.rst:162 ../../source/journal.rst:271
+msgid "``player_updated``"
+msgstr "``player_updated``"
+
+#: ../../source/journal.rst:162
+msgid "``Player`` (obligatoire, ``ID`` d'un joueur inscrit)"
+msgstr "``Player`` (required, ``ID`` of a registered player)"
+
+#: ../../source/journal.rst:164
+msgid "``player_unavailable``"
+msgstr "``player_unavailable``"
+
+#: ../../source/journal.rst:164
+msgid ""
+"``ID`` ; ``Until`` (heure de retour) ou ``Round`` (ronde de retour), ou "
+"aucun des deux"
+msgstr "``ID``; ``Until`` (return time) or ``Round`` (return round), or neither"
+
+#: ../../source/journal.rst:167
+msgid "``player_available``"
+msgstr "``player_available``"
+
+#: ../../source/journal.rst:167
+msgid "``ID``"
+msgstr "``ID``"
+
+#: ../../source/journal.rst:169 ../../source/journal.rst:367
+msgid "``match_started``"
+msgstr "``match_started``"
+
+#: ../../source/journal.rst:169
+msgid ""
+"``MatchID``, ``Phase``, ``Section``, ``Label``, ``Round``, ``Key``, "
+"``A``, ``B``, ``Length``, ``Table``"
+msgstr ""
+"``MatchID``, ``Phase``, ``Section``, ``Label``, ``Round``, ``Key``, "
+"``A``, ``B``, ``Length``, ``Table``"
+
+#: ../../source/journal.rst:172
+msgid "``result``"
+msgstr "``result``"
+
+#: ../../source/journal.rst:172
+msgid ""
+"``MatchID``, ``Winner``, ``ScoreA``, ``ScoreB``, ``Forfeit`` ; ``Text`` "
+"(remarque facultative, ``WithNote``, conservée au journal)"
+msgstr ""
+"``MatchID``, ``Winner``, ``ScoreA``, ``ScoreB``, ``Forfeit``; ``Text`` "
+"(optional remark, ``WithNote``, kept in the journal)"
+
+#: ../../source/journal.rst:175
+msgid "``result_corrected``"
+msgstr "``result_corrected``"
+
+#: ../../source/journal.rst:175
+msgid "idem"
+msgstr "same"
+
+#: ../../source/journal.rst:177 ../../source/journal.rst:441
+msgid "``match_cancelled``"
+msgstr "``match_cancelled``"
+
+#: ../../source/journal.rst:177
+msgid "``MatchID``"
+msgstr "``MatchID``"
+
+#: ../../source/journal.rst:179 ../../source/journal.rst:453
+#: ../../source/journal.rst:691
+msgid "``bye``"
+msgstr "``bye``"
+
+#: ../../source/journal.rst:179
+msgid "``Phase``, ``ID``, ``Round``, ``Label``"
+msgstr "``Phase``, ``ID``, ``Round``, ``Label``"
+
+#: ../../source/journal.rst:181 ../../source/journal.rst:468
+#: ../../source/journal.rst:693
+msgid "``draw``"
+msgstr "``draw``"
+
+#: ../../source/journal.rst:181
+msgid "``Phase``, ``Section`` (barrage), ``Draw`` (obligatoire), ``Label``"
+msgstr "``Phase``, ``Section`` (play-off), ``Draw`` (required), ``Label``"
+
+#: ../../source/journal.rst:183 ../../source/journal.rst:495
+#: ../../source/journal.rst:697
+msgid "``next_phase``"
+msgstr "``next_phase``"
+
+#: ../../source/journal.rst:183 ../../source/journal.rst:192
+#: ../../source/journal.rst:196
+msgid "—"
+msgstr "—"
+
+#: ../../source/journal.rst:185 ../../source/journal.rst:507
+#: ../../source/journal.rst:699
+msgid "``repechage``"
+msgstr "``repechage``"
+
+#: ../../source/journal.rst:185
+msgid ""
+"``Phase`` (la phase de poules), ``Section`` (la poule), ``A`` (le "
+"qualifié retiré), ``B`` (le repêché)"
+msgstr ""
+"``Phase`` (the pool phase), ``Section`` (the pool), ``A`` (the withdrawn "
+"qualifier), ``B`` (the repechaged player)"
+
+#: ../../source/journal.rst:188 ../../source/journal.rst:527
+msgid "``length_changed``"
+msgstr "``length_changed``"
+
+#: ../../source/journal.rst:188
+msgid "``Phase``, ``Length``"
+msgstr "``Phase``, ``Length``"
+
+#: ../../source/journal.rst:190 ../../source/journal.rst:542
+msgid "``config_changed``"
+msgstr "``config_changed``"
+
+#: ../../source/journal.rst:190
+msgid "``Config`` (obligatoire, la configuration **entière**), ``Version``"
+msgstr "``Config`` (required, the **entire** configuration), ``Version``"
+
+#: ../../source/journal.rst:192 ../../source/journal.rst:609
+msgid "``reopened``"
+msgstr "``reopened``"
+
+#: ../../source/journal.rst:194 ../../source/journal.rst:621
+msgid "``table_changed``"
+msgstr "``table_changed``"
+
+#: ../../source/journal.rst:194
+msgid "``MatchID``, ``Table``"
+msgstr "``MatchID``, ``Table``"
+
+#: ../../source/journal.rst:196 ../../source/journal.rst:636
+#: ../../source/journal.rst:701
+msgid "``finished``"
+msgstr "``finished``"
+
+#: ../../source/journal.rst:198 ../../source/journal.rst:647
+msgid "``note``"
+msgstr "``note``"
+
+#: ../../source/journal.rst:198
+msgid "``Text``"
+msgstr "``Text``"
+
+#: ../../source/journal.rst:202
+msgid "Sémantique de ``Apply``"
+msgstr "Semantics of ``Apply``"
+
+#: ../../source/journal.rst:204
+msgid ""
+"``func (s *State) Apply(ev Event) error`` applique un événement. "
+"**Première règle** : si ``ev.Kind != EvCreated`` et ``s.Current < 0``, "
+"erreur « tournoi non créé ». Aucun événement ne peut précéder la "
+"création."
+msgstr ""
+"``func (s *State) Apply(ev Event) error`` applies an event. **First "
+"rule**: if ``ev.Kind != EvCreated`` and ``s.Current < 0``, error "
+"\"tournament not created\". No event can precede creation."
+
+#: ../../source/journal.rst:208
+msgid ""
+"Avant le traitement, ``s.clock = ev.Time``. Un ``Kind`` inconnu est une "
+"erreur (« événement inconnu »)."
+msgstr ""
+"Before processing, ``s.clock = ev.Time``. An unknown ``Kind`` is an error"
+" (\"unknown event\")."
+
+#: ../../source/journal.rst:211
+msgid ""
+"À la fin de tout traitement réussi, et pour **tous** les types y compris "
+"``note`` :"
+msgstr ""
+"At the end of any successful processing, and for **all** types including "
+"``note``:"
+
+#: ../../source/journal.rst:220
+msgid ""
+"``check()`` est rappelée sur ces trois types parce qu'ils changent ce "
+"qu'elle regarde (les joueurs qui occupent une place de graphe, un score "
+"au regard de la longueur, deux matchs sur une même table) sans passer par"
+" ``recompute()``, qui l'appelle déjà. ``refreshInfos()`` recalcule "
+"``State.Infos``."
+msgstr ""
+"``check()`` is called again on these three types because they change what"
+" it looks at (the players occupying a graph slot, a score with respect to"
+" the length, two matches on the same table) without going through "
+"``recompute()``, which already calls it. ``refreshInfos()`` recomputes "
+"``State.Infos``."
+
+#: ../../source/journal.rst:225
+msgid ""
+"``NEvents`` est donc le nombre d'événements appliqués avec succès ; il "
+"entre dans la graine du générateur, ce qui garantit qu'une nouvelle "
+"proposition suit toujours un tirage différent."
+msgstr ""
+"``NEvents`` is therefore the number of events applied successfully; it "
+"enters the generator's seed, which guarantees that a new proposal always "
+"follows a different draw."
+
+#: ../../source/journal.rst:239
+msgid ""
+"Un second ``created`` dans un journal écraserait la configuration ; le "
+"moteur ne l'interdit pas explicitement, mais l'hôte ne doit jamais le "
+"produire."
+msgstr ""
+"A second ``created`` in a journal would overwrite the configuration; the "
+"engine does not explicitly forbid it, but the host must never produce "
+"one."
+
+#: ../../source/journal.rst:258
+msgid "**Retardataires.** Trois chemins, et un seul interdit : refaire le tirage."
+msgstr "**Latecomers.** Three paths, and only one is forbidden: redoing the draw."
+
+#: ../../source/journal.rst:260
+msgid ""
+"Le tirage n'a pas eu lieu (ou la phase est un suisse non figé) : le "
+"joueur entre tout de suite, avec toutes ses vies."
+msgstr ""
+"The draw has not taken place (or the phase is an unfrozen Swiss): the "
+"player enters immediately, with all their lives."
+
+#: ../../source/journal.rst:262
+msgid ""
+"``ev.Slot`` désigne une **place d'exemption libre** d'un tableau déjà "
+"tiré (``State.FreeSlots`` les énumère, ``PlayerAddedAtSlotEvent`` "
+"construit l'événement) : il l'occupe là où elle est, avec une vie — il ne"
+" bénéficie pas de l'exemption qu'il prend. Une place dont le match a été "
+"lancé, ou dont le tour a commencé, ou qui n'existe pas, est **refusée** :"
+" ``Apply`` renvoie une erreur."
+msgstr ""
+"``ev.Slot`` designates a **free bye slot** in a bracket that has already "
+"been drawn (``State.FreeSlots`` enumerates them, "
+"``PlayerAddedAtSlotEvent`` builds the event): the player takes it where "
+"it is, with one life — they do not benefit from the bye they take. A slot"
+" whose match has been started, or whose round has begun, or which does "
+"not exist, is **refused**: ``Apply`` returns an error."
+
+#: ../../source/journal.rst:266
+msgid ""
+"Sinon il est enregistré (``Players``, ``Order``) sans entrer dans aucune "
+"phase, et ``State.Infos`` porte un code disant où il entrera "
+"(``enters_at``) ou que rien ne l'admet (``no_entry``)."
+msgstr ""
+"Otherwise the player is recorded (``Players``, ``Order``) without "
+"entering any phase, and ``State.Infos`` carries a code saying where they "
+"will enter (``enters_at``) or that nothing admits them (``no_entry``)."
+
+#: ../../source/journal.rst:279
+msgid ""
+"La **correction d'une fiche** — nom, club, cote — et rien d'autre. La "
+"fiche est entière, comme la configuration de ``config_changed`` : ce qui "
+"est écrit est le résultat. L'état du joueur n'est pas touché : un retiré "
+"reste retiré, ses vies, ses victoires, ses matchs et sa place dans les "
+"phases sont intacts."
+msgstr ""
+"The **correction of a record** — name, club, rating — and nothing else. "
+"The record is complete, like the configuration of ``config_changed``: "
+"what is written is the result. The player's state is not touched: a "
+"withdrawn player stays withdrawn, and their lives, wins, matches and "
+"place in the phases are intact."
+
+#: ../../source/journal.rst:284
+msgid ""
+"Ce n'est **pas une réinscription**, et c'est ce qui la distingue de "
+"``player_added`` sur un identifiant connu, qui met la fiche à jour **et**"
+" annule un retrait : corriger le club d'une joueuse retirée par "
+"``player_added`` la remettrait en jeu. ``player_added`` garde son sens "
+"pour les journaux existants — c'est aussi le chemin du retour d'un joueur"
+" retiré."
+msgstr ""
+"This is **not a re-registration**, and that is what distinguishes it from"
+" ``player_added`` on a known identifier, which updates the record **and**"
+" cancels a withdrawal: correcting the club of a player withdrawn via "
+"``player_added`` would put her back in play. ``player_added`` keeps its "
+"meaning for existing journals — it is also the path for the return of a "
+"withdrawn player."
+
+#: ../../source/journal.rst:291
+msgid "``player_unavailable`` et ``player_available``"
+msgstr "``player_unavailable`` and ``player_available``"
+
+#: ../../source/journal.rst:303
+msgid ""
+"Un joueur **indisponible** n'est plus apparié, et ne perd rien : ni vie, "
+"ni victoire, ni rang, ni place dans un tableau. C'est le joueur qui ne "
+"revient que dimanche à 14 h, celui qui dîne, celui qui joue en ce moment "
+"dans une autre épreuve de la salle. Les autres moyens ne conviennent pas "
+": le retirer puis le réinscrire le classe « forfait » pendant l'absence, "
+"ne rien faire le laisse apparier, et un forfait lui coûte une vie."
+msgstr ""
+"An **unavailable** player is no longer paired, and loses nothing: no "
+"life, no win, no rank, no place in a bracket. This is the player who only"
+" returns on Sunday at 14h, the one who is having dinner, the one who is "
+"currently playing in another event in the playing hall. The other options"
+" do not fit: withdrawing then re-registering the player ranks them as a "
+"\"forfeit\" during the absence, doing nothing leaves them to be paired, "
+"and a forfeit costs them a life."
+
+#: ../../source/journal.rst:317
+msgid "L'absence tombe :"
+msgstr "The absence ends:"
+
+#: ../../source/journal.rst:319
+msgid ""
+"à l'heure ``Until`` (comparée à l'heure de la proposition, "
+"``ProposeAt(now)``, ou de l'événement en cours d'application) ;"
+msgstr ""
+"at time ``Until`` (compared with the proposal time, ``ProposeAt(now)``, "
+"or with the time of the event being applied);"
+
+#: ../../source/journal.rst:321
+msgid ""
+"pour une absence « jusqu'à la ronde ``Round`` », quand la ronde appariée "
+"atteint ``Round``, ou au passage à une autre phase ;"
+msgstr ""
+"for an absence \"until round ``Round``\", when the paired round reaches "
+"``Round``, or on moving to another phase;"
+
+#: ../../source/journal.rst:323
+msgid ""
+"sans échéance, à ``player_available``, qui lève aussi toute absence avant"
+" son terme."
+msgstr ""
+"with no deadline, at ``player_available``, which also lifts any absence "
+"before its end."
+
+#: ../../source/journal.rst:325
+msgid "Effets, tous dérivés :"
+msgstr "Effects, all derived:"
+
+#: ../../source/journal.rst:327
+msgid ""
+"**suisse** : ``free(ph, r)`` écarte les absents — en continu comme par "
+"rondes (la ronde ``r`` est celle qu'on apparie). Un absent n'est pas dans"
+" le ``Roster`` de la ronde : la ronde se termine sans lui, **sans bye**. "
+"La file porte une attente par absent en vie (``wait``, raison "
+"``player_unavailable``, ``A`` = le joueur, ``Until`` ou ``Round`` = son "
+"retour) ;"
+msgstr ""
+"**Swiss**: ``free(ph, r)`` excludes the absent players — in continuous "
+"mode as in rounds mode (round ``r`` is the one being paired). An absent "
+"player is not in the round's ``Roster``: the round ends without them, "
+"**without a bye**. The queue carries one wait per absent player who is "
+"alive (``wait``, reason ``player_unavailable``, ``A`` = the player, "
+"``Until`` or ``Round`` = their return);"
+
+#: ../../source/journal.rst:331
+msgid ""
+"**graphes** (tableaux, GSL, poules, barrages) : la place est fixée, le "
+"match d'un absent reste donc proposé, mais **retenu** — raison "
+"``player_unavailable``, sans table. Le TD peut le lancer quand même."
+msgstr ""
+"**graphs** (brackets, GSL, pools, play-offs): the slot is fixed, so an "
+"absent player's match is still proposed, but **held** — reason "
+"``player_unavailable``, with no table. The TD can start it anyway."
+
+#: ../../source/journal.rst:351
+msgid ""
+"Le retrait est **général** : le joueur quitte le tournoi. Ses matchs de "
+"graphe non encore lancés sont perdus par walkover lors de la résolution "
+"(voir :ref:`graphes`)."
+msgstr ""
+"Withdrawal is **general**: the player leaves the tournament. Their graph "
+"matches not yet started are lost by walkover at resolution (see "
+":ref:`graphes`)."
+
+#: ../../source/journal.rst:354
+msgid ""
+"**Retrait différé** (``AfterCurrent``, "
+"``PlayerWithdrawnAfterCurrentEvent``) : le joueur qui doit partir finit "
+"le match qu'il joue. Il est inscrit dans ``WithdrawAfter`` ; occupé, il "
+"n'est plus apparié ; ``promoteDeferred()``, appelée après chaque "
+"résultat, le fait passer dans ``Withdrawn`` dès qu'il n'a plus de match "
+"en cours. S'il n'a pas de match en cours, le retrait est immédiat."
+msgstr ""
+"**Deferred withdrawal** (``AfterCurrent``, "
+"``PlayerWithdrawnAfterCurrentEvent``): the player who has to leave "
+"finishes the match they are playing. They are recorded in "
+"``WithdrawAfter``; while busy, they are no longer paired; "
+"``promoteDeferred()``, called after each result, moves them into "
+"``Withdrawn`` as soon as they have no match in progress. If they have no "
+"match in progress, the withdrawal is immediate."
+
+#: ../../source/journal.rst:359
+msgid ""
+"Le **forfait d'un seul match**, sans quitter le tournoi, n'est pas un "
+"retrait : c'est un ``result`` avec ``Forfeit = true`` (``ForfeitEvent``),"
+" après lequel le perdant suit le chemin d'un perdant ordinaire."
+msgstr ""
+"A **single-match forfeit**, without leaving the tournament, is not a "
+"withdrawal: it is a ``result`` with ``Forfeit = true`` "
+"(``ForfeitEvent``), after which the loser follows the path of an ordinary"
+" loser."
+
+#: ../../source/journal.rst:363
+msgid ""
+"Un qualifié de poule qui se retire avant le tirage de la phase suivante "
+"ouvre un repêchage (proposé, voir :ref:`format_poules`)."
+msgstr ""
+"A pool qualifier who withdraws before the draw of the next phase opens a "
+"repechage (proposed, see :ref:`format_poules`)."
+
+#: ../../source/journal.rst:369
+msgid "Validations, dans l'ordre :"
+msgstr "Validations, in order:"
+
+#: ../../source/journal.rst:379
+msgid ""
+"``busy(p)`` : il existe un match de statut ``Running`` où ``p`` joue. "
+"**Un joueur ne peut jamais avoir deux matchs en cours.** C'est "
+"l'invariant central de l'ordonnancement."
+msgstr ""
+"``busy(p)``: there is a match with status ``Running`` in which ``p`` "
+"plays. **A player can never have two matches in progress.** This is the "
+"central invariant of scheduling."
+
+#: ../../source/journal.rst:382
+msgid "Puis :"
+msgstr "Then:"
+
+#: ../../source/journal.rst:400
+#, no-python-format
+msgid ""
+"``ev.Round`` (relu du libellé ``\"Ronde %d\"`` pour un journal de version"
+" 0, voir ``Event.upgraded``) est le seul mécanisme qui fait avancer le "
+"compteur de rondes du suisse synchrone. ``openRound`` n'agit que dans un "
+"``swiss_lives`` en mode ``rounds`` et pour ``ev.Round > ph.Round`` : au "
+"premier événement d'une ronde (match ou bye) et avant de l'appliquer, il "
+"relève les joueurs libres de la phase (``free(ph, r)``) ; ce sont les "
+"joueurs appelés à la ronde (voir :ref:`format_suisse`)."
+msgstr ""
+"``ev.Round`` (re-read from the label ``\"Ronde %d\"`` for a version 0 "
+"journal, see ``Event.upgraded``) is the only mechanism that advances the "
+"round counter of the synchronous Swiss. ``openRound`` acts only in a "
+"``swiss_lives`` in ``rounds`` mode and for ``ev.Round > ph.Round``: at "
+"the first event of a round (match or bye), and before applying it, it "
+"collects the free players of the phase (``free(ph, r)``); these are the "
+"players called to the round (see :ref:`format_suisse`)."
+
+#: ../../source/journal.rst:406
+msgid ""
+"``nextMatchID()`` renvoie ``\"M\" + (nextID+1)``. Comme ``nextID`` n'est "
+"incrémenté que par ``match_started``, les identifiants sont consécutifs à"
+" partir de ``M1``, sans trou, y compris après un rejeu partiel."
+msgstr ""
+"``nextMatchID()`` returns ``\"M\" + (nextID+1)``. Since ``nextID`` is "
+"only incremented by ``match_started``, identifiers are consecutive "
+"starting from ``M1``, with no gaps, including after a partial replay."
+
+#: ../../source/journal.rst:411
+msgid "``result`` et ``result_corrected``"
+msgstr "``result`` and ``result_corrected``"
+
+#: ../../source/journal.rst:429
+msgid ""
+"``aliveInSwiss`` relève les joueurs en vie de chaque phase "
+"``swiss_lives``. ``noteRevived`` compare avant et après : un joueur que "
+"la correction rend à la vie entre dans ``State.Revived``, un joueur "
+"qu'elle élimine en sort ; les avertissements sont recalculés (voir "
+":ref:`etat`, « Contrôle de cohérence »). ``match_started`` retire ses "
+"deux joueurs de ``Revived``."
+msgstr ""
+"``aliveInSwiss`` collects the players still alive in each ``swiss_lives``"
+" phase. ``noteRevived`` compares before and after: a player whom the "
+"correction brings back to life enters ``State.Revived``, a player whom it"
+" eliminates leaves it; warnings are recomputed (see :ref:`etat`, "
+"\"Consistency check\"). ``match_started`` removes its two players from "
+"``Revived``."
+
+#: ../../source/journal.rst:434
+msgid ""
+"Une correction sur un match **annulé** le ramène à l'état ``Finished`` : "
+"c'est le moyen de revenir sur une annulation."
+msgstr ""
+"A correction on a **cancelled** match brings it back to the ``Finished`` "
+"state: this is the way to reverse a cancellation."
+
+#: ../../source/journal.rst:437
+msgid ""
+"Noter que ``result_corrected`` sur un match jamais terminé fonctionne "
+"aussi : il vaut alors saisie initiale suivie d'un recalcul complet (plus "
+"coûteux, mais correct)."
+msgstr ""
+"Note that ``result_corrected`` on a match that was never finished also "
+"works: it then amounts to an initial entry followed by a full "
+"recomputation (more costly, but correct)."
+
+#: ../../source/journal.rst:449
+msgid ""
+"Le match reste dans ``MatchOrder`` et dans ``Matches`` : le journal ne "
+"perd rien. Il est simplement ignoré par tous les calculs (comptabilité, "
+"adversaires rencontrés, graphes)."
+msgstr ""
+"The match stays in ``MatchOrder`` and in ``Matches``: the journal loses "
+"nothing. It is simply ignored by all computations (accounting, opponents "
+"met, graphs)."
+
+#: ../../source/journal.rst:463
+msgid ""
+"Un bye ne compte ni victoire ni défaite. Il **appartient à sa ronde** : "
+"le confirmer seul ne clôt pas la ronde, ses matchs restent proposés. Il "
+"est mémorisé pour éviter d'en donner deux au même joueur (voir "
+":ref:`format_suisse`)."
+msgstr ""
+"A bye counts neither as a win nor as a loss. It **belongs to its round**:"
+" confirming it alone does not close the round, whose matches remain "
+"proposed. It is remembered to avoid giving two to the same player (see "
+":ref:`format_suisse`)."
+
+#: ../../source/journal.rst:476
+msgid "``applyDraw`` dispatche selon le format (voir :ref:`formats`) :"
+msgstr "``applyDraw`` dispatches according to the format (see :ref:`formats`):"
+
+#: ../../source/journal.rst:479
+msgid "Traitement"
+msgstr "Processing"
+
+#: ../../source/journal.rst:481
+msgid "``bracket``, ``lives_bracket``"
+msgstr "``bracket``, ``lives_bracket``"
+
+#: ../../source/journal.rst:481
+msgid ""
+"vérifie que ``len(Slots)`` est une puissance de 2 ≥ 2, puis "
+"``buildBracket``"
+msgstr "checks that ``len(Slots)`` is a power of 2 ≥ 2, then ``buildBracket``"
+
+#: ../../source/journal.rst:484
+msgid "``gsl``"
+msgstr "``gsl``"
+
+#: ../../source/journal.rst:484
+msgid "``applyGSLDraw`` : nouveau bloc de groupes"
+msgstr "``applyGSLDraw``: new block of groups"
+
+#: ../../source/journal.rst:486
+msgid "``round_robin``"
+msgstr "``round_robin``"
+
+#: ../../source/journal.rst:486
+msgid ""
+"``applyRRDraw`` : poules ``poule:A``, ``poule:B``… à partir de ``Groups``"
+" (``Section`` vide), ou barrage (``Section =`` ``\"barrage:<lettre>\"``, "
+"un seul groupe dans ``Groups``, poule ``poule:<lettre>`` existante)"
+msgstr ""
+"``applyRRDraw``: pools ``poule:A``, ``poule:B``… from ``Groups`` (empty "
+"``Section``), or play-off (``Section =`` ``\"barrage:<lettre>\"``, a "
+"single group in ``Groups``, existing pool ``poule:<lettre>``)"
+
+#: ../../source/journal.rst:491
+msgid "autre"
+msgstr "other"
+
+#: ../../source/journal.rst:491
+msgid "erreur « la phase n'a pas de tirage »"
+msgstr "error \"the phase has no draw\""
+
+#: ../../source/journal.rst:522
+msgid ""
+"B n'est pas forcément le joueur proposé : le TD peut choisir un autre "
+"joueur non qualifié de la poule (entre ex æquo, typiquement). Sans "
+"``repechage`` confirmé, la place du retiré devient une exemption du "
+"tableau suivant ; un journal sans ``repechage`` se rejoue donc à "
+"l'identique."
+msgstr ""
+"B is not necessarily the proposed player: the TD may choose another non-"
+"qualified player of the pool (among the tied players, typically). Without"
+" a confirmed ``repechage``, the withdrawn player's slot becomes a bye in "
+"the next bracket; a journal without ``repechage`` therefore replays "
+"identically."
+
+#: ../../source/journal.rst:534
+msgid ""
+"Change la longueur des **matchs futurs** de la phase. Les matchs déjà "
+"lancés gardent leur longueur ; les ``GMatch`` déjà construits (tableau "
+"tiré) gardent la leur aussi, puisqu'elle a été figée à la construction du"
+" graphe. Le champ n'a donc d'effet immédiat que sur les formats à "
+"appariement dynamique (suisse, barrages) et sur les graphes construits "
+"**après** le changement (blocs GSL suivants). ``config_changed`` peut "
+"aussi changer une longueur ; ``length_changed`` reste lu pour les "
+"journaux existants."
+msgstr ""
+"Changes the length of the phase's **future matches**. Matches already "
+"started keep their length; the ``GMatch`` already built (bracket drawn) "
+"keep theirs too, since it was frozen when the graph was built. The field "
+"therefore has an immediate effect only on formats with dynamic pairing "
+"(Swiss, play-offs) and on graphs built **after** the change (following "
+"GSL blocks). ``config_changed`` can also change a length; "
+"``length_changed`` is still read for existing journals."
+
+#: ../../source/journal.rst:551
+msgid ""
+"L'événement porte la configuration **entière**, et non le champ à changer"
+" : ce qui est écrit dans le journal est le résultat, pas l'instruction "
+"qui y mène — le même choix que pour ``draw``. Un journal se relit alors "
+"sans connaître la règle de composition des retouches successives."
+msgstr ""
+"The event carries the **entire** configuration, not the field to change: "
+"what is written in the journal is the result, not the instruction leading"
+" to it — the same choice as for ``draw``. A journal can then be read back"
+" without knowing the rule for composing successive adjustments."
+
+#: ../../source/journal.rst:555
+msgid "``acceptConfig`` refuse trois choses, et seulement trois :"
+msgstr "``acceptConfig`` refuses three things, and only three:"
+
+#: ../../source/journal.rst:557
+msgid ""
+"une configuration qui a **moins de phases** que le tournoi n'en a "
+"ouvertes (une phase ouverte ne se retire pas) ;"
+msgstr ""
+"a configuration that has **fewer phases** than the tournament has opened "
+"(an open phase cannot be removed);"
+
+#: ../../source/journal.rst:559
+msgid ""
+"un changement de ``Kind`` sur une phase **terminée** (indice < "
+"``Current``), **tirée** ou **commencée** (raison testée dans cet ordre) ;"
+msgstr ""
+"a change of ``Kind`` on a phase that is **finished** (index < "
+"``Current``), **drawn** or **started** (reason tested in that order);"
+
+#: ../../source/journal.rst:561
+msgid ""
+"sur un tableau (``bracket``, ``lives_bracket``) **déjà tiré**, un "
+"changement de l'une des options qui ne servent qu'à construire le graphe "
+"au tirage : ``consolation``, ``last_chance``, ``reconciliation``, "
+"``recharge``, ``seeding``. Le graphe est fait ; les changer ne pourrait "
+"plus rien produire : sans ce refus, cocher la consolante d'un tableau "
+"tiré serait accepté, écrit dans la configuration, et sans effet."
+msgstr ""
+"on a bracket (``bracket``, ``lives_bracket``) that is **already drawn**, "
+"a change to any of the options used only to build the graph at the draw: "
+"``consolation``, ``last_chance``, ``reconciliation``, ``recharge``, "
+"``seeding``. The graph is built; changing them could no longer produce "
+"anything: without this refusal, ticking the consolation of a drawn "
+"bracket would be accepted, written to the configuration, and have no "
+"effect."
+
+#: ../../source/journal.rst:567
+msgid ""
+"Le refus est un ``*ConfigRefusal``, qui nomme la phase, le champ et la "
+"raison par des codes :"
+msgstr ""
+"The refusal is a ``*ConfigRefusal``, which names the phase, the field and"
+" the reason by codes:"
+
+#: ../../source/journal.rst:582
+msgid ""
+"``Error()`` en donne le rendu français (console, démo) ; un hôte "
+"multilingue traduit les codes."
+msgstr ""
+"``Error()`` gives its French rendering (console, demo); a multilingual "
+"host translates the codes."
+
+#: ../../source/journal.rst:584
+msgid ""
+"**Journaux anciens.** Le troisième refus n'existe qu'à partir de la "
+"**version 2** du journal. Un ``config_changed`` de version 0 ou 1 qui "
+"changeait ces options après le tirage a été joué ainsi — accepté, sans "
+"effet — et se rejoue ainsi : ``acceptConfig`` reçoit la version de "
+"l'événement et n'applique le verrou du tirage qu'à partir de 2."
+msgstr ""
+"**Old journals.** The third refusal exists only from **version 2** of the"
+" journal. A ``config_changed`` of version 0 or 1 that changed these "
+"options after the draw was played that way — accepted, without effect — "
+"and replays that way: ``acceptConfig`` receives the event's version and "
+"applies the draw lock only from 2 on."
+
+#: ../../source/journal.rst:593
+msgid ""
+"``CheckConfig`` est la **prévisualisation** : ``Validate`` puis "
+"``acceptConfig`` sur une copie, aux règles de la version courante, sans "
+"rien appliquer. C'est ce qu'un formulaire de réglages appelle pour griser"
+" ou expliquer un champ avant d'écrire l'événement."
+msgstr ""
+"``CheckConfig`` is the **preview**: ``Validate`` then ``acceptConfig`` on"
+" a copy, under the rules of the current version, applying nothing. This "
+"is what a settings form calls to grey out or explain a field before "
+"writing the event."
+
+#: ../../source/journal.rst:597
+msgid ""
+"Tout le reste est accepté, y compris ce que le moteur ne peut pas juger :"
+" la bascule (``target``), les longueurs à venir, les tables, les pauses, "
+"la dotation, et une phase **ajoutée après** la phase courante."
+msgstr ""
+"Everything else is accepted, including what the engine cannot judge: the "
+"switch-over (``target``), future lengths, tables, breaks, the prize "
+"distribution, and a phase **added after** the current phase."
+
+#: ../../source/journal.rst:601
+msgid ""
+"``setConfig`` répercute la nouvelle configuration sur les ``PhaseState`` "
+"déjà ouverts. La longueur courante d'une phase (``PhaseState.Length``) ne"
+" suit la configuration que si la configuration l'a **effectivement "
+"changée** : sinon, une retouche qui ne touche qu'à la bascule effacerait "
+"le ``length_changed`` que le TD venait de saisir à la main. Quand le "
+"``Kind`` d'une phase non commencée change, sa longueur courante reprend "
+"celle de la configuration et les vies de ses entrants sont recalculées "
+"(``livesFor`` : ``Lives`` pour un suisse, 2 pour un GSL, 1 sinon)."
+msgstr ""
+"``setConfig`` propagates the new configuration to the ``PhaseState`` "
+"already open. A phase's current length (``PhaseState.Length``) follows "
+"the configuration only if the configuration **actually changed it**: "
+"otherwise, an adjustment touching only the switch-over would erase the "
+"``length_changed`` that the TD had just entered by hand. When the "
+"``Kind`` of a phase that has not started changes, its current length "
+"takes that of the configuration and its entrants' lives are recomputed "
+"(``livesFor``: ``Lives`` for a Swiss, 2 for a GSL, 1 otherwise)."
+
+#: ../../source/journal.rst:616
+msgid ""
+"Rouvre un tournoi clos, parce qu'un résultat était faux. Le classement "
+"final figé est effacé et sera recalculé à la clôture suivante ; le "
+"journal, lui, garde tout — la clôture, la réouverture, la correction et "
+"la nouvelle clôture sont quatre événements."
+msgstr ""
+"Reopens a closed tournament, because a result was wrong. The frozen final"
+" standings are erased and will be recomputed at the next closing; the "
+"journal, for its part, keeps everything — the closing, the reopening, the"
+" correction and the new closing are four events."
+
+#: ../../source/journal.rst:629
+msgid ""
+"Le déplacement est **toujours accepté**, y compris vers une table qui "
+"porte déjà un match en cours : le moteur avertit, il ne bloque pas. "
+"``check`` lève alors ``table_shared`` (voir :ref:`etat`), qui tombe de "
+"lui-même dès que l'un des deux matchs se termine ou repart ailleurs. "
+"Refuser aurait laissé le TD sans recours dans la salle pleine où il en a "
+"justement besoin — un plateau cassé, quatorze tables sur quatorze "
+"occupées, deux joueurs qui finissent sur un coin de table en attendant."
+msgstr ""
+"The move is **always accepted**, including to a table that already has a "
+"match in progress: the engine warns, it does not block. ``check`` then "
+"raises ``table_shared`` (see :ref:`etat`), which goes away by itself as "
+"soon as one of the two matches ends or moves elsewhere. Refusing would "
+"have left the TD without recourse in the full playing hall where they "
+"need it most — a broken board, fourteen tables out of fourteen occupied, "
+"two players finishing on the corner of a table while they wait."
+
+#: ../../source/journal.rst:643
+msgid ""
+"Le classement est **figé** dans ``Final``. ``StandingsCSV`` et les "
+"fonctions de rendu utilisent ``Final`` s'il existe, sinon recalculent "
+"``Ranking()``."
+msgstr ""
+"The standings are **frozen** in ``Final``. ``StandingsCSV`` and the "
+"rendering functions use ``Final`` if it exists, otherwise they recompute "
+"``Ranking()``."
+
+#: ../../source/journal.rst:649
+msgid ""
+"Sans effet, sinon l'incrément de ``NEvents`` (ce qui décale le générateur"
+" aléatoire — une note change donc le prochain tirage : c'est sans "
+"conséquence sur la validité, mais à savoir)."
+msgstr ""
+"No effect, other than the increment of ``NEvents`` (which shifts the "
+"random generator — a note therefore changes the next draw: this has no "
+"consequence for validity, but is worth knowing)."
+
+#: ../../source/journal.rst:653
+msgid "Construction d'événements"
+msgstr "Building events"
+
+#: ../../source/journal.rst:681
+#, no-python-brace-format
+msgid ""
+"``EventFromAction`` traduit une action confirmée en événement. Base "
+"commune : ``Event{Version: JournalVersion, Time: now, Phase: a.Phase, "
+"Section: a.Section, Label: a.Label, Round: a.Round, Key: a.Key}``, puis :"
+msgstr ""
+"``EventFromAction`` translates a confirmed action into an event. Common "
+"base: ``Event{Version: JournalVersion, Time: now, Phase: a.Phase, "
+"Section: a.Section, Label: a.Label, Round: a.Round, Key: a.Key}``, then:"
+
+#: ../../source/journal.rst:686
+msgid "Action"
+msgstr "Action"
+
+#: ../../source/journal.rst:686
+msgid "Événement produit"
+msgstr "Resulting event"
+
+#: ../../source/journal.rst:688
+msgid "``start_match``"
+msgstr "``start_match``"
+
+#: ../../source/journal.rst:688
+msgid ""
+"``match_started`` avec ``MatchID = s.nextMatchID()``, ``A``, ``B``, "
+"``Length``, ``Table``"
+msgstr ""
+"``match_started`` with ``MatchID = s.nextMatchID()``, ``A``, ``B``, "
+"``Length``, ``Table``"
+
+#: ../../source/journal.rst:691
+msgid "``bye`` avec ``ID = a.A``"
+msgstr "``bye`` with ``ID = a.A``"
+
+#: ../../source/journal.rst:693
+msgid "``draw`` avec ``Draw = a.Draw``"
+msgstr "``draw`` with ``Draw = a.Draw``"
+
+#: ../../source/journal.rst:695
+msgid "``cancel_match``"
+msgstr "``cancel_match``"
+
+#: ../../source/journal.rst:695
+msgid "``match_cancelled`` avec ``MatchID = a.Match``"
+msgstr "``match_cancelled`` with ``MatchID = a.Match``"
+
+#: ../../source/journal.rst:699
+msgid "``repechage`` avec ``A = a.A`` (le retiré), ``B = a.B`` (le repêché)"
+msgstr ""
+"``repechage`` with ``A = a.A`` (the withdrawn player), ``B = a.B`` (the "
+"repechaged player)"
+
+#: ../../source/journal.rst:701
+msgid "``finish``"
+msgstr "``finish``"
+
+#: ../../source/journal.rst:703
+msgid "autre (``wait``)"
+msgstr "other (``wait``)"
+
+#: ../../source/journal.rst:703
+msgid "erreur « action sans événement associé »"
+msgstr "error \"action without an associated event\""
+
+#: ../../source/journal.rst:706
+msgid ""
+"**Attention** : l'identifiant de match est attribué au moment de l'appel."
+" Si le TD confirme plusieurs actions ``start_match`` d'un même lot, il "
+"doit appeler ``EventFromAction`` puis ``Apply`` **pour chacune, dans "
+"l'ordre**, sans quoi deux matchs recevraient le même identifiant et le "
+"second ``Apply`` échouerait."
+msgstr ""
+"**Warning**: the match identifier is assigned at the time of the call. If"
+" the TD confirms several ``start_match`` actions from the same batch, "
+"they must call ``EventFromAction`` then ``Apply`` **for each one, in "
+"order**, otherwise two matches would receive the same identifier and the "
+"second ``Apply`` would fail."
+
+#: ../../source/journal.rst:711
+#, no-python-brace-format
+msgid ""
+"``ResultEvent`` construit ``{Version, Kind: result, MatchID, Winner, "
+"ScoreA, ScoreB, Time}``. ``ForfeitEvent`` est le même événement avec "
+"``Forfeit = true`` et sans score ; ``CorrectionEvent`` a les champs de "
+"``ResultEvent`` avec ``Kind = result_corrected``. ``WithNote`` attache "
+"une remarque (``Text``) à un événement de résultat."
+msgstr ""
+"``ResultEvent`` builds ``{Version, Kind: result, MatchID, Winner, ScoreA,"
+" ScoreB, Time}``. ``ForfeitEvent`` is the same event with ``Forfeit = "
+"true`` and no score; ``CorrectionEvent`` has the fields of "
+"``ResultEvent`` with ``Kind = result_corrected``. ``WithNote`` attaches a"
+" remark (``Text``) to a result event."
+
+#: ../../source/journal.rst:717
+msgid "Boucle d'intégration côté hôte"
+msgstr "Host-side integration loop"
+
+#: ../../source/journal.rst:742
+msgid ""
+"``func (s *State) Step(evs ...Event) ([]Action, error)`` applique une "
+"suite d'événements puis renvoie ``Propose()`` (il s'arrête à la première "
+"erreur) ; c'est un raccourci, pas une primitive. L'intégration complète "
+"est décrite dans :ref:`integration`."
+msgstr ""
+"``func (s *State) Step(evs ...Event) ([]Action, error)`` applies a "
+"sequence of events then returns ``Propose()`` (it stops at the first "
+"error); it is a shortcut, not a primitive. The complete integration is "
+"described in :ref:`integration`."
+
+#: ../../source/journal.rst:746
+msgid ""
+"**Règle d'or de l'hôte** : un événement n'est ajouté au journal que si "
+"``Apply`` a réussi. Un ``Apply`` en échec laisse l'état inchangé pour les"
+" validations en tête de traitement ; pour les traitements qui modifient "
+"l'état avant de pouvoir échouer (``player_added`` sur une place refusée :"
+" le joueur est déjà enregistré quand ``takeSlot`` échoue), l'hôte doit "
+"repartir d'un ``Replay``."
+msgstr ""
+"**Golden rule for the host**: an event is added to the journal only if "
+"``Apply`` succeeded. A failed ``Apply`` leaves the state unchanged for "
+"the validations at the head of processing; for the processing that "
+"modifies the state before it can fail (``player_added`` on a refused "
+"slot: the player is already registered when ``takeSlot`` fails), the host"
+" must start again from a ``Replay``."
+
+#: ../../source/journal.rst:753
+msgid "Exemple de journal"
+msgstr "Journal example"
+
+#: ../../source/journal.rst:755
+msgid ""
+"Extrait d'un journal produit par ``tournoi-demo -format suisse_tableau`` "
+"(champs ``config`` et horodatages abrégés) :"
+msgstr ""
+"Extract of a journal produced by ``tournoi-demo -format suisse_tableau`` "
+"(``config`` fields and timestamps abridged):"

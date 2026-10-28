@@ -1,0 +1,584 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/format_suisse.rst:4
+msgid "Suisse à vies (``swiss_lives``)"
+msgstr "Swiss with lives (``swiss_lives``)"
+
+#: ../../source/format_suisse.rst:7
+msgid "Principe"
+msgstr "Principle"
+
+#: ../../source/format_suisse.rst:9
+msgid ""
+"Un suisse à *L* vies est une **double élimination sans tableau** (pour "
+"*L* = 2) : chaque joueur est éliminé après *L* défaites, et l'appariement"
+" se fait toujours **à l'intérieur du groupe des joueurs ayant le même "
+"nombre de défaites**. Tout effectif est admis, la fin est toujours "
+"résoluble sans départage, et il n'y a pas de graphe à construire. "
+"``lives`` vaut 2 par défaut."
+msgstr ""
+"A Swiss with *L* lives is a **double elimination without a bracket** (for"
+" *L* = 2): each player is eliminated after *L* losses, and pairing is "
+"always done **within the group of players with the same number of "
+"losses**. Any number of players is allowed, the end can always be "
+"resolved without a tie-break, and there is no graph to build. ``lives`` "
+"is 2 by default."
+
+#: ../../source/format_suisse.rst:14
+msgid ""
+"La règle vit dans ``rules/suisse.go`` (``rules.Pair``, "
+"``PairSwissRound``, ``PairSwissFallback``, ``PairSwissOrphans``, "
+"``SwissLength``) ; ``phase_swiss.go`` en est l'enveloppe : il construit "
+"l'instantané ``rules.Phase`` (``regles.go``), calcule les joueurs "
+"appariables et tient la ronde ouverte."
+msgstr ""
+"The rule lives in ``rules/suisse.go`` (``rules.Pair``, "
+"``PairSwissRound``, ``PairSwissFallback``, ``PairSwissOrphans``, "
+"``SwissLength``); ``phase_swiss.go`` is its wrapper: it builds the "
+"``rules.Phase`` snapshot (``regles.go``), computes the pairable players "
+"and keeps the round open."
+
+#: ../../source/format_suisse.rst:19
+msgid "Deux modes (``mode``) :"
+msgstr "Two modes (``mode``):"
+
+#: ../../source/format_suisse.rst:21
+msgid ""
+"``continuous`` (défaut, posé par ``Validate``) : dès que deux joueurs du "
+"même groupe sont libres, un match est proposé. C'est le mode recommandé —"
+" l'étude montre que l'attente est le premier gaspillage d'un tournoi (10 "
+"à 15 fois plus d'attente en synchrone qu'en continu, voir "
+":ref:`annexe_etude`). Les micro-rondes (``batch_minutes``) y regroupent "
+"les appariements par lots (voir :ref:`propositions`)."
+msgstr ""
+"``continuous`` (default, set by ``Validate``): as soon as two players of "
+"the same group are free, a match is proposed. This is the recommended "
+"mode — the study shows that waiting is the first waste of a tournament "
+"(10 to 15 times more waiting in synchronous mode than in continuous mode,"
+" see :ref:`annexe_etude`). Micro-rounds (``batch_minutes``) group the "
+"pairings into batches there (see :ref:`propositions`)."
+
+#: ../../source/format_suisse.rst:26
+msgid ""
+"``rounds`` : tous les matchs d'une ronde sont proposés ensemble, byes "
+"compris, et la ronde suivante n'est proposée qu'une fois la ronde "
+"entièrement engagée et tous ses matchs terminés. ``batch_minutes`` y est "
+"refusé : une ronde est déjà un lot."
+msgstr ""
+"``rounds``: all the matches of a round are proposed together, byes "
+"included, and the next round is proposed only once the round is entirely "
+"committed and all its matches are finished. ``batch_minutes`` is rejected"
+" there: a round is already a batch."
+
+#: ../../source/format_suisse.rst:30
+msgid ""
+"``Validate`` refuse un autre mode, un ``target`` qui n'est pas une "
+"puissance de 2, un ``target`` avec ``lives`` ≠ 2, et ``length_late`` sans"
+" ``late_threshold``."
+msgstr ""
+"``Validate`` rejects any other mode, a ``target`` that is not a power of "
+"2, a ``target`` with ``lives`` ≠ 2, and ``length_late`` without "
+"``late_threshold``."
+
+#: ../../source/format_suisse.rst:34
+msgid "Bascule vers un tableau (``target``)"
+msgstr "Switch-over to a bracket (``target``)"
+
+#: ../../source/format_suisse.rst:50
+msgid ""
+"L'idée : chaque match consomme exactement une vie. Quand la somme des "
+"vies restantes atteint une puissance de 2, on peut basculer sur un "
+"tableau à exemptions parfaitement équilibré — un joueur à 2 vies occupe "
+"deux places du tableau (il est exempt du premier tour), un joueur à 1 vie"
+" en occupe une. C'est pourquoi ``Validate`` impose ``Lives == 2`` avec "
+"``Target``. Pour ne pas « dépasser » la cible, l'appariement est borné "
+"par un **budget**, décrit ci-dessous pour chacun des deux modes."
+msgstr ""
+"The idea: each match consumes exactly one life. When the sum of remaining"
+" lives reaches a power of 2, one can switch to a perfectly balanced "
+"bracket with byes — a player with 2 lives takes two places in the bracket"
+" (they get a bye in the first round), a player with 1 life takes one. "
+"This is why ``Validate`` requires ``Lives == 2`` with ``Target``. So as "
+"not to \"overshoot\" the target, pairing is bounded by a **budget**, "
+"described below for each of the two modes."
+
+#: ../../source/format_suisse.rst:56
+msgid ""
+"Sans ``Target``, la phase va jusqu'à son terme naturel : un seul joueur "
+"en vie."
+msgstr ""
+"Without ``Target``, the phase runs to its natural end: a single player "
+"alive."
+
+#: ../../source/format_suisse.rst:59
+msgid "Joueurs libres et historique"
+msgstr "Free players and history"
+
+#: ../../source/format_suisse.rst:67
+msgid ""
+"``free(ph, r)`` : les joueurs en vie (dans l'ordre des entrants), privés "
+"de ceux qui ont un match en cours, de ceux qui sont indisponibles pour la"
+" ronde ``r`` (0 hors rondes ; voir :ref:`etat`) et de ceux qui jouent "
+"dans une autre épreuve de la salle (``External.BusyPlayers``). Le moteur "
+"le passe dans ``rules.Phase.Free``."
+msgstr ""
+"``free(ph, r)``: the players still alive (in entrant order), minus those "
+"with a match in progress, those who are unavailable for round ``r`` (0 "
+"outside rounds; see :ref:`etat`) and those playing in another event of "
+"the playing hall (``External.BusyPlayers``). The engine passes it in "
+"``rules.Phase.Free``."
+
+#: ../../source/format_suisse.rst:72
+msgid ""
+"``met`` lit ``Entrant.Opponents`` (adversaires des matchs non annulés, "
+"avec répétitions). ``sameClub`` : les deux clubs sont non vides et "
+"identiques."
+msgstr ""
+"``met`` reads ``Entrant.Opponents`` (opponents from non-cancelled "
+"matches, with repetitions). ``sameClub``: both clubs are non-empty and "
+"identical."
+
+#: ../../source/format_suisse.rst:76
+msgid "Appariement d'un groupe"
+msgstr "Pairing a group"
+
+#: ../../source/format_suisse.rst:82
+msgid ""
+"C'est le cœur de l'appariement suisse (``rules/suisse.go``). Glouton, sur"
+" une liste dont l'ordre a été construit en plusieurs passes :"
+msgstr ""
+"This is the heart of Swiss pairing (``rules/suisse.go``). Greedy, on a "
+"list whose order was built in several passes:"
+
+#: ../../source/format_suisse.rst:110
+msgid "Propriétés :"
+msgstr "Properties:"
+
+#: ../../source/format_suisse.rst:112
+msgid ""
+"**le tri par byes est le dernier appliqué**, donc le plus fort : un "
+"joueur qui a déjà été exempté passe en tête de liste et sera apparié en "
+"priorité. C'est la règle « pas de second bye tant que d'autres n'en ont "
+"pas eu », appliquée **à l'intérieur d'un groupe** ; l'équité entre "
+"groupes différents n'est pas assurée ;"
+msgstr ""
+"**the sort by byes is the last one applied**, hence the strongest: a "
+"player who has already had a bye moves to the head of the list and will "
+"be paired first. This is the rule \"no second bye while others have not "
+"had one\", applied **within a group**; fairness between different groups "
+"is not ensured;"
+
+#: ../../source/format_suisse.rst:116
+msgid ""
+"``pairing: \"wins\"`` ne fait qu'ordonner : il ne calcule aucun score de "
+"type Buchholz. Il rapproche les joueurs de même palmarès dans un même "
+"groupe de défaites. Le défaut est ``\"random\"`` ;"
+msgstr ""
+"``pairing: \"wins\"`` only orders: it computes no Buchholz-type score. It"
+" brings together players with the same record in the same losses group. "
+"The default is ``\"random\"``;"
+
+#: ../../source/format_suisse.rst:118
+msgid ""
+"``avoid_clubs`` est une préférence, pas une contrainte : si aucun "
+"adversaire d'un autre club n'est disponible, la seconde passe accepte le "
+"même club ;"
+msgstr ""
+"``avoid_clubs`` is a preference, not a constraint: if no opponent from "
+"another club is available, the second pass accepts the same club;"
+
+#: ../../source/format_suisse.rst:120
+msgid ""
+"l'interdiction de rematch est en revanche une **contrainte dure**, sauf "
+"``allow_rematch`` ou appel de repli (``allowRematch = vrai``)."
+msgstr ""
+"the ban on rematches, on the other hand, is a **hard constraint**, except"
+" with ``allow_rematch`` or a fallback call (``allowRematch = vrai``)."
+
+#: ../../source/format_suisse.rst:124
+msgid "Longueur des matchs"
+msgstr "Match length"
+
+#: ../../source/format_suisse.rst:135
+msgid ""
+"``Length`` est la longueur courante de la phase. La fin d'un suisse se "
+"joue ainsi en matchs plus longs. Un ``length_changed`` posé à la main par"
+" le TD (``Length ≠ length`` configurée) l'emporte : c'est lui qui dirige."
+msgstr ""
+"``Length`` is the current length of the phase. The end of a Swiss is thus"
+" played in longer matches. A ``length_changed`` set by hand by the TD "
+"(``Length ≠ length`` configured) takes precedence: it is the one in "
+"charge."
+
+#: ../../source/format_suisse.rst:140
+msgid "Proposition"
+msgstr "Proposal"
+
+#: ../../source/format_suisse.rst:156
+msgid ""
+"``rules.Pair`` dispatche vers ``pairContinuous(générateur(seed.Draw()))``"
+" en mode continu, et en mode par rondes vers ``pairRound(Round+1, Free, "
+"générateur(seed.Round(Round+1)))``, avec repli ``rematchOrFinal(Free, "
+"générateur(seed.Draw()))`` quand la ronde ne trouve aucune paire et qu'au"
+" moins deux joueurs sont libres. Les graines sont décrites dans "
+":ref:`propositions`."
+msgstr ""
+"``rules.Pair`` dispatches to ``pairContinuous(générateur(seed.Draw()))`` "
+"in continuous mode, and in by-rounds mode to ``pairRound(Round+1, Free, "
+"générateur(seed.Round(Round+1)))``, with fallback ``rematchOrFinal(Free, "
+"générateur(seed.Draw()))`` when the round finds no pair and at least two "
+"players are free. The seeds are described in :ref:`propositions`."
+
+#: ../../source/format_suisse.rst:162
+msgid "Mode continu"
+msgstr "Continuous mode"
+
+#: ../../source/format_suisse.rst:188
+msgid ""
+"Le **budget** garantit qu'on ne « dépasse » jamais la cible : avec Σ vies"
+" = 18 et ``target`` 16, deux matchs au plus peuvent être en cours ou "
+"lancés, même si six joueurs sont libres."
+msgstr ""
+"The **budget** guarantees that the target is never \"overshot\": with Σ "
+"lives = 18 and ``target`` 16, at most two matches can be in progress or "
+"launched, even if six players are free."
+
+#: ../../source/format_suisse.rst:191
+msgid ""
+"**Repli** (quand aucun appariement régulier n'est possible et qu'aucun "
+"match ne tourne) :"
+msgstr ""
+"**Fallback** (when no regular pairing is possible and no match is "
+"running):"
+
+#: ../../source/format_suisse.rst:203
+msgid ""
+"Ce repli est ce qui permet de **toujours conclure** : quand il ne reste "
+"que deux joueurs qui se sont déjà rencontrés, ou deux joueurs de groupes "
+"différents (par exemple un à 0 défaite et un à 1 défaite en fin de suisse"
+" à 2 vies), le moteur propose quand même le match. Les libellés ``final``"
+" et ``crossed`` sont d'ailleurs reconnus par les tests d'invariants "
+"(``sim_test.go``) comme les seules exceptions autorisées à la règle « pas"
+" de match entre groupes différents »."
+msgstr ""
+"This fallback is what makes it possible to **always conclude**: when only"
+" two players remain who have already met, or two players from different "
+"groups (for example one with 0 losses and one with 1 loss at the end of a"
+" 2-life Swiss), the engine still proposes the match. The labels ``final``"
+" and ``crossed`` are in fact recognised by the invariant tests "
+"(``sim_test.go``) as the only allowed exceptions to the rule \"no match "
+"between different groups\"."
+
+#: ../../source/format_suisse.rst:210
+msgid "Mode par rondes"
+msgstr "By-rounds mode"
+
+#: ../../source/format_suisse.rst:212
+msgid ""
+"Une ronde reste **ouverte** tant que l'un des joueurs appelés n'y est pas"
+" engagé. Une ronde de 12 matchs dans une salle de 6 tables se lance en "
+"deux vagues ; un bye se confirme parfois avant les matchs. Tant que la "
+"ronde est ouverte, ses appariements non lancés restent proposés — les "
+"mêmes —, et la ronde suivante ne vient que lorsque la ronde est "
+"entièrement engagée et ses matchs terminés."
+msgstr ""
+"A round stays **open** as long as one of the called players is not "
+"committed to it. A 12-match round in a playing hall of 6 tables is "
+"launched in two waves; a bye is sometimes confirmed before the matches. "
+"While the round is open, its unlaunched pairings remain proposed — the "
+"same ones — and the next round comes only when the round is entirely "
+"committed and its matches finished."
+
+#: ../../source/format_suisse.rst:221
+msgid ""
+"``PairSwissRound`` (``pairRound``, générateur ``seed.Round(r)``) est "
+"l'appariement de la ronde ``r`` sur l'instantané ``p`` :"
+msgstr ""
+"``PairSwissRound`` (``pairRound``, generator ``seed.Round(r)``) is the "
+"pairing of round ``r`` on the snapshot ``p``:"
+
+#: ../../source/format_suisse.rst:237
+msgid ""
+"Le budget d'une ronde ne retranche pas les matchs en cours : une ronde "
+"n'est appariée qu'une fois la précédente terminée. La DERNIÈRE ronde "
+"d'une phase à bascule est ainsi tronquée au nombre exact de matchs qui "
+"reste à jouer, et ne donne aucun bye : un bye enregistré fausserait "
+"l'ordre d'appariement d'une ronde qui n'aura pas lieu."
+msgstr ""
+"The budget of a round does not subtract matches in progress: a round is "
+"paired only once the previous one is finished. The LAST round of a "
+"switch-over phase is thus truncated to the exact number of matches left "
+"to play, and gives no bye: a recorded bye would distort the pairing order"
+" of a round that will not take place."
+
+#: ../../source/format_suisse.rst:242
+msgid ""
+"**Les mêmes appariements**, parce qu'ils sont *recalculés à l'identique* "
+"plutôt que stockés. Le plan d'une ronde ne dépend que de trois choses :"
+msgstr ""
+"**The same pairings**, because they are *recomputed identically* rather "
+"than stored. The plan of a round depends on only three things:"
+
+#: ../../source/format_suisse.rst:245
+msgid ""
+"l'état **d'avant la ronde** : ``beforeRound(ph, r)`` est la phase dont on"
+" a retiré les victoires, défaites et adversaires des matchs de ronde "
+"``r`` (non annulés), et les byes de ronde ``r`` "
+"(``PhaseState.ByeRounds``) ;"
+msgstr ""
+"the state **before the round**: ``beforeRound(ph, r)`` is the phase from "
+"which the wins, losses and opponents of the (non-cancelled) round ``r`` "
+"matches have been removed, as well as the round ``r`` byes "
+"(``PhaseState.ByeRounds``);"
+
+#: ../../source/format_suisse.rst:248
+msgid ""
+"les **joueurs appelés** : ``PhaseState.Roster``, relevé par ``Apply`` "
+"(``openRound``) au premier événement de la ronde (``match_started`` ou "
+"``bye`` dont ``Round`` dépasse ``ph.Round``), avant de l'appliquer — "
+"exactement les joueurs libres (``free(ph, r)``) qu'un ``Propose`` de cet "
+"instant appariait ;"
+msgstr ""
+"the **called players**: ``PhaseState.Roster``, captured by ``Apply`` "
+"(``openRound``) at the first event of the round (``match_started`` or "
+"``bye`` whose ``Round`` exceeds ``ph.Round``), before applying it — "
+"exactly the free players (``free(ph, r)``) that a ``Propose`` at that "
+"instant would pair;"
+
+#: ../../source/format_suisse.rst:252
+msgid "un **générateur propre à la ronde**, ``rules.Seed.Round(r)`` :"
+msgstr "a **generator specific to the round**, ``rules.Seed.Round(r)``:"
+
+#: ../../source/format_suisse.rst:260
+msgid ""
+"Il ne dépend pas du nombre d'événements : sans cela, confirmer le premier"
+" match d'une ronde redistribuerait les suivants."
+msgstr ""
+"It does not depend on the number of events: without this, confirming the "
+"first match of a round would reshuffle the following ones."
+
+#: ../../source/format_suisse.rst:267
+msgid ""
+"``roundRest(ph, R)`` renvoie ``nil`` si ``Roster`` est vide ; sinon il "
+"recalcule le plan ``PairSwissRound(snapshot(beforeRound(ph, R)), R, "
+"ph.Roster, seed)`` (``nil`` si le plan n'est pas normal) et garde, dans "
+"l'ordre du plan :"
+msgstr ""
+"``roundRest(ph, R)`` returns ``nil`` if ``Roster`` is empty; otherwise it"
+" recomputes the plan ``PairSwissRound(snapshot(beforeRound(ph, R)), R, "
+"ph.Roster, seed)`` (``nil`` if the plan is not normal) and keeps, in plan"
+" order:"
+
+#: ../../source/format_suisse.rst:271
+msgid ""
+"chaque ``start_match`` dont les deux joueurs sont **libres** : ni engagés"
+" dans la ronde (un match non annulé de ronde ``R``, ou un bye de ronde "
+"``R``), ni éliminés ou retirés, ni en match, ni indisponibles pour la "
+"ronde, ni occupés dans une autre épreuve. Sa longueur est celle "
+"d'aujourd'hui (``swissLength``), un ``length_changed`` ayant pu passer ;"
+msgstr ""
+"each ``start_match`` whose two players are **free**: neither committed to"
+" the round (a non-cancelled match of round ``R``, or a bye of round "
+"``R``), nor eliminated or withdrawn, nor in a match, nor unavailable for "
+"the round, nor busy in another event. Its length is today's "
+"(``swissLength``), as a ``length_changed`` may have occurred;"
+
+#: ../../source/format_suisse.rst:275
+msgid "chaque ``bye`` dont le joueur est libre."
+msgstr "each ``bye`` whose player is free."
+
+#: ../../source/format_suisse.rst:277
+#, no-python-brace-format
+msgid ""
+"Les **orphelins** — joueurs libres du plan, non repris, prévus contre "
+"quelqu'un qui a joué autre chose (un match lancé à la main) ou qui est "
+"parti — sont appariés entre eux par ``PairSwissOrphans`` (groupe par "
+"groupe de défaites sur l'instantané d'avant la ronde, ``pairGroup`` sans "
+"rematch, générateur ``seed.Round(R)``, ``Label = {kind: round, n: R}``), "
+"dans le budget de la bascule s'il y en a une (``Σ vies − matchs en cours "
+"− Target − matchs déjà gardés``). Un orphelin seul attend la ronde "
+"suivante. Un joueur inscrit pendant la ronde n'est pas dans ``Roster`` : "
+"il entre à la ronde suivante."
+msgstr ""
+"The **orphans** — free players of the plan, not retained, scheduled "
+"against someone who played something else (a hand-launched match) or who "
+"has left — are paired among themselves by ``PairSwissOrphans`` (losses "
+"group by losses group on the pre-round snapshot, ``pairGroup`` without "
+"rematch, generator ``seed.Round(R)``, ``Label = {kind: round, n: R}``), "
+"within the switch-over budget if there is one (``Σ vies − matchs en cours"
+" − Target − matchs déjà gardés``). A lone orphan waits for the next "
+"round. A player registered during the round is not in ``Roster``: they "
+"enter at the next round."
+
+#: ../../source/format_suisse.rst:285
+msgid ""
+"Limites assumées : un joueur retiré en cours de ronde, dans une phase à "
+"bascule, change le budget et peut donc changer les appariements non "
+"lancés ; la ronde reste une ronde (personne n'y joue deux fois)."
+msgstr ""
+"Accepted limits: a player withdrawn during a round, in a switch-over "
+"phase, changes the budget and can therefore change the unlaunched "
+"pairings; the round remains a round (nobody plays twice in it)."
+
+#: ../../source/format_suisse.rst:289
+msgid "Le repli du mode par rondes :"
+msgstr "The fallback of by-rounds mode:"
+
+#: ../../source/format_suisse.rst:301
+msgid ""
+"Les actions du repli ne portent pas de numéro de ronde (``Round = 0``) : "
+"elles ne comptent dans aucune ronde."
+msgstr ""
+"The fallback actions carry no round number (``Round = 0``): they count in"
+" no round."
+
+#: ../../source/format_suisse.rst:304
+msgid ""
+"**Le compteur de rondes** ``ph.Round`` n'est pas incrémenté par le moteur"
+" : il suit le champ ``Event.Round`` des événements ``match_started`` et "
+"``bye`` (un journal de version 0 est converti à la lecture par "
+"``Event.upgraded``, qui relit le numéro dans l'ancien libellé « Ronde k "
+"», voir :ref:`journal`). Dès que le TD confirme la première action d'une "
+"ronde, ``ph.Round`` prend son numéro et ``Roster`` est relevé. "
+"``Match.Round`` garde la ronde de chaque match."
+msgstr ""
+"**The round counter** ``ph.Round`` is not incremented by the engine: it "
+"follows the ``Event.Round`` field of the ``match_started`` and ``bye`` "
+"events (a version 0 journal is converted on read by ``Event.upgraded``, "
+"which re-reads the number from the old label \"Ronde k\", see "
+":ref:`journal`). As soon as the TD confirms the first action of a round, "
+"``ph.Round`` takes its number and ``Roster`` is captured. ``Match.Round``"
+" keeps the round of each match."
+
+#: ../../source/format_suisse.rst:311
+msgid "Absences et réparation"
+msgstr "Absences and repair"
+
+#: ../../source/format_suisse.rst:313
+msgid ""
+"Un suisse n'apparie pas un joueur indisponible ni un joueur occupé dans "
+"une autre épreuve : il est absent de ``free`` et la file porte une "
+"attente par joueur (``player_unavailable`` ou ``player_busy``). Une "
+"correction qui élimine un joueur en plein match "
+"(``correction_eliminates_running``) fait proposer l'annulation de ce "
+"match en tête de liste. Voir :ref:`propositions`."
+msgstr ""
+"A Swiss does not pair an unavailable player or a player busy in another "
+"event: they are absent from ``free`` and the queue carries a per-player "
+"wait (``player_unavailable`` or ``player_busy``). A correction that "
+"eliminates a player in the middle of a match "
+"(``correction_eliminates_running``) causes the cancellation of that match"
+" to be proposed at the head of the list. See :ref:`propositions`."
+
+#: ../../source/format_suisse.rst:320
+msgid "Classement d'une phase à vies"
+msgstr "Standings of a lives phase"
+
+#: ../../source/format_suisse.rst:326
+msgid ""
+"Utilisé pour ``swiss_lives`` **et** ``gsl`` (``rules.Rank`` y retombe "
+"pour tout format qui n'est ni un tableau ni des poules)."
+msgstr ""
+"Used for ``swiss_lives`` **and** ``gsl`` (``rules.Rank`` falls back to it"
+" for any format that is neither a bracket nor pools)."
+
+#: ../../source/format_suisse.rst:349
+msgid "Lecture des scores :"
+msgstr "Reading the scores:"
+
+#: ../../source/format_suisse.rst:352
+msgid "Score"
+msgstr "Score"
+
+#: ../../source/format_suisse.rst:352
+msgid "Signification"
+msgstr "Meaning"
+
+#: ../../source/format_suisse.rst:354
+msgid "``1000 + vies + victoires``"
+msgstr "``1000 + vies + victoires``"
+
+#: ../../source/format_suisse.rst:354
+msgid ""
+"joueur encore en vie ; plus il a de vies et de victoires, mieux il est "
+"classé"
+msgstr ""
+"player still alive; the more lives and wins they have, the higher they "
+"are ranked"
+
+#: ../../source/format_suisse.rst:357
+msgid "``999``"
+msgstr "``999``"
+
+#: ../../source/format_suisse.rst:357
+msgid "finaliste (dernier éliminé quand le vainqueur est connu)"
+msgstr "finalist (last one eliminated when the winner is known)"
+
+#: ../../source/format_suisse.rst:359
+msgid "``victoires``"
+msgstr "``victoires``"
+
+#: ../../source/format_suisse.rst:359
+msgid ""
+"éliminé, ou retiré ; départagé par le nombre de victoires au moment de "
+"l'élimination (ou du retrait), ex æquo conservés"
+msgstr ""
+"eliminated, or withdrawn; tie-broken by the number of wins at the time of"
+" elimination (or withdrawal), tied players kept tied"
+
+#: ../../source/format_suisse.rst:363
+msgid ""
+"C'est la traduction exacte du principe « pas de départage » : deux "
+"joueurs éliminés avec le même nombre de victoires sont **ex æquo**, "
+"définitivement. Les notes sont des codes (``rules.Note``) que l'hôte "
+"traduit."
+msgstr ""
+"This is the exact translation of the \"no tie-break\" principle: two "
+"players eliminated with the same number of wins are **tied**, "
+"definitively. The notes are codes (``rules.Note``) that the host "
+"translates."
+
+#: ../../source/format_suisse.rst:367
+msgid ""
+"**Un joueur retiré est classé sur son parcours**, comme s'il avait été "
+"éliminé à l'instant de son retrait : par ses victoires, **ex æquo** avec "
+"les éliminés qui en ont autant, derrière tous les joueurs encore en vie. "
+"Ses vies restantes ne comptent pas — il ne les jouera pas — mais la note "
+"les porte, avec ses victoires et ses défaites (``withdrawn``). Le parti "
+"pris est celui des éliminés : pas de départage, et un retrait n'efface "
+"pas ce qui a été joué. Le meilleur joueur d'un suisse de cinq jours qui "
+"part le mercredi avec huit victoires est classé parmi les éliminés à huit"
+" victoires. Le « forfait » ne désigne que le match abandonné "
+"(``Match.Forfeit``) et, dans le classement propre d'une section, le match"
+" perdu par forfait (note ``forfeit``). Voir :ref:`classement`."
+msgstr ""
+"**A withdrawn player is ranked on their run**, as if they had been "
+"eliminated at the instant of their withdrawal: by their wins, **tied** "
+"with the eliminated players who have as many, behind all the players "
+"still alive. Their remaining lives do not count — they will not play them"
+" — but the note carries them, with their wins and losses (``withdrawn``)."
+" The stance is that of the eliminated players: no tie-break, and a "
+"withdrawal does not erase what was played. The best player of a five-day "
+"Swiss who leaves on Wednesday with eight wins is ranked among the players"
+" eliminated with eight wins. \"Forfeit\" designates only the abandoned "
+"match (``Match.Forfeit``) and, in a section's own standings, the match "
+"lost by forfeit (note ``forfeit``). See :ref:`classement`."

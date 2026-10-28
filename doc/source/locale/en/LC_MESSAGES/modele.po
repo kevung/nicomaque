@@ -1,0 +1,459 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:09+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/modele.rst:4
+msgid "Modèle de données"
+msgstr "Data model"
+
+#: ../../source/modele.rst:6
+msgid "Tous les types de cette page appartiennent au paquet ``tournoi``."
+msgstr "All types on this page belong to the ``tournoi`` package."
+
+#: ../../source/modele.rst:9
+msgid "Identifiants et joueurs"
+msgstr "Identifiers and players"
+
+#: ../../source/modele.rst:23
+msgid ""
+"``BYE`` est une valeur réservée : aucun joueur inscrit ne peut porter cet"
+" identifiant. Le moteur ne le vérifie pas (``player_added`` ne refuse "
+"qu'un identifiant vide) ; c'est à l'hôte de l'interdire."
+msgstr ""
+"``BYE`` is a reserved value: no registered player may use this "
+"identifier. The engine does not check this (``player_added`` only rejects"
+" an empty identifier); it is up to the host to forbid it."
+
+#: ../../source/modele.rst:26
+msgid ""
+"Le ``Rating`` n'intervient ni dans l'appariement d'un suisse, d'un bloc "
+"GSL ou d'une poule, ni dans le classement. Il sert dans trois cas "
+"seulement :"
+msgstr ""
+"The ``Rating`` plays no part in the pairing of a Swiss, a GSL block or a "
+"pool, nor in the standings. It is used in only three cases:"
+
+#: ../../source/modele.rst:29
+msgid ""
+"le tirage d'un tableau dont la phase a ``seeding: \"rating\"`` (placement"
+" classique par cote, ``rules.SeedOrder``) ; par défaut (``seeding`` "
+"vide), le tirage est aléatoire et ignore la cote, conformément au "
+"principe « pas de têtes de série protégées » ;"
+msgstr ""
+"the draw of a bracket whose phase has ``seeding: \"rating\"`` (classic "
+"placement by rating, ``rules.SeedOrder``); by default (empty "
+"``seeding``), the draw is random and ignores the rating, in line with the"
+" \"no protected seeds\" principle;"
+
+#: ../../source/modele.rst:32
+msgid ""
+"la simulation (``sim.Run``) et la prévision de fin (``sim.Forecast``), où"
+" une cote inconnue est remplacée par la moyenne des cotes connues, ou 6 "
+"(``rules.MeanRating``) ;"
+msgstr ""
+"the simulation (``sim.Run``) and the end-time forecast "
+"(``sim.Forecast``), where an unknown rating is replaced by the mean of "
+"the known ratings, or 6 (``rules.MeanRating``);"
+
+#: ../../source/modele.rst:34
+msgid "l'affichage."
+msgstr "display."
+
+#: ../../source/modele.rst:37
+msgid "Match"
+msgstr "Match"
+
+#: ../../source/modele.rst:70
+msgid "Méthodes :"
+msgstr "Methods:"
+
+#: ../../source/modele.rst:72
+msgid ""
+"``Loser() PlayerID`` : renvoie ``B`` si ``Winner == A``, sinon ``A``. "
+"**N'est valide que pour un match terminé** ; sur un match non terminé "
+"elle renvoie ``A`` (puisque ``Winner`` est vide)."
+msgstr ""
+"``Loser() PlayerID``: returns ``B`` if ``Winner == A``, otherwise ``A``. "
+"**Valid only for a finished match**; on an unfinished match it returns "
+"``A`` (since ``Winner`` is empty)."
+
+#: ../../source/modele.rst:74
+msgid "``Has(p PlayerID) bool`` : ``A == p || B == p``."
+msgstr "``Has(p PlayerID) bool``: ``A == p || B == p``."
+
+#: ../../source/modele.rst:76
+msgid ""
+"Un match est relié à son emplacement dans un graphe par le couple "
+"(``Section``, ``Key``). ``Key`` est vide pour un match libre, apparié "
+"dynamiquement hors graphe : suisse (continu ou par rondes), finale GSL et"
+" barrage. ``Section`` est vide aussi pour le suisse et la finale GSL ; un"
+" match de barrage porte le nom de sa section (``barrage:A``), sans "
+"``Key``."
+msgstr ""
+"A match is tied to its location in a graph by the pair (``Section``, "
+"``Key``). ``Key`` is empty for a free match, paired dynamically outside "
+"any graph: Swiss (continuous or by rounds), GSL final and play-off. "
+"``Section`` is also empty for the Swiss and the GSL final; a play-off "
+"match carries the name of its section (``barrage:A``), with no ``Key``."
+
+#: ../../source/modele.rst:81
+#, no-python-brace-format
+msgid ""
+"``Section`` est un **identifiant**, jamais un texte à afficher : "
+"``main``, ``conso``, ``last``, ``gf`` (tableaux), ``B<bloc>G<groupe>`` "
+"(GSL), ``poule:A``, ``poule:B``… (poules), ``barrage:A``… (barrage de la "
+"poule A). ``Label`` est un libellé **structuré** (``Label{Kind, N, "
+"Losses, Match, Section, Text, Players, Spots, Sub}``, ``codes.go``) que "
+"l'hôte traduit ; seul ``Text`` porte du texte, et seulement ce que le TD "
+"a saisi (nom de phase)."
+msgstr ""
+"``Section`` is an **identifier**, never display text: ``main``, "
+"``conso``, ``last``, ``gf`` (brackets), ``B<bloc>G<groupe>`` (GSL), "
+"``poule:A``, ``poule:B``... (pools), ``barrage:A``... (play-off of pool "
+"A). ``Label`` is a **structured** label (``Label{Kind, N, Losses, Match, "
+"Section, Text, Players, Spots, Sub}``, ``codes.go``) that the host "
+"translates; only ``Text`` carries text, and only what the TD entered "
+"(phase name)."
+
+#: ../../source/modele.rst:88
+msgid "Rang"
+msgstr "Rank"
+
+#: ../../source/modele.rst:108
+msgid ""
+"La note est un **code** et ses paramètres, jamais une phrase : "
+"``winner``, ``finalist``, ``alive`` (``Lives``), ``record`` (``Wins``, "
+"``Losses``), ``forfeit``, ``withdrawn``, ``running``, ``awaiting_draw``, "
+"``unranked``, ``section_exit`` (``Section`` + ``Sub``), "
+"``section_winner``, ``pool_record`` (``Section``, ``Wins``, "
+"``Qualified``) — valeurs exactes dans ``rules/codes.go``. Le rendu "
+"français (``Note.String()``, ``fr.go``) ne sert que la console, la démo "
+"et ``render``. Voir :ref:`classement`."
+msgstr ""
+"The note is a **code** and its parameters, never a sentence: ``winner``, "
+"``finalist``, ``alive`` (``Lives``), ``record`` (``Wins``, ``Losses``), "
+"``forfeit``, ``withdrawn``, ``running``, ``awaiting_draw``, ``unranked``,"
+" ``section_exit`` (``Section`` + ``Sub``), ``section_winner``, "
+"``pool_record`` (``Section``, ``Wins``, ``Qualified``) — exact values in "
+"``rules/codes.go``. The French rendering (``Note.String()``, ``fr.go``) "
+"serves only the console, the demo and ``render``. See :ref:`classement`."
+
+#: ../../source/modele.rst:116
+msgid "Action"
+msgstr "Action"
+
+#: ../../source/modele.rst:150
+msgid ""
+"``Label``, ``Reason`` (``matches_running``, ``no_pairing``, "
+"``waiting_batch``, ``waiting_table``, ``player_unavailable``, "
+"``player_busy``) et ``Warn`` sont des codes. ``Action.String()`` (rendu "
+"français, pour la console) produit une phrase destinée au TD :"
+msgstr ""
+"``Label``, ``Reason`` (``matches_running``, ``no_pairing``, "
+"``waiting_batch``, ``waiting_table``, ``player_unavailable``, "
+"``player_busy``) and ``Warn`` are codes. ``Action.String()`` (French "
+"rendering, for the console) produces a sentence intended for the TD:"
+
+#: ../../source/modele.rst:155
+msgid "Kind"
+msgstr "Kind"
+
+#: ../../source/modele.rst:155
+msgid "Phrase"
+msgstr "Sentence"
+
+#: ../../source/modele.rst:157
+msgid "``start_match``"
+msgstr "``start_match``"
+
+#: ../../source/modele.rst:157
+msgid ""
+"``Lancer <Label> : <A> contre <B> en <Length> points, table <Table>``, "
+"suivi de « — <avertissement> » si ``Warn`` est posé"
+msgstr ""
+"``Lancer <Label> : <A> contre <B> en <Length> points, table <Table>``, "
+"followed by “ — <warning>” if ``Warn`` is set"
+
+#: ../../source/modele.rst:159
+msgid "``bye``"
+msgstr "``bye``"
+
+#: ../../source/modele.rst:159
+msgid "``Bye pour <A> (<Label>)``"
+msgstr "``Bye pour <A> (<Label>)``"
+
+#: ../../source/modele.rst:160
+msgid "``draw``"
+msgstr "``draw``"
+
+#: ../../source/modele.rst:160
+msgid "``Tirage : <Label>``"
+msgstr "``Tirage : <Label>``"
+
+#: ../../source/modele.rst:161
+msgid "``next_phase``"
+msgstr "``next_phase``"
+
+#: ../../source/modele.rst:161
+msgid "``Passer à la phase suivante : <Label>``"
+msgstr "``Passer à la phase suivante : <Label>``"
+
+#: ../../source/modele.rst:162
+msgid "``cancel_match``"
+msgstr "``cancel_match``"
+
+#: ../../source/modele.rst:162
+msgid "``Annuler <Match> : <A> contre <B> (<Label>), devenu incohérent``"
+msgstr "``Annuler <Match> : <A> contre <B> (<Label>), devenu incohérent``"
+
+#: ../../source/modele.rst:163
+msgid "``repechage``"
+msgstr "``repechage``"
+
+#: ../../source/modele.rst:163
+msgid "``<Label> : <B> à la place de <A>, retiré``"
+msgstr "``<Label> : <B> à la place de <A>, retiré``"
+
+#: ../../source/modele.rst:164
+msgid "``finish``"
+msgstr "``finish``"
+
+#: ../../source/modele.rst:164
+msgid "``Clore le tournoi``"
+msgstr "``Clore le tournoi``"
+
+#: ../../source/modele.rst:165
+msgid "(autre)"
+msgstr "(other)"
+
+#: ../../source/modele.rst:165
+msgid ""
+"``Attendre : <Reason>`` ; avec ``waiting_batch`` et ``Until`` : "
+"``Attendre : <Reason> (jusqu'à HH:MM)``"
+msgstr ""
+"``Attendre : <Reason>``; with ``waiting_batch`` and ``Until``: ``Attendre"
+" : <Reason> (jusqu'à HH:MM)``"
+
+#: ../../source/modele.rst:170
+msgid "Tirage"
+msgstr "Draw"
+
+#: ../../source/modele.rst:180
+msgid ""
+"``Slots`` a **toujours une longueur puissance de 2 ≥ 2** ; la paire *i* "
+"du premier tour est ``(Slots[2i], Slots[2i+1])``."
+msgstr ""
+"``Slots`` **always has a length that is a power of 2 ≥ 2**; pair *i* of "
+"the first round is ``(Slots[2i], Slots[2i+1])``."
+
+#: ../../source/modele.rst:183
+msgid ""
+"``Lives`` est purement informatif (affichage, audit) : il n'est pas relu "
+"au rejeu."
+msgstr ""
+"``Lives`` is purely informational (display, audit): it is not read back "
+"on replay."
+
+#: ../../source/modele.rst:185
+msgid ""
+"Le tirage étant **matérialisé** dans l'événement, l'algorithme qui le "
+"produit (``rules.DrawSlots``, placement par cote avec ``seeding: "
+"\"rating\"``, composition des groupes) peut changer sans casser un "
+"journal existant : le rejeu relit les places, il ne refait pas le tirage."
+msgstr ""
+"Since the draw is **materialised** in the event, the algorithm that "
+"produces it (``rules.DrawSlots``, placement by rating with ``seeding: "
+"\"rating\"``, composition of the groups) can change without breaking an "
+"existing journal: the replay reads back the slots; it does not redo the "
+"draw."
+
+#: ../../source/modele.rst:190
+msgid "État"
+msgstr "State"
+
+#: ../../source/modele.rst:224
+msgid ""
+"``WithdrawAfter`` tient les **retraits différés** (``player_withdrawn`` "
+"avec ``after_current``) : le joueur finit le match qu'il joue, n'est plus"
+" apparié, et passe dans ``Withdrawn`` dès que ce match est terminé. Un "
+"retrait différé sans match en cours est un retrait immédiat."
+msgstr ""
+"``WithdrawAfter`` holds the **deferred withdrawals** "
+"(``player_withdrawn`` with ``after_current``): the player finishes the "
+"match being played, is no longer paired, and moves to ``Withdrawn`` as "
+"soon as that match is finished. A deferred withdrawal with no match in "
+"progress is an immediate withdrawal."
+
+#: ../../source/modele.rst:228
+msgid ""
+"``Unavailable`` tient les indisponibilités (``player_unavailable``), "
+"levées par ``player_available``, par l'heure ``Until`` ou par la ronde de"
+" retour ``Round``."
+msgstr ""
+"``Unavailable`` holds the unavailabilities (``player_unavailable``), "
+"lifted by ``player_available``, by the time ``Until`` or by the return "
+"round ``Round``."
+
+#: ../../source/modele.rst:231
+#, no-python-brace-format
+msgid ""
+"``Warnings`` et ``Infos`` sont des listes de codes (``Warning{Code, "
+"Match, Section, Label, A, B, ExpectedA, ExpectedB, Length, ScoreA, "
+"ScoreB, Player, Table, Other}``, ``Info{Code, Player, Phase, Section, "
+"Label}``) dérivées de l'état ; voir :ref:`etat`."
+msgstr ""
+"``Warnings`` and ``Infos`` are lists of codes (``Warning{Code, Match, "
+"Section, Label, A, B, ExpectedA, ExpectedB, Length, ScoreA, ScoreB, "
+"Player, Table, Other}``, ``Info{Code, Player, Phase, Section, Label}``) "
+"derived from the state; see :ref:`etat`."
+
+#: ../../source/modele.rst:235
+msgid ""
+"``Phases`` ne contient que les phases **atteintes** : à la création, une "
+"seule (``Phases[0]``) ; une phase est ajoutée à chaque ``next_phase``. "
+"``Config.Phases`` contient la liste complète prévue."
+msgstr ""
+"``Phases`` contains only the phases **reached**: at creation, just one "
+"(``Phases[0]``); one phase is added at each ``next_phase``. "
+"``Config.Phases`` contains the full planned list."
+
+#: ../../source/modele.rst:261
+msgid ""
+"Un ``PhaseState`` neuf est créé par ``newPhaseState(i, cfg)`` : "
+"``Lives``, ``Losses``, ``Wins``, ``Byes``, ``ByeRounds`` et ``Opponents``"
+" initialisées vides, ``Length = cfg.Length``, tout le reste à zéro "
+"(``Repechages`` reste ``nil`` jusqu'au premier repêchage)."
+msgstr ""
+"A new ``PhaseState`` is created by ``newPhaseState(i, cfg)``: ``Lives``, "
+"``Losses``, ``Wins``, ``Byes``, ``ByeRounds`` and ``Opponents`` "
+"initialised empty, ``Length = cfg.Length``, everything else zero "
+"(``Repechages`` stays ``nil`` until the first repechage)."
+
+#: ../../source/modele.rst:266
+msgid "Graphe de matchs"
+msgstr "Match graph"
+
+#: ../../source/modele.rst:305
+msgid "Règles :"
+msgstr "Rules:"
+
+#: ../../source/modele.rst:307
+msgid ""
+"une ``Src`` est **soit** ``Player`` non vide avec ``From = -1`` (place "
+"fixée), **soit** ``From ≥ 0`` (place héritée) ; ``From = -1`` avec "
+"``Player`` vide signifie « place définitivement vide », ce qu'aucun "
+"constructeur ne produit (les places vides sont représentées par ``Player:"
+" BYE``) ;"
+msgstr ""
+"a ``Src`` is **either** a non-empty ``Player`` with ``From = -1`` (fixed "
+"slot), **or** ``From ≥ 0`` (inherited slot); ``From = -1`` with an empty "
+"``Player`` means \"slot permanently empty\", which no constructor "
+"produces (empty slots are represented by ``Player: BYE``);"
+
+#: ../../source/modele.rst:311
+msgid "``Section`` vide signifie « le match *From* de la section courante » ;"
+msgstr "an empty ``Section`` means \"match *From* of the current section\";"
+
+#: ../../source/modele.rst:312
+msgid ""
+"une section est **acyclique** : un ``GMatch`` ne référence que des matchs"
+" d'indice inférieur dans sa propre section, ou des matchs d'une section "
+"construite avant elle."
+msgstr ""
+"a section is **acyclic**: a ``GMatch`` references only matches of lower "
+"index in its own section, or matches of a section built before it."
+
+#: ../../source/modele.rst:315
+msgid ""
+"**Match conditionnel** (``Cond``) : le match n'existe que si le vainqueur"
+" du match ``CondFrom`` (même section) est le joueur qui occupait la place"
+" ``CondSide`` de ce match. Sert exclusivement à la recharge de la double "
+"élimination (``gf.1``, ``Cond: true, CondFrom: 0, CondSide: 1``) : la "
+"seconde grande finale n'a lieu que si le vainqueur de la consolante "
+"(place 1 de ``gf.0``) a gagné la première. Sinon le match est marqué "
+"``Skipped``."
+msgstr ""
+"**Conditional match** (``Cond``): the match exists only if the winner of "
+"match ``CondFrom`` (same section) is the player who occupied slot "
+"``CondSide`` of that match. Used exclusively for the recharge (bracket "
+"reset) of the double elimination (``gf.1``, ``Cond: true, CondFrom: 0, "
+"CondSide: 1``): the second grand final takes place only if the winner of "
+"the consolation (slot 1 of ``gf.0``) won the first one. Otherwise the "
+"match is marked ``Skipped``."
+
+#: ../../source/modele.rst:321
+msgid ""
+"Le moteur garde ses propres ``Section``/``GMatch`` (sérialisés dans "
+"l'état) ; les constructeurs et la résolution vivent dans "
+"``rules/graphe.go`` (``rules.Section``, ``rules.Node``), et ``regles.go``"
+" convertit dans les deux sens. Voir :ref:`graphes`."
+msgstr ""
+"The engine keeps its own ``Section``/``GMatch`` (serialised in the "
+"state); the constructors and the resolution live in ``rules/graphe.go`` "
+"(``rules.Section``, ``rules.Node``), and ``regles.go`` converts in both "
+"directions. See :ref:`graphes`."
+
+#: ../../source/modele.rst:326
+msgid "Sérialisation"
+msgstr "Serialisation"
+
+#: ../../source/modele.rst:328
+msgid ""
+"``Journal.Bytes() ([]byte, error)`` : ``json.MarshalIndent(j, \"\", \" "
+"\")`` — un tableau JSON."
+msgstr ""
+"``Journal.Bytes() ([]byte, error)``: ``json.MarshalIndent(j, \"\", \" "
+"\")`` — a JSON array."
+
+#: ../../source/modele.rst:329
+msgid "``ParseJournal([]byte) (Journal, error)``."
+msgstr "``ParseJournal([]byte) (Journal, error)``."
+
+#: ../../source/modele.rst:330
+msgid ""
+"``ParseConfig([]byte) (*Config, error)`` : désérialise puis **valide** "
+"(voir :ref:`configuration`)."
+msgstr ""
+"``ParseConfig([]byte) (*Config, error)``: deserialises then **validates**"
+" (see :ref:`configuration`)."
+
+#: ../../source/modele.rst:332
+msgid ""
+"``State`` est sérialisable en JSON (champs exportés) mais **n'est pas** "
+"un format d'échange : il est toujours reconstruit depuis le journal. Les "
+"champs privés (``nextID``, ``clock``, ``ailleurs``) ne sont pas "
+"sérialisés ; ``nextID`` est recalculé par le rejeu (incrémenté à chaque "
+"``match_started``), et ``nextMatchID()`` donne ``\"M<nextID+1>\"``."
+msgstr ""
+"``State`` is serialisable to JSON (exported fields) but **is not** an "
+"interchange format: it is always rebuilt from the journal. The private "
+"fields (``nextID``, ``clock``, ``ailleurs``) are not serialised; "
+"``nextID`` is recomputed by the replay (incremented at each "
+"``match_started``), and ``nextMatchID()`` gives ``\"M<nextID+1>\"``."
+
+#: ../../source/modele.rst:337
+msgid ""
+"``ParseJournal`` ne convertit rien : c'est ``Replay`` qui applique "
+"``Event.upgraded()`` à chaque événement, pour qu'un journal de version 0 "
+"(libellés en texte) soit lu en codes. Voir :ref:`journal`."
+msgstr ""
+"``ParseJournal`` converts nothing: it is ``Replay`` that applies "
+"``Event.upgraded()`` to each event, so that a version 0 journal (labels "
+"as text) is read as codes. See :ref:`journal`."

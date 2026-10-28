@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/historique.rst:4
+msgid "Historique des versions"
+msgstr "Version history"
+
+#: ../../source/historique.rst:6
+msgid ""
+"Les versions suivent la numérotation sémantique. Une sortie du moteur qui"
+" change à entrée égale (proposition, classement) donne une version "
+"mineure. Le format du journal est versionné indépendamment (champ "
+"``version`` de chaque événement, voir :ref:`annexe_tests`)."
+msgstr ""
+"Versions follow semantic versioning. An engine output that changes for "
+"the same input (proposal, standings) gives a minor version. The journal "
+"format is versioned independently (``version`` field of each event, see "
+":ref:`annexe_tests`)."
+
+#: ../../source/historique.rst:11
+msgid "0.8.0 — 28 octobre 2026"
+msgstr "0.8.0 — 28 October 2026"
+
+#: ../../source/historique.rst:13
+msgid ""
+"Le projet est repris sous ``github.com/kevung/nicomaque``. Le code est "
+"celui de 0.7.0 ; seul le chemin de module change."
+msgstr ""
+"The project is taken over under ``github.com/kevung/nicomaque``. The code"
+" is that of 0.7.0; only the module path changes."
+
+#: ../../source/historique.rst:15
+msgid ""
+"L'ancien module ``github.com/PileOfCells/backgammon-tournoi`` est "
+"déprécié à partir de sa version 0.7.1, qui renvoie au nouveau."
+msgstr ""
+"The former module ``github.com/PileOfCells/backgammon-tournoi`` is "
+"deprecated from its version 0.7.1, which points to the new one."
+
+#: ../../source/historique.rst:17
+msgid "La documentation est réorganisée et publiée en français et en anglais."
+msgstr "The documentation is reorganised and published in French and English."
+
+#: ../../source/historique.rst:20
+msgid "0.7.0 — 22 octobre 2026"
+msgstr "0.7.0 — 22 October 2026"
+
+#: ../../source/historique.rst:22
+msgid ""
+"Appariements, classement et matchs restants en fonctions pures du paquet "
+"``rules`` (``Pair``, ``Rank``, ``RemainingMatches``), sans changement de "
+"règle."
+msgstr ""
+"Pairings, standings and remaining matches as pure functions of the "
+"``rules`` package (``Pair``, ``Rank``, ``RemainingMatches``), with no "
+"rule change."
+
+#: ../../source/historique.rst:24
+msgid ""
+"Dotation répartie à l'unité par la méthode du plus fort reste : avec un "
+"barème à 100 %, la somme distribuée égale exactement le pool après "
+"retenue."
+msgstr ""
+"Prize distribution split to the unit by the largest remainder method: "
+"with a 100% scale, the sum distributed exactly equals the pool after "
+"retention."
+
+#: ../../source/historique.rst:28
+msgid "0.6.0 — 22 octobre 2026"
+msgstr "0.6.0 — 22 October 2026"
+
+#: ../../source/historique.rst:30
+msgid ""
+"Paquet ``rules`` : dotation, prévision de fin et feuille d'appariements "
+"en fonctions pures, sans changement de règle."
+msgstr ""
+"``rules`` package: prize distribution, end-time forecast and pairing "
+"sheet as pure functions, with no rule change."
+
+#: ../../source/historique.rst:34
+msgid "0.5.1 et 0.5.2 — 5 octobre 2026"
+msgstr "0.5.1 and 0.5.2 — 5 October 2026"
+
+#: ../../source/historique.rst:36
+msgid "Licence MIT ; Nicolas Harmand et Kévin Unger titulaires du droit d'auteur."
+msgstr "MIT licence; Nicolas Harmand and Kévin Unger hold the copyright."
+
+#: ../../source/historique.rst:39
+msgid "0.5.0 — 4 octobre 2026"
+msgstr "0.5.0 — 4 October 2026"
+
+#: ../../source/historique.rst:41
+msgid ""
+"Statut de chaque joueur (``State.Statuses``) : en jeu, exempté, qualifié,"
+" pas encore fixé, éliminé, vainqueur, retiré."
+msgstr ""
+"Status of each player (``State.Statuses``): in play, bye, qualified, not "
+"yet determined, eliminated, winner, withdrawn."
+
+#: ../../source/historique.rst:43
+msgid ""
+"Repêchage proposé d'un qualifié de poule retiré avant le tirage "
+"(événement ``repechage``)."
+msgstr ""
+"Proposed repechage of a pool qualifier withdrawn before the draw "
+"(``repechage`` event)."
+
+#: ../../source/historique.rst:46
+msgid "0.4.1 — 26 septembre 2026"
+msgstr "0.4.1 — 26 September 2026"
+
+#: ../../source/historique.rst:48
+msgid ""
+"Un joueur retiré d'un tableau est classé avec les perdants du match qui "
+"l'attendait."
+msgstr ""
+"A player withdrawn from a bracket is ranked with the losers of the match "
+"that was waiting for them."
+
+#: ../../source/historique.rst:51
+msgid "0.4.0 — 26 septembre 2026"
+msgstr "0.4.0 — 26 September 2026"
+
+#: ../../source/historique.rst:53
+msgid ""
+"``External.BusyPlayers`` : un joueur occupé dans une autre épreuve de la "
+"salle n'est pas apparié, sans rien écrire au journal."
+msgstr ""
+"``External.BusyPlayers``: a player busy in another event of the playing "
+"hall is not paired, without writing anything to the journal."
+
+#: ../../source/historique.rst:57
+msgid "0.3.0 — 26 septembre 2026"
+msgstr "0.3.0 — 26 September 2026"
+
+#: ../../source/historique.rst:59
+msgid ""
+"Indisponibilité d'un joueur sans retrait (``player_unavailable``, "
+"``player_available``)."
+msgstr ""
+"Player unavailability without withdrawal (``player_unavailable``, "
+"``player_available``)."
+
+#: ../../source/historique.rst:60
+msgid "Un joueur retiré est classé sur son parcours, avec la note ``withdrawn``."
+msgstr "A withdrawn player is ranked on their record, with the note ``withdrawn``."
+
+#: ../../source/historique.rst:61
+msgid "Correction de fiche sans toucher à l'état (``player_updated``)."
+msgstr "Record correction without touching the state (``player_updated``)."
+
+#: ../../source/historique.rst:62
+msgid ""
+"Table partagée signalée (``table_shared``) ; tables occupées par une "
+"autre épreuve (``External.BusyTables``)."
+msgstr ""
+"Shared table flagged (``table_shared``); tables occupied by another event"
+" (``External.BusyTables``)."
+
+#: ../../source/historique.rst:64
+msgid ""
+"Au suisse, une correction qui élimine un joueur en match ou lui rend une "
+"vie est signalée."
+msgstr ""
+"In the Swiss, a correction that eliminates a player in a match or gives "
+"them back a life is flagged."
+
+#: ../../source/historique.rst:65
+msgid ""
+"Mode par rondes : une ronde reste ouverte jusqu'à ce que tous ses joueurs"
+" y soient engagés."
+msgstr "Rounds mode: a round stays open until all its players are engaged in it."
+
+#: ../../source/historique.rst:66
+msgid ""
+"Les options de construction d'un tableau tiré sont figées (journal en "
+"version 2)."
+msgstr ""
+"The construction options of a drawn bracket are frozen (journal version "
+"2)."
+
+#: ../../source/historique.rst:69
+msgid "0.2.1 — 7 septembre 2026"
+msgstr "0.2.1 — 7 September 2026"
+
+#: ../../source/historique.rst:71
+msgid "Rendu : la table n'est affichée qu'une fois attribuée."
+msgstr "Rendering: the table is displayed only once assigned."
+
+#: ../../source/historique.rst:74
+msgid "0.2.0 — 7 septembre 2026"
+msgstr "0.2.0 — 7 September 2026"
+
+#: ../../source/historique.rst:76
+msgid ""
+"Configuration modifiable en cours de tournoi (``config_changed``) et "
+"réouverture d'un tournoi clos (``reopened``)."
+msgstr ""
+"Configuration changeable during the tournament (``config_changed``) and "
+"reopening of a closed tournament (``reopened``)."
+
+#: ../../source/historique.rst:78
+msgid ""
+"Micro-rondes (``batch_minutes``) et pauses programmées "
+"(``Config.Breaks``)."
+msgstr "Micro-rounds (``batch_minutes``) and scheduled breaks (``Config.Breaks``)."
+
+#: ../../source/historique.rst:79
+msgid "Réparation proposée d'un graphe désaccordé après une correction."
+msgstr "Proposed repair of an out-of-sync graph after a correction."
+
+#: ../../source/historique.rst:80
+msgid "Dotation : droit d'entrée, retenue, barème par section."
+msgstr "Prize distribution: entry fee, organiser's retention, scale per section."
+
+#: ../../source/historique.rst:81
+msgid ""
+"Têtes de série en option (``seeding: \"rating\"``), désactivées par "
+"défaut."
+msgstr "Optional seeding (``seeding: \"rating\"``), disabled by default."
+
+#: ../../source/historique.rst:82
+msgid "Retardataires installés sur une place d'exemption libre."
+msgstr "Latecomers placed on a free bye slot."
+
+#: ../../source/historique.rst:83
+msgid "Longueurs de match par tour ; fin de suisse allongée."
+msgstr "Match lengths per round; lengthened end of Swiss."
+
+#: ../../source/historique.rst:84
+msgid "Export CSV des joueurs."
+msgstr "CSV export of the players."
+
+#: ../../source/historique.rst:85
+msgid ""
+"Rendu traduisible (``Labeler``) et pages autonomes ; feuille "
+"d'appariements imprimable."
+msgstr ""
+"Translatable rendering (``Labeler``) and standalone pages; printable "
+"pairing sheet."
+
+#: ../../source/historique.rst:86
+msgid ""
+"Fuzzing d'``Apply`` et du rejeu de journal ; lecture des journaux en "
+"version 0."
+msgstr "Fuzzing of ``Apply`` and of journal replay; reading of version 0 journals."
+
+#: ../../source/historique.rst:89
+msgid "0.1.0 — 7 septembre 2026"
+msgstr "0.1.0 — 7 September 2026"
+
+#: ../../source/historique.rst:91
+msgid ""
+"Première version publiée : journal d'événements, suisse à vies, tableaux,"
+" blocs GSL, poules, rendu, simulation, console de direction et "
+"démonstration."
+msgstr ""
+"First published version: event journal, Swiss with lives, brackets, GSL "
+"blocks, pools, rendering, simulation, direction console and "
+"demonstration."
+
+#: ../../source/historique.rst:93
+msgid "Codes structurés à la place des textes, journal versionné."
+msgstr "Structured codes instead of texts, versioned journal."
+
+#: ../../source/historique.rst:94
+msgid "Tables indisponibles, réservées et déplaçables."
+msgstr "Unavailable, reserved and movable tables."
+
+#: ../../source/historique.rst:95
+msgid "Score facultatif, forfait sur un seul match, remarque, retrait différé."
+msgstr "Optional score, forfeit on a single match, remark, deferred withdrawal."

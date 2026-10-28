@@ -1,0 +1,375 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:11+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/faq.rst:4
+msgid "Questions fréquentes"
+msgstr "Frequently asked questions"
+
+#: ../../source/faq.rst:6
+msgid ""
+"Questions de joueurs et de directeurs de tournoi. Les justifications "
+"détaillées sont dans :ref:`annexe_conception` ; les chiffres dans "
+":ref:`annexe_etude`."
+msgstr ""
+"Questions from players and tournament directors. The detailed "
+"justifications are in :ref:`annexe_conception`; the figures in "
+":ref:`annexe_etude`."
+
+#: ../../source/faq.rst:10
+msgid "Classement"
+msgstr "Standings"
+
+#: ../../source/faq.rst:12
+msgid "Un joueur est parti en cours de tournoi — pourquoi n'est-il pas dernier ?"
+msgstr "A player left during the tournament — why are they not last?"
+
+#: ../../source/faq.rst:13
+msgid ""
+"Son retrait n'efface pas ce qu'il a joué. Il est classé comme éliminé à "
+"l'instant du retrait : au suisse, par ses victoires ; dans un tableau, "
+"comme perdant du match qui l'attendait ; dans une poule, par ses "
+"victoires, sans être qualifié. Il est ex æquo avec les éliminés du même "
+"niveau, avec la note « retiré ». Le mot « forfait » désigne seulement le "
+"match qu'il n'a pas joué."
+msgstr ""
+"Their withdrawal does not erase what they played. They are ranked as "
+"eliminated at the moment of withdrawal: in the Swiss, by their wins; in a"
+" bracket, as the loser of the match that was waiting for them; in a pool,"
+" by their wins, without being qualified. They are tied with the "
+"eliminated players of the same level, with the note \"withdrawn\". The "
+"word \"forfeit\" refers only to the match they did not play."
+
+#: ../../source/faq.rst:19
+msgid "Pourquoi deux joueurs ex æquo ne sont-ils pas départagés ?"
+msgstr "Why are two tied players not separated by a tie-break?"
+
+#: ../../source/faq.rst:20
+msgid ""
+"Ils ont le même parcours. Les départager demanderait d'utiliser la force "
+"de leurs adversaires, qu'ils n'ont pas choisis, ou la marge de leurs "
+"victoires, qui au backgammon dépend fortement du videau et du hasard. Si "
+"une qualification est en jeu, la place se joue en barrage ; sinon, les "
+"prix des places concernées sont partagés à parts égales."
+msgstr ""
+"They have the same record. Separating them would require using the "
+"strength of their opponents, whom they did not choose, or the margin of "
+"their wins, which in backgammon depends heavily on the cube and on luck. "
+"If a qualification is at stake, the place is played off in a play-off; "
+"otherwise, the prizes of the places concerned are shared equally."
+
+#: ../../source/faq.rst:25
+msgid "Le classement dit que j'ai été sorti du tableau — suis-je éliminé ?"
+msgstr "The standings say I was knocked out of the bracket — am I eliminated?"
+
+#: ../../source/faq.rst:26
+msgid ""
+"Pas forcément. Le classement situe chaque joueur (« principal, premier "
+"tour » dit où il a perdu), mais un joueur battu au premier tour du "
+"principal peut jouer la consolante. Le statut (voir :ref:`statut`) répond"
+" à « est-ce que je joue ? » : en jeu, exempté, qualifié, pas encore fixé,"
+" éliminé, vainqueur ou retiré."
+msgstr ""
+"Not necessarily. The standings locate each player (\"main, first round\" "
+"says where they lost), but a player beaten in the first round of the main"
+" bracket may play the consolation. The status (see :ref:`statut`) answers"
+" \"am I playing?\": in play, bye, qualified, not yet determined, "
+"eliminated, winner or withdrawn."
+
+#: ../../source/faq.rst:32
+msgid "Formats"
+msgstr "Formats"
+
+#: ../../source/faq.rst:34
+#, no-python-format
+msgid "Pourquoi le meilleur joueur ne gagne-t-il que 4 à 9 % du temps ?"
+msgstr "Why does the best player win only 4 to 9% of the time?"
+
+#: ../../source/faq.rst:35
+msgid ""
+"Sur 64 joueurs, les formats mesurés donnent 3,5 à 5,7 % ; un vainqueur "
+"tiré au sort donnerait 1,6 %. Le format multiplie cette probabilité par 2"
+" à 3,5. Aucun format raisonnable ne fait beaucoup mieux à durée égale : "
+"il faudrait des matchs beaucoup plus longs et plusieurs jours de jeu."
+msgstr ""
+"With 64 players, the measured formats give 3.5 to 5.7%; a winner drawn at"
+" random would give 1.6%. The format multiplies this probability by 2 to "
+"3.5. No reasonable format does much better for the same duration: it "
+"would take much longer matches and several days of play."
+
+#: ../../source/faq.rst:40
+msgid "Pourquoi un joueur qui a perdu peut-il gagner le tournoi ?"
+msgstr "Why can a player who has lost win the tournament?"
+
+#: ../../source/faq.rst:41
+#, no-python-format
+msgid ""
+"C'est le principe d'un format à deux vies. À 7 points, un joueur meilleur"
+" de 3 PR gagne environ 58 % du temps : perdre un match est courant, et "
+"éliminer dès la première défaite augmente la part du hasard dans le "
+"résultat."
+msgstr ""
+"That is the principle of a two-life format. At 7 points, a player who is "
+"3 PR better wins about 58% of the time: losing a match is common, and "
+"eliminating at the first loss increases the share of luck in the result."
+
+#: ../../source/faq.rst:45
+msgid "Pourquoi 2 vies plutôt que 3 ?"
+msgstr "Why 2 lives rather than 3?"
+
+#: ../../source/faq.rst:46
+msgid ""
+"À budget de temps constant, 3 vies n'est jamais le meilleur choix : la "
+"troisième vie coûte plus de temps qu'elle n'apporte de justesse. Le "
+"moteur accepte un nombre de vies quelconque."
+msgstr ""
+"With a constant time budget, 3 lives is never the best choice: the third "
+"life costs more time than it brings in fairness. The engine accepts any "
+"number of lives."
+
+#: ../../source/faq.rst:49
+msgid "Le jeu en continu n'avantage-t-il pas ceux qui jouent vite ?"
+msgstr "Doesn't continuous play favour those who play fast?"
+
+#: ../../source/faq.rst:50
+msgid ""
+"Le continu réduit l'attente de 174 à 12 minutes par joueur sur un tournoi"
+" de 16 heures. Il permet en revanche à un joueur de retarder l'annonce de"
+" son résultat pour influencer son appariement. Les parades sont les "
+"micro-rondes (``batch_minutes``), les blocs GSL et le mode par rondes ; "
+"sur 64 joueurs, GSL et rondes demandent environ 14 h de salle contre 10 h"
+" 20 pour le continu, pour le même nombre de matchs."
+msgstr ""
+"Continuous play reduces the wait from 174 to 12 minutes per player over a"
+" 16-hour tournament. It does, however, allow a player to delay announcing"
+" their result in order to influence their pairing. The countermeasures "
+"are the micro-rounds (``batch_minutes``), the GSL blocks and the rounds "
+"mode; with 64 players, GSL and rounds require about 14h of playing hall "
+"time against 10h20 for continuous, for the same number of matches."
+
+#: ../../source/faq.rst:56
+msgid "Pourquoi le tableau final a-t-il 32 places alors que nous sommes 20 ?"
+msgstr "Why does the final bracket have 32 slots when there are 20 of us?"
+
+#: ../../source/faq.rst:57
+msgid ""
+"Sa taille vient de la somme des vies restantes, pas du nombre de joueurs."
+" Un joueur encore invaincu occupe deux places : il est exempt du premier "
+"tour."
+msgstr ""
+"Its size comes from the sum of the remaining lives, not from the number "
+"of players. A player who is still undefeated occupies two slots: they get"
+" a first-round bye."
+
+#: ../../source/faq.rst:60
+msgid "Pourquoi les meilleurs joueurs ne sont-ils pas protégés dans le tableau ?"
+msgstr "Why are the best players not protected in the bracket?"
+
+#: ../../source/faq.rst:61
+msgid ""
+"Le tirage aléatoire est le défaut, conformément à la pratique du "
+"backgammon. Les têtes de série existent en option (``seeding: "
+"\"rating\"``) pour l'organisateur qui les veut."
+msgstr ""
+"The random draw is the default, in line with backgammon practice. Seeding"
+" exists as an option (``seeding: \"rating\"``) for the organiser who "
+"wants it."
+
+#: ../../source/faq.rst:64
+msgid "Pourquoi ai-je un bye alors qu'un autre joueur en a déjà eu un ?"
+msgstr "Why do I have a bye when another player has already had one?"
+
+#: ../../source/faq.rst:65
+msgid ""
+"Un joueur déjà exempté est apparié en priorité, ce qui évite un second "
+"bye tant que d'autres n'en ont pas eu. Cette règle s'applique à "
+"l'intérieur d'un groupe de même nombre de défaites ; l'équité entre "
+"groupes différents n'est pas garantie (voir :ref:`limites`)."
+msgstr ""
+"A player who already had a bye is paired with priority, which avoids a "
+"second bye as long as others have not had one. This rule applies within a"
+" same-losses group; fairness between different groups is not guaranteed "
+"(see :ref:`limites`)."
+
+#: ../../source/faq.rst:69
+msgid ""
+"J'ai perdu contre X au premier tour et je le retrouve en consolante. Est-"
+"ce normal ?"
+msgstr ""
+"I lost to X in the first round and I meet them again in the consolation. "
+"Is that normal?"
+
+#: ../../source/faq.rst:70
+msgid ""
+"Les perdants du principal entrent dans la consolante dans l'ordre "
+"inverse, ce qui évite la revanche immédiate, pas les suivantes. La "
+"fréquence de ces revanches n'est pas encore mesurée."
+msgstr ""
+"The losers of the main bracket enter the consolation in reverse order, "
+"which avoids the immediate rematch, not the later ones. The frequency of "
+"these rematches has not yet been measured."
+
+#: ../../source/faq.rst:74
+msgid "Déroulement"
+msgstr "Running the event"
+
+#: ../../source/faq.rst:76
+msgid "Un joueur doit s'absenter — faut-il le retirer ?"
+msgstr "A player has to leave for a while — should they be withdrawn?"
+
+#: ../../source/faq.rst:77
+msgid ""
+"Non : on le déclare indisponible jusqu'à une heure, jusqu'à une ronde ou "
+"jusqu'à nouvel ordre. Il n'est plus apparié pendant ce temps et ne perd "
+"ni vie, ni rang, ni place de tableau. Dans un tableau, son match reste "
+"affiché mais retenu. Un joueur qui dispute un match d'une autre épreuve "
+"de la salle est signalé par l'hôte (``External.BusyPlayers``) ; rien "
+"n'est écrit au journal."
+msgstr ""
+"No: they are declared unavailable until a time, until a round or until "
+"further notice. They are no longer paired during that time and lose "
+"neither life, nor rank, nor bracket slot. In a bracket, their match "
+"remains displayed but held. A player playing a match in another event of "
+"the playing hall is reported by the host (``External.BusyPlayers``); "
+"nothing is written to the journal."
+
+#: ../../source/faq.rst:83
+msgid "Peut-on inscrire un joueur en retard ?"
+msgstr "Can a player be registered late?"
+
+#: ../../source/faq.rst:84
+msgid ""
+"Au suisse, oui, tant que la phase n'est pas figée : il entre avec toutes "
+"ses vies. Dans un tableau ou des poules déjà tirés, le moteur liste les "
+"places d'exemption libres (``State.FreeSlots``) et y installe le joueur "
+"sans refaire le tirage. Sans place libre, le joueur est inscrit et le "
+"moteur indique la phase ou la section où il entrera."
+msgstr ""
+"In the Swiss, yes, as long as the phase is not frozen: they enter with "
+"all their lives. In a bracket or pools that have already been drawn, the "
+"engine lists the free bye slots (``State.FreeSlots``) and places the "
+"player in one without redoing the draw. With no free slot, the player is "
+"registered and the engine indicates the phase or section where they will "
+"enter."
+
+#: ../../source/faq.rst:89
+msgid "Un qualifié de ma poule part avant le tableau — qui prend sa place ?"
+msgstr "A qualifier from my pool leaves before the bracket — who takes their place?"
+
+#: ../../source/faq.rst:90
+msgid ""
+"Le suivant de sa poule, si le directeur le confirme : le moteur propose "
+"le repêchage avant le passage au tableau, ou avant le tirage si le "
+"passage est fait. Entre suivants ex æquo, il propose chacun. Si le "
+"directeur passe directement au tableau, la place devient une exemption. "
+"Après le tirage, le retiré perd son premier match par forfait."
+msgstr ""
+"The next player in their pool, if the director confirms: the engine "
+"proposes the repechage before moving to the bracket, or before the draw "
+"if the move has been made. Among tied next players, it proposes each of "
+"them. If the director moves directly to the bracket, the place becomes a "
+"bye. After the draw, the withdrawn player loses their first match by "
+"forfeit."
+
+#: ../../source/faq.rst:95
+msgid "Le directeur s'est trompé de vainqueur. Faut-il tout refaire ?"
+msgstr "The director got the winner wrong. Do we have to redo everything?"
+
+#: ../../source/faq.rst:96
+msgid ""
+"Non. Il saisit une correction, ajoutée au journal ; l'erreur reste "
+"visible. Le moteur recalcule tout, signale ce qui n'est plus cohérent (un"
+" match de tableau joué par le mauvais joueur) et propose d'annuler en "
+"série les matchs concernés. Le directeur confirme ou fait autrement."
+msgstr ""
+"No. They enter a correction, appended to the journal; the error remains "
+"visible. The engine recomputes everything, flags what is no longer "
+"consistent (a bracket match played by the wrong player) and proposes "
+"cancelling the matches concerned in series. The director confirms or does"
+" otherwise."
+
+#: ../../source/faq.rst:100
+msgid "Et si l'ordinateur s'éteint en plein tournoi ?"
+msgstr "What if the computer shuts down in the middle of the tournament?"
+
+#: ../../source/faq.rst:101
+msgid ""
+"Le journal relu redonne l'état exact, matchs en cours et tirages compris "
+"; les tests le vérifient sur toute la matrice de simulation. Cela suppose"
+" que l'hôte enregistre chaque événement au moment où il est appliqué."
+msgstr ""
+"Replaying the journal gives back the exact state, matches in progress and"
+" draws included; the tests verify this across the whole simulation "
+"matrix. This assumes the host records each event at the moment it is "
+"applied."
+
+#: ../../source/faq.rst:105
+msgid "Combien de temps dure un tournoi ?"
+msgstr "How long does a tournament last?"
+
+#: ../../source/faq.rst:106
+msgid ""
+"Un match dure en moyenne 8 minutes par point ; on compte 11 minutes par "
+"point pour planifier une ronde. Un format à 2 vies produit environ 2 "
+"matchs par joueur (126 pour 64 joueurs) ; l'élimination simple en produit"
+" un de moins que le nombre de joueurs (63 pour 64). Sur 64 joueurs en 7 "
+"points : environ 7 h pour l'élimination simple, 10 h pour le suisse "
+"continu, 14 h pour le suisse par rondes. En cours de tournoi, le moteur "
+"fournit une prévision de fin (médiane et délai à 90 %) par simulation des"
+" matchs restants."
+msgstr ""
+"A match lasts on average 8 minutes per point; 11 minutes per point is "
+"used to plan a round. A 2-life format produces about 2 matches per player"
+" (126 for 64 players); single elimination produces one fewer than the "
+"number of players (63 for 64). With 64 players at 7 points: about 7h for "
+"single elimination, 10h for continuous Swiss, 14h for Swiss by rounds. "
+"During a tournament, the engine provides an end-time forecast (median and"
+" 90% delay) by simulating the remaining matches."
+
+#: ../../source/faq.rst:114
+msgid "Intégration"
+msgstr "Integration"
+
+#: ../../source/faq.rst:116
+msgid "Pourquoi une bibliothèque plutôt qu'un logiciel complet ?"
+msgstr "Why a library rather than a complete software?"
+
+#: ../../source/faq.rst:117
+msgid ""
+"La logique du tournoi se vérifie ainsi indépendamment de tout affichage —"
+" les tests jouent des milliers de tournois sans écran — et elle est "
+"réutilisable par n'importe quel logiciel hôte. blunderDB et gammonGo "
+"l'utilisent."
+msgstr ""
+"The tournament logic can thus be verified independently of any display — "
+"the tests play thousands of tournaments without a screen — and it is "
+"reusable by any host software. blunderDB and gammonGo use it."
+
+#: ../../source/faq.rst:121
+msgid "Le moteur affiche-t-il du texte dans une langue donnée ?"
+msgstr "Does the engine display text in a given language?"
+
+#: ../../source/faq.rst:122
+msgid ""
+"Non. Il renvoie des codes ; l'hôte les traduit. Un rendu français est "
+"fourni pour la console, les démonstrations et le paquet ``render``."
+msgstr ""
+"No. It returns codes; the host translates them. A French rendering is "
+"provided for the console, the demonstrations and the ``render`` package."

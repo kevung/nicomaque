@@ -1,0 +1,533 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:09+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/annexe_tests.rst:4
+msgid "Tests et invariants"
+msgstr "Tests and invariants"
+
+#: ../../source/annexe_tests.rst:6
+msgid ""
+"Le moteur est validé par simulation : il joue des tournois complets et "
+"vérifie, après chaque événement, des propriétés qui doivent toujours être"
+" vraies. Il n'a pas encore dirigé de tournoi réel ; ce que la simulation "
+"ne couvre pas est listé dans :ref:`limites`."
+msgstr ""
+"The engine is validated by simulation: it plays complete tournaments and "
+"checks, after every event, properties that must always hold. It has not "
+"yet run a real tournament; what the simulation does not cover is listed "
+"in :ref:`limites`."
+
+#: ../../source/annexe_tests.rst:11
+msgid "Nature des tests"
+msgstr "Nature of the tests"
+
+#: ../../source/annexe_tests.rst:13
+msgid ""
+"Les tests **ne sont pas des tests unitaires** : ce sont des **tests "
+"d'invariants par simulation**. Un nouveau format ou une nouvelle option "
+"s'ajoute dans la liste ``configs()`` et se trouve automatiquement couvert"
+" par toutes les vérifications."
+msgstr ""
+"The tests **are not unit tests**: they are **invariant tests by "
+"simulation**. A new format or option is added to the ``configs()`` list "
+"and is automatically covered by all the checks."
+
+#: ../../source/annexe_tests.rst:26
+msgid "Invariants vérifiés"
+msgstr "Verified invariants"
+
+#: ../../source/annexe_tests.rst:28
+msgid ""
+"``TestFormatsInvariants`` joue toutes les configurations de ``configs()``"
+" × 8 effectifs (2, 3, 5, 8, 13, 32, 64, 100) × 8 graines, et vérifie "
+"après chaque événement puis à la fin. En mode ``-short`` la matrice est "
+"réduite à six effectifs (2, 3, 5, 8, 13, 32) et trois graines, ce qui la "
+"ramène sous les trois secondes : c'est la boucle qu'on lance à chaque "
+"sauvegarde, la matrice entière tournant en intégration continue."
+msgstr ""
+"``TestFormatsInvariants`` plays every configuration of ``configs()`` × 8 "
+"sizes (2, 3, 5, 8, 13, 32, 64, 100) × 8 seeds, and checks after every "
+"event and again at the end. In ``-short`` mode the matrix is reduced to "
+"six sizes (2, 3, 5, 8, 13, 32) and three seeds, which brings it under "
+"three seconds: this is the loop run on every save, the full matrix "
+"running in continuous integration."
+
+#: ../../source/annexe_tests.rst:34
+msgid ""
+"**Terminaison** : aucune simulation ne dépasse ``MaxSteps``, aucun "
+"blocage."
+msgstr "**Termination**: no simulation exceeds ``MaxSteps``, no deadlock."
+
+#: ../../source/annexe_tests.rst:35
+msgid ""
+"**Vainqueur unique** : ``Final`` existe et contient exactement un joueur "
+"au rang 1."
+msgstr ""
+"**Single winner**: ``Final`` exists and contains exactly one player at "
+"rank 1."
+
+#: ../../source/annexe_tests.rst:36
+msgid ""
+"**Classement complet** : ``len(Final) == P`` — tous les inscrits sont "
+"classés."
+msgstr ""
+"**Complete standings**: ``len(Final) == P`` — all registered players are "
+"ranked."
+
+#: ../../source/annexe_tests.rst:37
+msgid ""
+"**Rejeu identique** : ``Replay(journal)`` produit exactement le même "
+"``Final`` (comparaison JSON)."
+msgstr ""
+"**Identical replay**: ``Replay(journal)`` produces exactly the same "
+"``Final`` (JSON comparison)."
+
+#: ../../source/annexe_tests.rst:39
+msgid "**Aucun avertissement** après rejeu : ``len(Warnings) == 0``."
+msgstr "**No warning** after replay: ``len(Warnings) == 0``."
+
+#: ../../source/annexe_tests.rst:40
+msgid ""
+"**Aucun joueur éliminé ne joue** : dans une phase à vies, à l'instant où "
+"un match démarre, ``Losses[p] < Lives[p]`` pour les deux joueurs."
+msgstr ""
+"**No eliminated player plays**: in a lives phase, at the moment a match "
+"starts, ``Losses[p] < Lives[p]`` for both players."
+
+#: ../../source/annexe_tests.rst:42
+msgid ""
+"**Pas de match entre groupes différents** : dans une phase à vies, "
+"``Losses[A] == Losses[B]``, sauf pour les matchs de repli (libellés "
+"``final`` et ``crossed``)."
+msgstr ""
+"**No match between different groups**: in a lives phase, ``Losses[A] == "
+"Losses[B]``, except for fallback matches (labels ``final`` and "
+"``crossed``)."
+
+#: ../../source/annexe_tests.rst:44
+msgid ""
+"**Peu de rematchs** : en suisse, le nombre de secondes rencontres reste "
+"sous ``graines × (Lives + 3)`` dès que ``P ≥ 8``."
+msgstr ""
+"**Few rematches**: in Swiss, the number of second meetings stays below "
+"``graines × (Lives + 3)`` as soon as ``P ≥ 8``."
+
+#: ../../source/annexe_tests.rst:47
+msgid ""
+"``TestStatutsInvariants`` rejoue la même matrice (plus une entrée "
+"``top:4`` et une entrée ``all``) et vérifie les statuts après chaque "
+"événement : un statut par inscrit ; ``withdrawn`` exactement pour les "
+"retirés ; un joueur annoncé ``eliminated`` ne démarre plus aucun match, "
+"un ``bye`` ou un ``eliminated`` n'est pas en train de jouer ; les "
+"``qualified`` annoncés avant ``next_phase`` sont exactement les entrants "
+"qu'il produit ; à la clôture, ``winner`` exactement pour les rangs 1. Les"
+" feuilles T1 et T2 de la simulation blunderDB 2026-10 "
+"(``testdata/simulation-2026-10/``) et l'épreuve A de T3 (repêchage d'un "
+"qualifié de poule) sont rejouées avec les mêmes contrôles."
+msgstr ""
+"``TestStatutsInvariants`` replays the same matrix (plus a ``top:4`` entry"
+" and an ``all`` entry) and checks the statuses after every event: one "
+"status per registered player; ``withdrawn`` exactly for withdrawn "
+"players; a player announced as ``eliminated`` never starts another match,"
+" a ``bye`` or an ``eliminated`` player is not currently playing; the "
+"``qualified`` players announced before ``next_phase`` are exactly the "
+"entrants it produces; at closing, ``winner`` exactly for rank 1. Sheets "
+"T1 and T2 of the blunderDB 2026-10 simulation "
+"(``testdata/simulation-2026-10/``) and trial A of T3 (repechage of a pool"
+" qualifier) are replayed with the same checks."
+
+#: ../../source/annexe_tests.rst:56
+msgid "Fuzzing"
+msgstr "Fuzzing"
+
+#: ../../source/annexe_tests.rst:58
+msgid ""
+"Deux cibles gardent ``Apply`` contre ce qu'aucun test écrit à la main ne "
+"cherche :"
+msgstr "Two targets guard ``Apply`` against what no hand-written test looks for:"
+
+#: ../../source/annexe_tests.rst:60
+msgid ""
+"``FuzzApply`` applique des suites d'événements tirées au hasard. Les "
+"octets ne sont pas du JSON mais un **plan** : chaque triplet choisit un "
+"type d'événement et ses paramètres parmi ce que l'état contient. Du JSON "
+"aléatoire n'atteindrait presque jamais un événement valide, et ne "
+"testerait donc que le décodeur."
+msgstr ""
+"``FuzzApply`` applies randomly drawn sequences of events. The bytes are "
+"not JSON but a **plan**: each triplet chooses an event type and its "
+"parameters from what the state contains. Random JSON would almost never "
+"reach a valid event, and would therefore only test the decoder."
+
+#: ../../source/annexe_tests.rst:64
+msgid ""
+"``FuzzReplayJournal`` rejoue des octets quelconques présentés comme un "
+"journal — le fichier que l'hôte a stocké et qui revient tronqué, "
+"réordonné ou corrompu."
+msgstr ""
+"``FuzzReplayJournal`` replays arbitrary bytes presented as a journal — "
+"the file the host stored and which comes back truncated, reordered or "
+"corrupted."
+
+#: ../../source/annexe_tests.rst:67
+msgid ""
+"Dans les deux cas, **une erreur est une réponse acceptable** ; un "
+"``panic`` ou un état incohérent n'en est pas une. L'état est vérifié "
+"après chaque application : autant de matchs que d'identifiants ordonnés "
+"et aucun doublon, aucun match d'un joueur contre lui-même, un vainqueur "
+"qui appartient à son match, aucun entrant inconnu, aucun compteur "
+"négatif, aucun joueur deux fois au classement, et ``Propose`` qui ne "
+"panique pas."
+msgstr ""
+"In both cases, **an error is an acceptable response**; a ``panic`` or an "
+"inconsistent state is not. The state is checked after every application: "
+"as many matches as ordered identifiers and no duplicates, no match of a "
+"player against themselves, a winner who belongs to their match, no "
+"unknown entrant, no negative counter, no player twice in the standings, "
+"and ``Propose`` does not panic."
+
+#: ../../source/annexe_tests.rst:74
+msgid "Compatibilité ascendante"
+msgstr "Backward compatibility"
+
+#: ../../source/annexe_tests.rst:77
+msgid "Version"
+msgstr "Version"
+
+#: ../../source/annexe_tests.rst:77
+msgid "Ce qui change à la lecture"
+msgstr "What changes on read"
+
+#: ../../source/annexe_tests.rst:79
+msgid "0"
+msgstr "0"
+
+#: ../../source/annexe_tests.rst:79
+msgid ""
+"libellés en texte français, convertis en codes par ``Event.upgraded`` ; "
+"ronde relue du libellé"
+msgstr ""
+"labels as French text, converted to codes by ``Event.upgraded``; round "
+"re-read from the label"
+
+#: ../../source/annexe_tests.rst:82
+msgid "1"
+msgstr "1"
+
+#: ../../source/annexe_tests.rst:82
+msgid ""
+"codes structurés ; ``config_changed`` peut changer les options de "
+"construction d'un tableau tiré (sans effet)"
+msgstr ""
+"structured codes; ``config_changed`` can change the construction options "
+"of a drawn bracket (no effect)"
+
+#: ../../source/annexe_tests.rst:85
+msgid "2"
+msgstr "2"
+
+#: ../../source/annexe_tests.rst:85
+msgid "``config_changed`` ne le peut plus : refus ``drawn``"
+msgstr "``config_changed`` can no longer do so: ``drawn`` rejection"
+
+#: ../../source/annexe_tests.rst:88
+msgid ""
+"``testdata/journal_v0.json`` est un journal complet écrit dans la forme "
+"d'avant les codes structurés — aucun champ ``version``, aucun champ "
+"``round``, un ``label`` qui était une chaîne française. Le test le rejoue"
+" et compare le classement **place par place**. Cette fixture ne se "
+"régénère pas : elle vaut par le fait qu'elle n'a pas bougé."
+msgstr ""
+"``testdata/journal_v0.json`` is a complete journal written in the form "
+"that predates structured codes — no ``version`` field, no ``round`` "
+"field, a ``label`` that was a French string. The test replays it and "
+"compares the standings **place by place**. This fixture is not "
+"regenerated: its value is that it has not moved."
+
+#: ../../source/annexe_tests.rst:93
+msgid "``TestMatchCounts`` fixe les comptes de matchs sur 64 joueurs :"
+msgstr "``TestMatchCounts`` fixes the match counts for 64 players:"
+
+#: ../../source/annexe_tests.rst:96
+msgid "Format"
+msgstr "Format"
+
+#: ../../source/annexe_tests.rst:96
+msgid "Matchs attendus"
+msgstr "Expected matches"
+
+#: ../../source/annexe_tests.rst:98
+msgid "Suisse 2 vies continu"
+msgstr "Swiss 2 lives continuous"
+
+#: ../../source/annexe_tests.rst:98 ../../source/annexe_tests.rst:100
+#: ../../source/annexe_tests.rst:101
+msgid "126 ou 127"
+msgstr "126 or 127"
+
+#: ../../source/annexe_tests.rst:99
+msgid "Élimination simple"
+msgstr "Single elimination"
+
+#: ../../source/annexe_tests.rst:99
+msgid "63"
+msgstr "63"
+
+#: ../../source/annexe_tests.rst:100
+msgid "Double élimination avec recharge"
+msgstr "Double elimination with recharge (bracket reset)"
+
+#: ../../source/annexe_tests.rst:101
+msgid "Blocs GSL"
+msgstr "GSL blocks"
+
+#: ../../source/annexe_tests.rst:104
+msgid ""
+"(126 = 2 × 64 − 2 ; le 127ᵉ est la recharge, jouée une fois sur deux "
+"environ.)"
+msgstr "(126 = 2 × 64 − 2; the 127th is the recharge, played about half the time.)"
+
+#: ../../source/annexe_tests.rst:106
+msgid ""
+"``TestCorrection`` vérifie qu'après l'inversion du premier résultat d'un "
+"tournoi par ``result_corrected``, la somme des défaites de la phase égale"
+" le nombre de matchs terminés — c'est-à-dire que ``recompute`` a bien "
+"tout reconstruit."
+msgstr ""
+"``TestCorrection`` checks that after the first result of a tournament is "
+"reversed by ``result_corrected``, the sum of the phase's losses equals "
+"the number of finished matches — that is, that ``recompute`` has rebuilt "
+"everything correctly."
+
+#: ../../source/annexe_tests.rst:110
+msgid ""
+"``TestWithdrawnAfterDraw`` vérifie qu'un joueur retiré **après** le "
+"tirage d'un tableau n'est plus jamais proposé, que ses matchs non lancés "
+"sont perdus par walkover, que le tableau se termine et qu'aucun "
+"avertissement n'est produit."
+msgstr ""
+"``TestWithdrawnAfterDraw`` checks that a player withdrawn **after** a "
+"bracket draw is never proposed again, that their unstarted matches are "
+"lost by walkover, that the bracket finishes and that no warning is "
+"produced."
+
+#: ../../source/annexe_tests.rst:114
+#, no-python-format
+msgid ""
+"``TestParity`` (long, sauté en mode court) mesure sur 1 500 tournois de "
+"64 joueurs par format : P(le meilleur gagne), P(un des quatre meilleurs "
+"gagne), le nombre moyen de matchs et la durée moyenne. Ces valeurs sont "
+"comparées à celles de :ref:`annexe_etude` ; **tout changement "
+"d'algorithme d'appariement est validé par ce test**. Ordre de grandeur "
+"attendu : une fin de semaine ne fait gagner le meilleur joueur que 4 à 9 "
+"% du temps (64 ou 32 joueurs), contre 1,6 à 3 % au hasard."
+msgstr ""
+"``TestParity`` (long, skipped in short mode) measures, over 1,500 "
+"tournaments of 64 players per format: P(best wins), P(one of the top four"
+" wins), the average number of matches and the average duration. These "
+"values are compared with those of :ref:`annexe_etude`; **every change to "
+"the pairing algorithm is validated by this test**. Expected order of "
+"magnitude: a weekend format lets the best player win only 4 to 9% of the "
+"time (64 or 32 players), against 1.6 to 3% by chance."
+
+#: ../../source/annexe_tests.rst:121
+msgid "Fichiers dorés"
+msgstr "Golden files"
+
+#: ../../source/annexe_tests.rst:123
+msgid ""
+"Les sorties des règles sont figées dans des fichiers de référence, "
+"rejoués à chaque exécution contre le paquet ``rules`` et contre les "
+"enveloppes du paquet racine :"
+msgstr ""
+"The outputs of the rules are frozen in reference files, replayed on every"
+" run against the ``rules`` package and against the wrappers of the root "
+"package:"
+
+#: ../../source/annexe_tests.rst:127
+msgid "Fichier"
+msgstr "File"
+
+#: ../../source/annexe_tests.rst:127
+msgid "Contenu"
+msgstr "Content"
+
+#: ../../source/annexe_tests.rst:129
+msgid "``testdata/trace_moteur.json``"
+msgstr "``testdata/trace_moteur.json``"
+
+#: ../../source/annexe_tests.rst:129
+msgid ""
+"propositions et classements à chaque pas des simulations "
+"(``TestDoresTrace``)"
+msgstr ""
+"proposals and standings at each step of the simulations "
+"(``TestDoresTrace``)"
+
+#: ../../source/annexe_tests.rst:131
+msgid "``rules/testdata/appariements.json``"
+msgstr "``rules/testdata/appariements.json``"
+
+#: ../../source/annexe_tests.rst:131
+msgid "appariements"
+msgstr "pairings"
+
+#: ../../source/annexe_tests.rst:132
+msgid "``rules/testdata/dotation.json``"
+msgstr "``rules/testdata/dotation.json``"
+
+#: ../../source/annexe_tests.rst:132
+msgid "dotation"
+msgstr "prize distribution"
+
+#: ../../source/annexe_tests.rst:133
+msgid "``rules/testdata/feuille.json``"
+msgstr "``rules/testdata/feuille.json``"
+
+#: ../../source/annexe_tests.rst:133
+msgid "feuille d'appariements"
+msgstr "pairing sheet"
+
+#: ../../source/annexe_tests.rst:134
+msgid "``rules/testdata/fin.json``,"
+msgstr "``rules/testdata/fin.json``,"
+
+#: ../../source/annexe_tests.rst:134
+msgid "prévision de fin et horloge"
+msgstr "end forecast and clock"
+
+#: ../../source/annexe_tests.rst:135
+msgid "``rules/testdata/horloge.json``"
+msgstr "``rules/testdata/horloge.json``"
+
+#: ../../source/annexe_tests.rst:136
+msgid "``sim/testdata/prevision.json``"
+msgstr "``sim/testdata/prevision.json``"
+
+#: ../../source/annexe_tests.rst:136
+msgid "prévision par simulation"
+msgstr "forecast by simulation"
+
+#: ../../source/annexe_tests.rst:137
+msgid "``render/testdata/*``"
+msgstr "``render/testdata/*``"
+
+#: ../../source/annexe_tests.rst:137
+msgid "pages HTML et SVG témoins"
+msgstr "reference HTML and SVG pages"
+
+#: ../../source/annexe_tests.rst:140
+msgid ""
+"Une sortie qui change à entrée égale est une version mineure. Les "
+"fichiers se régénèrent avec ``go test -run TestDores . -args -update`` et"
+" ``go test ./render ./sim -update``."
+msgstr ""
+"An output that changes for the same input is a minor version. The files "
+"are regenerated with ``go test -run TestDores . -args -update`` and ``go "
+"test ./render ./sim -update``."
+
+#: ../../source/annexe_tests.rst:144
+msgid "Intégration continue"
+msgstr "Continuous integration"
+
+#: ../../source/annexe_tests.rst:146
+msgid ""
+"``.github/workflows/ci.yml`` s'exécute à chaque poussée sur ``main``, à "
+"chaque proposition de fusion et chaque lundi :"
+msgstr ""
+"``.github/workflows/ci.yml`` runs on every push to ``main``, on every "
+"merge proposal and every Monday:"
+
+#: ../../source/annexe_tests.rst:149
+msgid "``tests`` : la suite complète, sans ``-short``, donc avec ``TestParity`` ;"
+msgstr ""
+"``tests``: the full suite, without ``-short``, hence including "
+"``TestParity``;"
+
+#: ../../source/annexe_tests.rst:150
+msgid ""
+"``fuzz`` : ``FuzzApply`` et ``FuzzReplayJournal``, 60 s chacune (300 s le"
+" lundi) ;"
+msgstr ""
+"``fuzz``: ``FuzzApply`` and ``FuzzReplayJournal``, 60 s each (300 s on "
+"Monday);"
+
+#: ../../source/annexe_tests.rst:151
+msgid ""
+"``exemples`` : régénère la galerie ``exemples/`` et échoue si celle du "
+"dépôt n'est plus à jour."
+msgstr ""
+"``exemples``: regenerates the ``exemples/`` gallery and fails if the "
+"repository's copy is no longer up to date."
+
+#: ../../source/annexe_tests.rst:154
+msgid "Invariants structurels"
+msgstr "Structural invariants"
+
+#: ../../source/annexe_tests.rst:156
+msgid "À tout instant :"
+msgstr "At all times:"
+
+#: ../../source/annexe_tests.rst:158
+msgid "un joueur a **au plus un match en cours** ;"
+msgstr "a player has **at most one match in progress**;"
+
+#: ../../source/annexe_tests.rst:159
+msgid ""
+"``MatchOrder`` est en bijection avec les clés de ``Matches``, dans "
+"l'ordre de lancement ;"
+msgstr ""
+"``MatchOrder`` is in bijection with the keys of ``Matches``, in launch "
+"order;"
+
+#: ../../source/annexe_tests.rst:160
+msgid "les identifiants de matchs sont ``M1``, ``M2``, … consécutifs sans trou ;"
+msgstr "match identifiers are ``M1``, ``M2``, … consecutive with no gaps;"
+
+#: ../../source/annexe_tests.rst:161
+msgid ""
+"``sum(Losses)`` sur une phase = nombre de matchs terminés (non annulés) "
+"de cette phase ;"
+msgstr ""
+"``sum(Losses)`` over a phase = number of finished (non-cancelled) matches"
+" in that phase;"
+
+#: ../../source/annexe_tests.rst:162
+msgid "``remainingLives(p) = Lives[p] − Losses[p]``, borné à 0 ;"
+msgstr "``remainingLives(p) = Lives[p] − Losses[p]``, bounded at 0;"
+
+#: ../../source/annexe_tests.rst:163
+msgid ""
+"un ``GMatch`` ``Done`` a ``Winner`` et ``Loser`` renseignés, sauf s'il "
+"est ``Skipped`` ;"
+msgstr ""
+"a ``Done`` ``GMatch`` has ``Winner`` and ``Loser`` filled in, unless it "
+"is ``Skipped``;"
+
+#: ../../source/annexe_tests.rst:164
+msgid ""
+"``resolve`` est idempotente : l'appeler deux fois de suite ne change rien"
+" ;"
+msgstr "``resolve`` is idempotent: calling it twice in a row changes nothing;"
+
+#: ../../source/annexe_tests.rst:165
+msgid "``Replay(journal)`` est une fonction pure du journal."
+msgstr "``Replay(journal)`` is a pure function of the journal."

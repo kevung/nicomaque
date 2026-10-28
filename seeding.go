@@ -4,7 +4,7 @@ import "github.com/kevung/nicomaque/rules"
 
 // Têtes de série, en option et éteintes par défaut.
 //
-// L'étude par simulation (docs/etude_formats.md) conclut « pas de têtes de série protégées » :
+// L'étude par simulation (doc/source/annexe_etude.rst) conclut « pas de têtes de série protégées » :
 // c'est la culture actuelle du backgammon, où le tirage intégral est ce que les joueurs
 // attendent, et c'est pourquoi PhaseConfig.Seeding est VIDE par défaut. Le défaut est un choix
 // de conception, pas un oubli. Certains organisateurs en veulent quand même — un open à cent

@@ -1,0 +1,442 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/annexe_conception.rst:4
+msgid "Décisions de conception"
+msgstr "Design decisions"
+
+#: ../../source/annexe_conception.rst:6
+msgid ""
+"Cette page énonce les décisions qui gouvernent le moteur et leur "
+"justification. Les chiffres cités viennent de :ref:`annexe_etude`."
+msgstr ""
+"This page states the decisions that govern the engine and their "
+"rationale. The figures quoted come from :ref:`annexe_etude`."
+
+#: ../../source/annexe_conception.rst:10
+msgid "Décisions techniques"
+msgstr "Technical decisions"
+
+#: ../../source/annexe_conception.rst:12
+msgid "Journal d'événements, état dérivé"
+msgstr "Event journal, derived state"
+
+#: ../../source/annexe_conception.rst:13
+msgid ""
+"La seule donnée persistante est le journal ; l'état est une fonction pure"
+" du journal (``State = Replay(Journal)``). Conséquences : une reprise "
+"après panne est un ``Replay`` ; un préfixe du journal donne l'état à un "
+"instant passé, propositions comprises ; deux exécutions du même journal "
+"donnent le même état."
+msgstr ""
+"The only persistent data is the journal; the state is a pure function of "
+"the journal (``State = Replay(Journal)``). Consequences: recovery after a"
+" crash is a ``Replay``; a prefix of the journal gives the state at a past"
+" moment, proposals included; two runs of the same journal give the same "
+"state."
+
+#: ../../source/annexe_conception.rst:18
+msgid "Le journal n'est jamais modifié"
+msgstr "The journal is never modified"
+
+#: ../../source/annexe_conception.rst:19
+msgid "Une erreur se corrige par un événement ajouté :"
+msgstr "An error is corrected by an appended event:"
+
+#: ../../source/annexe_conception.rst:22
+msgid "Situation"
+msgstr "Situation"
+
+#: ../../source/annexe_conception.rst:22
+msgid "Événement"
+msgstr "Event"
+
+#: ../../source/annexe_conception.rst:24
+msgid "mauvais vainqueur saisi"
+msgstr "wrong winner entered"
+
+#: ../../source/annexe_conception.rst:24
+msgid "``result_corrected``"
+msgstr "``result_corrected``"
+
+#: ../../source/annexe_conception.rst:25
+msgid "match lancé par erreur"
+msgstr "match started by mistake"
+
+#: ../../source/annexe_conception.rst:25
+msgid "``match_cancelled``"
+msgstr "``match_cancelled``"
+
+#: ../../source/annexe_conception.rst:26
+msgid "joueur qui abandonne"
+msgstr "player who drops out"
+
+#: ../../source/annexe_conception.rst:26
+msgid "``player_withdrawn``"
+msgstr "``player_withdrawn``"
+
+#: ../../source/annexe_conception.rst:27
+msgid "fiche de joueur erronée"
+msgstr "incorrect player record"
+
+#: ../../source/annexe_conception.rst:27
+msgid "``player_updated``"
+msgstr "``player_updated``"
+
+#: ../../source/annexe_conception.rst:28
+msgid "joueur absent pour un temps"
+msgstr "player absent for a while"
+
+#: ../../source/annexe_conception.rst:28
+msgid "``player_unavailable``, ``player_available``"
+msgstr "``player_unavailable``, ``player_available``"
+
+#: ../../source/annexe_conception.rst:30
+msgid "configuration à changer"
+msgstr "configuration to change"
+
+#: ../../source/annexe_conception.rst:30
+msgid "``config_changed``"
+msgstr "``config_changed``"
+
+#: ../../source/annexe_conception.rst:31
+msgid "tournoi clos à corriger"
+msgstr "closed tournament to correct"
+
+#: ../../source/annexe_conception.rst:31
+msgid "``reopened``"
+msgstr "``reopened``"
+
+#: ../../source/annexe_conception.rst:34
+msgid ""
+"Ces événements déclenchent un recalcul complet de la comptabilité des "
+"phases, suivi d'un contrôle de cohérence qui remplit ``State.Warnings`` "
+"(par exemple : un match de tableau joué par des joueurs que le tableau "
+"n'attendait pas). Le contrôle est aussi fait à chaque ``match_started`` "
+"et ``result``. Quand un graphe est désaccordé, le moteur propose "
+"l'annulation en série des matchs incohérents ; il n'annule rien de lui-"
+"même."
+msgstr ""
+"These events trigger a full recomputation of the phase accounting, "
+"followed by a consistency check that fills ``State.Warnings`` (for "
+"example: a bracket match played by players the bracket did not expect). "
+"The check is also done at each ``match_started`` and ``result``. When a "
+"graph is out of sync, the engine proposes cancelling the inconsistent "
+"matches in series; it cancels nothing by itself."
+
+#: ../../source/annexe_conception.rst:40
+msgid "Le moteur propose, le directeur décide"
+msgstr "The engine proposes, the director decides"
+
+#: ../../source/annexe_conception.rst:41
+msgid ""
+"Le moteur expose ``Propose``, ``EventFromAction`` et ``Apply``. Aucune "
+"action n'est appliquée d'office ; chaque confirmation produit exactement "
+"un événement. Une décision douteuse du directeur (deux matchs sur une "
+"table, un match dont la fin tombe pendant une pause) est enregistrée et "
+"accompagnée d'un avertissement, pas refusée."
+msgstr ""
+"The engine exposes ``Propose``, ``EventFromAction`` and ``Apply``. No "
+"action is applied automatically; each confirmation produces exactly one "
+"event. A doubtful decision by the director (two matches on one table, a "
+"match whose end falls during a break) is recorded and accompanied by a "
+"warning, not refused."
+
+#: ../../source/annexe_conception.rst:46
+msgid "Déterminisme"
+msgstr "Determinism"
+
+#: ../../source/annexe_conception.rst:47
+msgid ""
+"``Propose`` ne dépend que du journal. Le générateur pseudo-aléatoire "
+"d'une proposition est initialisé par ``graine·1000003 + nombre "
+"d'événements·7919 + indice de phase`` (une ronde de suisse utilise une "
+"dérivation propre à la ronde, voir :ref:`format_suisse`). Deux appels "
+"successifs sans événement intermédiaire renvoient la même proposition. "
+"Toute itération sur une map dont l'ordre influence une proposition passe "
+"par un tri stable."
+msgstr ""
+"``Propose`` depends only on the journal. The pseudo-random generator of a"
+" proposal is seeded with ``graine·1000003 + nombre d'événements·7919 + "
+"indice de phase`` (a Swiss round uses a round-specific derivation, see "
+":ref:`format_suisse`). Two successive calls with no event in between "
+"return the same proposal. Any iteration over a map whose order influences"
+" a proposal goes through a stable sort."
+
+#: ../../source/annexe_conception.rst:53
+msgid "Tirages enregistrés"
+msgstr "Recorded draws"
+
+#: ../../source/annexe_conception.rst:54
+msgid ""
+"Tout tirage (placement dans un tableau, composition des groupes) est "
+"écrit dans l'événement ``draw``. Rejouer un journal ne fait pas appel à "
+"l'algorithme de tirage : celui-ci peut évoluer sans invalider les "
+"journaux existants."
+msgstr ""
+"Every draw (placement in a bracket, composition of the groups) is written"
+" in the ``draw`` event. Replaying a journal does not call the draw "
+"algorithm: it can evolve without invalidating existing journals."
+
+#: ../../source/annexe_conception.rst:58
+msgid "Codes, pas de phrases"
+msgstr "Codes, not sentences"
+
+#: ../../source/annexe_conception.rst:59
+msgid ""
+"Libellés de match, notes de classement, avertissements et raisons "
+"d'attente sont des codes structurés ; l'hôte les traduit dans la langue "
+"de son utilisateur. Les noms de section sont des identifiants (``main``, "
+"``conso``, ``poule:A``). Un test refuse toute chaîne accentuée ou à "
+"espaces sortant du moteur, hors les champs saisis par le directeur."
+msgstr ""
+"Match labels, standings notes, warnings and waiting reasons are "
+"structured codes; the host translates them into its user's language. "
+"Section names are identifiers (``main``, ``conso``, ``poule:A``). A test "
+"rejects any accented or space-containing string leaving the engine, "
+"except the fields entered by the director."
+
+#: ../../source/annexe_conception.rst:64
+msgid "Graphes de matchs comme données"
+msgstr "Match graphs as data"
+
+#: ../../source/annexe_conception.rst:65
+msgid ""
+"Tableaux, groupes GSL, poules et consolantes sont des ``Section`` de "
+"``GMatch`` dont chaque place est soit un joueur, soit le vainqueur ou le "
+"perdant d'un autre match. Une fonction unique propage les résultats "
+"jusqu'au point fixe. Ajouter un format de graphe revient à écrire un "
+"constructeur de section."
+msgstr ""
+"Brackets, GSL groups, pools and consolations are ``Section`` values made of "
+"``GMatch`` in which each slot is either a player, or the winner or loser "
+"of another match. A single function propagates the results to the fixed "
+"point. Adding a graph format amounts to writing a section constructor."
+
+#: ../../source/annexe_conception.rst:70
+msgid "Règles en fonctions pures"
+msgstr "Rules as pure functions"
+
+#: ../../source/annexe_conception.rst:71
+msgid ""
+"Les règles (appariement, classement, dotation, prévision, feuille "
+"d'appariements) sont dans le paquet ``rules``, sans état, sans entrée-"
+"sortie ni horloge. Le paquet racine construit un instantané de l'état et "
+"appelle ces fonctions : chaque règle a une seule implémentation, "
+"réutilisable par un autre logiciel."
+msgstr ""
+"The rules (pairing, standings, prize distribution, forecast, pairing "
+"sheet) are in the ``rules`` package, stateless, with no input-output and "
+"no clock. The root package builds a snapshot of the state and calls these"
+" functions: each rule has a single implementation, reusable by other "
+"software."
+
+#: ../../source/annexe_conception.rst:76
+msgid "Bibliothèque, pas service"
+msgstr "A library, not a service"
+
+#: ../../source/annexe_conception.rst:77
+msgid ""
+"Le moteur s'exécute dans le processus de l'hôte, sans réseau, sans base "
+"de données et sans dépendance externe."
+msgstr ""
+"The engine runs in the host's process, with no network, no database and "
+"no external dependency."
+
+#: ../../source/annexe_conception.rst:81
+msgid "Décisions de format"
+msgstr "Format decisions"
+
+#: ../../source/annexe_conception.rst:83
+msgid "Suisse à vies plutôt qu'élimination directe"
+msgstr "Swiss with lives rather than single elimination"
+
+#: ../../source/annexe_conception.rst:84
+#, no-python-format
+msgid ""
+"En élimination directe, une seule défaite élimine. À 7 points, un joueur "
+"meilleur de 3 PR ne gagne qu'environ 58 % du temps. Le suisse à 2 vies "
+"admet une défaite et produit le même nombre de matchs qu'une double "
+"élimination (2N − 2 pour N joueurs, plus une éventuelle recharge), sans "
+"contrainte d'effectif."
+msgstr ""
+"In single elimination, a single loss eliminates. At 7 points, a player "
+"who is 3 PR better wins only about 58% of the time. The Swiss with 2 "
+"lives allows one loss and produces the same number of matches as a double"
+" elimination (2N − 2 for N players, plus a possible recharge (bracket "
+"reset)), with no constraint on the number of players."
+
+#: ../../source/annexe_conception.rst:89
+msgid "Continu par défaut"
+msgstr "Continuous by default"
+
+#: ../../source/annexe_conception.rst:90
+msgid ""
+"Un suisse synchrone fait attendre les joueurs 10 à 15 fois plus. Le mode "
+"par rondes reste disponible : plus lisible, doublable sur papier, non "
+"manipulable. Une ronde plus grande que la salle se joue en plusieurs "
+"vagues, avec les mêmes appariements, et la ronde suivante n'arrive qu'une"
+" fois la ronde entière jouée. Les micro-rondes (``batch_minutes``) "
+"apparient par lots à heure fixe."
+msgstr ""
+"A synchronous Swiss makes players wait 10 to 15 times longer. The rounds "
+"mode remains available: more readable, doubled on paper, not manipulable."
+" A round larger than the playing hall is played in several waves, with "
+"the same pairings, and the next round arrives only once the entire round "
+"has been played. The micro-rounds (``batch_minutes``) pair by batches at "
+"a fixed time."
+
+#: ../../source/annexe_conception.rst:96
+msgid "Appariement dans le groupe de même nombre de défaites"
+msgstr "Pairing within the same-losses group"
+
+#: ../../source/annexe_conception.rst:97
+msgid ""
+"Pas de score ni de classement intermédiaire. Priorités : un joueur déjà "
+"exempté est apparié en premier ; pas de revanche sauf faute d'autre "
+"solution ; éviter deux joueurs du même club (option). Quand aucun "
+"appariement régulier n'est possible, le moteur propose un match de repli "
+"(finale ou match croisé) : un tournoi se termine toujours."
+msgstr ""
+"No score and no intermediate standings. Priorities: a player who already "
+"had a bye is paired first; no rematch unless there is no other solution; "
+"avoid two players from the same club (option). When no regular pairing is"
+" possible, the engine proposes a fallback match (final or crossed match):"
+" a tournament always ends."
+
+#: ../../source/annexe_conception.rst:102
+msgid "Bascule vers un tableau"
+msgstr "Switch-over to a bracket"
+
+#: ../../source/annexe_conception.rst:103
+msgid ""
+"Chaque match consomme une vie. Quand la somme des vies restantes atteint "
+"une puissance de 2, le tableau est exact : un joueur à 2 vies occupe deux"
+" places (exempt du premier tour), un joueur à 1 vie en occupe une. Un "
+"tableau de 32 places pour 20 joueurs est donc normal : sa taille vient de"
+" la somme des vies."
+msgstr ""
+"Each match consumes a life. When the sum of the remaining lives reaches a"
+" power of 2, the bracket is exact: a player with 2 lives occupies two "
+"slots (bye in the first round), a player with 1 life occupies one. A "
+"32-slot bracket for 20 players is therefore normal: its size comes from "
+"the sum of the lives."
+
+#: ../../source/annexe_conception.rst:108
+msgid "Aucun départage"
+msgstr "No tie-break"
+
+#: ../../source/annexe_conception.rst:109
+msgid ""
+"Un départage arithmétique (Buchholz, différence de points, cote) sépare "
+"deux joueurs qui ont le même parcours à partir d'informations qui ne "
+"mesurent pas leur performance ; au backgammon, la variance d'un match "
+"rend ces critères peu informatifs. Une égalité reste un ex æquo (avec "
+"partage des prix des places concernées) ou se règle par un barrage joué "
+"quand une place qualificative est en jeu."
+msgstr ""
+"An arithmetic tie-break (Buchholz, point difference, rating) separates "
+"two players with the same record using information that does not measure "
+"their performance; in backgammon, the variance of a match makes these "
+"criteria barely informative. A tie remains tied (with the prizes of the "
+"places concerned shared) or is settled by a play-off when a qualifying "
+"place is at stake."
+
+#: ../../source/annexe_conception.rst:115
+msgid "Tirage aléatoire par défaut"
+msgstr "Random draw by default"
+
+#: ../../source/annexe_conception.rst:116
+msgid ""
+"C'est la pratique du backgammon, et protéger les meilleurs ajoute un "
+"avantage structurel à des joueurs que le format favorise déjà, sur la "
+"base d'une cote bruitée. Les têtes de série existent en option "
+"(``seeding: \"rating\"``), désactivée par défaut."
+msgstr ""
+"This is backgammon practice, and protecting the best players adds a "
+"structural advantage to players the format already favours, on the basis "
+"of a noisy rating. Seeding exists as an option (``seeding: \"rating\"``),"
+" disabled by default."
+
+#: ../../source/annexe_conception.rst:120
+msgid "Pas de finale à handicap"
+msgstr "No handicap final"
+
+#: ../../source/annexe_conception.rst:121
+msgid "Le format récompense le parcours ; il ne le corrige pas."
+msgstr "The format rewards the record; it does not correct it."
+
+#: ../../source/annexe_conception.rst:123
+msgid "Repêchage proposé d'un qualifié de poule retiré"
+msgstr "Proposed repechage of a withdrawn pool qualifier"
+
+#: ../../source/annexe_conception.rst:124
+msgid ""
+"Quand un qualifié se retire **avant le tirage** du tableau, le moteur "
+"propose sa place au suivant de sa poule (le joueur non qualifié et non "
+"retiré qui a le plus de victoires). Le directeur confirme (événement "
+"``repechage``) ou passe à la phase suivante, et la place devient une "
+"exemption. Le repêchage n'est pas appliqué d'office : un règlement local "
+"ou un repêché absent peuvent faire préférer l'exemption, et les journaux "
+"existants se rejouent à l'identique. Un suivant lui-même retiré est sauté"
+" ; entre suivants ex æquo, le moteur propose chacun. **Après le tirage**,"
+" il n'y a plus de repêchage : le retiré perd son match par forfait."
+msgstr ""
+"When a qualifier withdraws **before the draw** of the bracket, the engine"
+" offers their place to the next in their pool (the non-qualified, non-"
+"withdrawn player with the most wins). The director confirms "
+"(``repechage`` event) or moves on to the next phase, and the place "
+"becomes a bye. The repechage is not applied automatically: a local rule "
+"or an absent repechaged player may make the bye preferable, and existing "
+"journals replay identically. A next player who has themselves withdrawn "
+"is skipped; among tied next players, the engine proposes each of them. "
+"**After the draw**, there is no more repechage: the withdrawn player "
+"loses their match by forfeit."
+
+#: ../../source/annexe_conception.rst:132
+msgid "Retraits classés sur le parcours"
+msgstr "Withdrawals ranked on record"
+
+#: ../../source/annexe_conception.rst:133
+msgid ""
+"Un joueur retiré est classé comme s'il avait été éliminé à l'instant du "
+"retrait (par ses victoires au suisse et en GSL, par la sortie atteinte en"
+" tableau), ex æquo avec les éliminés du même niveau, avec la note "
+"``withdrawn``."
+msgstr ""
+"A withdrawn player is ranked as if eliminated at the moment of withdrawal"
+" (by their wins in the Swiss and in GSL, by the exit reached in a "
+"bracket), tied with the eliminated players of the same level, with the "
+"note ``withdrawn``."
+
+#: ../../source/annexe_conception.rst:137
+msgid "Longueurs de match"
+msgstr "Match lengths"
+
+#: ../../source/annexe_conception.rst:138
+msgid ""
+"La répartition des longueurs entre les tours est presque neutre. Le "
+"moteur accepte une longueur par phase, une longueur de finale et une "
+"longueur par tour ; les allonger est un choix d'organisateur."
+msgstr ""
+"The distribution of lengths among the rounds is almost neutral. The "
+"engine accepts one length per phase, one final length and one length per "
+"round; lengthening them is an organiser's choice."

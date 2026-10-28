@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/affichage.rst:4
+msgid "Affichage (``render``)"
+msgstr "Display (``render``)"
+
+#: ../../source/affichage.rst:6
+msgid ""
+"Fonctions **pures** produisant du HTML et du SVG. Rien n'y est écrit en "
+"dur dans une langue : le moteur ne produit que des codes, et ce paquet "
+"les traduit par un ``Labeler`` que l'hôte fournit — y compris ses propres"
+" mots (« Joueur », « Table », « libre »), qui sont eux aussi des codes "
+"(``Term``). ``French()`` est fourni pour la console, la démo et les "
+"tests."
+msgstr ""
+"**Pure** functions producing HTML and SVG. Nothing in it is hard-coded in"
+" any language: the engine only produces codes, and this package "
+"translates them through a ``Labeler`` supplied by the host — including "
+"its own words (\"Joueur\", \"Table\", \"libre\"), which are also codes "
+"(``Term``). ``French()`` is provided for the console, the demo and the "
+"tests."
+
+#: ../../source/affichage.rst:38
+msgid ""
+"Le contrat du ``Labeler`` : aucune méthode ne renvoie de code brut. "
+"``French()`` délègue aux méthodes ``String()`` du paquet racine et à "
+"``tournoi.SectionName``/``tournoi.PhaseName`` pour les codes du moteur, "
+"et porte les mots du rendu ; c'est le seul endroit du paquet où une "
+"phrase est écrite. L'hôte remplace ``Style`` pour retrouver sa charte : "
+"les classes CSS (``lent``, ``alerte``, ``libre``, ``occupee``, ``hs``, "
+"``case``, ``credit``…) sont donc un contrat."
+msgstr ""
+"The ``Labeler`` contract: no method returns a raw code. ``French()`` "
+"delegates to the ``String()`` methods of the root package and to "
+"``tournoi.SectionName``/``tournoi.PhaseName`` for the engine's codes, and"
+" carries the words of the rendering; it is the only place in the package "
+"where a sentence is written. The host replaces ``Style`` to match its own"
+" design: the CSS classes (``lent``, ``alerte``, ``libre``, ``occupee``, "
+"``hs``, ``case``, ``credit``…) are therefore a contract."
+
+#: ../../source/affichage.rst:45
+msgid "Méthode"
+msgstr "Method"
+
+#: ../../source/affichage.rst:45
+msgid "Produit"
+msgstr "Produces"
+
+#: ../../source/affichage.rst:47
+msgid "``BracketBoardSVG(st, ph)``"
+msgstr "``BracketBoardSVG(st, ph)``"
+
+#: ../../source/affichage.rst:47
+msgid ""
+"**Toutes** les sections en graphe d'une phase dans un seul SVG, côte à "
+"côte, avec les descentes d'une section à l'autre"
+msgstr ""
+"**All** the graph sections of a phase in a single SVG, side by side, with"
+" the drops from one section to another"
+
+#: ../../source/affichage.rst:50
+msgid "``LivesBoard(st, ph, now)``"
+msgstr "``LivesBoard(st, ph, now)``"
+
+#: ../../source/affichage.rst:50
+msgid ""
+"Colonnes de joueurs par nombre de défaites : état, temps d'attente, "
+"adversaires déjà rencontrés"
+msgstr ""
+"Columns of players by number of losses: state, waiting time, opponents "
+"already met"
+
+#: ../../source/affichage.rst:53
+msgid "``TableGrid(st, now)``"
+msgstr "``TableGrid(st, now)``"
+
+#: ../../source/affichage.rst:53
+msgid ""
+"Une case par table : son match et sa durée, ou libre, indisponible, "
+"réservée"
+msgstr ""
+"One cell per table: its match and its duration, or free, unavailable, "
+"reserved"
+
+#: ../../source/affichage.rst:56
+msgid "``RunningTable(st, now)``"
+msgstr "``RunningTable(st, now)``"
+
+#: ../../source/affichage.rst:56
+msgid ""
+"Les matchs en cours, triés par table : table, libellé, joueurs, longueur,"
+" durée (classe ``lent`` au-delà de 1,5 × ``Expected``)"
+msgstr ""
+"The matches in progress, sorted by table: table, label, players, length, "
+"duration (class ``lent`` beyond 1.5 × ``Expected``)"
+
+#: ../../source/affichage.rst:59
+msgid "``ActionsList(st, acts)``"
+msgstr "``ActionsList(st, acts)``"
+
+#: ../../source/affichage.rst:59
+msgid ""
+"La liste ordonnée des actions proposées ; une action qui porte un "
+"avertissement reçoit la classe ``alerte`` et le texte du ``Warn``"
+msgstr ""
+"The ordered list of proposed actions; an action that carries a warning "
+"receives the class ``alerte`` and the text of the ``Warn``"
+
+#: ../../source/affichage.rst:62
+msgid "``StandingsTable(st)``"
+msgstr "``StandingsTable(st)``"
+
+#: ../../source/affichage.rst:62
+msgid ""
+"Le classement final (``Final``) ou courant (``Ranking``) avec club, note "
+"et prix du classement général (``PrizeSectionAll``)"
+msgstr ""
+"The final (``Final``) or current (``Ranking``) standings with club, note "
+"and prize from the overall standings (``PrizeSectionAll``)"
+
+#: ../../source/affichage.rst:65
+msgid "``PairingSheet(st, round)``"
+msgstr "``PairingSheet(st, round)``"
+
+#: ../../source/affichage.rst:65
+msgid ""
+"La feuille d'appariements d'un lot, imprimable A4, une case de score par "
+"joueur — page autonome"
+msgstr ""
+"The pairing sheet of a batch, printable on A4, one score box per player —"
+" standalone page"
+
+#: ../../source/affichage.rst:68
+msgid "``Page(st, acts, now)``"
+msgstr "``Page(st, acts, now)``"
+
+#: ../../source/affichage.rst:68
+msgid ""
+"La page d'écran de salle, autonome, rafraîchie toutes les 30 s par une "
+"méta (pas de script)"
+msgstr ""
+"The playing-hall display page, standalone, refreshed every 30 s by a meta"
+" tag (no script)"
+
+#: ../../source/affichage.rst:72
+msgid ""
+"``Page`` assemble, pour la phase courante : les actions à faire, la "
+"grille des tables (dès qu'une table est connue), les matchs en cours, le "
+"tableau des vies (phases ``swiss_lives`` et ``gsl`` seulement) et le "
+"graphe des sections ; puis le classement. Dans ``ActionsList``, la table "
+"d'un lancement n'est nommée que si elle est attribuée (``Table > 0``) ; "
+"une attente affiche sa raison (``Reason``) et, le cas échéant, son "
+"échéance ``Until`` (« 15:04 »)."
+msgstr ""
+"``Page`` assembles, for the current phase: the actions to take, the grid "
+"of tables (as soon as a table is known), the matches in progress, the "
+"lives board (``swiss_lives`` and ``gsl`` phases only) and the graph of "
+"sections; then the standings. In ``ActionsList``, the table of a start is"
+" named only if it is assigned (``Table > 0``); a wait displays its reason"
+" (``Reason``) and, where applicable, its deadline ``Until`` (\"15:04\")."
+
+#: ../../source/affichage.rst:78
+msgid ""
+"**Une page produite est autonome** : un seul fichier, feuille de style "
+"embarquée, aucune ressource externe — pas de police distante, pas de "
+"script, pas d'image liée. Elle doit s'ouvrir hors ligne, depuis une clé "
+"USB, sur l'ordinateur de la salle. Un crédit (``Credit``) figure en pied "
+"de page, et l'attribut ``lang`` de la page vaut ``Lang``. "
+"``PairingSheet`` et ``Page`` renvoient une page complète ; les autres "
+"méthodes, un fragment HTML (ou SVG) à insérer dans celle de l'hôte."
+msgstr ""
+"**A produced page is standalone**: a single file, embedded style sheet, "
+"no external resource — no remote font, no script, no linked image. It "
+"must open offline, from a USB stick, on the playing hall's computer. A "
+"credit (``Credit``) appears in the footer, and the page's ``lang`` "
+"attribute is ``Lang``. ``PairingSheet`` and ``Page`` return a complete "
+"page; the other methods, an HTML (or SVG) fragment to insert into the "
+"host's page."
+
+#: ../../source/affichage.rst:84
+msgid ""
+"**Les lots.** ``Batches(st)`` groupe les matchs de la phase courante par "
+"instant de départ. Un lot est ce qu'un directeur appelle une ronde dans "
+"un suisse par rondes, un bloc dans un GSL, un tour dans un tableau, une "
+"micro-ronde dans un suisse à ``batch_minutes``. Le moteur n'a pas de mot "
+"pour cela et n'en a pas besoin : l'instant de départ le dit. "
+"``PairingSheet(st, n)`` imprime le n-ième ; ``0`` ou un numéro au-delà du"
+" dernier donne le plus récent. Le découpage en lots et l'ordre des lignes"
+" viennent de ``rules.Batches`` et ``rules.PairingSheet`` (``render`` n'en"
+" est que le rendu, voir :ref:`api_reference`)."
+msgstr ""
+"**Batches.** ``Batches(st)`` groups the matches of the current phase by "
+"start time. A batch is what a director calls a round in a Swiss by "
+"rounds, a block in a GSL, a round in a bracket, a micro-round in a Swiss "
+"with ``batch_minutes``. The engine has no word for this and does not need"
+" one: the start time says it. ``PairingSheet(st, n)`` prints the n-th; "
+"``0`` or a number beyond the last gives the most recent. The split into "
+"batches and the order of the rows come from ``rules.Batches`` and "
+"``rules.PairingSheet`` (``render`` is only the rendering of them, see "
+":ref:`api_reference`)."
+
+#: ../../source/affichage.rst:92
+msgid ""
+"**Mise en page du SVG.** Une colonne par tour (``Section.Rounds``), boîte"
+" de 190 × 44 px, écart horizontal 60 px, vertical 12 px, et 40 px entre "
+"deux sections. Chaque section occupe sa propre bande de colonnes, si bien"
+" que deux arbres ne peuvent pas se chevaucher. L'ordonnée d'un match est "
+"la **moyenne des ordonnées de ses matchs sources de la même section** ; "
+"les chevauchements sont ensuite corrigés en décalant vers le bas "
+"(nécessaire pour les groupes GSL, où le match des gagnants et celui des "
+"perdants partagent des sources). Les liaisons sont tracées **sous** les "
+"boîtes ; celles qui traversent une section — les descentes du principal "
+"vers la consolante — sont en pointillé et d'une autre couleur. Une paire "
+"d'exemptions (``BYE`` contre ``BYE``) n'est pas dessinée. Le fond d'une "
+"boîte est blanc (match à venir), jaune pâle (lancé) ou vert pâle "
+"(terminé) ; le vainqueur est en gras, le score affiché une fois le match "
+"terminé, et le libellé et la longueur du match figurent au-dessus de la "
+"boîte. Le titre de chaque section passe par ``Labeler.SectionName`` (les "
+"noms de section sont des identifiants : ``main``, ``conso``, ``poule:A``,"
+" ``barrage:A``…)."
+msgstr ""
+"**SVG layout.** One column per round (``Section.Rounds``), boxes of 190 ×"
+" 44 px, horizontal gap 60 px, vertical 12 px, and 40 px between two "
+"sections. Each section occupies its own band of columns, so two trees "
+"cannot overlap. The vertical position of a match is the **average of the "
+"vertical positions of its source matches in the same section**; overlaps "
+"are then corrected by shifting downward (necessary for GSL groups, where "
+"the winners' match and the losers' match share sources). Links are drawn "
+"**under** the boxes; those that cross a section — the drops from the main"
+" bracket to the consolation — are dotted and of a different colour. A "
+"pair of byes (``BYE`` against ``BYE``) is not drawn. A box's background "
+"is white (upcoming match), pale yellow (started) or pale green "
+"(finished); the winner is in bold, the score is displayed once the match "
+"is finished, and the label and length of the match appear above the box. "
+"The title of each section goes through ``Labeler.SectionName`` (section "
+"names are identifiers: ``main``, ``conso``, ``poule:A``, ``barrage:A``…)."
+
+#: ../../source/affichage.rst:105
+msgid ""
+"Le nom affiché d'un joueur est ``Player.Name``, ou l'identifiant à défaut"
+" — un nom est saisi par le TD et ne se traduit pas. ``BYE`` et une place "
+"inconnue passent, eux, par le ``Labeler``. Tout texte issu des données "
+"passe par ``html.EscapeString``."
+msgstr ""
+"A player's displayed name is ``Player.Name``, or the identifier by "
+"default — a name is entered by the TD and is not translated. ``BYE`` and "
+"an unknown place, however, go through the ``Labeler``. All text coming "
+"from data goes through ``html.EscapeString``."
+
+#: ../../source/affichage.rst:109
+msgid ""
+"Les rendus sont figés par des **fichiers témoins** dans "
+"``render/testdata/`` : toute modification du rendu fait échouer les "
+"tests, et ``go test ./render -update`` les régénère une fois le "
+"changement relu."
+msgstr ""
+"Renderings are frozen by **reference files** in ``render/testdata/``: any"
+" change to the rendering makes the tests fail, and ``go test ./render "
+"-update`` regenerates them once the change has been reviewed."

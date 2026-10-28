@@ -5,16 +5,13 @@ Le module est `github.com/kevung/nicomaque` ; le paquet Go s'appelle `tournoi`. 
 
 Bibliothèque Go sans dépendance, à intégrer dans un logiciel web dans le même processus.
 Journal d'événements, état reconstruit par `Replay`, propositions d'actions pour le directeur de
-tournoi, aucun départage. Exemple d'intégration dans `doc.go`. Les choix de conception viennent
-d'une étude par simulation des formats résumée dans `docs/etude_formats.md` ; le travail restant
-est dans `docs/RESTE_A_FAIRE.md`. Pour une présentation accessible du fonctionnement et des
-décisions de conception — utilisable telle quelle pour répondre aux questions des joueurs et des
-organisateurs — voir `docs/comprendre_le_moteur.md`. La **spécification complète**, assez détaillée
-pour reconstruire le moteur à partir d'elle seule, est dans `docs/specification.md`.
-Les deux existent aussi en PDF à côté.
+tournoi, aucun départage. Exemple d'intégration dans `doc.go` ; le travail restant est dans
+`docs/RESTE_A_FAIRE.md`.
 
-**Documentation en ligne, en neuf langues :**
-<https://kevung.github.io/nicomaque/>
+**Documentation en ligne, en français et en anglais :** <https://kevung.github.io/nicomaque/>
+— guide du directeur de tournoi, intégration, formats, référence complète du moteur (de quoi le
+reconstruire), étude des formats, questions fréquentes. Les sources sont dans `doc/`
+(Sphinx) ; les construire : `doc/CLAUDE.md`.
 
 ```bash
 go get github.com/kevung/nicomaque
@@ -62,7 +59,7 @@ grille par tour lue **du dernier tour vers le premier** (`[15,13,11,9]`), `lengt
 - `cmd/tournoi-demo` : démonstration (`go run ./cmd/tournoi-demo -format suisse_tableau -joueurs 32 -etapes -sortie demo`, `-rejouer demo/journal.json`).
 - `cmd/tournoi-td` : console interactive pour diriger un tournoi à la main (voir « Tester à la main »).
 - `exemples/` : tournois simulés rendus à quatre stades pour sept formats ; ouvrir `exemples/index.html`. Régénérer avec `scripts/exemples.sh`.
-- `site/` : le site publié (Sphinx + gettext, neuf langues). Voir `site/README.md` pour le construire et pour ce qui reste à traduire.
+- `doc/` : la documentation publiée (Sphinx, français et anglais). Règles et construction : `doc/CLAUDE.md`.
 
 ## Tests
 

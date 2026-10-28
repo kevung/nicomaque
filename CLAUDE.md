@@ -6,8 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Bibliothèque Go (`tournoi`, module `github.com/kevung/nicomaque`, Go 1.22, **aucune dépendance externe**) : moteur de tournoi de backgammon destiné à être intégré dans un logiciel hôte, dans le même processus. Code, commentaires, identifiants de labels et documentation sont **en français** ; garder cette convention (noms de fonctions exportées en anglais, commentaires et messages en français).
 
-Le moteur n'a jamais dirigé de vrai tournoi. Les choix de conception (formats, absence de départage, pas de têtes de série) sont justifiés dans `docs/etude_formats.md` ; la liste priorisée du travail restant est dans `docs/RESTE_A_FAIRE.md` : consulter ce fichier avant d'ajouter une fonction, et le mettre à jour quand un point est traité.
-`docs/specification.md` (et son PDF) est la spécification complète du moteur : la mettre à jour quand le comportement change. `docs/comprendre_le_moteur.md` est la présentation accessible (décisions de conception, justifications, questions fréquentes, chiffres de référence) : les chiffres du chapitre « Chiffres de référence » viennent de `go test -run TestParity -v ./` et sont à refaire si l'appariement change.
+Le moteur n'a jamais dirigé de vrai tournoi. Les choix de conception (formats, absence de départage, pas de têtes de série par défaut) sont justifiés dans `doc/source/annexe_conception.rst` et `doc/source/annexe_etude.rst` ; la liste priorisée du travail restant est dans `docs/RESTE_A_FAIRE.md` : consulter ce fichier avant d'ajouter une fonction, et le mettre à jour quand un point est traité.
+La documentation `doc/` (Sphinx, français et anglais) EST la spécification du moteur : ses pages de référence (`modele`, `configuration`, `journal`, `etat`, `propositions`, `graphes`, `format_*`, `classement`, `statut`, `horloge`, paquets annexes) se mettent à jour dans le même commit que le comportement. Les chiffres de référence (`annexe_etude.rst`, `formats.rst`) viennent de `go test -run TestParity -v ./` et sont à refaire si l'appariement change. Règles de la doc : `doc/CLAUDE.md`.
 
 ## Commandes
 
@@ -76,7 +76,7 @@ Un tournoi est une suite de `PhaseConfig` (`Config.Validate` remplit les défaut
 | `bracket`, `lives_bracket` | `phase_bracket.go` | tirage puis sections `main`, `conso`, `last`, `gf` |
 | `round_robin` | `phase_rr.go` | poules (table de Berger), puis sections `barrage` à appariement dynamique en cas d'égalité |
 
-Le tirage d'un tableau (`rules.DrawSlots`) est aléatoire par défaut ; `PhaseConfig.Seeding = "rating"` le remplace par le placement classique par cote (`rules.SeedOrder`). Le défaut vide est un choix de conception justifié dans `docs/etude_formats.md`, pas un oubli : ne pas l'inverser.
+Le tirage d'un tableau (`rules.DrawSlots`) est aléatoire par défaut ; `PhaseConfig.Seeding = "rating"` le remplace par le placement classique par cote (`rules.SeedOrder`). Le défaut vide est un choix de conception justifié dans `doc/source/annexe_conception.rst`, pas un oubli : ne pas l'inverser.
 
 Le passage de phase (`enterFrom`) admet les survivants **avec leurs vies restantes** quand la phase suivante est à vies (`lives_bracket` : 2 vies = exempt du premier tour), sinon `entry` vaut `all` ou `top:N`.
 
@@ -100,19 +100,13 @@ Un `Match` (state.go, joué, avec table et horodatages) est relié à son `GMatc
 - `players/` : import et export CSV (séparateur détecté, identifiants en slug ; `ToCSV` écrit ce que `FromCSV` relit).
 - `cmd/tournoi-demo`, `cmd/tournoi-td` : chacun a sa propre map `formats` de configurations nommées ; les garder cohérentes si on en ajoute une.
 
-## Site publié
+## Documentation publiée
 
-`site/` est un projet Sphinx (MyST + gettext) publié sur GitHub Pages à chaque poussée sur `main`
-(`.github/workflows/pages.yml`). Le français est la source ; huit catalogues gettext dans
-`site/locale/` ; une chaîne non traduite retombe sur le français, ce qui est voulu.
-
-Les trois documents longs (`comprendre_le_moteur.md`, `etude_formats.md`, `specification.md`)
-restent dans `docs/`, leur source canonique ; `site/build.py` les recopie avant la construction.
-**Après toute modification d'une page du site ou de ces trois documents**, régénérer les
-catalogues (`site/build.py --pot --langue fr`) — la CI le signale sinon. Ne jamais réécrire un
-`.po` avec `msgcat`, Babel ou polib : ils reformatent tout le fichier. Utiliser
-`site/po-fill.py`, qui n'édite que les entrées demandées. Voir `site/README.md` pour l'état des
-traductions.
+`doc/` est un projet Sphinx (reStructuredText, thème Read the Docs) publié sur GitHub Pages à
+chaque poussée sur `main` (`.github/workflows/pages.yml`) : <https://kevung.github.io/nicomaque/>.
+Le français est la source ; l'anglais est le catalogue gettext `doc/source/locale/en/`. Après
+toute modification d'une page : `scripts/doc-po-update.sh`, traduire les entrées vides ou fuzzy
+(`scripts/po-fill.py`), puis `scripts/doc-i18n-check.sh`. Détails : `doc/CLAUDE.md`.
 
 ## Intégration continue
 
@@ -125,4 +119,4 @@ la galerie et échoue si celle du dépôt n'est plus à jour.
 
 Les tests sont des tests d'invariants par simulation, pas des tests unitaires : un nouveau format ou une nouvelle option s'ajoute dans `configs()` de `sim_test.go` pour être couvert automatiquement (vainqueur unique, classement complet, rejeu identique, aucun match entre joueurs de groupes différents, peu de rematchs). `-short` réduit la matrice à six effectifs et trois graines pour rester sous trois secondes ; la matrice complète tourne sans `-short`, donc en intégration continue.
 
-Deux cibles de fuzzing gardent `Apply` : `FuzzApply` applique des suites d'événements tirées au hasard (les octets sont un PLAN, pas du JSON — du JSON aléatoire ne testerait que le décodeur), `FuzzReplayJournal` rejoue des octets quelconques présentés comme un journal. Une erreur est une réponse acceptable ; un panic ou un état incohérent, non. `testdata/journal_v0.json` est la fixture d'un journal antérieur aux codes structurés : elle ne se régénère pas. Un changement d'algorithme d'appariement se valide en plus avec `TestParity` (P(meilleur gagne), nombre de matchs, durée) comparé aux valeurs de `docs/etude_formats.md`.
+Deux cibles de fuzzing gardent `Apply` : `FuzzApply` applique des suites d'événements tirées au hasard (les octets sont un PLAN, pas du JSON — du JSON aléatoire ne testerait que le décodeur), `FuzzReplayJournal` rejoue des octets quelconques présentés comme un journal. Une erreur est une réponse acceptable ; un panic ou un état incohérent, non. `testdata/journal_v0.json` est la fixture d'un journal antérieur aux codes structurés : elle ne se régénère pas. Un changement d'algorithme d'appariement se valide en plus avec `TestParity` (P(meilleur gagne), nombre de matchs, durée) comparé aux valeurs de `doc/source/annexe_etude.rst`.

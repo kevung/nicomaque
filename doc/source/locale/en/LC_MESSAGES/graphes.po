@@ -1,0 +1,472 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/graphes.rst:4
+msgid "Graphes de matchs"
+msgstr "Match graphs"
+
+#: ../../source/graphes.rst:6
+msgid ""
+"Ce chapitre spécifie ``rules/graphe.go``, commun à tous les formats à "
+"graphe (tableaux, consolantes, dernière chance, grande finale, groupes "
+"GSL, poules). Les règles y sont des fonctions pures sur les types de "
+"``rules`` (``Section``, ``Node``, ``Src``) ; le moteur garde ses propres "
+"types (``Section``, ``GMatch``, ``Src`` de ``state.go``, sérialisés dans "
+"l'état) et les convertit dans ``regles.go`` (``toRulesSections``, "
+"``fromRulesSections``)."
+msgstr ""
+"This chapter specifies ``rules/graphe.go``, shared by all graph-based "
+"formats (brackets, consolations, last chance, grand final, GSL groups, "
+"pools). The rules there are pure functions on the types of ``rules`` "
+"(``Section``, ``Node``, ``Src``); the engine keeps its own types "
+"(``Section``, ``GMatch``, ``Src`` from ``state.go``, serialised in the "
+"state) and converts them in ``regles.go`` (``toRulesSections``, "
+"``fromRulesSections``)."
+
+#: ../../source/graphes.rst:13
+msgid "Types"
+msgstr "Types"
+
+#: ../../source/graphes.rst:55
+msgid ""
+"Le ``GMatch`` du moteur a les mêmes champs, à ceci près que l'identifiant"
+" du match lancé s'appelle ``MatchID`` (balise ``match_id``) et que "
+"``Done`` est toujours sérialisé ; la ``Section`` du moteur range ses "
+"nœuds dans ``Matches`` (balise ``matches``). Un barrage n'a pas de nœuds "
+": ses joueurs s'apparient au fil des résultats (voir "
+":ref:`format_poules`)."
+msgstr ""
+"The engine's ``GMatch`` has the same fields, except that the identifier "
+"of the launched match is called ``MatchID`` (tag ``match_id``) and that "
+"``Done`` is always serialised; the engine's ``Section`` stores its nodes "
+"in ``Matches`` (tag ``matches``). A play-off has no nodes: its players "
+"are paired as results come in (see :ref:`format_poules`)."
+
+#: ../../source/graphes.rst:61
+msgid "Accès"
+msgstr "Access"
+
+#: ../../source/graphes.rst:69
+msgid "Un ``Match`` joué est relié à son ``GMatch`` par ``(Section, Key)``."
+msgstr "A played ``Match`` is linked to its ``GMatch`` by ``(Section, Key)``."
+
+#: ../../source/graphes.rst:72
+msgid "Résolution"
+msgstr "Resolution"
+
+#: ../../source/graphes.rst:79
+msgid ""
+"Fonction centrale : elle propage les résultats dans tous les graphes de "
+"la phase **jusqu'au point fixe**. Elle est idempotente et peut être "
+"appelée aussi souvent qu'on veut. ``rules.Resolve`` travaille sur une "
+"copie des sections et la renvoie ; l'enveloppe du moteur passe les "
+"retirés triés (``withdrawnRefs``) et recopie ``Players``, ``Winner``, "
+"``Loser``, ``Done``, ``Walkover`` et ``Skipped`` dans ses ``GMatch``, en "
+"place."
+msgstr ""
+"Central function: it propagates the results through all the graphs of the"
+" phase **up to the fixed point**. It is idempotent and can be called as "
+"often as desired. ``rules.Resolve`` works on a copy of the sections and "
+"returns it; the engine's wrapper passes the sorted withdrawn players "
+"(``withdrawnRefs``) and copies ``Players``, ``Winner``, ``Loser``, "
+"``Done``, ``Walkover`` and ``Skipped`` back into its ``GMatch`` values, "
+"in place."
+
+#: ../../source/graphes.rst:122
+msgid "Points d'attention :"
+msgstr "Points of attention:"
+
+#: ../../source/graphes.rst:124
+msgid "l'ordre ``(a) (b) (c) (d)`` est significatif ;"
+msgstr "the order ``(a) (b) (c) (d)`` is significant;"
+
+#: ../../source/graphes.rst:125
+msgid ""
+"``(c)`` ne s'applique **pas** si le match a déjà été lancé "
+"(``Match``/``MatchID`` non vide) : un match commencé se conclut par un "
+"résultat de forfait, pas par un walkover de graphe. C'est pourquoi "
+"``recompute`` relie d'abord chaque place à son match, puis rejoue les "
+"résultats ;"
+msgstr ""
+"``(c)`` does **not** apply if the match has already been launched "
+"(``Match``/``MatchID`` non-empty): a started match concludes with a "
+"forfeit result, not with a graph walkover. This is why ``recompute`` "
+"first links each place to its match, then replays the results;"
+
+#: ../../source/graphes.rst:128
+msgid ""
+"si les deux joueurs sont retirés, l'ordre du tableau tranche "
+"(``Players[0]`` gagne) ; le vainqueur fictif sera lui-même éliminé par "
+"walkover au tour suivant ;"
+msgstr ""
+"if both players are withdrawn, the bracket order decides (``Players[0]`` "
+"wins); the fictitious winner will itself be eliminated by walkover in the"
+" next round;"
+
+#: ../../source/graphes.rst:130
+msgid ""
+"la propagation d'un ``BYE`` gagnant fait remonter ``BYE`` comme vainqueur"
+" d'une paire entièrement vide, ce qui vide toute une branche du tableau —"
+" comportement voulu."
+msgstr ""
+"propagating a winning ``BYE`` makes ``BYE`` come up as the winner of an "
+"entirely empty pair, which empties a whole branch of the bracket — "
+"intended behaviour."
+
+#: ../../source/graphes.rst:134
+msgid "Sélection des matchs lançables"
+msgstr "Selecting launchable matches"
+
+#: ../../source/graphes.rst:145
+msgid ""
+"Tous les nœuds, dans l'ordre des sections puis des nœuds, tels que : non "
+"``Done``, sans ``Match``, deux places connues, aucune place à ``BYE``."
+msgstr ""
+"All nodes, in section order then node order, such that: not ``Done``, no "
+"``Match``, two known places, no place at ``BYE``."
+
+#: ../../source/graphes.rst:152
+msgid ""
+"Filtre ``Ready`` : on écarte tout nœud dont un joueur est déjà occupé "
+"(``busy`` : les joueurs d'un match en cours, ``Phase.Busy``) **ou déjà "
+"pris par un nœud précédent du même lot** — le premier nœud qui prend un "
+"joueur l'emporte. Le résultat est donc un lot de matchs simultanément "
+"lançables, sans conflit de joueur. Les joueurs occupés dans une autre "
+"épreuve ne sont pas écartés ici : leur match reste proposé et le moteur "
+"le retient (``holdElsewhere``, voir :ref:`propositions`)."
+msgstr ""
+"``Ready`` filter: discard any node with a player who is already busy "
+"(``busy``: the players of a match in progress, ``Phase.Busy``) **or "
+"already taken by a previous node of the same batch** — the first node to "
+"take a player wins. The result is therefore a batch of simultaneously "
+"launchable matches, with no player conflict. Players busy in another "
+"event are not discarded here: their match remains proposed and the engine"
+" holds it back (``holdElsewhere``, see :ref:`propositions`)."
+
+#: ../../source/graphes.rst:164
+msgid "Constructeurs de sections"
+msgstr "Section constructors"
+
+#: ../../source/graphes.rst:166
+msgid ""
+"Un constructeur ne fait que **poser des** ``Src`` ; il ne consulte jamais"
+" l'état. Ajouter un format de tableau se réduit à écrire un constructeur."
+" Les libellés sont des codes (``rules.Label``, ``rules/codes.go``), "
+"jamais des phrases : l'hôte les traduit."
+msgstr ""
+"A constructor only **sets** ``Src`` values; it never consults the state. "
+"Adding a bracket format boils down to writing a constructor. Labels are "
+"codes (``rules.Label``, ``rules/codes.go``), never sentences: the host "
+"translates them."
+
+#: ../../source/graphes.rst:171
+msgid "Tableau à élimination simple"
+msgstr "Single-elimination bracket"
+
+#: ../../source/graphes.rst:177
+msgid ""
+"La longueur des matchs vient d'un **plan** qui superpose trois sources, "
+"de la plus précise à la plus générale — la liste par tour, la longueur de"
+" finale, la longueur par défaut :"
+msgstr ""
+"Match length comes from a **plan** that layers three sources, from the "
+"most specific to the most general — the per-round list, the final length,"
+" the default length:"
+
+#: ../../source/graphes.rst:196
+#, no-python-brace-format
+msgid ""
+"``LengthPlan{Default: l}`` est le plan d'une longueur unique (mini-"
+"tableaux, dernière chance) ; ``BracketSections`` construit celui du "
+"tableau principal à partir de ``ph.Length``, ``final_length`` et "
+"``lengths``."
+msgstr ""
+"``LengthPlan{Default: l}`` is the plan for a single length (mini-"
+"brackets, last chance); ``BracketSections`` builds the main bracket's "
+"plan from ``ph.Length``, ``final_length`` and ``lengths``."
+
+#: ../../source/graphes.rst:200
+msgid "``slots`` a une longueur ``size`` puissance de 2. ``rounds = log2(size)``."
+msgstr ""
+"``slots`` has a length ``size`` that is a power of 2. ``rounds = "
+"log2(size)``."
+
+#: ../../source/graphes.rst:218
+msgid "Libellés de tour :"
+msgstr "Round labels:"
+
+#: ../../source/graphes.rst:225
+msgid "``rounds - r``"
+msgstr "``rounds - r``"
+
+#: ../../source/graphes.rst:225 ../../source/graphes.rst:339
+#: ../../source/graphes.rst:353
+msgid "Libellé"
+msgstr "Label"
+
+#: ../../source/graphes.rst:227 ../../source/graphes.rst:342
+#: ../../source/graphes.rst:356
+msgid "1"
+msgstr "1"
+
+#: ../../source/graphes.rst:227
+#, no-python-brace-format
+msgid "``{kind: final}``"
+msgstr "``{kind: final}``"
+
+#: ../../source/graphes.rst:228 ../../source/graphes.rst:343
+#: ../../source/graphes.rst:357
+msgid "2"
+msgstr "2"
+
+#: ../../source/graphes.rst:228
+#, no-python-brace-format
+msgid "``{kind: semi_final}``"
+msgstr "``{kind: semi_final}``"
+
+#: ../../source/graphes.rst:229 ../../source/graphes.rst:344
+msgid "3"
+msgstr "3"
+
+#: ../../source/graphes.rst:229
+#, no-python-brace-format
+msgid "``{kind: quarter_final}``"
+msgstr "``{kind: quarter_final}``"
+
+#: ../../source/graphes.rst:230
+msgid "autre"
+msgstr "other"
+
+#: ../../source/graphes.rst:230
+#, no-python-brace-format
+msgid "``{kind: bracket_round, n: r+1}``"
+msgstr "``{kind: bracket_round, n: r+1}``"
+
+#: ../../source/graphes.rst:233
+msgid ""
+"Le dernier nœud de la section (``Nodes[len-1]``) est toujours la finale :"
+" c'est lui qui désigne le vainqueur de la section."
+msgstr ""
+"The last node of the section (``Nodes[len-1]``) is always the final: it "
+"designates the winner of the section."
+
+#: ../../source/graphes.rst:237
+msgid "Sections d'un tableau tiré"
+msgstr "Sections of a drawn bracket"
+
+#: ../../source/graphes.rst:259
+msgid "Le détail des formats de tableau est dans :ref:`format_tableaux`."
+msgstr "The details of the bracket formats are in :ref:`format_tableaux`."
+
+#: ../../source/graphes.rst:262
+msgid "Consolante progressive"
+msgstr "Progressive consolation"
+
+#: ../../source/graphes.rst:268
+msgid ""
+"La consolante (genre ``conso``) recueille les perdants du tableau "
+"principal au fur et à mesure. Sa structure alterne un **tour de fusion** "
+"(survivants de la consolante contre les nouveaux perdants du principal) "
+"et un **tour interne** (survivants entre eux). Tous ses matchs ont la "
+"longueur ``length``."
+msgstr ""
+"The consolation (kind ``conso``) collects the losers of the main bracket "
+"as they occur. Its structure alternates a **merge round** (consolation "
+"survivors against the new losers from the main bracket) and an **internal"
+" round** (survivors among themselves). All its matches have length "
+"``length``."
+
+#: ../../source/graphes.rst:298
+msgid ""
+"L'**ordre inversé** des drops (``drops[len-1-i]``) sert à éviter qu'un "
+"joueur retombant du principal ne retrouve immédiatement l'adversaire qui "
+"vient de le battre, ou un joueur de la même moitié de tableau. Il ne "
+"garantit rien au-delà du tour immédiat. Le tirage étant enregistré dans "
+"le journal, cet algorithme peut changer sans casser les journaux "
+"existants."
+msgstr ""
+"The **reversed order** of the drops (``drops[len-1-i]``) is used so that "
+"a player dropping from the main bracket does not immediately meet the "
+"opponent who just beat them, or a player from the same half of the "
+"bracket. It guarantees nothing beyond the immediate round. Since the draw"
+" is recorded in the journal, this algorithm can change without breaking "
+"existing journals."
+
+#: ../../source/graphes.rst:304
+msgid "Tableau construit sur des sources (dernière chance)"
+msgstr "Bracket built on sources (last chance)"
+
+#: ../../source/graphes.rst:320
+msgid ""
+"Le genre de la section est son nom (``last``). Remplir toutes les places "
+"0 avant les places 1 **répartit les entrants** : avec 5 sources sur 8 "
+"places, on obtient trois joueurs exemptés plutôt qu'un déséquilibre."
+msgstr ""
+"The kind of the section is its name (``last``). Filling all the 0 places "
+"before the 1 places **spreads the entrants**: with 5 sources over 8 "
+"places, one gets three players with byes rather than an imbalance."
+
+#: ../../source/graphes.rst:325
+msgid "Groupe GSL"
+msgstr "GSL group"
+
+#: ../../source/graphes.rst:331
+msgid ""
+"Le format GSL (groupe de 4 à double élimination, 5 matchs) donne deux "
+"qualifiés : le vainqueur du match des gagnants (0 défaite) et le "
+"vainqueur du match décisif (1 défaite). Genre ``gsl`` ; les sections d'un"
+" bloc sont nommées ``B<bloc>G<groupe>`` par ``GSLBlockSections`` (voir "
+":ref:`format_gsl`)."
+msgstr ""
+"The GSL format (group of 4 with double elimination, 5 matches) yields two"
+" qualifiers: the winner of the winners' match (0 losses) and the winner "
+"of the decider (1 loss). Kind ``gsl``; the sections of a block are named "
+"``B<bloc>G<groupe>`` by ``GSLBlockSections`` (see :ref:`format_gsl`)."
+
+#: ../../source/graphes.rst:336
+msgid ""
+"Groupe de **4** joueurs ``a, b, c, d`` — clés ``<name>.0`` à ``<name>.4``"
+" :"
+msgstr "Group of **4** players ``a, b, c, d`` — keys ``<name>.0`` to ``<name>.4``:"
+
+#: ../../source/graphes.rst:339 ../../source/graphes.rst:353
+msgid "#"
+msgstr "#"
+
+#: ../../source/graphes.rst:339 ../../source/graphes.rst:353
+msgid "Places"
+msgstr "Places"
+
+#: ../../source/graphes.rst:341 ../../source/graphes.rst:355
+msgid "0"
+msgstr "0"
+
+#: ../../source/graphes.rst:341 ../../source/graphes.rst:342
+#: ../../source/graphes.rst:355
+msgid "``opening``"
+msgstr "``opening``"
+
+#: ../../source/graphes.rst:341 ../../source/graphes.rst:355
+msgid "``a`` — ``b``"
+msgstr "``a`` — ``b``"
+
+#: ../../source/graphes.rst:342
+msgid "``c`` — ``d``"
+msgstr "``c`` — ``d``"
+
+#: ../../source/graphes.rst:343 ../../source/graphes.rst:356
+msgid "``winners_match``"
+msgstr "``winners_match``"
+
+#: ../../source/graphes.rst:343
+msgid "vainqueur 0 — vainqueur 1"
+msgstr "winner 0 — winner 1"
+
+#: ../../source/graphes.rst:344
+msgid "``losers_match``"
+msgstr "``losers_match``"
+
+#: ../../source/graphes.rst:344 ../../source/graphes.rst:357
+msgid "perdant 0 — perdant 1"
+msgstr "loser 0 — loser 1"
+
+#: ../../source/graphes.rst:345
+msgid "4"
+msgstr "4"
+
+#: ../../source/graphes.rst:345 ../../source/graphes.rst:357
+msgid "``decider``"
+msgstr "``decider``"
+
+#: ../../source/graphes.rst:345
+msgid "perdant 2 — vainqueur 3"
+msgstr "loser 2 — winner 3"
+
+#: ../../source/graphes.rst:348
+msgid "``Rounds = [[0,1], [2,3], [4]]``."
+msgstr "``Rounds = [[0,1], [2,3], [4]]``."
+
+#: ../../source/graphes.rst:350
+msgid "Groupe de **3** joueurs ``a, b, c`` :"
+msgstr "Group of **3** players ``a, b, c``:"
+
+#: ../../source/graphes.rst:356
+msgid "vainqueur 0 — ``c``"
+msgstr "winner 0 — ``c``"
+
+#: ../../source/graphes.rst:360
+msgid "``Rounds = [[0], [1], [2]]``."
+msgstr "``Rounds = [[0], [1], [2]]``."
+
+#: ../../source/graphes.rst:362
+msgid ""
+"Groupe de **2** : un seul nœud, libellé ``single_match``, ``Rounds = "
+"[[0]]``."
+msgstr "Group of **2**: a single node, label ``single_match``, ``Rounds = [[0]]``."
+
+#: ../../source/graphes.rst:364
+msgid ""
+"Groupe de taille autre : section sans nœud (``GSLBlockSections`` ne crée "
+"pas de section pour un groupe de moins de deux joueurs)."
+msgstr ""
+"Group of any other size: a section with no node (``GSLBlockSections`` "
+"creates no section for a group of fewer than two players)."
+
+#: ../../source/graphes.rst:368
+msgid "Mini-tableau à élimination directe"
+msgstr "Direct-elimination mini-bracket"
+
+#: ../../source/graphes.rst:374
+msgid ""
+"Pour un groupe de 2 à 4 joueurs **à une vie** (blocs GSL des joueurs déjà"
+" battus une fois) :"
+msgstr ""
+"For a group of 2 to 4 players **with one life** (GSL blocks of players "
+"already beaten once):"
+
+#: ../../source/graphes.rst:386
+msgid "Poule toutes rondes (table de Berger)"
+msgstr "Round-robin pool (Berger table)"
+
+#: ../../source/graphes.rst:407
+msgid ""
+"Le premier élément reste fixe, les autres tournent d'un cran : c'est la "
+"table de Berger classique. Chaque joueur rencontre chaque autre "
+"exactement une fois, en ``n-1`` rondes. Genre ``poule`` ; "
+"``PoolSections`` nomme les poules ``poule:A``, ``poule:B``… "
+"(``PoolSectionName``) et pose ``Group = i+1``."
+msgstr ""
+"The first element stays fixed, the others rotate one step: this is the "
+"classic Berger table. Each player meets every other exactly once, in "
+"``n-1`` rounds. Kind ``poule``; ``PoolSections`` names the pools "
+"``poule:A``, ``poule:B``… (``PoolSectionName``) and sets ``Group = i+1``."
+
+#: ../../source/graphes.rst:412
+msgid ""
+"Les places d'une poule sont **toutes fixées** (``Src.Player``) : les "
+"matchs sont donc tous lançables dès le tirage, sous la seule contrainte "
+"qu'un joueur ne joue qu'un match à la fois. C'est ce qui donne aux poules"
+" leur souplesse d'ordonnancement (voir :ref:`format_poules`)."
+msgstr ""
+"The places of a pool are **all fixed** (``Src.Player``): the matches are "
+"therefore all launchable from the draw, under the sole constraint that a "
+"player plays only one match at a time. This is what gives pools their "
+"scheduling flexibility (see :ref:`format_poules`)."

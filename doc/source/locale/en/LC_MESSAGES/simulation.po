@@ -1,0 +1,228 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/simulation.rst:4
+msgid "Simulation et prévision (``sim``)"
+msgstr "Simulation and forecasting (``sim``)"
+
+#: ../../source/simulation.rst:6
+msgid ""
+"Le paquet ``sim`` joue des tournois fictifs avec le moteur. Il sert à "
+"trois choses : les tests d'invariants, la validation des formats "
+"(comparaison avec le simulateur de l'étude) et la prévision de l'heure de"
+" fin d'un tournoi en cours."
+msgstr ""
+"The ``sim`` package plays fictitious tournaments with the engine. It "
+"serves three purposes: invariant tests, validation of the formats "
+"(comparison with the study's simulator) and forecasting the end time of a"
+" tournament in progress."
+
+#: ../../source/simulation.rst:11
+msgid "Modèle probabiliste"
+msgstr "Probabilistic model"
+
+#: ../../source/simulation.rst:17
+msgid ""
+"Probabilité que le joueur de PR ``a`` batte celui de PR ``b`` en ``n`` "
+"points, formule Elo/FIBS avec la conversion **3 PR = 100 points Elo** "
+"(enveloppe de ``rules.WinProbability``). Le PR est une cote d'erreurs : "
+"plus bas = meilleur."
+msgstr ""
+"Probability that the player with PR ``a`` beats the one with PR ``b`` "
+"over ``n`` points, Elo/FIBS formula with the conversion **3 PR = 100 Elo "
+"points** (wrapper of ``rules.WinProbability``). PR is an error rating: "
+"lower = better."
+
+#: ../../source/simulation.rst:21
+msgid ""
+"D = \\frac{(b-a)\\times 100}{3} \\qquad P = \\frac{1}{1 + "
+"10^{-D\\sqrt{n}/2000}}\n"
+"\n"
+msgstr ""
+"D = \\frac{(b-a)\\times 100}{3} \\qquad P = \\frac{1}{1 + "
+"10^{-D\\sqrt{n}/2000}}\n"
+"\n"
+
+#: ../../source/simulation.rst:23
+msgid ""
+"Justification (voir :ref:`annexe_etude`) : sur la base BMAB (33 238 "
+"matchs uniques), 1 PR d'écart vaut 2,8 % à 7–11 points (β = 0,036 pour α "
+"= 0,5 ; théorie 0,039). L'exposant α de la longueur n'est pas "
+"identifiable avec ces données — la vraisemblance est plate entre 0 et "
+"0,7, α = 1 est exclu — mais la mécanique « erreur cumulée ∝ N, chance ∝ "
+"√N » soutient α = 0,5."
+msgstr ""
+"Justification (see :ref:`annexe_etude`): on the BMAB database (33,238 "
+"unique matches), 1 PR of difference is worth 2.8% at 7–11 points (β = "
+"0.036 for α = 0.5; theory 0.039). The exponent α of the length is not "
+"identifiable with these data — the likelihood is flat between 0 and 0.7, "
+"α = 1 is excluded — but the mechanics \"cumulative error ∝ N, luck ∝ √N\""
+" support α = 0.5."
+
+#: ../../source/simulation.rst:32
+msgid ""
+"Durée d'un match de ``n`` points : loi **gamma de forme 8** et de moyenne"
+" ``minPerPoint × n``, obtenue en moyennant huit tirages exponentiels. La "
+"forme 8 donne un coefficient de variation d'environ 35 %, proche de "
+"l'observation."
+msgstr ""
+"Duration of a match of ``n`` points: **gamma distribution with shape 8** "
+"and mean ``minPerPoint × n``, obtained by averaging eight exponential "
+"draws. Shape 8 gives a coefficient of variation of about 35%, close to "
+"what is observed."
+
+#: ../../source/simulation.rst:37
+msgid "Exécution d'un tournoi"
+msgstr "Running a tournament"
+
+#: ../../source/simulation.rst:61
+msgid "Boucle de simulation :"
+msgstr "Simulation loop:"
+
+#: ../../source/simulation.rst:81
+msgid ""
+"Le score du vainqueur est ``n`` ; celui du perdant est tiré uniformément "
+"dans ``[0, n-1]``. Le résultat porte ``Winner`` (le vainqueur, "
+"``Final[0]``), ``Minutes`` (durée totale depuis ``Start``), ``NMatches`` "
+"(matchs lancés) et ``Steps`` ; en cas d'erreur, ``Err`` est rempli et "
+"``State``/``Journal`` sont ceux du moment de l'erreur."
+msgstr ""
+"The winner's score is ``n``; the loser's is drawn uniformly in ``[0, "
+"n-1]``. The result carries ``Winner`` (the winner, ``Final[0]``), "
+"``Minutes`` (total duration since ``Start``), ``NMatches`` (matches "
+"started) and ``Steps``; in case of error, ``Err`` is filled in and "
+"``State``/``Journal`` are those at the time of the error."
+
+#: ../../source/simulation.rst:86
+msgid ""
+"``Hook`` est appelé après chaque événement appliqué : c'est le point "
+"d'accroche des tests d'invariants. Une erreur renvoyée par le hook "
+"interrompt la simulation."
+msgstr ""
+"``Hook`` is called after each applied event: it is the hook point for "
+"invariant tests. An error returned by the hook interrupts the simulation."
+
+#: ../../source/simulation.rst:93
+msgid ""
+"Crée ``P`` joueurs de PR tirés dans une loi normale ``N(mu, sigma)`` "
+"tronquée à ``[min, max]``, **triés du meilleur au moins bon** : ``P1`` "
+"est toujours le meilleur joueur du champ. Les clubs sont affectés "
+"cycliquement (``Club 0`` à ``Club 4``) pour exercer ``avoid_clubs`` ; les"
+" noms sont ``Joueur 1``, ``Joueur 2``… Le champ de référence de l'étude "
+"est ``Champ(64, 6, 2, 2, 10)``."
+msgstr ""
+"Creates ``P`` players with PRs drawn from a normal distribution ``N(mu, "
+"sigma)`` truncated to ``[min, max]``, **sorted from best to worst**: "
+"``P1`` is always the best player in the field. Clubs are assigned "
+"cyclically (``Club 0`` to ``Club 4``) to exercise ``avoid_clubs``; names "
+"are ``Joueur 1``, ``Joueur 2``… The study's reference field is "
+"``Champ(64, 6, 2, 2, 10)``."
+
+#: ../../source/simulation.rst:100
+msgid "Prévision de fin"
+msgstr "End forecast"
+
+#: ../../source/simulation.rst:107
+msgid ""
+"Rejoue le journal, puis simule ``K`` fins de tournoi à partir de ``now`` "
+"(la ``k``-ième avec la graine ``seed + k``). Renvoie les durées restantes"
+" en minutes, **triées croissantes** : la médiane est ``out[K/2]``, le "
+"quantile 90 % ``out[9K/10]``."
+msgstr ""
+"Replays the journal, then simulates ``K`` tournament endings from ``now``"
+" (the ``k``-th with seed ``seed + k``). Returns the remaining durations "
+"in minutes, **sorted ascending**: the median is ``out[K/2]``, the 90% "
+"quantile ``out[9K/10]``."
+
+#: ../../source/simulation.rst:111
+msgid "Particularités :"
+msgstr "Particularities:"
+
+#: ../../source/simulation.rst:113
+msgid "``minPerPoint ≤ 0`` prend ``Config.MinPerPoint`` du tournoi ;"
+msgstr "``minPerPoint ≤ 0`` takes the tournament's ``Config.MinPerPoint``;"
+
+#: ../../source/simulation.rst:114
+msgid ""
+"les PR inconnus (0) sont remplacés par la moyenne des PR connus, ou 6 "
+"s'il n'y en a aucun (``rules.MeanRating``) ;"
+msgstr ""
+"unknown PRs (0) are replaced by the mean of the known PRs, or 6 if there "
+"are none (``rules.MeanRating``);"
+
+#: ../../source/simulation.rst:116
+#, no-python-format
+msgid ""
+"pour un match déjà en cours, la durée restante est un tirage neuf moins "
+"le temps déjà écoulé, **plancher à 10 % de la durée attendue** "
+"(``rules.RemainingDuration``) ;"
+msgstr ""
+"for a match already in progress, the remaining duration is a fresh draw "
+"minus the time already elapsed, **floored at 10% of the expected "
+"duration** (``rules.RemainingDuration``);"
+
+#: ../../source/simulation.rst:118
+msgid ""
+"le perdant d'un match simulé marque 0 ; chaque fin simulée est bornée à "
+"20 000 tours de boucle ;"
+msgstr ""
+"the loser of a simulated match scores 0; each simulated ending is bounded"
+" to 20,000 loop iterations;"
+
+#: ../../source/simulation.rst:119
+msgid "un tournoi déjà terminé renvoie ``[0]``."
+msgstr "an already finished tournament returns ``[0]``."
+
+#: ../../source/simulation.rst:121
+msgid ""
+"Les règles de prévision elles-mêmes vivent dans ``rules`` "
+"(``WinProbability``, ``MeanRating``, ``RemainingDuration``, "
+"``EstimatedEnd``, ``AfterBreaks``) ; ``Forecast`` en est l'enveloppe à "
+"journal (voir :ref:`horloge`)."
+msgstr ""
+"The forecasting rules themselves live in ``rules`` (``WinProbability``, "
+"``MeanRating``, ``RemainingDuration``, ``EstimatedEnd``, "
+"``AfterBreaks``); ``Forecast`` is their journal wrapper (see "
+":ref:`horloge`)."
+
+#: ../../source/simulation.rst:131
+msgid ""
+"``Durations`` convertit les minutes de ``Forecast`` en ``time.Duration``."
+" ``EstimatedEnd`` donne l'heure de fin estimée : la médiane des ``K`` "
+"fins simulées, reportée au-delà des pauses déclarées (``Config.Breaks``, "
+"via ``rules.EstimatedEnd``). ``ok`` est faux pour un tournoi terminé ou "
+"sans fin simulée."
+msgstr ""
+"``Durations`` converts the minutes from ``Forecast`` into "
+"``time.Duration``. ``EstimatedEnd`` gives the estimated end time: the "
+"median of the ``K`` simulated endings, shifted past the declared breaks "
+"(``Config.Breaks``, via ``rules.EstimatedEnd``). ``ok`` is false for a "
+"finished tournament or one with no simulated ending."
+
+#: ../../source/simulation.rst:136
+msgid ""
+"La prévision est figée par un fichier témoin, "
+"``sim/testdata/prevision.json`` ; ``go test ./sim -update`` le réécrit "
+"après un changement voulu."
+msgstr ""
+"The forecast is frozen by a reference file, "
+"``sim/testdata/prevision.json``; ``go test ./sim -update`` rewrites it "
+"after an intended change."

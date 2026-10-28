@@ -1,0 +1,174 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/horloge.rst:4
+msgid "Horloge et prévisions"
+msgstr "Clock and forecasts"
+
+#: ../../source/horloge.rst:10
+msgid ""
+"``Config.MinPerPoint × n`` minutes (``rules.ExpectedDuration``). Avec le "
+"défaut de 8 min/point, un match en 7 points est attendu en 56 minutes. "
+"L'étude recommande de compter **11 min/point pour planifier une ronde** "
+"(attente comprise) et 8 min/point pour l'espérance d'un match."
+msgstr ""
+"``Config.MinPerPoint × n`` minutes (``rules.ExpectedDuration``). With the"
+" default of 8 min/point, a 7-point match is expected to take 56 minutes. "
+"The study recommends counting **11 min/point to plan a round** (waiting "
+"included) and 8 min/point for the expectation of a match."
+
+#: ../../source/horloge.rst:18
+msgid ""
+"Les matchs en cours (``Running()``, dans l'ordre de lancement) dont la "
+"durée écoulée ``now - Start`` dépasse strictement ``facteur × "
+"Expected(Length)`` (``rules.IsSlow``). Le tableau des matchs en cours de "
+"``render`` applique le même critère avec un facteur de 1,5 et marque la "
+"ligne (classe CSS ``lent``)."
+msgstr ""
+"The matches in progress (``Running()``, in start order) whose elapsed "
+"duration ``now - Start`` strictly exceeds ``facteur × Expected(Length)`` "
+"(``rules.IsSlow``). The ``render`` table of matches in progress applies "
+"the same criterion with a factor of 1.5 and marks the row (CSS class "
+"``lent``)."
+
+#: ../../source/horloge.rst:35
+msgid ""
+"Enveloppe de ``rules.PaceAt(s.RulesMatches(), now, start)`` "
+"(``rules.Pace`` a les mêmes champs) :"
+msgstr ""
+"Wrapper of ``rules.PaceAt(s.RulesMatches(), now, start)`` (``rules.Pace``"
+" has the same fields):"
+
+#: ../../source/horloge.rst:47
+msgid ""
+"Les matchs gagnés par forfait sont exclus des moyennes : ils fausseraient"
+" la mesure."
+msgstr ""
+"Matches won by forfeit are excluded from the averages: they would skew "
+"the measurement."
+
+#: ../../source/horloge.rst:50
+msgid "Autres pièces du temps"
+msgstr "Other pieces of time"
+
+#: ../../source/horloge.rst:57
+msgid ""
+"Ces deux fonctions donnent aux règles pures de ``rules/prevision.go`` "
+"leur entrée :"
+msgstr ""
+"These two functions give the pure rules of ``rules/prevision.go`` their "
+"input:"
+
+#: ../../source/horloge.rst:59
+msgid ""
+"``rules.PlayingTime(matches, now)`` : union des intervalles ``[Start, "
+"End)`` des matchs non annulés, jusqu'à ``now`` (un match en cours ou sans"
+" fin compte jusqu'à ``now``) ; les trous où aucune table ne jouait ne "
+"comptent pas ;"
+msgstr ""
+"``rules.PlayingTime(matches, now)``: union of the ``[Start, End)`` "
+"intervals of non-cancelled matches, up to ``now`` (a match in progress or"
+" without an end counts up to ``now``); gaps where no table was playing do"
+" not count;"
+
+#: ../../source/horloge.rst:62
+msgid ""
+"``rules.DayOfPlay(start, now)`` : jour calendaire de ``now`` compté "
+"depuis celui de ``start`` (1 = le même jour), 0 si ``start`` est nul ;"
+msgstr ""
+"``rules.DayOfPlay(start, now)``: calendar day of ``now`` counted from "
+"that of ``start`` (1 = the same day), 0 if ``start`` is zero;"
+
+#: ../../source/horloge.rst:64
+msgid ""
+"``rules.AfterBreaks(now, play, breaks)`` : l'heure où se termine ``play``"
+" posé à partir de ``now``, pauses sautées (une pause en cours retarde le "
+"départ, une pause rencontrée ajoute sa longueur ; finir exactement au "
+"début d'une pause, c'est finir avant elle) ;"
+msgstr ""
+"``rules.AfterBreaks(now, play, breaks)``: the time at which ``play`` ends"
+" when laid out from ``now``, skipping breaks (a break in progress delays "
+"the start, a break encountered adds its length; finishing exactly at the "
+"start of a break means finishing before it);"
+
+#: ../../source/horloge.rst:67
+msgid ""
+"``rules.EstimatedEnd(now, remaining, breaks)`` : la médiane des durées "
+"restantes simulées (la plus haute des deux du milieu pour un nombre "
+"pair), posée après ``now`` par ``AfterBreaks`` ; ``ok`` est faux sans "
+"aucune durée."
+msgstr ""
+"``rules.EstimatedEnd(now, remaining, breaks)``: the median of the "
+"simulated remaining durations (the higher of the two middle ones for an "
+"even number), laid out after ``now`` by ``AfterBreaks``; ``ok`` is false "
+"without any duration."
+
+#: ../../source/horloge.rst:71
+msgid ""
+"Les durées restantes viennent de ``sim.Forecast`` (voir "
+":ref:`simulation`)."
+msgstr ""
+"The remaining durations come from ``sim.Forecast`` (see "
+":ref:`simulation`)."
+
+#: ../../source/horloge.rst:74
+msgid "Le temps dans les propositions"
+msgstr "Time in proposals"
+
+#: ../../source/horloge.rst:76
+msgid ""
+"Le moteur n'a pas d'horloge : ``ProposeAt(now)`` reçoit l'heure de "
+"l'hôte, ``Propose()`` prend ``State.Last`` (horodatage du dernier "
+"événement). Deux règles seulement en dépendent :"
+msgstr ""
+"The engine has no clock: ``ProposeAt(now)`` receives the host's time, "
+"``Propose()`` takes ``State.Last`` (timestamp of the last event). Only "
+"two rules depend on it:"
+
+#: ../../source/horloge.rst:79
+msgid ""
+"**micro-rondes** (``batch_minutes`` d'un suisse continu) : l'échéance du "
+"prochain lot est le départ du dernier match non annulé lancé dans la "
+"phase, plus ``batch_minutes`` ; elle n'est stockée nulle part. Le premier"
+" lot ne s'attend pas. Avant l'échéance, le moteur propose ``wait`` avec "
+"``Reason = waiting_batch`` et ``Until`` = l'échéance ;"
+msgstr ""
+"**micro-rounds** (``batch_minutes`` of a continuous Swiss): the deadline "
+"of the next batch is the start of the last non-cancelled match started in"
+" the phase, plus ``batch_minutes``; it is stored nowhere. The first batch"
+" is not waited for. Before the deadline, the engine proposes ``wait`` "
+"with ``Reason = waiting_batch`` and ``Until`` = the deadline;"
+
+#: ../../source/horloge.rst:83
+msgid ""
+"**pauses** (``Config.Breaks``, ``TimeRange`` à ``Start`` incluse et "
+"``End`` exclue) : une proposition ``start_match`` dont l'intervalle "
+"``[now, now + Expected(Length)]`` rencontre une pause porte ``Warn = "
+"ends_in_break``. Rien n'est bloqué : le TD décide."
+msgstr ""
+"**breaks** (``Config.Breaks``, ``TimeRange`` with ``Start`` included and "
+"``End`` excluded): a ``start_match`` proposal whose interval ``[now, now "
+"+ Expected(Length)]`` meets a break carries ``Warn = ends_in_break``. "
+"Nothing is blocked: the TD decides."
+
+#: ../../source/horloge.rst:87
+msgid "Voir :ref:`propositions`."
+msgstr "See :ref:`propositions`."

@@ -1,0 +1,344 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:09+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/format_poules.rst:4
+msgid "Poules (``round_robin``)"
+msgstr "Pools (``round_robin``)"
+
+#: ../../source/format_poules.rst:7
+msgid "Principe"
+msgstr "Principle"
+
+#: ../../source/format_poules.rst:9
+msgid ""
+"Les entrants sont répartis en poules ; chaque poule est une toutes rondes"
+" (table de Berger). Les ``qualifiers`` premiers de chaque poule passent à"
+" la phase suivante. Les égalités à la place qualificative ne sont **pas**"
+" départagées arithmétiquement : elles déclenchent un **barrage** à 2 vies"
+" entre les joueurs concernés."
+msgstr ""
+"Entrants are split into pools; each pool is a round robin (Berger table)."
+" The top ``qualifiers`` players of each pool advance to the next phase. "
+"Ties at the qualifying place are **not** broken arithmetically: they "
+"trigger a 2-life **play-off** between the players concerned."
+
+#: ../../source/format_poules.rst:14
+msgid ""
+"Les défauts sont posés par ``Config.Validate`` : ``group_size`` vaut 4, "
+"``qualifiers`` vaut 2, et ``qualifiers`` doit être strictement inférieur "
+"à ``group_size``. La règle est dans ``rules`` (``rules/graphes_phase.go``"
+" : ``Pair``, ``PoolSections``, ``PoolWins``, ``PoolTie``, "
+"``BarrageSection``, ``PoolQualified`` ; ``rules/classement.go`` : "
+"``Rank``) ; ``phase_rr.go`` en est l'enveloppe."
+msgstr ""
+"Defaults are set by ``Config.Validate``: ``group_size`` is 4, "
+"``qualifiers`` is 2, and ``qualifiers`` must be strictly less than "
+"``group_size``. The rule lives in ``rules`` (``rules/graphes_phase.go``: "
+"``Pair``, ``PoolSections``, ``PoolWins``, ``PoolTie``, "
+"``BarrageSection``, ``PoolQualified``; ``rules/classement.go``: "
+"``Rank``); ``phase_rr.go`` is its wrapper."
+
+#: ../../source/format_poules.rst:21
+msgid "Tirage des poules"
+msgstr "Pool draw"
+
+#: ../../source/format_poules.rst:33
+msgid "La distribution ``i mod ng`` équilibre les tailles à un joueur près."
+msgstr "The ``i mod ng`` distribution balances sizes to within one player."
+
+#: ../../source/format_poules.rst:39
+msgid "Avec ``section`` vide (tirage des poules) :"
+msgstr "With an empty ``section`` (pool draw):"
+
+#: ../../source/format_poules.rst:48
+#, no-python-brace-format
+msgid ""
+"Les poules sont des sections de genre ``poule`` dont le nom est un "
+"**identifiant** : ``poule:A``, ``poule:B``, … "
+"(``rules.PoolSectionName(i)`` = ``\"poule:\" + ('A'+i)``). Les clés de "
+"leurs nœuds sont ``poule:A.<ronde>.<i>`` (``poule:A.0.0``, …) et leurs "
+"libellés ``pool_round{N: ronde}`` (table de Berger). Au-delà de 26 "
+"poules, le caractère produit sort de l'alphabet : limite connue, sans "
+"conséquence fonctionnelle."
+msgstr ""
+"Pools are sections of kind ``poule`` whose name is an **identifier**: "
+"``poule:A``, ``poule:B``, … (``rules.PoolSectionName(i)`` = ``\"poule:\" "
+"+ ('A'+i)``). Their node keys are ``poule:A.<ronde>.<i>`` "
+"(``poule:A.0.0``, …) and their labels are ``pool_round{N: ronde}`` "
+"(Berger table). Beyond 26 pools, the resulting character falls outside "
+"the alphabet: a known limit, with no functional consequence."
+
+#: ../../source/format_poules.rst:55
+msgid "Décompte et détection des égalités"
+msgstr "Counting wins and detecting ties"
+
+#: ../../source/format_poules.rst:61
+msgid ""
+"Compte les victoires **dans la section** : chaque joueur figurant en "
+"``Src[k].Player`` est initialisé à 0 (pour qu'un joueur sans victoire "
+"apparaisse), puis chaque match ``Done`` et non ``Walkover`` ajoute une "
+"victoire à son vainqueur. Les walkovers (exemptions, forfaits) ne "
+"comptent donc pas."
+msgstr ""
+"Counts wins **within the section**: each player listed in ``Src[k].Player``"
+" is initialised to 0 (so that a player with no wins still appears), then "
+"each ``Done`` match that is not ``Walkover`` adds a win to its winner. "
+"Walkovers (byes, forfeits) therefore do not count."
+
+#: ../../source/format_poules.rst:84
+msgid ""
+"Résultat : ``tied`` sont les joueurs à égalité sur la ligne de coupure, "
+"``spots`` le nombre de places qu'ils doivent se partager."
+msgstr ""
+"Result: ``tied`` are the players tied on the cut line, ``spots`` the "
+"number of places they must share."
+
+#: ../../source/format_poules.rst:88
+msgid "Barrage"
+msgstr "Play-off"
+
+#: ../../source/format_poules.rst:90
+msgid ""
+"Un barrage est une ``Section`` d'un genre particulier : elle n'a **pas de"
+" graphe** (``Matches`` vide) ; ses matchs sont appariés dynamiquement, "
+"comme un suisse à 2 vies, jusqu'à ce qu'il ne reste que ``Spots`` "
+"joueurs."
+msgstr ""
+"A play-off is a ``Section`` of a particular kind: it has **no graph** "
+"(empty ``Matches``); its matches are paired dynamically, like a 2-life "
+"Swiss, until only ``Spots`` players remain."
+
+#: ../../source/format_poules.rst:107
+msgid ""
+"Le barrage de ``poule:A`` s'appelle ``barrage:A`` "
+"(``rules.BarrageSectionName``). L'instantané de la phase "
+"(``rules.Phase.Barrages``) porte les matchs lancés et non annulés des "
+"sections de barrage, dans l'ordre de ``MatchOrder``."
+msgstr ""
+"The play-off of ``poule:A`` is called ``barrage:A`` "
+"(``rules.BarrageSectionName``). The phase snapshot "
+"(``rules.Phase.Barrages``) carries the started, non-cancelled matches of "
+"the play-off sections, in ``MatchOrder`` order."
+
+#: ../../source/format_poules.rst:115
+msgid ""
+"Pour les matchs de barrage de section ``name`` non annulés : compte les "
+"``Running`` et incrémente ``losses[perdant]`` pour les autres."
+msgstr ""
+"For the non-cancelled play-off matches of section ``name``: counts the "
+"``Running`` ones and increments ``losses[perdant]`` for the others."
+
+#: ../../source/format_poules.rst:146
+msgid ""
+"Même logique de budget que le suisse : on ne lance pas un match qui "
+"ferait descendre le nombre de survivants en dessous du nombre de places."
+msgstr ""
+"Same budget logic as the Swiss: a match is not started if it would bring "
+"the number of survivors below the number of places."
+
+#: ../../source/format_poules.rst:153
+msgid ""
+"Pour chaque poule ayant une égalité : le barrage doit exister **et** "
+"``len(barrageAlive) <= Spots``. La phase est finie (``rules.PhaseDone``) "
+"quand elle est tirée, que tous les nœuds de ses sections sont terminés et"
+" que ``barragesDone`` est vrai."
+msgstr ""
+"For each pool with a tie: the play-off must exist **and** "
+"``len(barrageAlive) <= Spots``. The phase is finished "
+"(``rules.PhaseDone``) when it is drawn, all the nodes of its sections are"
+" finished, and ``barragesDone`` is true."
+
+#: ../../source/format_poules.rst:158
+msgid "Proposition"
+msgstr "Proposal"
+
+#: ../../source/format_poules.rst:183
+msgid ""
+"Les poules qui ont fini avancent donc vers leur barrage pendant que les "
+"autres jouent encore."
+msgstr ""
+"Pools that have finished therefore advance toward their play-off while "
+"the others are still playing."
+
+#: ../../source/format_poules.rst:186
+msgid "Qualifiés et classement"
+msgstr "Qualifiers and standings"
+
+#: ../../source/format_poules.rst:209
+msgid ""
+"Un repêchage ne tient qu'autant que le retrait : un qualifié réinscrit "
+"avant le tirage retrouve sa place, et son repêché la perd."
+msgstr ""
+"A repechage holds only as long as the withdrawal does: a qualifier who is"
+" re-registered before the draw gets their place back, and their "
+"repechaged replacement loses it."
+
+#: ../../source/format_poules.rst:213
+msgid "Repêchage d'un qualifié retiré"
+msgstr "Repechage of a withdrawn qualifier"
+
+#: ../../source/format_poules.rst:215
+msgid ""
+"**Règle.** Un qualifié de poule qui se retire **avant le tirage** de la "
+"phase suivante laisse sa place au **suivant de sa poule**, si le TD le "
+"confirme. Le moteur propose (``ActRepechage``, confirmée en événement "
+"``repechage``), il n'impose pas : passer à la phase suivante, ou tirer, "
+"sans confirmer laisse la place vide, et elle devient une exemption du "
+"tableau. La règle vit dans ``repechage.go``."
+msgstr ""
+"**Rule.** A pool qualifier who withdraws **before the draw** of the next "
+"phase leaves their place to the **next player in their pool**, if the TD "
+"confirms. The engine proposes (``ActRepechage``, confirmed as a "
+"``repechage`` event), it does not impose: moving to the next phase, or "
+"drawing, without confirming leaves the place empty, and it becomes a bye "
+"in the bracket. The rule lives in ``repechage.go``."
+
+#: ../../source/format_poules.rst:236
+msgid "Cas limites :"
+msgstr "Edge cases:"
+
+#: ../../source/format_poules.rst:239
+msgid "Cas"
+msgstr "Case"
+
+#: ../../source/format_poules.rst:239
+msgid "Réponse du moteur"
+msgstr "Engine response"
+
+#: ../../source/format_poules.rst:241
+msgid "Le suivant est lui-même retiré"
+msgstr "The next player is themselves withdrawn"
+
+#: ../../source/format_poules.rst:241
+msgid "il est sauté : le candidat est le suivant **non retiré**"
+msgstr "they are skipped: the candidate is the next **non-withdrawn** player"
+
+#: ../../source/format_poules.rst:244
+msgid "Plus personne dans la poule (tous qualifiés ou retirés)"
+msgstr "No one left in the pool (all qualified or withdrawn)"
+
+#: ../../source/format_poules.rst:244
+msgid "aucune proposition ; la place devient une exemption"
+msgstr "no proposal; the place becomes a bye"
+
+#: ../../source/format_poules.rst:247
+msgid "Le repêché se retire à son tour avant le tirage"
+msgstr "The repechaged player withdraws in turn before the draw"
+
+#: ../../source/format_poules.rst:247
+msgid "il est un qualifié retiré comme un autre : nouveau repêchage proposé"
+msgstr "they are a withdrawn qualifier like any other: a new repechage is proposed"
+
+#: ../../source/format_poules.rst:250
+msgid "Deux qualifiés de la même poule se retirent"
+msgstr "Two qualifiers from the same pool withdraw"
+
+#: ../../source/format_poules.rst:250
+msgid ""
+"un repêchage à la fois : le second est proposé une fois le premier "
+"confirmé"
+msgstr ""
+"one repechage at a time: the second is proposed once the first is "
+"confirmed"
+
+#: ../../source/format_poules.rst:253
+msgid "Suivants ex æquo (même nombre de victoires)"
+msgstr "Tied next players (same number of wins)"
+
+#: ../../source/format_poules.rst:253
+msgid ""
+"une proposition par candidat, ``Label.Players`` = leur nombre ; le TD "
+"choisit (aucun départage)"
+msgstr ""
+"one proposal per candidate, ``Label.Players`` = their number; the TD "
+"chooses (no tie-break)"
+
+#: ../../source/format_poules.rst:257
+msgid "Retrait après le passage de phase, avant le tirage"
+msgstr "Withdrawal after the phase switch, before the draw"
+
+#: ../../source/format_poules.rst:257
+msgid ""
+"le repêchage reste proposé, devant le tirage ; le repêché remplace le "
+"retiré parmi les entrants"
+msgstr ""
+"the repechage remains proposed, ahead of the draw; the repechaged player "
+"replaces the withdrawn one among the entrants"
+
+#: ../../source/format_poules.rst:261
+msgid "Retrait après le tirage (ou après un premier match de la phase suivante)"
+msgstr "Withdrawal after the draw (or after a first match of the next phase)"
+
+#: ../../source/format_poules.rst:261
+msgid ""
+"pas de repêchage : le retiré perd son match par forfait (walkover), comme"
+" tout retrait de tableau ; ``repechage`` est refusé"
+msgstr ""
+"no repechage: the withdrawn player loses their match by walkover, like "
+"any bracket withdrawal; ``repechage`` is refused"
+
+#: ../../source/format_poules.rst:265
+msgid "Phase suivante en entrée ``all``"
+msgstr "Next phase with ``all`` entry"
+
+#: ../../source/format_poules.rst:265
+msgid "sans objet (tout le monde entre déjà) ; ni proposé ni accepté"
+msgstr "not applicable (everyone already enters); neither proposed nor accepted"
+
+#: ../../source/format_poules.rst:269
+msgid ""
+"Le repêchage est proposé avec l'action de passage de phase (avant elle), "
+"puis, une fois le passage confirmé et tant que la phase suivante n'est ni"
+" tirée ni commencée, devant ses propositions. À l'application, le moteur "
+"vérifie à nouveau ces conditions, que ``A`` est un qualifié retiré de la "
+"poule et ``B`` un joueur de la poule ni qualifié ni retiré ; si la phase "
+"suivante est déjà ouverte, ``B`` remplace ``A`` parmi ses entrants."
+msgstr ""
+"The repechage is proposed with the phase-switch action (before it), then,"
+" once the switch is confirmed and as long as the next phase is neither "
+"drawn nor started, ahead of its proposals. On application, the engine "
+"checks these conditions again, that ``A`` is a withdrawn qualifier of the"
+" pool and ``B`` a player of the pool who is neither qualified nor "
+"withdrawn; if the next phase is already open, ``B`` replaces ``A`` among "
+"its entrants."
+
+#: ../../source/format_poules.rst:275
+msgid ""
+"Le repêché est **qualifié** au classement de la poule "
+"(``Note.Qualified``, bonus de 100) ; le retiré garde la note "
+"``withdrawn``, jamais qualifié."
+msgstr ""
+"The repechaged player is **qualified** in the pool standings "
+"(``Note.Qualified``, bonus of 100); the withdrawn player keeps the "
+"``withdrawn`` note, never qualified."
+
+#: ../../source/format_poules.rst:294
+msgid ""
+"Le bonus de 100 place tous les qualifiés devant tous les non-qualifiés, "
+"quelles que soient les poules — ce qui est correct puisque les poules ne "
+"sont pas comparables entre elles. Un retiré n'en bénéficie pas : il est "
+"classé sur ses victoires, ex æquo avec les non-qualifiés qui en ont "
+"autant."
+msgstr ""
+"The bonus of 100 places all qualifiers ahead of all non-qualifiers, "
+"whatever the pools — which is correct since pools are not comparable with"
+" each other. A withdrawn player does not benefit from it: they are ranked"
+" on their wins, tied with the non-qualifiers who have as many."

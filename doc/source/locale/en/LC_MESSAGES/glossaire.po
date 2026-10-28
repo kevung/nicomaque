@@ -1,0 +1,368 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/glossaire.rst:4
+msgid "Glossaire"
+msgstr "Glossary"
+
+#: ../../source/glossaire.rst:7
+msgid "Action"
+msgstr "Action"
+
+#: ../../source/glossaire.rst:9
+msgid ""
+"Proposition du moteur au directeur de tournoi (``Action``) : lancer un "
+"match, donner un bye, tirer un tableau, passer à la phase suivante, "
+"clore, attendre. Une action confirmée devient un événement."
+msgstr ""
+"A proposal from the engine to the tournament director (``Action``): "
+"launch a match, give a bye, draw a bracket, move to the next phase, "
+"close, wait. A confirmed action becomes an event."
+
+#: ../../source/glossaire.rst:12
+msgid "Barrage"
+msgstr "Play-off"
+
+#: ../../source/glossaire.rst:14
+msgid ""
+"Mini-tournoi à 2 vies entre joueurs à égalité pour une place "
+"qualificative de poule."
+msgstr ""
+"A mini-tournament with 2 lives between players tied for a qualifying "
+"place in a pool."
+
+#: ../../source/glossaire.rst:15
+msgid "Bascule"
+msgstr "Switch-over"
+
+#: ../../source/glossaire.rst:17
+msgid ""
+"Arrêt d'un suisse à vies quand la somme des vies restantes atteint une "
+"puissance de 2 (option ``target``), pour enchaîner sur un tableau à vies."
+msgstr ""
+"Stopping a Swiss with lives when the sum of remaining lives reaches a "
+"power of 2 (option ``target``), in order to continue into a lives "
+"bracket."
+
+#: ../../source/glossaire.rst:19
+msgid "Bye, exemption"
+msgstr "Bye"
+
+#: ../../source/glossaire.rst:21
+msgid ""
+"Place vide d'un tableau (``BYE``), ou ronde sautée par un joueur au "
+"suisse par rondes."
+msgstr ""
+"An empty place in a bracket (``BYE``), or a round skipped by a player in "
+"a by-rounds Swiss."
+
+#: ../../source/glossaire.rst:22
+msgid "Code"
+msgstr "Code"
+
+#: ../../source/glossaire.rst:24
+msgid ""
+"Valeur structurée renvoyée par le moteur à la place d'un texte : libellé "
+"de match (``Label``), note de classement (``Note``), avertissement "
+"(``Warning``), raison d'attente (``ReasonCode``). L'hôte les traduit."
+msgstr ""
+"A structured value returned by the engine in place of text: match label "
+"(``Label``), standings note (``Note``), warning (``Warning``), waiting "
+"reason (``ReasonCode``). The host translates them."
+
+#: ../../source/glossaire.rst:27
+msgid "Événement"
+msgstr "Event"
+
+#: ../../source/glossaire.rst:29
+msgid ""
+"Fait consigné au journal (``Event``), avec un type (``kind``), un numéro "
+"d'ordre (``seq``), un horodatage et une version."
+msgstr ""
+"A fact recorded in the journal (``Event``), with a type (``kind``), a "
+"sequence number (``seq``), a timestamp and a version."
+
+#: ../../source/glossaire.rst:31
+msgid "Format"
+msgstr "Format"
+
+#: ../../source/glossaire.rst:33
+msgid ""
+"Type d'une phase (``Kind``) : ``swiss_lives``, ``lives_bracket``, "
+"``gsl``, ``bracket``, ``round_robin``."
+msgstr ""
+"The type of a phase (``Kind``): ``swiss_lives``, ``lives_bracket``, "
+"``gsl``, ``bracket``, ``round_robin``."
+
+#: ../../source/glossaire.rst:35
+msgid "GMatch"
+msgstr "GMatch"
+
+#: ../../source/glossaire.rst:37
+msgid ""
+"Case d'un graphe de matchs : deux places, une longueur, un résultat "
+"éventuel. Un ``GMatch`` n'est pas encore un match joué."
+msgstr ""
+"A cell of a match graph: two places, a length, a possible result. A "
+"``GMatch`` is not yet a played match."
+
+#: ../../source/glossaire.rst:39
+msgid "Journal"
+msgstr "Journal"
+
+#: ../../source/glossaire.rst:41
+msgid ""
+"Liste ordonnée des événements d'un tournoi (``Journal``, tableau JSON). "
+"Seule donnée persistante ; l'hôte la stocke."
+msgstr ""
+"The ordered list of a tournament's events (``Journal``, JSON array). The "
+"only persistent data; the host stores it."
+
+#: ../../source/glossaire.rst:43
+msgid "Match"
+msgstr "Match"
+
+#: ../../source/glossaire.rst:45
+msgid ""
+"Match réellement lancé : deux joueurs, une table, des horodatages. Relié "
+"à son ``GMatch`` par le couple (section, clé)."
+msgstr ""
+"A match actually launched: two players, a table, timestamps. Linked to "
+"its ``GMatch`` by the (section, key) pair."
+
+#: ../../source/glossaire.rst:47
+msgid "Phase"
+msgstr "Phase"
+
+#: ../../source/glossaire.rst:49
+msgid ""
+"Étape du tournoi, d'un format donné. Les phases s'enchaînent dans l'ordre"
+" de ``Config.Phases``."
+msgstr ""
+"A stage of the tournament, of a given format. Phases follow one another "
+"in the order of ``Config.Phases``."
+
+#: ../../source/glossaire.rst:51
+msgid "PR"
+msgstr "PR"
+
+#: ../../source/glossaire.rst:53
+msgid ""
+"*Performance Rating* : mesure de la qualité de jeu au backgammon ; plus "
+"elle est basse, meilleur est le joueur (2 : très fort, 10 : débutant). Le"
+" moteur l'appelle ``rating``."
+msgstr ""
+"*Performance Rating*: a measure of backgammon playing quality; the lower "
+"it is, the better the player (2: very strong, 10: beginner). The engine "
+"calls it ``rating``."
+
+#: ../../source/glossaire.rst:55
+msgid "Repêchage"
+msgstr "Repechage"
+
+#: ../../source/glossaire.rst:57
+msgid ""
+"Remplacement d'un qualifié de poule retiré avant le tirage du tableau par"
+" le suivant de sa poule, proposé par le moteur et confirmé par le "
+"directeur (événement ``repechage``)."
+msgstr ""
+"Replacement of a pool qualifier withdrawn before the bracket draw by the "
+"next one in their pool, proposed by the engine and confirmed by the "
+"director (event ``repechage``)."
+
+#: ../../source/glossaire.rst:59
+msgid "Section"
+msgstr "Section"
+
+#: ../../source/glossaire.rst:61
+msgid ""
+"Graphe de matchs nommé à l'intérieur d'une phase : tableau principal, "
+"consolante, groupe GSL, poule, barrage. Son nom est un identifiant, pas "
+"un libellé."
+msgstr ""
+"A named match graph inside a phase: main bracket, consolation, GSL group,"
+" pool, play-off. Its name is an identifier, not a label."
+
+#: ../../source/glossaire.rst:63
+msgid "TD"
+msgstr "TD"
+
+#: ../../source/glossaire.rst:65
+msgid "Directeur de tournoi."
+msgstr "Tournament director."
+
+#: ../../source/glossaire.rst:66
+msgid "Tirage"
+msgstr "Draw"
+
+#: ../../source/glossaire.rst:68
+msgid ""
+"Placement des joueurs dans un tableau ou composition des groupes. Le "
+"résultat est écrit dans l'événement ``draw``."
+msgstr ""
+"Placement of players in a bracket or composition of groups. The result is"
+" written in the ``draw`` event."
+
+#: ../../source/glossaire.rst:70
+msgid "Vie"
+msgstr "Life"
+
+#: ../../source/glossaire.rst:72
+msgid "Droit à une défaite. Un joueur sans vie restante est éliminé de la phase."
+msgstr ""
+"The right to one loss. A player with no remaining life is eliminated from"
+" the phase."
+
+#: ../../source/glossaire.rst:73
+msgid "Walkover"
+msgstr "Walkover"
+
+#: ../../source/glossaire.rst:75
+msgid ""
+"Victoire acquise sans jouer : contre une exemption, ou contre un joueur "
+"retiré."
+msgstr ""
+"A win obtained without playing: against a bye, or against a withdrawn "
+"player."
+
+#: ../../source/glossaire.rst:78
+msgid "Nomenclature des identifiants"
+msgstr "Identifier naming scheme"
+
+#: ../../source/glossaire.rst:81
+msgid "Objet"
+msgstr "Object"
+
+#: ../../source/glossaire.rst:81
+msgid "Forme"
+msgstr "Form"
+
+#: ../../source/glossaire.rst:81
+msgid "Exemple"
+msgstr "Example"
+
+#: ../../source/glossaire.rst:83
+msgid "Match réel"
+msgstr "Real match"
+
+#: ../../source/glossaire.rst:83
+msgid "``M<n>``"
+msgstr "``M<n>``"
+
+#: ../../source/glossaire.rst:83
+msgid "``M17``"
+msgstr "``M17``"
+
+#: ../../source/glossaire.rst:84
+msgid "Section de tableau"
+msgstr "Bracket section"
+
+#: ../../source/glossaire.rst:84
+msgid "``main``, ``conso``, ``last``, ``gf``"
+msgstr "``main``, ``conso``, ``last``, ``gf``"
+
+#: ../../source/glossaire.rst:84
+msgid "``conso``"
+msgstr "``conso``"
+
+#: ../../source/glossaire.rst:86
+msgid "Section de groupe GSL"
+msgstr "GSL group section"
+
+#: ../../source/glossaire.rst:86
+msgid "``B<bloc>G<groupe>``"
+msgstr "``B<bloc>G<groupe>``"
+
+#: ../../source/glossaire.rst:86
+msgid "``B2G3``"
+msgstr "``B2G3``"
+
+#: ../../source/glossaire.rst:87
+msgid "Section de poule"
+msgstr "Pool section"
+
+#: ../../source/glossaire.rst:87
+msgid "``poule:<lettre>``"
+msgstr "``poule:<lettre>``"
+
+#: ../../source/glossaire.rst:87
+msgid "``poule:C``"
+msgstr "``poule:C``"
+
+#: ../../source/glossaire.rst:88
+msgid "Section de barrage"
+msgstr "Play-off section"
+
+#: ../../source/glossaire.rst:88
+msgid "``barrage:<lettre>``"
+msgstr "``barrage:<lettre>``"
+
+#: ../../source/glossaire.rst:88
+msgid "``barrage:C``"
+msgstr "``barrage:C``"
+
+#: ../../source/glossaire.rst:89
+msgid "``GMatch`` de tableau"
+msgstr "Bracket ``GMatch``"
+
+#: ../../source/glossaire.rst:89
+msgid "``<section>.<tour>.<indice>``"
+msgstr "``<section>.<tour>.<indice>``"
+
+#: ../../source/glossaire.rst:89
+msgid "``main.2.1``, ``conso.3.0``"
+msgstr "``main.2.1``, ``conso.3.0``"
+
+#: ../../source/glossaire.rst:90
+msgid "``GMatch`` de grande finale"
+msgstr "Grand final ``GMatch``"
+
+#: ../../source/glossaire.rst:90
+msgid "``gf.<n>``"
+msgstr "``gf.<n>``"
+
+#: ../../source/glossaire.rst:90
+msgid "``gf.0``"
+msgstr "``gf.0``"
+
+#: ../../source/glossaire.rst:91
+msgid "``GMatch`` de groupe GSL"
+msgstr "GSL group ``GMatch``"
+
+#: ../../source/glossaire.rst:91
+msgid "``<section>.<n>``"
+msgstr "``<section>.<n>``"
+
+#: ../../source/glossaire.rst:91
+msgid "``B2G3.4``"
+msgstr "``B2G3.4``"
+
+#: ../../source/glossaire.rst:92
+msgid "``GMatch`` de poule"
+msgstr "Pool ``GMatch``"
+
+#: ../../source/glossaire.rst:92
+msgid "``<section>.<ronde>.<indice>``"
+msgstr "``<section>.<ronde>.<indice>``"
+
+#: ../../source/glossaire.rst:92
+msgid "``poule:A.1.0``"
+msgstr "``poule:A.1.0``"

@@ -1,0 +1,190 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/statut.rst:4
+msgid "Statut d'un joueur"
+msgstr "Player status"
+
+#: ../../source/statut.rst:20
+msgid ""
+"La réponse à « est-ce que je joue ? », que le classement ne donne pas : "
+"une note situe un joueur, elle ne dit pas s'il a encore un match (voir la"
+" note ``section_exit`` dans :ref:`classement`). Le statut est **dérivé** "
+"de l'état, comme ``State.Infos`` : il ne dépend que du journal, ni de "
+"l'heure ni d'une proposition non confirmée — sauf le repêchage, dont les "
+"candidats proposés restent indécis tant que le TD n'a pas tranché. "
+"``Statuses`` est vide (``nil``) avant la création du tournoi."
+msgstr ""
+"The answer to \"am I playing?\", which the standings do not give: a note "
+"locates a player, it does not say whether they still have a match (see "
+"the ``section_exit`` note in :ref:`classement`). The status is "
+"**derived** from the state, like ``State.Infos``: it depends only on the "
+"journal, neither on the time nor on an unconfirmed proposal — except the "
+"repechage, whose proposed candidates remain undecided until the TD has "
+"ruled. ``Statuses`` is empty (``nil``) before the tournament is created."
+
+#: ../../source/statut.rst:26
+msgid ""
+"``Phase`` est la phase dont parle le statut : en cours (``playing``, "
+"``bye``), à venir (``qualified``, ``undecided``), dernière où le joueur "
+"est entré (``eliminated``, ``withdrawn``, ``winner``)."
+msgstr ""
+"``Phase`` is the phase the status is about: the current one (``playing``,"
+" ``bye``), an upcoming one (``qualified``, ``undecided``), the last one "
+"the player entered (``eliminated``, ``withdrawn``, ``winner``)."
+
+#: ../../source/statut.rst:31
+msgid "``Kind``"
+msgstr "``Kind``"
+
+#: ../../source/statut.rst:31
+msgid "Sens"
+msgstr "Meaning"
+
+#: ../../source/statut.rst:31
+msgid "Champs"
+msgstr "Fields"
+
+#: ../../source/statut.rst:33
+msgid "``playing``"
+msgstr "``playing``"
+
+#: ../../source/statut.rst:33
+msgid "encore en course dans la phase en cours"
+msgstr "still in contention in the current phase"
+
+#: ../../source/statut.rst:33
+msgid "``Phase`` ; tableau : ``Section``, ``Round``, ``Label`` du prochain match"
+msgstr "``Phase``; bracket: ``Section``, ``Round``, ``Label`` of the next match"
+
+#: ../../source/statut.rst:37
+msgid "``bye``"
+msgstr "``bye``"
+
+#: ../../source/statut.rst:37
+msgid "exempté : ne joue pas maintenant, entre plus tard"
+msgstr "given a bye: not playing now, enters later"
+
+#: ../../source/statut.rst:37
+msgid ""
+"tableau : ``Section``, ``Round`` (tour, à partir de 1), ``Label`` du "
+"match où il entre ; suisse par rondes : ``Round`` = ronde du retour, "
+"``Label`` = ``round``"
+msgstr ""
+"bracket: ``Section``, ``Round`` (round, from 1), ``Label`` of the match "
+"they enter; Swiss by rounds: ``Round`` = round of return, ``Label`` = "
+"``round``"
+
+#: ../../source/statut.rst:43
+msgid "``qualified``"
+msgstr "``qualified``"
+
+#: ../../source/statut.rst:43
+msgid "entre dans la phase ``Phase``"
+msgstr "enters phase ``Phase``"
+
+#: ../../source/statut.rst:43 ../../source/statut.rst:45
+#: ../../source/statut.rst:51
+msgid "``Phase``"
+msgstr "``Phase``"
+
+#: ../../source/statut.rst:45
+msgid "``undecided``"
+msgstr "``undecided``"
+
+#: ../../source/statut.rst:45
+msgid "son sort dans la phase ``Phase`` n'est pas fixé"
+msgstr "their fate in phase ``Phase`` is not fixed"
+
+#: ../../source/statut.rst:48
+msgid "``eliminated``"
+msgstr "``eliminated``"
+
+#: ../../source/statut.rst:48
+msgid "plus aucun match dans le tournoi"
+msgstr "no more matches in the tournament"
+
+#: ../../source/statut.rst:48 ../../source/statut.rst:54
+msgid "``Phase`` = dernière phase où il est entré"
+msgstr "``Phase`` = last phase they entered"
+
+#: ../../source/statut.rst:51
+msgid "``winner``"
+msgstr "``winner``"
+
+#: ../../source/statut.rst:51
+msgid "premier, la dernière phase finie ou le tournoi clos"
+msgstr "first, in the last finished phase or the closed tournament"
+
+#: ../../source/statut.rst:54
+msgid "``withdrawn``"
+msgstr "``withdrawn``"
+
+#: ../../source/statut.rst:54
+msgid "retiré ; prime sur tout le reste"
+msgstr "withdrawn; overrides everything else"
+
+#: ../../source/statut.rst:57
+msgid "``not_entered``"
+msgstr "``not_entered``"
+
+#: ../../source/statut.rst:57
+msgid "inscrit, engagé dans aucune phase (``State.Infos`` dit où il entrera)"
+msgstr ""
+"registered, not committed to any phase (``State.Infos`` says where they "
+"will enter)"
+
+#: ../../source/statut.rst:57
+msgid "—"
+msgstr "—"
+
+#: ../../source/statut.rst:61
+msgid "Règles, dans l'ordre où elles s'appliquent :"
+msgstr "Rules, in the order in which they apply:"
+
+#: ../../source/statut.rst:101
+msgid ""
+"Un **repêché** est qualifié dès que le repêchage est confirmé, puisque "
+"``rrQualified`` le compte ; le retiré qu'il remplace est ``withdrawn``. "
+"Un candidat proposé mais pas confirmé est ``undecided`` ; si le TD passe "
+"outre et tire le tableau, le repêchage est clos et le candidat est "
+"éliminé. Une poule ne connaît pas d'élimination en cours de phase : ses "
+"joueurs sont ``playing`` jusqu'à la fin des poules et des barrages."
+msgstr ""
+"A **repechaged** player is qualified as soon as the repechage is "
+"confirmed, since ``rrQualified`` counts them; the withdrawn player they "
+"replace is ``withdrawn``. A candidate who is proposed but not confirmed "
+"is ``undecided``; if the TD overrides and draws the bracket, the "
+"repechage is closed and the candidate is eliminated. A pool has no "
+"elimination during the phase: its players are ``playing`` until the end "
+"of the pools and play-offs."
+
+#: ../../source/statut.rst:107
+msgid ""
+"Le passage simulé est la raison d'être de cette fonction dans le moteur :"
+" la liste des qualifiés est celle que ``next_phase`` produira (un test le"
+" vérifie à chaque passage de toute la matrice), sans que l'hôte ait à "
+"rejouer le journal ni à recoder ``enterFrom``."
+msgstr ""
+"The simulated switch is the reason this function exists in the engine: "
+"the list of qualifiers is the one ``next_phase`` will produce (a test "
+"checks this at every switch across the whole matrix), without the host "
+"having to replay the journal or recode ``enterFrom``."

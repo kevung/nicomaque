@@ -227,18 +227,10 @@ où intervenir et comment vérifier.
 
 ## 5. Documentation publiée
 
-- [x] **Site en neuf langues** (issue #13). Projet Sphinx dans `site/`, publié sur GitHub Pages à
-  chaque poussée sur `main` (`.github/workflows/pages.yml`). Français source, huit catalogues
-  gettext ; une chaîne non traduite retombe sur le français. Les quatre pages d'introduction
-  (accueil, déroulement, formats, intégration) sont traduites dans les neuf langues ; les trois
-  documents longs restent en français partout — 1 131 msgid restant à traduire, détaillés dans
-  `site/README.md`.
-- [ ] **Activer GitHub Pages** dans les réglages du dépôt (Settings → Pages → Source : GitHub
-  Actions). Cela demande les droits d'administration du dépôt ; le workflow, lui, est en place et
-  se déclenche déjà.
-- [ ] Traduire `comprendre_le_moteur.md` (246 msgid), `etude_formats.md` (18) et
-  `specification.md` (867) dans les huit langues. Travail de traduction, document par document,
-  qui ne casse rien : chaque `msgstr` rempli apparaît en ligne à la poussée suivante.
+- [x] **Documentation Sphinx en français et en anglais** dans `doc/`, publiée sur GitHub Pages
+  (<https://kevung.github.io/nicomaque/>). Elle remplace le site en neuf langues et les
+  documents longs de `docs/` (spécification, présentation, étude), répartis en guide, référence
+  et annexes. La référence fait office de spécification.
 
 ## 6. Étude (simulateur de l'étude, hors dépôt)
 

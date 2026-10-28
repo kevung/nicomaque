@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/a_propos.rst:4
+msgid "À propos"
+msgstr "About"
+
+#: ../../source/a_propos.rst:7
+msgid "Auteurs"
+msgstr "Authors"
+
+#: ../../source/a_propos.rst:9
+msgid "**Nicolas Harmand** : auteur du moteur."
+msgstr "**Nicolas Harmand**: author of the engine."
+
+#: ../../source/a_propos.rst:10
+msgid "**Kévin Unger** : coauteur ; mainteneur du projet depuis la version 0.8.0."
+msgstr "**Kévin Unger**: co-author; project maintainer since version 0.8.0."
+
+#: ../../source/a_propos.rst:13
+msgid "Licence"
+msgstr "License"
+
+#: ../../source/a_propos.rst:15
+msgid ""
+"MIT. Copyright (c) 2026 Nicolas Harmand, Kévin Unger. Le texte complet "
+"est dans le fichier ``LICENSE`` du dépôt."
+msgstr ""
+"MIT. Copyright (c) 2026 Nicolas Harmand, Kévin Unger. The full text is in"
+" the ``LICENSE`` file of the repository."
+
+#: ../../source/a_propos.rst:19
+msgid "Dépôt et liens"
+msgstr "Repository and links"
+
+#: ../../source/a_propos.rst:21
+msgid "Code source : https://github.com/kevung/nicomaque"
+msgstr "Source code: https://github.com/kevung/nicomaque"
+
+#: ../../source/a_propos.rst:22
+msgid "Documentation : https://kevung.github.io/nicomaque/"
+msgstr "Documentation: https://kevung.github.io/nicomaque/"
+
+#: ../../source/a_propos.rst:23
+msgid "Anomalies et demandes : https://github.com/kevung/nicomaque/issues"
+msgstr "Issues and requests: https://github.com/kevung/nicomaque/issues"
+
+#: ../../source/a_propos.rst:24
+msgid ""
+"Ancien dépôt (versions 0.1.0 à 0.7.1, déprécié) : "
+"https://github.com/PileOfCells/backgammon-tournoi"
+msgstr ""
+"Old repository (versions 0.1.0 to 0.7.1, deprecated): "
+"https://github.com/PileOfCells/backgammon-tournoi"
+
+#: ../../source/a_propos.rst:28
+msgid "Logiciels qui utilisent Nicomaque"
+msgstr "Software that uses Nicomaque"
+
+#: ../../source/a_propos.rst:30
+msgid ""
+"**blunderDB** (https://github.com/kevung/blunderDB) : direction de "
+"tournoi intégrée au logiciel."
+msgstr ""
+"**blunderDB** (https://github.com/kevung/blunderDB) : tournament "
+"direction built into the software."
+
+#: ../../source/a_propos.rst:32
+msgid ""
+"**gammonGo** (https://github.com/kevung/gammonGo), par l'intermédiaire de"
+" blunderDB."
+msgstr "**gammonGo** (https://github.com/kevung/gammonGo), through blunderDB."
+
+#: ../../source/a_propos.rst:35
+msgid "Le nom"
+msgstr "The name"
+
+#: ../../source/a_propos.rst:37
+msgid ""
+"Nicomaque est le fils d'Aristote et le destinataire de l'*Éthique à "
+"Nicomaque*, qui traite notamment de la justice dans la décision."
+msgstr ""
+"Nicomaque is the son of Aristotle and the addressee of the *Nicomachean "
+"Ethics*, which deals in particular with justice in decision-making."

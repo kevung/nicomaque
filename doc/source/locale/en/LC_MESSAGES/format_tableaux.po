@@ -1,0 +1,351 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:09+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/format_tableaux.rst:4
+msgid "Tableaux (``bracket``, ``lives_bracket``)"
+msgstr "Brackets (``bracket``, ``lives_bracket``)"
+
+#: ../../source/format_tableaux.rst:6
+msgid ""
+"Les deux formats partagent tout le code ; ils ne diffèrent que par les "
+"vies à l'entrée, donc par le tirage. La règle est dans ``rules`` "
+"(``rules/graphes_phase.go`` : ``DrawSlots``, ``SeedOrder``, "
+"``BracketSections``, ``Pair`` ; ``rules/classement.go`` : ``Rank``, "
+"``RankSection``) ; ``phase_bracket.go`` en est l'enveloppe."
+msgstr ""
+"Both formats share all their code; they differ only in the lives at "
+"entry, hence in the draw. The rule lives in ``rules`` "
+"(``rules/graphes_phase.go``: ``DrawSlots``, ``SeedOrder``, "
+"``BracketSections``, ``Pair``; ``rules/classement.go``: ``Rank``, "
+"``RankSection``); ``phase_bracket.go`` is its wrapper."
+
+#: ../../source/format_tableaux.rst:11
+msgid ""
+"``bracket`` : tous les entrants ont 1 vie ; le tableau est un tableau "
+"classique complété par des exemptions."
+msgstr ""
+"``bracket``: all entrants have 1 life; the bracket is a classic bracket "
+"completed with byes."
+
+#: ../../source/format_tableaux.rst:13
+msgid ""
+"``lives_bracket`` : les entrants arrivent avec les vies héritées de la "
+"phase précédente ; un joueur à 2 vies occupe une paire entière et est "
+"donc **exempt du premier tour**."
+msgstr ""
+"``lives_bracket``: entrants arrive with the lives inherited from the "
+"previous phase; a player with 2 lives occupies a whole pair and is "
+"therefore **given a bye in the first round**."
+
+#: ../../source/format_tableaux.rst:17
+msgid "Utilitaire"
+msgstr "Utility"
+
+#: ../../source/format_tableaux.rst:24
+msgid "Tirage des places"
+msgstr "Slot draw"
+
+#: ../../source/format_tableaux.rst:30
+msgid ""
+"Le générateur est construit sur ``seed`` (``Seed.Draw()`` : graine du "
+"tournoi, nombre d'événements, phase)."
+msgstr ""
+"The generator is built on ``seed`` (``Seed.Draw()``: tournament seed, "
+"number of events, phase)."
+
+#: ../../source/format_tableaux.rst:59
+msgid "Trois idées :"
+msgstr "Three ideas:"
+
+#: ../../source/format_tableaux.rst:61
+msgid ""
+"**La taille du tableau est dictée par la somme des vies**, pas par le "
+"nombre de joueurs : c'est ce qui rend la bascule depuis un suisse exacte "
+"quand Σ vies est une puissance de 2."
+msgstr ""
+"**The size of the bracket is dictated by the sum of lives**, not by the "
+"number of players: this is what makes the switch-over from a Swiss exact "
+"when Σ lives is a power of 2."
+
+#: ../../source/format_tableaux.rst:63
+msgid ""
+"**Les exemptés sont écartés** : en remplissant d'abord une paire sur deux"
+" (indices pairs), on évite que deux joueurs à 2 vies se retrouvent dans "
+"la même moitié de bracket de premier tour."
+msgstr ""
+"**Players with byes are spread apart**: by filling every other pair first"
+" (even indices), we avoid two 2-life players ending up in the same half "
+"of the first-round bracket."
+
+#: ../../source/format_tableaux.rst:65
+msgid ""
+"**Les exemptions surnuméraires** (``extra``) vont en seconde position des"
+" premières paires libres, donc aux joueurs placés en tête de la liste "
+"mélangée — c'est-à-dire au hasard."
+msgstr ""
+"**Surplus byes** (``extra``) go to the second position of the first free "
+"pairs, hence to the players placed at the head of the shuffled list — "
+"that is, at random."
+
+#: ../../source/format_tableaux.rst:69
+msgid "Têtes de série"
+msgstr "Seeding"
+
+#: ../../source/format_tableaux.rst:71
+msgid ""
+"Le tirage est aléatoire par défaut. Avec ``seeding: \"rating\"`` "
+"(``PhaseConfig.Seeding``, seule valeur admise par ``Config.Validate`` "
+"hormis le vide, et réservée aux tableaux), le hasard cède la place au "
+"placement classique par cote :"
+msgstr ""
+"The draw is random by default. With ``seeding: \"rating\"`` "
+"(``PhaseConfig.Seeding``, the only value accepted by ``Config.Validate`` "
+"besides empty, and reserved for brackets), chance gives way to the "
+"classic placement by rating:"
+
+#: ../../source/format_tableaux.rst:94
+msgid ""
+"``byStrength`` trie du meilleur au moins bon par ``Player.Rating`` (le PR"
+" : plus bas vaut mieux) ; une cote nulle ou négative est inconnue et "
+"passe derrière toutes les autres ; l'ordre de départ (et donc entre cotes"
+" égales ou inconnues) est celui des identifiants. Les places sans tête de"
+" série sont des exemptions (``BYE``), qui reviennent ainsi aux meilleures"
+" têtes."
+msgstr ""
+"``byStrength`` sorts from best to worst by ``Player.Rating`` (the PR: "
+"lower is better); a zero or negative rating is unknown and goes behind "
+"all the others; the starting order (and therefore between equal or "
+"unknown ratings) is that of the identifiers. Places without a seeded "
+"player are byes (``BYE``), which thus go to the best seeds."
+
+#: ../../source/format_tableaux.rst:100
+msgid "Construction du tableau"
+msgstr "Building the bracket"
+
+#: ../../source/format_tableaux.rst:136
+msgid ""
+"``length`` est la longueur courante de la phase (``ph.Length``) : "
+"consolante et dernière chance n'ont pas de plan de longueurs par tour. "
+"``Config.Validate`` refuse ``recharge`` sans ``reconciliation`` et "
+"``reconciliation`` sans ``consolation``."
+msgstr ""
+"``length`` is the current length of the phase (``ph.Length``): "
+"consolation and last chance have no per-round length plan. "
+"``Config.Validate`` refuses ``recharge`` without ``reconciliation`` and "
+"``reconciliation`` without ``consolation``."
+
+#: ../../source/format_tableaux.rst:140
+msgid ""
+"La **dernière chance** ne recueille que les perdants des tours de "
+"consolante **sauf les deux derniers** : perdre en finale ou en demi-"
+"finale de consolante ne donne pas droit à un troisième tableau."
+msgstr ""
+"The **last chance** collects only the losers of the consolation rounds "
+"**except the last two**: losing in the consolation final or semi-final "
+"does not entitle one to a third bracket."
+
+#: ../../source/format_tableaux.rst:144
+msgid ""
+"La **recharge** est le mécanisme de la vraie double élimination : "
+"``CondSide = 1`` signifie que le match n'existe que si le vainqueur de la"
+" grande finale est le joueur venu de la place 1, c'est-à-dire le "
+"vainqueur de la consolante (qui a déjà une défaite). Le vainqueur du "
+"principal, invaincu, doit donc être battu deux fois. Si c'est lui qui "
+"gagne la première grande finale, ``resolve`` marque ``gf.1`` comme "
+"``Skipped`` (donc ``Done``) et le tournoi se termine."
+msgstr ""
+"The **recharge** (bracket reset) is the mechanism of true double "
+"elimination: ``CondSide = 1`` means the match exists only if the winner "
+"of the grand final is the player coming from slot 1, that is, the winner "
+"of the consolation (who already has a loss). The winner of the main "
+"bracket, undefeated, must therefore be beaten twice. If they win the "
+"first grand final, ``resolve`` marks ``gf.1`` as ``Skipped`` (hence "
+"``Done``) and the tournament ends."
+
+#: ../../source/format_tableaux.rst:151
+msgid "Application du tirage"
+msgstr "Applying the draw"
+
+#: ../../source/format_tableaux.rst:157
+msgid "Pour ``bracket`` et ``lives_bracket`` :"
+msgstr "For ``bracket`` and ``lives_bracket``:"
+
+#: ../../source/format_tableaux.rst:166
+msgid "Proposition"
+msgstr "Proposal"
+
+#: ../../source/format_tableaux.rst:188
+#, no-python-brace-format
+msgid ""
+"Les libellés des nœuds sont des codes : ``final``, ``semi_final``, "
+"``quarter_final``, puis ``bracket_round{N}`` au principal ; "
+"``consolation_round{N}`` et ``consolation_final`` en consolante ; "
+"``last_chance`` (avec le libellé du tour en ``Sub``) en dernière chance ;"
+" ``grand_final`` et ``grand_final_recharge`` en grande finale."
+msgstr ""
+"Node labels are codes: ``final``, ``semi_final``, ``quarter_final``, then"
+" ``bracket_round{N}`` in the main bracket; ``consolation_round{N}`` and "
+"``consolation_final`` in the consolation; ``last_chance`` (with the round"
+" label in ``Sub``) in the last chance; ``grand_final`` and "
+"``grand_final_recharge`` in the grand final."
+
+#: ../../source/format_tableaux.rst:193
+msgid ""
+"Toutes les sections sont proposées en parallèle : consolante, dernière "
+"chance et principal avancent simultanément dès que les places sont "
+"connues et les joueurs libres."
+msgstr ""
+"All sections are proposed in parallel: consolation, last chance and main "
+"bracket advance simultaneously as soon as the places are known and the "
+"players are free."
+
+#: ../../source/format_tableaux.rst:197
+msgid "Classement d'un tableau"
+msgstr "Bracket standings"
+
+#: ../../source/format_tableaux.rst:203
+msgid "Priorité des sections, par genre (plus haut = mieux classé) :"
+msgstr "Section priority, by kind (higher = better ranked):"
+
+#: ../../source/format_tableaux.rst:206
+msgid "Section"
+msgstr "Section"
+
+#: ../../source/format_tableaux.rst:206
+msgid "``prio``"
+msgstr "``prio``"
+
+#: ../../source/format_tableaux.rst:208
+msgid "``gf`` (grande finale)"
+msgstr "``gf`` (grand final)"
+
+#: ../../source/format_tableaux.rst:208
+msgid "4"
+msgstr "4"
+
+#: ../../source/format_tableaux.rst:209
+msgid "``main``, ``se``"
+msgstr "``main``, ``se``"
+
+#: ../../source/format_tableaux.rst:209
+msgid "3"
+msgstr "3"
+
+#: ../../source/format_tableaux.rst:210
+msgid "``conso``"
+msgstr "``conso``"
+
+#: ../../source/format_tableaux.rst:210
+msgid "2"
+msgstr "2"
+
+#: ../../source/format_tableaux.rst:211
+msgid "``last``"
+msgstr "``last``"
+
+#: ../../source/format_tableaux.rst:211
+msgid "1"
+msgstr "1"
+
+#: ../../source/format_tableaux.rst:251
+msgid ""
+"La règle (1) est contre-intuitive mais essentielle : **un joueur est "
+"classé par sa dernière sortie**, c'est-à-dire par la section de plus "
+"faible priorité où il a perdu. Un joueur battu au premier tour du "
+"principal puis en finale de consolante est classé sur sa performance en "
+"consolante, pas sur son élimination du principal."
+msgstr ""
+"Rule (1) is counter-intuitive but essential: **a player is ranked by "
+"their last exit**, that is, by the section of lowest priority in which "
+"they lost. A player beaten in the first round of the main bracket and "
+"then in the consolation final is ranked on their consolation performance,"
+" not on their elimination from the main bracket."
+
+#: ../../source/format_tableaux.rst:256
+msgid ""
+"Un joueur **retiré** est classé comme s'il perdait chacun de ses matchs "
+"restants : le match qu'il perd par forfait (walkover résolu contre lui) "
+"est une sortie comme une autre, et la règle (1) retient la dernière. Il "
+"est donc **ex æquo avec les perdants du match qui l'attendait**. Un "
+"joueur de ``lives_bracket`` qui gagne un match puis part est classé avec "
+"les perdants du tour de consolante où il redescend, et non dernier ; une "
+"demi-finaliste qui part pendant sa demi-finale, dans un tableau à "
+"consolante, est classée avec la perdante du tour de consolante qu'elle "
+"aurait joué — et non devant la gagnante de la consolante, qui a joué deux"
+" matchs de plus. Tant que l'adversaire de ce match n'est pas connu, le "
+"match qui l'attend tient lieu de sortie : le retiré n'est jamais « en "
+"cours ». Retiré sans avoir joué, il est classé avec les perdants de son "
+"premier match."
+msgstr ""
+"A **withdrawn** player is ranked as if they lost each of their remaining "
+"matches: the match they lose by forfeit (walkover resolved against them) "
+"is an exit like any other, and rule (1) retains the last one. They are "
+"therefore **tied with the losers of the match that was awaiting them**. A"
+" ``lives_bracket`` player who wins a match and then leaves is ranked with"
+" the losers of the consolation round where they drop down, and not last; "
+"a semi-finalist who leaves during their semi-final, in a bracket with "
+"consolation, is ranked with the loser of the consolation round they would"
+" have played — and not ahead of the consolation winner, who played two "
+"more matches. As long as the opponent of that match is not known, the "
+"match awaiting them stands in for the exit: the withdrawn player is never"
+" \"running\". Withdrawn without having played, they are ranked with the "
+"losers of their first match."
+
+#: ../../source/format_tableaux.rst:266
+msgid ""
+"Le score 5000 attribué aux joueurs en cours (``running``) les place "
+"**devant tout le monde** : c'est voulu, puisque le classement "
+"intermédiaire doit montrer les joueurs encore en course en tête."
+msgstr ""
+"The score 5000 given to players still running (``running``) places them "
+"**ahead of everyone**: this is intended, since the interim standings must"
+" show the players still in contention at the top."
+
+#: ../../source/format_tableaux.rst:269
+msgid ""
+"La note ``section_exit`` dit où un joueur est **sorti d'une section**, "
+"pas qu'il est éliminé : le perdant du principal reversé en consolante la "
+"porte, avec la section ``main``, tant que sa consolante n'est pas jouée ;"
+" il n'est pas non plus ``running`` au sens de la règle (3). C'est une "
+"note de classement — elle situe le joueur — et non une réponse à « "
+"joue-t-il encore ? ». Cette réponse est le statut (``State.Statuses``, "
+"voir :ref:`statut`), qui le dit en jeu, en consolante."
+msgstr ""
+"The ``section_exit`` note says where a player **left a section**, not "
+"that they are eliminated: the loser of the main bracket dropped into the "
+"consolation carries it, with the ``main`` section, as long as their "
+"consolation has not been played; nor are they ``running`` within the "
+"meaning of rule (3). It is a ranking note — it locates the player — and "
+"not an answer to \"are they still playing?\". That answer is the status "
+"(``State.Statuses``, see :ref:`statut`), which says they are in play, in "
+"consolation."
+
+#: ../../source/format_tableaux.rst:276
+msgid ""
+"Le classement PROPRE d'une section (``SectionRanking``, sur lequel se "
+"répartit sa dotation) est décrit dans :ref:`classement`."
+msgstr ""
+"The section's OWN standings (``SectionRanking``, on which its prize "
+"distribution is split) are described in :ref:`classement`."
+
+#: ../../source/format_tableaux.rst:280
+msgid "Survivants d'un tableau"
+msgstr "Bracket survivors"

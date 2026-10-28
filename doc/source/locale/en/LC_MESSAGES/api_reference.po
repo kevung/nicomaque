@@ -1,0 +1,293 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/api_reference.rst:4
+msgid "Récapitulatif de l'API"
+msgstr "API summary"
+
+#: ../../source/api_reference.rst:6
+msgid "Le module s'importe sous le nom ``tournoi`` :"
+msgstr "The module is imported under the name ``tournoi``:"
+
+#: ../../source/api_reference.rst:12
+msgid ""
+"La liste ci-dessous est celle de ``go doc -all`` sur le paquet racine ; "
+"les paquets annexes suivent en fin de page."
+msgstr ""
+"The list below is that of ``go doc -all`` on the root package; the "
+"auxiliary packages follow at the end of the page."
+
+#: ../../source/api_reference.rst:16
+msgid "Types"
+msgstr "Types"
+
+#: ../../source/api_reference.rst:18
+msgid ""
+"Joueurs et matchs : ``PlayerID``, ``Player``, ``MatchID``, "
+"``MatchStatus``, ``Match``, ``Rank``, ``Absence``."
+msgstr ""
+"Players and matches: ``PlayerID``, ``Player``, ``MatchID``, "
+"``MatchStatus``, ``Match``, ``Rank``, ``Absence``."
+
+#: ../../source/api_reference.rst:21
+msgid ""
+"Actions et journal : ``ActionKind``, ``Action``, ``Draw``, ``EventKind``,"
+" ``Event``, ``Journal``, ``External``."
+msgstr ""
+"Actions and journal: ``ActionKind``, ``Action``, ``Draw``, ``EventKind``,"
+" ``Event``, ``Journal``, ``External``."
+
+#: ../../source/api_reference.rst:24
+msgid ""
+"Configuration : ``Config``, ``PhaseConfig``, ``Tables``, ``TableRule``, "
+"``TimeRange``, ``PrizePool``, ``PrizeScale``, ``Retention``, "
+"``ConfigRefusal``."
+msgstr ""
+"Configuration: ``Config``, ``PhaseConfig``, ``Tables``, ``TableRule``, "
+"``TimeRange``, ``PrizePool``, ``PrizeScale``, ``Retention``, "
+"``ConfigRefusal``."
+
+#: ../../source/api_reference.rst:27
+msgid ""
+"État : ``State``, ``PhaseState``, ``Section``, ``GMatch``, ``Src``, "
+"``Slot``, ``Clock``, ``PlayerStatus``, ``StatusKind``."
+msgstr ""
+"State: ``State``, ``PhaseState``, ``Section``, ``GMatch``, ``Src``, "
+"``Slot``, ``Clock``, ``PlayerStatus``, ``StatusKind``."
+
+#: ../../source/api_reference.rst:30
+msgid ""
+"Codes (``codes.go`` ; aucun texte destiné à l'affichage ne sort du "
+"moteur, voir :ref:`affichage`) : ``LabelKind``, ``Label``, ``NoteKind``, "
+"``Note``, ``WarningCode``, ``Warning``, ``InfoCode``, ``Info``, "
+"``ReasonCode``. Les noms de section (``Section.Name``, ``Match.Section``)"
+" sont des identifiants — ``main``, ``conso``, ``last``, ``gf``, "
+"``poule:A``, ``barrage:A``… — et non des libellés."
+msgstr ""
+"Codes (``codes.go``; no text intended for display leaves the engine, see "
+":ref:`affichage`): ``LabelKind``, ``Label``, ``NoteKind``, ``Note``, "
+"``WarningCode``, ``Warning``, ``InfoCode``, ``Info``, ``ReasonCode``. "
+"Section names (``Section.Name``, ``Match.Section``) are identifiers — "
+"``main``, ``conso``, ``last``, ``gf``, ``poule:A``, ``barrage:A``… — and "
+"not labels."
+
+#: ../../source/api_reference.rst:37
+msgid "Constantes"
+msgstr "Constants"
+
+#: ../../source/api_reference.rst:39
+msgid "``BYE`` (``PlayerID`` réservé à une place vide) ;"
+msgstr "``BYE`` (``PlayerID`` reserved for an empty place);"
+
+#: ../../source/api_reference.rst:40
+msgid "``MatchStatus`` : ``Running``, ``Finished``, ``Cancelled`` ;"
+msgstr "``MatchStatus``: ``Running``, ``Finished``, ``Cancelled``;"
+
+#: ../../source/api_reference.rst:41
+msgid ""
+"``ActionKind`` : ``ActStartMatch``, ``ActBye``, ``ActDraw``, "
+"``ActNextPhase``, ``ActFinish``, ``ActWait``, ``ActCancelMatch`` "
+"(annulation proposée d'un match devenu incohérent), ``ActRepechage`` "
+"(repêchage proposé d'un suivant de poule) ;"
+msgstr ""
+"``ActionKind``: ``ActStartMatch``, ``ActBye``, ``ActDraw``, "
+"``ActNextPhase``, ``ActFinish``, ``ActWait``, ``ActCancelMatch`` "
+"(proposed cancellation of a match that has become inconsistent), "
+"``ActRepechage`` (proposed repechage of a pool's next player);"
+
+#: ../../source/api_reference.rst:44
+msgid ""
+"``EventKind`` : ``EvCreated``, ``EvPlayerAdded``, ``EvPlayerWithdrawn``, "
+"``EvPlayerUpdated``, ``EvPlayerUnavailable``, ``EvPlayerAvailable``, "
+"``EvMatchStarted``, ``EvResult``, ``EvResultCorrected``, "
+"``EvMatchCancelled``, ``EvBye``, ``EvDraw``, ``EvNextPhase``, "
+"``EvRepechage``, ``EvLengthChanged``, ``EvConfigChanged``, "
+"``EvReopened``, ``EvTableChanged``, ``EvFinished``, ``EvNote`` ;"
+msgstr ""
+"``EventKind``: ``EvCreated``, ``EvPlayerAdded``, ``EvPlayerWithdrawn``, "
+"``EvPlayerUpdated``, ``EvPlayerUnavailable``, ``EvPlayerAvailable``, "
+"``EvMatchStarted``, ``EvResult``, ``EvResultCorrected``, "
+"``EvMatchCancelled``, ``EvBye``, ``EvDraw``, ``EvNextPhase``, "
+"``EvRepechage``, ``EvLengthChanged``, ``EvConfigChanged``, "
+"``EvReopened``, ``EvTableChanged``, ``EvFinished``, ``EvNote``;"
+
+#: ../../source/api_reference.rst:49
+msgid ""
+"formats (chaînes non typées, ``PhaseConfig.Kind``) : ``KindSwissLives``, "
+"``KindLivesBracket``, ``KindGSL``, ``KindBracket``, ``KindRoundRobin`` ;"
+msgstr ""
+"formats (untyped strings, ``PhaseConfig.Kind``): ``KindSwissLives``, "
+"``KindLivesBracket``, ``KindGSL``, ``KindBracket``, ``KindRoundRobin``;"
+
+#: ../../source/api_reference.rst:51
+msgid ""
+"raisons d'un ``ConfigRefusal`` : ``RefusalRemoved``, ``RefusalFinished``,"
+" ``RefusalDrawn``, ``RefusalStarted`` ;"
+msgstr ""
+"reasons for a ``ConfigRefusal``: ``RefusalRemoved``, ``RefusalFinished``,"
+" ``RefusalDrawn``, ``RefusalStarted``;"
+
+#: ../../source/api_reference.rst:53
+msgid ""
+"``JournalVersion`` (= 2, posée dans chaque événement par les "
+"constructeurs ; un journal ``Version: 0`` est converti à la lecture) ;"
+msgstr ""
+"``JournalVersion`` (= 2, set in each event by the constructors; a "
+"``Version: 0`` journal is converted on reading);"
+
+#: ../../source/api_reference.rst:55
+msgid ""
+"``PrizeSectionAll`` (= ``\"all\"``, clé de la dotation du classement "
+"général) ;"
+msgstr ""
+"``PrizeSectionAll`` (= ``\"all\"``, key of the overall standings' prize "
+"distribution);"
+
+#: ../../source/api_reference.rst:56
+msgid ""
+"``SeedingRating`` (``PhaseConfig.Seeding`` : placement par cote, même "
+"valeur que ``rules.SeedingRating``) ;"
+msgstr ""
+"``SeedingRating`` (``PhaseConfig.Seeding``: placement by rating, same "
+"value as ``rules.SeedingRating``);"
+
+#: ../../source/api_reference.rst:58
+msgid ""
+"les codes ``Label*`` (``LabelNone``, ``LabelRound``, ``LabelFinal``, "
+"``LabelInSection``, ``LabelBarrage``, ``LabelPoolName``, "
+"``LabelSectionMain``…), ``Note*`` (dont ``NoteWithdrawn`` : retiré, "
+"classé sur son parcours ; ``NoteForfeit`` : match perdu par forfait), "
+"``Warn*``, ``Info*`` (``InfoEntersAt``, ``InfoNoEntry``), ``Reason*`` et "
+"``Status*``."
+msgstr ""
+"the ``Label*`` codes (``LabelNone``, ``LabelRound``, ``LabelFinal``, "
+"``LabelInSection``, ``LabelBarrage``, ``LabelPoolName``, "
+"``LabelSectionMain``…), ``Note*`` (including ``NoteWithdrawn``: "
+"withdrawn, ranked on their run; ``NoteForfeit``: match lost by forfeit), "
+"``Warn*``, ``Info*`` (``InfoEntersAt``, ``InfoNoEntry``), ``Reason*`` and"
+" ``Status*``."
+
+#: ../../source/api_reference.rst:64
+msgid "Fonctions et méthodes"
+msgstr "Functions and methods"
+
+#: ../../source/api_reference.rst:156
+msgid ""
+"Les règles elles-mêmes (appariements, tirages, résolution des graphes, "
+"classement, dotation, prévision) ne sont pas dans le paquet racine : "
+"elles vivent, exportées, dans ``rules``, et les fonctions du paquet "
+"racine en sont des enveloppes. Le reste du paquet racine est non exporté."
+" Un journal ne dépend pas de ces règles : les tirages sont matérialisés "
+"dans ``EvDraw``, si bien qu'un changement d'algorithme ne casse pas les "
+"journaux existants (voir :ref:`journal`)."
+msgstr ""
+"The rules themselves (pairings, draws, graph resolution, standings, prize"
+" distribution, forecasting) are not in the root package: they live, "
+"exported, in ``rules``, and the root package's functions are wrappers "
+"around them. The rest of the root package is unexported. A journal does "
+"not depend on these rules: draws are materialised in ``EvDraw``, so that "
+"a change of algorithm does not break existing journals (see "
+":ref:`journal`)."
+
+#: ../../source/api_reference.rst:163
+msgid "Paquets annexes"
+msgstr "Auxiliary packages"
+
+#: ../../source/api_reference.rst:165
+msgid "``rules`` (``github.com/kevung/nicomaque/rules``)"
+msgstr "``rules`` (``github.com/kevung/nicomaque/rules``)"
+
+#: ../../source/api_reference.rst:166
+msgid ""
+"Règles en fonctions pures, sans état, sans E/S ni horloge, sur ses "
+"propres types (``Ref``, ``Phase``, ``PhaseRules``, ``Seed``, ``Pairing``,"
+" ``Section``, ``Node``, ``Src``, ``Slot``, ``Match``, ``Label``, "
+"``Note``, ``Standing``, ``Placement``, ``PrizeScale``, ``Retention``, "
+"``Interval``, ``Pace``, ``Remaining``, ``Sheet``, ``LengthPlan``…). "
+"Appariements : ``Pair``, ``PairSwissRound``, ``PairSwissOrphans``, "
+"``PairSwissFallback`` ; graphes : ``BracketSection(s)``, "
+"``ConsolationSection``, ``LastChanceSection``, ``GSLSection``, "
+"``GSLBlockSections``, ``SESection``, ``PoolSection(s)``, "
+"``BarrageSection``, ``Resolve``, ``Ready``, ``ReadyFree``, ``AllDone``, "
+"``PhaseDone`` ; tirages : ``DrawSlots``, ``SeedOrder``, ``Partition`` ; "
+"classement : ``Rank``, ``RankSection``, ``MergeRankings``, "
+"``PoolQualified``, ``PoolTie``, ``PoolWins`` ; dotation : ``Pool``, "
+"``Distributable``, ``PlaceAmounts``, ``SharePrizes`` ; prévision et "
+"horloge : ``RemainingMatches``, ``PaceAt``, ``ExpectedDuration``, "
+"``IsSlow``, ``PlayingTime``, ``DayOfPlay``, ``EstimatedEnd``, "
+"``AfterBreaks``, ``WinProbability``, ``MeanRating``, "
+"``RemainingDuration`` ; feuille d'appariements : ``Batches``, "
+"``PairingSheet``."
+msgstr ""
+"Rules as pure, stateless functions, with no I/O or clock, on its own "
+"types (``Ref``, ``Phase``, ``PhaseRules``, ``Seed``, ``Pairing``, "
+"``Section``, ``Node``, ``Src``, ``Slot``, ``Match``, ``Label``, ``Note``,"
+" ``Standing``, ``Placement``, ``PrizeScale``, ``Retention``, "
+"``Interval``, ``Pace``, ``Remaining``, ``Sheet``, ``LengthPlan``…). "
+"Pairings: ``Pair``, ``PairSwissRound``, ``PairSwissOrphans``, "
+"``PairSwissFallback``; graphs: ``BracketSection(s)``, "
+"``ConsolationSection``, ``LastChanceSection``, ``GSLSection``, "
+"``GSLBlockSections``, ``SESection``, ``PoolSection(s)``, "
+"``BarrageSection``, ``Resolve``, ``Ready``, ``ReadyFree``, ``AllDone``, "
+"``PhaseDone``; draws: ``DrawSlots``, ``SeedOrder``, ``Partition``; "
+"standings: ``Rank``, ``RankSection``, ``MergeRankings``, "
+"``PoolQualified``, ``PoolTie``, ``PoolWins``; prize distribution: "
+"``Pool``, ``Distributable``, ``PlaceAmounts``, ``SharePrizes``; "
+"forecasting and clock: ``RemainingMatches``, ``PaceAt``, "
+"``ExpectedDuration``, ``IsSlow``, ``PlayingTime``, ``DayOfPlay``, "
+"``EstimatedEnd``, ``AfterBreaks``, ``WinProbability``, ``MeanRating``, "
+"``RemainingDuration``; pairing sheet: ``Batches``, ``PairingSheet``."
+
+#: ../../source/api_reference.rst:180
+msgid "``render`` (``github.com/kevung/nicomaque/render``)"
+msgstr "``render`` (``github.com/kevung/nicomaque/render``)"
+
+#: ../../source/api_reference.rst:181
+msgid ""
+"``Labeler``, ``French()``, ``Term``, ``Renderer`` (``New``, "
+"``BracketBoardSVG``, ``LivesBoard``, ``TableGrid``, ``RunningTable``, "
+"``ActionsList``, ``StandingsTable``, ``PairingSheet``, ``Page``), "
+"``Batches``, ``DefaultStyle``, ``DefaultCredit``. Voir :ref:`affichage`."
+msgstr ""
+"``Labeler``, ``French()``, ``Term``, ``Renderer`` (``New``, "
+"``BracketBoardSVG``, ``LivesBoard``, ``TableGrid``, ``RunningTable``, "
+"``ActionsList``, ``StandingsTable``, ``PairingSheet``, ``Page``), "
+"``Batches``, ``DefaultStyle``, ``DefaultCredit``. See :ref:`affichage`."
+
+#: ../../source/api_reference.rst:186
+msgid "``sim`` (``github.com/kevung/nicomaque/sim``)"
+msgstr "``sim`` (``github.com/kevung/nicomaque/sim``)"
+
+#: ../../source/api_reference.rst:187
+msgid ""
+"``PGain``, ``Duree``, ``Options``, ``Result``, ``Run``, ``Champ``, "
+"``Forecast``, ``Durations``, ``EstimatedEnd``. Voir :ref:`simulation`."
+msgstr ""
+"``PGain``, ``Duree``, ``Options``, ``Result``, ``Run``, ``Champ``, "
+"``Forecast``, ``Durations``, ``EstimatedEnd``. See :ref:`simulation`."
+
+#: ../../source/api_reference.rst:190
+msgid "``players`` (``github.com/kevung/nicomaque/players``)"
+msgstr "``players`` (``github.com/kevung/nicomaque/players``)"
+
+#: ../../source/api_reference.rst:191
+msgid "``FromCSV``, ``ToCSV``. Voir :ref:`joueurs_csv`."
+msgstr "``FromCSV``, ``ToCSV``. See :ref:`joueurs_csv`."
