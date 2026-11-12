@@ -3,6 +3,8 @@ package tournoi
 import (
 	"encoding/json"
 	"fmt"
+	"strconv"
+	"strings"
 
 	"github.com/kevung/nicomaque/rules"
 )
@@ -318,6 +320,28 @@ func (c *Config) Validate() error {
 		}
 		if p.Seeding != "" && p.Kind != KindBracket && p.Kind != KindLivesBracket && p.Kind != KindSwissRounds && p.Kind != KindRoundRobin {
 			return fmt.Errorf("phase %d : seeding ne s'applique qu'aux tableaux, au suisse classique et aux poules, pas à %q", i, p.Kind)
+		}
+	}
+	return nil
+}
+
+// validateAt : Validate, plus les refus qui ne valent qu'à l'écriture — ceux d'un événement
+// created ou config_changed de la version donnée. Une entrée top:N sans N ≥ 1 n'admet
+// personne et bloque le tournoi au passage de phase ; un journal antérieur qui la porte reste
+// lisible, bloqué comme il l'a été.
+func (c *Config) validateAt(version int) error {
+	if err := c.Validate(); err != nil {
+		return err
+	}
+	if version < versionRefus {
+		return nil
+	}
+	for i, p := range c.Phases {
+		if !strings.HasPrefix(p.Entry, "top:") {
+			continue
+		}
+		if n, err := strconv.Atoi(p.Entry[4:]); err != nil || n < 1 {
+			return fmt.Errorf("phase %d : entry %q — top:N attend un entier N ≥ 1", i, p.Entry)
 		}
 	}
 	return nil

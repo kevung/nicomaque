@@ -58,7 +58,7 @@ func (r *ConfigRefusal) Error() string {
 // courante du journal.
 func (s *State) CheckConfig(next Config) error {
 	c := next.clone()
-	if err := c.Validate(); err != nil {
+	if err := c.validateAt(JournalVersion); err != nil {
 		return err
 	}
 	return s.acceptConfig(c, JournalVersion)

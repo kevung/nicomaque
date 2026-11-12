@@ -306,8 +306,9 @@ journal plus ancien peut porter ``lives: 1048576`` et ``mode: "rounds"``, qui re
 moteur les calcule.
 
 Hors ``top:N``, ``Entry`` n'est pas vérifiée : une valeur inconnue fait entrer les survivants, mais avec les vies
-par défaut du format (pas leurs vies restantes), et un ``top:N`` illisible donne une phase vide
-(voir :ref:`etat`).
+par défaut du format (pas leurs vies restantes). Un ``top:N`` sans entier N ≥ 1 (``top:0``, ``top:x``) est
+refusé à l'écriture — par ``New``, ``CheckConfig`` et un ``config_changed`` de version 3 —, pas par
+``Validate`` : un journal plus ancien qui le porte reste lisible, et sa phase reste vide (voir :ref:`etat`).
 
 Le test de puissance de deux est ``Target & (Target-1) == 0`` (vrai aussi pour 0, d'où la garde
 ``Target != 0``).

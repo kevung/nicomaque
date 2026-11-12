@@ -1,6 +1,7 @@
 package tournoi_test
 
 import (
+	"encoding/json"
 	"fmt"
 	"math/rand"
 	"testing"
@@ -190,4 +191,85 @@ func TestRemplacementRefus(t *testing.T) {
 	}
 	d.jouer(nil)
 	d.rejouable()
+}
+
+// TestEchangeApresCloture : deux joueurs qui n'ont pas joué s'échangent encore après la
+// clôture ; le classement final figé suit les places, comme celui que le moteur recalcule.
+func TestEchangeApresCloture(t *testing.T) {
+	d := piloter(t, manuel(), 1, champClubs(4, 0))
+	d.must(d.st.ManualMatchEvent(1, "p00", "p01", d.now))
+	d.must(tournoi.ResultEvent(d.st.MatchOrder[0], "p00", 5, 0, d.now))
+	d.jouer(nil)
+	if !d.st.Finished || len(d.st.Final) != 4 {
+		t.Fatalf("clôture attendue : %v", d.st.Final)
+	}
+	avant := map[tournoi.PlayerID]int{}
+	for i, l := range d.st.Final {
+		avant[l.Player] = i
+	}
+	d.must(tournoi.PlayersSwappedEvent("p02", "p03", d.now))
+	if d.st.Final[avant["p02"]].Player != "p03" || d.st.Final[avant["p03"]].Player != "p02" {
+		t.Fatalf("classement final après l'échange : %v", d.st.Final)
+	}
+	f, _ := json.Marshal(d.st.Final)
+	r, _ := json.Marshal(d.st.Ranking())
+	if string(f) != string(r) {
+		t.Fatalf("classement final %s, recalculé %s", f, r)
+	}
+	d.rejouable()
+}
+
+// TestRefusALEcritureSeulement : un refus ajouté ne vaut que pour un événement neuf. Un
+// journal de version 2 qui inscrit un joueur « BYE » ou porte une entrée top:0 se relit ;
+// les mêmes, écrits aujourd'hui, sont refusés.
+func TestRefusALEcritureSeulement(t *testing.T) {
+	now := time.Date(2026, 9, 7, 9, 0, 0, 0, time.UTC)
+	phases := func(entry string) tournoi.Config {
+		return tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissLives, Length: 5, Lives: 2},
+			{Kind: tournoi.KindBracket, Length: 5, Entry: entry}}}
+	}
+	if tournoi.JournalVersion < 3 {
+		t.Fatalf("JournalVersion %d : les refus à l'écriture datent de la version 3", tournoi.JournalVersion)
+	}
+	for _, entry := range []string{"top:0", "top:-1", "top:x", "top:"} {
+		if _, _, err := tournoi.New(phases(entry), 1, now); err == nil {
+			t.Errorf("New accepte entry %q", entry)
+		}
+		st, _, err := tournoi.New(phases("top:4"), 1, now)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if st.CheckConfig(phases(entry)) == nil || st.Apply(tournoi.ConfigChangedEvent(phases(entry), now)) == nil {
+			t.Errorf("config_changed accepte entry %q", entry)
+		}
+		cfg := phases(entry)
+		ancien := tournoi.Journal{{Version: 2, Kind: tournoi.EvCreated, Time: now, Config: &cfg, Seed: 1}}
+		st, err = tournoi.Replay(ancien)
+		if err != nil {
+			t.Errorf("journal de version 2, entry %q : %v", entry, err)
+			continue
+		}
+		changé := tournoi.ConfigChangedEvent(phases(entry), now)
+		changé.Version = 2
+		if err := st.Apply(changé); err != nil {
+			t.Errorf("config_changed de version 2, entry %q : %v", entry, err)
+		}
+	}
+	for _, entry := range []string{"top:1", "top:4", "all", "survivors", ""} {
+		if _, _, err := tournoi.New(phases(entry), 1, now); err != nil {
+			t.Errorf("New refuse entry %q : %v", entry, err)
+		}
+	}
+	st, _, err := tournoi.New(phases("top:4"), 1, now)
+	if err != nil {
+		t.Fatal(err)
+	}
+	bye := tournoi.PlayerAddedEvent(tournoi.Player{ID: tournoi.BYE, Name: "X"}, now)
+	if st.Apply(bye) == nil {
+		t.Error("joueur BYE inscrit par un événement neuf")
+	}
+	bye.Version = 2
+	if err := st.Apply(bye); err != nil {
+		t.Errorf("joueur BYE d'un journal de version 2 : %v", err)
+	}
 }

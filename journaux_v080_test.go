@@ -18,6 +18,8 @@ import (
 // et les mêmes avertissements. Les empreintes du fichier témoin viennent de v0.8.0 et ne se
 // régénèrent pas ; un champ ajouté à Action, à PlayerStatus ou à Warning doit donc être omis
 // quand il est vide. Les journaux « perturbe/ » portent retraits, corrections et annulations.
+// Les journaux « bye/ » inscrivent un joueur d'identifiant BYE, que v0.8.0 acceptait : classé
+// premier d'un tableau sans jouer, ou tirage GSL proposé sans fin (journal tronqué) — relus tels quels.
 //
 // Seul écart voulu : la phase d'un seul entrant (journaux « top1 »), où v0.8.0 attendait sans
 // fin (no_pairing) — le moteur y propose maintenant la clôture.

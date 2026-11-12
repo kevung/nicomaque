@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 16:07+0100\n"
+"POT-Creation-Date: 2026-11-12 17:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -149,10 +149,10 @@ msgstr ""
 
 #: ../../source/api_reference.rst:54
 msgid ""
-"``JournalVersion`` (= 2, posée dans chaque événement par les "
+"``JournalVersion`` (= 3, posée dans chaque événement par les "
 "constructeurs ; un journal ``Version: 0`` est converti à la lecture) ;"
 msgstr ""
-"``JournalVersion`` (= 2, set in each event by the constructors; a "
+"``JournalVersion`` (= 3, set in each event by the constructors; a "
 "``Version: 0`` journal is converted on reading);"
 
 #: ../../source/api_reference.rst:56
