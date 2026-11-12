@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 14:34+0100\n"
+"POT-Creation-Date: 2026-11-12 14:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -165,13 +165,23 @@ msgstr ""
 
 #: ../../source/limites.rst:47
 msgid ""
+"**Remplacement** : la place d'un joueur retiré ne se reprend pas "
+"(``player_replaced`` est refusé) ; le remplaçant s'inscrit alors comme un"
+" retardataire."
+msgstr ""
+"**Replacement**: the seat of a withdrawn player cannot be taken over "
+"(``player_replaced`` is refused); the replacement then registers as a "
+"latecomer."
+
+#: ../../source/limites.rst:49
+msgid ""
 "**Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a "
 "pas été éprouvée en conditions réelles (durée du barrage)."
 msgstr ""
 "**Pools**: the three-way tie for two places, settled by a play-off, has "
 "not been tested under real conditions (play-off duration)."
 
-#: ../../source/limites.rst:49
+#: ../../source/limites.rst:51
 msgid ""
 "**Classement des places non gagnantes** : les règles (par tour atteint en"
 " tableau, par victoires au suisse, ex æquo partagés) restent à valider "
@@ -181,11 +191,11 @@ msgstr ""
 "bracket, by wins in the Swiss, ties shared) remain to be validated with "
 "the FFBG."
 
-#: ../../source/limites.rst:53
+#: ../../source/limites.rst:55
 msgid "Affichage"
 msgstr "Display"
 
-#: ../../source/limites.rst:55
+#: ../../source/limites.rst:57
 msgid ""
 "Pas d'écran joueur (« votre prochain match, votre table ») dans le paquet"
 " ``render``."
@@ -193,11 +203,11 @@ msgstr ""
 "No player screen (\"your next match, your table\") in the ``render`` "
 "package."
 
-#: ../../source/limites.rst:58
+#: ../../source/limites.rst:60
 msgid "Modèle de l'étude"
 msgstr "Study model"
 
-#: ../../source/limites.rst:60
+#: ../../source/limites.rst:62
 msgid ""
 "L'effet de la longueur de match (exposant α) n'est pas fixé par les "
 "données disponibles."
@@ -205,7 +215,7 @@ msgstr ""
 "The effect of match length (exponent α) is not settled by the available "
 "data."
 
-#: ../../source/limites.rst:61
+#: ../../source/limites.rst:63
 msgid ""
 "Le modèle de durée est une moyenne par point, indépendante du niveau et "
 "de la longueur."
@@ -213,7 +223,7 @@ msgstr ""
 "The duration model is a per-point average, independent of level and "
 "length."
 
-#: ../../source/limites.rst:62
+#: ../../source/limites.rst:64
 msgid ""
 "Le simulateur de l'étude et ``sim`` diffèrent de 1 à 2 écarts types sur "
 "les probabilités de la double élimination et du GSL ; la cause n'est pas "

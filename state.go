@@ -237,6 +237,14 @@ func (s *State) Apply(ev Event) error {
 		}
 		p := *ev.Player
 		s.Players[p.ID] = &p
+	case EvPlayerReplaced:
+		if err := s.applyReplace(ev); err != nil {
+			return err
+		}
+	case EvPlayersSwapped:
+		if err := s.applySwap(ev); err != nil {
+			return err
+		}
 	case EvHalfBye, EvHalfByeCancelled:
 		if err := s.applyHalfBye(ev); err != nil {
 			return err

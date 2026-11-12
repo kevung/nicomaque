@@ -44,6 +44,8 @@ Règles
   d'adversaires possibles (effectif moins un) reste jouable, par revanches, mais ``Propose``
   y ralentit nettement. ``Validate`` ne borne pas ``rounds`` : l'effectif n'est pas connu à la
   configuration.
+- **Remplacement** : la place d'un joueur retiré ne se reprend pas (``player_replaced`` est
+  refusé) ; le remplaçant s'inscrit alors comme un retardataire.
 - **Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a pas été éprouvée en
   conditions réelles (durée du barrage).
 - **Classement des places non gagnantes** : les règles (par tour atteint en tableau, par

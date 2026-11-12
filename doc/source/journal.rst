@@ -70,6 +70,8 @@ Structure d'un événement
        EvPlayerAvailable   EventKind = "player_available"
        EvHalfBye           EventKind = "half_bye"
        EvHalfByeCancelled  EventKind = "half_bye_cancelled"
+       EvPlayerReplaced    EventKind = "player_replaced"
+       EvPlayersSwapped    EventKind = "players_swapped"
        EvMatchStarted    EventKind = "match_started"
        EvResult          EventKind = "result"
        EvResultCorrected EventKind = "result_corrected"
@@ -171,6 +173,10 @@ Champs utilisés par type
 | ``half_bye``           | ``ID``, ``Phase``, ``Round``                                            |
 +------------------------+-------------------------------------------------------------------------+
 | ``half_bye_cancelled`` | ``ID``, ``Phase``, ``Round``                                            |
++------------------------+-------------------------------------------------------------------------+
+| ``player_replaced``    | ``ID`` (l'ancien joueur), ``Player`` (le remplaçant)                    |
++------------------------+-------------------------------------------------------------------------+
+| ``players_swapped``    | ``A``, ``B``                                                            |
 +------------------------+-------------------------------------------------------------------------+
 | ``match_started``      | ``MatchID``, ``Phase``, ``Section``, ``Label``, ``Round``, ``Key``,     |
 |                        | ``A``, ``B``, ``Length``, ``Table``                                     |
@@ -292,6 +298,32 @@ identifiant connu, qui met la fiche à jour **et** annule un retrait : corriger 
 joueuse retirée par ``player_added`` la remettrait en jeu.
 ``player_added`` garde son sens pour les journaux existants — c'est aussi le chemin du retour d'un
 joueur retiré.
+
+``player_replaced`` et ``players_swapped``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Une **place** est tout ce que le tournoi a attaché à un identifiant : rang d'inscription, tête de
+série, place dans un tirage ou une poule, matchs qui l'attendent dans un graphe, exemptions
+reçues. Tant que son joueur n'a lancé aucun match, elle peut changer de joueur
+(``PlayerReplacedEvent``) ou s'échanger avec une autre (``PlayersSwappedEvent``). Le journal
+n'est pas réécrit : l'état dérive la substitution, en renommant l'identifiant partout où il
+figure (``remplacement.go``).
+
+::
+
+   pour l'ancien joueur (player_replaced) ou pour A et B (players_swapped) :
+       inconnu, ou retiré                                  → erreur
+       un match non annulé le porte (lancé ou terminé)     → erreur « a déjà joué »
+       une demi-exemption annoncée                         → erreur « la retirer d'abord »
+   player_replaced : Player sans identifiant, ou déjà inscrit → erreur ;
+                     partout dans l'état, ID devient Player.ID ; la fiche est celle du
+                     remplaçant, avec la tête de série (Seed) de la place
+   players_swapped : A == B → erreur ; dans les phases, l'ordre d'inscription et les matchs
+                     annulés, A et B s'échangent ; les fiches restent à leurs joueurs, leurs
+                     têtes de série (Seed) s'échangent
+
+Une exemption déjà reçue reste à la place : un exempté n'a rien joué. L'ancien joueur d'un
+remplacement n'existe plus dans l'état, ni au classement.
 
 ``half_bye`` et ``half_bye_cancelled``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

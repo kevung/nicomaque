@@ -29,21 +29,26 @@ const (
 	// (EvHalfByeCancelled), avant l'ouverture de la ronde seulement.
 	EvHalfBye          EventKind = "half_bye"
 	EvHalfByeCancelled EventKind = "half_bye_cancelled"
-	EvPlayerAvailable  EventKind = "player_available" // ID : l'indisponibilité est levée
-	EvMatchStarted     EventKind = "match_started"    // MatchID, Phase, Section, Label, Key, A, B, Length, Table
-	EvResult           EventKind = "result"           // MatchID, Winner, ScoreA, ScoreB, Forfeit
-	EvResultCorrected  EventKind = "result_corrected" // idem, remplace le résultat précédent
-	EvMatchCancelled   EventKind = "match_cancelled"  // MatchID (match lancé par erreur)
-	EvBye              EventKind = "bye"              // Phase, Player, Label
-	EvDraw             EventKind = "draw"             // Phase, Section, Draw
-	EvNextPhase        EventKind = "next_phase"       // passage à la phase suivante
-	EvRepechage        EventKind = "repechage"        // Phase, Section (poule), A (qualifié retiré), B (repêché)
-	EvLengthChanged    EventKind = "length_changed"   // Phase, Length (matchs futurs de la phase)
-	EvConfigChanged    EventKind = "config_changed"   // Config (la configuration ENTIÈRE, voir reconfig.go)
-	EvReopened         EventKind = "reopened"         // le tournoi clos est rouvert ; Final sera recalculé
-	EvTableChanged     EventKind = "table_changed"    // MatchID, Table (match en cours déplacé)
-	EvFinished         EventKind = "finished"
-	EvNote             EventKind = "note" // Text (annotation libre du TD)
+	// EvPlayerReplaced : ID (l'ancien joueur), Player (le remplaçant). Le remplaçant prend la
+	// place d'un joueur qui n'a pas joué, telle quelle. EvPlayersSwapped : A, B. Deux joueurs
+	// qui n'ont pas joué échangent leurs places. Voir remplacement.go.
+	EvPlayerReplaced  EventKind = "player_replaced"
+	EvPlayersSwapped  EventKind = "players_swapped"
+	EvPlayerAvailable EventKind = "player_available" // ID : l'indisponibilité est levée
+	EvMatchStarted    EventKind = "match_started"    // MatchID, Phase, Section, Label, Key, A, B, Length, Table
+	EvResult          EventKind = "result"           // MatchID, Winner, ScoreA, ScoreB, Forfeit
+	EvResultCorrected EventKind = "result_corrected" // idem, remplace le résultat précédent
+	EvMatchCancelled  EventKind = "match_cancelled"  // MatchID (match lancé par erreur)
+	EvBye             EventKind = "bye"              // Phase, Player, Label
+	EvDraw            EventKind = "draw"             // Phase, Section, Draw
+	EvNextPhase       EventKind = "next_phase"       // passage à la phase suivante
+	EvRepechage       EventKind = "repechage"        // Phase, Section (poule), A (qualifié retiré), B (repêché)
+	EvLengthChanged   EventKind = "length_changed"   // Phase, Length (matchs futurs de la phase)
+	EvConfigChanged   EventKind = "config_changed"   // Config (la configuration ENTIÈRE, voir reconfig.go)
+	EvReopened        EventKind = "reopened"         // le tournoi clos est rouvert ; Final sera recalculé
+	EvTableChanged    EventKind = "table_changed"    // MatchID, Table (match en cours déplacé)
+	EvFinished        EventKind = "finished"
+	EvNote            EventKind = "note" // Text (annotation libre du TD)
 )
 
 // Event est une entrée du journal. Les champs inutiles pour un type restent vides.
@@ -197,6 +202,16 @@ func PlayerUnavailableEvent(id PlayerID, until time.Time, now time.Time) Event {
 // l'affaire de l'hôte.
 func HalfByeEvent(id PlayerID, phase, round int, now time.Time) Event {
 	return Event{Version: JournalVersion, Kind: EvHalfBye, Time: now, ID: id, Phase: phase, Round: round}
+}
+
+// PlayerReplacedEvent : le joueur p prend la place de old, qui n'a encore joué aucun match.
+func PlayerReplacedEvent(old PlayerID, p Player, now time.Time) Event {
+	return Event{Version: JournalVersion, Kind: EvPlayerReplaced, Time: now, ID: old, Player: &p}
+}
+
+// PlayersSwappedEvent : a et b, qui n'ont encore joué aucun match, échangent leurs places.
+func PlayersSwappedEvent(a, b PlayerID, now time.Time) Event {
+	return Event{Version: JournalVersion, Kind: EvPlayersSwapped, Time: now, A: a, B: b}
 }
 
 // HalfByeCancelledEvent retire une demi-exemption posée, tant que sa ronde n'est pas ouverte.
