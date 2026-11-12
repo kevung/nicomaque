@@ -62,7 +62,7 @@ func fromRulesLabel(l rules.Label) Label {
 }
 
 func fromRulesNote(n rules.Note) Note {
-	out := Note{Kind: NoteKind(n.Kind), Wins: n.Wins, Losses: n.Losses, Byes: n.Byes, Lives: n.Lives, Section: n.Section, Qualified: n.Qualified}
+	out := Note{Kind: NoteKind(n.Kind), Wins: n.Wins, Losses: n.Losses, Byes: n.Byes, PointDiff: n.PointDiff, PointsScored: n.PointsScored, Buchholz: n.Buchholz, Lives: n.Lives, Section: n.Section, Qualified: n.Qualified}
 	if n.Sub != nil {
 		sub := fromRulesLabel(*n.Sub)
 		out.Sub = &sub
@@ -171,7 +171,7 @@ func phaseRules(c PhaseConfig) rules.PhaseRules {
 		LengthLate: c.LengthLate, LateThreshold: c.LateThreshold, Mode: c.Mode, Pairing: c.Pairing,
 		AvoidClubs: c.AvoidClubs, AllowRematch: c.AllowRematch, Target: c.Target, Consolation: c.Consolation,
 		LastChance: c.LastChance, Reconciliation: c.Reconciliation, Recharge: c.Recharge, GroupSize: c.GroupSize,
-		Qualifiers: c.Qualifiers, Seeding: c.Seeding}
+		Qualifiers: c.Qualifiers, Seeding: c.Seeding, Tiebreak: c.Tiebreak}
 }
 
 // snapshot : l'instantané de la phase ph pour rules.Pair. free : les joueurs appariables d'un
@@ -203,6 +203,9 @@ func (s *State) instantané(ph *PhaseState, free []PlayerID, apparier bool) rule
 		}
 		p.Entrants[i] = e
 	}
+	if len(ph.Cfg.Tiebreak) > 0 {
+		s.départage(ph, p.Entrants)
+	}
 	p.Sections = toRulesSections(ph.Sections)
 	for _, id := range s.MatchOrder {
 		if !apparier && !poules {
@@ -230,6 +233,39 @@ func (s *State) instantané(ph *PhaseState, free []PlayerID, apparier bool) rule
 		}
 	}
 	return p
+}
+
+// départage : ce que les critères de départage lisent des matchs TERMINÉS de la phase — points
+// de match marqués et encaissés, plafonnés à la longueur (9-3 en 7 points compte 7-3), et
+// adversaires rencontrés. Un forfait compte longueur–0 ; un résultat saisi sans score ne compte
+// que pour l'adversaire rencontré. Une ronde mise de côté par beforeRound est ignorée.
+func (s *State) départage(ph *PhaseState, entrants []rules.Entrant) {
+	idx := make(map[PlayerID]*rules.Entrant, len(entrants))
+	for i := range entrants {
+		idx[PlayerID(entrants[i].Player)] = &entrants[i]
+	}
+	for _, id := range s.MatchOrder {
+		m := s.Matches[id]
+		if m.Phase != ph.Index || m.Status != Finished || (ph.sansRonde > 0 && m.Round == ph.sansRonde) {
+			continue
+		}
+		a, b := idx[m.A], idx[m.B]
+		if a == nil || b == nil {
+			continue
+		}
+		a.Played, b.Played = append(a.Played, ref(m.B)), append(b.Played, ref(m.A))
+		sa, sb := min(m.ScoreA, m.Length), min(m.ScoreB, m.Length)
+		if m.Forfeit {
+			sa, sb = 0, 0
+			if m.Winner == m.A {
+				sa = m.Length
+			} else {
+				sb = m.Length
+			}
+		}
+		a.PointsFor, a.PointsAgainst = a.PointsFor+sa, a.PointsAgainst+sb
+		b.PointsFor, b.PointsAgainst = b.PointsFor+sb, b.PointsAgainst+sa
+	}
 }
 
 // seed : la graine des propositions à l'état courant.

@@ -34427,6 +34427,1080 @@
       }
     },
     {
+      "name": "suisse_departage_tableau P=5 pas 3",
+      "seed": {
+        "base": 0,
+        "events": 10,
+        "phase": 0
+      },
+      "phase": {
+        "format": "swiss_rounds",
+        "name": "Suisse en 4 rondes",
+        "rules": {
+          "lives": 1048576,
+          "rounds": 4,
+          "length": 7,
+          "mode": "rounds",
+          "tiebreak": [
+            "point_diff",
+            "points_scored",
+            "buchholz"
+          ]
+        },
+        "entrants": [
+          {
+            "player": "P1",
+            "lives": 1048576,
+            "losses": 1,
+            "opponents": [
+              "P3"
+            ],
+            "points_for": 1,
+            "points_against": 7,
+            "played": [
+              "P3"
+            ],
+            "club": "Club 0",
+            "rating": 3.946159528966618
+          },
+          {
+            "player": "P2",
+            "lives": 1048576,
+            "byes": 1,
+            "club": "club1",
+            "rating": 7.6246768015988255
+          },
+          {
+            "player": "P3",
+            "lives": 1048576,
+            "wins": 1,
+            "opponents": [
+              "P1"
+            ],
+            "points_for": 7,
+            "points_against": 1,
+            "played": [
+              "P1"
+            ],
+            "club": "Club 2",
+            "rating": 7.666048341737641
+          },
+          {
+            "player": "P4",
+            "lives": 1048576,
+            "opponents": [
+              "P5"
+            ],
+            "club": "Club 3",
+            "rating": 8.822085659403301
+          },
+          {
+            "player": "P5",
+            "lives": 1048576,
+            "opponents": [
+              "P4"
+            ],
+            "club": "club0",
+            "rating": 8.884571841122204
+          }
+        ],
+        "round": 1,
+        "length": 7,
+        "running": 1,
+        "busy": [
+          "P4",
+          "P5"
+        ],
+        "free": [
+          "P1",
+          "P2",
+          "P3"
+        ]
+      },
+      "out": {
+        "pairs": [],
+        "done": false,
+        "rank": [
+          {
+            "player": "P3",
+            "rank": 1,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "point_diff": 6,
+              "points_scored": 7
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 2,
+            "note": {
+              "kind": "record",
+              "byes": 1
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 5,
+            "note": {
+              "kind": "record",
+              "losses": 1,
+              "point_diff": -6,
+              "points_scored": 1,
+              "buchholz": 1
+            }
+          }
+        ],
+        "remaining": {
+          "min": 7,
+          "max": 8
+        }
+      }
+    },
+    {
+      "name": "suisse_departage_tableau P=5 pas 15",
+      "seed": {
+        "base": 0,
+        "events": 28,
+        "phase": 1
+      },
+      "phase": {
+        "format": "bracket",
+        "name": "Tableau",
+        "rules": {
+          "length": 9
+        },
+        "entrants": [
+          {
+            "player": "P5",
+            "lives": 1,
+            "club": "club0",
+            "rating": 8.884571841122204
+          },
+          {
+            "player": "P2",
+            "lives": 1,
+            "club": "club1",
+            "rating": 7.6246768015988255
+          },
+          {
+            "player": "P4",
+            "lives": 1,
+            "club": "Club 3",
+            "rating": 8.822085659403301
+          },
+          {
+            "player": "P1",
+            "lives": 1,
+            "club": "Club 0",
+            "rating": 3.946159528966618
+          }
+        ],
+        "drawn": true,
+        "length": 9,
+        "sections": [
+          {
+            "name": "main",
+            "kind": "main",
+            "nodes": [
+              {
+                "key": "main.0.0",
+                "label": {
+                  "kind": "semi_final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P2",
+                    "from": -1
+                  },
+                  {
+                    "player": "P1",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P2",
+                  "P1"
+                ]
+              },
+              {
+                "key": "main.0.1",
+                "label": {
+                  "kind": "semi_final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P4",
+                    "from": -1
+                  },
+                  {
+                    "player": "P5",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P4",
+                  "P5"
+                ]
+              },
+              {
+                "key": "main.1.0",
+                "label": {
+                  "kind": "final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "from": 0
+                  },
+                  {
+                    "from": 1
+                  }
+                ],
+                "players": [
+                  "",
+                  ""
+                ]
+              }
+            ],
+            "rounds": [
+              [
+                0,
+                1
+              ],
+              [
+                2
+              ]
+            ]
+          }
+        ]
+      },
+      "out": {
+        "pairs": [
+          {
+            "kind": "match",
+            "section": "main",
+            "key": "main.0.0",
+            "label": {
+              "kind": "semi_final"
+            },
+            "a": "P2",
+            "b": "P1",
+            "length": 9
+          },
+          {
+            "kind": "match",
+            "section": "main",
+            "key": "main.0.1",
+            "label": {
+              "kind": "semi_final"
+            },
+            "a": "P4",
+            "b": "P5",
+            "length": 9
+          }
+        ],
+        "done": false,
+        "rank": [
+          {
+            "player": "P5",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          }
+        ],
+        "sections": {
+          "main": [
+            {
+              "player": "P2",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P1",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P4",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P5",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            }
+          ]
+        },
+        "remaining": {
+          "min": 3,
+          "max": 3
+        }
+      }
+    },
+    {
+      "name": "suisse_departage_tableau P=13 perturbé pas 3",
+      "seed": {
+        "base": 0,
+        "events": 22,
+        "phase": 0
+      },
+      "phase": {
+        "format": "swiss_rounds",
+        "name": "Suisse en 4 rondes",
+        "rules": {
+          "lives": 1048576,
+          "rounds": 4,
+          "length": 7,
+          "mode": "rounds",
+          "tiebreak": [
+            "point_diff",
+            "points_scored",
+            "buchholz"
+          ]
+        },
+        "entrants": [
+          {
+            "player": "P1",
+            "lives": 1048576,
+            "opponents": [
+              "P8"
+            ],
+            "club": "Club 0",
+            "rating": 4.1984530957787705
+          },
+          {
+            "player": "P2",
+            "lives": 1048576,
+            "opponents": [
+              "P13"
+            ],
+            "club": "club1",
+            "rating": 4.723551644193424
+          },
+          {
+            "player": "P3",
+            "lives": 1048576,
+            "opponents": [
+              "P5"
+            ],
+            "club": "Club 2",
+            "rating": 5.064981159227004
+          },
+          {
+            "player": "P4",
+            "lives": 1048576,
+            "opponents": [
+              "P11"
+            ],
+            "club": "Club 3",
+            "rating": 5.625565270981094
+          },
+          {
+            "player": "P5",
+            "lives": 1048576,
+            "opponents": [
+              "P3"
+            ],
+            "club": "club0",
+            "rating": 6.525720284658867
+          },
+          {
+            "player": "P6",
+            "lives": 1048576,
+            "opponents": [
+              "P7"
+            ],
+            "club": "Club 0",
+            "rating": 6.859884965799685
+          },
+          {
+            "player": "P7",
+            "lives": 1048576,
+            "opponents": [
+              "P6"
+            ],
+            "club": "Club 1",
+            "rating": 6.879091995136401
+          },
+          {
+            "player": "P8",
+            "lives": 1048576,
+            "opponents": [
+              "P1"
+            ],
+            "club": "club3",
+            "rating": 7.024693633927019
+          },
+          {
+            "player": "P9",
+            "lives": 1048576,
+            "losses": 1,
+            "opponents": [
+              "P10"
+            ],
+            "points_for": 3,
+            "points_against": 7,
+            "played": [
+              "P10"
+            ],
+            "club": "Club 3",
+            "rating": 7.207027840597041
+          },
+          {
+            "player": "P10",
+            "lives": 1048576,
+            "wins": 1,
+            "opponents": [
+              "P9"
+            ],
+            "points_for": 7,
+            "points_against": 3,
+            "played": [
+              "P9"
+            ],
+            "club": "Club 4",
+            "rating": 7.416723835503722
+          },
+          {
+            "player": "P11",
+            "lives": 1048576,
+            "opponents": [
+              "P4"
+            ],
+            "club": "club2",
+            "rating": 8.409442305368984
+          },
+          {
+            "player": "P12",
+            "lives": 1048576,
+            "byes": 1,
+            "club": "Club 1",
+            "rating": 8.660685714325359
+          },
+          {
+            "player": "P13",
+            "lives": 1048576,
+            "opponents": [
+              "P2"
+            ],
+            "club": "Club 2",
+            "rating": 9.738466530418485
+          }
+        ],
+        "round": 1,
+        "length": 7,
+        "running": 5,
+        "busy": [
+          "P7",
+          "P6",
+          "P3",
+          "P5",
+          "P8",
+          "P1",
+          "P13",
+          "P2",
+          "P11",
+          "P4"
+        ],
+        "free": [
+          "P9",
+          "P10",
+          "P12"
+        ]
+      },
+      "out": {
+        "pairs": [],
+        "done": false,
+        "rank": [
+          {
+            "player": "P10",
+            "rank": 1,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "point_diff": 4,
+              "points_scored": 7
+            }
+          },
+          {
+            "player": "P12",
+            "rank": 2,
+            "note": {
+              "kind": "record",
+              "byes": 1
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P3",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P6",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P7",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P8",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P11",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P13",
+            "rank": 3,
+            "note": {
+              "kind": "record"
+            }
+          },
+          {
+            "player": "P9",
+            "rank": 13,
+            "note": {
+              "kind": "record",
+              "losses": 1,
+              "point_diff": -4,
+              "points_scored": 3,
+              "buchholz": 1
+            }
+          }
+        ],
+        "remaining": {
+          "min": 23,
+          "max": 24
+        }
+      }
+    },
+    {
+      "name": "suisse_departage_tableau P=13 perturbé pas 15",
+      "seed": {
+        "base": 0,
+        "events": 45,
+        "phase": 0
+      },
+      "phase": {
+        "format": "swiss_rounds",
+        "name": "Suisse en 4 rondes",
+        "rules": {
+          "lives": 1048576,
+          "rounds": 4,
+          "length": 7,
+          "mode": "rounds",
+          "tiebreak": [
+            "point_diff",
+            "points_scored",
+            "buchholz"
+          ]
+        },
+        "entrants": [
+          {
+            "player": "P1",
+            "lives": 1048576,
+            "wins": 2,
+            "opponents": [
+              "P8",
+              "P3",
+              "P13"
+            ],
+            "points_for": 14,
+            "points_against": 10,
+            "played": [
+              "P8",
+              "P3"
+            ],
+            "club": "Club 0",
+            "rating": 4.1984530957787705
+          },
+          {
+            "player": "P2",
+            "lives": 1048576,
+            "losses": 1,
+            "opponents": [
+              "P13",
+              "P9"
+            ],
+            "points_for": 3,
+            "points_against": 7,
+            "played": [
+              "P13"
+            ],
+            "club": "club1",
+            "rating": 4.723551644193424
+          },
+          {
+            "player": "P3",
+            "lives": 1048576,
+            "wins": 1,
+            "losses": 1,
+            "opponents": [
+              "P5",
+              "P1",
+              "P8"
+            ],
+            "points_for": 12,
+            "points_against": 10,
+            "played": [
+              "P5",
+              "P1"
+            ],
+            "club": "Club 2",
+            "rating": 5.064981159227004
+          },
+          {
+            "player": "P4",
+            "lives": 1048576,
+            "wins": 2,
+            "opponents": [
+              "P11",
+              "P6",
+              "P10"
+            ],
+            "points_for": 14,
+            "points_against": 2,
+            "played": [
+              "P11",
+              "P6"
+            ],
+            "club": "Club 3",
+            "rating": 5.625565270981094
+          },
+          {
+            "player": "P5",
+            "lives": 1048576,
+            "wins": 1,
+            "losses": 1,
+            "opponents": [
+              "P3",
+              "P9",
+              "P6"
+            ],
+            "points_for": 10,
+            "points_against": 12,
+            "played": [
+              "P3",
+              "P9"
+            ],
+            "club": "club0",
+            "rating": 6.525720284658867
+          },
+          {
+            "player": "P6",
+            "lives": 1048576,
+            "wins": 1,
+            "losses": 1,
+            "opponents": [
+              "P7",
+              "P4",
+              "P5"
+            ],
+            "points_for": 9,
+            "points_against": 9,
+            "played": [
+              "P7",
+              "P4"
+            ],
+            "club": "Club 0",
+            "rating": 6.859884965799685
+          },
+          {
+            "player": "P7",
+            "lives": 1048576,
+            "losses": 1,
+            "byes": 1,
+            "opponents": [
+              "P6",
+              "P12"
+            ],
+            "points_for": 2,
+            "points_against": 7,
+            "played": [
+              "P6"
+            ],
+            "club": "Club 1",
+            "rating": 6.879091995136401
+          },
+          {
+            "player": "P8",
+            "lives": 1048576,
+            "wins": 1,
+            "losses": 1,
+            "opponents": [
+              "P1",
+              "P12",
+              "P3"
+            ],
+            "points_for": 12,
+            "points_against": 7,
+            "played": [
+              "P1",
+              "P12"
+            ],
+            "club": "club3",
+            "rating": 7.024693633927019
+          },
+          {
+            "player": "P9",
+            "lives": 1048576,
+            "losses": 2,
+            "opponents": [
+              "P10",
+              "P5",
+              "P2"
+            ],
+            "points_for": 8,
+            "points_against": 14,
+            "played": [
+              "P10",
+              "P5"
+            ],
+            "club": "Club 3",
+            "rating": 7.207027840597041
+          },
+          {
+            "player": "P10",
+            "lives": 1048576,
+            "wins": 2,
+            "opponents": [
+              "P9",
+              "P13",
+              "P4"
+            ],
+            "points_for": 14,
+            "points_against": 6,
+            "played": [
+              "P9",
+              "P13"
+            ],
+            "club": "Club 4",
+            "rating": 7.416723835503722
+          },
+          {
+            "player": "P11",
+            "lives": 1048576,
+            "losses": 1,
+            "opponents": [
+              "P4"
+            ],
+            "points_against": 7,
+            "played": [
+              "P4"
+            ],
+            "club": "club2",
+            "rating": 8.409442305368984
+          },
+          {
+            "player": "P12",
+            "lives": 1048576,
+            "losses": 1,
+            "byes": 1,
+            "opponents": [
+              "P8",
+              "P7"
+            ],
+            "points_against": 7,
+            "played": [
+              "P8"
+            ],
+            "club": "Club 1",
+            "rating": 8.660685714325359
+          },
+          {
+            "player": "P13",
+            "lives": 1048576,
+            "wins": 1,
+            "losses": 1,
+            "opponents": [
+              "P2",
+              "P10",
+              "P1"
+            ],
+            "points_for": 10,
+            "points_against": 10,
+            "played": [
+              "P2",
+              "P10"
+            ],
+            "club": "Club 2",
+            "rating": 9.738466530418485
+          }
+        ],
+        "eliminated": [
+          "P11"
+        ],
+        "withdrawn": [
+          "P11"
+        ],
+        "round": 3,
+        "length": 7,
+        "running": 6,
+        "busy": [
+          "P4",
+          "P10",
+          "P1",
+          "P13",
+          "P8",
+          "P3",
+          "P6",
+          "P5",
+          "P7",
+          "P12",
+          "P2",
+          "P9"
+        ]
+      },
+      "out": {
+        "pairs": [],
+        "done": false,
+        "rank": [
+          {
+            "player": "P4",
+            "rank": 1,
+            "note": {
+              "kind": "record",
+              "wins": 2,
+              "point_diff": 12,
+              "points_scored": 14,
+              "buchholz": 1
+            }
+          },
+          {
+            "player": "P10",
+            "rank": 2,
+            "note": {
+              "kind": "record",
+              "wins": 2,
+              "point_diff": 8,
+              "points_scored": 14,
+              "buchholz": 1
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 3,
+            "note": {
+              "kind": "record",
+              "wins": 2,
+              "point_diff": 4,
+              "points_scored": 14,
+              "buchholz": 2
+            }
+          },
+          {
+            "player": "P8",
+            "rank": 4,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "losses": 1,
+              "point_diff": 5,
+              "points_scored": 12,
+              "buchholz": 3
+            }
+          },
+          {
+            "player": "P3",
+            "rank": 5,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "losses": 1,
+              "point_diff": 2,
+              "points_scored": 12,
+              "buchholz": 3
+            }
+          },
+          {
+            "player": "P13",
+            "rank": 6,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "losses": 1,
+              "points_scored": 10,
+              "buchholz": 2
+            }
+          },
+          {
+            "player": "P6",
+            "rank": 7,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "losses": 1,
+              "points_scored": 9,
+              "buchholz": 3
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 8,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "losses": 1,
+              "point_diff": -2,
+              "points_scored": 10,
+              "buchholz": 1
+            }
+          },
+          {
+            "player": "P7",
+            "rank": 9,
+            "note": {
+              "kind": "record",
+              "losses": 1,
+              "byes": 1,
+              "point_diff": -5,
+              "points_scored": 2,
+              "buchholz": 1
+            }
+          },
+          {
+            "player": "P12",
+            "rank": 10,
+            "note": {
+              "kind": "record",
+              "losses": 1,
+              "byes": 1,
+              "point_diff": -7,
+              "buchholz": 1
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 11,
+            "note": {
+              "kind": "record",
+              "losses": 1,
+              "point_diff": -4,
+              "points_scored": 3,
+              "buchholz": 1
+            }
+          },
+          {
+            "player": "P9",
+            "rank": 12,
+            "note": {
+              "kind": "record",
+              "losses": 2,
+              "point_diff": -6,
+              "points_scored": 8,
+              "buchholz": 3
+            }
+          },
+          {
+            "player": "P11",
+            "rank": 13,
+            "note": {
+              "kind": "withdrawn",
+              "losses": 1,
+              "point_diff": -7,
+              "buchholz": 2
+            }
+          }
+        ],
+        "remaining": {
+          "min": 12,
+          "max": 12
+        }
+      }
+    },
+    {
       "name": "suisse_fin_longue P=5 pas 3",
       "seed": {
         "base": 0,
@@ -48396,6 +49470,520 @@
           "note": {
             "kind": "withdrawn",
             "losses": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "suisse_departage_tableau P=5 fin",
+      "by_phase": [
+        [
+          {
+            "player": "P5",
+            "rank": 1,
+            "note": {
+              "kind": "record",
+              "wins": 3,
+              "losses": 1,
+              "point_diff": 17,
+              "points_scored": 26,
+              "buchholz": 9
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 2,
+            "note": {
+              "kind": "record",
+              "wins": 2,
+              "losses": 1,
+              "byes": 1,
+              "point_diff": 1,
+              "points_scored": 15,
+              "buchholz": 7
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 3,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "losses": 2,
+              "byes": 1,
+              "point_diff": -5,
+              "points_scored": 10,
+              "buchholz": 8
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 4,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "losses": 2,
+              "byes": 1,
+              "point_diff": -6,
+              "points_scored": 9,
+              "buchholz": 8
+            }
+          },
+          {
+            "player": "P3",
+            "rank": 5,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "losses": 2,
+              "byes": 1,
+              "point_diff": -7,
+              "points_scored": 8,
+              "buchholz": 7
+            }
+          }
+        ],
+        [
+          {
+            "player": "P2",
+            "rank": 1,
+            "note": {
+              "kind": "section_winner",
+              "section": "main"
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 2,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "final"
+              }
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 3,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "semi_final"
+              }
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 3,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "semi_final"
+              }
+            }
+          }
+        ]
+      ],
+      "out": [
+        {
+          "player": "P2",
+          "rank": 1,
+          "note": {
+            "kind": "section_winner",
+            "section": "main"
+          }
+        },
+        {
+          "player": "P4",
+          "rank": 2,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "final"
+            }
+          }
+        },
+        {
+          "player": "P5",
+          "rank": 3,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "semi_final"
+            }
+          }
+        },
+        {
+          "player": "P1",
+          "rank": 3,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "semi_final"
+            }
+          }
+        },
+        {
+          "player": "P3",
+          "rank": 5,
+          "note": {
+            "kind": "record",
+            "wins": 1,
+            "losses": 2,
+            "byes": 1,
+            "point_diff": -7,
+            "points_scored": 8,
+            "buchholz": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "suisse_departage_tableau P=13 perturbé fin",
+      "by_phase": [
+        [
+          {
+            "player": "P1",
+            "rank": 1,
+            "note": {
+              "kind": "record",
+              "wins": 4,
+              "point_diff": 15,
+              "points_scored": 28,
+              "buchholz": 8
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 2,
+            "note": {
+              "kind": "record",
+              "wins": 3,
+              "losses": 1,
+              "point_diff": 6,
+              "points_scored": 24,
+              "buchholz": 8
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 3,
+            "note": {
+              "kind": "record",
+              "wins": 3,
+              "losses": 1,
+              "point_diff": 6,
+              "points_scored": 21,
+              "buchholz": 8
+            }
+          },
+          {
+            "player": "P8",
+            "rank": 4,
+            "note": {
+              "kind": "withdrawn",
+              "wins": 2,
+              "losses": 1,
+              "point_diff": 10,
+              "points_scored": 19,
+              "buchholz": 8
+            }
+          },
+          {
+            "player": "P10",
+            "rank": 5,
+            "note": {
+              "kind": "record",
+              "wins": 2,
+              "losses": 2,
+              "point_diff": 3,
+              "points_scored": 23,
+              "buchholz": 9
+            }
+          },
+          {
+            "player": "P3",
+            "rank": 6,
+            "note": {
+              "kind": "record",
+              "wins": 2,
+              "losses": 2,
+              "point_diff": 3,
+              "points_scored": 21,
+              "buchholz": 11
+            }
+          },
+          {
+            "player": "P9",
+            "rank": 7,
+            "note": {
+              "kind": "record",
+              "wins": 2,
+              "losses": 2,
+              "point_diff": 2,
+              "points_scored": 22,
+              "buchholz": 7
+            }
+          },
+          {
+            "player": "P6",
+            "rank": 8,
+            "note": {
+              "kind": "record",
+              "wins": 2,
+              "losses": 2,
+              "point_diff": -1,
+              "points_scored": 19,
+              "buchholz": 8
+            }
+          },
+          {
+            "player": "P12",
+            "rank": 9,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "losses": 2,
+              "byes": 1,
+              "point_diff": -11,
+              "points_scored": 8,
+              "buchholz": 5
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 10,
+            "note": {
+              "kind": "record",
+              "losses": 2,
+              "byes": 1,
+              "point_diff": -5,
+              "points_scored": 9,
+              "buchholz": 3
+            }
+          },
+          {
+            "player": "P13",
+            "rank": 11,
+            "note": {
+              "kind": "record",
+              "wins": 1,
+              "losses": 3,
+              "point_diff": -7,
+              "points_scored": 17,
+              "buchholz": 9
+            }
+          },
+          {
+            "player": "P7",
+            "rank": 12,
+            "note": {
+              "kind": "record",
+              "losses": 3,
+              "byes": 1,
+              "point_diff": -14,
+              "points_scored": 7,
+              "buchholz": 6
+            }
+          },
+          {
+            "player": "P11",
+            "rank": 13,
+            "note": {
+              "kind": "withdrawn",
+              "losses": 1,
+              "point_diff": -7,
+              "buchholz": 3
+            }
+          }
+        ],
+        [
+          {
+            "player": "P5",
+            "rank": 1,
+            "note": {
+              "kind": "section_winner",
+              "section": "main"
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 2,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "final"
+              }
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 3,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "semi_final"
+              }
+            }
+          }
+        ]
+      ],
+      "out": [
+        {
+          "player": "P5",
+          "rank": 1,
+          "note": {
+            "kind": "section_winner",
+            "section": "main"
+          }
+        },
+        {
+          "player": "P4",
+          "rank": 2,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "final"
+            }
+          }
+        },
+        {
+          "player": "P1",
+          "rank": 3,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "semi_final"
+            }
+          }
+        },
+        {
+          "player": "P8",
+          "rank": 4,
+          "note": {
+            "kind": "withdrawn",
+            "wins": 2,
+            "losses": 1,
+            "point_diff": 10,
+            "points_scored": 19,
+            "buchholz": 8
+          }
+        },
+        {
+          "player": "P10",
+          "rank": 5,
+          "note": {
+            "kind": "record",
+            "wins": 2,
+            "losses": 2,
+            "point_diff": 3,
+            "points_scored": 23,
+            "buchholz": 9
+          }
+        },
+        {
+          "player": "P3",
+          "rank": 6,
+          "note": {
+            "kind": "record",
+            "wins": 2,
+            "losses": 2,
+            "point_diff": 3,
+            "points_scored": 21,
+            "buchholz": 11
+          }
+        },
+        {
+          "player": "P9",
+          "rank": 7,
+          "note": {
+            "kind": "record",
+            "wins": 2,
+            "losses": 2,
+            "point_diff": 2,
+            "points_scored": 22,
+            "buchholz": 7
+          }
+        },
+        {
+          "player": "P6",
+          "rank": 8,
+          "note": {
+            "kind": "record",
+            "wins": 2,
+            "losses": 2,
+            "point_diff": -1,
+            "points_scored": 19,
+            "buchholz": 8
+          }
+        },
+        {
+          "player": "P12",
+          "rank": 9,
+          "note": {
+            "kind": "record",
+            "wins": 1,
+            "losses": 2,
+            "byes": 1,
+            "point_diff": -11,
+            "points_scored": 8,
+            "buchholz": 5
+          }
+        },
+        {
+          "player": "P2",
+          "rank": 10,
+          "note": {
+            "kind": "record",
+            "losses": 2,
+            "byes": 1,
+            "point_diff": -5,
+            "points_scored": 9,
+            "buchholz": 3
+          }
+        },
+        {
+          "player": "P13",
+          "rank": 11,
+          "note": {
+            "kind": "record",
+            "wins": 1,
+            "losses": 3,
+            "point_diff": -7,
+            "points_scored": 17,
+            "buchholz": 9
+          }
+        },
+        {
+          "player": "P7",
+          "rank": 12,
+          "note": {
+            "kind": "record",
+            "losses": 3,
+            "byes": 1,
+            "point_diff": -14,
+            "points_scored": 7,
+            "buchholz": 6
+          }
+        },
+        {
+          "player": "P11",
+          "rank": 13,
+          "note": {
+            "kind": "withdrawn",
+            "losses": 1,
+            "point_diff": -7,
+            "buchholz": 3
           }
         }
       ]

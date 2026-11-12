@@ -753,7 +753,7 @@ msgid "Puis :"
 msgstr "Then:"
 
 #: ../../source/journal.rst:400
-#, no-python-format, python-format
+#, no-python-format
 msgid ""
 "``ev.Round`` (relu du libellé ``\"Ronde %d\"`` pour un journal de version"
 " 0, voir ``Event.upgraded``) est le seul mécanisme qui fait avancer le "

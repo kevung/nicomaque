@@ -25,12 +25,70 @@ func (v *vue) roundsDone() bool {
 	return v.Round >= v.Rules.Rounds || len(v.alive()) <= 1
 }
 
-// ordreClassement : les joueurs par points décroissants. À points égaux l'ordre est tiré au
-// sort (après le tri par identifiant) : sans départage, rien ne distingue deux ex æquo.
+// maxCritères : au plus trois critères de départage, après les points.
+const maxCritères = 3
+
+// clé : ce qui ordonne un joueur — ses points, puis la valeur de chaque critère de départage
+// configuré, dans l'ordre. Deux clés égales sont deux ex æquo.
+type clé [1 + maxCritères]int
+
+func (a clé) devant(b clé) bool {
+	for i := range a {
+		if a[i] != b[i] {
+			return a[i] > b[i]
+		}
+	}
+	return false
+}
+
+// buchholz : la somme des points des adversaires rencontrés, une fois par rencontre. Une
+// exemption n'apporte aucun adversaire.
+func (v *vue) buchholz(e Entrant) int {
+	n := 0
+	for _, o := range e.Played {
+		n += v.entrant(o).points()
+	}
+	return n
+}
+
+// TiebreakValue : la valeur du critère de départage c pour l'entrant e de la phase p.
+func TiebreakValue(p Phase, e Entrant, c string) int { return voir(&p).critère(e, c) }
+
+func (v *vue) critère(e Entrant, c string) int {
+	switch c {
+	case TiebreakPointDiff:
+		return e.PointsFor - e.PointsAgainst
+	case TiebreakPointsScored:
+		return e.PointsFor
+	case TiebreakBuchholz:
+		return v.buchholz(e)
+	}
+	return 0
+}
+
+func (v *vue) clé(p Ref) clé {
+	e := v.entrant(p)
+	k := clé{e.points()}
+	for i, c := range v.Rules.Tiebreak {
+		if i >= maxCritères {
+			break
+		}
+		k[i+1] = v.critère(e, c)
+	}
+	return k
+}
+
+// ordreClassement : les joueurs par points décroissants, puis par départage s'il y en a un. À
+// égalité complète l'ordre est tiré au sort (après le tri par identifiant) : rien ne distingue
+// deux ex æquo.
 func (v *vue) ordreClassement(players []Ref, rng *rand.Rand) []Ref {
 	g := sortedRefs(players)
 	rng.Shuffle(len(g), func(i, j int) { g[i], g[j] = g[j], g[i] })
-	sort.SliceStable(g, func(i, j int) bool { return v.entrant(g[i]).points() > v.entrant(g[j]).points() })
+	clés := make(map[Ref]clé, len(g))
+	for _, p := range g {
+		clés[p] = v.clé(p)
+	}
+	sort.SliceStable(g, func(i, j int) bool { return clés[g[i]].devant(clés[g[j]]) })
 	return g
 }
 
@@ -154,21 +212,32 @@ func (v *vue) chercher(reste []Ref, limite int, sansClub bool, budget *int) ([][
 	return out, true
 }
 
-// rankRounds : le classement d'un suisse classique — par points, ex æquo conservés. Un retiré
-// est classé sur son parcours, avec la note NoteWithdrawn.
+// rankRounds : le classement d'un suisse classique — par points, puis par départage s'il y en a
+// un ; les ex æquo qui résistent le restent. Un retiré est classé sur son parcours, avec la note
+// NoteWithdrawn.
 func (v *vue) rankRounds() []Standing {
 	ps := make([]Ref, len(v.Entrants))
-	pts := map[Ref]int{}
+	pts := map[Ref]clé{}
 	for i, e := range v.Entrants {
 		ps[i] = e.Player
-		pts[e.Player] = e.points()
+		pts[e.Player] = v.clé(e.Player)
 	}
-	sort.SliceStable(ps, func(i, j int) bool { return pts[ps[i]] > pts[ps[j]] })
-	scores, notes := make([]int, len(ps)), make([]Note, len(ps))
+	sort.SliceStable(ps, func(i, j int) bool { return pts[ps[i]].devant(pts[ps[j]]) })
+	scores, notes := make([]clé, len(ps)), make([]Note, len(ps))
 	for i, p := range ps {
 		e := v.entrant(p)
 		scores[i] = pts[p]
 		notes[i] = Note{Kind: NoteRecord, Wins: e.Wins, Losses: e.Losses, Byes: e.Byes}
+		for _, c := range v.Rules.Tiebreak {
+			switch c {
+			case TiebreakPointDiff:
+				notes[i].PointDiff = v.critère(e, c)
+			case TiebreakPointsScored:
+				notes[i].PointsScored = v.critère(e, c)
+			case TiebreakBuchholz:
+				notes[i].Buchholz = v.critère(e, c)
+			}
+		}
 		if v.withdrawn[p] {
 			notes[i].Kind = NoteWithdrawn
 		}

@@ -72,6 +72,9 @@ type PhaseState struct {
 	Started   bool               `json:"started"`
 	// Repechages : poules, qualifié retiré → joueur repêché à sa place (repechage.go).
 	Repechages map[PlayerID]PlayerID `json:"repechages,omitempty"`
+	// sansRonde : posé par beforeRound sur sa copie — la ronde mise de côté, que le départage
+	// ignore aussi. Jamais sérialisé.
+	sansRonde int
 }
 
 // Section est un graphe de matchs dont les places se remplissent par les résultats

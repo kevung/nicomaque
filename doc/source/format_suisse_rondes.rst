@@ -13,7 +13,7 @@ une victoire vaut un point, une exemption aussi.
 C'est une **variante nommée**, à part du suisse à vies (:ref:`format_suisse`) que l'étude retient.
 Elle existe parce que des organisateurs la jouent, et elle a un prix : sans départage, les joueurs
 à égalité de points restent ex æquo, **y compris en tête**. Un tournoi qui veut un vainqueur unique
-la fait suivre d'un tableau (``entry: "top:N"``).
+la fait suivre d'un tableau (``entry: "top:N"``), ou configure un départage (``tiebreak``).
 
 La règle vit dans ``rules/suisse_rondes.go`` ; l'enveloppe est celle du suisse à vies en mode
 ``rounds`` (``phase_swiss.go``) : ronde ouverte reproposée à l'identique tant qu'elle n'est pas
@@ -35,6 +35,7 @@ Appariement d'une ronde
 
    ordre := joueurs triés par identifiant, mélangés (graine de la ronde), puis triés (stable)
             par points décroissants                     ← points = Wins + Byes
+            puis par critères de départage, s'il y en a (voir « Départage »)
    si l'effectif est impair :
        candidats à l'exemption := ceux qui ont eu le MOINS d'exemptions, du dernier au premier
    pour limite de 0 à n/2 :                              ← nombre de revanches admis
@@ -47,7 +48,8 @@ Trois priorités, dans cet ordre : **le moins de revanches possible** ; l'exempt
 classé parmi ceux qui en ont eu le moins** (jamais une seconde tant qu'un joueur n'en a pas eu) ;
 chacun contre **le plus proche encore libre** au classement.
 
-À points égaux, l'ordre est tiré au sort : sans départage, rien ne distingue deux ex æquo. Le
+À égalité de points — et de départage, s'il y en a un —, l'ordre est tiré au sort : rien ne
+distingue deux ex æquo. Le
 tirage dépend de la graine du tournoi, de la phase et du numéro de ronde seulement
 (``Seed.Round``) : une ronde ouverte se recalcule à l'identique.
 
@@ -73,14 +75,47 @@ Les joueurs ne portent pas de vies qui aient un sens : la mécanique partagée a
 vies leur en donne un nombre qu'aucun nombre de rondes n'épuise. Vers la phase suivante,
 ``survivors`` admet tous les non-retirés, chacun avec les vies d'entrée de cette phase.
 
+Départage (``tiebreak``)
+------------------------
+
+``tiebreak`` est une liste de critères, appliqués dans l'ordre **après les points**. Elle est
+**vide par défaut**, et ce défaut est un choix de conception : le moteur ne départage pas (voir
+:ref:`annexe_conception`). La remplir, c'est accepter de séparer deux joueurs au même parcours sur
+leurs points de match et sur la force de leurs adversaires.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 24 76
+
+   * - Critère
+     - Valeur
+   * - ``point_diff``
+     - Points de match marqués moins points encaissés.
+   * - ``points_scored``
+     - Points de match marqués.
+   * - ``buchholz``
+     - Somme des points des adversaires rencontrés, une fois par rencontre.
+
+Seuls les matchs **terminés** comptent. Les points de match sont **plafonnés à la longueur du
+match** : 9-3 dans un match en 7 points compte 7-3. Un forfait compte longueur–0. Un résultat saisi
+sans score ne compte que pour l'adversaire rencontré. Une exemption n'apporte ni points de match ni
+adversaire.
+
+Le départage n'ordonne que des ex æquo : il ne passe jamais un joueur devant un autre qui a plus
+de points. Deux joueurs égaux sur les points et sur tous les critères **restent ex æquo** — il n'y
+a pas de tri caché par identifiant. L'ordre d'appariement d'une ronde suit le même classement.
+
+``Validate`` refuse un critère inconnu ou répété, et ``tiebreak`` sur tout autre format.
+
 Classement
 ----------
 
 ::
 
    pour chaque entrant, dans l'ordre des entrants :
-       score := Wins + Byes
-       note  := {kind: record, wins, losses, byes}      ← kind: withdrawn pour un retiré
-   trier (stable) par score décroissant ; même score, même rang
+       clé  := (Wins + Byes, puis la valeur de chaque critère de tiebreak)
+       note := {kind: record, wins, losses, byes,       ← kind: withdrawn pour un retiré
+                point_diff, points_scored, buchholz}    ← les critères configurés seulement
+   trier (stable) par clé décroissante ; même clé, même rang
 
 Un retiré garde son parcours et son rang parmi les joueurs au même nombre de points.

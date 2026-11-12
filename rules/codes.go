@@ -125,14 +125,18 @@ const (
 
 // Note est la note de classement d'un joueur : un code et ses paramètres.
 type Note struct {
-	Kind      NoteKind `json:"kind,omitempty"`
-	Wins      int      `json:"wins,omitempty"`
-	Losses    int      `json:"losses,omitempty"`
-	Byes      int      `json:"byes,omitempty"` // suisse classique : exemptions, qui valent une victoire
-	Lives     int      `json:"lives,omitempty"`
-	Section   string   `json:"section,omitempty"`
-	Qualified bool     `json:"qualified,omitempty"`
-	Sub       *Label   `json:"sub,omitempty"`
+	Kind   NoteKind `json:"kind,omitempty"`
+	Wins   int      `json:"wins,omitempty"`
+	Losses int      `json:"losses,omitempty"`
+	Byes   int      `json:"byes,omitempty"` // suisse classique : exemptions, qui valent une victoire
+	// Départage configuré : les valeurs qui ont servi à ordonner les ex æquo.
+	PointDiff    int    `json:"point_diff,omitempty"`
+	PointsScored int    `json:"points_scored,omitempty"`
+	Buchholz     int    `json:"buchholz,omitempty"`
+	Lives        int    `json:"lives,omitempty"`
+	Section      string `json:"section,omitempty"`
+	Qualified    bool   `json:"qualified,omitempty"`
+	Sub          *Label `json:"sub,omitempty"`
 }
 
 // ---- Sections ----

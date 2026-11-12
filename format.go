@@ -3,6 +3,8 @@ package tournoi
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/kevung/nicomaque/rules"
 )
 
 // Kinds de phases.
@@ -16,6 +18,13 @@ const (
 	// nommée, à part du suisse à vies que l'étude retient : personne n'est éliminé, et sans
 	// départage ses ex æquo le restent, y compris en tête.
 	KindSwissRounds = "swiss_rounds"
+)
+
+// Critères de départage (PhaseConfig.Tiebreak).
+const (
+	TiebreakPointDiff    = rules.TiebreakPointDiff
+	TiebreakPointsScored = rules.TiebreakPointsScored
+	TiebreakBuchholz     = rules.TiebreakBuchholz
 )
 
 // swissRoundsLives : dans un suisse classique personne n'est éliminé. Chacun porte un nombre de
@@ -79,6 +88,12 @@ type PhaseConfig struct {
 	// l'étude conclut « pas de têtes de série protégées », c'est la culture actuelle du
 	// backgammon. Voir seeding.go.
 	Seeding string `json:"seeding,omitempty"`
+	// Tiebreak : départage ARITHMÉTIQUE des ex æquo d'un suisse classique, critères appliqués
+	// dans l'ordre après les points : TiebreakPointDiff, TiebreakPointsScored, TiebreakBuchholz.
+	// Le défaut VIDE est un choix de conception et non un oubli — l'étude conclut « aucun
+	// départage » : à égalité on reste ex æquo, ou on se départage sur le tapis. Ce champ sépare
+	// des joueurs au même parcours sur leurs points de match et la force de leurs adversaires.
+	Tiebreak []string `json:"tiebreak,omitempty"`
 }
 
 // Validate vérifie la cohérence d'une configuration et remplit les défauts.
@@ -150,6 +165,16 @@ func (c *Config) Validate() error {
 				return fmt.Errorf("phase %d : lives ne se règle pas sur %q — personne n'y est éliminé", i, p.Kind)
 			}
 			p.Mode, p.Lives = "rounds", swissRoundsLives
+			vus := map[string]bool{}
+			for _, c := range p.Tiebreak {
+				if c != TiebreakPointDiff && c != TiebreakPointsScored && c != TiebreakBuchholz {
+					return fmt.Errorf("phase %d : critère de départage %q inconnu (%q, %q, %q)", i, c, TiebreakPointDiff, TiebreakPointsScored, TiebreakBuchholz)
+				}
+				if vus[c] {
+					return fmt.Errorf("phase %d : critère de départage %q répété", i, c)
+				}
+				vus[c] = true
+			}
 		case KindLivesBracket, KindBracket:
 			if p.Seeding != "" && p.Seeding != SeedingRating {
 				return fmt.Errorf("phase %d : seeding %q inconnu (vide ou %q)", i, p.Seeding, SeedingRating)
@@ -183,6 +208,9 @@ func (c *Config) Validate() error {
 		}
 		if p.Rounds != 0 && p.Kind != KindSwissRounds {
 			return fmt.Errorf("phase %d : rounds ne s'applique qu'à %q, pas à %q", i, KindSwissRounds, p.Kind)
+		}
+		if len(p.Tiebreak) != 0 && p.Kind != KindSwissRounds {
+			return fmt.Errorf("phase %d : tiebreak ne s'applique qu'à %q, pas à %q", i, KindSwissRounds, p.Kind)
 		}
 		if p.BatchMinutes != 0 && p.Kind != KindSwissLives {
 			return fmt.Errorf("phase %d : batch_minutes ne s'applique qu'au suisse continu, pas à %q", i, p.Kind)

@@ -39,6 +39,10 @@ func configs() map[string]tournoi.Config {
 		"suisse_classique_tableau": {Name: "Suisse classique puis tableau", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, AvoidClubs: true},
 			{Kind: tournoi.KindBracket, Length: 9, Entry: "top:8"}}},
+		"suisse_departage_tableau": {Name: "Suisse classique départagé puis tableau", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 4,
+				Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakPointsScored, tournoi.TiebreakBuchholz}},
+			{Kind: tournoi.KindBracket, Length: 9, Entry: "top:4"}}},
 		"gsl": {Name: "Blocs GSL", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindGSL, Length: 7}}},
 		"gsl_tableau16": {Name: "GSL puis tableau", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindGSL, Length: 7, Target: 16},

@@ -127,6 +127,7 @@ func (s *State) engagedIn(ph *PhaseState, r int) map[PlayerID]bool {
 // adversaires et byes de la ronde r retirés. C'est l'état sur lequel la ronde a été appariée.
 func (s *State) beforeRound(ph *PhaseState, r int) *PhaseState {
 	v := *ph
+	v.sansRonde = r
 	v.Losses, v.Wins, v.Opponents = map[PlayerID]int{}, map[PlayerID]int{}, map[PlayerID][]PlayerID{}
 	v.Byes = map[PlayerID]int{}
 	for p, n := range ph.Byes {
