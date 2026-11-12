@@ -532,12 +532,16 @@ func (v *vue) poolBarragesDone() bool {
 	return true
 }
 
-// finalistes : dans une DERNIÈRE phase de poules, les premiers de chaque poule — les
+// finale : la phase désigne un vainqueur unique par le barrage final — une dernière phase, et
+// l'option FinalBarrage. Sans elle, chaque poule garde son premier.
+func (v *vue) finale() bool { return v.Last && v.Rules.FinalBarrage }
+
+// finalistes : dans une DERNIÈRE phase de poules à barrage final, les premiers de chaque poule — les
 // joueurs non retirés à la meilleure clé de leur poule, moins ceux que le barrage de la poule a
 // écartés. Plus d'un : ils se départagent sur le tapis, par le barrage final, à une place. nil
 // tant que les poules et leurs barrages ne sont pas finis, et hors de ce cas.
 func (v *vue) finalistes() []Ref {
-	if !v.Last || !v.Drawn {
+	if !v.finale() || !v.Drawn {
 		return nil
 	}
 	n := 0

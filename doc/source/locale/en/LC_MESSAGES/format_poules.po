@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 13:00+0100\n"
+"POT-Creation-Date: 2026-11-12 14:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -58,21 +58,27 @@ msgstr ""
 
 #: ../../source/format_poules.rst:20
 msgid ""
-"Quand les poules sont la **dernière phase**, elles désignent un seul "
+"Quand les poules sont la **dernière phase**, chaque poule garde son "
+"premier : la phase se clôt à la fin des poules et de leurs barrages de "
+"qualification, et plusieurs poules donnent plusieurs premiers. L'option "
+"``final_barrage``, éteinte par défaut, désigne à la place un seul "
 "vainqueur : les premiers de chaque poule — les joueurs non retirés à la "
 "meilleure clé de leur poule, moins ceux que le barrage de la poule a "
 "écartés — se départagent par le **barrage final** (section "
 "``barrage:final``, une place), tiré quand les poules et leurs barrages "
 "sont finis. Un seul premier : il est le vainqueur, sans barrage."
 msgstr ""
-"When the pools are the **last phase**, they produce a single winner: the "
-"firsts of each pool — the players not withdrawn with the best key of "
-"their pool, minus those the pool's play-off set aside — are separated by "
-"the **final play-off** (section ``barrage:final``, one place), drawn once"
-" the pools and their play-offs are finished. A single first: that player "
-"is the winner, with no play-off."
+"When the pools are the **last phase**, each pool keeps its first: the "
+"phase closes once the pools and their qualifying play-offs are finished, "
+"and several pools give several firsts. The ``final_barrage`` option, off "
+"by default, produces a single winner instead: the firsts of each pool — "
+"the players not withdrawn with the best key of their pool, minus those "
+"the pool's play-off set aside — are separated by the **final play-off** "
+"(section ``barrage:final``, one place), drawn once the pools and their "
+"play-offs are finished. A single first: that player is the winner, with "
+"no play-off."
 
-#: ../../source/format_poules.rst:26
+#: ../../source/format_poules.rst:28
 msgid ""
 "Les défauts sont posés par ``Config.Validate`` : ``group_size`` vaut 4, "
 "``qualifiers`` vaut 2, et ``qualifiers`` doit être strictement inférieur "
@@ -92,11 +98,11 @@ msgstr ""
 "``PoolTie``, ``BarrageSection``, ``PoolQualified``; "
 "``rules/classement.go``: ``Rank``); ``phase_rr.go`` is its wrapper."
 
-#: ../../source/format_poules.rst:35
+#: ../../source/format_poules.rst:37
 msgid "Tirage des poules"
 msgstr "Pool draw"
 
-#: ../../source/format_poules.rst:52
+#: ../../source/format_poules.rst:54
 msgid ""
 "Les deux distributions équilibrent les tailles à un joueur près. Le "
 "serpentin donne des poules de force comparable ; comme dans un tableau, "
@@ -107,11 +113,11 @@ msgstr ""
 "order gives pools of comparable strength; as in a bracket, seeding is a "
 "named option and the random draw remains the default."
 
-#: ../../source/format_poules.rst:60
+#: ../../source/format_poules.rst:62
 msgid "Avec ``section`` vide (tirage des poules) :"
 msgstr "With an empty ``section`` (pool draw):"
 
-#: ../../source/format_poules.rst:69
+#: ../../source/format_poules.rst:71
 #, no-python-brace-format
 msgid ""
 "Les poules sont des sections de genre ``poule`` dont le nom est un "
@@ -129,11 +135,11 @@ msgstr ""
 "(Berger table). Beyond 26 pools, the resulting character falls outside "
 "the alphabet: a known limit, with no functional consequence."
 
-#: ../../source/format_poules.rst:76
+#: ../../source/format_poules.rst:78
 msgid "Décompte et détection des égalités"
 msgstr "Counting wins and detecting ties"
 
-#: ../../source/format_poules.rst:82
+#: ../../source/format_poules.rst:84
 msgid ""
 "Compte les victoires **dans la section** : chaque joueur figurant en "
 "``Src[k].Player`` est initialisé à 0 (pour qu'un joueur sans victoire "
@@ -146,7 +152,7 @@ msgstr ""
 "still appears), then each ``Done`` match that is not ``Walkover`` adds a "
 "win to its winner. Walkovers (byes, forfeits) therefore do not count."
 
-#: ../../source/format_poules.rst:105
+#: ../../source/format_poules.rst:107
 msgid ""
 "Résultat : ``tied`` sont les joueurs à égalité sur la ligne de coupure, "
 "``spots`` le nombre de places qu'ils doivent se partager."
@@ -154,11 +160,11 @@ msgstr ""
 "Result: ``tied`` are the players tied on the cut line, ``spots`` the "
 "number of places they must share."
 
-#: ../../source/format_poules.rst:109
+#: ../../source/format_poules.rst:111
 msgid "Barrage"
 msgstr "Play-off"
 
-#: ../../source/format_poules.rst:111
+#: ../../source/format_poules.rst:113
 msgid ""
 "Un barrage est une ``Section`` d'un genre particulier : elle n'a **pas de"
 " graphe** (``Matches`` vide) ; ses matchs sont appariés dynamiquement, "
@@ -169,7 +175,7 @@ msgstr ""
 "(empty ``Matches``); its matches are paired dynamically, like a 2-life "
 "Swiss, until only ``Spots`` players remain."
 
-#: ../../source/format_poules.rst:128
+#: ../../source/format_poules.rst:130
 msgid ""
 "Le barrage de ``poule:A`` s'appelle ``barrage:A`` "
 "(``rules.BarrageSectionName``). L'instantané de la phase "
@@ -181,7 +187,7 @@ msgstr ""
 "(``rules.Phase.Barrages``) carries the started, non-cancelled matches of "
 "the play-off sections, in ``MatchOrder`` order."
 
-#: ../../source/format_poules.rst:136
+#: ../../source/format_poules.rst:138
 msgid ""
 "Pour les matchs de barrage de section ``name`` non annulés : compte les "
 "``Running`` et incrémente ``losses[perdant]`` pour les autres."
@@ -189,7 +195,7 @@ msgstr ""
 "For the non-cancelled play-off matches of section ``name``: counts the "
 "``Running`` ones and increments ``losses[perdant]`` for the others."
 
-#: ../../source/format_poules.rst:167
+#: ../../source/format_poules.rst:169
 msgid ""
 "Même logique de budget que le suisse : on ne lance pas un match qui "
 "ferait descendre le nombre de survivants en dessous du nombre de places."
@@ -197,25 +203,26 @@ msgstr ""
 "Same budget logic as the Swiss: a match is not started if it would bring "
 "the number of survivors below the number of places."
 
-#: ../../source/format_poules.rst:174
+#: ../../source/format_poules.rst:176
 msgid ""
 "Pour chaque poule ayant une égalité : le barrage doit exister **et** "
-"``len(barrageAlive) <= Spots``. En dernière phase, de même pour le "
-"barrage final s'il y a plus d'un premier de poule. La phase est finie "
-"(``rules.PhaseDone``) quand elle est tirée, que tous les nœuds de ses "
-"sections sont terminés et que ``barragesDone`` est vrai."
+"``len(barrageAlive) <= Spots``. En dernière phase et avec "
+"``final_barrage``, de même pour le barrage final s'il y a plus d'un "
+"premier de poule. La phase est finie (``rules.PhaseDone``) quand elle est"
+" tirée, que tous les nœuds de ses sections sont terminés et que "
+"``barragesDone`` est vrai."
 msgstr ""
 "For each pool with a tie: the play-off must exist **and** "
-"``len(barrageAlive) <= Spots``. In a last phase, likewise for the final "
-"play-off when there is more than one pool first. The phase is finished "
-"(``rules.PhaseDone``) when it is drawn, all the nodes of its sections are"
-" finished, and ``barragesDone`` is true."
+"``len(barrageAlive) <= Spots``. In a last phase with ``final_barrage``, "
+"likewise for the final play-off when there is more than one pool first. "
+"The phase is finished (``rules.PhaseDone``) when it is drawn, all the "
+"nodes of its sections are finished, and ``barragesDone`` is true."
 
-#: ../../source/format_poules.rst:180
+#: ../../source/format_poules.rst:183
 msgid "Proposition"
 msgstr "Proposal"
 
-#: ../../source/format_poules.rst:205
+#: ../../source/format_poules.rst:208
 msgid ""
 "Les poules qui ont fini avancent donc vers leur barrage pendant que les "
 "autres jouent encore."
@@ -223,11 +230,11 @@ msgstr ""
 "Pools that have finished therefore advance toward their play-off while "
 "the others are still playing."
 
-#: ../../source/format_poules.rst:208
+#: ../../source/format_poules.rst:211
 msgid "Qualifiés et classement"
 msgstr "Qualifiers and standings"
 
-#: ../../source/format_poules.rst:232
+#: ../../source/format_poules.rst:235
 msgid ""
 "Un repêchage ne tient qu'autant que le retrait : un qualifié réinscrit "
 "avant le tirage retrouve sa place, et son repêché la perd."
@@ -236,11 +243,11 @@ msgstr ""
 " re-registered before the draw gets their place back, and their "
 "repechaged replacement loses it."
 
-#: ../../source/format_poules.rst:236
+#: ../../source/format_poules.rst:239
 msgid "Repêchage d'un qualifié retiré"
 msgstr "Repechage of a withdrawn qualifier"
 
-#: ../../source/format_poules.rst:238
+#: ../../source/format_poules.rst:241
 msgid ""
 "**Règle.** Un qualifié de poule qui se retire **avant le tirage** de la "
 "phase suivante laisse sa place au **suivant de sa poule**, si le TD le "
@@ -256,47 +263,47 @@ msgstr ""
 "drawing, without confirming leaves the place empty, and it becomes a bye "
 "in the bracket. The rule lives in ``repechage.go``."
 
-#: ../../source/format_poules.rst:259
+#: ../../source/format_poules.rst:262
 msgid "Cas limites :"
 msgstr "Edge cases:"
 
-#: ../../source/format_poules.rst:262
+#: ../../source/format_poules.rst:265
 msgid "Cas"
 msgstr "Case"
 
-#: ../../source/format_poules.rst:262
+#: ../../source/format_poules.rst:265
 msgid "Réponse du moteur"
 msgstr "Engine response"
 
-#: ../../source/format_poules.rst:264
+#: ../../source/format_poules.rst:267
 msgid "Le suivant est lui-même retiré"
 msgstr "The next player is themselves withdrawn"
 
-#: ../../source/format_poules.rst:264
+#: ../../source/format_poules.rst:267
 msgid "il est sauté : le candidat est le suivant **non retiré**"
 msgstr "they are skipped: the candidate is the next **non-withdrawn** player"
 
-#: ../../source/format_poules.rst:267
+#: ../../source/format_poules.rst:270
 msgid "Plus personne dans la poule (tous qualifiés ou retirés)"
 msgstr "No one left in the pool (all qualified or withdrawn)"
 
-#: ../../source/format_poules.rst:267
+#: ../../source/format_poules.rst:270
 msgid "aucune proposition ; la place devient une exemption"
 msgstr "no proposal; the place becomes a bye"
 
-#: ../../source/format_poules.rst:270
+#: ../../source/format_poules.rst:273
 msgid "Le repêché se retire à son tour avant le tirage"
 msgstr "The repechaged player withdraws in turn before the draw"
 
-#: ../../source/format_poules.rst:270
+#: ../../source/format_poules.rst:273
 msgid "il est un qualifié retiré comme un autre : nouveau repêchage proposé"
 msgstr "they are a withdrawn qualifier like any other: a new repechage is proposed"
 
-#: ../../source/format_poules.rst:273
+#: ../../source/format_poules.rst:276
 msgid "Deux qualifiés de la même poule se retirent"
 msgstr "Two qualifiers from the same pool withdraw"
 
-#: ../../source/format_poules.rst:273
+#: ../../source/format_poules.rst:276
 msgid ""
 "un repêchage à la fois : le second est proposé une fois le premier "
 "confirmé"
@@ -304,11 +311,11 @@ msgstr ""
 "one repechage at a time: the second is proposed once the first is "
 "confirmed"
 
-#: ../../source/format_poules.rst:276
+#: ../../source/format_poules.rst:279
 msgid "Suivants ex æquo (même nombre de victoires)"
 msgstr "Tied next players (same number of wins)"
 
-#: ../../source/format_poules.rst:276
+#: ../../source/format_poules.rst:279
 msgid ""
 "une proposition par candidat, ``Label.Players`` = leur nombre ; le TD "
 "choisit (aucun départage)"
@@ -316,11 +323,11 @@ msgstr ""
 "one proposal per candidate, ``Label.Players`` = their number; the TD "
 "chooses (no tie-break)"
 
-#: ../../source/format_poules.rst:280
+#: ../../source/format_poules.rst:283
 msgid "Retrait après le passage de phase, avant le tirage"
 msgstr "Withdrawal after the phase switch, before the draw"
 
-#: ../../source/format_poules.rst:280
+#: ../../source/format_poules.rst:283
 msgid ""
 "le repêchage reste proposé, devant le tirage ; le repêché remplace le "
 "retiré parmi les entrants"
@@ -328,11 +335,11 @@ msgstr ""
 "the repechage remains proposed, ahead of the draw; the repechaged player "
 "replaces the withdrawn one among the entrants"
 
-#: ../../source/format_poules.rst:284
+#: ../../source/format_poules.rst:287
 msgid "Retrait après le tirage (ou après un premier match de la phase suivante)"
 msgstr "Withdrawal after the draw (or after a first match of the next phase)"
 
-#: ../../source/format_poules.rst:284
+#: ../../source/format_poules.rst:287
 msgid ""
 "pas de repêchage : le retiré perd son match par forfait (walkover), comme"
 " tout retrait de tableau ; ``repechage`` est refusé"
@@ -340,15 +347,15 @@ msgstr ""
 "no repechage: the withdrawn player loses their match by walkover, like "
 "any bracket withdrawal; ``repechage`` is refused"
 
-#: ../../source/format_poules.rst:288
+#: ../../source/format_poules.rst:291
 msgid "Phase suivante en entrée ``all``"
 msgstr "Next phase with ``all`` entry"
 
-#: ../../source/format_poules.rst:288
+#: ../../source/format_poules.rst:291
 msgid "sans objet (tout le monde entre déjà) ; ni proposé ni accepté"
 msgstr "not applicable (everyone already enters); neither proposed nor accepted"
 
-#: ../../source/format_poules.rst:292
+#: ../../source/format_poules.rst:295
 msgid ""
 "Le repêchage est proposé avec l'action de passage de phase (avant elle), "
 "puis, une fois le passage confirmé et tant que la phase suivante n'est ni"
@@ -365,7 +372,7 @@ msgstr ""
 "withdrawn; if the next phase is already open, ``B`` replaces ``A`` among "
 "its entrants."
 
-#: ../../source/format_poules.rst:298
+#: ../../source/format_poules.rst:301
 msgid ""
 "Le repêché est **qualifié** au classement de la poule "
 "(``Note.Qualified``, bonus de 100) ; le retiré garde la note "
@@ -375,7 +382,7 @@ msgstr ""
 "(``Note.Qualified``, bonus of 100); the withdrawn player keeps the "
 "``withdrawn`` note, never qualified."
 
-#: ../../source/format_poules.rst:317
+#: ../../source/format_poules.rst:320
 msgid ""
 "Le bonus de 100 place tous les qualifiés devant tous les non-qualifiés, "
 "quelles que soient les poules — ce qui est correct puisque les poules ne "

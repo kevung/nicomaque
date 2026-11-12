@@ -47,8 +47,8 @@ func jouerPoules(t *testing.T, nom string, ph tournoi.PhaseConfig, P int, k int6
 }
 
 // TestPoulesDepartageInvariants : avec tiebreak, la poule est classée par le départage — un
-// barrage ne reste que pour une égalité complète —, et une dernière phase de poules a toujours
-// un seul vainqueur, qu'il y ait une poule ou plusieurs, un départage ou non.
+// barrage ne reste que pour une égalité complète —, et une dernière phase de poules à barrage final
+// (final_barrage) a toujours un seul vainqueur, qu'il y ait une poule ou plusieurs, un départage ou non.
 func TestPoulesDepartageInvariants(t *testing.T) {
 	effectifs, graines := []int{2, 3, 5, 8, 13, 32}, 4
 	if testing.Short() {
@@ -59,7 +59,7 @@ func TestPoulesDepartageInvariants(t *testing.T) {
 			for _, q := range []int{1, 2} {
 				for k := 0; k < graines; k++ {
 					nom := fmt.Sprintf("P=%d poules=%d qualifiés=%d graine=%d", P, ng, q, k)
-					ph := tournoi.PhaseConfig{Kind: tournoi.KindRoundRobin, Length: 5, Groups: ng, Qualifiers: q}
+					ph := tournoi.PhaseConfig{Kind: tournoi.KindRoundRobin, Length: 5, Groups: ng, Qualifiers: q, FinalBarrage: true}
 					jouerPoules(t, nom+" sans départage", ph, P, int64(k))
 					ph.Tiebreak = tousCritères
 					jouerPoules(t, nom+" avec départage", ph, P, int64(k))
@@ -77,7 +77,7 @@ func TestPoulesDepartageSimulation(t *testing.T) {
 	}
 	sans, avec, exAequo := 0, 0, 0
 	for k := int64(0); k < 40; k++ {
-		ph := tournoi.PhaseConfig{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 1, Qualifiers: 1}
+		ph := tournoi.PhaseConfig{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 1, Qualifiers: 1, FinalBarrage: true}
 		sans += barrages(jouerPoules(t, "sans", ph, 8, k).Journal)
 		ph.Tiebreak = tousCritères
 		r := jouerPoules(t, "avec", ph, 8, k)
@@ -104,7 +104,7 @@ func TestPoulesDepartageSimulation(t *testing.T) {
 func TestPoulesFinales(t *testing.T) {
 	for k := int64(0); k < 4; k++ {
 		r := jouerPoules(t, fmt.Sprintf("graine %d", k),
-			tournoi.PhaseConfig{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 4, Qualifiers: 1}, 16, k)
+			tournoi.PhaseConfig{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 4, Qualifiers: 1, FinalBarrage: true}, 16, k)
 		final := false
 		for _, ev := range r.Journal {
 			if ev.Kind == tournoi.EvDraw && ev.Section == "barrage:final" {
