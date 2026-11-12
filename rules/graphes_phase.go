@@ -886,7 +886,6 @@ func (v *vue) finalPérimé(bs Section) bool {
 	for _, x := range bs.Players {
 		tiré[x] = true
 	}
-	vus := 0
 	for i := range v.Sections {
 		pool := v.Sections[i]
 		if pool.Kind != SectionPool {
@@ -899,13 +898,12 @@ func (v *vue) finalPérimé(bs Section) bool {
 				tirés = append(tirés, x)
 			}
 		}
-		vus += len(tirés)
 		attendus := v.premiersDe(pool, func(x Ref) bool { return v.withdrawn[x] && !tiré[x] })
 		if !v.mêmesPrésents(attendus, tirés) {
 			return true
 		}
 	}
-	return vus != len(bs.Players)
+	return false
 }
 
 // mêmesPrésents : deux listes égales, retirés mis à part.
