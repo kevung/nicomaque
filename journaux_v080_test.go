@@ -42,6 +42,7 @@ func empreinteV080(v any) string {
 }
 
 func TestJournauxV080(t *testing.T) {
+	t.Parallel() // indépendant des autres : la boucle -short garde de la marge
 	chemin := "testdata/journaux_v080.json.gz"
 	// NICOMAQUE_V080 : un jeu plus large, hors dépôt, pour une mesure.
 	if c := os.Getenv("NICOMAQUE_V080"); c != "" {
