@@ -68,6 +68,8 @@ func (s *State) propose(now time.Time, ext External) []Action {
 	ph := s.phase()
 	var acts []Action
 	switch ph.Cfg.Kind {
+	case KindManual:
+		return s.proposeManual(ph)
 	case KindSwissLives, KindSwissRounds:
 		if éch, lot := s.batchDeadline(ph); lot && now.Before(éch) && !s.swissDone(ph) {
 			// Micro-rondes : les joueurs libres attendent l'échéance. L'action porte

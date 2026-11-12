@@ -290,6 +290,9 @@ func (s *State) Apply(ev Event) error {
 				return fmt.Errorf("joueur %s a déjà un match en cours", p)
 			}
 		}
+		if err := s.manualCheck(ev.Phase, ev.Round, ev.A, ev.B); err != nil {
+			return err
+		}
 		if ph := s.phaseOf(ev.Phase); ph != nil {
 			s.openRound(ph, ev.Round) // avant le match : ses deux joueurs sont encore libres
 		}
@@ -351,6 +354,9 @@ func (s *State) Apply(ev Event) error {
 		if ph == nil {
 			return fmt.Errorf("phase %d inconnue", ev.Phase)
 		}
+		if err := s.manualCheck(ev.Phase, ev.Round, ev.ID); err != nil {
+			return err
+		}
 		s.openRound(ph, ev.Round)
 		ph.Byes[ev.ID]++
 		if ev.Round > 0 {
@@ -358,6 +364,10 @@ func (s *State) Apply(ev Event) error {
 		}
 		if ev.Round > ph.Round && swissKind(ph.Cfg.Kind) {
 			ph.Round = ev.Round
+		}
+	case EvByeCancelled:
+		if err := s.applyByeCancelled(ev); err != nil {
+			return err
 		}
 	case EvDraw:
 		ph := s.phaseOf(ev.Phase)
@@ -374,6 +384,11 @@ func (s *State) Apply(ev Event) error {
 		ph := s.phase()
 		if ph == nil || s.Current+1 >= len(s.Config.Phases) {
 			return fmt.Errorf("pas de phase suivante")
+		}
+		// Une phase manuelle ne finit que sur l'ordre du directeur : rien d'autre ne retient
+		// un passage envoyé pendant un match, qui resterait à jouer dans une phase close.
+		if ph.Cfg.Kind == KindManual && s.runningInPhase(ph) > 0 {
+			return fmt.Errorf("phase %d : %d match(s) en cours", ph.Index, s.runningInPhase(ph))
 		}
 		ph.Done = true
 		next := newPhaseState(s.Current+1, s.Config.Phases[s.Current+1])
@@ -505,7 +520,7 @@ func (s *State) entryLives(next, prev *PhaseState, p PlayerID) int {
 		return livesFor(next.Cfg)
 	}
 	// Un suisse classique n'a pas de vies à transmettre : celles qu'il porte ne sont qu'un artifice.
-	if prev.Cfg.Kind == KindSwissRounds || (next.Cfg.Kind != KindLivesBracket && next.Cfg.Kind != KindGSL && next.Cfg.Kind != KindSwissLives) {
+	if noLives(prev.Cfg.Kind) || (next.Cfg.Kind != KindLivesBracket && next.Cfg.Kind != KindGSL && next.Cfg.Kind != KindSwissLives) {
 		return livesFor(next.Cfg)
 	}
 	return s.remainingLives(prev, p)
@@ -513,7 +528,7 @@ func (s *State) entryLives(next, prev *PhaseState, p PlayerID) int {
 
 func livesFor(cfg PhaseConfig) int {
 	switch cfg.Kind {
-	case KindSwissRounds:
+	case KindSwissRounds, KindManual:
 		return swissRoundsLives
 	case KindSwissLives:
 		return cfg.Lives

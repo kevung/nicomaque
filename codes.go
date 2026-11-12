@@ -216,8 +216,11 @@ const (
 	ReasonNone           ReasonCode = ""
 	ReasonMatchesRunning ReasonCode = "matches_running"
 	ReasonNoPairing      ReasonCode = "no_pairing"
-	ReasonWaitingBatch   ReasonCode = "waiting_batch"
-	ReasonWaitingTable   ReasonCode = "waiting_table"
+	// ReasonManual : phase à appariement manuel — le moteur attend que le directeur pose les
+	// matchs ; le passage de phase ou la clôture est proposé à côté dès qu'aucun match ne joue.
+	ReasonManual       ReasonCode = "manual"
+	ReasonWaitingBatch ReasonCode = "waiting_batch"
+	ReasonWaitingTable ReasonCode = "waiting_table"
 	// ReasonPlayerUnavailable : un joueur est indisponible (player_unavailable). Sur une attente
 	// (A = le joueur, Until ou Round = son retour) dans un suisse ; sur la proposition de match
 	// d'un graphe, qui reste dans la file sans table.

@@ -77,7 +77,8 @@ revient), puis une attente ``player_busy`` par joueur en vie occupé ailleurs, n
 ici. Un joueur n'a qu'une attente.
 
 Les raisons d'attente sont des codes (``ReasonCode``, ``codes.go``) : ``matches_running``,
-``no_pairing``, ``waiting_batch``, ``waiting_table``, ``player_unavailable``, ``player_busy``. Le
+``no_pairing``, ``waiting_batch``, ``waiting_table``, ``player_unavailable``, ``player_busy``,
+``manual`` (phase à appariement manuel, voir :ref:`format_manuel`). Le
 libellé de ``next_phase`` est un ``Label`` de genre ``phase`` dont ``Text`` porte le nom de phase
 saisi par l'organisateur (ou le nom par défaut de ``PhaseName``).
 

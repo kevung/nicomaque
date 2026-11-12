@@ -210,7 +210,7 @@ Signification des champs de phase
 |                    |                                | série protégées », c'est la culture du     |
 |                    |                                | backgammon. Refusé sur les autres formats  |
 +--------------------+--------------------------------+--------------------------------------------+
-| ``tiebreak``       | ``swiss_rounds``,              | Départage arithmétique des ex æquo :       |
+| ``tiebreak``       | ``swiss_rounds``, ``manual``,  | Départage arithmétique des ex æquo :       |
 |                    | ``round_robin``                | liste de ``point_diff``,                   |
 |                    |                                | ``points_scored``, ``buchholz``,           |
 |                    |                                | appliqués dans l'ordre après les points.   |
@@ -249,6 +249,8 @@ Algorithme :
        si p.LengthLate > 0 et p.LateThreshold <= 0  → erreur « length_late sans late_threshold »
 
        selon p.Kind :
+         manual :
+             si p.Lives, p.Mode, p.Target ou p.Pairing renseigné → erreur
          swiss_rounds :
              si p.Rounds <= 0                      → erreur « combien de rondes ? »
              si p.Target ou p.LengthLate renseigné → erreur
@@ -291,7 +293,7 @@ Algorithme :
        si p.Seeding != "" et p.Kind ∉ {bracket, lives_bracket, swiss_rounds, round_robin} → erreur
        si p.Groups != 0 et p.Kind != round_robin               → erreur
        si p.FinalBarrage et p.Kind != round_robin              → erreur
-       si p.Tiebreak non vide et p.Kind ∉ {swiss_rounds, round_robin} → erreur
+       si p.Tiebreak non vide et p.Kind ∉ {swiss_rounds, manual, round_robin} → erreur
        si p.Tiebreak porte un critère inconnu                  → erreur
        si p.AvoidCountries et p.Kind ∉ {swiss_lives, swiss_rounds} → erreur
        si p.AvoidRounds < 0, ou p.AvoidRounds != 0 hors swiss_rounds ou sans avoid_clubs ni avoid_countries → erreur

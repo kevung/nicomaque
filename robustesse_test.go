@@ -182,7 +182,7 @@ func cohérent(t *testing.T, st *tournoi.State) {
 // puis les formats plus récents, pour que leurs événements (half_bye) et leurs appariements
 // soient atteints.
 func cfgFuzz(k byte) tournoi.Config {
-	switch k % 4 {
+	switch k % 5 {
 	case 1:
 		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3, Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakBuchholz},
@@ -191,6 +191,10 @@ func cfgFuzz(k byte) tournoi.Config {
 	case 2:
 		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 4, Pairing: tournoi.PairingMonrad, MonradWiden: true}}}
+	case 4:
+		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindManual, Length: 5, Tiebreak: []string{tournoi.TiebreakBuchholz}},
+			{Kind: tournoi.KindBracket, Length: 7, Entry: "top:4"}}}
 	case 3:
 		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 2, Qualifiers: 1, FinalBarrage: true,
@@ -215,7 +219,10 @@ func FuzzApply(f *testing.F) {
 	// Monrad, poules à barrage final.
 	f.Add([]byte{0x1e, 0, 1, 0x1e, 1, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0x0f, 0, 1, 0, 0, 0, 9, 3, 3})
 	f.Add([]byte{0x2e, 2, 1, 0, 0, 0, 0, 0, 0, 2, 0, 1, 2, 1, 0, 3, 0, 0, 0, 0, 0})
+	f.Add([]byte{0x40, 0, 0, 16, 0, 5, 16, 2, 13, 17, 4, 1, 2, 0, 0, 2, 1, 1, 16, 0, 10, 0, 1, 0})
 	f.Add([]byte{0x30, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 1, 1, 3, 0, 1, 6, 0, 0, 0, 0, 0})
+	// Phase manuelle : une exemption posée puis retirée, le joueur apparié ensuite dans la ronde.
+	f.Add([]byte{0x40, 0, 0, 17, 4, 1, 17, 4, 0x81, 16, 4, 21, 1, 0, 4})
 	f.Fuzz(func(t *testing.T, plan []byte) {
 		now := time.Date(2026, 9, 7, 9, 0, 0, 0, time.UTC)
 		// Le quartet haut du premier octet choisit le format : les plans d'avant gardent le leur.
@@ -245,7 +252,7 @@ func FuzzApply(f *testing.F) {
 			now = now.Add(time.Minute)
 			a, b, c := plan[i], plan[i+1], plan[i+2]
 			var ev tournoi.Event
-			switch a % 16 {
+			switch a % 18 {
 			case 0: // confirmer une proposition du moteur
 				acts := st.ProposeAt(now)
 				if len(acts) == 0 {
@@ -301,6 +308,13 @@ func FuzzApply(f *testing.F) {
 				ev = tournoi.HalfByeEvent(joueur(b), int(c)%3, int(c)%7, now)
 			case 15:
 				ev = tournoi.HalfByeCancelledEvent(joueur(b), int(c)%3, int(c)%7, now)
+			case 16:
+				ev = st.ManualMatchEvent(int(c)%4, joueur(b), joueur(c>>2), now)
+			case 17:
+				ev = st.ManualByeEvent(int(c)%4, joueur(b), now)
+				if c&0x80 != 0 {
+					ev = st.ManualByeCancelledEvent(int(c)%4, joueur(b), now)
+				}
 			}
 			_ = st.Apply(ev) // une erreur est une réponse acceptable
 			cohérent(t, st)

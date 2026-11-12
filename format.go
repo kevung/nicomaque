@@ -18,6 +18,10 @@ const (
 	// nommée, à part du suisse à vies que l'étude retient : personne n'est éliminé, et sans
 	// départage ses ex æquo le restent, y compris en tête.
 	KindSwissRounds = "swiss_rounds"
+	// KindManual : phase à appariement MANUEL. Le moteur n'y propose aucun match : le directeur
+	// pose chaque match (ManualMatchEvent) et chaque exemption (ManualByeEvent) dans une ronde,
+	// et décide de la fin. Classement aux points, ex æquo conservés, tiebreak admis.
+	KindManual = "manual"
 )
 
 // PairingMonrad : sur un suisse classique, l'adversaire est tiré au sort dans le groupe de mêmes
@@ -40,7 +44,10 @@ const swissRoundsLives = 1 << 20
 
 // byRounds : la phase s'apparie ronde par ronde — le suisse classique toujours, le suisse à
 // vies en mode « rounds ».
-func byRounds(c PhaseConfig) bool { return c.Kind == KindSwissRounds || c.Mode == "rounds" }
+func byRounds(c PhaseConfig) bool { return noLives(c.Kind) || c.Mode == "rounds" }
+
+// noLives : les phases sans élimination, jouées ronde par ronde et classées aux points.
+func noLives(k string) bool { return k == KindSwissRounds || k == KindManual }
 
 // Config décrit un tournoi : une suite de phases.
 type Config struct {
@@ -232,6 +239,13 @@ func (c *Config) Validate() error {
 			if err := p.validateTiebreak(i); err != nil {
 				return err
 			}
+		case KindManual:
+			if p.Lives != 0 || p.Mode != "" || p.Target != 0 || p.Pairing != "" {
+				return fmt.Errorf("phase %d : lives, mode, target et pairing ne se règlent pas sur %q — rien n'y est apparié par le moteur", i, p.Kind)
+			}
+			if err := p.validateTiebreak(i); err != nil {
+				return err
+			}
 		case KindLivesBracket, KindBracket:
 			if p.Seeding != "" && p.Seeding != SeedingRating && p.Seeding != SeedingManual {
 				return fmt.Errorf("phase %d : seeding %q inconnu (vide, %q ou %q)", i, p.Seeding, SeedingRating, SeedingManual)
@@ -281,8 +295,8 @@ func (c *Config) Validate() error {
 		if p.Accelerated && p.Kind != KindSwissRounds {
 			return fmt.Errorf("phase %d : accelerated ne s'applique qu'à %q, pas à %q", i, KindSwissRounds, p.Kind)
 		}
-		if len(p.Tiebreak) != 0 && p.Kind != KindSwissRounds && p.Kind != KindRoundRobin {
-			return fmt.Errorf("phase %d : tiebreak ne s'applique qu'à %q et %q, pas à %q", i, KindSwissRounds, KindRoundRobin, p.Kind)
+		if len(p.Tiebreak) != 0 && !noLives(p.Kind) && p.Kind != KindRoundRobin {
+			return fmt.Errorf("phase %d : tiebreak ne s'applique qu'à %q, %q et %q, pas à %q", i, KindSwissRounds, KindManual, KindRoundRobin, p.Kind)
 		}
 		if p.AvoidRounds < 0 || p.AvoidRounds != 0 && (p.Kind != KindSwissRounds || !p.AvoidClubs && !p.AvoidCountries) {
 			return fmt.Errorf("phase %d : avoid_rounds borne avoid_clubs ou avoid_countries sur %q", i, KindSwissRounds)

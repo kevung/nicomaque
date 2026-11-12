@@ -150,7 +150,7 @@ Action
    }
 
 ``Label``, ``Reason`` (``matches_running``, ``no_pairing``, ``waiting_batch``, ``waiting_table``,
-``player_unavailable``, ``player_busy``) et ``Warn`` sont des codes. ``Action.String()`` (rendu
+``player_unavailable``, ``player_busy``, ``manual``) et ``Warn`` sont des codes. ``Action.String()`` (rendu
 français, pour la console) produit une phrase destinée au TD :
 
 ================ =====================================================================
