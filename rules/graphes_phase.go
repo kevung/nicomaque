@@ -540,52 +540,67 @@ func (v *vue) finale() bool { return v.Last && v.Rules.FinalBarrage }
 // joueurs non retirés à la meilleure clé de leur poule, moins ceux que le barrage de la poule a
 // écartés. Plus d'un : ils se départagent sur le tapis, par le barrage final, à une place. nil
 // tant que les poules et leurs barrages ne sont pas finis, et hors de ce cas.
-func (v *vue) finalistes() []Ref {
-	if !v.finale() || !v.Drawn {
+func (v *vue) finalistes() []Ref { return v.premiers(false) }
+
+// premiers : les finalistes ; avecRetirés les désigne sur les seuls résultats, un retiré
+// gardant sa place en tête de poule.
+func (v *vue) premiers(avecRetirés bool) []Ref {
+	if !v.finalePrête() {
 		return nil
+	}
+	var out []Ref
+	for i := range v.Sections {
+		if sec := v.Sections[i]; sec.Kind == SectionPool {
+			out = append(out, v.premiersDe(sec, func(p Ref) bool { return !avecRetirés && v.withdrawn[p] })...)
+		}
+	}
+	return out
+}
+
+// finalePrête : dernière phase à barrage final, poules et barrages de poule finis.
+func (v *vue) finalePrête() bool {
+	if !v.finale() || !v.Drawn {
+		return false
 	}
 	n := 0
 	for i := range v.Sections {
 		if v.Sections[i].Kind == SectionPool {
 			n++
 			if !v.Sections[i].Done() {
-				return nil
+				return false
 			}
 		}
 	}
-	if n == 0 || !v.poolBarragesDone() {
-		return nil
+	return n > 0 && v.poolBarragesDone()
+}
+
+// premiersDe : les premiers ex æquo d'une poule, barrage de poule compris, sans ceux que
+// saute écarte.
+func (v *vue) premiersDe(sec Section, saute func(Ref) bool) []Ref {
+	ids, clés := v.poolOrdre(sec)
+	écartés := map[Ref]bool{}
+	if bs := v.section(BarrageSectionName(sec.Name)); bs != nil {
+		for _, p := range bs.Players {
+			écartés[p] = true
+		}
+		for _, p := range v.barrageAlive(bs) {
+			écartés[p] = false
+		}
 	}
 	var out []Ref
-	for i := range v.Sections {
-		sec := v.Sections[i]
-		if sec.Kind != SectionPool {
+	var tête *clé
+	for _, p := range ids {
+		if saute(p) || écartés[p] {
 			continue
 		}
-		ids, clés := v.poolOrdre(sec)
-		écartés := map[Ref]bool{}
-		if bs := v.section(BarrageSectionName(sec.Name)); bs != nil {
-			for _, p := range bs.Players {
-				écartés[p] = true
-			}
-			for _, p := range v.barrageAlive(bs) {
-				écartés[p] = false
-			}
+		if tête == nil {
+			k := clés[p]
+			tête = &k
 		}
-		var tête *clé
-		for _, p := range ids {
-			if v.withdrawn[p] || écartés[p] {
-				continue
-			}
-			if tête == nil {
-				k := clés[p]
-				tête = &k
-			}
-			if clés[p] != *tête {
-				break
-			}
-			out = append(out, p)
+		if clés[p] != *tête {
+			break
 		}
+		out = append(out, p)
 	}
 	return out
 }
@@ -826,4 +841,88 @@ func (v *vue) repecher(base []Ref) []Ref {
 		}
 	}
 	return out
+}
+
+// StaleBarrages : les barrages tirés dont les joueurs ne sont plus ceux que les poules
+// désignent — une correction de poule est passée après le tirage. Les retirés ne comptent pas :
+// un retrait ne refait pas un barrage.
+func StaleBarrages(p Phase) []string {
+	v := voir(&p)
+	var out []string
+	for i := range v.Sections {
+		bs := v.Sections[i]
+		if bs.Kind != SectionBarrage {
+			continue
+		}
+		stale := false
+		if bs.Name == FinalBarrageName {
+			if !v.finalePrête() {
+				continue
+			}
+			stale = v.finalPérimé(bs)
+		} else {
+			var attendus []Ref
+			for j := range v.Sections {
+				if pool := v.Sections[j]; pool.Kind == SectionPool && BarrageSectionName(pool.Name) == bs.Name {
+					attendus, _ = v.poolTie(pool)
+				}
+			}
+			stale = !v.mêmesPrésents(attendus, bs.Players)
+		}
+		if stale {
+			out = append(out, bs.Name)
+		}
+	}
+	return out
+}
+
+// finalPérimé juge le barrage final POULE PAR POULE : un critère global laisserait le suivant
+// promu d'une poule excuser une égalité née d'une correction dans la même poule. Le tirage ne
+// dit pas quand un retrait est tombé, mais qui il a tiré : un retiré absent du tirage s'est
+// retiré avant (le suivant a été tiré à bon droit, lui est sauté), un retiré tiré garde sa
+// place (sinon son retrait promouvrait un absent du tirage, sans correction).
+func (v *vue) finalPérimé(bs Section) bool {
+	tiré := map[Ref]bool{}
+	for _, x := range bs.Players {
+		tiré[x] = true
+	}
+	for i := range v.Sections {
+		pool := v.Sections[i]
+		if pool.Kind != SectionPool {
+			continue
+		}
+		var tirés []Ref
+		membres, _ := v.poolOrdre(pool)
+		for _, x := range membres {
+			if tiré[x] {
+				tirés = append(tirés, x)
+			}
+		}
+		attendus := v.premiersDe(pool, func(x Ref) bool { return v.withdrawn[x] && !tiré[x] })
+		if !v.mêmesPrésents(attendus, tirés) {
+			return true
+		}
+	}
+	return false
+}
+
+// mêmesPrésents : deux listes égales, retirés mis à part.
+func (v *vue) mêmesPrésents(a, b []Ref) bool {
+	dans := map[Ref]int{}
+	for _, x := range a {
+		if !v.withdrawn[x] {
+			dans[x] |= 1
+		}
+	}
+	for _, x := range b {
+		if !v.withdrawn[x] {
+			dans[x] |= 2
+		}
+	}
+	for _, m := range dans {
+		if m != 3 {
+			return false
+		}
+	}
+	return true
 }

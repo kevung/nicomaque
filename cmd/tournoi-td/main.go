@@ -32,11 +32,17 @@ var formats = map[string]tournoi.Config{
 	"suisse_rondes":    {Name: "Suisse 2 vies par rondes", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissLives, Length: 7, Mode: "rounds"}}},
 	"suisse_tableau":   {Name: "Suisse 2 vies puis tableau à vies", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissLives, Length: 7, Target: 16}, {Kind: tournoi.KindLivesBracket, Length: 9, FinalLength: 11}}},
 	"suisse_classique": {Name: "Suisse classique en 5 rondes", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5}}},
-	"gsl":              {Name: "Blocs GSL puis tableau", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindGSL, Length: 7, Target: 16}, {Kind: tournoi.KindLivesBracket, Length: 9}}},
-	"elim":             {Name: "Élimination simple", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindBracket, Length: 9, FinalLength: 11}}},
-	"conso":            {Name: "Principal, consolante, dernière chance", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindBracket, Length: 9, Consolation: true, LastChance: true}}},
-	"double":           {Name: "Double élimination", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindBracket, Length: 7, Consolation: true, Reconciliation: true, Recharge: true}}},
-	"poules":           {Name: "Poules puis tableau", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindRoundRobin, Length: 5, GroupSize: 4, Qualifiers: 2}, {Kind: tournoi.KindBracket, Length: 9}}},
+	"suisse_departage": {Name: "Suisse classique départagé", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5,
+		Seeding: tournoi.SeedingManual, Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakBuchholz}}}},
+	"suisse_accelere": {Name: "Suisse classique accéléré", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5,
+		Seeding: tournoi.SeedingRating, Accelerated: true, Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakBuchholz}}}},
+	"poule_unique": {Name: "Poule unique", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 1, Qualifiers: 1,
+		Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakPointsScored}, FinalBarrage: true}}},
+	"gsl":    {Name: "Blocs GSL puis tableau", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindGSL, Length: 7, Target: 16}, {Kind: tournoi.KindLivesBracket, Length: 9}}},
+	"elim":   {Name: "Élimination simple", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindBracket, Length: 9, FinalLength: 11}}},
+	"conso":  {Name: "Principal, consolante, dernière chance", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindBracket, Length: 9, Consolation: true, LastChance: true}}},
+	"double": {Name: "Double élimination", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindBracket, Length: 7, Consolation: true, Reconciliation: true, Recharge: true}}},
+	"poules": {Name: "Poules puis tableau", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindRoundRobin, Length: 5, GroupSize: 4, Qualifiers: 2}, {Kind: tournoi.KindBracket, Length: 9}}},
 }
 
 type td struct {

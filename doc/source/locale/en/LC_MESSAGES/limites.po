@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 14:22+0100\n"
+"POT-Creation-Date: 2026-11-12 15:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -113,13 +113,67 @@ msgstr ""
 
 #: ../../source/limites.rst:33
 msgid ""
+"**Barrage tiré puis poule corrigée** : un barrage (de poule ou final) "
+"n'est pas recalculé. Si une correction de résultat de poule, passée après"
+" son tirage, change les joueurs que la poule désigne, le barrage se joue "
+"entre ceux du tirage et l'avertissement ``barrage_stale`` le signale ; au"
+" directeur d'annuler ses matchs s'il veut le refaire."
+msgstr ""
+"**Play-off drawn, then pool corrected**: a play-off (pool or final) is "
+"not recomputed. If a pool result correction, made after its draw, changes"
+" the players the pool designates, the play-off is played between those of"
+" the draw and the ``barrage_stale`` warning reports it; it is up to the "
+"director to cancel its matches to redo it."
+
+#: ../../source/limites.rst:37
+msgid ""
+"**Ronde de demi-exemptés seuls** : si, après des retraits, tous les "
+"joueurs restants d'une ronde de suisse classique sont demi-exemptés, rien"
+" ne s'apparie et le moteur attend (``no_pairing``) ; retirer une demi-"
+"exemption débloque la ronde."
+msgstr ""
+"**Round of half-byes only**: if, after withdrawals, all the remaining "
+"players of a classic Swiss round have a half-bye, nothing is paired and "
+"the engine waits (``no_pairing``); removing a half-bye unblocks the "
+"round."
+
+#: ../../source/limites.rst:40
+msgid ""
+"**Entrée** ``top:N`` **et ex æquo** : ``top:N`` coupe dans l'ordre du "
+"classement de la phase précédente, sans départager des ex æquo à la "
+"frontière ; sans ``tiebreak``, deux joueurs à égalité peuvent se trouver "
+"de part et d'autre de la coupe. ``top:1`` est admis : la phase n'a qu'un "
+"entrant, qui en est le vainqueur sans jouer."
+msgstr ""
+"**Entry** ``top:N`` **and ties**: ``top:N`` cuts in the order of the "
+"previous phase's ranking, without separating tied players at the "
+"boundary; without ``tiebreak``, two tied players can end up on either "
+"side of the cut. ``top:1`` is accepted: the phase has a single entrant, "
+"who wins it without playing."
+
+#: ../../source/limites.rst:44
+msgid ""
+"**Plus de rondes que d'adversaires** : un suisse classique dont "
+"``rounds`` dépasse le nombre d'adversaires possibles (effectif moins un) "
+"reste jouable, par revanches, mais ``Propose`` y ralentit nettement. "
+"``Validate`` ne borne pas ``rounds`` : l'effectif n'est pas connu à la "
+"configuration."
+msgstr ""
+"**More rounds than opponents**: a classic Swiss whose ``rounds`` exceeds "
+"the number of possible opponents (field size minus one) remains playable,"
+" through rematches, but ``Propose`` slows down markedly there. "
+"``Validate`` does not bound ``rounds``: the field size is not known at "
+"configuration time."
+
+#: ../../source/limites.rst:48
+msgid ""
 "**Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a "
 "pas été éprouvée en conditions réelles (durée du barrage)."
 msgstr ""
 "**Pools**: the three-way tie for two places, settled by a play-off, has "
 "not been tested under real conditions (play-off duration)."
 
-#: ../../source/limites.rst:35
+#: ../../source/limites.rst:50
 msgid ""
 "**Classement des places non gagnantes** : les règles (par tour atteint en"
 " tableau, par victoires au suisse, ex æquo partagés) restent à valider "
@@ -129,11 +183,11 @@ msgstr ""
 "bracket, by wins in the Swiss, ties shared) remain to be validated with "
 "the FFBG."
 
-#: ../../source/limites.rst:39
+#: ../../source/limites.rst:54
 msgid "Affichage"
 msgstr "Display"
 
-#: ../../source/limites.rst:41
+#: ../../source/limites.rst:56
 msgid ""
 "Pas d'écran joueur (« votre prochain match, votre table ») dans le paquet"
 " ``render``."
@@ -141,11 +195,11 @@ msgstr ""
 "No player screen (\"your next match, your table\") in the ``render`` "
 "package."
 
-#: ../../source/limites.rst:44
+#: ../../source/limites.rst:59
 msgid "Modèle de l'étude"
 msgstr "Study model"
 
-#: ../../source/limites.rst:46
+#: ../../source/limites.rst:61
 msgid ""
 "L'effet de la longueur de match (exposant α) n'est pas fixé par les "
 "données disponibles."
@@ -153,7 +207,7 @@ msgstr ""
 "The effect of match length (exponent α) is not settled by the available "
 "data."
 
-#: ../../source/limites.rst:47
+#: ../../source/limites.rst:62
 msgid ""
 "Le modèle de durée est une moyenne par point, indépendante du niveau et "
 "de la longueur."
@@ -161,7 +215,7 @@ msgstr ""
 "The duration model is a per-point average, independent of level and "
 "length."
 
-#: ../../source/limites.rst:48
+#: ../../source/limites.rst:63
 msgid ""
 "Le simulateur de l'étude et ``sim`` diffèrent de 1 à 2 écarts types sur "
 "les probabilités de la double élimination et du GSL ; la cause n'est pas "
@@ -170,3 +224,15 @@ msgstr ""
 "The study's simulator and ``sim`` differ by 1 to 2 standard deviations on"
 " the probabilities of double elimination and GSL; the cause has not been "
 "identified."
+
+#~ msgid ""
+#~ "**Plus de rondes que d'adversaires** :"
+#~ " un suisse classique dont ``rounds`` "
+#~ "dépasse le nombre d'adversaires possibles "
+#~ "(effectif moins un) reste jouable, par"
+#~ " revanches, mais ``Propose`` devient lent"
+#~ " — plusieurs secondes par ronde "
+#~ "au-delà de trente joueurs. ``Validate`` "
+#~ "ne borne pas ``rounds`` : l'effectif "
+#~ "n'est pas connu à la configuration."
+#~ msgstr ""

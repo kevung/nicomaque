@@ -25,8 +25,8 @@ const (
 	StatusPlaying StatusKind = "playing"
 	// StatusBye : exempté — ne joue pas maintenant et entre plus tard. Tableau : il n'a encore
 	// joué aucun match de la phase et le tirage (ou un forfait) l'a avancé jusqu'au match situé
-	// par Section, Round (tour de la section, à partir de 1) et Label. Suisse par rondes : bye de
-	// la ronde en cours ; il rejoue à la ronde Round (Label = LabelRound).
+	// par Section, Round (tour de la section, à partir de 1) et Label. Suisse par rondes : bye ou
+	// demi-exemption de la ronde en cours ; il rejoue à la ronde Round (Label = LabelRound).
 	StatusBye StatusKind = "bye"
 	// StatusQualified : entre dans la phase Phase — la phase en cours est terminée et il fait
 	// partie de ceux qui passent, ou le passage est fait et la phase n'est ni tirée ni commencée.
@@ -193,7 +193,7 @@ func (v *statusView) of(p PlayerID) PlayerStatus {
 		if s.remainingLives(cur, p) == 0 {
 			return v.phaseOver(p)
 		}
-		if cur.Cfg.Mode == "rounds" && cur.Round > 0 && !s.busy(p) && containsRound(cur.ByeRounds[p], cur.Round) {
+		if byRounds(cur.Cfg) && cur.Round > 0 && !s.busy(p) && (containsRound(cur.ByeRounds[p], cur.Round) || containsRound(cur.HalfByes[p], cur.Round)) {
 			r := cur.Round + 1
 			return PlayerStatus{Player: p, Kind: StatusBye, Phase: cur.Index, Round: r, Label: Label{Kind: LabelRound, N: r}}
 		}

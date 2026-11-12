@@ -14,14 +14,19 @@ import (
 )
 
 // Un tournoi commencé sous v0.8.0 se poursuit à l'identique : ses journaux, rejoués pas à pas,
-// rendent les mêmes propositions, les mêmes statuts, le même classement et le même reste à jouer. Le fichier témoin
-// vient de v0.8.0 et ne se régénère pas ; il ne garde que des empreintes, donc un champ ajouté
-// à Action ou à PlayerStatus doit être omis quand il est vide.
+// rendent les mêmes propositions, les mêmes statuts, le même classement, le même reste à jouer
+// et les mêmes avertissements. Les empreintes du fichier témoin viennent de v0.8.0 et ne se
+// régénèrent pas ; un champ ajouté à Action, à PlayerStatus ou à Warning doit donc être omis
+// quand il est vide. Les journaux « perturbe/ » portent retraits, corrections et annulations.
+//
+// Seul écart voulu : la phase d'un seul entrant (journaux « top1 »), où v0.8.0 attendait sans
+// fin (no_pairing) — le moteur y propose maintenant la clôture.
 type pasV080 struct {
 	P string `json:"p"` // empreinte de Propose
 	S string `json:"s"` // empreinte de Statuses
 	R string `json:"r"` // RemainingMatches de la phase courante, « min-max »
 	K string `json:"k"` // empreinte de Ranking
+	W string `json:"w"` // empreinte de Warnings, vide sans avertissement
 }
 
 type temoinV080 struct {
@@ -56,12 +61,17 @@ func TestJournauxV080(t *testing.T) {
 	if err := json.NewDecoder(z).Decode(&témoins); err != nil {
 		t.Fatal(err)
 	}
-	pas, écarts := 0, map[string]int{}
+	pas, seuls, écarts := 0, 0, map[string]int{}
 	for _, tm := range témoins {
+		s, err := tournoi.Replay(tm.Journal[:1])
+		if err != nil {
+			t.Fatalf("%s : %v", tm.Name, err)
+		}
 		for i := range tm.Journal {
-			s, err := tournoi.Replay(tm.Journal[:i+1])
-			if err != nil {
-				t.Fatalf("%s, pas %d : %v", tm.Name, i, err)
+			if i > 0 {
+				if err := s.Apply(tm.Journal[i]); err != nil {
+					t.Fatalf("%s, pas %d : %v", tm.Name, i, err)
+				}
 			}
 			pas++
 			acts := s.Propose()
@@ -70,12 +80,27 @@ func TestJournauxV080(t *testing.T) {
 				rm := rules.RemainingMatches(*ph)
 				reste = fmt.Sprintf("%d-%d", rm.Min, rm.Max)
 			}
-			for quoi, ok := range map[string]bool{
+			avert := ""
+			if len(s.Warnings) > 0 {
+				avert = empreinteV080(s.Warnings)
+			}
+			mêmes := map[string]bool{
 				"Propose":          empreinteV080(acts) == tm.Pas[i].P,
 				"Statuses":         empreinteV080(s.Statuses()) == tm.Pas[i].S,
 				"Ranking":          empreinteV080(s.Ranking()) == tm.Pas[i].K,
 				"RemainingMatches": reste == tm.Pas[i].R,
-			} {
+				"Warnings":         avert == tm.Pas[i].W,
+			}
+			if ph := s.Phases[s.Current]; !s.Finished && ph.Index > 0 && !ph.Drawn && len(ph.Entrants) == 1 {
+				seuls++
+				if len(acts) != 1 || acts[0].Kind != tournoi.ActFinish {
+					b, _ := json.Marshal(acts)
+					t.Errorf("%s, pas %d : phase d'un seul entrant, clôture attendue ; propose %s", tm.Name, i, b)
+				}
+				delete(mêmes, "Propose")
+				delete(mêmes, "Statuses")
+			}
+			for quoi, ok := range mêmes {
 				if ok {
 					continue
 				}
@@ -87,6 +112,9 @@ func TestJournauxV080(t *testing.T) {
 			}
 		}
 	}
-	t.Logf("%d journaux, %d pas ; écarts : Propose %d, Statuses %d, Ranking %d, RemainingMatches %d",
-		len(témoins), pas, écarts["Propose"], écarts["Statuses"], écarts["Ranking"], écarts["RemainingMatches"])
+	if chemin == "testdata/journaux_v080.json.gz" && seuls == 0 {
+		t.Error("aucun pas de phase d'un seul entrant : le témoin top1 manque")
+	}
+	t.Logf("%d journaux, %d pas (dont %d en phase d'un seul entrant) ; écarts : Propose %d, Statuses %d, Ranking %d, RemainingMatches %d, Warnings %d",
+		len(témoins), pas, seuls, écarts["Propose"], écarts["Statuses"], écarts["Ranking"], écarts["RemainingMatches"], écarts["Warnings"])
 }

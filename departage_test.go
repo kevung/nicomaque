@@ -210,3 +210,26 @@ func TestDepartageValidate(t *testing.T) {
 		}
 	}
 }
+
+// TestDepartageOrdreDesCriteres : les critères s'appliquent dans l'ordre configuré — x a le
+// meilleur écart, y a marqué le plus, et l'ordre de la liste décide lequel passe devant.
+func TestDepartageOrdreDesCriteres(t *testing.T) {
+	ph := rules.Phase{Format: rules.FormatSwissRounds, Length: 7,
+		Rules: rules.PhaseRules{Rounds: 2, Length: 7, Mode: rules.ModeRounds},
+		Entrants: []rules.Entrant{
+			{Player: "x", Lives: 99, Wins: 1, Losses: 1, PointsFor: 8, PointsAgainst: 7, Played: []rules.Ref{"y", "z"}},
+			{Player: "y", Lives: 99, Wins: 1, Losses: 1, PointsFor: 13, PointsAgainst: 14, Played: []rules.Ref{"x", "z"}},
+			{Player: "z", Lives: 99, Wins: 1, Losses: 1, PointsFor: 10, PointsAgainst: 10, Played: []rules.Ref{"x", "y"}},
+		}}
+	premier := func(critères ...string) rules.Ref {
+		p := ph
+		p.Rules.Tiebreak = critères
+		return rules.Rank(p)[0].Player
+	}
+	if got := premier(rules.TiebreakPointDiff, rules.TiebreakPointsScored); got != "x" {
+		t.Errorf("écart puis marqués : %s premier, attendu x", got)
+	}
+	if got := premier(rules.TiebreakPointsScored, rules.TiebreakPointDiff); got != "y" {
+		t.Errorf("marqués puis écart : %s premier, attendu y", got)
+	}
+}

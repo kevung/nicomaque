@@ -104,6 +104,10 @@ où intervenir et comment vérifier.
   étendent `avoid_clubs` au pays, le bornent aux premières rondes et en sortent le club hôte ; le
   CSV des joueurs lit et écrit le pays et la tête de série. `half_bye` / `half_bye_cancelled`
   (issue #10) : demi-exemption annoncée avant la ronde, un demi-point, pas d'appariement.
+- [ ] **Ronde de demi-exemptés seuls et barrage périmé** : une ronde dont tous les joueurs
+  restants sont demi-exemptés attend (`no_pairing`) ; un barrage dont la poule est corrigée après
+  le tirage n'est pas refait (avertissement `barrage_stale`). Les deux sont dans `limites.rst` ;
+  à traiter si un tournoi réel les rencontre.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que
   d'autres n'en ont pas eu » entre groupes différents (aujourd'hui par groupe). `pairGroup`.

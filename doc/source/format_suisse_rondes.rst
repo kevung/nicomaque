@@ -89,9 +89,10 @@ de têtes de série il n'y a pas de moitié haute — et ``Validate`` la refuse 
 "monrad"``.
 
 - **Moitié haute** (``rules.TopHalf``) : les ``⌊n/2⌋`` premières têtes de série des joueurs de la
-  ronde 1 ; en effectif impair, la tête du milieu reste en bas. Elle est **figée à la ronde 1** :
-  le moteur la relit des joueurs engagés à cette ronde, si bien qu'un retrait ou un retardataire ne
-  fait franchir la ligne à personne.
+  ronde 1 ; en effectif impair, la tête du milieu reste en bas. Elle est **relue des joueurs
+  engagés à la ronde 1** : une fois cette ronde entièrement lancée, un retrait ou un retardataire
+  ne fait franchir la ligne à personne ; tant qu'elle ne l'est pas, une inscription ou un retrait
+  la déplace encore, comme il déplace le pliage de la ronde 1.
 - **Ronde 1** : chaque moitié est pliée séparément. Moitié haute impaire : sa dernière tête
   descend en tête de la moitié basse ; moitié basse impaire : sa dernière tête est exemptée.
 - **Ronde 2** : l'ordre du classement est retrié (stable) par points + point virtuel, puis

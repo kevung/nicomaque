@@ -22,10 +22,11 @@ go get github.com/kevung/nicomaque
 | Kind | Description |
 |---|---|
 | `swiss_lives` | Suisse à L vies, appariement dans le groupe de même nombre de défaites, continu (dès que deux joueurs sont libres) ou par rondes ; option `batch_minutes` : micro-rondes, les joueurs libres attendent l'échéance et partent par lots ; option `target` : arrêt quand la somme des vies vaut une puissance de 2 pour basculer sur un tableau |
+| `swiss_rounds` | Suisse classique à `rounds` rondes fixes, sans élimination ; `tiebreak` (écart de points, points marqués, Buchholz), `pairing: "monrad"`, `seeding` (ronde 1 pliée), `accelerated`, demi-exemptions annoncées (`half_bye`), `avoid_clubs` / `avoid_countries` bornés par `avoid_rounds` |
 | `lives_bracket` | Tableau à élimination simple où un joueur à 2 vies est exempt du premier tour |
 | `gsl` | Blocs de groupes GSL de 4 (3, 2) pour les joueurs à 0 défaite, mini-tableaux pour ceux à 1 défaite ; option `target` |
 | `bracket` | Élimination simple ; `consolation` (consolante progressive), `last_chance`, `reconciliation` + `recharge` (double élimination vraie) |
-| `round_robin` | Poules (table de Berger), `qualifiers` par poule, égalités réglées par barrage à 2 vies |
+| `round_robin` | Poules (table de Berger), `groups` ou `group_size`, `qualifiers` par poule, égalités réglées par barrage à 2 vies ou par `tiebreak` ; `final_barrage` : un seul vainqueur en dernière phase |
 
 Les phases s'enchaînent (`entry` : `survivors` avec leurs vies, `all`, `top:N`).
 

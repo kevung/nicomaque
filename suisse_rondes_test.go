@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/rand"
+	"strings"
 	"testing"
 	"time"
 
@@ -376,5 +377,42 @@ func TestSuisseRondesRetardataire(t *testing.T) {
 	}
 	if n := len(st.Ranking()); n != 9 {
 		t.Fatalf("classement de %d joueurs", n)
+	}
+}
+
+// TestSuisseRondesArtificeNonEcrit : les vies et le mode d'un suisse classique sont un artifice
+// de mécanique, calculé et jamais écrit au journal ; un journal qui les porte encore se lit et
+// se joue à l'identique.
+func TestSuisseRondesArtificeNonEcrit(t *testing.T) {
+	cfg := tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3}}}
+	d := piloter(t, cfg, 3, champClubs(7, 0))
+	créé, _ := json.Marshal(d.j[0])
+	if s := string(créé); strings.Contains(s, "1048576") || strings.Contains(s, `"mode"`) || strings.Contains(s, `"lives"`) {
+		t.Fatalf("l'artifice est écrit au journal : %s", s)
+	}
+	ancien := strings.Replace(string(créé), `"kind":"swiss_rounds"`, `"kind":"swiss_rounds","lives":1048576,"mode":"rounds"`, 1)
+	if ancien == string(créé) {
+		t.Fatal("événement de création inattendu")
+	}
+	var ev tournoi.Event
+	if err := json.Unmarshal([]byte(ancien), &ev); err != nil {
+		t.Fatal(err)
+	}
+	d.jouer(nil)
+	if !d.st.Finished {
+		t.Fatalf("tournoi non terminé : %v", d.st.Propose())
+	}
+	j := append(tournoi.Journal{ev}, d.j[1:]...)
+	st, err := tournoi.Replay(j)
+	if err != nil {
+		t.Fatalf("journal ancien : %v", err)
+	}
+	if fmt.Sprint(st.Ranking()) != fmt.Sprint(d.st.Ranking()) || len(st.Warnings) > 0 {
+		t.Fatalf("journal ancien : classement différent ou avertissements %v", st.Warnings)
+	}
+	// Un vrai réglage de vies reste refusé.
+	cfg.Phases[0].Lives = 3
+	if cfg.Validate() == nil {
+		t.Error("lives: 3 accepté sur un suisse classique")
 	}
 }

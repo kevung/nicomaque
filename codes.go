@@ -157,6 +157,10 @@ const (
 	// un joueur (Player) qu'elle avait éliminé. Il redevient appariable ; l'avertissement reste
 	// jusqu'à ce qu'il rejoue, ou qu'il soit de nouveau éliminé.
 	WarnCorrectionRevives WarningCode = "correction_revives"
+	// WarnBarrageStale : une correction de poule postérieure au tirage du barrage Section a
+	// changé les joueurs que la poule désigne. Le barrage n'est pas retiré : il se joue entre
+	// ceux du tirage. Dérivé : tombe si une autre correction rétablit l'égalité tirée.
+	WarnBarrageStale WarningCode = "barrage_stale"
 )
 
 // Warning est une incohérence : un code et de quoi la situer. Rien n'est bloqué par un

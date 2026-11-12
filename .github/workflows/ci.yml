@@ -3,8 +3,8 @@
 # Trois travaux, et la raison de chacun :
 #   - « tests » : ce qu'un relecteur doit voir sur la proposition elle-même — compilation, vet,
 #     format, et la suite COMPLÈTE (sans -short), qui inclut la matrice entière des invariants
-#     et TestParity. C'est long, environ une minute, et c'est le prix de la confiance ;
-#     `go test -short` reste la boucle qu'on lance à chaque sauvegarde, sous trois secondes.
+#     et TestParity. C'est long, plusieurs minutes, et c'est le prix de la confiance ;
+#     `go test -short` reste la boucle qu'on lance à chaque sauvegarde, sous dix secondes.
 #   - « fuzz » : le fuzzing d'Apply et du rejeu d'un journal, sur une durée fixée. Il ne trouve
 #     rien la plupart du temps ; le jour où il trouve, il trouve ce qu'aucun test écrit à la
 #     main n'aurait cherché.
