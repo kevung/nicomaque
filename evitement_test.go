@@ -63,7 +63,11 @@ func TestEvitementPays(t *testing.T) {
 // rondes suivantes s'apparier au classement.
 func TestEvitementSimulation(t *testing.T) {
 	compte := func(évite bool) (tôt, revanches int) {
-		for k := int64(0); k < 10; k++ {
+		graines := int64(10)
+		if testing.Short() {
+			graines = 3
+		}
+		for k := int64(0); k < graines; k++ {
 			cfg := tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5,
 				AvoidClubs: évite, AvoidRounds: 2}}}
 			if !évite {

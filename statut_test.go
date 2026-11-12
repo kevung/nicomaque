@@ -122,8 +122,12 @@ func TestStatutsInvariants(t *testing.T) {
 	if testing.Short() {
 		seeds = 1
 	}
+	effectifs := []int{11, 16, 24}
+	if testing.Short() {
+		effectifs = []int{16}
+	}
 	for name, cfg := range cfgs {
-		for _, n := range []int{11, 16, 24} {
+		for _, n := range effectifs {
 			for k := 0; k < seeds; k++ {
 				nom := fmt.Sprintf("%s/%d/%d", name, n, k)
 				g := nouveauGardien(t, nom)

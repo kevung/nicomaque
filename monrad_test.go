@@ -97,7 +97,11 @@ func TestMonradTirage(t *testing.T) {
 func TestMonradSimulation(t *testing.T) {
 	for _, élargi := range []bool{false, true} {
 		croisés, revanches, total := 0, 0, 0
-		for k := 0; k < 20; k++ {
+		graines := 20
+		if testing.Short() {
+			graines = 6
+		}
+		for k := 0; k < graines; k++ {
 			c := monrad(6)
 			c.Phases[0].MonradWiden = élargi
 			r, b := jouerRondes(t, c, 32, int64(k))

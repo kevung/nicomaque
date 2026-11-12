@@ -27,8 +27,8 @@ Invariants vérifiés
 
 ``TestFormatsInvariants`` joue toutes les configurations de ``configs()`` × 8 effectifs (2, 3, 5,
 8, 13, 32, 64, 100) × 8 graines, et vérifie après chaque événement puis à la fin. En mode
-``-short`` la matrice est réduite à six effectifs (2, 3, 5, 8, 13, 32) et trois graines, ce qui la
-ramène sous les trois secondes : c'est la boucle qu'on lance à chaque sauvegarde, la matrice entière
+``-short`` la matrice est réduite à six effectifs (2, 3, 5, 8, 13, 32) et deux graines, et toute la
+suite tient sous dix secondes : c'est la boucle qu'on lance à chaque sauvegarde, la matrice entière
 tournant en intégration continue.
 
 1. **Terminaison** : aucune simulation ne dépasse ``MaxSteps``, aucun blocage.

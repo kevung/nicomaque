@@ -131,11 +131,11 @@ func hook(t *testing.T, name string, seen map[string]int) func(s *tournoi.State,
 func TestFormatsInvariants(t *testing.T) {
 	// La matrice complète — 8 effectifs × 8 graines × tous les formats — est ce qui donne
 	// confiance, et ce qui coûte. En mode court elle est réduite aux petits effectifs et à
-	// trois graines : c'est la boucle qu'on lance à chaque sauvegarde. La matrice entière
+	// deux graines : c'est la boucle qu'on lance à chaque sauvegarde. La matrice entière
 	// tourne sans -short, donc en intégration continue.
 	effectifs, graines := []int{2, 3, 5, 8, 13, 32, 64, 100}, 8
 	if testing.Short() {
-		effectifs, graines = []int{2, 3, 5, 8, 13, 32}, 3
+		effectifs, graines = []int{2, 3, 5, 8, 13, 32}, 2
 	}
 	for name, cfg := range configs() {
 		for _, P := range effectifs {
