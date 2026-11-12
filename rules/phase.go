@@ -67,6 +67,8 @@ type PhaseRules struct {
 	// Accelerated : suisse classique accéléré — un point virtuel à la moitié haute, pour
 	// l'appariement des rondes 1 et 2 seulement.
 	Accelerated bool `json:"accelerated,omitempty"`
+	// FinalBarrage : poules en dernière phase, barrage final entre les premiers de poule.
+	FinalBarrage bool `json:"final_barrage,omitempty"`
 }
 
 // Entrant : un joueur de la phase et son parcours dans la phase.
@@ -110,8 +112,8 @@ type Phase struct {
 	// Withdrawn : les retirés du tournoi. Un retiré n'a plus de vie ; dans un graphe, il perd par
 	// forfait le match qui l'attend.
 	Withdrawn []Ref `json:"withdrawn,omitempty"`
-	// Last : la phase est la dernière du tournoi. Des poules y désignent UN vainqueur, par le
-	// barrage final de leurs premiers.
+	// Last : la phase est la dernière du tournoi. Avec Rules.FinalBarrage, des poules y désignent
+	// UN vainqueur, par le barrage final de leurs premiers.
 	Last    bool `json:"last,omitempty"`
 	Drawn   bool `json:"drawn,omitempty"`   // tableau, poules : tirage fait ; GSL : un bloc au moins
 	Round   int  `json:"round,omitempty"`   // suisse par rondes : dernière ronde ouverte ; GSL : bloc courant
@@ -138,6 +140,7 @@ type vue struct {
 	*Phase
 	idx       map[Ref]*Entrant
 	withdrawn map[Ref]bool
+	ronde     int // suisse par rondes : la ronde en cours d'appariement (0 : Round + 1)
 }
 
 func voir(p *Phase) *vue {

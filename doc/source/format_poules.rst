@@ -17,11 +17,13 @@ des victoires de poule des adversaires rencontrés), sur les seuls matchs de pou
 reste que pour une égalité **complète** à la place qualificative, et le classement de la phase
 suit le même ordre.
 
-Quand les poules sont la **dernière phase**, elles désignent un seul vainqueur : les premiers de
-chaque poule — les joueurs non retirés à la meilleure clé de leur poule, moins ceux que le barrage
-de la poule a écartés — se départagent par le **barrage final** (section ``barrage:final``, une
-place), tiré quand les poules et leurs barrages sont finis. Un seul premier : il est le vainqueur,
-sans barrage.
+Quand les poules sont la **dernière phase**, chaque poule garde son premier : la phase se clôt à
+la fin des poules et de leurs barrages de qualification, et plusieurs poules donnent plusieurs
+premiers. L'option ``final_barrage``, éteinte par défaut, désigne à la place un seul vainqueur :
+les premiers de chaque poule — les joueurs non retirés à la meilleure clé de leur poule, moins
+ceux que le barrage de la poule a écartés — se départagent par le **barrage final** (section
+``barrage:final``, une place), tiré quand les poules et leurs barrages sont finis. Un seul
+premier : il est le vainqueur, sans barrage.
 
 Les défauts sont posés par ``Config.Validate`` : ``group_size`` vaut 4, ``qualifiers`` vaut 2, et
 ``qualifiers`` doit être strictement inférieur à ``group_size``. ``groups`` fixe à la place le
@@ -172,7 +174,8 @@ survivants en dessous du nombre de places.
    func (v *vue) barragesDone() bool   // paquet rules
 
 Pour chaque poule ayant une égalité : le barrage doit exister **et** ``len(barrageAlive) <= Spots``.
-En dernière phase, de même pour le barrage final s'il y a plus d'un premier de poule.
+En dernière phase et avec ``final_barrage``, de même pour le barrage final s'il y a plus d'un
+premier de poule.
 La phase est finie (``rules.PhaseDone``) quand elle est tirée, que tous les nœuds de ses sections
 sont terminés et que ``barragesDone`` est vrai.
 

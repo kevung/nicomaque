@@ -76,6 +76,7 @@ Structures
        GroupSize      int    `json:"group_size,omitempty"`
        Groups         int    `json:"groups,omitempty"`
        Qualifiers     int    `json:"qualifiers,omitempty"`
+       FinalBarrage   bool   `json:"final_barrage,omitempty"`
        Entry          string `json:"entry,omitempty"`
        BatchMinutes   int    `json:"batch_minutes,omitempty"`
        Seeding        string `json:"seeding,omitempty"`
@@ -186,6 +187,11 @@ Signification des champs de phase
 +--------------------+--------------------------------+--------------------------------------------+
 | ``qualifiers``     | ``round_robin``                | Qualifiés par poule (défaut 2)             |
 +--------------------+--------------------------------+--------------------------------------------+
+| ``final_barrage``  | ``round_robin``                | En dernière phase, les premiers de poule   |
+|                    |                                | se départagent par un barrage final qui    |
+|                    |                                | désigne un seul vainqueur (éteint par      |
+|                    |                                | défaut)                                    |
++--------------------+--------------------------------+--------------------------------------------+
 | ``entry``          | toutes sauf la première        | ``survivors`` (défaut : les survivants,    |
 |                    |                                | avec leurs vies restantes si la phase est  |
 |                    |                                | à vies), ``all``, ``top:N``                |
@@ -284,6 +290,7 @@ Algorithme :
        si p.BatchMinutes != 0 et p.Kind != swiss_lives → erreur
        si p.Seeding != "" et p.Kind ∉ {bracket, lives_bracket, swiss_rounds, round_robin} → erreur
        si p.Groups != 0 et p.Kind != round_robin               → erreur
+       si p.FinalBarrage et p.Kind != round_robin              → erreur
        si p.Tiebreak non vide et p.Kind != swiss_rounds        → erreur
        si p.Accelerated et p.Kind != swiss_rounds              → erreur
 

@@ -1,8 +1,10 @@
 package tournoi_test
 
 import (
+	"fmt"
 	"math/rand"
 	"testing"
+	"time"
 
 	"github.com/kevung/nicomaque"
 	"github.com/kevung/nicomaque/rules"
@@ -119,5 +121,65 @@ func TestEvitementValidate(t *testing.T) {
 		AvoidClubs: true, AvoidCountries: true, AvoidRounds: 2, AvoidExcept: []string{"Hôte"}}}}
 	if err := c.Validate(); err != nil {
 		t.Fatal(err)
+	}
+}
+
+// TestEvitementRondeFrontiere : une ronde ouverte se repropose à l'identique, y compris la
+// dernière ronde que borne avoid_rounds — la préférence dépend de la ronde APPARIÉE, pas de la
+// dernière ronde ouverte, qui change dès le premier match confirmé.
+func TestEvitementRondeFrontiere(t *testing.T) {
+	plan := func(acts []tournoi.Action) string {
+		s := ""
+		for _, a := range acts {
+			if a.Kind == tournoi.ActStartMatch || a.Kind == tournoi.ActBye {
+				s += fmt.Sprintf("%s:%s-%s ", a.Kind, a.A, a.B)
+			}
+		}
+		return s
+	}
+	for _, borne := range []int{0, 1, 2, 3} {
+		for g := int64(0); g < 40; g++ {
+			now := time.Date(2026, 1, 1, 9, 0, 0, 0, time.UTC)
+			cfg := tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 4,
+				AvoidClubs: true, AvoidRounds: borne}}}
+			st, _, err := tournoi.New(cfg, g, now)
+			if err != nil {
+				t.Fatal(err)
+			}
+			appliquer := func(ev tournoi.Event, err error) {
+				t.Helper()
+				if err == nil {
+					err = st.Apply(ev)
+				}
+				if err != nil {
+					t.Fatal(err)
+				}
+			}
+			for i := 0; i < 12; i++ {
+				appliquer(tournoi.PlayerAddedEvent(tournoi.Player{ID: tournoi.PlayerID(fmt.Sprintf("p%02d", i)),
+					Name: fmt.Sprintf("J%d", i), Club: fmt.Sprintf("C%d", i%3)}, now), nil)
+			}
+			// Les rondes d'avant la frontière, jouées en entier ; puis la ronde frontière,
+			// confirmée action par action.
+			for r := 1; r <= max(borne, 1); r++ {
+				acts := st.Propose()
+				for len(acts) > 0 && (acts[0].Kind == tournoi.ActStartMatch || acts[0].Kind == tournoi.ActBye) {
+					now = now.Add(time.Minute)
+					appliquer(st.EventFromAction(acts[0], now))
+					reste := st.Propose()
+					if r == max(borne, 1) && plan(acts[1:]) != plan(reste) {
+						t.Fatalf("avoid_rounds=%d graine %d ronde %d : le reste de la ronde a changé\n avant %s\n après %s",
+							borne, g, r, plan(acts[1:]), plan(reste))
+					}
+					acts = reste
+				}
+				for _, id := range st.MatchOrder {
+					if m := st.Matches[id]; m.Status == tournoi.Running {
+						now = now.Add(time.Minute)
+						appliquer(tournoi.ResultEvent(id, m.A, m.Length, 1, now), nil)
+					}
+				}
+			}
+		}
 	}
 }

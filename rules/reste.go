@@ -227,7 +227,7 @@ func (v *vue) restePoules() Remaining {
 		lo, hi := v.resteBarrage(bs)
 		r.Min, r.Max = r.Min+lo, r.Max+hi
 	}
-	if !v.Last {
+	if !v.finale() {
 		return r
 	}
 	// Dernière phase : le barrage final entre les premiers de poule.
