@@ -21,8 +21,9 @@ Règles
 - **Byes entre groupes** : en mode par rondes, la règle « pas de second bye tant que d'autres
   n'en ont pas eu » s'applique à l'intérieur d'un groupe de même nombre de défaites, pas entre
   groupes.
-- **Suisse classique** (``swiss_rounds``) : aucun départage. Les joueurs à égalité de points
-  restent ex æquo, y compris en tête ; l'ordre de la ronde 1 est tiré au sort.
+- **Suisse classique** (``swiss_rounds``) : sans ``tiebreak``, les joueurs à égalité de points
+  restent ex æquo, y compris en tête ; l'ordre de la ronde 1 est tiré au sort. Le départage
+  arithmétique ne s'applique pas aux poules, qui se règlent par barrage.
 - **Consolante et dernière chance** : pas d'option de saut (perdants du premier tour seulement,
   entrée jusqu'au tour *k*, consolante à tirage avec heure limite d'entrée).
 - **Revanches en consolante** : l'ordre inversé d'entrée évite la revanche immédiate, pas les

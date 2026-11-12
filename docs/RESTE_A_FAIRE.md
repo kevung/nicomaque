@@ -89,7 +89,9 @@ où intervenir et comment vérifier.
   `KindSwissRounds` + `PhaseConfig.Rounds` : une variante NOMMÉE, à part du suisse à vies —
   personne n'est éliminé, classement aux points (une exemption vaut une victoire), appariement au
   plus proche avec retour arrière (`rules/suisse_rondes.go`). Sans départage les ex æquo le
-  restent, y compris en tête : le départage arithmétique en option est l'issue #3, le Monrad #4,
+  restent, y compris en tête ; `PhaseConfig.Tiebreak` (issue #3) les départage en option —
+  différence de points de match plafonnés, points marqués, Buchholz — et reste VIDE par défaut.
+  Le départage des poules à la place du barrage est dans l'issue #8, le Monrad #4,
   l'accélération #5, les têtes de série saisies #6.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que

@@ -21,6 +21,10 @@ const (
 	ModeRounds    = "rounds" // suisse par rondes ; vide : continu
 	PairingWins   = "wins"   // suisse : à défaites égales, les plus victorieux ensemble
 	SeedingRating = "rating" // tableau : placement classique par cote
+	// Critères de départage (PhaseRules.Tiebreak), appliqués dans l'ordre donné, après les points.
+	TiebreakPointDiff    = "point_diff"    // différence de points de match, plafonnés à la longueur
+	TiebreakPointsScored = "points_scored" // points de match marqués, plafonnés à la longueur
+	TiebreakBuchholz     = "buchholz"      // somme des points des adversaires rencontrés
 )
 
 // PhaseRules : la configuration d'une phase, ce que les règles en lisent. Les champs inutiles à
@@ -45,18 +49,26 @@ type PhaseRules struct {
 	GroupSize      int    `json:"group_size,omitempty"`
 	Qualifiers     int    `json:"qualifiers,omitempty"`
 	Seeding        string `json:"seeding,omitempty"`
+	// Tiebreak : départage arithmétique des ex æquo d'un suisse classique. Vide : aucun.
+	Tiebreak []string `json:"tiebreak,omitempty"`
 }
 
 // Entrant : un joueur de la phase et son parcours dans la phase.
 type Entrant struct {
-	Player    Ref     `json:"player"`
-	Lives     int     `json:"lives"` // vies à l'entrée de la phase
-	Wins      int     `json:"wins,omitempty"`
-	Losses    int     `json:"losses,omitempty"`
-	Byes      int     `json:"byes,omitempty"`
-	Opponents []Ref   `json:"opponents,omitempty"` // adversaires déjà rencontrés, avec répétitions
-	Club      string  `json:"club,omitempty"`
-	Rating    float64 `json:"rating,omitempty"` // PR, plus bas = meilleur ; 0 = inconnu
+	Player    Ref   `json:"player"`
+	Lives     int   `json:"lives"` // vies à l'entrée de la phase
+	Wins      int   `json:"wins,omitempty"`
+	Losses    int   `json:"losses,omitempty"`
+	Byes      int   `json:"byes,omitempty"`
+	Opponents []Ref `json:"opponents,omitempty"` // adversaires déjà rencontrés, avec répétitions
+	// Départage (PhaseRules.Tiebreak), remplis seulement quand il est configuré. Points de
+	// match marqués et encaissés, plafonnés à la longueur du match ; adversaires des matchs
+	// TERMINÉS, avec répétitions.
+	PointsFor     int     `json:"points_for,omitempty"`
+	PointsAgainst int     `json:"points_against,omitempty"`
+	Played        []Ref   `json:"played,omitempty"`
+	Club          string  `json:"club,omitempty"`
+	Rating        float64 `json:"rating,omitempty"` // PR, plus bas = meilleur ; 0 = inconnu
 }
 
 // Phase est l'instantané d'une phase : tout ce que les règles d'appariement et de classement

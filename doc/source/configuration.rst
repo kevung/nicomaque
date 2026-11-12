@@ -75,6 +75,7 @@ Structures
        Entry          string `json:"entry,omitempty"`
        BatchMinutes   int    `json:"batch_minutes,omitempty"`
        Seeding        string `json:"seeding,omitempty"`
+       Tiebreak       []string `json:"tiebreak,omitempty"`
    }
 
 Deux formes anciennes restent lisibles : ``"tables": 12`` (un nombre) devient
@@ -176,6 +177,13 @@ Signification des champs de phase
 |                    |                                | backgammon. Refusé sur un format sans      |
 |                    |                                | tirage de tableau                          |
 +--------------------+--------------------------------+--------------------------------------------+
+| ``tiebreak``       | ``swiss_rounds``               | Départage arithmétique des ex æquo :       |
+|                    |                                | liste de ``point_diff``,                   |
+|                    |                                | ``points_scored``, ``buchholz``,           |
+|                    |                                | appliqués dans l'ordre après les points.   |
+|                    |                                | **Vide par défaut, par choix de            |
+|                    |                                | conception** (aucun départage)             |
++--------------------+--------------------------------+--------------------------------------------+
 
 Validation et valeurs par défaut
 --------------------------------
@@ -210,6 +218,7 @@ Algorithme :
              si p.Mode ∉ {"", rounds}              → erreur
              si p.Lives saisi                      → erreur (personne n'est éliminé)
              p.Mode = "rounds"
+             si un critère de p.Tiebreak est inconnu ou répété → erreur
          swiss_lives :
              si p.Lives <= 0                       → p.Lives = 2
              si p.Mode == ""                       → p.Mode = "continuous"
@@ -237,6 +246,7 @@ Algorithme :
        si p.Entry == ""  → p.Entry = "survivors"
        si p.BatchMinutes != 0 et p.Kind != swiss_lives → erreur
        si p.Seeding != "" et p.Kind ∉ {bracket, lives_bracket} → erreur
+       si p.Tiebreak non vide et p.Kind != swiss_rounds        → erreur
 
 ``Entry`` n'est pas vérifiée : une valeur inconnue fait entrer les survivants, mais avec les vies
 par défaut du format (pas leurs vies restantes), et un ``top:N`` illisible donne une phase vide

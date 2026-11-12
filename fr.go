@@ -147,10 +147,20 @@ func (n Note) String() string {
 	case NoteAlive:
 		return fmt.Sprintf("en vie (%d vies)", n.Lives)
 	case NoteRecord:
+		out := fmt.Sprintf("%d victoires, %d défaites", n.Wins, n.Losses)
 		if n.Byes > 0 {
-			return fmt.Sprintf("%d victoires, %d défaites, %d exemptions", n.Wins, n.Losses, n.Byes)
+			out += fmt.Sprintf(", %d exemptions", n.Byes)
 		}
-		return fmt.Sprintf("%d victoires, %d défaites", n.Wins, n.Losses)
+		if n.PointDiff != 0 {
+			out += fmt.Sprintf(", écart %+d", n.PointDiff)
+		}
+		if n.PointsScored != 0 {
+			out += fmt.Sprintf(", %d points marqués", n.PointsScored)
+		}
+		if n.Buchholz != 0 {
+			out += fmt.Sprintf(", Buchholz %d", n.Buchholz)
+		}
+		return out
 	case NoteForfeit:
 		return "forfait"
 	case NoteWithdrawn:
