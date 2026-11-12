@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 14:09+0100\n"
+"POT-Creation-Date: 2026-11-12 11:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -111,17 +111,24 @@ msgstr "Seeding"
 
 #: ../../source/format_tableaux.rst:71
 msgid ""
-"Le tirage est aléatoire par défaut. Avec ``seeding: \"rating\"`` "
-"(``PhaseConfig.Seeding``, seule valeur admise par ``Config.Validate`` "
-"hormis le vide, et réservée aux tableaux), le hasard cède la place au "
-"placement classique par cote :"
+"Le tirage est aléatoire par défaut. ``PhaseConfig.Seeding`` admet deux "
+"autres valeurs, qui remplacent le hasard par le placement classique : "
+"``\"rating\"``, par cote, et ``\"seed\"``, par tête de série **saisie** "
+"par l'organisateur (``Player.Seed``, 1 pour la meilleure ; "
+"``rules.SeedSlots``). Avec ``\"seed\"``, un joueur sans numéro passe "
+"derrière tous les autres dans l'ordre d'inscription, et deux joueurs au "
+"même numéro se suivent dans cet ordre. Le placement est le même dans les "
+"deux cas :"
 msgstr ""
-"The draw is random by default. With ``seeding: \"rating\"`` "
-"(``PhaseConfig.Seeding``, the only value accepted by ``Config.Validate`` "
-"besides empty, and reserved for brackets), chance gives way to the "
-"classic placement by rating:"
+"The draw is random by default. ``PhaseConfig.Seeding`` accepts two other "
+"values, which replace chance with the classic placement: ``\"rating\"``, "
+"by rating, and ``\"seed\"``, by seed number **entered** by the organiser "
+"(``Player.Seed``, 1 for the best; ``rules.SeedSlots``). With "
+"``\"seed\"``, a player with no number goes behind all the others in "
+"registration order, and two players with the same number follow each "
+"other in that order. The placement is the same in both cases:"
 
-#: ../../source/format_tableaux.rst:94
+#: ../../source/format_tableaux.rst:97
 msgid ""
 "``byStrength`` trie du meilleur au moins bon par ``Player.Rating`` (le PR"
 " : plus bas vaut mieux) ; une cote nulle ou négative est inconnue et "
@@ -136,11 +143,11 @@ msgstr ""
 "unknown ratings) is that of the identifiers. Places without a seeded "
 "player are byes (``BYE``), which thus go to the best seeds."
 
-#: ../../source/format_tableaux.rst:100
+#: ../../source/format_tableaux.rst:103
 msgid "Construction du tableau"
 msgstr "Building the bracket"
 
-#: ../../source/format_tableaux.rst:136
+#: ../../source/format_tableaux.rst:139
 msgid ""
 "``length`` est la longueur courante de la phase (``ph.Length``) : "
 "consolante et dernière chance n'ont pas de plan de longueurs par tour. "
@@ -152,7 +159,7 @@ msgstr ""
 "``Config.Validate`` refuses ``recharge`` without ``reconciliation`` and "
 "``reconciliation`` without ``consolation``."
 
-#: ../../source/format_tableaux.rst:140
+#: ../../source/format_tableaux.rst:143
 msgid ""
 "La **dernière chance** ne recueille que les perdants des tours de "
 "consolante **sauf les deux derniers** : perdre en finale ou en demi-"
@@ -162,7 +169,7 @@ msgstr ""
 "**except the last two**: losing in the consolation final or semi-final "
 "does not entitle one to a third bracket."
 
-#: ../../source/format_tableaux.rst:144
+#: ../../source/format_tableaux.rst:147
 msgid ""
 "La **recharge** est le mécanisme de la vraie double élimination : "
 "``CondSide = 1`` signifie que le match n'existe que si le vainqueur de la"
@@ -180,19 +187,19 @@ msgstr ""
 "first grand final, ``resolve`` marks ``gf.1`` as ``Skipped`` (hence "
 "``Done``) and the tournament ends."
 
-#: ../../source/format_tableaux.rst:151
+#: ../../source/format_tableaux.rst:154
 msgid "Application du tirage"
 msgstr "Applying the draw"
 
-#: ../../source/format_tableaux.rst:157
+#: ../../source/format_tableaux.rst:160
 msgid "Pour ``bracket`` et ``lives_bracket`` :"
 msgstr "For ``bracket`` and ``lives_bracket``:"
 
-#: ../../source/format_tableaux.rst:166
+#: ../../source/format_tableaux.rst:169
 msgid "Proposition"
 msgstr "Proposal"
 
-#: ../../source/format_tableaux.rst:188
+#: ../../source/format_tableaux.rst:191
 #, no-python-brace-format
 msgid ""
 "Les libellés des nœuds sont des codes : ``final``, ``semi_final``, "
@@ -207,7 +214,7 @@ msgstr ""
 " label in ``Sub``) in the last chance; ``grand_final`` and "
 "``grand_final_recharge`` in the grand final."
 
-#: ../../source/format_tableaux.rst:193
+#: ../../source/format_tableaux.rst:196
 msgid ""
 "Toutes les sections sont proposées en parallèle : consolante, dernière "
 "chance et principal avancent simultanément dès que les places sont "
@@ -217,55 +224,55 @@ msgstr ""
 "bracket advance simultaneously as soon as the places are known and the "
 "players are free."
 
-#: ../../source/format_tableaux.rst:197
+#: ../../source/format_tableaux.rst:200
 msgid "Classement d'un tableau"
 msgstr "Bracket standings"
 
-#: ../../source/format_tableaux.rst:203
+#: ../../source/format_tableaux.rst:206
 msgid "Priorité des sections, par genre (plus haut = mieux classé) :"
 msgstr "Section priority, by kind (higher = better ranked):"
 
-#: ../../source/format_tableaux.rst:206
+#: ../../source/format_tableaux.rst:209
 msgid "Section"
 msgstr "Section"
 
-#: ../../source/format_tableaux.rst:206
+#: ../../source/format_tableaux.rst:209
 msgid "``prio``"
 msgstr "``prio``"
 
-#: ../../source/format_tableaux.rst:208
+#: ../../source/format_tableaux.rst:211
 msgid "``gf`` (grande finale)"
 msgstr "``gf`` (grand final)"
 
-#: ../../source/format_tableaux.rst:208
+#: ../../source/format_tableaux.rst:211
 msgid "4"
 msgstr "4"
 
-#: ../../source/format_tableaux.rst:209
+#: ../../source/format_tableaux.rst:212
 msgid "``main``, ``se``"
 msgstr "``main``, ``se``"
 
-#: ../../source/format_tableaux.rst:209
+#: ../../source/format_tableaux.rst:212
 msgid "3"
 msgstr "3"
 
-#: ../../source/format_tableaux.rst:210
+#: ../../source/format_tableaux.rst:213
 msgid "``conso``"
 msgstr "``conso``"
 
-#: ../../source/format_tableaux.rst:210
+#: ../../source/format_tableaux.rst:213
 msgid "2"
 msgstr "2"
 
-#: ../../source/format_tableaux.rst:211
+#: ../../source/format_tableaux.rst:214
 msgid "``last``"
 msgstr "``last``"
 
-#: ../../source/format_tableaux.rst:211
+#: ../../source/format_tableaux.rst:214
 msgid "1"
 msgstr "1"
 
-#: ../../source/format_tableaux.rst:251
+#: ../../source/format_tableaux.rst:254
 msgid ""
 "La règle (1) est contre-intuitive mais essentielle : **un joueur est "
 "classé par sa dernière sortie**, c'est-à-dire par la section de plus "
@@ -279,7 +286,7 @@ msgstr ""
 "then in the consolation final is ranked on their consolation performance,"
 " not on their elimination from the main bracket."
 
-#: ../../source/format_tableaux.rst:256
+#: ../../source/format_tableaux.rst:259
 msgid ""
 "Un joueur **retiré** est classé comme s'il perdait chacun de ses matchs "
 "restants : le match qu'il perd par forfait (walkover résolu contre lui) "
@@ -309,7 +316,7 @@ msgstr ""
 " \"running\". Withdrawn without having played, they are ranked with the "
 "losers of their first match."
 
-#: ../../source/format_tableaux.rst:266
+#: ../../source/format_tableaux.rst:269
 msgid ""
 "Le score 5000 attribué aux joueurs en cours (``running``) les place "
 "**devant tout le monde** : c'est voulu, puisque le classement "
@@ -319,7 +326,7 @@ msgstr ""
 "**ahead of everyone**: this is intended, since the interim standings must"
 " show the players still in contention at the top."
 
-#: ../../source/format_tableaux.rst:269
+#: ../../source/format_tableaux.rst:272
 msgid ""
 "La note ``section_exit`` dit où un joueur est **sorti d'une section**, "
 "pas qu'il est éliminé : le perdant du principal reversé en consolante la "
@@ -338,7 +345,7 @@ msgstr ""
 "(``State.Statuses``, see :ref:`statut`), which says they are in play, in "
 "consolation."
 
-#: ../../source/format_tableaux.rst:276
+#: ../../source/format_tableaux.rst:279
 msgid ""
 "Le classement PROPRE d'une section (``SectionRanking``, sur lequel se "
 "répartit sa dotation) est décrit dans :ref:`classement`."
@@ -346,6 +353,23 @@ msgstr ""
 "The section's OWN standings (``SectionRanking``, on which its prize "
 "distribution is split) are described in :ref:`classement`."
 
-#: ../../source/format_tableaux.rst:280
+#: ../../source/format_tableaux.rst:283
 msgid "Survivants d'un tableau"
 msgstr "Bracket survivors"
+
+#~ msgid ""
+#~ "Le tirage est aléatoire par défaut. "
+#~ "Avec ``seeding: \"rating\"`` "
+#~ "(``PhaseConfig.Seeding``, seule valeur admise "
+#~ "par ``Config.Validate`` hormis le vide, "
+#~ "et réservée aux tableaux), le hasard "
+#~ "cède la place au placement classique "
+#~ "par cote :"
+#~ msgstr ""
+#~ "The draw is random by default. "
+#~ "With ``seeding: \"rating\"`` "
+#~ "(``PhaseConfig.Seeding``, the only value "
+#~ "accepted by ``Config.Validate`` besides empty,"
+#~ " and reserved for brackets), chance "
+#~ "gives way to the classic placement "
+#~ "by rating:"

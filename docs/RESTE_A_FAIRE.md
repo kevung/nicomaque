@@ -92,9 +92,10 @@ où intervenir et comment vérifier.
   restent, y compris en tête ; `PhaseConfig.Tiebreak` (issue #3) les départage en option —
   différence de points de match plafonnés, points marqués, Buchholz — et reste VIDE par défaut.
   Le départage des poules à la place du barrage est dans l'issue #8. `pairing: "monrad"`
-  (issue #4) tire l'adversaire au sort dans le groupe de mêmes points, avec flotteurs ;
-  `monrad_widen` (éteint par défaut) élargit le dernier groupe pour éviter une revanche. Restent
-  l'accélération #5 et les têtes de série saisies #6.
+  (issue #4) tire l'adversaire au sort dans le groupe de mêmes points, avec flotteurs.
+  `seeding: "seed"` (issue #6) place par tête de série SAISIE (`Player.Seed`) dans les tableaux
+  et plie la ronde 1 du suisse classique. Restent l'accélération #5, le serpentin des poules #8
+  et la colonne `seed` du CSV des joueurs.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que
   d'autres n'en ont pas eu » entre groupes différents (aujourd'hui par groupe). `pairGroup`.

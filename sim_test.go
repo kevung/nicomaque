@@ -46,6 +46,11 @@ func configs() map[string]tournoi.Config {
 		"monrad_tableau": {Name: "Monrad puis tableau", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Pairing: tournoi.PairingMonrad},
 			{Kind: tournoi.KindBracket, Length: 9, Entry: "top:8"}}},
+		// sim.Champ ne numérote personne : les têtes saisies retombent sur l'ordre d'inscription.
+		"elim_tetes_saisies": {Name: "Tableau à têtes de série saisies", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindBracket, Length: 9, Consolation: true, Seeding: tournoi.SeedingManual}}},
+		"suisse_classique_tetes": {Name: "Suisse classique à têtes de série puis tableau", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 4, Seeding: tournoi.SeedingRating},
+			{Kind: tournoi.KindBracket, Length: 9, Entry: "top:4", Seeding: tournoi.SeedingRating}}},
 		"gsl": {Name: "Blocs GSL", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindGSL, Length: 7}}},
 		"gsl_tableau16": {Name: "GSL puis tableau", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindGSL, Length: 7, Target: 16},

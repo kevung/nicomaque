@@ -22,7 +22,8 @@ Règles
   n'en ont pas eu » s'applique à l'intérieur d'un groupe de même nombre de défaites, pas entre
   groupes.
 - **Suisse classique** (``swiss_rounds``) : sans ``tiebreak``, les joueurs à égalité de points
-  restent ex æquo, y compris en tête ; l'ordre de la ronde 1 est tiré au sort. Le départage
+  restent ex æquo, y compris en tête. Les têtes de série saisies ne s'appliquent pas aux poules
+  (tirées au sort) et ne se lisent pas dans le CSV des joueurs. Le départage
   arithmétique ne s'applique pas aux poules, qui se règlent par barrage.
 - **Consolante et dernière chance** : pas d'option de saut (perdants du premier tour seulement,
   entrée jusqu'au tour *k*, consolante à tirage avec heure limite d'entrée).

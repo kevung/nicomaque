@@ -173,16 +173,18 @@ Signification des champs de phase
 |                    |                                | avec leurs vies restantes si la phase est  |
 |                    |                                | à vies), ``all``, ``top:N``                |
 +--------------------+--------------------------------+--------------------------------------------+
-| ``seeding``        | ``bracket``, ``lives_bracket`` | ``""`` (défaut) : tirage intégralement     |
-|                    |                                | aléatoire. ``"rating"`` : placement        |
+| ``seeding``        | ``bracket``, ``lives_bracket``,| ``""`` (défaut) : tirage intégralement     |
+|                    | ``swiss_rounds``               | aléatoire. ``"rating"`` : placement        |
 |                    |                                | classique par cote d'entrée (1 contre 16,  |
 |                    |                                | 2 contre 15… ; ``rules.SeedOrder``), les   |
-|                    |                                | joueurs à 2 vies d'abord. **Le défaut vide |
+|                    |                                | joueurs à 2 vies d'abord. ``"seed"`` : le  |
+|                    |                                | même placement, par tête de série saisie   |
+|                    |                                | (``Player.Seed``). Sur ``swiss_rounds`` :  |
+|                    |                                | la ronde 1 est pliée. **Le défaut vide     |
 |                    |                                | est un choix de conception**, pas un       |
 |                    |                                | oubli : l'étude conclut « pas de têtes de  |
 |                    |                                | série protégées », c'est la culture du     |
-|                    |                                | backgammon. Refusé sur un format sans      |
-|                    |                                | tirage de tableau                          |
+|                    |                                | backgammon. Refusé sur les autres formats  |
 +--------------------+--------------------------------+--------------------------------------------+
 | ``tiebreak``       | ``swiss_rounds``               | Départage arithmétique des ex æquo :       |
 |                    |                                | liste de ``point_diff``,                   |
@@ -228,6 +230,7 @@ Algorithme :
              si p.Lives saisi                      → erreur (personne n'est éliminé)
              p.Mode = "rounds"
              si un critère de p.Tiebreak est inconnu ou répété → erreur
+             si p.Seeding ∉ {"", "rating", "seed"} → erreur « seeding inconnu »
          swiss_lives :
              si p.Lives <= 0                       → p.Lives = 2
              si p.Mode == ""                       → p.Mode = "continuous"
@@ -240,7 +243,7 @@ Algorithme :
              si p.BatchMinutes > 0 et p.Mode == "rounds" → erreur
                    « une ronde EST un lot »
          lives_bracket, bracket :
-             si p.Seeding ∉ {"", "rating"}         → erreur « seeding inconnu »
+             si p.Seeding ∉ {"", "rating", "seed"} → erreur « seeding inconnu »
              si p.Recharge et non p.Reconciliation → erreur « recharge sans reconciliation »
              si p.Reconciliation et non p.Consolation → erreur « reconciliation sans consolante »
          gsl :
@@ -254,7 +257,7 @@ Algorithme :
 
        si p.Entry == ""  → p.Entry = "survivors"
        si p.BatchMinutes != 0 et p.Kind != swiss_lives → erreur
-       si p.Seeding != "" et p.Kind ∉ {bracket, lives_bracket} → erreur
+       si p.Seeding != "" et p.Kind ∉ {bracket, lives_bracket, swiss_rounds} → erreur
        si p.Tiebreak non vide et p.Kind != swiss_rounds        → erreur
 
 ``Entry`` n'est pas vérifiée : une valeur inconnue fait entrer les survivants, mais avec les vies

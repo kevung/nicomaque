@@ -20,6 +20,9 @@ type Player struct {
 	Name   string   `json:"name"`
 	Club   string   `json:"club,omitempty"`
 	Rating float64  `json:"rating,omitempty"` // PR (plus bas = meilleur) ; 0 = inconnu
+	// Seed : tête de série SAISIE par l'organisateur (1 = la meilleure) ; 0 = aucune, derrière
+	// toutes les autres dans l'ordre d'inscription. Lue seulement par seeding: "seed".
+	Seed int `json:"seed,omitempty"`
 }
 
 // MatchID identifie un match dans le tournoi.
