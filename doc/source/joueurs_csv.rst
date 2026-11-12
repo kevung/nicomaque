@@ -27,7 +27,9 @@ Import souple destiné aux exports HelloAsso, FFBG ou tableur :
 - une ligne sans nom est ignorée ;
 - l'identifiant est la colonne ``id`` si elle est renseignée, sinon un **slug** du nom ; en cas de
   collision, l'identifiant devient le slug du nom suivi de ``-2``, ``-3``\ … ;
-- le PR accepte la virgule décimale ; une valeur illisible laisse ``Rating`` à 0.
+- le PR accepte la virgule décimale ; une valeur illisible laisse ``Rating`` à 0 ;
+- le pays (``pays``, ``country``) et la tête de série saisie (``tête de série``, ``tête``,
+  ``seed`` ; un entier positif, sinon aucune) sont lus s'ils sont là.
 
 Le slug conserve les minuscules ASCII, les chiffres et les caractères non-ASCII (donc les lettres
 accentuées), remplace espace, tiret, souligné et apostrophe par un tiret, supprime le reste, puis
@@ -43,3 +45,6 @@ qu'un organisateur ouvre dans un tableur. Une cote inconnue (0) sort en cellule 
 « 0 » qui se lirait comme un joueur parfait ; elle revient à 0 à la relecture. Une colonne ``id`` n'est ajoutée en tête que si elle est **nécessaire** : quand au moins un
 identifiant diffère de celui que ``FromCSV`` dériverait du nom (slug, avec les mêmes suffixes de
 collision), pour qu'un identifiant venu d'ailleurs ne se perde pas.
+
+Les colonnes ``pays`` et ``tête de série`` ne sont ajoutées, à la fin, que si un joueur au moins
+en porte.

@@ -43,18 +43,24 @@ type PhaseRules struct {
 	Pairing       string `json:"pairing,omitempty"`
 	// MonradWiden : Monrad, le dernier groupe s'élargit aux groupes d'au-dessus tant que cela
 	// évite une revanche. Éteint : la revanche du dernier groupe est jouée.
-	MonradWiden    bool   `json:"monrad_widen,omitempty"`
-	AvoidClubs     bool   `json:"avoid_clubs,omitempty"`
-	AllowRematch   bool   `json:"allow_rematch,omitempty"`
-	Target         int    `json:"target,omitempty"` // suisse, GSL : la phase s'arrête quand Σ vies ≤ Target
-	Consolation    bool   `json:"consolation,omitempty"`
-	LastChance     bool   `json:"last_chance,omitempty"`
-	Reconciliation bool   `json:"reconciliation,omitempty"`
-	Recharge       bool   `json:"recharge,omitempty"`
-	GroupSize      int    `json:"group_size,omitempty"`
-	Groups         int    `json:"groups,omitempty"` // poules : nombre de poules, à la place de GroupSize
-	Qualifiers     int    `json:"qualifiers,omitempty"`
-	Seeding        string `json:"seeding,omitempty"`
+	MonradWiden bool `json:"monrad_widen,omitempty"`
+	AvoidClubs  bool `json:"avoid_clubs,omitempty"`
+	// AvoidCountries : comme AvoidClubs, pour le pays. AvoidRounds : suisse classique, la
+	// préférence (club, pays) ne vaut que jusqu'à cette ronde ; 0 = toutes. AvoidExcept : clubs
+	// sortis de la comparaison (le club hôte, que tous partagent).
+	AvoidCountries bool     `json:"avoid_countries,omitempty"`
+	AvoidRounds    int      `json:"avoid_rounds,omitempty"`
+	AvoidExcept    []string `json:"avoid_except,omitempty"`
+	AllowRematch   bool     `json:"allow_rematch,omitempty"`
+	Target         int      `json:"target,omitempty"` // suisse, GSL : la phase s'arrête quand Σ vies ≤ Target
+	Consolation    bool     `json:"consolation,omitempty"`
+	LastChance     bool     `json:"last_chance,omitempty"`
+	Reconciliation bool     `json:"reconciliation,omitempty"`
+	Recharge       bool     `json:"recharge,omitempty"`
+	GroupSize      int      `json:"group_size,omitempty"`
+	Groups         int      `json:"groups,omitempty"` // poules : nombre de poules, à la place de GroupSize
+	Qualifiers     int      `json:"qualifiers,omitempty"`
+	Seeding        string   `json:"seeding,omitempty"`
 	// Tiebreak : départage arithmétique des ex æquo d'un suisse classique ou d'une poule. Vide :
 	// aucun.
 	Tiebreak []string `json:"tiebreak,omitempty"`
@@ -78,6 +84,7 @@ type Entrant struct {
 	PointsAgainst int     `json:"points_against,omitempty"`
 	Played        []Ref   `json:"played,omitempty"`
 	Club          string  `json:"club,omitempty"`
+	Country       string  `json:"country,omitempty"`
 	Rating        float64 `json:"rating,omitempty"` // PR, plus bas = meilleur ; 0 = inconnu
 	Seed          int     `json:"seed,omitempty"`   // tête de série saisie, 1 = la meilleure ; 0 = aucune
 	// TopHalf : suisse accéléré, le joueur est de la moitié haute, figée à la ronde 1. L'hôte

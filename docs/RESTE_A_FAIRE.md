@@ -99,7 +99,9 @@ où intervenir et comment vérifier.
   haute aux rondes 1 et 2. `groups` fixe le nombre de poules et `seeding` les compose en serpentin
   (issue #8) ; avec `tiebreak` une poule est classée par le départage, le barrage ne restant que
   pour une égalité complète, et des poules en dernière phase désignent un seul vainqueur par le
-  barrage final (`barrage:final`). Reste la colonne `seed` du CSV des joueurs.
+  barrage final (`barrage:final`). `avoid_countries`, `avoid_rounds` et `avoid_except` (issue #14)
+  étendent `avoid_clubs` au pays, le bornent aux premières rondes et en sortent le club hôte ; le
+  CSV des joueurs lit et écrit le pays et la tête de série.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que
   d'autres n'en ont pas eu » entre groupes différents (aujourd'hui par groupe). `pairGroup`.

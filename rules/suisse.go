@@ -3,6 +3,7 @@ package rules
 import (
 	"math/rand"
 	"sort"
+	"strings"
 )
 
 // ---- Suisse à vies : appariement dans le groupe de même nombre de défaites ----
@@ -41,9 +42,31 @@ func (v *vue) met(a, b Ref) bool {
 	return false
 }
 
+// sameClub : a et b partagent une affinité que la configuration demande d'éviter — le club
+// (avoid_clubs, hors clubs de avoid_except), le pays (avoid_countries, sans égard à la casse).
+// Une valeur vide n'est partagée avec personne.
 func (v *vue) sameClub(a, b Ref) bool {
-	ca, cb := v.entrant(a).Club, v.entrant(b).Club
-	return ca != "" && ca == cb
+	ea, eb := v.entrant(a), v.entrant(b)
+	if v.Rules.AvoidClubs && ea.Club != "" && ea.Club == eb.Club {
+		exclu := false
+		for _, c := range v.Rules.AvoidExcept {
+			exclu = exclu || c == ea.Club
+		}
+		if !exclu {
+			return true
+		}
+	}
+	pa, pb := strings.TrimSpace(ea.Country), strings.TrimSpace(eb.Country)
+	return v.Rules.AvoidCountries && pa != "" && strings.EqualFold(pa, pb)
+}
+
+// évite : la préférence de club ou de pays joue pour la ronde à apparier (Round + 1), bornée
+// par avoid_rounds.
+func (v *vue) évite() bool {
+	if !v.Rules.AvoidClubs && !v.Rules.AvoidCountries {
+		return false
+	}
+	return v.Rules.AvoidRounds == 0 || v.Round+1 <= v.Rules.AvoidRounds
 }
 
 func sortedRefs(ids []Ref) []Ref {
@@ -68,7 +91,7 @@ func (v *vue) pairGroup(g []Ref, rng *rand.Rand, allowRematch bool) (pairs [][2]
 		libres = libres[1:]
 		found := -1
 		passes := []bool{false}
-		if v.Rules.AvoidClubs {
+		if v.évite() {
 			passes = []bool{true, false}
 		}
 		for _, exigerClub := range passes {
