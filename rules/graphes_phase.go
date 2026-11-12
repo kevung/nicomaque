@@ -540,7 +540,11 @@ func (v *vue) finale() bool { return v.Last && v.Rules.FinalBarrage }
 // joueurs non retirés à la meilleure clé de leur poule, moins ceux que le barrage de la poule a
 // écartés. Plus d'un : ils se départagent sur le tapis, par le barrage final, à une place. nil
 // tant que les poules et leurs barrages ne sont pas finis, et hors de ce cas.
-func (v *vue) finalistes() []Ref {
+func (v *vue) finalistes() []Ref { return v.premiers(false) }
+
+// premiers : les finalistes ; avecRetirés les désigne sur les seuls résultats, un retiré
+// gardant sa place en tête de poule (ce que le tirage du barrage final a vu, à un retrait près).
+func (v *vue) premiers(avecRetirés bool) []Ref {
 	if !v.finale() || !v.Drawn {
 		return nil
 	}
@@ -574,7 +578,7 @@ func (v *vue) finalistes() []Ref {
 		}
 		var tête *clé
 		for _, p := range ids {
-			if v.withdrawn[p] || écartés[p] {
+			if !avecRetirés && v.withdrawn[p] || écartés[p] {
 				continue
 			}
 			if tête == nil {
@@ -839,11 +843,15 @@ func StaleBarrages(p Phase) []string {
 		if bs.Kind != SectionBarrage {
 			continue
 		}
-		var attendus []Ref
+		var attendus, promus []Ref
 		if bs.Name == FinalBarrageName {
-			if attendus = v.finalistes(); attendus == nil {
+			// Sur les seuls résultats : sans cela le retrait d'un finaliste promouvrait le
+			// suivant de sa poule, absent du tirage, et l'avertissement se lèverait sans correction.
+			if attendus = v.premiers(true); attendus == nil {
 				continue
 			}
+			// Retrait AVANT le tirage : le suivant de la poule a été tiré à bon droit.
+			promus = v.premiers(false)
 		} else {
 			for j := range v.Sections {
 				if pool := v.Sections[j]; pool.Kind == SectionPool && BarrageSectionName(pool.Name) == bs.Name {
@@ -851,7 +859,7 @@ func StaleBarrages(p Phase) []string {
 				}
 			}
 		}
-		a, b := map[Ref]bool{}, map[Ref]bool{}
+		a, b, promu := map[Ref]bool{}, map[Ref]bool{}, map[Ref]bool{}
 		for _, x := range attendus {
 			a[x] = !v.withdrawn[x]
 		}
@@ -862,8 +870,14 @@ func StaleBarrages(p Phase) []string {
 		for x, ok := range a {
 			stale = stale || ok && !b[x]
 		}
+		for _, x := range promus {
+			if _, vu := a[x]; !vu {
+				a[x] = false // admis dans le tirage, pas exigé
+				promu[x] = true
+			}
+		}
 		for x, ok := range b {
-			stale = stale || ok && !a[x]
+			stale = stale || ok && !a[x] && !promu[x]
 		}
 		if stale {
 			out = append(out, bs.Name)
