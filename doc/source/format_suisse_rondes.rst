@@ -63,6 +63,11 @@ candidat ou à la limite suivante : un grand champ ne bloque jamais.
 ``avoid_clubs`` est une **préférence** : à nombre de revanches égal, un appariement sans rencontre
 de club est essayé d'abord ; il n'est jamais payé d'une revanche.
 
+``avoid_countries`` fait de même pour le pays (``Player.Country``, sans égard à la casse), et les
+deux options se cumulent. ``avoid_except`` sort des clubs de la comparaison — le club hôte, que
+tout le monde partage. ``avoid_rounds: N`` borne ces préférences aux N premières rondes : la ronde
+N + 1 s'apparie au classement seul. Un club ou un pays vide n'est partagé avec personne.
+
 Un joueur seul à apparier (les autres absents ou retirés) est exempté.
 
 Têtes de série (``seeding``)

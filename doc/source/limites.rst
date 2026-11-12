@@ -22,8 +22,7 @@ Règles
   n'en ont pas eu » s'applique à l'intérieur d'un groupe de même nombre de défaites, pas entre
   groupes.
 - **Suisse classique** (``swiss_rounds``) : sans ``tiebreak``, les joueurs à égalité de points
-  restent ex æquo, y compris en tête. Les têtes de série saisies ne se lisent pas dans le CSV des
-  joueurs.
+  restent ex æquo, y compris en tête.
 - **Consolante et dernière chance** : pas d'option de saut (perdants du premier tour seulement,
   entrée jusqu'au tour *k*, consolante à tirage avec heure limite d'entrée).
 - **Revanches en consolante** : l'ordre inversé d'entrée évite la revanche immédiate, pas les

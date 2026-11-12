@@ -17,6 +17,7 @@ Identifiants et joueurs
        ID     PlayerID `json:"id"`
        Name   string   `json:"name"`
        Club   string   `json:"club,omitempty"`
+       Country string  `json:"country,omitempty"` // pays, lu par avoid_countries
        Rating float64  `json:"rating,omitempty"` // PR (plus bas = meilleur) ; 0 = inconnu
        Seed   int      `json:"seed,omitempty"`   // tête de série saisie (1 = la meilleure) ; 0 = aucune
    }

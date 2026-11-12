@@ -286,7 +286,7 @@ func (v *vue) monradAvecQueue(g []Ref, bornes []int) (pairs [][2]Ref, bye Ref) {
 // c'est possible (avoid_clubs).
 func (v *vue) sansRevanche(groupe []Ref) ([][2]Ref, bool) {
 	passes := []bool{false}
-	if v.Rules.AvoidClubs {
+	if v.évite() {
 		passes = []bool{true, false}
 	}
 	for _, sansClub := range passes {
@@ -319,7 +319,7 @@ func (v *vue) pairNearest(ordre []Ref, exempter bool) (pairs [][2]Ref, bye Ref) 
 	// Le club est une préférence : on l'essaie d'abord, à nombre de revanches égal, et on y
 	// renonce plutôt que de créer une revanche.
 	passes := []bool{false}
-	if v.Rules.AvoidClubs {
+	if v.évite() {
 		passes = []bool{true, false}
 	}
 	for limite := 0; limite <= len(ordre)/2; limite++ {

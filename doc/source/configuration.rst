@@ -64,6 +64,9 @@ Structures
        Mode           string `json:"mode,omitempty"`
        Pairing        string `json:"pairing,omitempty"`
        AvoidClubs     bool   `json:"avoid_clubs,omitempty"`
+       AvoidCountries bool   `json:"avoid_countries,omitempty"`
+       AvoidRounds    int    `json:"avoid_rounds,omitempty"`
+       AvoidExcept    []string `json:"avoid_except,omitempty"`
        AllowRematch   bool   `json:"allow_rematch,omitempty"`
        Target         int    `json:"target,omitempty"`
        Consolation    bool   `json:"consolation,omitempty"`
@@ -149,6 +152,15 @@ Signification des champs de phase
 +--------------------+--------------------------------+--------------------------------------------+
 | ``avoid_clubs``    | les deux suisses               | Éviter les rencontres entre joueurs d'un   |
 |                    |                                | même club quand c'est possible             |
++--------------------+--------------------------------+--------------------------------------------+
+| ``avoid_countries``| les deux suisses               | Éviter les rencontres entre joueurs d'un   |
+|                    |                                | même pays quand c'est possible             |
++--------------------+--------------------------------+--------------------------------------------+
+| ``avoid_rounds``   | ``swiss_rounds``               | Dernière ronde où ``avoid_clubs`` et       |
+|                    |                                | ``avoid_countries`` jouent ; 0 = toutes    |
++--------------------+--------------------------------+--------------------------------------------+
+| ``avoid_except``   | les deux suisses               | Clubs sortis de la comparaison de          |
+|                    |                                | ``avoid_clubs`` (le club hôte)             |
 +--------------------+--------------------------------+--------------------------------------------+
 | ``allow_rematch``  | ``swiss_lives``                | Autoriser une seconde rencontre entre deux |
 |                    |                                | mêmes joueurs                              |

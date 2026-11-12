@@ -80,15 +80,22 @@ type PhaseConfig struct {
 	// MonradWiden : Monrad seulement. Quand le dernier groupe de points ne s'apparie qu'au prix
 	// d'une revanche, il s'élargit au groupe d'au-dessus, puis au suivant, tant que cela en évite
 	// une. Éteint par défaut : le Monrad joue alors la revanche du dernier groupe.
-	MonradWiden    bool `json:"monrad_widen,omitempty"`
-	AvoidClubs     bool `json:"avoid_clubs,omitempty"` // éviter les joueurs du même club quand c'est possible
-	AllowRematch   bool `json:"allow_rematch,omitempty"`
-	Target         int  `json:"target,omitempty"`         // swiss_lives / gsl : figer quand la somme des vies vaut Target (puissance de 2)
-	Consolation    bool `json:"consolation,omitempty"`    // bracket : consolante progressive (perdants du tableau principal)
-	LastChance     bool `json:"last_chance,omitempty"`    // bracket : dernière chance (perdants de la consolante)
-	Reconciliation bool `json:"reconciliation,omitempty"` // bracket : le vainqueur de la consolante joue le vainqueur du principal (double élimination)
-	Recharge       bool `json:"recharge,omitempty"`       // bracket : en double élimination, le vainqueur du principal doit être battu deux fois
-	GroupSize      int  `json:"group_size,omitempty"`     // round_robin : taille des poules (défaut 4)
+	MonradWiden bool `json:"monrad_widen,omitempty"`
+	AvoidClubs  bool `json:"avoid_clubs,omitempty"` // éviter les joueurs du même club quand c'est possible
+	// AvoidCountries : éviter les joueurs du même pays (Player.Country) quand c'est possible,
+	// comme avoid_clubs. AvoidRounds : sur un suisse classique, ces préférences ne valent que
+	// jusqu'à cette ronde (0 = toutes). AvoidExcept : clubs sortis de la comparaison — le club
+	// hôte, que tout le monde partage.
+	AvoidCountries bool     `json:"avoid_countries,omitempty"`
+	AvoidRounds    int      `json:"avoid_rounds,omitempty"`
+	AvoidExcept    []string `json:"avoid_except,omitempty"`
+	AllowRematch   bool     `json:"allow_rematch,omitempty"`
+	Target         int      `json:"target,omitempty"`         // swiss_lives / gsl : figer quand la somme des vies vaut Target (puissance de 2)
+	Consolation    bool     `json:"consolation,omitempty"`    // bracket : consolante progressive (perdants du tableau principal)
+	LastChance     bool     `json:"last_chance,omitempty"`    // bracket : dernière chance (perdants de la consolante)
+	Reconciliation bool     `json:"reconciliation,omitempty"` // bracket : le vainqueur de la consolante joue le vainqueur du principal (double élimination)
+	Recharge       bool     `json:"recharge,omitempty"`       // bracket : en double élimination, le vainqueur du principal doit être battu deux fois
+	GroupSize      int      `json:"group_size,omitempty"`     // round_robin : taille des poules (défaut 4)
 	// Groups : round_robin, le NOMBRE de poules, à la place de leur taille (group_size) — une
 	// seule poule fait un toutes-rondes complet. Jamais plus d'une poule pour deux joueurs.
 	Groups     int `json:"groups,omitempty"`
@@ -270,6 +277,15 @@ func (c *Config) Validate() error {
 		}
 		if len(p.Tiebreak) != 0 && p.Kind != KindSwissRounds && p.Kind != KindRoundRobin {
 			return fmt.Errorf("phase %d : tiebreak ne s'applique qu'à %q et %q, pas à %q", i, KindSwissRounds, KindRoundRobin, p.Kind)
+		}
+		if p.AvoidRounds < 0 || p.AvoidRounds != 0 && (p.Kind != KindSwissRounds || !p.AvoidClubs && !p.AvoidCountries) {
+			return fmt.Errorf("phase %d : avoid_rounds borne avoid_clubs ou avoid_countries sur %q", i, KindSwissRounds)
+		}
+		if len(p.AvoidExcept) != 0 && !p.AvoidClubs {
+			return fmt.Errorf("phase %d : avoid_except sans avoid_clubs", i)
+		}
+		if p.AvoidCountries && p.Kind != KindSwissRounds && p.Kind != KindSwissLives {
+			return fmt.Errorf("phase %d : avoid_countries ne s'applique qu'aux suisses, pas à %q", i, p.Kind)
 		}
 		if p.BatchMinutes != 0 && p.Kind != KindSwissLives {
 			return fmt.Errorf("phase %d : batch_minutes ne s'applique qu'au suisse continu, pas à %q", i, p.Kind)
