@@ -18,6 +18,7 @@ indépendamment (champ ``version`` de chaque événement, voir :ref:`annexe_test
   entre premiers de poule en option (``final_barrage``), éteinte par défaut.
 - Évitement par pays (``avoid_countries``), borné aux premières rondes (``avoid_rounds``), club
   hôte exclu (``avoid_except``).
+- Phase à appariement manuel (``manual``) : le directeur pose les matchs, le moteur classe.
 - Un tournoi commencé sous 0.8.0 se poursuit à l'identique : mêmes propositions, mêmes statuts,
   même classement.
 - Une phase d'un seul entrant ne bloque plus le tournoi ; ``entry: "top:1"`` est refusé.

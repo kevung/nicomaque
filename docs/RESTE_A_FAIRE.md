@@ -104,6 +104,10 @@ où intervenir et comment vérifier.
   étendent `avoid_clubs` au pays, le bornent aux premières rondes et en sortent le club hôte ; le
   CSV des joueurs lit et écrit le pays et la tête de série. `half_bye` / `half_bye_cancelled`
   (issue #10) : demi-exemption annoncée avant la ronde, un demi-point, pas d'appariement.
+- [x] **Phase à appariement manuel** (issue #13). `KindManual` : `Propose` ne rend que l'attente
+  `manual` et, sans match en cours, le passage ou la clôture ; `ManualMatchEvent` et
+  `ManualByeEvent` posent une ronde, `manualCheck` (phase_manual.go) refuse le joueur hors phase,
+  retiré ou déjà placé dans la ronde. Une exemption posée ne se retire pas.
 - [ ] **Ronde de demi-exemptés seuls et barrage périmé** : une ronde dont tous les joueurs
   restants sont demi-exemptés attend (`no_pairing`) ; un barrage dont la poule est corrigée après
   le tirage n'est pas refait (avertissement `barrage_stale`). Les deux sont dans `limites.rst` ;

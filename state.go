@@ -284,6 +284,9 @@ func (s *State) Apply(ev Event) error {
 				return fmt.Errorf("joueur %s a déjà un match en cours", p)
 			}
 		}
+		if err := s.manualCheck(ev.Phase, ev.Round, ev.A, ev.B); err != nil {
+			return err
+		}
 		if ph := s.phaseOf(ev.Phase); ph != nil {
 			s.openRound(ph, ev.Round) // avant le match : ses deux joueurs sont encore libres
 		}
@@ -344,6 +347,9 @@ func (s *State) Apply(ev Event) error {
 		ph := s.phaseOf(ev.Phase)
 		if ph == nil {
 			return fmt.Errorf("phase %d inconnue", ev.Phase)
+		}
+		if err := s.manualCheck(ev.Phase, ev.Round, ev.ID); err != nil {
+			return err
 		}
 		s.openRound(ph, ev.Round)
 		ph.Byes[ev.ID]++
@@ -499,7 +505,7 @@ func (s *State) entryLives(next, prev *PhaseState, p PlayerID) int {
 		return livesFor(next.Cfg)
 	}
 	// Un suisse classique n'a pas de vies à transmettre : celles qu'il porte ne sont qu'un artifice.
-	if prev.Cfg.Kind == KindSwissRounds || (next.Cfg.Kind != KindLivesBracket && next.Cfg.Kind != KindGSL && next.Cfg.Kind != KindSwissLives) {
+	if noLives(prev.Cfg.Kind) || (next.Cfg.Kind != KindLivesBracket && next.Cfg.Kind != KindGSL && next.Cfg.Kind != KindSwissLives) {
 		return livesFor(next.Cfg)
 	}
 	return s.remainingLives(prev, p)
@@ -507,7 +513,7 @@ func (s *State) entryLives(next, prev *PhaseState, p PlayerID) int {
 
 func livesFor(cfg PhaseConfig) int {
 	switch cfg.Kind {
-	case KindSwissRounds:
+	case KindSwissRounds, KindManual:
 		return swissRoundsLives
 	case KindSwissLives:
 		return cfg.Lives

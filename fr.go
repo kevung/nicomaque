@@ -218,6 +218,8 @@ func (r ReasonCode) String() string {
 		return "matchs en cours"
 	case ReasonNoPairing:
 		return "aucun appariement possible"
+	case ReasonManual:
+		return "appariement manuel : au directeur de poser les matchs"
 	case ReasonWaitingBatch:
 		return "appariement au prochain lot"
 	case ReasonWaitingTable:
@@ -318,6 +320,8 @@ func PhaseName(p PhaseConfig) string {
 		return fmt.Sprintf("Suisse %d vies", p.Lives)
 	case KindSwissRounds:
 		return fmt.Sprintf("Suisse en %d rondes", p.Rounds)
+	case KindManual:
+		return "Appariement manuel"
 	case KindLivesBracket:
 		return "Tableau final"
 	case KindGSL:

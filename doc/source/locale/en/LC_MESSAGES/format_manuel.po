@@ -1,0 +1,125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-12 14:39+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/format_manuel.rst:4
+msgid "Appariement manuel (``manual``)"
+msgstr "Manual pairing (``manual``)"
+
+#: ../../source/format_manuel.rst:7
+msgid "Principe"
+msgstr "Principle"
+
+#: ../../source/format_manuel.rst:9
+msgid ""
+"Dans une phase ``manual`` le moteur ne propose **aucun appariement** : le"
+" directeur pose chaque match et chaque exemption, ronde par ronde, et "
+"décide de la fin de la phase. Personne n'est éliminé ; le classement est "
+"celui des **points** — une victoire vaut un point, une exemption aussi —,"
+" les ex æquo le restent, et ``tiebreak`` les départage comme au suisse "
+"classique (:ref:`format_suisse_rondes`)."
+msgstr ""
+"In a ``manual`` phase the engine proposes **no pairing**: the director "
+"places every match and every bye, round by round, and decides when the "
+"phase ends. Nobody is eliminated; the ranking is by **points** — a win is"
+" worth one point, and so is a bye —, tied players stay tied, and "
+"``tiebreak`` separates them as in the classic Swiss "
+"(:ref:`format_suisse_rondes`)."
+
+#: ../../source/format_manuel.rst:16
+msgid "Poser une ronde"
+msgstr "Placing a round"
+
+#: ../../source/format_manuel.rst:23
+msgid ""
+"``ManualMatchEvent`` rend un ``match_started`` et ``ManualByeEvent`` un "
+"``bye``, tous deux dans la ronde ``round`` de la phase courante. Une "
+"ronde s'ouvre en y posant un premier match ou une première exemption : "
+"``round`` vaut de 1 à la dernière ronde ouverte plus un. Une ronde peut "
+"rester partielle, et une ronde antérieure peut encore être complétée."
+msgstr ""
+"``ManualMatchEvent`` returns a ``match_started`` and ``ManualByeEvent`` a"
+" ``bye``, both in round ``round`` of the current phase. A round opens "
+"when a first match or a first bye is placed in it: ``round`` goes from 1 "
+"to the last open round plus one. A round may stay partial, and an earlier"
+" round can still be completed."
+
+#: ../../source/format_manuel.rst:28
+msgid "``Apply`` ne refuse que ce qui rendrait la ronde incohérente :"
+msgstr "``Apply`` refuses only what would make the round inconsistent:"
+
+#: ../../source/format_manuel.rst:30
+msgid "un match contre soi-même ;"
+msgstr "a match against oneself;"
+
+#: ../../source/format_manuel.rst:31
+msgid "un joueur qui n'est pas dans la phase, ou qui est retiré ;"
+msgstr "a player who is not in the phase, or who has withdrawn;"
+
+#: ../../source/format_manuel.rst:32
+msgid ""
+"un joueur déjà placé dans la ronde — par un match non annulé ou par une "
+"exemption ;"
+msgstr ""
+"a player already placed in the round — by a match that is not cancelled "
+"or by a bye;"
+
+#: ../../source/format_manuel.rst:33
+msgid "une ronde qui laisserait un trou dans la numérotation."
+msgstr "a round that would leave a gap in the numbering."
+
+#: ../../source/format_manuel.rst:35
+msgid ""
+"Un match posé par erreur s'annule (``match_cancelled``) : ses deux "
+"joueurs redeviennent libres dans la ronde. Une exemption posée ne se "
+"retire pas."
+msgstr ""
+"A match placed by mistake is cancelled (``match_cancelled``): its two "
+"players become free again in the round. A placed bye cannot be removed."
+
+#: ../../source/format_manuel.rst:39
+msgid "Propositions et fin de phase"
+msgstr "Proposals and end of phase"
+
+#: ../../source/format_manuel.rst:41
+msgid ""
+"``Propose`` rend l'attente ``manual`` et, dès qu'aucun match de la phase "
+"ne joue, le passage à la phase suivante (``next_phase``) ou la clôture "
+"(``finish``) — proposés, jamais imposés : c'est le directeur qui dit "
+"quand la phase est finie, y compris sans avoir posé aucun match. "
+"``rules.PhaseDone`` reste faux et ``rules.RemainingMatches`` rend zéro : "
+"le moteur ne sait pas ce que le directeur posera encore."
+msgstr ""
+"``Propose`` returns the ``manual`` wait and, as soon as no match of the "
+"phase is running, the move to the next phase (``next_phase``) or the "
+"closing (``finish``) — proposed, never imposed: the director says when "
+"the phase is over, even without having placed any match. "
+"``rules.PhaseDone`` stays false and ``rules.RemainingMatches`` returns "
+"zero: the engine does not know what the director will still place."
+
+#: ../../source/format_manuel.rst:47
+msgid ""
+"La phase suivante reçoit ses entrants comme après un suisse classique "
+"(``survivors`` : tous les joueurs non retirés ; ``top:N`` : les premiers "
+"du classement)."
+msgstr ""
+"The next phase receives its entrants as after a classic Swiss "
+"(``survivors``: all the players not withdrawn; ``top:N``: the first of "
+"the ranking)."

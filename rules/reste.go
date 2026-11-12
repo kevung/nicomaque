@@ -38,6 +38,8 @@ func RemainingMatches(p Phase) Remaining {
 		return v.resteVies()
 	case FormatSwissRounds:
 		return v.resteRondes()
+	case FormatManual:
+		return Remaining{} // le directeur seul sait ce qu'il posera encore
 	case FormatBracket, FormatLivesBracket:
 		if !p.Drawn {
 			if len(p.Entrants) < 2 {

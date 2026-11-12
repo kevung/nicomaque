@@ -189,7 +189,7 @@ func (v *statusView) of(p PlayerID) PlayerStatus {
 		return PlayerStatus{Player: p, Kind: StatusQualified, Phase: cur.Index}
 	}
 	switch cur.Cfg.Kind {
-	case KindSwissLives, KindGSL, KindSwissRounds:
+	case KindSwissLives, KindGSL, KindSwissRounds, KindManual:
 		if s.remainingLives(cur, p) == 0 {
 			return v.phaseOver(p)
 		}

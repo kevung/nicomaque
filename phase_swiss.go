@@ -30,7 +30,7 @@ func (s *State) swissDone(ph *PhaseState) bool {
 
 // swissKind : les deux suisses — à vies, ou classique à rondes fixes — partagent la mécanique
 // des rondes, des absences et des retardataires.
-func swissKind(k string) bool { return k == KindSwissLives || k == KindSwissRounds }
+func swissKind(k string) bool { return k == KindSwissLives || noLives(k) }
 
 // free : joueurs en vie sans match en cours, ni ici ni dans une autre épreuve de la salle, et
 // disponibles pour la ronde r (0 = hors rondes ; voir absence.go).

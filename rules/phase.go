@@ -14,6 +14,7 @@ const (
 	FormatBracket      Format = "bracket"       // élimination simple, consolante, dernière chance, double élimination
 	FormatRoundRobin   Format = "round_robin"   // poules toutes rondes, barrage entre ex æquo
 	FormatSwissRounds  Format = "swiss_rounds"  // suisse classique : nombre de rondes fixe, sans vies
+	FormatManual       Format = "manual"        // appariement manuel : aucune proposition, classement aux points
 )
 
 // Valeurs de PhaseRules.
@@ -233,6 +234,8 @@ func PhaseDone(p Phase) bool {
 		return v.swissDone()
 	case FormatSwissRounds:
 		return v.roundsDone()
+	case FormatManual:
+		return false // elle finit quand le directeur le décide
 	case FormatGSL:
 		return v.gslDone()
 	case FormatRoundRobin:
@@ -276,6 +279,8 @@ type Pairing struct {
 func Pair(p Phase, seed Seed) []Pairing {
 	v := voir(&p)
 	switch p.Format {
+	case FormatManual:
+		return nil
 	case FormatSwissLives, FormatSwissRounds:
 		return v.pairSwiss(seed)
 	case FormatGSL:

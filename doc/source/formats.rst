@@ -23,6 +23,10 @@ suivante est à vies.
      - Suisse classique
      - Nombre de rondes fixe, personne n'est éliminé, classement aux points. Variante nommée :
        sans départage, les ex æquo le restent, y compris en tête.
+   * - ``manual``
+     - Appariement manuel
+     - Le moteur ne propose aucun match : le directeur pose chaque match et chaque exemption,
+       ronde par ronde, et décide de la fin. Classement aux points.
    * - ``lives_bracket``
      - Tableau à vies
      - Élimination directe où un joueur arrivé avec 2 vies est exempt du premier tour. Suite
@@ -47,6 +51,7 @@ Les chapitres suivants décrivent chaque format jusqu'au niveau de l'algorithme 
 
    format_suisse
    format_suisse_rondes
+   format_manuel
    format_tableaux
    format_gsl
    format_poules
