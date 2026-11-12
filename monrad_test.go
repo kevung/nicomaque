@@ -15,8 +15,15 @@ func monrad(rondes int) tournoi.Config {
 }
 
 // TestMonradInvariants : ceux du suisse classique, plus ce qui fait le Monrad — un match oppose
-// deux joueurs de mêmes points, sauf flotteur (au plus un par groupe de points).
+// deux joueurs de mêmes points, sauf flotteur (au plus un par groupe de points). Sans
+// monrad_widen, le dernier groupe peut jouer une revanche ; avec, un champ large n'en joue aucune.
 func TestMonradInvariants(t *testing.T) {
+	for _, élargi := range []bool{false, true} {
+		monradInvariants(t, élargi)
+	}
+}
+
+func monradInvariants(t *testing.T, élargi bool) {
 	effectifs, graines := []int{2, 3, 5, 8, 13, 32, 64, 100}, 8
 	if testing.Short() {
 		effectifs, graines = []int{2, 3, 5, 8, 13, 32}, 3
@@ -24,8 +31,10 @@ func TestMonradInvariants(t *testing.T) {
 	for _, P := range effectifs {
 		for _, rondes := range []int{1, 4, 7} {
 			for k := 0; k < graines; k++ {
-				nom := fmt.Sprintf("P=%d rondes=%d graine=%d", P, rondes, k)
-				r, b := jouerRondes(t, monrad(rondes), P, int64(k))
+				nom := fmt.Sprintf("P=%d rondes=%d graine=%d élargi=%v", P, rondes, k, élargi)
+				cfg := monrad(rondes)
+				cfg.Phases[0].MonradWiden = élargi
+				r, b := jouerRondes(t, cfg, P, int64(k))
 				if b.maxRonde != rondes || len(b.parRonde) != rondes {
 					t.Fatalf("%s : %d rondes jouées, dernière %d", nom, len(b.parRonde), b.maxRonde)
 				}
@@ -47,7 +56,7 @@ func TestMonradInvariants(t *testing.T) {
 						t.Fatalf("%s : ronde %d, %d matchs entre points différents", nom, ronde, b.croisés[ronde])
 					}
 				}
-				if P >= 8*rondes && b.revanches != 0 {
+				if élargi && P >= 8*rondes && b.revanches != 0 {
 					t.Fatalf("%s : %d revanches", nom, b.revanches)
 				}
 				if len(r.State.Final) != P {
