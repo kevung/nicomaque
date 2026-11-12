@@ -220,9 +220,12 @@ func FuzzApply(f *testing.F) {
 	f.Add([]byte{0x1e, 0, 1, 0x1e, 1, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0x0f, 0, 1, 0, 0, 0, 9, 3, 3})
 	f.Add([]byte{0x2e, 2, 1, 0, 0, 0, 0, 0, 0, 2, 0, 1, 2, 1, 0, 3, 0, 0, 0, 0, 0})
 	f.Add([]byte{0x40, 0, 0, 16, 0, 5, 16, 2, 13, 17, 4, 1, 2, 0, 0, 2, 1, 1, 16, 0, 10, 0, 1, 0})
+	f.Add([]byte{18, 1, 0, 19, 2, 3, 0, 0, 0, 18, 4, 1, 0, 0, 0, 2, 0, 0, 19, 5, 6, 0, 0, 0})
 	f.Add([]byte{0x30, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 1, 1, 3, 0, 1, 6, 0, 0, 0, 0, 0})
 	// Phase manuelle : une exemption posée puis retirée, le joueur apparié ensuite dans la ronde.
 	f.Add([]byte{0x40, 0, 0, 17, 4, 1, 17, 4, 0x81, 16, 4, 21, 1, 0, 4})
+	// La même, menée jusqu'au passage de phase : le classement de la phase manuelle sert l'entrée du tableau.
+	f.Add([]byte{0x40, 7, 0, 17, 4, 1, 17, 4, 0x81, 16, 4, 21, 1, 0, 4, 0, 1, 0, 0, 0, 0})
 	f.Fuzz(func(t *testing.T, plan []byte) {
 		now := time.Date(2026, 9, 7, 9, 0, 0, 0, time.UTC)
 		// Le quartet haut du premier octet choisit le format : les plans d'avant gardent le leur.
@@ -252,7 +255,7 @@ func FuzzApply(f *testing.F) {
 			now = now.Add(time.Minute)
 			a, b, c := plan[i], plan[i+1], plan[i+2]
 			var ev tournoi.Event
-			switch a % 18 {
+			switch a % 20 {
 			case 0: // confirmer une proposition du moteur
 				acts := st.ProposeAt(now)
 				if len(acts) == 0 {
@@ -315,6 +318,10 @@ func FuzzApply(f *testing.F) {
 				if c&0x80 != 0 {
 					ev = st.ManualByeCancelledEvent(int(c)%4, joueur(b), now)
 				}
+			case 18:
+				ev = tournoi.PlayerReplacedEvent(joueur(b), tournoi.Player{ID: tournoi.PlayerID(fmt.Sprintf("r%d", c%4)), Name: "R"}, now)
+			case 19:
+				ev = tournoi.PlayersSwappedEvent(joueur(b), joueur(c), now)
 			}
 			_ = st.Apply(ev) // une erreur est une réponse acceptable
 			cohérent(t, st)

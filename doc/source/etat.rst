@@ -23,7 +23,7 @@ voit jamais de libellé texte. À la première erreur, ``Replay`` renvoie l'éta
 erreur enrichie : ``événement <i> (<kind>) : <erreur>``.
 
 ``New`` valide la configuration, construit l'événement ``created`` (``Version: JournalVersion``,
-soit 2) et l'applique ; elle renvoie l'état, l'événement (que l'hôte doit ajouter en tête de
+soit 3) et l'applique ; elle renvoie l'état, l'événement (que l'hôte doit ajouter en tête de
 journal) et l'erreur éventuelle.
 
 Après chaque événement appliqué, ``Apply`` rafraîchit ``State.Infos`` (``refreshInfos``),

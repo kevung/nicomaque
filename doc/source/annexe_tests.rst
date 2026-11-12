@@ -84,6 +84,9 @@ Compatibilité ascendante
 +---------+----------------------------------------------------------------------------------------+
 | 2       | ``config_changed`` ne le peut plus : refus ``drawn``                                   |
 +---------+----------------------------------------------------------------------------------------+
+| 3       | ``player_added`` refuse l'identifiant ``BYE`` ; ``created`` et ``config_changed``      |
+|         | refusent une entrée ``top:N`` sans entier N ≥ 1 (lus comme avant en version 2)         |
++---------+----------------------------------------------------------------------------------------+
 
 ``testdata/journal_v0.json`` est un journal complet écrit dans la forme d'avant les codes structurés
 — aucun champ ``version``, aucun champ ``round``, un ``label`` qui était une chaîne française. Le

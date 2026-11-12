@@ -11,7 +11,13 @@ import (
 // 2 : config_changed ne peut plus changer les options de construction d'un tableau déjà tiré
 // (consolante, dernière chance, réconciliation, recharge, têtes de série) ; un événement de
 // version 1 qui le faisait reste accepté, sans effet, comme il l'a été.
-const JournalVersion = 2
+// 3 : player_added refuse l'identifiant BYE, created et config_changed une entrée top:N sans
+// N ≥ 1 ; un événement de version 2 qui les portait a été joué ainsi et se rejoue ainsi.
+const JournalVersion = 3
+
+// versionRefus : la version du journal à partir de laquelle les refus ajoutés depuis valent.
+// Un refus neuf ne s'applique jamais à un événement écrit avant lui : Replay passe par Apply.
+const versionRefus = 3
 
 // EventKind est le type d'un événement du journal.
 type EventKind string
@@ -29,12 +35,17 @@ const (
 	// (EvHalfByeCancelled), avant l'ouverture de la ronde seulement.
 	EvHalfBye          EventKind = "half_bye"
 	EvHalfByeCancelled EventKind = "half_bye_cancelled"
-	EvPlayerAvailable  EventKind = "player_available" // ID : l'indisponibilité est levée
-	EvMatchStarted     EventKind = "match_started"    // MatchID, Phase, Section, Label, Key, A, B, Length, Table
-	EvResult           EventKind = "result"           // MatchID, Winner, ScoreA, ScoreB, Forfeit
-	EvResultCorrected  EventKind = "result_corrected" // idem, remplace le résultat précédent
-	EvMatchCancelled   EventKind = "match_cancelled"  // MatchID (match lancé par erreur)
-	EvBye              EventKind = "bye"              // Phase, Player, Label
+	// EvPlayerReplaced : ID (l'ancien joueur), Player (le remplaçant). Le remplaçant prend la
+	// place d'un joueur qui n'a pas joué, telle quelle. EvPlayersSwapped : A, B. Deux joueurs
+	// qui n'ont pas joué échangent leurs places. Voir remplacement.go.
+	EvPlayerReplaced  EventKind = "player_replaced"
+	EvPlayersSwapped  EventKind = "players_swapped"
+	EvPlayerAvailable EventKind = "player_available" // ID : l'indisponibilité est levée
+	EvMatchStarted    EventKind = "match_started"    // MatchID, Phase, Section, Label, Key, A, B, Length, Table
+	EvResult          EventKind = "result"           // MatchID, Winner, ScoreA, ScoreB, Forfeit
+	EvResultCorrected EventKind = "result_corrected" // idem, remplace le résultat précédent
+	EvMatchCancelled  EventKind = "match_cancelled"  // MatchID (match lancé par erreur)
+	EvBye             EventKind = "bye"              // Phase, Player, Label
 	// EvByeCancelled : Phase, ID, Round. Une exemption posée par erreur dans une phase manuelle
 	// est retirée, tant que la phase n'est pas finie. Nulle part ailleurs : le moteur y donne
 	// lui-même les exemptions.
@@ -201,6 +212,16 @@ func PlayerUnavailableEvent(id PlayerID, until time.Time, now time.Time) Event {
 // l'affaire de l'hôte.
 func HalfByeEvent(id PlayerID, phase, round int, now time.Time) Event {
 	return Event{Version: JournalVersion, Kind: EvHalfBye, Time: now, ID: id, Phase: phase, Round: round}
+}
+
+// PlayerReplacedEvent : le joueur p prend la place de old, qui n'a encore joué aucun match.
+func PlayerReplacedEvent(old PlayerID, p Player, now time.Time) Event {
+	return Event{Version: JournalVersion, Kind: EvPlayerReplaced, Time: now, ID: old, Player: &p}
+}
+
+// PlayersSwappedEvent : a et b, qui n'ont encore joué aucun match, échangent leurs places.
+func PlayersSwappedEvent(a, b PlayerID, now time.Time) Event {
+	return Event{Version: JournalVersion, Kind: EvPlayersSwapped, Time: now, A: a, B: b}
 }
 
 // HalfByeCancelledEvent retire une demi-exemption posée, tant que sa ronde n'est pas ouverte.

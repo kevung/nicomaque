@@ -33,7 +33,13 @@ Règles
 - **Barrage tiré puis poule corrigée** : un barrage (de poule ou final) n'est pas recalculé. Si
   une correction de résultat de poule, passée après son tirage, change les joueurs que la poule
   désigne, le barrage se joue entre ceux du tirage et l'avertissement ``barrage_stale`` le
-  signale ; au directeur d'annuler ses matchs s'il veut le refaire.
+  signale ; au directeur d'annuler ses matchs s'il veut le refaire. Pour le barrage final,
+  l'avertissement se trompe dans deux cas, tous deux après un retrait postérieur au tirage
+  suivi de corrections. Il manque quand un joueur qui n'a pas été tiré se retire après le
+  tirage, puis qu'une correction le ferait passer premier de sa poule : le moteur le prend
+  pour un retiré d'avant le tirage. Il se lève à tort quand le tiré d'une poule et un autre
+  joueur de cette poule se retirent après le tirage, puis que des corrections font passer
+  premiers des joueurs retirés : le tirage reste juste.
 - **Ronde de demi-exemptés seuls** : si, après des retraits, tous les joueurs restants d'une
   ronde de suisse classique sont demi-exemptés, rien ne s'apparie et le moteur attend
   (``no_pairing``) ; retirer une demi-exemption débloque la ronde.
@@ -45,6 +51,8 @@ Règles
   d'adversaires possibles (effectif moins un) reste jouable, par revanches, mais ``Propose``
   y ralentit nettement. ``Validate`` ne borne pas ``rounds`` : l'effectif n'est pas connu à la
   configuration.
+- **Remplacement** : la place d'un joueur retiré ne se reprend pas (``player_replaced`` est
+  refusé) ; le remplaçant s'inscrit alors comme un retardataire.
 - **Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a pas été éprouvée en
   conditions réelles (durée du barrage).
 - **Classement des places non gagnantes** : les règles (par tour atteint en tableau, par

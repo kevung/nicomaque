@@ -109,6 +109,10 @@ où intervenir et comment vérifier.
   `ManualByeEvent` posent une ronde, `manualCheck` (phase_manual.go) refuse le joueur hors phase,
   retiré ou déjà placé dans la ronde. Une exemption posée par erreur se retire
   (`ManualByeCancelledEvent`, `bye_cancelled`) ; `next_phase` est refusé pendant un match.
+- [x] **Remplacement et échange de places** (issue #12). `player_replaced` et `players_swapped`
+  (remplacement.go) : refusés dès qu'un match non annulé porte le joueur, s'il est retiré ou s'il
+  a une demi-exemption annoncée ; l'état renomme l'identifiant partout (`renamePlayers`). Reste :
+  reprendre la place d'un retiré.
 - [ ] **Ronde de demi-exemptés seuls et barrage périmé** : une ronde dont tous les joueurs
   restants sont demi-exemptés attend (`no_pairing`) ; un barrage dont la poule est corrigée après
   le tirage n'est pas refait (avertissement `barrage_stale`). Les deux sont dans `limites.rst` ;

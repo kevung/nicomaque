@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 13:21+0100\n"
+"POT-Creation-Date: 2026-11-12 17:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -248,7 +248,21 @@ msgstr "2"
 msgid "``config_changed`` ne le peut plus : refus ``drawn``"
 msgstr "``config_changed`` can no longer do so: ``drawn`` rejection"
 
-#: ../../source/annexe_tests.rst:88
+#: ../../source/annexe_tests.rst:87
+msgid "3"
+msgstr "3"
+
+#: ../../source/annexe_tests.rst:87
+msgid ""
+"``player_added`` refuse l'identifiant ``BYE`` ; ``created`` et "
+"``config_changed`` refusent une entrée ``top:N`` sans entier N ≥ 1 (lus "
+"comme avant en version 2)"
+msgstr ""
+"``player_added`` rejects the identifier ``BYE``; ``created`` and "
+"``config_changed`` reject a ``top:N`` entry without an integer N ≥ 1 "
+"(read as before in version 2)"
+
+#: ../../source/annexe_tests.rst:91
 msgid ""
 "``testdata/journal_v0.json`` est un journal complet écrit dans la forme "
 "d'avant les codes structurés — aucun champ ``version``, aucun champ "
@@ -262,50 +276,50 @@ msgstr ""
 "compares the standings **place by place**. This fixture is not "
 "regenerated: its value is that it has not moved."
 
-#: ../../source/annexe_tests.rst:93
+#: ../../source/annexe_tests.rst:96
 msgid "``TestMatchCounts`` fixe les comptes de matchs sur 64 joueurs :"
 msgstr "``TestMatchCounts`` fixes the match counts for 64 players:"
 
-#: ../../source/annexe_tests.rst:96
+#: ../../source/annexe_tests.rst:99
 msgid "Format"
 msgstr "Format"
 
-#: ../../source/annexe_tests.rst:96
+#: ../../source/annexe_tests.rst:99
 msgid "Matchs attendus"
 msgstr "Expected matches"
 
-#: ../../source/annexe_tests.rst:98
+#: ../../source/annexe_tests.rst:101
 msgid "Suisse 2 vies continu"
 msgstr "Swiss 2 lives continuous"
 
-#: ../../source/annexe_tests.rst:98 ../../source/annexe_tests.rst:100
-#: ../../source/annexe_tests.rst:101
+#: ../../source/annexe_tests.rst:101 ../../source/annexe_tests.rst:103
+#: ../../source/annexe_tests.rst:104
 msgid "126 ou 127"
 msgstr "126 or 127"
 
-#: ../../source/annexe_tests.rst:99
+#: ../../source/annexe_tests.rst:102
 msgid "Élimination simple"
 msgstr "Single elimination"
 
-#: ../../source/annexe_tests.rst:99
+#: ../../source/annexe_tests.rst:102
 msgid "63"
 msgstr "63"
 
-#: ../../source/annexe_tests.rst:100
+#: ../../source/annexe_tests.rst:103
 msgid "Double élimination avec recharge"
 msgstr "Double elimination with recharge (bracket reset)"
 
-#: ../../source/annexe_tests.rst:101
+#: ../../source/annexe_tests.rst:104
 msgid "Blocs GSL"
 msgstr "GSL blocks"
 
-#: ../../source/annexe_tests.rst:104
+#: ../../source/annexe_tests.rst:107
 msgid ""
 "(126 = 2 × 64 − 2 ; le 127ᵉ est la recharge, jouée une fois sur deux "
 "environ.)"
 msgstr "(126 = 2 × 64 − 2; the 127th is the recharge, played about half the time.)"
 
-#: ../../source/annexe_tests.rst:106
+#: ../../source/annexe_tests.rst:109
 msgid ""
 "``TestCorrection`` vérifie qu'après l'inversion du premier résultat d'un "
 "tournoi par ``result_corrected``, la somme des défaites de la phase égale"
@@ -317,7 +331,7 @@ msgstr ""
 "the number of finished matches — that is, that ``recompute`` has rebuilt "
 "everything correctly."
 
-#: ../../source/annexe_tests.rst:110
+#: ../../source/annexe_tests.rst:113
 msgid ""
 "``TestWithdrawnAfterDraw`` vérifie qu'un joueur retiré **après** le "
 "tirage d'un tableau n'est plus jamais proposé, que ses matchs non lancés "
@@ -329,7 +343,7 @@ msgstr ""
 "lost by walkover, that the bracket finishes and that no warning is "
 "produced."
 
-#: ../../source/annexe_tests.rst:114
+#: ../../source/annexe_tests.rst:117
 #, no-python-format
 msgid ""
 "``TestParity`` (long, sauté en mode court) mesure sur 1 500 tournois de "
@@ -348,11 +362,11 @@ msgstr ""
 "magnitude: a weekend format lets the best player win only 4 to 9% of the "
 "time (64 or 32 players), against 1.6 to 3% by chance."
 
-#: ../../source/annexe_tests.rst:121
+#: ../../source/annexe_tests.rst:124
 msgid "Fichiers dorés"
 msgstr "Golden files"
 
-#: ../../source/annexe_tests.rst:123
+#: ../../source/annexe_tests.rst:126
 msgid ""
 "Les sorties des règles sont figées dans des fichiers de référence, "
 "rejoués à chaque exécution contre le paquet ``rules`` et contre les "
@@ -362,19 +376,19 @@ msgstr ""
 " run against the ``rules`` package and against the wrappers of the root "
 "package:"
 
-#: ../../source/annexe_tests.rst:127
+#: ../../source/annexe_tests.rst:130
 msgid "Fichier"
 msgstr "File"
 
-#: ../../source/annexe_tests.rst:127
+#: ../../source/annexe_tests.rst:130
 msgid "Contenu"
 msgstr "Content"
 
-#: ../../source/annexe_tests.rst:129
+#: ../../source/annexe_tests.rst:132
 msgid "``testdata/trace_moteur.json``"
 msgstr "``testdata/trace_moteur.json``"
 
-#: ../../source/annexe_tests.rst:129
+#: ../../source/annexe_tests.rst:132
 msgid ""
 "propositions et classements à chaque pas des simulations "
 "(``TestDoresTrace``)"
@@ -382,59 +396,59 @@ msgstr ""
 "proposals and standings at each step of the simulations "
 "(``TestDoresTrace``)"
 
-#: ../../source/annexe_tests.rst:131
+#: ../../source/annexe_tests.rst:134
 msgid "``rules/testdata/appariements.json``"
 msgstr "``rules/testdata/appariements.json``"
 
-#: ../../source/annexe_tests.rst:131
+#: ../../source/annexe_tests.rst:134
 msgid "appariements"
 msgstr "pairings"
 
-#: ../../source/annexe_tests.rst:132
+#: ../../source/annexe_tests.rst:135
 msgid "``rules/testdata/dotation.json``"
 msgstr "``rules/testdata/dotation.json``"
 
-#: ../../source/annexe_tests.rst:132
+#: ../../source/annexe_tests.rst:135
 msgid "dotation"
 msgstr "prize distribution"
 
-#: ../../source/annexe_tests.rst:133
+#: ../../source/annexe_tests.rst:136
 msgid "``rules/testdata/feuille.json``"
 msgstr "``rules/testdata/feuille.json``"
 
-#: ../../source/annexe_tests.rst:133
+#: ../../source/annexe_tests.rst:136
 msgid "feuille d'appariements"
 msgstr "pairing sheet"
 
-#: ../../source/annexe_tests.rst:134
+#: ../../source/annexe_tests.rst:137
 msgid "``rules/testdata/fin.json``,"
 msgstr "``rules/testdata/fin.json``,"
 
-#: ../../source/annexe_tests.rst:134
+#: ../../source/annexe_tests.rst:137
 msgid "prévision de fin et horloge"
 msgstr "end forecast and clock"
 
-#: ../../source/annexe_tests.rst:135
+#: ../../source/annexe_tests.rst:138
 msgid "``rules/testdata/horloge.json``"
 msgstr "``rules/testdata/horloge.json``"
 
-#: ../../source/annexe_tests.rst:136
+#: ../../source/annexe_tests.rst:139
 msgid "``sim/testdata/prevision.json``"
 msgstr "``sim/testdata/prevision.json``"
 
-#: ../../source/annexe_tests.rst:136
+#: ../../source/annexe_tests.rst:139
 msgid "prévision par simulation"
 msgstr "forecast by simulation"
 
-#: ../../source/annexe_tests.rst:137
+#: ../../source/annexe_tests.rst:140
 msgid "``render/testdata/*``"
 msgstr "``render/testdata/*``"
 
-#: ../../source/annexe_tests.rst:137
+#: ../../source/annexe_tests.rst:140
 msgid "pages HTML et SVG témoins"
 msgstr "reference HTML and SVG pages"
 
-#: ../../source/annexe_tests.rst:140
+#: ../../source/annexe_tests.rst:143
 msgid ""
 "Une sortie qui change à entrée égale est une version mineure. Les "
 "fichiers se régénèrent avec ``go test -run TestDores . -args -update`` et"
@@ -444,11 +458,11 @@ msgstr ""
 "are regenerated with ``go test -run TestDores . -args -update`` and ``go "
 "test ./render ./sim -update``."
 
-#: ../../source/annexe_tests.rst:144
+#: ../../source/annexe_tests.rst:147
 msgid "Intégration continue"
 msgstr "Continuous integration"
 
-#: ../../source/annexe_tests.rst:146
+#: ../../source/annexe_tests.rst:149
 msgid ""
 "``.github/workflows/ci.yml`` s'exécute à chaque poussée sur ``main``, à "
 "chaque proposition de fusion et chaque lundi :"
@@ -456,13 +470,13 @@ msgstr ""
 "``.github/workflows/ci.yml`` runs on every push to ``main``, on every "
 "merge proposal and every Monday:"
 
-#: ../../source/annexe_tests.rst:149
+#: ../../source/annexe_tests.rst:152
 msgid "``tests`` : la suite complète, sans ``-short``, donc avec ``TestParity`` ;"
 msgstr ""
 "``tests``: the full suite, without ``-short``, hence including "
 "``TestParity``;"
 
-#: ../../source/annexe_tests.rst:150
+#: ../../source/annexe_tests.rst:153
 msgid ""
 "``fuzz`` : ``FuzzApply`` et ``FuzzReplayJournal``, 60 s chacune (300 s le"
 " lundi) ;"
@@ -470,7 +484,7 @@ msgstr ""
 "``fuzz``: ``FuzzApply`` and ``FuzzReplayJournal``, 60 s each (300 s on "
 "Monday);"
 
-#: ../../source/annexe_tests.rst:151
+#: ../../source/annexe_tests.rst:154
 msgid ""
 "``exemples`` : régénère la galerie ``exemples/`` et échoue si celle du "
 "dépôt n'est plus à jour."
@@ -478,19 +492,19 @@ msgstr ""
 "``exemples``: regenerates the ``exemples/`` gallery and fails if the "
 "repository's copy is no longer up to date."
 
-#: ../../source/annexe_tests.rst:154
+#: ../../source/annexe_tests.rst:157
 msgid "Invariants structurels"
 msgstr "Structural invariants"
 
-#: ../../source/annexe_tests.rst:156
+#: ../../source/annexe_tests.rst:159
 msgid "À tout instant :"
 msgstr "At all times:"
 
-#: ../../source/annexe_tests.rst:158
+#: ../../source/annexe_tests.rst:161
 msgid "un joueur a **au plus un match en cours** ;"
 msgstr "a player has **at most one match in progress**;"
 
-#: ../../source/annexe_tests.rst:159
+#: ../../source/annexe_tests.rst:162
 msgid ""
 "``MatchOrder`` est en bijection avec les clés de ``Matches``, dans "
 "l'ordre de lancement ;"
@@ -498,11 +512,11 @@ msgstr ""
 "``MatchOrder`` is in bijection with the keys of ``Matches``, in launch "
 "order;"
 
-#: ../../source/annexe_tests.rst:160
+#: ../../source/annexe_tests.rst:163
 msgid "les identifiants de matchs sont ``M1``, ``M2``, … consécutifs sans trou ;"
 msgstr "match identifiers are ``M1``, ``M2``, … consecutive with no gaps;"
 
-#: ../../source/annexe_tests.rst:161
+#: ../../source/annexe_tests.rst:164
 msgid ""
 "``sum(Losses)`` sur une phase = nombre de matchs terminés (non annulés) "
 "de cette phase ;"
@@ -510,11 +524,11 @@ msgstr ""
 "``sum(Losses)`` over a phase = number of finished (non-cancelled) matches"
 " in that phase;"
 
-#: ../../source/annexe_tests.rst:162
+#: ../../source/annexe_tests.rst:165
 msgid "``remainingLives(p) = Lives[p] − Losses[p]``, borné à 0 ;"
 msgstr "``remainingLives(p) = Lives[p] − Losses[p]``, bounded at 0;"
 
-#: ../../source/annexe_tests.rst:163
+#: ../../source/annexe_tests.rst:166
 msgid ""
 "un ``GMatch`` ``Done`` a ``Winner`` et ``Loser`` renseignés, sauf s'il "
 "est ``Skipped`` ;"
@@ -522,12 +536,12 @@ msgstr ""
 "a ``Done`` ``GMatch`` has ``Winner`` and ``Loser`` filled in, unless it "
 "is ``Skipped``;"
 
-#: ../../source/annexe_tests.rst:164
+#: ../../source/annexe_tests.rst:167
 msgid ""
 "``resolve`` est idempotente : l'appeler deux fois de suite ne change rien"
 " ;"
 msgstr "``resolve`` is idempotent: calling it twice in a row changes nothing;"
 
-#: ../../source/annexe_tests.rst:165
+#: ../../source/annexe_tests.rst:168
 msgid "``Replay(journal)`` est une fonction pure du journal."
 msgstr "``Replay(journal)`` is a pure function of the journal."

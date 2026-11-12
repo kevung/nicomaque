@@ -51,7 +51,7 @@ Constantes
   ``KindGSL``, ``KindBracket``, ``KindRoundRobin`` ;
 - raisons d'un ``ConfigRefusal`` : ``RefusalRemoved``, ``RefusalFinished``, ``RefusalDrawn``,
   ``RefusalStarted`` ;
-- ``JournalVersion`` (= 2, posée dans chaque événement par les constructeurs ; un journal
+- ``JournalVersion`` (= 3, posée dans chaque événement par les constructeurs ; un journal
   ``Version: 0`` est converti à la lecture) ;
 - ``PrizeSectionAll`` (= ``"all"``, clé de la dotation du classement général) ;
 - ``SeedingRating`` (``PhaseConfig.Seeding`` : placement par cote, même valeur que
