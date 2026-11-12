@@ -209,3 +209,35 @@ func TestManuelRefus(t *testing.T) {
 		t.Error("lives accepté sur une phase manuelle")
 	}
 }
+
+// TestManuelExemptionRetireeRefus : une exemption RÉELLEMENT posée ne se retire ni d'une phase
+// qui n'est pas manuelle (le suisse a compté son bye, l'appariement suivant en dépend), ni
+// d'une phase manuelle terminée (son classement a servi l'entrée de la suivante).
+func TestManuelExemptionRetireeRefus(t *testing.T) {
+	p := func(i int) tournoi.PlayerID { return tournoi.PlayerID(fmt.Sprintf("p%02d", i)) }
+	suisse := piloter(t, tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3}}}, 1, champClubs(5, 0))
+	var exempt tournoi.PlayerID
+	suisse.jouer(func() bool {
+		for id := range suisse.st.Phases[0].ByeRounds {
+			exempt = id
+		}
+		return exempt != ""
+	})
+	if exempt == "" {
+		t.Fatal("suisse à cinq : aucun bye")
+	}
+	ronde := suisse.st.Phases[0].ByeRounds[exempt][0]
+	retrait := tournoi.Event{Version: tournoi.JournalVersion, Kind: tournoi.EvByeCancelled, Time: suisse.now, Round: ronde, ID: exempt}
+	if suisse.st.Apply(retrait) == nil || suisse.st.Phases[0].Byes[exempt] != 1 {
+		t.Fatalf("bye de suisse retiré : byes %v", suisse.st.Phases[0].Byes)
+	}
+
+	d := piloter(t, manuel(tournoi.PhaseConfig{Kind: tournoi.KindBracket, Length: 5, Entry: "top:4"}), 1, champClubs(6, 0))
+	d.must(d.st.ManualByeEvent(1, p(2), d.now))
+	retrait = d.st.ManualByeCancelledEvent(1, p(2), d.now)
+	d.must(tournoi.Event{Version: tournoi.JournalVersion, Kind: tournoi.EvNextPhase, Time: d.now})
+	if d.st.Apply(retrait) == nil || d.st.Phases[0].Byes[p(2)] != 1 {
+		t.Fatalf("exemption retirée d'une phase terminée : byes %v", d.st.Phases[0].Byes)
+	}
+	d.rejouable()
+}
