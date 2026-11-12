@@ -20,6 +20,7 @@ const (
 const (
 	ModeRounds    = "rounds" // suisse par rondes ; vide : continu
 	PairingWins   = "wins"   // suisse : à défaites égales, les plus victorieux ensemble
+	PairingMonrad = "monrad" // suisse classique : adversaire tiré au sort dans le groupe de points
 	SeedingRating = "rating" // tableau : placement classique par cote
 	// Critères de départage (PhaseRules.Tiebreak), appliqués dans l'ordre donné, après les points.
 	TiebreakPointDiff    = "point_diff"    // différence de points de match, plafonnés à la longueur
@@ -30,15 +31,18 @@ const (
 // PhaseRules : la configuration d'une phase, ce que les règles en lisent. Les champs inutiles à
 // un format sont ignorés ; les défauts sont déjà remplis par l'appelant.
 type PhaseRules struct {
-	Lives          int    `json:"lives,omitempty"`  // suisse : vies à l'entrée
-	Rounds         int    `json:"rounds,omitempty"` // suisse classique : nombre de rondes
-	Length         int    `json:"length"`           // longueur configurée des matchs
-	FinalLength    int    `json:"final_length,omitempty"`
-	Lengths        []int  `json:"lengths,omitempty"`        // tableau : du dernier tour vers le premier
-	LengthLate     int    `json:"length_late,omitempty"`    // suisse : longueur de la fin de phase…
-	LateThreshold  int    `json:"late_threshold,omitempty"` // …quand il reste au plus ce nombre de joueurs en vie
-	Mode           string `json:"mode,omitempty"`
-	Pairing        string `json:"pairing,omitempty"`
+	Lives         int    `json:"lives,omitempty"`  // suisse : vies à l'entrée
+	Rounds        int    `json:"rounds,omitempty"` // suisse classique : nombre de rondes
+	Length        int    `json:"length"`           // longueur configurée des matchs
+	FinalLength   int    `json:"final_length,omitempty"`
+	Lengths       []int  `json:"lengths,omitempty"`        // tableau : du dernier tour vers le premier
+	LengthLate    int    `json:"length_late,omitempty"`    // suisse : longueur de la fin de phase…
+	LateThreshold int    `json:"late_threshold,omitempty"` // …quand il reste au plus ce nombre de joueurs en vie
+	Mode          string `json:"mode,omitempty"`
+	Pairing       string `json:"pairing,omitempty"`
+	// MonradWiden : Monrad, le dernier groupe s'élargit aux groupes d'au-dessus tant que cela
+	// évite une revanche. Éteint : la revanche du dernier groupe est jouée.
+	MonradWiden    bool   `json:"monrad_widen,omitempty"`
 	AvoidClubs     bool   `json:"avoid_clubs,omitempty"`
 	AllowRematch   bool   `json:"allow_rematch,omitempty"`
 	Target         int    `json:"target,omitempty"` // suisse, GSL : la phase s'arrête quand Σ vies ≤ Target

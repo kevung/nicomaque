@@ -25,11 +25,13 @@ type bilanRondes struct {
 	écarts    int // matchs entre joueurs séparés de plus d'un point
 	matchs    int
 	maxRonde  int
+	croisés   map[int]int // ronde → matchs entre joueurs de points différents
+	plan      []string    // les matchs, dans l'ordre, pour comparer deux tournois
 }
 
 func jouerRondes(t *testing.T, cfg tournoi.Config, P int, graine int64) (sim.Result, *bilanRondes) {
 	t.Helper()
-	b := &bilanRondes{parRonde: map[int]map[tournoi.PlayerID]int{}, byes: map[tournoi.PlayerID]int{}, byesRonde: map[int]int{}}
+	b := &bilanRondes{parRonde: map[int]map[tournoi.PlayerID]int{}, byes: map[tournoi.PlayerID]int{}, byesRonde: map[int]int{}, croisés: map[int]int{}}
 	engager := func(r int, p tournoi.PlayerID) {
 		if b.parRonde[r] == nil {
 			b.parRonde[r] = map[tournoi.PlayerID]int{}
@@ -63,6 +65,10 @@ func jouerRondes(t *testing.T, cfg tournoi.Config, P int, graine int64) (sim.Res
 			if pa-pb > 1 || pb-pa > 1 {
 				b.écarts++
 			}
+			if pa != pb {
+				b.croisés[ev.Round]++
+			}
+			b.plan = append(b.plan, fmt.Sprintf("%d:%s-%s", ev.Round, k[0], k[1]))
 			b.matchs++
 		}
 		return nil
@@ -271,6 +277,7 @@ func TestSuisseRondesValidate(t *testing.T) {
 		"sans rondes":    {Kind: tournoi.KindSwissRounds, Length: 7},
 		"bascule":        {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Target: 8},
 		"vies":           {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Lives: 2},
+		"appariement":    {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Pairing: "random"},
 		"continu":        {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Mode: "continuous"},
 		"micro-rondes":   {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, BatchMinutes: 10},
 		"rondes à vies":  {Kind: tournoi.KindSwissLives, Length: 7, Rounds: 5},

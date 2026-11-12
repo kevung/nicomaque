@@ -133,9 +133,16 @@ Signification des champs de phase
 |                    |                                | au fil de l'eau. Refusé en mode ``rounds`` |
 |                    |                                | — une ronde EST un lot                     |
 +--------------------+--------------------------------+--------------------------------------------+
-| ``pairing``        | ``swiss_lives``                | ``random`` (défaut) ou ``wins`` (apparier  |
-|                    |                                | d'abord les joueurs les plus victorieux du |
-|                    |                                | groupe)                                    |
+| ``pairing``        | les deux suisses               | ``swiss_lives`` : ``random`` (défaut) ou   |
+|                    |                                | ``wins`` (apparier d'abord les joueurs les |
+|                    |                                | plus victorieux du groupe).                |
+|                    |                                | ``swiss_rounds`` : vide (le plus proche au |
+|                    |                                | classement) ou ``monrad`` (tiré au sort    |
+|                    |                                | dans le groupe de mêmes points)            |
++--------------------+--------------------------------+--------------------------------------------+
+| ``monrad_widen``   | ``swiss_rounds``, ``monrad``   | Élargir le dernier groupe de points aux    |
+|                    |                                | groupes d'au-dessus quand cela évite une   |
+|                    |                                | revanche. Éteint par défaut                |
 +--------------------+--------------------------------+--------------------------------------------+
 | ``avoid_clubs``    | les deux suisses               | Éviter les rencontres entre joueurs d'un   |
 |                    |                                | même club quand c'est possible             |
@@ -214,7 +221,9 @@ Algorithme :
        selon p.Kind :
          swiss_rounds :
              si p.Rounds <= 0                      → erreur « combien de rondes ? »
-             si p.Target, p.LengthLate ou p.Pairing renseigné → erreur
+             si p.Target ou p.LengthLate renseigné → erreur
+             si p.Pairing ∉ {"", monrad}           → erreur
+             si p.MonradWiden sans monrad          → erreur
              si p.Mode ∉ {"", rounds}              → erreur
              si p.Lives saisi                      → erreur (personne n'est éliminé)
              p.Mode = "rounds"

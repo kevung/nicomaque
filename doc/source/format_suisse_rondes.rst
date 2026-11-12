@@ -21,7 +21,8 @@ entièrement lancée, orphelins réappariés entre eux, absences, retardataires 
 :ref:`format_suisse`, « Mode par rondes »).
 
 ``Validate`` exige ``rounds`` > 0, pose ``mode`` à ``rounds`` et refuse sur ce format ``target``,
-``length_late``, ``pairing``, ``batch_minutes``, un autre ``mode`` et un ``lives`` saisi.
+``length_late``, ``batch_minutes``, un autre ``mode``, un ``lives`` saisi et un ``pairing`` autre
+que ``monrad``.
 ``rounds`` est refusé sur tout autre format.
 
 Appariement d'une ronde
@@ -63,6 +64,34 @@ candidat ou à la limite suivante : un grand champ ne bloque jamais.
 de club est essayé d'abord ; il n'est jamais payé d'une revanche.
 
 Un joueur seul à apparier (les autres absents ou retirés) est exempté.
+
+Monrad (``pairing: "monrad"``)
+------------------------------
+
+Le Monrad garde les rondes, les points et le classement du suisse classique ; seul change le choix
+de l'adversaire, **tiré au sort dans le groupe de mêmes points** au lieu d'être le plus proche au
+classement. Le départage, s'il y en a un, n'y joue aucun rôle.
+
+::
+
+   g := joueurs triés par identifiant, mélangés (graine de la ronde), triés (stable) par points
+   pour chaque groupe de mêmes points, du meilleur au moins bon, sauf le dernier :
+       groupe := report + groupe
+       pair   : apparier sans aucune revanche ; impossible → report := groupe entier
+       impair : retirer un joueur, du dernier tiré au premier, jusqu'à apparier le reste sans
+                revanche → report := ce joueur (le flotteur) ; impossible → report := groupe entier
+   dernier groupe (+ report) : appariement du suisse — le moins de revanches, l'exemption au
+                plus bas parmi ceux qui en ont eu le moins
+
+Un match oppose donc deux joueurs de mêmes points, sauf un flotteur par groupe impair.
+
+Le dernier groupe peut donc jouer une revanche qu'un groupe plus large aurait évitée. Avec
+``monrad_widen: true``, la ronde est alors refaite en lui adjoignant le groupe d'au-dessus, puis le
+suivant, jusqu'à ne plus avoir de revanche ; tous les groupes réunis, c'est l'appariement du suisse.
+L'option est éteinte par défaut.
+
+Le tirage vient de ``Seed.Round`` : il se rejoue à l'identique, et deux graines donnent deux
+tournois.
 
 Fin de la phase
 ---------------
