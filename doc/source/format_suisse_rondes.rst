@@ -98,6 +98,22 @@ de têtes de série il n'y a pas de moitié haute — et ``Validate`` la refuse 
   apparié comme toute ronde.
 - **Rondes suivantes** : plus de point virtuel.
 
+Demi-exemptions annoncées
+-------------------------
+
+Un joueur peut annoncer **à l'avance** qu'il ne jouera pas une ronde : l'événement ``half_bye``
+(``HalfByeEvent(joueur, phase, ronde, now)``) le sort de l'appariement de cette ronde — il n'y est
+ni apparié ni exempté — et lui vaut un **demi-point** dès que la ronde est ouverte. Elle se pose
+et se retire (``half_bye_cancelled``) tant que la ronde n'est pas ouverte, jamais après ; le
+moteur la refuse si elle ne laissait plus personne à apparier. Le quota par joueur et
+l'acceptation de la demande sont l'affaire de l'hôte.
+
+Les points se comptent alors en demi-points : deux par victoire ou par exemption, un par
+demi-exemption. Le classement, les groupes du Monrad et le Buchholz des adversaires en tiennent
+compte ; la note de classement porte ``half_byes``, et son Buchholz reste en points entiers (le
+demi-point y est tronqué). Si les joueurs restants sont en nombre impair, l'un d'eux reçoit
+l'exemption entière habituelle.
+
 Monrad (``pairing: "monrad"``)
 ------------------------------
 

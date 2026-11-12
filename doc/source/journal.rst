@@ -68,6 +68,8 @@ Structure d'un événement
        EvPlayerUpdated   EventKind = "player_updated"
        EvPlayerUnavailable EventKind = "player_unavailable"
        EvPlayerAvailable   EventKind = "player_available"
+       EvHalfBye           EventKind = "half_bye"
+       EvHalfByeCancelled  EventKind = "half_bye_cancelled"
        EvMatchStarted    EventKind = "match_started"
        EvResult          EventKind = "result"
        EvResultCorrected EventKind = "result_corrected"
@@ -165,6 +167,10 @@ Champs utilisés par type
 |                        | aucun des deux                                                          |
 +------------------------+-------------------------------------------------------------------------+
 | ``player_available``   | ``ID``                                                                  |
++------------------------+-------------------------------------------------------------------------+
+| ``half_bye``           | ``ID``, ``Phase``, ``Round``                                            |
++------------------------+-------------------------------------------------------------------------+
+| ``half_bye_cancelled`` | ``ID``, ``Phase``, ``Round``                                            |
 +------------------------+-------------------------------------------------------------------------+
 | ``match_started``      | ``MatchID``, ``Phase``, ``Section``, ``Label``, ``Round``, ``Key``,     |
 |                        | ``A``, ``B``, ``Length``, ``Table``                                     |
@@ -286,6 +292,21 @@ identifiant connu, qui met la fiche à jour **et** annule un retrait : corriger 
 joueuse retirée par ``player_added`` la remettrait en jeu.
 ``player_added`` garde son sens pour les journaux existants — c'est aussi le chemin du retour d'un
 joueur retiré.
+
+``half_bye`` et ``half_bye_cancelled``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Une demi-exemption annoncée (``HalfByeEvent``, ``HalfByeCancelledEvent``) : voir
+:ref:`format_suisse_rondes`.
+
+::
+
+   si la phase est inconnue, passée, pas commencée, ou n'est pas un swiss_rounds → erreur
+   si Round hors de 1..Rounds, ou Round <= ph.Round (ronde déjà ouverte)          → erreur
+   si ID inconnu, retiré, ou hors de la phase                                    → erreur
+   half_bye           : déjà posée → erreur ; plus personne à apparier à cette ronde → erreur ;
+                        ph.HalfByes[ID] += Round
+   half_bye_cancelled : pas posée → erreur ; ph.HalfByes[ID] -= Round
 
 ``player_unavailable`` et ``player_available``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

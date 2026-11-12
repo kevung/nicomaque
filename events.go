@@ -24,21 +24,26 @@ const (
 	// EvPlayerUnavailable : ID ; Until (heure de retour) ou Round (ronde de retour), ou aucun des
 	// deux (jusqu'à player_available). Le joueur n'est plus apparié, sans rien perdre.
 	EvPlayerUnavailable EventKind = "player_unavailable"
-	EvPlayerAvailable   EventKind = "player_available" // ID : l'indisponibilité est levée
-	EvMatchStarted      EventKind = "match_started"    // MatchID, Phase, Section, Label, Key, A, B, Length, Table
-	EvResult            EventKind = "result"           // MatchID, Winner, ScoreA, ScoreB, Forfeit
-	EvResultCorrected   EventKind = "result_corrected" // idem, remplace le résultat précédent
-	EvMatchCancelled    EventKind = "match_cancelled"  // MatchID (match lancé par erreur)
-	EvBye               EventKind = "bye"              // Phase, Player, Label
-	EvDraw              EventKind = "draw"             // Phase, Section, Draw
-	EvNextPhase         EventKind = "next_phase"       // passage à la phase suivante
-	EvRepechage         EventKind = "repechage"        // Phase, Section (poule), A (qualifié retiré), B (repêché)
-	EvLengthChanged     EventKind = "length_changed"   // Phase, Length (matchs futurs de la phase)
-	EvConfigChanged     EventKind = "config_changed"   // Config (la configuration ENTIÈRE, voir reconfig.go)
-	EvReopened          EventKind = "reopened"         // le tournoi clos est rouvert ; Final sera recalculé
-	EvTableChanged      EventKind = "table_changed"    // MatchID, Table (match en cours déplacé)
-	EvFinished          EventKind = "finished"
-	EvNote              EventKind = "note" // Text (annotation libre du TD)
+	// EvHalfBye : ID, Phase, Round. Demi-exemption annoncée sur un suisse classique : le joueur
+	// n'est pas apparié à cette ronde et reçoit un demi-point. Posée, et retirée
+	// (EvHalfByeCancelled), avant l'ouverture de la ronde seulement.
+	EvHalfBye          EventKind = "half_bye"
+	EvHalfByeCancelled EventKind = "half_bye_cancelled"
+	EvPlayerAvailable  EventKind = "player_available" // ID : l'indisponibilité est levée
+	EvMatchStarted     EventKind = "match_started"    // MatchID, Phase, Section, Label, Key, A, B, Length, Table
+	EvResult           EventKind = "result"           // MatchID, Winner, ScoreA, ScoreB, Forfeit
+	EvResultCorrected  EventKind = "result_corrected" // idem, remplace le résultat précédent
+	EvMatchCancelled   EventKind = "match_cancelled"  // MatchID (match lancé par erreur)
+	EvBye              EventKind = "bye"              // Phase, Player, Label
+	EvDraw             EventKind = "draw"             // Phase, Section, Draw
+	EvNextPhase        EventKind = "next_phase"       // passage à la phase suivante
+	EvRepechage        EventKind = "repechage"        // Phase, Section (poule), A (qualifié retiré), B (repêché)
+	EvLengthChanged    EventKind = "length_changed"   // Phase, Length (matchs futurs de la phase)
+	EvConfigChanged    EventKind = "config_changed"   // Config (la configuration ENTIÈRE, voir reconfig.go)
+	EvReopened         EventKind = "reopened"         // le tournoi clos est rouvert ; Final sera recalculé
+	EvTableChanged     EventKind = "table_changed"    // MatchID, Table (match en cours déplacé)
+	EvFinished         EventKind = "finished"
+	EvNote             EventKind = "note" // Text (annotation libre du TD)
 )
 
 // Event est une entrée du journal. Les champs inutiles pour un type restent vides.
@@ -185,6 +190,18 @@ func PlayerUnavailableEvent(id PlayerID, until time.Time, now time.Time) Event {
 		ev.Until = &u
 	}
 	return ev
+}
+
+// HalfByeEvent : le joueur annonce qu'il ne jouera pas la ronde round de la phase (un suisse
+// classique) ; il n'y est pas apparié et reçoit un demi-point. Le quota et l'acceptation sont
+// l'affaire de l'hôte.
+func HalfByeEvent(id PlayerID, phase, round int, now time.Time) Event {
+	return Event{Version: JournalVersion, Kind: EvHalfBye, Time: now, ID: id, Phase: phase, Round: round}
+}
+
+// HalfByeCancelledEvent retire une demi-exemption posée, tant que sa ronde n'est pas ouverte.
+func HalfByeCancelledEvent(id PlayerID, phase, round int, now time.Time) Event {
+	return Event{Version: JournalVersion, Kind: EvHalfByeCancelled, Time: now, ID: id, Phase: phase, Round: round}
 }
 
 // PlayerUnavailableUntilRoundEvent : suisse par rondes, le joueur est absent jusqu'à la ronde

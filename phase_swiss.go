@@ -1,6 +1,10 @@
 package tournoi
 
-import "github.com/kevung/nicomaque/rules"
+import (
+	"fmt"
+
+	"github.com/kevung/nicomaque/rules"
+)
 
 // ---- Suisse à vies : appariement dans le groupe de même nombre de défaites ----
 
@@ -33,7 +37,7 @@ func swissKind(k string) bool { return k == KindSwissLives || k == KindSwissRoun
 func (s *State) free(ph *PhaseState, r int) []PlayerID {
 	var out []PlayerID
 	for _, p := range s.alive(ph) {
-		if !s.busy(p) && !s.absent(p, r) && !s.ailleurs[p] {
+		if !s.busy(p) && !s.absent(p, r) && !s.ailleurs[p] && !containsRound(ph.HalfByes[p], r) {
 			out = append(out, p)
 		}
 	}
@@ -213,4 +217,72 @@ func (s *State) roundRest(ph *PhaseState, r int) []Action {
 		}
 	}
 	return append(acts, s.actions(ph, rules.PairSwissOrphans(avant, r, refs(orphelins), budget, longueur, graine))...)
+}
+
+// applyHalfBye pose ou retire une demi-exemption. Sur un suisse classique seulement, pour un
+// joueur inscrit et non retiré, et pour une ronde qui n'est pas encore ouverte : une fois la
+// ronde appariée, on n'y touche plus. Il reste toujours quelqu'un à apparier.
+func (s *State) applyHalfBye(ev Event) error {
+	if ev.Phase < 0 || ev.Phase >= len(s.Config.Phases) || ev.Phase < s.Current {
+		return fmt.Errorf("demi-exemption : phase %d inconnue ou passée", ev.Phase)
+	}
+	cfg := s.Config.Phases[ev.Phase]
+	if cfg.Kind != KindSwissRounds {
+		return fmt.Errorf("demi-exemption : la phase %d n'est pas un suisse classique", ev.Phase)
+	}
+	if ev.Round < 1 || ev.Round > cfg.Rounds {
+		return fmt.Errorf("demi-exemption : ronde %d hors de 1..%d", ev.Round, cfg.Rounds)
+	}
+	if _, ok := s.Players[ev.ID]; !ok || s.Withdrawn[ev.ID] {
+		return fmt.Errorf("demi-exemption : joueur %s inconnu ou retiré", ev.ID)
+	}
+	ph := s.phaseOf(ev.Phase)
+	if ph == nil {
+		return fmt.Errorf("demi-exemption : la phase %d n'est pas commencée", ev.Phase)
+	}
+	if ev.Round <= ph.Round {
+		return fmt.Errorf("demi-exemption : la ronde %d est déjà ouverte", ev.Round)
+	}
+	posée := containsRound(ph.HalfByes[ev.ID], ev.Round)
+	if ev.Kind == EvHalfByeCancelled {
+		if !posée {
+			return fmt.Errorf("demi-exemption : %s n'en a pas à la ronde %d", ev.ID, ev.Round)
+		}
+		var reste []int
+		for _, r := range ph.HalfByes[ev.ID] {
+			if r != ev.Round {
+				reste = append(reste, r)
+			}
+		}
+		if len(reste) == 0 {
+			delete(ph.HalfByes, ev.ID)
+		} else {
+			ph.HalfByes[ev.ID] = reste
+		}
+		return nil
+	}
+	if posée {
+		return fmt.Errorf("demi-exemption : %s en a déjà une à la ronde %d", ev.ID, ev.Round)
+	}
+	if ph.Index == s.Current && len(ph.Entrants) > 0 {
+		dedans, autres := false, 0
+		for _, p := range s.alive(ph) {
+			if p == ev.ID {
+				dedans = true
+			} else if !containsRound(ph.HalfByes[p], ev.Round) {
+				autres++
+			}
+		}
+		if !dedans {
+			return fmt.Errorf("demi-exemption : %s n'est pas dans la phase %d", ev.ID, ev.Phase)
+		}
+		if autres == 0 {
+			return fmt.Errorf("demi-exemption : plus personne à apparier à la ronde %d", ev.Round)
+		}
+	}
+	if ph.HalfByes == nil {
+		ph.HalfByes = map[PlayerID][]int{}
+	}
+	ph.HalfByes[ev.ID] = append(ph.HalfByes[ev.ID], ev.Round)
+	return nil
 }

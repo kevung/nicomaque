@@ -15,8 +15,9 @@ import (
 // nombre de revanches suivant, pour qu'un grand champ ne bloque jamais.
 const swissRoundsBudget = 200000
 
-// points : victoires plus exemptions — une exemption vaut une victoire.
-func (e Entrant) points() int { return e.Wins + e.Byes }
+// points : en DEMI-POINTS, pour rester en entiers — deux par victoire et par exemption (une
+// exemption vaut une victoire), un par demi-exemption annoncée.
+func (e Entrant) points() int { return 2*(e.Wins+e.Byes) + e.HalfByes }
 
 func (v *vue) roundsDone() bool {
 	if v.Running > 0 {
@@ -41,8 +42,8 @@ func (a clé) devant(b clé) bool {
 	return false
 }
 
-// buchholz : la somme des points des adversaires rencontrés, une fois par rencontre. Une
-// exemption n'apporte aucun adversaire.
+// buchholz : la somme des points des adversaires rencontrés, une fois par rencontre, en
+// demi-points. Une exemption n'apporte aucun adversaire.
 func (v *vue) buchholz(e Entrant) int {
 	n := 0
 	for _, o := range e.Played {
@@ -52,7 +53,16 @@ func (v *vue) buchholz(e Entrant) int {
 }
 
 // TiebreakValue : la valeur du critère de départage c pour l'entrant e de la phase p.
-func TiebreakValue(p Phase, e Entrant, c string) int { return voir(&p).critère(e, c) }
+// Le Buchholz est rendu en points entiers (le demi-point d'une demi-exemption est tronqué).
+func TiebreakValue(p Phase, e Entrant, c string) int { return voir(&p).affiché(e, c) }
+
+// affiché : la valeur d'un critère telle qu'une note la porte.
+func (v *vue) affiché(e Entrant, c string) int {
+	if c == TiebreakBuchholz {
+		return v.buchholz(e) / 2
+	}
+	return v.critère(e, c)
+}
 
 func (v *vue) critère(e Entrant, c string) int {
 	switch c {
@@ -122,7 +132,7 @@ func (v *vue) pairClassicRound(r int, players []Ref, rng *rand.Rand) []Pairing {
 			total := func(p Ref) int {
 				e := v.entrant(p)
 				if e.TopHalf {
-					return e.points() + 1
+					return e.points() + 2
 				}
 				return e.points()
 			}
@@ -411,7 +421,7 @@ func (v *vue) rankRounds() []Standing {
 	for i, p := range ps {
 		e := v.entrant(p)
 		scores[i] = pts[p]
-		notes[i] = Note{Kind: NoteRecord, Wins: e.Wins, Losses: e.Losses, Byes: e.Byes}
+		notes[i] = Note{Kind: NoteRecord, Wins: e.Wins, Losses: e.Losses, Byes: e.Byes, HalfByes: e.HalfByes}
 		for _, c := range v.Rules.Tiebreak {
 			switch c {
 			case TiebreakPointDiff:
@@ -419,7 +429,7 @@ func (v *vue) rankRounds() []Standing {
 			case TiebreakPointsScored:
 				notes[i].PointsScored = v.critère(e, c)
 			case TiebreakBuchholz:
-				notes[i].Buchholz = v.critère(e, c)
+				notes[i].Buchholz = v.affiché(e, c)
 			}
 		}
 		if v.withdrawn[p] {

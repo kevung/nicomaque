@@ -62,7 +62,7 @@ func fromRulesLabel(l rules.Label) Label {
 }
 
 func fromRulesNote(n rules.Note) Note {
-	out := Note{Kind: NoteKind(n.Kind), Wins: n.Wins, Losses: n.Losses, Byes: n.Byes, PointDiff: n.PointDiff, PointsScored: n.PointsScored, Buchholz: n.Buchholz, Lives: n.Lives, Section: n.Section, Qualified: n.Qualified}
+	out := Note{Kind: NoteKind(n.Kind), Wins: n.Wins, Losses: n.Losses, Byes: n.Byes, HalfByes: n.HalfByes, PointDiff: n.PointDiff, PointsScored: n.PointsScored, Buchholz: n.Buchholz, Lives: n.Lives, Section: n.Section, Qualified: n.Qualified}
 	if n.Sub != nil {
 		sub := fromRulesLabel(*n.Sub)
 		out.Sub = &sub
@@ -197,6 +197,12 @@ func (s *State) instantané(ph *PhaseState, free []PlayerID, apparier bool) rule
 			Byes: ph.Byes[id]}
 		if suisse {
 			e.Opponents = refs(ph.Opponents[id])
+		}
+		for _, r := range ph.HalfByes[id] {
+			// Un demi-point dès que la ronde est ouverte ; pas celui de la ronde qu'on réapparie.
+			if r <= ph.Round && (ph.sansRonde == 0 || r < ph.sansRonde) {
+				e.HalfByes++
+			}
 		}
 		if pl := s.Players[id]; pl != nil {
 			e.Club, e.Country, e.Rating, e.Seed = pl.Club, pl.Country, pl.Rating, pl.Seed

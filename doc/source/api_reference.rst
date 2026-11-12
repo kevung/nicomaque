@@ -42,7 +42,8 @@ Constantes
   ``ActWait``, ``ActCancelMatch`` (annulation proposée d'un match devenu incohérent),
   ``ActRepechage`` (repêchage proposé d'un suivant de poule) ;
 - ``EventKind`` : ``EvCreated``, ``EvPlayerAdded``, ``EvPlayerWithdrawn``, ``EvPlayerUpdated``,
-  ``EvPlayerUnavailable``, ``EvPlayerAvailable``, ``EvMatchStarted``, ``EvResult``,
+  ``EvPlayerUnavailable``, ``EvPlayerAvailable``, ``EvHalfBye``, ``EvHalfByeCancelled``,
+  ``EvMatchStarted``, ``EvResult``,
   ``EvResultCorrected``, ``EvMatchCancelled``, ``EvBye``, ``EvDraw``, ``EvNextPhase``,
   ``EvRepechage``, ``EvLengthChanged``, ``EvConfigChanged``, ``EvReopened``, ``EvTableChanged``,
   ``EvFinished``, ``EvNote`` ;
