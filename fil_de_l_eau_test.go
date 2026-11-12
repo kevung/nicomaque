@@ -254,3 +254,65 @@ func TestFilDeLEauEvitementBorne(t *testing.T) {
 	}
 	t.Error("le reste de la ronde 3 s'apparie de même borné à 2 ou à 3 rondes : avoid_rounds ignore la ronde appariée")
 }
+
+// TestFilDeLEauEvitementBorneCompte : dans les rondes que la borne couvre, le fil de l'eau
+// évite les clubs autant que l'évitement permanent — même quand ces rondes s'apparient alors
+// qu'une ronde hors borne est déjà ouverte. Les rondes se chevauchent : tout ce qui est
+// proposé est lancé, les résultats tombent un par un dans un ordre tiré.
+func TestFilDeLEauEvitementBorneCompte(t *testing.T) {
+	t.Parallel()
+	const borne = 2
+	mêmeClub := func(n int, g int64, rondesÉvitées int) (mêmes, matchs int) {
+		cfg := filDeLEau(4)
+		cfg.Phases[0].AvoidClubs, cfg.Phases[0].AvoidRounds = true, rondesÉvitées
+		d := piloter(t, cfg, g, champClubs(n, 3))
+		rng := rand.New(rand.NewSource(g*100 + int64(n)))
+		for pas := 0; pas < 2000 && !d.st.Finished; pas++ {
+			for _, a := range d.st.Propose() {
+				if a.Kind == tournoi.ActStartMatch || a.Kind == tournoi.ActBye {
+					d.confirm(a)
+				}
+			}
+			var enCours []tournoi.MatchID
+			for _, id := range d.st.MatchOrder {
+				if d.st.Matches[id].Status == tournoi.Running {
+					enCours = append(enCours, id)
+				}
+			}
+			if len(enCours) == 0 {
+				break
+			}
+			m := d.st.Matches[enCours[rng.Intn(len(enCours))]]
+			gagnant := m.A
+			if rng.Intn(2) == 0 {
+				gagnant = m.B
+			}
+			d.must(tournoi.ResultEvent(m.ID, gagnant, m.Length, 0, d.now))
+		}
+		for _, id := range d.st.MatchOrder {
+			if m := d.st.Matches[id]; m.Status != tournoi.Cancelled && m.Round <= borne {
+				matchs++
+				if d.st.Players[m.A].Club == d.st.Players[m.B].Club {
+					mêmes++
+				}
+			}
+		}
+		return mêmes, matchs
+	}
+	for _, n := range []int{7, 12} {
+		var bornés, permanents, matchs int
+		for g := int64(0); g < 40; g++ {
+			b, mb := mêmeClub(n, g, borne)
+			p, mp := mêmeClub(n, g, 0)
+			if mb != mp || mb != borne*(n/2) {
+				t.Fatalf("%d joueurs, graine %d : %d et %d matchs en rondes 1-%d", n, g, mb, mp, borne)
+			}
+			bornés, permanents, matchs = bornés+b, permanents+p, matchs+mb
+		}
+		t.Logf("%d joueurs : %d rencontres de même club sur %d en rondes 1-%d, borné ; %d en évitement permanent", n, bornés, matchs, borne, permanents)
+		if bornés != permanents {
+			t.Errorf("%d joueurs : %d rencontres de même club en rondes 1-%d avec avoid_rounds %d, %d en évitement permanent",
+				n, bornés, borne, borne, permanents)
+		}
+	}
+}

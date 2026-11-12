@@ -109,6 +109,7 @@ func (g *gardien) apres(st *tournoi.State, ev tournoi.Event) {
 // TestStatutsInvariants : tous les formats de la matrice, plus les entrées top:N et all qui
 // rendent un parcours fini indécis ou qualifiant.
 func TestStatutsInvariants(t *testing.T) {
+	t.Parallel() // indépendant des autres : la boucle -short garde de la marge
 	cfgs := configs()
 	cfgs["suisse_top4_tableau"] = tournoi.Config{Name: "Suisse puis top 4", Phases: []tournoi.PhaseConfig{
 		{Kind: tournoi.KindSwissLives, Length: 5, Target: 8},
