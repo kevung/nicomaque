@@ -299,6 +299,8 @@ func (w Warning) String() string {
 		return fmt.Sprintf("table %d : %s et %s y sont en cours tous les deux", w.Table, w.Other, w.Match)
 	case WarnCorrectionEliminatesRunning:
 		return fmt.Sprintf("match %s : %s n'a plus de vie depuis une correction, et joue encore", w.Match, w.Player)
+	case WarnBarrageStale:
+		return fmt.Sprintf("%s : une correction a changé les ex æquo de la poule, le barrage reste celui du tirage", sectionName(w.Section))
 	case WarnCorrectionRevives:
 		return fmt.Sprintf("%s retrouve une vie après une correction : de nouveau appariable", w.Player)
 	}

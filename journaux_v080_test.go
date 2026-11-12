@@ -57,10 +57,15 @@ func TestJournauxV080(t *testing.T) {
 	}
 	pas, écarts := 0, map[string]int{}
 	for _, tm := range témoins {
+		s, err := tournoi.Replay(tm.Journal[:1])
+		if err != nil {
+			t.Fatalf("%s : %v", tm.Name, err)
+		}
 		for i := range tm.Journal {
-			s, err := tournoi.Replay(tm.Journal[:i+1])
-			if err != nil {
-				t.Fatalf("%s, pas %d : %v", tm.Name, i, err)
+			if i > 0 {
+				if err := s.Apply(tm.Journal[i]); err != nil {
+					t.Fatalf("%s, pas %d : %v", tm.Name, i, err)
+				}
 			}
 			pas++
 			acts := s.Propose()

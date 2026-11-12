@@ -118,6 +118,11 @@ func (s *State) propose(now time.Time, ext External) []Action {
 
 // phaseDone : la phase n'a plus rien à jouer (rules.PhaseDone).
 func (s *State) phaseDone(ph *PhaseState) bool {
+	// Un seul entrant dans une phase qui suit une autre : rien ne s'y tire ni ne s'y joue, il
+	// en est le vainqueur. Sans cela la phase attendrait sans fin (no_pairing).
+	if ph.Index > 0 && !ph.Drawn && !ph.Started && len(ph.Entrants) == 1 {
+		return true
+	}
 	if ph.Cfg.Kind == KindSwissRounds {
 		return s.swissDone(ph)
 	}

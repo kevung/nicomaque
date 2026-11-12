@@ -54,7 +54,7 @@ func (s *State) proposeSwiss(ph *PhaseState) []Action {
 		return nil
 	}
 	r := 0
-	if ph.Cfg.Mode == "rounds" {
+	if byRounds(ph.Cfg) {
 		if ph.Round > 0 {
 			if rest := s.roundRest(ph, ph.Round); len(rest) > 0 {
 				return rest
@@ -101,7 +101,7 @@ func (s *State) proposeSwiss(ph *PhaseState) []Action {
 // ceux qu'un Propose de cet instant aurait appariés. Appelée par Apply AVANT d'appliquer
 // l'événement, quand ses joueurs sont encore libres.
 func (s *State) openRound(ph *PhaseState, r int) {
-	if !swissKind(ph.Cfg.Kind) || ph.Cfg.Mode != "rounds" || r <= ph.Round {
+	if !swissKind(ph.Cfg.Kind) || !byRounds(ph.Cfg) || r <= ph.Round {
 		return
 	}
 	ph.Roster = s.free(ph, r)

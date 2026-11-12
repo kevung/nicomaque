@@ -230,3 +230,14 @@ func TestDemiExemptionRegles(t *testing.T) {
 		t.Error("demi-exemption acceptée sur un suisse à vies")
 	}
 }
+
+// TestDemiExemptionStatut : pendant sa ronde, un demi-exempté est exempt, pas « en jeu ».
+func TestDemiExemptionStatut(t *testing.T) {
+	cfg := tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3}}}
+	d := piloter(t, cfg, 1, champClubs(6, 0))
+	d.must(tournoi.HalfByeEvent("p00", 0, 1, d.now))
+	d.confirm(d.st.Propose()[0])
+	if s := d.st.StatusOf("p00"); s.Kind != tournoi.StatusBye || s.Round != 2 {
+		t.Fatalf("demi-exempté pendant la ronde 1 : %+v", s)
+	}
+}

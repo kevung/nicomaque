@@ -827,3 +827,47 @@ func (v *vue) repecher(base []Ref) []Ref {
 	}
 	return out
 }
+
+// StaleBarrages : les barrages tirés dont les joueurs ne sont plus ceux que les poules
+// désignent — une correction de poule est passée après le tirage. Les retirés ne comptent pas :
+// un retrait ne refait pas un barrage.
+func StaleBarrages(p Phase) []string {
+	v := voir(&p)
+	var out []string
+	for i := range v.Sections {
+		bs := v.Sections[i]
+		if bs.Kind != SectionBarrage {
+			continue
+		}
+		var attendus []Ref
+		if bs.Name == FinalBarrageName {
+			if attendus = v.finalistes(); attendus == nil {
+				continue
+			}
+		} else {
+			for j := range v.Sections {
+				if pool := v.Sections[j]; pool.Kind == SectionPool && BarrageSectionName(pool.Name) == bs.Name {
+					attendus, _ = v.poolTie(pool)
+				}
+			}
+		}
+		a, b := map[Ref]bool{}, map[Ref]bool{}
+		for _, x := range attendus {
+			a[x] = !v.withdrawn[x]
+		}
+		for _, x := range bs.Players {
+			b[x] = !v.withdrawn[x]
+		}
+		stale := false
+		for x, ok := range a {
+			stale = stale || ok && !b[x]
+		}
+		for x, ok := range b {
+			stale = stale || ok && !a[x]
+		}
+		if stale {
+			out = append(out, bs.Name)
+		}
+	}
+	return out
+}

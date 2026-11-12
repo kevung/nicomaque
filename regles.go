@@ -167,6 +167,9 @@ func withdrawnRefs(w map[PlayerID]bool) []rules.Ref {
 // ---- Instantané d'une phase ----
 
 func phaseRules(c PhaseConfig) rules.PhaseRules {
+	if c.Kind == KindSwissRounds {
+		c.Mode, c.Lives = "rounds", swissRoundsLives
+	}
 	return rules.PhaseRules{Lives: c.Lives, Rounds: c.Rounds, Length: c.Length, FinalLength: c.FinalLength, Lengths: c.Lengths,
 		LengthLate: c.LengthLate, LateThreshold: c.LateThreshold, Mode: c.Mode, Pairing: c.Pairing, MonradWiden: c.MonradWiden,
 		AvoidClubs: c.AvoidClubs, AvoidCountries: c.AvoidCountries, AvoidRounds: c.AvoidRounds, AvoidExcept: c.AvoidExcept, AllowRematch: c.AllowRematch, Target: c.Target, Consolation: c.Consolation,
@@ -366,7 +369,7 @@ func (s *State) RulesPhase(i int) *rules.Phase {
 		v := *s
 		v.clock = s.Last
 		r := 0
-		if ph.Cfg.Mode == "rounds" {
+		if byRounds(ph.Cfg) {
 			r = ph.Round + 1
 		}
 		free = v.free(ph, r)

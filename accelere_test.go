@@ -233,3 +233,37 @@ func TestAccelereValidate(t *testing.T) {
 		}
 	}
 }
+
+// TestAccelerePointVirtuelAvecDepartage : avec un départage, l'ordre dans un groupe de points
+// ne suffit plus à réunir par hasard les vainqueurs du haut — seule la ronde 2 appariée sur le
+// total (points réels + point virtuel) met face à face des joueurs de même total.
+func TestAccelerePointVirtuelAvecDepartage(t *testing.T) {
+	for _, n := range []int{8, 16, 24, 32} {
+		for g := int64(0); g < 6; g++ {
+			cfg := accéléré(4)
+			cfg.Phases[0].Tiebreak = []string{tournoi.TiebreakPointDiff}
+			d := piloter(t, cfg, g, joueursNumérotés(n, nil))
+			for i, a := range d.st.Propose() {
+				d.confirm(a)
+				id := d.st.MatchOrder[len(d.st.MatchOrder)-1]
+				w := a.A
+				if (int64(i)*5+g*3+int64(n))%4 == 0 {
+					w = a.B
+				}
+				d.must(tournoi.ResultEvent(id, w, 7, i%6, d.now))
+			}
+			total := map[tournoi.PlayerID]int{}
+			for _, e := range d.st.RulesPhase(0).Entrants {
+				total[tournoi.PlayerID(e.Player)] = e.Wins
+				if e.TopHalf {
+					total[tournoi.PlayerID(e.Player)]++
+				}
+			}
+			for _, a := range d.st.Propose() {
+				if a.Kind == tournoi.ActStartMatch && total[a.A] != total[a.B] {
+					t.Fatalf("n=%d graine %d, ronde 2 : %s (total %d) contre %s (total %d)", n, g, a.A, total[a.A], a.B, total[a.B])
+				}
+			}
+		}
+	}
+}

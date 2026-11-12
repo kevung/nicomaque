@@ -286,15 +286,25 @@ Algorithme :
              si p.Seeding ∉ {"", "rating", "seed"} → erreur « seeding inconnu »
          défaut : erreur « type inconnu »
 
+       si p.Entry == "top:N" avec N < 2 → erreur « une phase d'un seul entrant ne se joue pas »
        si p.Entry == ""  → p.Entry = "survivors"
        si p.BatchMinutes != 0 et p.Kind != swiss_lives → erreur
        si p.Seeding != "" et p.Kind ∉ {bracket, lives_bracket, swiss_rounds, round_robin} → erreur
        si p.Groups != 0 et p.Kind != round_robin               → erreur
        si p.FinalBarrage et p.Kind != round_robin              → erreur
-       si p.Tiebreak non vide et p.Kind != swiss_rounds        → erreur
+       si p.Tiebreak non vide et p.Kind ∉ {swiss_rounds, round_robin} → erreur
+       si p.Tiebreak porte un critère inconnu                  → erreur
+       si p.AvoidCountries et p.Kind ∉ {swiss_lives, swiss_rounds} → erreur
+       si p.AvoidRounds < 0, ou p.AvoidRounds != 0 hors swiss_rounds ou sans avoid_clubs ni avoid_countries → erreur
+       si p.AvoidExcept non vide sans avoid_clubs              → erreur
+       si p.MonradWiden sans p.Pairing == "monrad"             → erreur
        si p.Accelerated et p.Kind != swiss_rounds              → erreur
 
-``Entry`` n'est pas vérifiée : une valeur inconnue fait entrer les survivants, mais avec les vies
+Dans un ``swiss_rounds``, ``lives`` et ``mode`` ne se règlent pas : ``Validate`` les efface (un
+journal plus ancien peut porter ``lives: 1048576`` et ``mode: "rounds"``, qui restent lus), et le
+moteur les calcule.
+
+Hors ``top:N``, ``Entry`` n'est pas vérifiée : une valeur inconnue fait entrer les survivants, mais avec les vies
 par défaut du format (pas leurs vies restantes), et un ``top:N`` illisible donne une phase vide
 (voir :ref:`etat`).
 

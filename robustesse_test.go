@@ -177,7 +177,24 @@ func cohérent(t *testing.T, st *tournoi.State) {
 	}
 }
 
-func cfgFuzz() tournoi.Config {
+// cfgFuzz : la configuration que choisit le premier octet du plan — le suisse à vies d'origine,
+// puis les formats plus récents, pour que leurs événements (half_bye) et leurs appariements
+// soient atteints.
+func cfgFuzz(k byte) tournoi.Config {
+	switch k % 4 {
+	case 1:
+		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3, Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakBuchholz},
+				AvoidClubs: true, AvoidRounds: 2},
+			{Kind: tournoi.KindBracket, Length: 7, Entry: "top:4", Seeding: tournoi.SeedingManual}}}
+	case 2:
+		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 4, Pairing: tournoi.PairingMonrad, MonradWiden: true}}}
+	case 3:
+		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 2, Qualifiers: 1, FinalBarrage: true,
+				Tiebreak: []string{tournoi.TiebreakPointDiff}}}}
+	}
 	return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
 		{Kind: tournoi.KindSwissLives, Length: 7, Target: 4},
 		{Kind: tournoi.KindLivesBracket, Length: 9}}}
@@ -193,14 +210,25 @@ func FuzzApply(f *testing.F) {
 	f.Add([]byte{0, 0, 0, 1, 1, 1, 2, 0, 0, 3, 0, 0, 4, 1, 2})
 	f.Add([]byte{1, 0, 0, 1, 1, 0, 2, 0, 5, 2, 1, 9, 6, 0, 0, 5, 0, 0})
 	f.Add([]byte{7, 3, 3, 8, 0, 0, 1, 2, 2, 2, 2, 2, 3, 3, 3})
+	// Les formats plus récents : suisse classique (demi-exemptions posées puis retirées),
+	// Monrad, poules à barrage final.
+	f.Add([]byte{0x1e, 0, 1, 0x1e, 1, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0x0f, 0, 1, 0, 0, 0, 9, 3, 3})
+	f.Add([]byte{0x2e, 2, 1, 0, 0, 0, 0, 0, 0, 2, 0, 1, 2, 1, 0, 3, 0, 0, 0, 0, 0})
+	f.Add([]byte{0x30, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 1, 1, 3, 0, 1, 6, 0, 0, 0, 0, 0})
 	f.Fuzz(func(t *testing.T, plan []byte) {
 		now := time.Date(2026, 9, 7, 9, 0, 0, 0, time.UTC)
-		st, _, err := tournoi.New(cfgFuzz(), 1, now)
+		// Le quartet haut du premier octet choisit le format : les plans d'avant gardent le leur.
+		var format byte
+		if len(plan) > 0 {
+			format = plan[0] >> 4
+		}
+		st, _, err := tournoi.New(cfgFuzz(format), 1, now)
 		if err != nil {
 			t.Fatal(err)
 		}
 		for i := 0; i < 8; i++ {
-			p := tournoi.Player{ID: tournoi.PlayerID(fmt.Sprintf("p%d", i)), Name: fmt.Sprintf("J%d", i)}
+			p := tournoi.Player{ID: tournoi.PlayerID(fmt.Sprintf("p%d", i)), Name: fmt.Sprintf("J%d", i),
+				Club: fmt.Sprint(i % 3), Seed: i + 1}
 			if err := st.Apply(tournoi.PlayerAddedEvent(p, now)); err != nil {
 				t.Fatal(err)
 			}
@@ -248,9 +276,13 @@ func FuzzApply(f *testing.F) {
 			case 8:
 				ev = tournoi.PlayerAddedEvent(tournoi.Player{ID: joueur(b), Name: "R"}, now)
 			case 9:
-				cfg := cfgFuzz()
-				cfg.Phases[0].Target = 1 << (int(b) % 4)
-				cfg.Phases[1].Length = 1 + int(c)%20
+				cfg := cfgFuzz(format)
+				if cfg.Phases[0].Kind == tournoi.KindSwissLives {
+					cfg.Phases[0].Target = 1 << (int(b) % 4)
+				} else if cfg.Phases[0].Kind == tournoi.KindSwissRounds {
+					cfg.Phases[0].Rounds = 1 + int(b)%5
+				}
+				cfg.Phases[len(cfg.Phases)-1].Length = 1 + int(c)%20
 				ev = tournoi.ConfigChangedEvent(cfg, now)
 			case 10:
 				ev = tournoi.TableChangedEvent(match(b), int(c)%6, now)

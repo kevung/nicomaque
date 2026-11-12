@@ -507,7 +507,9 @@ func (s *State) entryLives(next, prev *PhaseState, p PlayerID) int {
 
 func livesFor(cfg PhaseConfig) int {
 	switch cfg.Kind {
-	case KindSwissLives, KindSwissRounds:
+	case KindSwissRounds:
+		return swissRoundsLives
+	case KindSwissLives:
 		return cfg.Lives
 	case KindGSL:
 		return 2
@@ -665,6 +667,14 @@ func (s *State) check() []Warning {
 		}
 		if m.Status == Finished && m.Length > 0 && (m.ScoreA > m.Length || m.ScoreB > m.Length) {
 			w = append(w, Warning{Code: WarnScoreOverLength, Match: m.ID, Length: m.Length, ScoreA: m.ScoreA, ScoreB: m.ScoreB})
+		}
+	}
+	for _, ph := range s.Phases {
+		if ph.Cfg.Kind != KindRoundRobin || !ph.Drawn {
+			continue
+		}
+		for _, name := range rules.StaleBarrages(s.bilan(ph)) {
+			w = append(w, Warning{Code: WarnBarrageStale, Section: name})
 		}
 	}
 	w = append(w, s.swissCorrections()...)

@@ -7,6 +7,22 @@ Les versions suivent la numérotation sémantique. Une sortie du moteur qui chan
 (proposition, classement) donne une version mineure. Le format du journal est versionné
 indépendamment (champ ``version`` de chaque événement, voir :ref:`annexe_tests`).
 
+0.9.0 — novembre 2026
+---------------------
+
+- Suisse classique à rondes fixes (``swiss_rounds``), avec départage arithmétique
+  (``tiebreak``), appariement Monrad (``pairing: "monrad"``, ``monrad_widen``), têtes de série
+  saisies (``seeding: "seed"``), accélération (``accelerated``) et demi-exemptions annoncées
+  (``half_bye``).
+- Poules : nombre de poules (``groups``), serpentin, classement par départage ; barrage final
+  entre premiers de poule en option (``final_barrage``), éteinte par défaut.
+- Évitement par pays (``avoid_countries``), borné aux premières rondes (``avoid_rounds``), club
+  hôte exclu (``avoid_except``).
+- Un tournoi commencé sous 0.8.0 se poursuit à l'identique : mêmes propositions, mêmes statuts,
+  même classement.
+- Une phase d'un seul entrant ne bloque plus le tournoi ; ``entry: "top:1"`` est refusé.
+- Avertissement ``barrage_stale`` : une poule corrigée après le tirage de son barrage.
+
 0.8.0 — 28 octobre 2026
 -----------------------
 

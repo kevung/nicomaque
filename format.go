@@ -3,6 +3,8 @@ package tournoi
 import (
 	"encoding/json"
 	"fmt"
+	"strconv"
+	"strings"
 
 	"github.com/kevung/nicomaque/rules"
 )
@@ -33,8 +35,14 @@ const (
 
 // swissRoundsLives : dans un suisse classique personne n'est éliminé. Chacun porte un nombre de
 // vies qu'aucun nombre de rondes n'épuise — un artifice de la mécanique partagée avec le suisse
-// à vies, pas un réglage : il ne dépend pas de Rounds, qui peut changer en cours de tournoi.
+// à vies, pas un réglage : il ne dépend pas de Rounds, qui peut changer en cours de tournoi. Il
+// se CALCULE (livesFor, byRounds, phaseRules) et ne s'écrit pas dans la configuration, donc pas
+// dans le journal ; Validate efface les valeurs qu'un journal plus ancien y a laissées.
 const swissRoundsLives = 1 << 20
+
+// byRounds : la phase s'apparie ronde par ronde — le suisse classique toujours, le suisse à
+// vies en mode « rounds ».
+func byRounds(c PhaseConfig) bool { return c.Kind == KindSwissRounds || c.Mode == "rounds" }
 
 // Config décrit un tournoi : une suite de phases.
 type Config struct {
@@ -222,7 +230,7 @@ func (c *Config) Validate() error {
 			if p.Accelerated && p.Pairing == PairingMonrad {
 				return fmt.Errorf("phase %d : accelerated et pairing %q s'excluent", i, PairingMonrad)
 			}
-			p.Mode, p.Lives = "rounds", swissRoundsLives
+			p.Mode, p.Lives = "", 0
 			if err := p.validateTiebreak(i); err != nil {
 				return err
 			}
@@ -265,6 +273,9 @@ func (c *Config) Validate() error {
 			}
 		default:
 			return fmt.Errorf("phase %d : type %q inconnu", i, p.Kind)
+		}
+		if n, err := strconv.Atoi(strings.TrimPrefix(p.Entry, "top:")); strings.HasPrefix(p.Entry, "top:") && err == nil && n < 2 {
+			return fmt.Errorf("phase %d : entry %q — une phase d'un seul entrant ne se joue pas", i, p.Entry)
 		}
 		if p.Entry == "" {
 			p.Entry = "survivors"

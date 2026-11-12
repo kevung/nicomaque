@@ -30,6 +30,20 @@ Règles
 - **Poules en dernière phase** : sans ``final_barrage``, plusieurs poules donnent un premier par
   poule, et une poule unique ne désigne un vainqueur que si ``qualifiers`` vaut 1 ou si son
   premier est seul en tête. Un tableau d'un seul qualifié ne se tire pas.
+- **Barrage tiré puis poule corrigée** : un barrage (de poule ou final) n'est pas recalculé. Si
+  une correction de résultat de poule, passée après son tirage, change les joueurs que la poule
+  désigne, le barrage se joue entre ceux du tirage et l'avertissement ``barrage_stale`` le
+  signale ; au directeur d'annuler ses matchs s'il veut le refaire.
+- **Ronde de demi-exemptés seuls** : si, après des retraits, tous les joueurs restants d'une
+  ronde de suisse classique sont demi-exemptés, rien ne s'apparie et le moteur attend
+  (``no_pairing``) ; retirer une demi-exemption débloque la ronde.
+- **Entrée** ``top:N`` **et ex æquo** : ``top:N`` coupe dans l'ordre du classement de la phase précédente,
+  sans départager des ex æquo à la frontière ; sans ``tiebreak``, deux joueurs à égalité peuvent
+  se trouver de part et d'autre de la coupe. ``top:1`` est refusé.
+- **Plus de rondes que d'adversaires** : un suisse classique dont ``rounds`` dépasse le nombre
+  d'adversaires possibles (effectif moins un) reste jouable, par revanches, mais ``Propose``
+  y ralentit nettement. ``Validate`` ne borne pas ``rounds`` : l'effectif n'est pas connu à la
+  configuration.
 - **Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a pas été éprouvée en
   conditions réelles (durée du barrage).
 - **Classement des places non gagnantes** : les règles (par tour atteint en tableau, par

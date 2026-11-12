@@ -130,3 +130,69 @@ func TestPoulesDepartageValidate(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+// TestBarrageFinalCorrectionAvertit : une correction de poule passée après le tirage du barrage
+// final change les premiers de poule ; le barrage reste celui du tirage, et le TD en est averti.
+func TestBarrageFinalCorrectionAvertit(t *testing.T) {
+	cfg := tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindRoundRobin, Length: 5, GroupSize: 4, Qualifiers: 1, FinalBarrage: true}}}
+	d := piloter(t, cfg, 1, champClubs(8, 0))
+	final := func() *tournoi.Section {
+		for _, sec := range d.st.Phases[0].Sections {
+			if sec.Name == "barrage:final" {
+				return sec
+			}
+		}
+		return nil
+	}
+	périmé := func() bool {
+		for _, w := range d.st.Warnings {
+			if w.Code == tournoi.WarnBarrageStale && w.Section == "barrage:final" {
+				return true
+			}
+		}
+		return false
+	}
+	d.jouer(func() bool { return final() != nil })
+	if final() == nil || périmé() {
+		t.Fatalf("barrage final attendu, sans avertissement : %v", d.st.Warnings)
+	}
+	x := final().Players[0]
+	for _, id := range d.st.MatchOrder {
+		if m := d.st.Matches[id]; m.Winner == x {
+			o := m.A
+			if o == x {
+				o = m.B
+			}
+			d.must(tournoi.CorrectionEvent(id, o, m.Length, 0, d.now))
+		}
+	}
+	if !périmé() {
+		t.Fatalf("pas d'avertissement barrage_stale après la correction : %v", d.st.Warnings)
+	}
+	d.rejouable()
+}
+
+// TestUnSeulQualifie : une phase d'un seul entrant ne bloque pas le tournoi — elle est refusée
+// à la validation quand la configuration le dit (top:1), et son entrant est le vainqueur quand
+// cela arrive en cours.
+func TestUnSeulQualifie(t *testing.T) {
+	refusée := tournoi.Config{Phases: []tournoi.PhaseConfig{
+		{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3}, {Kind: tournoi.KindBracket, Length: 5, Entry: "top:1"}}}
+	if refusée.Validate() == nil {
+		t.Error("entry top:1 accepté")
+	}
+	cfg := tournoi.Config{Phases: []tournoi.PhaseConfig{
+		{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 1, Qualifiers: 1}, {Kind: tournoi.KindBracket, Length: 5}}}
+	d := piloter(t, cfg, 2, champClubs(5, 0))
+	d.jouer(nil)
+	if !d.st.Finished {
+		t.Fatalf("tournoi bloqué : %v", d.st.Propose())
+	}
+	if n := len(d.st.Final); n != 5 || d.st.Final[0].Rank != 1 || d.st.Final[1].Rank == 1 {
+		t.Fatalf("classement final : %v", d.st.Final)
+	}
+	if s := d.st.StatusOf(d.st.Final[0].Player); s.Kind != tournoi.StatusWinner {
+		t.Errorf("statut du vainqueur : %+v", s)
+	}
+	d.rejouable()
+}

@@ -19,11 +19,16 @@ Nom                  Phases
 ``suisse_rondes``    suisse 2 vies par rondes (``tournoi-td`` seulement)
 ``suisse_tableau``   suisse 2 vies, ``target: 16``, puis tableau à vies (9 points, finale en
                      11)
+``suisse_classique`` suisse classique en 5 rondes
+``suisse_departage`` suisse classique en 5 rondes, têtes de série saisies, départage (écart
+                     de points, Buchholz)
+``suisse_accelere``  suisse classique accéléré en 5 rondes, départage
 ``gsl``              blocs GSL, ``target: 16``, puis tableau à vies
 ``elim``             élimination simple (9 points, finale en 11)
 ``conso``            tableau principal, consolante et dernière chance
 ``double``           double élimination (consolante, réconciliation, recharge)
 ``poules``           poules de 4 (2 qualifiés, matchs en 5), puis tableau
+``poule_unique``     une poule (toutes rondes), classée par départage, barrage final
 ==================== ========================================================================
 
 ``cmd/tournoi-demo``

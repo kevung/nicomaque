@@ -42,7 +42,7 @@ func (s *State) applyAbsence(ev Event) error {
 		return fmt.Errorf("indisponibilité de %s : une heure OU une ronde de retour, pas les deux", ev.ID)
 	}
 	if a.Round > 0 {
-		if ph := s.phase(); ph == nil || !swissKind(ph.Cfg.Kind) || ph.Cfg.Mode != "rounds" {
+		if ph := s.phase(); ph == nil || !swissKind(ph.Cfg.Kind) || !byRounds(ph.Cfg) {
 			return fmt.Errorf("indisponibilité de %s jusqu'à la ronde %d : la phase en cours n'a pas de rondes", ev.ID, a.Round)
 		}
 	}
@@ -73,7 +73,7 @@ func (s *State) absent(p PlayerID, r int) bool {
 // roundProposed : la ronde que le suisse par rondes propose en ce moment — la ronde ouverte si
 // des appariements en restent, sinon la suivante. 0 hors rondes.
 func (s *State) roundProposed(ph *PhaseState) int {
-	if !swissKind(ph.Cfg.Kind) || ph.Cfg.Mode != "rounds" {
+	if !swissKind(ph.Cfg.Kind) || !byRounds(ph.Cfg) {
 		return 0
 	}
 	if ph.Round > 0 && len(s.roundRest(ph, ph.Round)) > 0 {
