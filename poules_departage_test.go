@@ -172,17 +172,21 @@ func TestBarrageFinalCorrectionAvertit(t *testing.T) {
 	d.rejouable()
 }
 
-// TestUnSeulQualifie : une phase d'un seul entrant ne bloque pas le tournoi — elle est refusée
-// à la validation quand la configuration le dit (top:1), et son entrant est le vainqueur quand
-// cela arrive en cours.
+// TestUnSeulQualifie : une phase d'un seul entrant ne bloque pas le tournoi — son entrant en
+// est le vainqueur, que la configuration le dise (top:1, admis : un journal v0.8.0 peut le
+// porter) ou que cela arrive en cours.
 func TestUnSeulQualifie(t *testing.T) {
-	refusée := tournoi.Config{Phases: []tournoi.PhaseConfig{
-		{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3}, {Kind: tournoi.KindBracket, Length: 5, Entry: "top:1"}}}
-	if refusée.Validate() == nil {
-		t.Error("entry top:1 accepté")
+	for nom, cfg := range map[string]tournoi.Config{
+		"top:1": {Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3}, {Kind: tournoi.KindBracket, Length: 5, Entry: "top:1"}}},
+		"un qualifié": {Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 1, Qualifiers: 1}, {Kind: tournoi.KindBracket, Length: 5}}},
+	} {
+		t.Run(nom, func(t *testing.T) { unSeulQualifie(t, cfg) })
 	}
-	cfg := tournoi.Config{Phases: []tournoi.PhaseConfig{
-		{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 1, Qualifiers: 1}, {Kind: tournoi.KindBracket, Length: 5}}}
+}
+
+func unSeulQualifie(t *testing.T, cfg tournoi.Config) {
 	d := piloter(t, cfg, 2, champClubs(5, 0))
 	d.jouer(nil)
 	if !d.st.Finished {

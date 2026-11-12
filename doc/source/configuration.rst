@@ -286,7 +286,6 @@ Algorithme :
              si p.Seeding ∉ {"", "rating", "seed"} → erreur « seeding inconnu »
          défaut : erreur « type inconnu »
 
-       si p.Entry == "top:N" avec N < 2 → erreur « une phase d'un seul entrant ne se joue pas »
        si p.Entry == ""  → p.Entry = "survivors"
        si p.BatchMinutes != 0 et p.Kind != swiss_lives → erreur
        si p.Seeding != "" et p.Kind ∉ {bracket, lives_bracket, swiss_rounds, round_robin} → erreur

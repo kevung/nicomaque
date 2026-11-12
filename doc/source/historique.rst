@@ -18,9 +18,10 @@ indépendamment (champ ``version`` de chaque événement, voir :ref:`annexe_test
   entre premiers de poule en option (``final_barrage``), éteinte par défaut.
 - Évitement par pays (``avoid_countries``), borné aux premières rondes (``avoid_rounds``), club
   hôte exclu (``avoid_except``).
-- Un tournoi commencé sous 0.8.0 se poursuit à l'identique : mêmes propositions, mêmes statuts,
-  même classement.
-- Une phase d'un seul entrant ne bloque plus le tournoi ; ``entry: "top:1"`` est refusé.
+- Un tournoi commencé sous 0.8.0 se relit et se poursuit à l'identique : mêmes propositions,
+  mêmes statuts, même classement, mêmes avertissements. Un seul écart, voulu : une phase d'un
+  seul entrant (``entry: "top:1"``, ou un seul qualifié), où 0.8.0 attendait sans fin, ne
+  bloque plus le tournoi — son entrant en est le vainqueur.
 - Avertissement ``barrage_stale`` : une poule corrigée après le tirage de son barrage.
 
 0.8.0 — 28 octobre 2026
