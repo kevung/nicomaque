@@ -305,7 +305,7 @@ func casTraces(court bool) []struct {
 						nomCas += " perturbé"
 					}
 					P, k, pert := P, k, pert
-					if court && P > 8 {
+					if court && (P > 8 || k > 0) {
 						nomCas = "" // présent dans le fichier, pas rejoué en mode court
 					}
 					out = append(out, struct {
@@ -330,6 +330,7 @@ func casTraces(court bool) []struct {
 
 // TestDoresTrace : la trace complète du moteur, comparée cas par cas au fichier doré.
 func TestDoresTrace(t *testing.T) {
+	t.Parallel() // indépendant des autres : la boucle -short garde de la marge
 	const chemin = "testdata/trace_moteur.json"
 	cas := casTraces(testing.Short() && !*majDores)
 	if *majDores {

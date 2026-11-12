@@ -18,6 +18,7 @@ func monrad(rondes int) tournoi.Config {
 // deux joueurs de mêmes points, sauf flotteur (au plus un par groupe de points). Sans
 // monrad_widen, le dernier groupe peut jouer une revanche ; avec, un champ large n'en joue aucune.
 func TestMonradInvariants(t *testing.T) {
+	t.Parallel() // indépendant des autres : la boucle -short garde de la marge
 	for _, élargi := range []bool{false, true} {
 		monradInvariants(t, élargi)
 	}
@@ -95,9 +96,14 @@ func TestMonradTirage(t *testing.T) {
 // deux joueurs de mêmes points. Les seules revanches sont celles du dernier groupe : rares sans
 // monrad_widen, absentes avec.
 func TestMonradSimulation(t *testing.T) {
+	t.Parallel() // indépendant des autres : la boucle -short garde de la marge
 	for _, élargi := range []bool{false, true} {
 		croisés, revanches, total := 0, 0, 0
-		for k := 0; k < 20; k++ {
+		graines := 20
+		if testing.Short() {
+			graines = 6
+		}
+		for k := 0; k < graines; k++ {
 			c := monrad(6)
 			c.Phases[0].MonradWiden = élargi
 			r, b := jouerRondes(t, c, 32, int64(k))

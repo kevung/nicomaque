@@ -71,7 +71,11 @@ func TestAucunTexteHumainNeSortDuMoteur(t *testing.T) {
 	for name, cfg := range configs() {
 		name, cfg := name, cfg
 		t.Run(name, func(t *testing.T) {
-			joueurs := sim.Champ(24, 6, 2, 2, 10, rand.New(rand.NewSource(7)))
+			effectif := 24
+			if testing.Short() {
+				effectif = 12
+			}
+			joueurs := sim.Champ(effectif, 6, 2, 2, 10, rand.New(rand.NewSource(7)))
 			var journal tournoi.Journal
 			r := sim.Run(cfg, joueurs, sim.Options{Seed: 7, Hook: func(st *tournoi.State, ev tournoi.Event) error {
 				journal = append(journal, ev)

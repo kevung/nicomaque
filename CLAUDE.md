@@ -13,7 +13,7 @@ La documentation `doc/` (Sphinx, français et anglais) EST la spécification du 
 
 ```bash
 go build ./...
-go test -short ./...             # la boucle de travail, sous 3 s : matrice réduite (6 effectifs × 3 graines)
+go test -short ./...             # la boucle de travail, sous 10 s : matrice réduite (6 effectifs × 2 graines)
 go test ./...                    # tout : matrice complète (8 effectifs × 8 graines), rejeu, corrections, TestParity
 go test -run '^$' -fuzz FuzzApply -fuzztime 60s ./   # fuzzing d'Apply ; FuzzReplayJournal pour les journaux
 go test -run TestFormatsInvariants ./          # un seul test
@@ -117,6 +117,6 @@ la galerie et échoue si celle du dépôt n'est plus à jour.
 
 ## Conventions de test
 
-Les tests sont des tests d'invariants par simulation, pas des tests unitaires : un nouveau format ou une nouvelle option s'ajoute dans `configs()` de `sim_test.go` pour être couvert automatiquement (vainqueur unique, classement complet, rejeu identique, aucun match entre joueurs de groupes différents, peu de rematchs). `-short` réduit la matrice à six effectifs et trois graines pour rester sous trois secondes ; la matrice complète tourne sans `-short`, donc en intégration continue.
+Les tests sont des tests d'invariants par simulation, pas des tests unitaires : un nouveau format ou une nouvelle option s'ajoute dans `configs()` de `sim_test.go` pour être couvert automatiquement (vainqueur unique, classement complet, rejeu identique, aucun match entre joueurs de groupes différents, peu de rematchs). `-short` réduit la matrice à six effectifs et deux graines (et la trace dorée aux petits effectifs d'une graine) pour rester sous dix secondes ; la matrice complète tourne sans `-short`, donc en intégration continue.
 
 Deux cibles de fuzzing gardent `Apply` : `FuzzApply` applique des suites d'événements tirées au hasard (les octets sont un PLAN, pas du JSON — du JSON aléatoire ne testerait que le décodeur), `FuzzReplayJournal` rejoue des octets quelconques présentés comme un journal. Une erreur est une réponse acceptable ; un panic ou un état incohérent, non. `testdata/journal_v0.json` est la fixture d'un journal antérieur aux codes structurés : elle ne se régénère pas. Un changement d'algorithme d'appariement se valide en plus avec `TestParity` (P(meilleur gagne), nombre de matchs, durée) comparé aux valeurs de `doc/source/annexe_etude.rst`.
