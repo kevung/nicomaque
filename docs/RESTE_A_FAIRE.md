@@ -92,7 +92,8 @@ où intervenir et comment vérifier.
   restent, y compris en tête ; `PhaseConfig.Tiebreak` (issue #3) les départage en option —
   différence de points de match plafonnés, points marqués, Buchholz — et reste VIDE par défaut.
   Le départage des poules à la place du barrage est dans l'issue #8. `pairing: "monrad"`
-  (issue #4) tire l'adversaire au sort dans le groupe de mêmes points, avec flotteurs. Restent
+  (issue #4) tire l'adversaire au sort dans le groupe de mêmes points, avec flotteurs ;
+  `monrad_widen` (éteint par défaut) élargit le dernier groupe pour éviter une revanche. Restent
   l'accélération #5 et les têtes de série saisies #6.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que

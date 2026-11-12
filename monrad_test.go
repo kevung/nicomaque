@@ -82,25 +82,34 @@ func TestMonradTirage(t *testing.T) {
 	}
 }
 
-// TestMonradSimulation : 32 joueurs, 6 rondes — tout se joue, sans revanche, et la plupart des
-// matchs opposent deux joueurs de mêmes points.
+// TestMonradSimulation : 32 joueurs, 6 rondes — tout se joue et la plupart des matchs opposent
+// deux joueurs de mêmes points. Les seules revanches sont celles du dernier groupe : rares sans
+// monrad_widen, absentes avec.
 func TestMonradSimulation(t *testing.T) {
-	croisés, total := 0, 0
-	for k := 0; k < 20; k++ {
-		r, b := jouerRondes(t, monrad(6), 32, int64(k))
-		if r.NMatches != 6*16 {
-			t.Fatalf("graine %d : %d matchs", k, r.NMatches)
+	for _, élargi := range []bool{false, true} {
+		croisés, revanches, total := 0, 0, 0
+		for k := 0; k < 20; k++ {
+			c := monrad(6)
+			c.Phases[0].MonradWiden = élargi
+			r, b := jouerRondes(t, c, 32, int64(k))
+			if r.NMatches != 6*16 {
+				t.Fatalf("graine %d : %d matchs", k, r.NMatches)
+			}
+			for _, n := range b.croisés {
+				croisés += n
+			}
+			revanches += b.revanches
+			total += b.matchs
 		}
-		if b.revanches != 0 {
-			t.Fatalf("graine %d : %d revanches", k, b.revanches)
+		if croisés*5 > total {
+			t.Errorf("élargi=%v : %d matchs sur %d entre points différents", élargi, croisés, total)
 		}
-		for _, n := range b.croisés {
-			croisés += n
+		if élargi && revanches != 0 {
+			t.Errorf("monrad_widen : %d revanches", revanches)
 		}
-		total += b.matchs
-	}
-	if croisés*5 > total {
-		t.Errorf("%d matchs sur %d entre points différents", croisés, total)
+		if revanches*50 > total {
+			t.Errorf("élargi=%v : %d revanches sur %d matchs", élargi, revanches, total)
+		}
 	}
 }
 
@@ -112,5 +121,28 @@ func TestMonradValidate(t *testing.T) {
 	c = monrad(5)
 	if err := c.Validate(); err != nil {
 		t.Fatal(err)
+	}
+}
+
+// TestMonradElargi : monrad_widen évite des revanches que le Monrad sans l'option joue dans son
+// dernier groupe, et n'en ajoute jamais sur l'ensemble des tirages.
+func TestMonradElargi(t *testing.T) {
+	strict, large := 0, 0
+	for k := 0; k < 30; k++ {
+		_, a := jouerRondes(t, monrad(6), 8, int64(k))
+		c := monrad(6)
+		c.Phases[0].MonradWiden = true
+		_, b := jouerRondes(t, c, 8, int64(k))
+		strict, large = strict+a.revanches, large+b.revanches
+	}
+	if strict == 0 {
+		t.Fatal("le Monrad sans monrad_widen ne joue aucune revanche : le cas n'est pas couvert")
+	}
+	if large >= strict {
+		t.Errorf("monrad_widen : %d revanches, %d sans l'option", large, strict)
+	}
+	c := tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, MonradWiden: true}}}
+	if err := c.Validate(); err == nil {
+		t.Error("monrad_widen accepté sans pairing monrad")
 	}
 }
