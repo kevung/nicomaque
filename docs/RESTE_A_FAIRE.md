@@ -107,7 +107,8 @@ où intervenir et comment vérifier.
 - [x] **Phase à appariement manuel** (issue #13). `KindManual` : `Propose` ne rend que l'attente
   `manual` et, sans match en cours, le passage ou la clôture ; `ManualMatchEvent` et
   `ManualByeEvent` posent une ronde, `manualCheck` (phase_manual.go) refuse le joueur hors phase,
-  retiré ou déjà placé dans la ronde. Une exemption posée ne se retire pas.
+  retiré ou déjà placé dans la ronde. Une exemption posée par erreur se retire
+  (`ManualByeCancelledEvent`, `bye_cancelled`) ; `next_phase` est refusé pendant un match.
 - [ ] **Ronde de demi-exemptés seuls et barrage périmé** : une ronde dont tous les joueurs
   restants sont demi-exemptés attend (`no_pairing`) ; un barrage dont la poule est corrigée après
   le tirage n'est pas refait (avertissement `barrage_stale`). Les deux sont dans `limites.rst` ;

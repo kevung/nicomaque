@@ -137,15 +137,66 @@ func TestManuelRefus(t *testing.T) {
 	d.must(d.st.ManualByeEvent(1, p(2), d.now))
 	refusé("exempté puis apparié", d.st.ManualMatchEvent(1, p(2), p(3), d.now))
 	refusé("exempté deux fois", d.st.ManualByeEvent(1, p(2), d.now))
+	// Une exemption posée par erreur se retire : le joueur redevient libre dans la ronde.
+	refusé("exemption absente", d.st.ManualByeCancelledEvent(1, p(3), d.now))
+	refusé("exemption d'une autre ronde", d.st.ManualByeCancelledEvent(2, p(2), d.now))
+	d.must(d.st.ManualByeCancelledEvent(1, p(2), d.now))
+	if n := d.st.Phases[0].Byes[p(2)]; n != 0 || len(d.st.Phases[0].ByeRounds[p(2)]) != 0 {
+		t.Fatalf("exemption retirée : il en reste %d (%v)", n, d.st.Phases[0].ByeRounds[p(2)])
+	}
+	refusé("exemption retirée deux fois", d.st.ManualByeCancelledEvent(1, p(2), d.now))
+	d.must(d.st.ManualMatchEvent(1, p(2), p(4), d.now))
+	d.must(tournoi.CancelEvent(d.st.MatchOrder[len(d.st.MatchOrder)-1], d.now))
+	// Tant qu'un match joue : ni passage ni clôture proposés, et un passage envoyé quand même
+	// est refusé.
+	if acts := d.st.Propose(); len(acts) != 1 || acts[0].Kind != tournoi.ActWait {
+		t.Fatalf("match en cours : %v", acts)
+	}
 	// Une ronde partielle est permise, et un match annulé libère ses joueurs dans la ronde.
 	d.must(tournoi.CancelEvent(m.MatchID, d.now))
 	d.must(d.st.ManualMatchEvent(1, p(1), p(3), d.now))
 	d.must(tournoi.PlayerWithdrawnEvent(p(5), d.now))
 	refusé("joueur retiré", d.st.ManualMatchEvent(1, p(4), p(5), d.now))
 	d.must(d.st.ManualMatchEvent(2, p(0), p(4), d.now))
-	// Un tournoi sans phase manuelle ne change pas : un match posé à la main y reste accepté.
+	d.rejouable()
+	// Un tournoi sans phase manuelle ne change pas : un match posé à la main y reste accepté,
+	// et une exemption ne s'y retire pas.
 	autre := piloter(t, tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissLives, Length: 5}}}, 1, champClubs(4, 0))
 	autre.must(autre.st.ManualMatchEvent(7, p(0), p(1), autre.now))
+	if autre.st.Apply(autre.st.ManualByeCancelledEvent(1, p(2), autre.now)) == nil {
+		t.Error("exemption retirée hors d'une phase manuelle")
+	}
+	// Deux phases : un joueur du tournoi qui n'est pas entré dans la phase manuelle n'y joue
+	// pas, et le passage de phase attend la fin des matchs.
+	deux := manuel(tournoi.PhaseConfig{Kind: tournoi.KindManual, Length: 5, Entry: "top:2"})
+	e := piloter(t, deux, 1, champClubs(4, 0))
+	e.must(e.st.ManualMatchEvent(1, p(0), p(1), e.now))
+	suivante := tournoi.Event{Version: tournoi.JournalVersion, Kind: tournoi.EvNextPhase, Time: e.now}
+	if e.st.Apply(suivante) == nil {
+		t.Fatal("next_phase accepté pendant un match")
+	}
+	e.must(tournoi.ResultEvent(e.st.MatchOrder[0], p(0), 5, 0, e.now))
+	e.must(suivante)
+	dehors := 0
+	for i := 0; i < 4; i++ {
+		entré := false
+		for _, x := range e.st.Phases[1].Entrants {
+			entré = entré || x == p(i)
+		}
+		if !entré {
+			dehors++
+			autreJoueur := e.st.Phases[1].Entrants[0]
+			if e.st.Apply(e.st.ManualMatchEvent(1, p(i), autreJoueur, e.now)) == nil {
+				t.Errorf("joueur %s hors de la phase : match accepté", p(i))
+			}
+			if e.st.Apply(e.st.ManualByeEvent(1, p(i), e.now)) == nil {
+				t.Errorf("joueur %s hors de la phase : exemption acceptée", p(i))
+			}
+		}
+	}
+	if dehors == 0 {
+		t.Fatal("top:2 sur quatre joueurs : aucun joueur hors de la phase")
+	}
 	// Une phase sans aucun match se clôt quand même.
 	vide := piloter(t, manuel(), 1, champClubs(3, 0))
 	vide.jouer(nil)

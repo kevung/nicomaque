@@ -75,6 +75,7 @@ Structure d'un événement
        EvResultCorrected EventKind = "result_corrected"
        EvMatchCancelled  EventKind = "match_cancelled"
        EvBye             EventKind = "bye"
+       EvByeCancelled    EventKind = "bye_cancelled"
        EvDraw            EventKind = "draw"
        EvNextPhase       EventKind = "next_phase"
        EvRepechage       EventKind = "repechage"
@@ -184,6 +185,8 @@ Champs utilisés par type
 | ``match_cancelled``    | ``MatchID``                                                             |
 +------------------------+-------------------------------------------------------------------------+
 | ``bye``                | ``Phase``, ``ID``, ``Round``, ``Label``                                 |
++------------------------+-------------------------------------------------------------------------+
+| ``bye_cancelled``      | ``Phase``, ``ID``, ``Round``                                            |
 +------------------------+-------------------------------------------------------------------------+
 | ``draw``               | ``Phase``, ``Section`` (barrage), ``Draw`` (obligatoire), ``Label``     |
 +------------------------+-------------------------------------------------------------------------+
@@ -486,6 +489,18 @@ Un bye ne compte ni victoire ni défaite. Il **appartient à sa ronde** : le con
 pas la ronde, ses matchs restent proposés. Il est mémorisé pour éviter d'en donner deux au même
 joueur (voir :ref:`format_suisse`).
 
+``bye_cancelled``
+~~~~~~~~~~~~~~~~~
+
+Le retrait d'une exemption posée par erreur dans une phase à appariement manuel
+(``ManualByeCancelledEvent``, voir :ref:`format_manuel`).
+
+::
+
+   si la phase est inconnue, n'est pas manual, ou est finie → erreur
+   si ev.Round n'est pas dans ph.ByeRounds[ev.ID]           → erreur
+   ph.ByeRounds[ev.ID] -= ev.Round ; ph.Byes[ev.ID]--
+
 ``draw``
 ~~~~~~~~
 
@@ -520,6 +535,7 @@ joueur (voir :ref:`format_suisse`).
 
    ph := phase courante
    si ph == nil ou s.Current+1 >= len(Config.Phases) → erreur « pas de phase suivante »
+   si ph est manual et qu'un de ses matchs joue      → erreur « match(s) en cours »
    ph.Done = true
    next := newPhaseState(s.Current+1, Config.Phases[s.Current+1])
    s.Phases += next ; s.Current++

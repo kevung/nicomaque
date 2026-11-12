@@ -44,7 +44,7 @@ Constantes
 - ``EventKind`` : ``EvCreated``, ``EvPlayerAdded``, ``EvPlayerWithdrawn``, ``EvPlayerUpdated``,
   ``EvPlayerUnavailable``, ``EvPlayerAvailable``, ``EvHalfBye``, ``EvHalfByeCancelled``,
   ``EvMatchStarted``, ``EvResult``,
-  ``EvResultCorrected``, ``EvMatchCancelled``, ``EvBye``, ``EvDraw``, ``EvNextPhase``,
+  ``EvResultCorrected``, ``EvMatchCancelled``, ``EvBye``, ``EvByeCancelled``, ``EvDraw``, ``EvNextPhase``,
   ``EvRepechage``, ``EvLengthChanged``, ``EvConfigChanged``, ``EvReopened``, ``EvTableChanged``,
   ``EvFinished``, ``EvNote`` ;
 - formats (chaînes non typées, ``PhaseConfig.Kind``) : ``KindSwissLives``, ``KindLivesBracket``,

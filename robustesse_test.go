@@ -310,6 +310,9 @@ func FuzzApply(f *testing.F) {
 				ev = st.ManualMatchEvent(int(c)%4, joueur(b), joueur(c>>2), now)
 			case 17:
 				ev = st.ManualByeEvent(int(c)%4, joueur(b), now)
+				if c&0x80 != 0 {
+					ev = st.ManualByeCancelledEvent(int(c)%4, joueur(b), now)
+				}
 			}
 			_ = st.Apply(ev) // une erreur est une réponse acceptable
 			cohérent(t, st)

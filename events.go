@@ -35,15 +35,19 @@ const (
 	EvResultCorrected  EventKind = "result_corrected" // idem, remplace le résultat précédent
 	EvMatchCancelled   EventKind = "match_cancelled"  // MatchID (match lancé par erreur)
 	EvBye              EventKind = "bye"              // Phase, Player, Label
-	EvDraw             EventKind = "draw"             // Phase, Section, Draw
-	EvNextPhase        EventKind = "next_phase"       // passage à la phase suivante
-	EvRepechage        EventKind = "repechage"        // Phase, Section (poule), A (qualifié retiré), B (repêché)
-	EvLengthChanged    EventKind = "length_changed"   // Phase, Length (matchs futurs de la phase)
-	EvConfigChanged    EventKind = "config_changed"   // Config (la configuration ENTIÈRE, voir reconfig.go)
-	EvReopened         EventKind = "reopened"         // le tournoi clos est rouvert ; Final sera recalculé
-	EvTableChanged     EventKind = "table_changed"    // MatchID, Table (match en cours déplacé)
-	EvFinished         EventKind = "finished"
-	EvNote             EventKind = "note" // Text (annotation libre du TD)
+	// EvByeCancelled : Phase, ID, Round. Une exemption posée par erreur dans une phase manuelle
+	// est retirée, tant que la phase n'est pas finie. Nulle part ailleurs : le moteur y donne
+	// lui-même les exemptions.
+	EvByeCancelled  EventKind = "bye_cancelled"
+	EvDraw          EventKind = "draw"           // Phase, Section, Draw
+	EvNextPhase     EventKind = "next_phase"     // passage à la phase suivante
+	EvRepechage     EventKind = "repechage"      // Phase, Section (poule), A (qualifié retiré), B (repêché)
+	EvLengthChanged EventKind = "length_changed" // Phase, Length (matchs futurs de la phase)
+	EvConfigChanged EventKind = "config_changed" // Config (la configuration ENTIÈRE, voir reconfig.go)
+	EvReopened      EventKind = "reopened"       // le tournoi clos est rouvert ; Final sera recalculé
+	EvTableChanged  EventKind = "table_changed"  // MatchID, Table (match en cours déplacé)
+	EvFinished      EventKind = "finished"
+	EvNote          EventKind = "note" // Text (annotation libre du TD)
 )
 
 // Event est une entrée du journal. Les champs inutiles pour un type restent vides.

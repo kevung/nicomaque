@@ -88,3 +88,39 @@ func (s *State) ManualByeEvent(round int, p PlayerID, now time.Time) Event {
 	return Event{Version: JournalVersion, Kind: EvBye, Time: now, Phase: s.Current, Round: round, ID: p,
 		Label: Label{Kind: LabelRound, N: round}}
 }
+
+// ManualByeCancelledEvent : le directeur retire l'exemption posée par erreur au joueur dans la
+// ronde round de la phase manuelle courante.
+func (s *State) ManualByeCancelledEvent(round int, p PlayerID, now time.Time) Event {
+	return Event{Version: JournalVersion, Kind: EvByeCancelled, Time: now, Phase: s.Current, Round: round, ID: p}
+}
+
+// applyByeCancelled : l'exemption du joueur dans la ronde est retirée ; il y redevient libre.
+// La ronde reste ouverte, même vide.
+func (s *State) applyByeCancelled(ev Event) error {
+	ph := s.phaseOf(ev.Phase)
+	if ph == nil || ph.Cfg.Kind != KindManual {
+		return fmt.Errorf("phase %d : une exemption ne se retire que d'une phase manuelle", ev.Phase)
+	}
+	if ph.Done {
+		return fmt.Errorf("phase %d terminée", ev.Phase)
+	}
+	if !containsRound(ph.ByeRounds[ev.ID], ev.Round) {
+		return fmt.Errorf("joueur %s : pas d'exemption dans la ronde %d", ev.ID, ev.Round)
+	}
+	var reste []int
+	for _, r := range ph.ByeRounds[ev.ID] {
+		if r != ev.Round {
+			reste = append(reste, r)
+		}
+	}
+	if len(reste) == 0 {
+		delete(ph.ByeRounds, ev.ID)
+	} else {
+		ph.ByeRounds[ev.ID] = reste
+	}
+	if ph.Byes[ev.ID]--; ph.Byes[ev.ID] <= 0 {
+		delete(ph.Byes, ev.ID)
+	}
+	return nil
+}
