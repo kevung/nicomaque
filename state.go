@@ -146,9 +146,10 @@ func Replay(j Journal) (*State, error) {
 
 // New crée l'état initial d'un tournoi et l'événement de création correspondant.
 func New(cfg Config, seed int64, now time.Time) (*State, Event, error) {
-	if err := cfg.validateAt(JournalVersion); err != nil {
+	if err := cfg.Validate(); err != nil {
 		return nil, Event{}, err
 	}
+	// Les refus de la version courante sont ceux d'Apply, sur l'événement created.
 	ev := Event{Version: JournalVersion, Kind: EvCreated, Time: now, Config: &cfg, Seed: seed}
 	s := newState()
 	if err := s.Apply(ev); err != nil {
