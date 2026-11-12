@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"testing"
+	"time"
 
 	"github.com/kevung/nicomaque"
 )
@@ -135,6 +136,8 @@ func TestRemplacementRefus(t *testing.T) {
 	refusé("ancien inconnu", tournoi.PlayerReplacedEvent("zz", neuf, d.now))
 	refusé("remplaçant déjà inscrit", tournoi.PlayerReplacedEvent("p00", tournoi.Player{ID: "p01", Name: "X"}, d.now))
 	refusé("remplaçant sans identifiant", tournoi.PlayerReplacedEvent("p00", tournoi.Player{Name: "X"}, d.now))
+	refusé("remplaçant nommé comme l'exemption", tournoi.PlayerReplacedEvent("p00", tournoi.Player{ID: tournoi.BYE, Name: "X"}, d.now))
+	refusé("inscrit nommé comme l'exemption", tournoi.PlayerAddedEvent(tournoi.Player{ID: tournoi.BYE, Name: "X"}, d.now))
 	refusé("échange avec soi-même", tournoi.PlayersSwappedEvent("p00", "p00", d.now))
 	d.must(tournoi.HalfByeEvent("p05", 0, 1, d.now))
 	refusé("demi-exemption annoncée", tournoi.PlayerReplacedEvent("p05", neuf, d.now))
@@ -152,9 +155,39 @@ func TestRemplacementRefus(t *testing.T) {
 	d.confirm(lancé)
 	refusé("match lancé", tournoi.PlayerReplacedEvent(lancé.A, neuf, d.now))
 	refusé("échange après un match lancé", tournoi.PlayersSwappedEvent(lancé.B, "p05", d.now))
-	// Un match annulé n'a rien fait jouer.
-	d.must(tournoi.CancelEvent(d.st.MatchOrder[0], d.now))
+	// Un match annulé n'a rien fait jouer ; il suit la place dans un échange, comme le rang
+	// d'inscription.
+	annulé := d.st.MatchOrder[0]
+	d.must(tournoi.CancelEvent(annulé, d.now))
+	rang := func(p tournoi.PlayerID) int {
+		for i, x := range d.st.Order {
+			if x == p {
+				return i
+			}
+		}
+		return -1
+	}
+	autre := tournoi.PlayerID("p05")
+	if autre == lancé.A || autre == lancé.B {
+		autre = "p03"
+	}
+	ra, rb := rang(lancé.B), rang(autre)
+	d.must(tournoi.PlayersSwappedEvent(lancé.B, autre, d.now))
+	if m := d.st.Matches[annulé]; m.B != autre || m.A != lancé.A {
+		t.Fatalf("échange : le match annulé porte %s et %s, attendu %s et %s", m.A, m.B, lancé.A, autre)
+	}
+	if rang(lancé.B) != rb || rang(autre) != ra {
+		t.Fatalf("échange : rangs d'inscription %d et %d, attendus %d et %d", rang(lancé.B), rang(autre), rb, ra)
+	}
+	// L'indisponibilité est au joueur : le remplaçant n'en hérite pas.
+	d.must(tournoi.PlayerUnavailableEvent(lancé.A, time.Time{}, d.now))
+	if _, ok := d.st.Unavailable[lancé.A]; !ok {
+		t.Fatalf("%s devrait être indisponible", lancé.A)
+	}
 	d.must(tournoi.PlayerReplacedEvent(lancé.A, neuf, d.now))
+	if len(d.st.Unavailable) != 0 {
+		t.Fatalf("le remplaçant hérite de l'indisponibilité : %v", d.st.Unavailable)
+	}
 	d.jouer(nil)
 	d.rejouable()
 }

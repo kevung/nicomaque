@@ -261,6 +261,7 @@ explicitement, mais l'hôte ne doit jamais le produire.
 ::
 
    si ev.Player == nil ou ev.Player.ID == "" → erreur « joueur sans identifiant »
+   si ev.Player.ID == "BYE" → erreur « identifiant réservé à l'exemption »
    si l'identifiant est inconnu → l'ajouter à s.Order
    s.Players[id] = copie de *ev.Player     (réinscription = mise à jour de la fiche)
    supprimer id de s.Withdrawn             (une réinscription annule un forfait)
@@ -319,15 +320,17 @@ figure (``remplacement.go``).
        inconnu, ou retiré                                  → erreur
        un match non annulé le porte (lancé ou terminé)     → erreur « a déjà joué »
        une demi-exemption annoncée                         → erreur « la retirer d'abord »
-   player_replaced : Player sans identifiant, ou déjà inscrit → erreur ;
+   player_replaced : Player sans identifiant, nommé "BYE", ou déjà inscrit → erreur ;
+                     l'indisponibilité de l'ancien joueur est levée ;
                      partout dans l'état, ID devient Player.ID ; la fiche est celle du
                      remplaçant, avec la tête de série (Seed) de la place
-   players_swapped : A == B → erreur ; dans les phases, l'ordre d'inscription et les matchs
-                     annulés, A et B s'échangent ; les fiches restent à leurs joueurs, leurs
-                     têtes de série (Seed) s'échangent
+   players_swapped : A == B → erreur ; dans les phases, l'ordre d'inscription, les matchs
+                     annulés, Infos et Final, A et B s'échangent ; les fiches restent à
+                     leurs joueurs, leurs têtes de série (Seed) s'échangent
 
-Une exemption déjà reçue reste à la place : un exempté n'a rien joué. L'ancien joueur d'un
-remplacement n'existe plus dans l'état, ni au classement.
+Une exemption déjà reçue reste à la place : un exempté n'a rien joué. Une indisponibilité est
+au joueur, pas à la place : le remplaçant n'en hérite pas, et un échange la laisse à celui qui
+l'a déclarée. L'ancien joueur d'un remplacement n'existe plus dans l'état, ni au classement.
 
 ``half_bye`` et ``half_bye_cancelled``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

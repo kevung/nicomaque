@@ -217,6 +217,9 @@ func (s *State) Apply(ev Event) error {
 		if ev.Player == nil || ev.Player.ID == "" {
 			return fmt.Errorf("joueur sans identifiant")
 		}
+		if ev.Player.ID == BYE {
+			return fmt.Errorf("identifiant %s réservé à l'exemption", BYE)
+		}
 		if _, ok := s.Players[ev.Player.ID]; !ok {
 			s.Order = append(s.Order, ev.Player.ID)
 		}
