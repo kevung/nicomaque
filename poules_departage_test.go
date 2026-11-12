@@ -254,3 +254,123 @@ func TestBarrageFinalRetraitNAvertitPas(t *testing.T) {
 		d.rejouable()
 	}
 }
+
+// barrageFinal pilote deux poules de quatre à un qualifié jusqu'au tirage du barrage final
+// PROPOSÉ, et rend le pilote avec les joueurs de chaque poule, du premier au dernier.
+func barrageFinal(t *testing.T, graine int64) (*pilote, map[string][]tournoi.PlayerID) {
+	t.Helper()
+	cfg := tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindRoundRobin, Length: 5, GroupSize: 4, Qualifiers: 1, FinalBarrage: true}}}
+	d := piloter(t, cfg, graine, champClubs(8, 0))
+	d.jouer(func() bool { return tirageFinalProposé(d) })
+	if !tirageFinalProposé(d) {
+		t.Fatalf("graine %d : tirage du barrage final attendu", graine)
+	}
+	poule := map[tournoi.PlayerID]string{}
+	for _, m := range d.st.Matches {
+		poule[m.A], poule[m.B] = m.Section, m.Section
+	}
+	poules := map[string][]tournoi.PlayerID{}
+	for _, l := range d.st.Ranking() {
+		poules[poule[l.Player]] = append(poules[poule[l.Player]], l.Player)
+	}
+	return d, poules
+}
+
+func tirageFinalProposé(d *pilote) bool {
+	for _, a := range d.st.Propose() {
+		if a.Kind == tournoi.ActDraw && a.Section == "barrage:final" {
+			return true
+		}
+	}
+	return false
+}
+
+func (d *pilote) finalTiré() *tournoi.Section {
+	for _, sec := range d.st.Phases[0].Sections {
+		if sec.Name == "barrage:final" {
+			return sec
+		}
+	}
+	return nil
+}
+
+func (d *pilote) barragePérimé() bool {
+	for _, w := range d.st.Warnings {
+		if w.Code == tournoi.WarnBarrageStale {
+			return true
+		}
+	}
+	return false
+}
+
+// corrige donne à gagnant le match de poule entre a et b.
+func (d *pilote) corrige(a, b, gagnant tournoi.PlayerID) {
+	d.t.Helper()
+	for _, id := range d.st.MatchOrder {
+		if m := d.st.Matches[id]; m.A == a && m.B == b || m.A == b && m.B == a {
+			d.must(tournoi.CorrectionEvent(id, gagnant, m.Length, 0, d.now))
+			return
+		}
+	}
+	d.t.Fatalf("pas de match entre %s et %s", a, b)
+}
+
+// TestBarrageFinalEgaliteApresPromotion : le premier d'une poule se retire avant le tirage,
+// son suivant est tiré ; des corrections mettent ensuite les trois restants de la poule à
+// égalité. Le barrage final est périmé — le suivant promu n'excuse pas l'égalité née après lui.
+func TestBarrageFinalEgaliteApresPromotion(t *testing.T) {
+	d, poules := barrageFinal(t, 1)
+	a := poules["poule:A"]
+	d.must(tournoi.PlayerWithdrawnEvent(a[0], d.now))
+	d.jouer(func() bool { return d.finalTiré() != nil })
+	if d.finalTiré() == nil || d.barragePérimé() {
+		t.Fatalf("barrage final attendu, sans avertissement : %v", d.st.Warnings)
+	}
+	x, z, dernier := a[1], a[2], a[3]
+	if v := map[tournoi.PlayerID]int{}; true {
+		for _, m := range d.st.Matches {
+			if m.Section == "poule:A" {
+				v[m.Winner]++
+			}
+		}
+		if v[x] != 2 || v[z] != 1 || v[dernier] != 0 {
+			t.Fatalf("poule A inattendue : %v", v)
+		}
+	}
+	d.corrige(x, z, z)
+	d.corrige(z, dernier, dernier)
+	if !d.barragePérimé() {
+		t.Fatalf("trois ex æquo en tête de poule A, un seul tiré : barrage_stale attendu, %v", d.st.Warnings)
+	}
+	d.rejouable()
+}
+
+// TestBarrageFinalRetraitsMelesNAvertitPas : chaque poule se juge seule. Un retrait avant le
+// tirage dans l'une, un retrait après le tirage dans l'autre (ou dans la même) : aucun
+// résultat n'est corrigé, aucun avertissement.
+func TestBarrageFinalRetraitsMelesNAvertitPas(t *testing.T) {
+	for graine := int64(0); graine < 4; graine++ {
+		for _, mêmePoule := range []bool{false, true} {
+			d, poules := barrageFinal(t, graine)
+			a, b := poules["poule:A"], poules["poule:B"]
+			d.must(tournoi.PlayerWithdrawnEvent(a[0], d.now))
+			d.jouer(func() bool { return d.finalTiré() != nil })
+			if d.finalTiré() == nil || len(d.st.Warnings) != 0 {
+				t.Fatalf("graine %d : barrage final attendu, sans avertissement : %v", graine, d.st.Warnings)
+			}
+			après := b[0]
+			if mêmePoule {
+				après = a[1]
+			}
+			d.must(tournoi.PlayerWithdrawnEvent(après, d.now))
+			if len(d.st.Warnings) != 0 {
+				t.Fatalf("graine %d, même poule %v, au second retrait : %v", graine, mêmePoule, d.st.Warnings)
+			}
+			d.jouer(nil)
+			if !d.st.Finished || len(d.st.Warnings) != 0 {
+				t.Fatalf("graine %d, même poule %v : fini %v, avertissements %v", graine, mêmePoule, d.st.Finished, d.st.Warnings)
+			}
+			d.rejouable()
+		}
+	}
+}
