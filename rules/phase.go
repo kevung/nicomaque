@@ -137,6 +137,7 @@ type vue struct {
 	*Phase
 	idx       map[Ref]*Entrant
 	withdrawn map[Ref]bool
+	ronde     int // suisse par rondes : la ronde en cours d'appariement (0 : Round + 1)
 }
 
 func voir(p *Phase) *vue {
