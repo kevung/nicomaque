@@ -127,10 +127,12 @@ func TestPoulesNombre(t *testing.T) {
 
 func TestPoulesNombreValidate(t *testing.T) {
 	refus := map[string]tournoi.PhaseConfig{
-		"nombre et taille": {Kind: tournoi.KindRoundRobin, Length: 5, Groups: 2, GroupSize: 4},
-		"négatif":          {Kind: tournoi.KindRoundRobin, Length: 5, Groups: -1},
-		"sur un tableau":   {Kind: tournoi.KindBracket, Length: 5, Groups: 2},
-		"seeding inconnu":  {Kind: tournoi.KindRoundRobin, Length: 5, Seeding: "elo"},
+		"nombre et taille":             {Kind: tournoi.KindRoundRobin, Length: 5, Groups: 2, GroupSize: 4},
+		"négatif":                      {Kind: tournoi.KindRoundRobin, Length: 5, Groups: -1},
+		"sur un tableau":               {Kind: tournoi.KindBracket, Length: 5, Groups: 2},
+		"seeding inconnu":              {Kind: tournoi.KindRoundRobin, Length: 5, Seeding: "elo"},
+		"barrage final sur un tableau": {Kind: tournoi.KindBracket, Length: 5, FinalBarrage: true},
+		"barrage final sur un suisse":  {Kind: tournoi.KindSwissLives, Length: 5, FinalBarrage: true},
 	}
 	for nom, p := range refus {
 		c := tournoi.Config{Phases: []tournoi.PhaseConfig{p}}
