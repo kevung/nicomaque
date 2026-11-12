@@ -154,7 +154,9 @@ sont appariés dans la ronde *k* + 1, dans l'ordre du classement :
 
 - **tant qu'un joueur joue encore sa k-ième partie**, il les rejoindra : appariement glouton,
   chacun avec le premier joueur qu'il n'a pas rencontré, **sans aucune revanche** ; qui ne trouve
-  personne attend ;
+  personne attend. Cet appariement glouton n'évite ni club ni pays (``avoid_clubs``,
+  ``avoid_countries``) : seule une ronde appariée en entier les évite, dans la limite
+  d'``avoid_rounds`` comptée sur la ronde appariée ;
 - **sinon** plus personne ne viendra : la ronde est appariée en entier, comme une ronde
   ordinaire (revanches au plus juste, exemption en effectif impair). Une exemption proposée
   arrête la proposition : confirmée, son joueur passe au compte suivant.

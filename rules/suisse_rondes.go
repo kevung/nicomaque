@@ -504,6 +504,7 @@ func (v *vue) pairRolling(seed Seed) []Pairing {
 		r := k + 1
 		rng := generateur(seed.Round(r))
 		if !attendus[k] {
+			v.ronde = r // la borne avoid_rounds vaut pour la ronde appariée, pas pour Round
 			prs := v.pairClassicRound(r, groupes[k], rng)
 			out = append(out, prs...)
 			if n := len(prs); n > 0 && prs[n-1].Kind == PairBye {

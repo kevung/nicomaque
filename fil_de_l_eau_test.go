@@ -2,6 +2,7 @@ package tournoi_test
 
 import (
 	"encoding/json"
+	"fmt"
 	"math/rand"
 	"testing"
 
@@ -52,8 +53,12 @@ func TestFilDeLEauInvariants(t *testing.T) {
 						attendus[parties(m.A)+1], attendus[parties(m.B)+1] = true, true
 					}
 				}
-				fin := false
+				fin, exempté := false, false
 				for _, a := range acts {
+					if exempté && (a.Kind == tournoi.ActStartMatch || a.Kind == tournoi.ActBye) {
+						t.Fatalf("n=%d g=%d : une exemption proposée n'arrête pas la proposition : %v", n, g, acts)
+					}
+					exempté = exempté || a.Kind == tournoi.ActBye
 					switch a.Kind {
 					case tournoi.ActStartMatch:
 						ka, kb := parties(a.A), parties(a.B)
@@ -142,4 +147,110 @@ func TestFilDeLEauSimulation(t *testing.T) {
 	if fil > rondes {
 		t.Errorf("le fil de l'eau dure plus longtemps (%.0f min) que les rondes (%.0f min)", fil/float64(graines), rondes/float64(graines))
 	}
+}
+
+// TestFilDeLEauRefus : pas de demi-exemption au fil de l'eau — il n'y a pas de ronde à manquer.
+func TestFilDeLEauRefus(t *testing.T) {
+	d := piloter(t, filDeLEau(3), 1, champClubs(6, 0))
+	if d.st.Apply(tournoi.HalfByeEvent("p05", 0, 2, d.now)) == nil {
+		t.Fatal("demi-exemption acceptée au fil de l'eau")
+	}
+	classique := filDeLEau(3)
+	classique.Phases[0].Mode = ""
+	d = piloter(t, classique, 1, champClubs(6, 0))
+	d.must(tournoi.HalfByeEvent("p05", 0, 2, d.now)) // le refus tient bien au mode
+}
+
+// filChevauché : sept joueurs, quatre rondes, des rondes qui se chevauchent — au retour, le
+// reste de la ronde 3 (trois joueurs) s'apparie en entier alors que quatre joueurs sont déjà
+// libres pour la ronde 4. Rend la dernière proposition ; faux si la graine ne construit pas le cas.
+func filChevauché(t *testing.T, cfg tournoi.Config, g int64, clubs int) ([]tournoi.Action, bool) {
+	d := piloter(t, cfg, g, champClubs(7, clubs))
+	lancer := func(r int) {
+		for _, a := range d.st.Propose() {
+			if (a.Kind == tournoi.ActStartMatch || a.Kind == tournoi.ActBye) && a.Round == r {
+				d.confirm(a)
+			}
+		}
+	}
+	enCours := func(r int) (ids []tournoi.MatchID) {
+		for _, id := range d.st.MatchOrder {
+			if m := d.st.Matches[id]; m.Status == tournoi.Running && m.Round == r {
+				ids = append(ids, id)
+			}
+		}
+		return ids
+	}
+	finir := func(id tournoi.MatchID) { d.must(tournoi.ResultEvent(id, d.st.Matches[id].A, 5, 0, d.now)) }
+	lancer(1)
+	for _, id := range enCours(1) {
+		finir(id)
+	}
+	lancer(2)
+	r2 := enCours(2)
+	if len(r2) != 3 {
+		return nil, false
+	}
+	finir(r2[0])
+	lancer(3)
+	finir(r2[1])
+	lancer(3)
+	for _, id := range enCours(3) {
+		finir(id)
+	}
+	libres := false // des joueurs libres pour la ronde 4, qu'on ne lance pas
+	for _, a := range d.st.Propose() {
+		libres = libres || a.Kind == tournoi.ActStartMatch && a.Round == 4
+	}
+	finir(r2[2])
+	return d.st.Propose(), libres
+}
+
+// TestFilDeLEauExemptionArrete : une exemption proposée arrête la proposition — les joueurs
+// libres de la ronde suivante attendent, l'exempté va les rejoindre.
+func TestFilDeLEauExemptionArrete(t *testing.T) {
+	atteints := 0
+	for g := int64(0); g < 10; g++ {
+		acts, ok := filChevauché(t, filDeLEau(4), g, 0)
+		exemption, ronde4 := false, 0
+		for _, a := range acts {
+			exemption = exemption || a.Kind == tournoi.ActBye && a.Round == 3
+			if a.Kind == tournoi.ActStartMatch && a.Round == 4 {
+				ronde4++
+			}
+		}
+		if !ok || !exemption {
+			continue
+		}
+		atteints++
+		if ronde4 != 0 {
+			t.Fatalf("graine %d : exemption proposée en ronde 3, et %d match(s) de ronde 4 avec elle : %v", g, ronde4, acts)
+		}
+	}
+	if atteints == 0 {
+		t.Fatal("aucune graine ne construit le cas : le test ne prouve rien")
+	}
+}
+
+// TestFilDeLEauEvitementBorne : avoid_rounds borne l'évitement à la ronde APPARIÉE, pas à la
+// dernière ronde ouverte. Même histoire jusque-là ; le reste de la ronde 3, apparié en entier
+// quand la ronde 4 pourrait déjà s'ouvrir, évite les clubs si la borne est 3 et pas si elle est 2.
+func TestFilDeLEauEvitementBorne(t *testing.T) {
+	for g := int64(0); g < 40; g++ {
+		var vues [2]string
+		for i, borne := range []int{2, 3} {
+			cfg := filDeLEau(4)
+			cfg.Phases[0].AvoidClubs, cfg.Phases[0].AvoidRounds = true, borne
+			acts, _ := filChevauché(t, cfg, g, 2)
+			for _, a := range acts {
+				if a.Round == 3 {
+					vues[i] += fmt.Sprintf("%s %s-%s ", a.Kind, a.A, a.B)
+				}
+			}
+		}
+		if vues[0] != "" && vues[0] != vues[1] {
+			return
+		}
+	}
+	t.Error("le reste de la ronde 3 s'apparie de même borné à 2 ou à 3 rondes : avoid_rounds ignore la ronde appariée")
 }

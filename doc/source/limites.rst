@@ -48,7 +48,9 @@ Règles
 - **Suisse classique au fil de l'eau** : après la ronde 1, le reste d'une ronde appariée en
   entier se recalcule à chaque proposition ; il peut changer quand un match est confirmé. Un
   joueur indisponible garde ses parties à jouer : la phase ne finit pas tant qu'il n'est ni
-  revenu ni retiré. ``batch_minutes`` ne s'y applique pas.
+  revenu ni retiré. ``batch_minutes`` ne s'y applique pas. L'appariement glouton — tant qu'un
+  joueur du même compte joue encore — n'évite ni club ni pays ; seule la ronde 1 et les restes
+  de ronde appariés en entier les évitent.
 - **Remplacement** : la place d'un joueur retiré ne se reprend pas (``player_replaced`` est
   refusé) ; le remplaçant s'inscrit alors comme un retardataire.
 - **Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a pas été éprouvée en
