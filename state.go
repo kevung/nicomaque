@@ -65,11 +65,14 @@ type PhaseState struct {
 	Roster []PlayerID `json:"roster,omitempty"`
 	// ByeRounds : les rondes où le joueur a reçu un bye (suisse par rondes).
 	ByeRounds map[PlayerID][]int `json:"bye_rounds,omitempty"`
-	Drawn     bool               `json:"drawn"`
-	Done      bool               `json:"done"`
-	Sections  []*Section         `json:"sections,omitempty"`
-	Length    int                `json:"length"` // longueur courante des matchs
-	Started   bool               `json:"started"`
+	// HalfByes : suisse classique, les rondes où le joueur a annoncé une demi-exemption. Elle
+	// vaut un demi-point dès que sa ronde est ouverte.
+	HalfByes map[PlayerID][]int `json:"half_byes,omitempty"`
+	Drawn    bool               `json:"drawn"`
+	Done     bool               `json:"done"`
+	Sections []*Section         `json:"sections,omitempty"`
+	Length   int                `json:"length"` // longueur courante des matchs
+	Started  bool               `json:"started"`
 	// Repechages : poules, qualifié retiré → joueur repêché à sa place (repechage.go).
 	Repechages map[PlayerID]PlayerID `json:"repechages,omitempty"`
 	// sansRonde : posé par beforeRound sur sa copie — la ronde mise de côté, que le départage
@@ -234,6 +237,10 @@ func (s *State) Apply(ev Event) error {
 		}
 		p := *ev.Player
 		s.Players[p.ID] = &p
+	case EvHalfBye, EvHalfByeCancelled:
+		if err := s.applyHalfBye(ev); err != nil {
+			return err
+		}
 	case EvPlayerUnavailable, EvPlayerAvailable:
 		if err := s.applyAbsence(ev); err != nil {
 			return err

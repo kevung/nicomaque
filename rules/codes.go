@@ -129,6 +129,8 @@ type Note struct {
 	Wins   int      `json:"wins,omitempty"`
 	Losses int      `json:"losses,omitempty"`
 	Byes   int      `json:"byes,omitempty"` // suisse classique : exemptions, qui valent une victoire
+	// HalfByes : demi-exemptions annoncées, un demi-point chacune.
+	HalfByes int `json:"half_byes,omitempty"`
 	// Départage configuré : les valeurs qui ont servi à ordonner les ex æquo.
 	PointDiff    int    `json:"point_diff,omitempty"`
 	PointsScored int    `json:"points_scored,omitempty"`

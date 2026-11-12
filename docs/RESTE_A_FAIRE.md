@@ -101,7 +101,8 @@ où intervenir et comment vérifier.
   pour une égalité complète, et des poules en dernière phase désignent un seul vainqueur par le
   barrage final (`barrage:final`). `avoid_countries`, `avoid_rounds` et `avoid_except` (issue #14)
   étendent `avoid_clubs` au pays, le bornent aux premières rondes et en sortent le club hôte ; le
-  CSV des joueurs lit et écrit le pays et la tête de série.
+  CSV des joueurs lit et écrit le pays et la tête de série. `half_bye` / `half_bye_cancelled`
+  (issue #10) : demi-exemption annoncée avant la ronde, un demi-point, pas d'appariement.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que
   d'autres n'en ont pas eu » entre groupes différents (aujourd'hui par groupe). `pairGroup`.

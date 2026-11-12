@@ -252,6 +252,7 @@ phase est ajoutée à chaque ``next_phase``. ``Config.Phases`` contient la liste
        Round     int                     `json:"round"`     // ronde synchrone / bloc GSL
        Roster    []PlayerID              `json:"roster,omitempty"`     // suisse par rondes : appelés à la ronde Round
        ByeRounds map[PlayerID][]int      `json:"bye_rounds,omitempty"` // rondes où le joueur a eu un bye
+       HalfByes  map[PlayerID][]int      `json:"half_byes,omitempty"`  // demi-exemptions annoncées, par ronde
        Drawn     bool                    `json:"drawn"`     // le tirage a eu lieu
        Done      bool                    `json:"done"`
        Sections  []*Section              `json:"sections,omitempty"`

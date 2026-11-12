@@ -166,6 +166,9 @@ func (n Note) String() string {
 		if n.Byes > 0 {
 			out += fmt.Sprintf(", %d exemptions", n.Byes)
 		}
+		if n.HalfByes > 0 {
+			out += fmt.Sprintf(", %d demi-exemptions", n.HalfByes)
+		}
 		if n.PointDiff != 0 {
 			out += fmt.Sprintf(", écart %+d", n.PointDiff)
 		}

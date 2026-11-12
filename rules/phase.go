@@ -71,11 +71,14 @@ type PhaseRules struct {
 
 // Entrant : un joueur de la phase et son parcours dans la phase.
 type Entrant struct {
-	Player    Ref   `json:"player"`
-	Lives     int   `json:"lives"` // vies à l'entrée de la phase
-	Wins      int   `json:"wins,omitempty"`
-	Losses    int   `json:"losses,omitempty"`
-	Byes      int   `json:"byes,omitempty"`
+	Player Ref `json:"player"`
+	Lives  int `json:"lives"` // vies à l'entrée de la phase
+	Wins   int `json:"wins,omitempty"`
+	Losses int `json:"losses,omitempty"`
+	Byes   int `json:"byes,omitempty"`
+	// HalfByes : suisse classique, demi-exemptions annoncées des rondes ouvertes — un
+	// demi-point chacune.
+	HalfByes  int   `json:"half_byes,omitempty"`
 	Opponents []Ref `json:"opponents,omitempty"` // adversaires déjà rencontrés, avec répétitions
 	// Départage (PhaseRules.Tiebreak), remplis seulement quand il est configuré. Points de
 	// match marqués et encaissés, plafonnés à la longueur du match ; adversaires des matchs
