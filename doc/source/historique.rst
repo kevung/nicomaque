@@ -7,7 +7,7 @@ Les versions suivent la numérotation sémantique. Une sortie du moteur qui chan
 (proposition, classement) donne une version mineure. Le format du journal est versionné
 indépendamment (champ ``version`` de chaque événement, voir :ref:`annexe_tests`).
 
-0.9.0 — 13 novembre 2026
+0.9.0 — 12 novembre 2026
 ------------------------
 
 - Suisse classique à rondes fixes (``swiss_rounds``), avec départage arithmétique
