@@ -129,6 +129,12 @@ func newPhaseState(i int, cfg PhaseConfig) *PhaseState {
 func Replay(j Journal) (*State, error) {
 	s := newState()
 	for i := range j {
+		// Un journal écrit par un moteur plus récent porte des événements ou des options que
+		// celui-ci ignorerait en silence : mieux vaut un refus qu'un autre tournoi.
+		if j[i].Version > JournalVersion {
+			return s, fmt.Errorf("événement %d (%s) : version %d du journal, ce moteur lit jusqu'à la version %d — mettre le moteur à jour",
+				i, j[i].Kind, j[i].Version, JournalVersion)
+		}
 		// Un journal antérieur aux codes structurés est converti à la lecture, pour que le
 		// moteur ne voie jamais de libellé texte (voir upgrade dans events.go).
 		if err := s.Apply(j[i].upgraded()); err != nil {

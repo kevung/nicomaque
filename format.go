@@ -3,8 +3,6 @@ package tournoi
 import (
 	"encoding/json"
 	"fmt"
-	"strconv"
-	"strings"
 
 	"github.com/kevung/nicomaque/rules"
 )
@@ -287,9 +285,6 @@ func (c *Config) Validate() error {
 			}
 		default:
 			return fmt.Errorf("phase %d : type %q inconnu", i, p.Kind)
-		}
-		if n, err := strconv.Atoi(strings.TrimPrefix(p.Entry, "top:")); strings.HasPrefix(p.Entry, "top:") && err == nil && n < 2 {
-			return fmt.Errorf("phase %d : entry %q — une phase d'un seul entrant ne se joue pas", i, p.Entry)
 		}
 		if p.Entry == "" {
 			p.Entry = "survivors"

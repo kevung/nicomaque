@@ -10928,7 +10928,7 @@
     "name": "poules8_departage P=8 k=1 perturbé",
     "steps": 24,
     "events": 38,
-    "digest": "23bcfaa5102f8393517f93af279aa4e3dfb5100c37be5dadc9b9b0c8da9fa2da",
+    "digest": "06520c16372b44f0f9f77e372f3d363d5a0e46d96bc6f12770204d01da1c79be",
     "final": [
       "1 P3 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:B\",\"qualified\":true}",
       "2 P2 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:D\",\"qualified\":true}",
@@ -11087,7 +11087,7 @@
     "name": "poules8_departage P=13 k=1 perturbé",
     "steps": 31,
     "events": 58,
-    "digest": "942f7a392eba2a697029e1c4c901652f168ee25c2d8535cc11853582b921612b",
+    "digest": "11e4f6fa60df4c30c1a5e249c39a3cb35b4a549a9bcdb251612560acd916992e",
     "final": [
       "1 P1 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:C\",\"qualified\":true}",
       "2 P11 {\"kind\":\"pool_record\",\"wins\":2,\"section\":\"poule:A\",\"qualified\":true}",
@@ -11147,7 +11147,7 @@
     "name": "poules8_departage P=13 k=2 perturbé",
     "steps": 31,
     "events": 58,
-    "digest": "5072d60abd6dd0a49f1f4e7f434914506d89c298081ee5166eeb3965d6869eed",
+    "digest": "143d6041410f74064817b235a365942912c0c67fc7d5d0df05bd5145faa1038a",
     "final": [
       "1 P7 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:B\",\"qualified\":true}",
       "2 P8 {\"kind\":\"pool_record\",\"wins\":2,\"section\":\"poule:A\",\"qualified\":true}",
@@ -11330,7 +11330,7 @@
     "name": "poules8_departage P=32 k=1 perturbé",
     "steps": 96,
     "events": 171,
-    "digest": "8ad83b6dc40fcb06454df7eeeefe416df5e58a253ce4e479f3617a03dfd65843",
+    "digest": "416681c6546b3661ef103d2b8b912c7da4c6ea2272aa52f0dab416dc96657c37",
     "final": [
       "1 P4 {\"kind\":\"pool_record\",\"wins\":2,\"section\":\"poule:E\",\"qualified\":true}",
       "2 P3 {\"kind\":\"pool_record\",\"wins\":3,\"section\":\"poule:A\",\"qualified\":true}",
