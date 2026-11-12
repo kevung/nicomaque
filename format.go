@@ -20,6 +20,10 @@ const (
 	KindSwissRounds = "swiss_rounds"
 )
 
+// PairingMonrad : sur un suisse classique, l'adversaire est tiré au sort dans le groupe de mêmes
+// points au lieu d'être le plus proche au classement.
+const PairingMonrad = rules.PairingMonrad
+
 // Critères de départage (PhaseConfig.Tiebreak).
 const (
 	TiebreakPointDiff    = rules.TiebreakPointDiff
@@ -155,8 +159,11 @@ func (c *Config) Validate() error {
 			if p.Rounds <= 0 {
 				return fmt.Errorf("phase %d : swiss_rounds sans rounds — combien de rondes ?", i)
 			}
-			if p.Target != 0 || p.LengthLate != 0 || p.Pairing != "" {
-				return fmt.Errorf("phase %d : target, length_late et pairing sont ceux du suisse à vies, pas de %q", i, p.Kind)
+			if p.Target != 0 || p.LengthLate != 0 {
+				return fmt.Errorf("phase %d : target et length_late sont ceux du suisse à vies, pas de %q", i, p.Kind)
+			}
+			if p.Pairing != "" && p.Pairing != PairingMonrad {
+				return fmt.Errorf("phase %d : pairing %q inconnu pour %q (vide ou %q)", i, p.Pairing, p.Kind, PairingMonrad)
 			}
 			if p.Mode != "" && p.Mode != "rounds" {
 				return fmt.Errorf("phase %d : mode %q inconnu pour %q (rondes seulement)", i, p.Mode, p.Kind)

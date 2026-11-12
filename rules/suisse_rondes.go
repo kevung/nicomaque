@@ -101,9 +101,15 @@ func (v *vue) pairClassicRound(r int, players []Ref, rng *rand.Rand) []Pairing {
 	if len(players) == 0 || r > v.Rules.Rounds {
 		return nil
 	}
-	ordre := v.ordreClassement(players, rng)
 	lbl := Label{Kind: LabelRound, N: r}
-	pairs, bye := v.pairNearest(ordre, len(ordre)%2 == 1)
+	var pairs [][2]Ref
+	var bye Ref
+	if v.Rules.Pairing == PairingMonrad {
+		pairs, bye = v.pairMonrad(players, rng)
+	} else {
+		ordre := v.ordreClassement(players, rng)
+		pairs, bye = v.pairNearest(ordre, len(ordre)%2 == 1)
+	}
 	acts := make([]Pairing, 0, len(pairs)+1)
 	for _, pr := range pairs {
 		acts = append(acts, Pairing{Kind: PairMatch, Label: lbl, Round: r, A: pr[0], B: pr[1], Length: v.Length})
@@ -112,6 +118,93 @@ func (v *vue) pairClassicRound(r int, players []Ref, rng *rand.Rand) []Pairing {
 		acts = append(acts, Pairing{Kind: PairBye, Label: lbl, Round: r, A: bye})
 	}
 	return acts
+}
+
+// pairMonrad : le Monrad. L'adversaire est TIRÉ AU SORT dans le groupe de mêmes points, au lieu
+// d'être le plus proche au classement — le départage, s'il y en a un, n'y joue aucun rôle. Les
+// groupes sont traités du meilleur au moins bon, sans aucune revanche à l'intérieur d'un groupe.
+// Groupe impair : un joueur flotte vers le groupe suivant (on essaie du dernier tiré au premier).
+// Groupe impossible à apparier sans revanche : il rejoint entier le suivant. Le dernier groupe
+// s'apparie comme un suisse (pairNearest) : le moins de revanches, l'exemption en bas.
+//
+// Si le dernier groupe ne s'apparie qu'au prix d'une revanche, on recommence en lui adjoignant
+// le groupe d'au-dessus, puis le suivant : une revanche qu'un groupe plus large évite n'est pas
+// jouée. Tous les groupes réunis, c'est l'appariement du suisse, au minimum de revanches.
+func (v *vue) pairMonrad(players []Ref, rng *rand.Rand) (pairs [][2]Ref, bye Ref) {
+	g := sortedRefs(players)
+	rng.Shuffle(len(g), func(i, j int) { g[i], g[j] = g[j], g[i] })
+	sort.SliceStable(g, func(i, j int) bool { return v.entrant(g[i]).points() > v.entrant(g[j]).points() })
+	var bornes []int // début de chaque groupe de points
+	for i := range g {
+		if i == 0 || v.entrant(g[i]).points() != v.entrant(g[i-1]).points() {
+			bornes = append(bornes, i)
+		}
+	}
+	moins := 1 << 30
+	for queue := 1; queue <= len(bornes); queue++ {
+		got, exempté := v.monradAvecQueue(g, bornes[:len(bornes)-queue+1])
+		n := 0
+		for _, pr := range got {
+			if v.met(pr[0], pr[1]) {
+				n++
+			}
+		}
+		if n < moins {
+			pairs, bye, moins = got, exempté, n
+		}
+		if n == 0 {
+			break
+		}
+	}
+	return pairs, bye
+}
+
+// monradAvecQueue : les groupes qui commencent aux bornes données, le dernier allant jusqu'au
+// bout de g et s'appariant comme un suisse.
+func (v *vue) monradAvecQueue(g []Ref, bornes []int) (pairs [][2]Ref, bye Ref) {
+	var report []Ref // flotteur, ou groupe entier reporté
+	for b, i := range bornes {
+		if b == len(bornes)-1 { // le dernier groupe
+			groupe := append(append([]Ref{}, report...), g[i:]...)
+			reste, exempté := v.pairNearest(groupe, len(groupe)%2 == 1)
+			return append(pairs, reste...), exempté
+		}
+		groupe := append(append([]Ref{}, report...), g[i:bornes[b+1]]...)
+		report = nil
+		if len(groupe)%2 == 0 {
+			if got, ok := v.sansRevanche(groupe); ok {
+				pairs = append(pairs, got...)
+			} else {
+				report = groupe
+			}
+			continue
+		}
+		report = groupe
+		for k := len(groupe) - 1; k >= 0; k-- {
+			reste := append(append([]Ref{}, groupe[:k]...), groupe[k+1:]...)
+			if got, ok := v.sansRevanche(reste); ok {
+				pairs, report = append(pairs, got...), []Ref{groupe[k]}
+				break
+			}
+		}
+	}
+	return pairs, ""
+}
+
+// sansRevanche apparie un groupe sans aucune revanche, les rencontres de club évitées quand
+// c'est possible (avoid_clubs).
+func (v *vue) sansRevanche(groupe []Ref) ([][2]Ref, bool) {
+	passes := []bool{false}
+	if v.Rules.AvoidClubs {
+		passes = []bool{true, false}
+	}
+	for _, sansClub := range passes {
+		budget := swissRoundsBudget
+		if got, ok := v.chercher(groupe, 0, sansClub, &budget); ok {
+			return got, true
+		}
+	}
+	return nil, false
 }
 
 // pairNearest apparie ordre (déjà classé). exempter : un joueur est mis de côté, que l'appelant

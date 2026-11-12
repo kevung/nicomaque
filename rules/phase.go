@@ -20,6 +20,7 @@ const (
 const (
 	ModeRounds    = "rounds" // suisse par rondes ; vide : continu
 	PairingWins   = "wins"   // suisse : à défaites égales, les plus victorieux ensemble
+	PairingMonrad = "monrad" // suisse classique : adversaire tiré au sort dans le groupe de points
 	SeedingRating = "rating" // tableau : placement classique par cote
 	// Critères de départage (PhaseRules.Tiebreak), appliqués dans l'ordre donné, après les points.
 	TiebreakPointDiff    = "point_diff"    // différence de points de match, plafonnés à la longueur

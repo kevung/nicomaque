@@ -43,6 +43,9 @@ func configs() map[string]tournoi.Config {
 			{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 4,
 				Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakPointsScored, tournoi.TiebreakBuchholz}},
 			{Kind: tournoi.KindBracket, Length: 9, Entry: "top:4"}}},
+		"monrad_tableau": {Name: "Monrad puis tableau", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Pairing: tournoi.PairingMonrad},
+			{Kind: tournoi.KindBracket, Length: 9, Entry: "top:8"}}},
 		"gsl": {Name: "Blocs GSL", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindGSL, Length: 7}}},
 		"gsl_tableau16": {Name: "GSL puis tableau", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindGSL, Length: 7, Target: 16},

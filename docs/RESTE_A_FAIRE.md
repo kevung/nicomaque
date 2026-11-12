@@ -91,8 +91,9 @@ où intervenir et comment vérifier.
   plus proche avec retour arrière (`rules/suisse_rondes.go`). Sans départage les ex æquo le
   restent, y compris en tête ; `PhaseConfig.Tiebreak` (issue #3) les départage en option —
   différence de points de match plafonnés, points marqués, Buchholz — et reste VIDE par défaut.
-  Le départage des poules à la place du barrage est dans l'issue #8, le Monrad #4,
-  l'accélération #5, les têtes de série saisies #6.
+  Le départage des poules à la place du barrage est dans l'issue #8. `pairing: "monrad"`
+  (issue #4) tire l'adversaire au sort dans le groupe de mêmes points, avec flotteurs. Restent
+  l'accélération #5 et les têtes de série saisies #6.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que
   d'autres n'en ont pas eu » entre groupes différents (aujourd'hui par groupe). `pairGroup`.
