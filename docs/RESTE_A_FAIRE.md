@@ -98,7 +98,8 @@ où intervenir et comment vérifier.
   et plie la ronde 1 du suisse classique. `accelerated` (issue #5) donne un point virtuel à la moitié
   haute aux rondes 1 et 2. `groups` fixe le nombre de poules et `seeding` les compose en serpentin
   (issue #8) ; avec `tiebreak` une poule est classée par le départage, le barrage ne restant que
-  pour une égalité complète, et des poules en dernière phase désignent un seul vainqueur par le
+  pour une égalité complète, et, avec `final_barrage` (éteint par défaut : chaque poule garde son
+  premier, comme en v0.8.0), des poules en dernière phase désignent un seul vainqueur par le
   barrage final (`barrage:final`). `avoid_countries`, `avoid_rounds` et `avoid_except` (issue #14)
   étendent `avoid_clubs` au pays, le bornent aux premières rondes et en sortent le club hôte ; le
   CSV des joueurs lit et écrit le pays et la tête de série.

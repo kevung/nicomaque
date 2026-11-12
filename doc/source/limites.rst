@@ -27,8 +27,9 @@ Règles
   entrée jusqu'au tour *k*, consolante à tirage avec heure limite d'entrée).
 - **Revanches en consolante** : l'ordre inversé d'entrée évite la revanche immédiate, pas les
   suivantes ; leur fréquence n'est pas mesurée.
-- **Poules en dernière phase** : plusieurs poules donnent un premier par poule ; seule une
-  poule unique (``groups: 1``) désigne un vainqueur. Un tableau d'un seul qualifié ne se tire pas.
+- **Poules en dernière phase** : sans ``final_barrage``, plusieurs poules donnent un premier par
+  poule, et une poule unique ne désigne un vainqueur que si ``qualifiers`` vaut 1 ou si son
+  premier est seul en tête. Un tableau d'un seul qualifié ne se tire pas.
 - **Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a pas été éprouvée en
   conditions réelles (durée du barrage).
 - **Classement des places non gagnantes** : les règles (par tour atteint en tableau, par
