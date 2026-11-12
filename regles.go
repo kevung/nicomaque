@@ -199,7 +199,7 @@ func (s *State) instantané(ph *PhaseState, free []PlayerID, apparier bool) rule
 			e.Opponents = refs(ph.Opponents[id])
 		}
 		if pl := s.Players[id]; pl != nil {
-			e.Club, e.Rating = pl.Club, pl.Rating
+			e.Club, e.Rating, e.Seed = pl.Club, pl.Rating, pl.Seed
 		}
 		p.Entrants[i] = e
 	}

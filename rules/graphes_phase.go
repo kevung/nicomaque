@@ -109,6 +109,49 @@ func seededSlots(deux, une []Ref, ratings map[Ref]float64, size int) []Ref {
 	return slots
 }
 
+// SeedSlots : les places du premier tour d'un tableau placé par têtes de série SAISIES. ordre :
+// les entrants dans l'ordre d'inscription ; seeds : le numéro de chacun (1 = la meilleure, 0 =
+// aucune, derrière toutes les autres). Les joueurs à deux vies passent devant, comme par cote.
+func SeedSlots(ordre []Ref, lives map[Ref]int, seeds map[Ref]int) []Ref {
+	var deux, une []Ref
+	sum := 0
+	for _, p := range bySeed(ordre, seeds) {
+		if lives[p] >= 2 {
+			deux = append(deux, p)
+			sum += 2
+		} else {
+			une = append(une, p)
+			sum++
+		}
+	}
+	size := max(pow2ceil(sum), 2)
+	ordonné := append(deux, une...)
+	slots := make([]Ref, size)
+	for i := range slots {
+		slots[i] = Bye
+	}
+	for place, tête := range SeedOrder(size) {
+		if tête <= len(ordonné) {
+			slots[place] = ordonné[tête-1]
+		}
+	}
+	return slots
+}
+
+// bySeed : par tête de série saisie croissante, les joueurs sans numéro derrière ; à égalité,
+// l'ordre reçu (celui de l'inscription).
+func bySeed(g []Ref, seeds map[Ref]int) []Ref {
+	out := append([]Ref{}, g...)
+	sort.SliceStable(out, func(i, j int) bool {
+		si, sj := seeds[out[i]], seeds[out[j]]
+		if (si <= 0) != (sj <= 0) {
+			return sj <= 0
+		}
+		return si > 0 && si < sj
+	})
+	return out
+}
+
 // byStrength : du meilleur au moins bon ; les cotes inconnues derrière, par identifiant.
 func byStrength(g []Ref, ratings map[Ref]float64) []Ref {
 	out := sortedRefs(g)
@@ -327,6 +370,9 @@ func (v *vue) pairBracket(seed Seed) []Pairing {
 			ids[i], lives[e.Player], ratings[e.Player] = e.Player, e.Lives, e.Rating
 		}
 		slots := DrawSlots(ids, lives, v.Rules.Seeding, ratings, seed.Draw())
+		if v.Rules.Seeding == SeedingManual {
+			slots = SeedSlots(ids, lives, v.seeds())
+		}
 		return []Pairing{{Kind: PairDraw,
 			Label: Label{Kind: LabelDrawBracket, N: len(slots)}.With(Label{Kind: LabelPhase, Text: v.Name}),
 			Slots: slots}}

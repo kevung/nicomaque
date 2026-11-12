@@ -22,6 +22,7 @@ const (
 	PairingWins   = "wins"   // suisse : à défaites égales, les plus victorieux ensemble
 	PairingMonrad = "monrad" // suisse classique : adversaire tiré au sort dans le groupe de points
 	SeedingRating = "rating" // tableau : placement classique par cote
+	SeedingManual = "seed"   // placement par tête de série saisie (Entrant.Seed)
 	// Critères de départage (PhaseRules.Tiebreak), appliqués dans l'ordre donné, après les points.
 	TiebreakPointDiff    = "point_diff"    // différence de points de match, plafonnés à la longueur
 	TiebreakPointsScored = "points_scored" // points de match marqués, plafonnés à la longueur
@@ -70,6 +71,7 @@ type Entrant struct {
 	Played        []Ref   `json:"played,omitempty"`
 	Club          string  `json:"club,omitempty"`
 	Rating        float64 `json:"rating,omitempty"` // PR, plus bas = meilleur ; 0 = inconnu
+	Seed          int     `json:"seed,omitempty"`   // tête de série saisie, 1 = la meilleure ; 0 = aucune
 }
 
 // Phase est l'instantané d'une phase : tout ce que les règles d'appariement et de classement

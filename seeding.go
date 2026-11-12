@@ -17,3 +17,9 @@ import "github.com/kevung/nicomaque/rules"
 
 // SeedingRating : placement classique par cote d'entrée (1 contre 16, 2 contre 15…).
 const SeedingRating = rules.SeedingRating
+
+// SeedingManual place les joueurs par tête de série SAISIE (Player.Seed) : l'organisateur numérote
+// lui-même, 1 pour la meilleure. Un joueur sans numéro passe derrière tous les autres, dans
+// l'ordre d'inscription ; deux joueurs au même numéro, de même. Comme SeedingRating, c'est une
+// option nommée : le défaut reste le tirage au sort.
+const SeedingManual = rules.SeedingManual

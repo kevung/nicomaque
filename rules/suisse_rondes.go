@@ -84,6 +84,9 @@ func (v *vue) clé(p Ref) clé {
 func (v *vue) ordreClassement(players []Ref, rng *rand.Rand) []Ref {
 	g := sortedRefs(players)
 	rng.Shuffle(len(g), func(i, j int) { g[i], g[j] = g[j], g[i] })
+	if v.Rules.Seeding != "" {
+		g = v.têtes(players) // des têtes de série : à égalité complète, la meilleure tête d'abord
+	}
 	clés := make(map[Ref]clé, len(g))
 	for _, p := range g {
 		clés[p] = v.clé(p)
@@ -104,7 +107,9 @@ func (v *vue) pairClassicRound(r int, players []Ref, rng *rand.Rand) []Pairing {
 	lbl := Label{Kind: LabelRound, N: r}
 	var pairs [][2]Ref
 	var bye Ref
-	if v.Rules.Pairing == PairingMonrad {
+	if r == 1 && v.Rules.Seeding != "" {
+		pairs, bye = plier(v.têtes(players))
+	} else if v.Rules.Pairing == PairingMonrad {
 		pairs, bye = v.pairMonrad(players, rng)
 	} else {
 		ordre := v.ordreClassement(players, rng)
@@ -118,6 +123,48 @@ func (v *vue) pairClassicRound(r int, players []Ref, rng *rand.Rand) []Pairing {
 		acts = append(acts, Pairing{Kind: PairBye, Label: lbl, Round: r, A: bye})
 	}
 	return acts
+}
+
+// seeds : la tête de série saisie de chaque entrant.
+func (v *vue) seeds() map[Ref]int {
+	out := make(map[Ref]int, len(v.Entrants))
+	for _, e := range v.Entrants {
+		out[e.Player] = e.Seed
+	}
+	return out
+}
+
+// têtes : les joueurs dans l'ordre des têtes de série — saisies (SeedingManual) ou par cote
+// (SeedingRating) —, ceux qui n'en ont pas derrière, dans l'ordre des entrants.
+func (v *vue) têtes(players []Ref) []Ref {
+	dedans := refSet(players)
+	var ordre []Ref
+	for _, e := range v.Entrants {
+		if dedans[e.Player] {
+			ordre = append(ordre, e.Player)
+		}
+	}
+	if v.Rules.Seeding == SeedingRating {
+		ratings := make(map[Ref]float64, len(v.Entrants))
+		for _, e := range v.Entrants {
+			ratings[e.Player] = e.Rating
+		}
+		return byStrength(ordre, ratings)
+	}
+	return bySeed(ordre, v.seeds())
+}
+
+// plier : la ronde 1 d'un suisse à têtes de série — la moitié haute contre la moitié basse, la
+// tête 1 contre la tête n/2 + 1. Effectif impair : la dernière tête est exemptée.
+func plier(ordre []Ref) (pairs [][2]Ref, bye Ref) {
+	n := len(ordre) / 2
+	for i := 0; i < n; i++ {
+		pairs = append(pairs, [2]Ref{ordre[i], ordre[i+n]})
+	}
+	if len(ordre)%2 == 1 {
+		bye = ordre[len(ordre)-1]
+	}
+	return pairs, bye
 }
 
 // pairMonrad : le Monrad. L'adversaire est TIRÉ AU SORT dans le groupe de mêmes points, au lieu

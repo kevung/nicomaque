@@ -18,6 +18,7 @@ Identifiants et joueurs
        Name   string   `json:"name"`
        Club   string   `json:"club,omitempty"`
        Rating float64  `json:"rating,omitempty"` // PR (plus bas = meilleur) ; 0 = inconnu
+       Seed   int      `json:"seed,omitempty"`   // tête de série saisie (1 = la meilleure) ; 0 = aucune
    }
 
 ``BYE`` est une valeur réservée : aucun joueur inscrit ne peut porter cet identifiant. Le moteur ne

@@ -65,6 +65,16 @@ de club est essayé d'abord ; il n'est jamais payé d'une revanche.
 
 Un joueur seul à apparier (les autres absents ou retirés) est exempté.
 
+Têtes de série (``seeding``)
+----------------------------
+
+Sans ``seeding``, la ronde 1 est tirée au sort. Avec ``seeding: "seed"`` (têtes de série saisies,
+``Player.Seed``) ou ``"rating"`` (par cote), la **ronde 1 est pliée** : la moitié haute contre la
+moitié basse, la tête 1 contre la tête *n*/2 + 1 ; en effectif impair, la dernière tête est
+exemptée. Aux rondes suivantes, deux joueurs à égalité complète sont pris dans l'ordre des têtes
+de série au lieu d'être tirés au sort. Le défaut reste le tirage : les têtes de série sont une
+option nommée (voir :ref:`annexe_conception`).
+
 Monrad (``pairing: "monrad"``)
 ------------------------------
 

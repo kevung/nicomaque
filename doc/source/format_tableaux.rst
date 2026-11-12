@@ -68,9 +68,12 @@ Trois idées :
 Têtes de série
 ~~~~~~~~~~~~~~
 
-Le tirage est aléatoire par défaut. Avec ``seeding: "rating"`` (``PhaseConfig.Seeding``, seule
-valeur admise par ``Config.Validate`` hormis le vide, et réservée aux tableaux), le hasard cède la
-place au placement classique par cote :
+Le tirage est aléatoire par défaut. ``PhaseConfig.Seeding`` admet deux autres valeurs, qui
+remplacent le hasard par le placement classique : ``"rating"``, par cote, et ``"seed"``, par tête
+de série **saisie** par l'organisateur (``Player.Seed``, 1 pour la meilleure ; ``rules.SeedSlots``).
+Avec ``"seed"``, un joueur sans numéro passe derrière tous les autres dans l'ordre d'inscription,
+et deux joueurs au même numéro se suivent dans cet ordre. Le placement est le même dans les deux
+cas :
 
 .. code:: go
 

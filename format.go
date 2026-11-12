@@ -171,6 +171,9 @@ func (c *Config) Validate() error {
 			if p.Lives != 0 && p.Lives != swissRoundsLives {
 				return fmt.Errorf("phase %d : lives ne se règle pas sur %q — personne n'y est éliminé", i, p.Kind)
 			}
+			if p.Seeding != "" && p.Seeding != SeedingRating && p.Seeding != SeedingManual {
+				return fmt.Errorf("phase %d : seeding %q inconnu (vide, %q ou %q)", i, p.Seeding, SeedingRating, SeedingManual)
+			}
 			p.Mode, p.Lives = "rounds", swissRoundsLives
 			vus := map[string]bool{}
 			for _, c := range p.Tiebreak {
@@ -183,8 +186,8 @@ func (c *Config) Validate() error {
 				vus[c] = true
 			}
 		case KindLivesBracket, KindBracket:
-			if p.Seeding != "" && p.Seeding != SeedingRating {
-				return fmt.Errorf("phase %d : seeding %q inconnu (vide ou %q)", i, p.Seeding, SeedingRating)
+			if p.Seeding != "" && p.Seeding != SeedingRating && p.Seeding != SeedingManual {
+				return fmt.Errorf("phase %d : seeding %q inconnu (vide, %q ou %q)", i, p.Seeding, SeedingRating, SeedingManual)
 			}
 			if p.Recharge && !p.Reconciliation {
 				return fmt.Errorf("phase %d : recharge sans reconciliation", i)
@@ -222,8 +225,8 @@ func (c *Config) Validate() error {
 		if p.BatchMinutes != 0 && p.Kind != KindSwissLives {
 			return fmt.Errorf("phase %d : batch_minutes ne s'applique qu'au suisse continu, pas à %q", i, p.Kind)
 		}
-		if p.Seeding != "" && p.Kind != KindBracket && p.Kind != KindLivesBracket {
-			return fmt.Errorf("phase %d : seeding ne s'applique qu'aux tableaux, pas à %q", i, p.Kind)
+		if p.Seeding != "" && p.Kind != KindBracket && p.Kind != KindLivesBracket && p.Kind != KindSwissRounds {
+			return fmt.Errorf("phase %d : seeding ne s'applique qu'aux tableaux et au suisse classique, pas à %q", i, p.Kind)
 		}
 	}
 	return nil

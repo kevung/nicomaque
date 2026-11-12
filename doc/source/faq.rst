@@ -59,7 +59,7 @@ Pourquoi le tableau final a-t-il 32 places alors que nous sommes 20 ?
 
 Pourquoi les meilleurs joueurs ne sont-ils pas protégés dans le tableau ?
    Le tirage aléatoire est le défaut, conformément à la pratique du backgammon. Les têtes de série
-   existent en option (``seeding: "rating"``) pour l'organisateur qui les veut.
+   existent en option (``seeding: "rating"`` par cote, ``"seed"`` par numéro saisi) pour l'organisateur qui les veut.
 
 Pourquoi ai-je un bye alors qu'un autre joueur en a déjà eu un ?
    Un joueur déjà exempté est apparié en priorité, ce qui évite un second bye tant que d'autres
