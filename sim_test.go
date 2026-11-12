@@ -129,6 +129,7 @@ func hook(t *testing.T, name string, seen map[string]int) func(s *tournoi.State,
 }
 
 func TestFormatsInvariants(t *testing.T) {
+	t.Parallel() // indépendant des autres : la boucle -short garde de la marge
 	// La matrice complète — 8 effectifs × 8 graines × tous les formats — est ce qui donne
 	// confiance, et ce qui coûte. En mode court elle est réduite aux petits effectifs et à
 	// deux graines : c'est la boucle qu'on lance à chaque sauvegarde. La matrice entière
