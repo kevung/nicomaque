@@ -85,6 +85,12 @@ où intervenir et comment vérifier.
   jouée, candidat d'un repêchage non tranché), éliminé, vainqueur, retiré, non engagé. Un hôte
   n'a plus à recoder le passage de phase ni les exemptions. Vérifié sur toute la matrice et sur
   T1-T3 de la simulation blunderDB.
+- [x] **Suisse classique à nombre de rondes fixe** (issue #2, formats de gammonGo : #15).
+  `KindSwissRounds` + `PhaseConfig.Rounds` : une variante NOMMÉE, à part du suisse à vies —
+  personne n'est éliminé, classement aux points (une exemption vaut une victoire), appariement au
+  plus proche avec retour arrière (`rules/suisse_rondes.go`). Sans départage les ex æquo le
+  restent, y compris en tête : le départage arithmétique en option est l'issue #3, le Monrad #4,
+  l'accélération #5, les têtes de série saisies #6.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que
   d'autres n'en ont pas eu » entre groupes différents (aujourd'hui par groupe). `pairGroup`.

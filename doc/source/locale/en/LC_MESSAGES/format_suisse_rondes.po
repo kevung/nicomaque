@@ -1,0 +1,181 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-12 11:23+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/format_suisse_rondes.rst:4
+msgid "Suisse classique (``swiss_rounds``)"
+msgstr "Classic Swiss (``swiss_rounds``)"
+
+#: ../../source/format_suisse_rondes.rst:7
+msgid "Principe"
+msgstr "Principle"
+
+#: ../../source/format_suisse_rondes.rst:9
+msgid ""
+"Le suisse classique se joue en un **nombre de rondes fixe** (``rounds``, "
+"obligatoire) : personne n'est éliminé, chaque joueur présent joue chaque "
+"ronde, et le classement est celui des **points** — une victoire vaut un "
+"point, une exemption aussi."
+msgstr ""
+"The classic Swiss is played over a **fixed number of rounds** "
+"(``rounds``, required): nobody is eliminated, every player present plays "
+"every round, and the ranking is by **points** — a win is worth one point,"
+" and so is a bye."
+
+#: ../../source/format_suisse_rondes.rst:13
+msgid ""
+"C'est une **variante nommée**, à part du suisse à vies "
+"(:ref:`format_suisse`) que l'étude retient. Elle existe parce que des "
+"organisateurs la jouent, et elle a un prix : sans départage, les joueurs "
+"à égalité de points restent ex æquo, **y compris en tête**. Un tournoi "
+"qui veut un vainqueur unique la fait suivre d'un tableau (``entry: "
+"\"top:N\"``)."
+msgstr ""
+"It is a **named variant**, separate from the Swiss with lives "
+"(:ref:`format_suisse`) that the study recommends. It exists because "
+"organisers play it, and it has a price: with no tie-break, players level "
+"on points stay tied, **including at the top**. A tournament that wants a "
+"single winner follows it with a bracket (``entry: \"top:N\"``)."
+
+#: ../../source/format_suisse_rondes.rst:18
+msgid ""
+"La règle vit dans ``rules/suisse_rondes.go`` ; l'enveloppe est celle du "
+"suisse à vies en mode ``rounds`` (``phase_swiss.go``) : ronde ouverte "
+"reproposée à l'identique tant qu'elle n'est pas entièrement lancée, "
+"orphelins réappariés entre eux, absences, retardataires (voir "
+":ref:`format_suisse`, « Mode par rondes »)."
+msgstr ""
+"The rule lives in ``rules/suisse_rondes.go``; the envelope is that of the"
+" Swiss with lives in ``rounds`` mode (``phase_swiss.go``): an open round "
+"is proposed again unchanged until it is fully started, orphans are paired"
+" with each other, absences, latecomers (see :ref:`format_suisse`, "
+"\"Rounds mode\")."
+
+#: ../../source/format_suisse_rondes.rst:23
+msgid ""
+"``Validate`` exige ``rounds`` > 0, pose ``mode`` à ``rounds`` et refuse "
+"sur ce format ``target``, ``length_late``, ``pairing``, "
+"``batch_minutes``, un autre ``mode`` et un ``lives`` saisi. ``rounds`` "
+"est refusé sur tout autre format."
+msgstr ""
+"``Validate`` requires ``rounds`` > 0, sets ``mode`` to ``rounds`` and "
+"rejects, on this format, ``target``, ``length_late``, ``pairing``, "
+"``batch_minutes``, any other ``mode`` and a supplied ``lives``. "
+"``rounds`` is rejected on every other format."
+
+#: ../../source/format_suisse_rondes.rst:28
+msgid "Appariement d'une ronde"
+msgstr "Pairing a round"
+
+#: ../../source/format_suisse_rondes.rst:46
+msgid ""
+"Trois priorités, dans cet ordre : **le moins de revanches possible** ; "
+"l'exemption au **plus bas classé parmi ceux qui en ont eu le moins** "
+"(jamais une seconde tant qu'un joueur n'en a pas eu) ; chacun contre **le"
+" plus proche encore libre** au classement."
+msgstr ""
+"Three priorities, in this order: **as few rematches as possible**; the "
+"bye to the **lowest-ranked player among those who have had the fewest** "
+"(never a second one while a player has had none); each player against "
+"**the nearest one still free** in the ranking."
+
+#: ../../source/format_suisse_rondes.rst:50
+msgid ""
+"À points égaux, l'ordre est tiré au sort : sans départage, rien ne "
+"distingue deux ex æquo. Le tirage dépend de la graine du tournoi, de la "
+"phase et du numéro de ronde seulement (``Seed.Round``) : une ronde "
+"ouverte se recalcule à l'identique."
+msgstr ""
+"On equal points the order is drawn at random: with no tie-break, nothing "
+"separates two tied players. The draw depends only on the tournament seed,"
+" the phase and the round number (``Seed.Round``): an open round is "
+"recomputed identically."
+
+#: ../../source/format_suisse_rondes.rst:54
+msgid ""
+"La recherche (``chercher``) est en profondeur d'abord, avec retour "
+"arrière : le premier joueur libre essaie ses adversaires du plus proche "
+"au plus lointain. Un appariement glouton ne suffit pas — il apparie "
+"proprement la tête et accule les derniers à une revanche qu'un autre "
+"choix plus haut évitait. Chaque tentative est bornée à 200 000 essais, "
+"après quoi la recherche passe au candidat ou à la limite suivante : un "
+"grand champ ne bloque jamais."
+msgstr ""
+"The search (``chercher``) is depth-first with backtracking: the first "
+"free player tries opponents from the nearest to the farthest. A greedy "
+"pairing is not enough — it pairs the top cleanly and corners the last "
+"players into a rematch that a different choice higher up would have "
+"avoided. Each attempt is capped at 200,000 tries, after which the search "
+"moves on to the next candidate or the next limit: a large field never "
+"hangs."
+
+#: ../../source/format_suisse_rondes.rst:60
+msgid ""
+"``avoid_clubs`` est une **préférence** : à nombre de revanches égal, un "
+"appariement sans rencontre de club est essayé d'abord ; il n'est jamais "
+"payé d'une revanche."
+msgstr ""
+"``avoid_clubs`` is a **preference**: for an equal number of rematches, a "
+"pairing with no same-club match is tried first; it is never paid for with"
+" a rematch."
+
+#: ../../source/format_suisse_rondes.rst:63
+msgid "Un joueur seul à apparier (les autres absents ou retirés) est exempté."
+msgstr "A player left alone to pair (the others absent or withdrawn) gets a bye."
+
+#: ../../source/format_suisse_rondes.rst:66
+msgid "Fin de la phase"
+msgstr "End of the phase"
+
+#: ../../source/format_suisse_rondes.rst:68
+msgid ""
+"La phase est finie quand la ronde ``rounds`` est entièrement lancée et "
+"tous ses matchs terminés, ou quand il reste au plus un joueur non retiré."
+" ``RemainingMatches`` compte les matchs en cours plus une ronde complète "
+"des joueurs en lice par ronde à venir."
+msgstr ""
+"The phase is over when round ``rounds`` is fully started and all its "
+"matches are finished, or when at most one player has not withdrawn. "
+"``RemainingMatches`` counts the running matches plus one full round of "
+"the remaining players per round still to come."
+
+#: ../../source/format_suisse_rondes.rst:72
+msgid ""
+"Les joueurs ne portent pas de vies qui aient un sens : la mécanique "
+"partagée avec le suisse à vies leur en donne un nombre qu'aucun nombre de"
+" rondes n'épuise. Vers la phase suivante, ``survivors`` admet tous les "
+"non-retirés, chacun avec les vies d'entrée de cette phase."
+msgstr ""
+"Players carry no meaningful lives: the machinery shared with the Swiss "
+"with lives gives them a number that no number of rounds can exhaust. Into"
+" the next phase, ``survivors`` admits every player who has not withdrawn,"
+" each with that phase's entry lives."
+
+#: ../../source/format_suisse_rondes.rst:77
+msgid "Classement"
+msgstr "Ranking"
+
+#: ../../source/format_suisse_rondes.rst:86
+msgid ""
+"Un retiré garde son parcours et son rang parmi les joueurs au même nombre"
+" de points."
+msgstr ""
+"A withdrawn player keeps their record and their rank among the players on"
+" the same number of points."

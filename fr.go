@@ -147,6 +147,9 @@ func (n Note) String() string {
 	case NoteAlive:
 		return fmt.Sprintf("en vie (%d vies)", n.Lives)
 	case NoteRecord:
+		if n.Byes > 0 {
+			return fmt.Sprintf("%d victoires, %d défaites, %d exemptions", n.Wins, n.Losses, n.Byes)
+		}
 		return fmt.Sprintf("%d victoires, %d défaites", n.Wins, n.Losses)
 	case NoteForfeit:
 		return "forfait"
@@ -283,6 +286,8 @@ func PhaseName(p PhaseConfig) string {
 	switch p.Kind {
 	case KindSwissLives:
 		return fmt.Sprintf("Suisse %d vies", p.Lives)
+	case KindSwissRounds:
+		return fmt.Sprintf("Suisse en %d rondes", p.Rounds)
 	case KindLivesBracket:
 		return "Tableau final"
 	case KindGSL:

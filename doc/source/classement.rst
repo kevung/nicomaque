@@ -53,12 +53,13 @@ Kind                           Fonction (paquet ``rules``, ``classement.go``)
 ``bracket``, ``lives_bracket`` ``rankBracket`` (voir :ref:`format_tableaux`)
 ``round_robin``                ``rankPools`` (voir :ref:`format_poules`)
 ``swiss_lives``, ``gsl``       ``rankLives`` (voir :ref:`format_suisse`)
+``swiss_rounds``               ``rankRounds`` (voir :ref:`format_suisse_rondes`)
 ============================== =================================================================
 
 Les notes (``Note``) sont des codes structurés, jamais des phrases : ``winner``, ``finalist``,
 ``alive``, ``record``, ``forfeit``, ``withdrawn``, ``running``, ``awaiting_draw``, ``unranked``,
 ``section_exit``, ``section_winner``, ``pool_record``, avec leurs paramètres (``wins``,
-``losses``, ``lives``, ``section``, ``qualified``, ``sub``). Leur rendu français (``Note.String``,
+``losses``, ``byes``, ``lives``, ``section``, ``qualified``, ``sub``). Leur rendu français (``Note.String``,
 ``fr.go``) ne sert que la console, la démo, ``render/`` et l'export CSV.
 
 Prix

@@ -13,6 +13,7 @@ const (
 	FormatGSL          Format = "gsl"           // blocs de groupes GSL, 2 vies
 	FormatBracket      Format = "bracket"       // élimination simple, consolante, dernière chance, double élimination
 	FormatRoundRobin   Format = "round_robin"   // poules toutes rondes, barrage entre ex æquo
+	FormatSwissRounds  Format = "swiss_rounds"  // suisse classique : nombre de rondes fixe, sans vies
 )
 
 // Valeurs de PhaseRules.
@@ -25,8 +26,9 @@ const (
 // PhaseRules : la configuration d'une phase, ce que les règles en lisent. Les champs inutiles à
 // un format sont ignorés ; les défauts sont déjà remplis par l'appelant.
 type PhaseRules struct {
-	Lives          int    `json:"lives,omitempty"` // suisse : vies à l'entrée
-	Length         int    `json:"length"`          // longueur configurée des matchs
+	Lives          int    `json:"lives,omitempty"`  // suisse : vies à l'entrée
+	Rounds         int    `json:"rounds,omitempty"` // suisse classique : nombre de rondes
+	Length         int    `json:"length"`           // longueur configurée des matchs
 	FinalLength    int    `json:"final_length,omitempty"`
 	Lengths        []int  `json:"lengths,omitempty"`        // tableau : du dernier tour vers le premier
 	LengthLate     int    `json:"length_late,omitempty"`    // suisse : longueur de la fin de phase…
@@ -187,6 +189,8 @@ func PhaseDone(p Phase) bool {
 	switch p.Format {
 	case FormatSwissLives:
 		return v.swissDone()
+	case FormatSwissRounds:
+		return v.roundsDone()
 	case FormatGSL:
 		return v.gslDone()
 	case FormatRoundRobin:
@@ -230,7 +234,7 @@ type Pairing struct {
 func Pair(p Phase, seed Seed) []Pairing {
 	v := voir(&p)
 	switch p.Format {
-	case FormatSwissLives:
+	case FormatSwissLives, FormatSwissRounds:
 		return v.pairSwiss(seed)
 	case FormatGSL:
 		return v.pairGSL(seed)

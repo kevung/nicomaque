@@ -34,6 +34,11 @@ func configs() map[string]tournoi.Config {
 		"suisse_tables_limitees": {Name: "Suisse, salle contrainte",
 			Tables: tournoi.Tables{Count: 3, Unavailable: []int{2}, Reserved: []tournoi.TableRule{{Table: 1, Section: "main", AllPhases: true}}},
 			Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissLives, Length: 7}}},
+		// Le suisse classique laisse des ex æquo en tête (aucun départage) : un tableau le suit,
+		// pour l'invariant « vainqueur unique ». Seul, il est couvert par suisse_rondes_test.go.
+		"suisse_classique_tableau": {Name: "Suisse classique puis tableau", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, AvoidClubs: true},
+			{Kind: tournoi.KindBracket, Length: 9, Entry: "top:8"}}},
 		"gsl": {Name: "Blocs GSL", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindGSL, Length: 7}}},
 		"gsl_tableau16": {Name: "GSL puis tableau", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindGSL, Length: 7, Target: 16},

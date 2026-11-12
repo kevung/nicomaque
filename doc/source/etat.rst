@@ -85,6 +85,7 @@ Passage d'une phase à la suivante
 
    entryLives(next, prev, p) :
          Entry ∉ {"survivors", ""}    → livesFor(next.Cfg)
+         prev.Kind == swiss_rounds    → livesFor(next.Cfg)   (pas de vies à transmettre)
          next.Kind ∈ {lives_bracket, gsl, swiss_lives} → remainingLives(prev, p)
          sinon → livesFor(next.Cfg)
 
@@ -136,7 +137,7 @@ Les entrants (dans l'ordre de ``Entrants``) dont ``remainingLives > 0``.
 |                                   | pas tiré ; le premier du classement si toutes les sections   |
 |                                   | sont finies ; sinon les joueurs de note ``running``          |
 +-----------------------------------+--------------------------------------------------------------+
-| autres (``swiss_lives``, ``gsl``) | ``alive(ph)``                                                |
+| autres (suisses, ``gsl``)         | ``alive(ph)``                                                |
 +-----------------------------------+--------------------------------------------------------------+
 
 Comptabilité d'un résultat

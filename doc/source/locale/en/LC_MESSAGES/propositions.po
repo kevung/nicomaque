@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"POT-Creation-Date: 2026-11-12 11:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -153,30 +153,38 @@ msgid "``swissDone`` (voir :ref:`format_suisse`)"
 msgstr "``swissDone`` (see :ref:`format_suisse`)"
 
 #: ../../source/propositions.rst:100
+msgid "``swiss_rounds``"
+msgstr "``swiss_rounds``"
+
+#: ../../source/propositions.rst:100
+msgid "``roundsDone``, et la dernière ronde entièrement lancée"
+msgstr "``roundsDone``, and the last round fully started"
+
+#: ../../source/propositions.rst:101
 msgid "``gsl``"
 msgstr "``gsl``"
 
-#: ../../source/propositions.rst:100
+#: ../../source/propositions.rst:101
 msgid "``gslDone`` (voir :ref:`format_gsl`)"
 msgstr "``gslDone`` (see :ref:`format_gsl`)"
 
-#: ../../source/propositions.rst:101
+#: ../../source/propositions.rst:102
 msgid "``round_robin``"
 msgstr "``round_robin``"
 
-#: ../../source/propositions.rst:101
+#: ../../source/propositions.rst:102
 msgid "``Drawn && AllDone(Sections) && barragesDone``"
 msgstr "``Drawn && AllDone(Sections) && barragesDone``"
 
-#: ../../source/propositions.rst:102
+#: ../../source/propositions.rst:103
 msgid "``bracket``, ``lives_bracket``"
 msgstr "``bracket``, ``lives_bracket``"
 
-#: ../../source/propositions.rst:102
+#: ../../source/propositions.rst:103
 msgid "``Drawn && AllDone(Sections)``"
 msgstr "``Drawn && AllDone(Sections)``"
 
-#: ../../source/propositions.rst:105
+#: ../../source/propositions.rst:106
 msgid ""
 "``rules.AllDone`` : tous les nœuds de toutes les sections sont ``Done`` "
 "(un match sauté compte comme fait). Une phase de tableau non encore tirée"
@@ -189,15 +197,15 @@ msgstr ""
 "``s.bilan(ph)`` is the ``rules.Phase`` snapshot of the phase, built by "
 "``regles.go`` without the opponents or the busy players."
 
-#: ../../source/propositions.rst:111
+#: ../../source/propositions.rst:112
 msgid "Matchs en cours"
 msgstr "Matches in progress"
 
-#: ../../source/propositions.rst:120
+#: ../../source/propositions.rst:121
 msgid "Réparation d'un graphe désaccordé"
 msgstr "Repair of an out-of-sync graph"
 
-#: ../../source/propositions.rst:122
+#: ../../source/propositions.rst:123
 msgid ""
 "Corriger un résultat de tableau après coup recalcule l'état et lève "
 "l'avertissement ``bracket_wrong_players`` ; le directeur se trouve alors "
@@ -211,7 +219,7 @@ msgstr ""
 "people. ``proposeRepair`` (``reparation.go``) issues the repair as "
 "ORDINARY proposals, at the head of the list:"
 
-#: ../../source/propositions.rst:134
+#: ../../source/propositions.rst:135
 msgid ""
 "Un demi-finaliste faux fait une finale fausse, même si la finale oppose "
 "bien les deux joueurs que le graphe attendait : elle les attendait pour "
@@ -225,7 +233,7 @@ msgstr ""
 " the deepest to the shallowest — the most recent is undone first, as on "
 "paper."
 
-#: ../../source/propositions.rst:139
+#: ../../source/propositions.rst:140
 msgid ""
 "Les relances correctes ne sont pas fabriquées : une fois les annulations "
 "confirmées, les places redeviennent libres et sont proposées comme "
@@ -237,7 +245,7 @@ msgstr ""
 "match, at the next call. As long as the TD has confirmed nothing, there "
 "is nothing to restart."
 
-#: ../../source/propositions.rst:143
+#: ../../source/propositions.rst:144
 msgid ""
 "**Rien n'est appliqué d'office.** Ne rien confirmer laisse l'état tel "
 "quel, avertissement compris : un directeur peut préférer laisser le "
@@ -247,7 +255,7 @@ msgstr ""
 " as it is, warning included: a director may prefer to leave the bracket "
 "as it was played and note it by hand."
 
-#: ../../source/propositions.rst:146
+#: ../../source/propositions.rst:147
 msgid ""
 "**Dans un suisse**, il n'y a pas de graphe à réparer, mais une correction"
 " peut éliminer un joueur en plein match "
@@ -265,7 +273,7 @@ msgstr ""
 "The TD can also let the match finish: their opponent may lose a life "
 "against an eliminated player, and that is their decision."
 
-#: ../../source/propositions.rst:152
+#: ../../source/propositions.rst:153
 msgid ""
 "Corollaire dans ``recompute`` (``state.go``) : ``GMatch.MatchID`` repart "
 "**vide** au recalcul, et n'est reposé que pour les matchs non annulés ; "
@@ -283,11 +291,11 @@ msgstr ""
 "skip it, and the bracket would remain stuck at the very place one wants "
 "to replay."
 
-#: ../../source/propositions.rst:159
+#: ../../source/propositions.rst:160
 msgid "Micro-rondes et pauses"
 msgstr "Micro-rounds and breaks"
 
-#: ../../source/propositions.rst:161
+#: ../../source/propositions.rst:162
 msgid ""
 "Le moteur n'a pas d'horloge. Le temps entre par ``ProposeAt(now)`` — "
 "l'hôte donne la sienne — ou, à défaut, par l'horodatage du dernier "
@@ -306,11 +314,11 @@ msgstr ""
 "depends only on the journal, so the replay is unaffected: what is "
 "replayed is the events, not the proposals."
 
-#: ../../source/propositions.rst:169
+#: ../../source/propositions.rst:170
 msgid "Micro-rondes (``batch_minutes``)"
 msgstr "Micro-rounds (``batch_minutes``)"
 
-#: ../../source/propositions.rst:171
+#: ../../source/propositions.rst:172
 msgid ""
 "L'appariement au fil de l'eau rend le suisse continu manipulable par "
 "l'heure d'annonce d'un résultat : celui qui finit à 14 h 03 choisit son "
@@ -325,7 +333,7 @@ msgstr ""
 " (``batch_minutes``) closes this door: free players wait for the "
 "deadline, then all those of the same losses group are paired at once."
 
-#: ../../source/propositions.rst:189
+#: ../../source/propositions.rst:190
 msgid ""
 "L'horodatage du dernier lot **n'est stocké nulle part** : c'est le départ"
 " du dernier match lancé dans la phase, un lot étant exactement cela — un "
@@ -337,7 +345,7 @@ msgstr ""
 "bundle of matches started together. Deducing it avoids one more state "
 "field to keep correct right after a correction or a cancellation."
 
-#: ../../source/propositions.rst:193
+#: ../../source/propositions.rst:194
 msgid ""
 "``Action.Until`` porte l'échéance pour que l'hôte affiche un compte à "
 "rebours. ``Validate`` refuse ``batch_minutes`` négatif, en mode "
@@ -347,11 +355,11 @@ msgstr ""
 "countdown. ``Validate`` rejects a negative ``batch_minutes``, in "
 "``rounds`` mode (a round is already a batch) and outside ``swiss_lives``."
 
-#: ../../source/propositions.rst:199
+#: ../../source/propositions.rst:200
 msgid "Pauses (``Config.Breaks``)"
 msgstr "Breaks (``Config.Breaks``)"
 
-#: ../../source/propositions.rst:208
+#: ../../source/propositions.rst:209
 msgid ""
 "``Validate`` refuse une pause qui finit avant de commencer. "
 "``flagBreaks`` (``horaires.go``) :"
@@ -359,7 +367,7 @@ msgstr ""
 "``Validate`` rejects a break that ends before it starts. ``flagBreaks`` "
 "(``horaires.go``):"
 
-#: ../../source/propositions.rst:216
+#: ../../source/propositions.rst:217
 msgid ""
 "``Expected(n)`` est la durée attendue d'un match de *n* points "
 "(``rules.ExpectedDuration``, à partir de ``Config.MinPerPoint``, voir "
@@ -369,7 +377,7 @@ msgstr ""
 "(``rules.ExpectedDuration``, from ``Config.MinPerPoint``, see "
 ":ref:`horloge`)."
 
-#: ../../source/propositions.rst:219
+#: ../../source/propositions.rst:220
 msgid ""
 "**Rien n'est bloqué.** Le directeur sait des choses que le moteur ignore "
 "— que ces deux-là mangeront après, que la pause est indicative, que la "
@@ -381,7 +389,7 @@ msgstr ""
 "the playing hall closes anyway. They are told, they decide; this is the "
 "rule for all of the engine's warnings."
 
-#: ../../source/propositions.rst:223
+#: ../../source/propositions.rst:224
 msgid ""
 "L'avertissement tombe dès que le match **rencontre** la pause, et pas "
 "seulement s'il s'y termine : un match lancé à midi moins dix et attendu "
@@ -391,11 +399,11 @@ msgstr ""
 "only if it ends in it: a match started at ten to noon and expected to "
 "last until 13h30 makes people miss the meal just as much."
 
-#: ../../source/propositions.rst:227
+#: ../../source/propositions.rst:228
 msgid "Attribution des tables"
 msgstr "Table assignment"
 
-#: ../../source/propositions.rst:246
+#: ../../source/propositions.rst:247
 msgid ""
 "``AvailableFor`` (``tables.go``) écarte les tables hors service "
 "(``Tables.Unavailable``), celles au-delà de ``Count`` et celles qui sont "
@@ -410,19 +418,20 @@ msgid ""
 msgstr ""
 "``AvailableFor`` (``tables.go``) excludes out-of-service tables "
 "(``Tables.Unavailable``), those beyond ``Count`` and those reserved "
-"(``Tables.Reserved``, ``TableRule`` entries) for another section or another "
-"phase. ``dehors`` is ``External.BusyTables``: the tables where another "
-"event of the playing hall is playing. The proposed table is therefore "
-"always **the lowest free one**. An action that finds none keeps ``Table ="
-" 0`` and carries the reason ``waiting_table``: it remains confirmable "
-"(the engine does not block), and the TD enters a table or waits for one "
-"to free up. See :ref:`configuration` for the shape of ``Config.Tables``."
+"(``Tables.Reserved``, ``TableRule`` entries) for another section or "
+"another phase. ``dehors`` is ``External.BusyTables``: the tables where "
+"another event of the playing hall is playing. The proposed table is "
+"therefore always **the lowest free one**. An action that finds none keeps"
+" ``Table = 0`` and carries the reason ``waiting_table``: it remains "
+"confirmable (the engine does not block), and the TD enters a table or "
+"waits for one to free up. See :ref:`configuration` for the shape of "
+"``Config.Tables``."
 
-#: ../../source/propositions.rst:255
+#: ../../source/propositions.rst:256
 msgid "Générateur pseudo-aléatoire"
 msgstr "Pseudo-random generator"
 
-#: ../../source/propositions.rst:273
+#: ../../source/propositions.rst:274
 msgid ""
 "Le moteur construit la graine par ``State.seed()`` (``regles.go``) et la "
 "passe à ``rules.Pair`` ; le générateur est **recréé à chaque appel** et "
@@ -452,11 +461,11 @@ msgstr ""
 "journal, since the draws are materialised in it. That is the property "
 "that matters."
 
-#: ../../source/propositions.rst:284
+#: ../../source/propositions.rst:285
 msgid "Utilitaires d'ordre"
 msgstr "Ordering utilities"
 
-#: ../../source/propositions.rst:290
+#: ../../source/propositions.rst:291
 msgid ""
 "Renvoie une **copie** triée par ordre croissant de l'identifiant "
 "(comparaison de chaînes). C'est le préalable obligatoire à tout mélange "

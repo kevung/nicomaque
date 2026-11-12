@@ -68,7 +68,7 @@ func (s *State) propose(now time.Time, ext External) []Action {
 	ph := s.phase()
 	var acts []Action
 	switch ph.Cfg.Kind {
-	case KindSwissLives:
+	case KindSwissLives, KindSwissRounds:
 		if éch, lot := s.batchDeadline(ph); lot && now.Before(éch) && !s.swissDone(ph) {
 			// Micro-rondes : les joueurs libres attendent l'échéance. L'action porte
 			// l'échéance pour que l'hôte affiche un compte à rebours.
@@ -107,7 +107,7 @@ func (s *State) propose(now time.Time, ext External) []Action {
 		// Passage confirmé, tirage pas encore fait : le repêchage reste possible (N26).
 		acts = append(s.proposeRepechages(s.phaseOf(ph.Index-1)), acts...)
 	}
-	if ph.Cfg.Kind != KindSwissLives {
+	if !swissKind(ph.Cfg.Kind) {
 		s.holdAbsent(acts) // un suisse n'apparie pas les absents ; un graphe les retient
 		s.holdElsewhere(acts)
 	}
@@ -117,7 +117,12 @@ func (s *State) propose(now time.Time, ext External) []Action {
 }
 
 // phaseDone : la phase n'a plus rien à jouer (rules.PhaseDone).
-func (s *State) phaseDone(ph *PhaseState) bool { return rules.PhaseDone(s.bilan(ph)) }
+func (s *State) phaseDone(ph *PhaseState) bool {
+	if ph.Cfg.Kind == KindSwissRounds {
+		return s.swissDone(ph)
+	}
+	return rules.PhaseDone(s.bilan(ph))
+}
 
 func (s *State) runningInPhase(ph *PhaseState) int {
 	n := 0

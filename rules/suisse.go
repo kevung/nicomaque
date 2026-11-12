@@ -8,6 +8,9 @@ import (
 // ---- Suisse à vies : appariement dans le groupe de même nombre de défaites ----
 
 func (v *vue) swissDone() bool {
+	if v.Format == FormatSwissRounds {
+		return v.roundsDone()
+	}
 	if v.Running > 0 {
 		return false
 	}
@@ -188,6 +191,9 @@ func PairSwissRound(p Phase, r int, players []Ref, seed Seed) (plan []Pairing, n
 }
 
 func (v *vue) pairRound(r int, players []Ref, rng *rand.Rand) (acts []Pairing, normal bool) {
+	if v.Format == FormatSwissRounds {
+		return v.pairClassicRound(r, players, rng), true
+	}
 	budget := 1 << 30
 	if v.Rules.Target > 0 {
 		budget = v.livesLeft() - v.Rules.Target
@@ -246,6 +252,13 @@ func PairSwissOrphans(p Phase, r int, orphans []Ref, budget, length int, seed Se
 	v := voir(&p)
 	rng := generateur(seed.Round(r))
 	var acts []Pairing
+	if v.Format == FormatSwissRounds {
+		pairs, _ := v.pairNearest(v.ordreClassement(orphans, rng), len(orphans)%2 == 1)
+		for _, pr := range pairs {
+			acts = append(acts, Pairing{Kind: PairMatch, Label: Label{Kind: LabelRound, N: r}, Round: r, A: pr[0], B: pr[1], Length: length})
+		}
+		return acts
+	}
 	for l := 0; l < v.Rules.Lives && budget > 0; l++ {
 		pairs, _ := v.pairGroup(v.groupe(orphans, l), rng, false)
 		for _, pr := range pairs {
