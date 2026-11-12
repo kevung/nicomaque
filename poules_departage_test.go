@@ -374,3 +374,66 @@ func TestBarrageFinalRetraitsMelesNAvertitPas(t *testing.T) {
 		}
 	}
 }
+
+// TestBarrageDePouleCorrectionAvertit : un barrage de poule est tiré entre les ex æquo de la
+// frontière ; une correction qui sort l'un d'eux de l'égalité le périme.
+func TestBarrageDePouleCorrectionAvertit(t *testing.T) {
+	cfg := tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindRoundRobin, Length: 5, GroupSize: 4, Qualifiers: 2}}}
+	vus := 0
+	for graine := int64(0); graine < 12; graine++ {
+		d := piloter(t, cfg, graine, champClubs(8, 0))
+		var barrage *tournoi.Section
+		rng := rand.New(rand.NewSource(graine))
+		for pas := 0; pas < 200 && barrage == nil && !d.st.Finished; pas++ {
+			for _, a := range d.st.Propose() {
+				if a.Kind != tournoi.ActWait && a.Kind != tournoi.ActFinish {
+					d.confirm(a)
+					break
+				}
+			}
+			for _, id := range d.st.MatchOrder {
+				if m := d.st.Matches[id]; m.Status == tournoi.Running {
+					d.must(tournoi.ResultEvent(id, []tournoi.PlayerID{m.A, m.B}[rng.Intn(2)], m.Length, 0, d.now))
+				}
+			}
+			for _, sec := range d.st.Phases[0].Sections {
+				if strings.HasPrefix(sec.Name, "barrage:") {
+					barrage = sec
+				}
+			}
+		}
+		if barrage == nil {
+			continue
+		}
+		vus++
+		if d.barragePérimé() {
+			t.Fatalf("graine %d : barrage tout juste tiré, déjà périmé : %v", graine, d.st.Warnings)
+		}
+		exAequo := map[tournoi.PlayerID]bool{}
+		for _, p := range barrage.Players {
+			exAequo[p] = true
+		}
+		// Un match de poule entre un ex æquo et un joueur de sa poule hors de l'égalité.
+		corrigé := false
+		for _, id := range d.st.MatchOrder {
+			m := d.st.Matches[id]
+			if "barrage:"+strings.TrimPrefix(m.Section, "poule:") != barrage.Name || exAequo[m.A] == exAequo[m.B] {
+				continue
+			}
+			perdant := m.A
+			if perdant == m.Winner {
+				perdant = m.B
+			}
+			d.must(tournoi.CorrectionEvent(id, perdant, m.Length, 0, d.now))
+			corrigé = true
+			break
+		}
+		if !corrigé || !d.barragePérimé() {
+			t.Fatalf("graine %d : correction %v, barrage_stale attendu : %v", graine, corrigé, d.st.Warnings)
+		}
+		d.rejouable()
+	}
+	if vus == 0 {
+		t.Fatal("aucun barrage de poule en douze graines")
+	}
+}
