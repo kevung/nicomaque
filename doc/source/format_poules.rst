@@ -11,6 +11,18 @@ Les entrants sont répartis en poules ; chaque poule est une toutes rondes (tabl
 qualificative ne sont **pas** départagées arithmétiquement : elles déclenchent un **barrage** à 2
 vies entre les joueurs concernés.
 
+Avec ``tiebreak``, chaque poule est classée **par le départage** : après les victoires, les
+critères configurés dans l'ordre (``point_diff``, ``points_scored``, ``buchholz`` — ici la somme
+des victoires de poule des adversaires rencontrés), sur les seuls matchs de poule. Le barrage ne
+reste que pour une égalité **complète** à la place qualificative, et le classement de la phase
+suit le même ordre.
+
+Quand les poules sont la **dernière phase**, elles désignent un seul vainqueur : les premiers de
+chaque poule — les joueurs non retirés à la meilleure clé de leur poule, moins ceux que le barrage
+de la poule a écartés — se départagent par le **barrage final** (section ``barrage:final``, une
+place), tiré quand les poules et leurs barrages sont finis. Un seul premier : il est le vainqueur,
+sans barrage.
+
 Les défauts sont posés par ``Config.Validate`` : ``group_size`` vaut 4, ``qualifiers`` vaut 2, et
 ``qualifiers`` doit être strictement inférieur à ``group_size``. ``groups`` fixe à la place le
 **nombre** de poules (une seule fait un toutes-rondes complet) ; ``groups`` et ``group_size``
@@ -160,6 +172,7 @@ survivants en dessous du nombre de places.
    func (v *vue) barragesDone() bool   // paquet rules
 
 Pour chaque poule ayant une égalité : le barrage doit exister **et** ``len(barrageAlive) <= Spots``.
+En dernière phase, de même pour le barrage final s'il y a plus d'un premier de poule.
 La phase est finie (``rules.PhaseDone``) quand elle est tirée, que tous les nœuds de ses sections
 sont terminés et que ``barragesDone`` est vrai.
 
@@ -202,13 +215,14 @@ Qualifiés et classement
 ::
 
    qualifiedBase — pour chaque poule :
-       w   := PoolWins ; ids := tri par identifiant puis tri stable décroissant sur w
-       tied, spots := PoolTie
+       clé := (victoires, critères de tiebreak) ; ids := tri par identifiant puis tri stable
+              décroissant sur la clé
+       tied, spots := les ex æquo de clé à la frontière des qualifiés (PoolTieOf)
        si pas d'égalité :
            → les `Qualifiers` premiers de ids
        sinon :
-           v := w[tied[0]]
-           → tous ceux qui ont strictement plus de v victoires
+           v := clé[tied[0]]
+           → tous ceux dont la clé est strictement devant v
            + si un barrage existe et len(barrageAlive) <= spots → les survivants du barrage
 
    repecher — pour chaque qualifié p de la base :

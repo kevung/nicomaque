@@ -23,8 +23,7 @@ Règles
   groupes.
 - **Suisse classique** (``swiss_rounds``) : sans ``tiebreak``, les joueurs à égalité de points
   restent ex æquo, y compris en tête. Les têtes de série saisies ne se lisent pas dans le CSV des
-  joueurs. Le départage
-  arithmétique ne s'applique pas aux poules, qui se règlent par barrage.
+  joueurs.
 - **Consolante et dernière chance** : pas d'option de saut (perdants du premier tour seulement,
   entrée jusqu'au tour *k*, consolante à tirage avec heure limite d'entrée).
 - **Revanches en consolante** : l'ordre inversé d'entrée évite la revanche immédiate, pas les

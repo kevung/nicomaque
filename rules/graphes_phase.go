@@ -443,6 +443,164 @@ func PoolTie(sec Section, qualifiers int) (tied []Ref, spots int) {
 	return tied, spots
 }
 
+// poolClés : la clé de classement de chaque joueur d'une poule — ses victoires, puis les critères
+// du départage configuré (Rules.Tiebreak). Le Buchholz d'une poule est la somme des victoires de
+// poule des adversaires rencontrés. Sans départage, la clé est le nombre de victoires.
+func (v *vue) poolClés(sec Section) map[Ref]clé {
+	w := PoolWins(sec)
+	clés := make(map[Ref]clé, len(w))
+	for p, n := range w {
+		k := clé{n}
+		e := v.entrant(p)
+		for i, c := range v.Rules.Tiebreak {
+			if i >= maxCritères {
+				break
+			}
+			if c == TiebreakBuchholz {
+				for _, o := range e.Played {
+					k[i+1] += w[o]
+				}
+				continue
+			}
+			k[i+1] = v.critère(e, c)
+		}
+		clés[p] = k
+	}
+	return clés
+}
+
+// poolOrdre : les joueurs d'une poule par identifiant, puis (stable) par clé décroissante.
+func (v *vue) poolOrdre(sec Section) ([]Ref, map[Ref]clé) {
+	clés := v.poolClés(sec)
+	ids := make([]Ref, 0, len(clés))
+	for p := range clés {
+		ids = append(ids, p)
+	}
+	ids = sortedRefs(ids)
+	sort.SliceStable(ids, func(i, j int) bool { return clés[ids[i]].devant(clés[ids[j]]) })
+	return ids, clés
+}
+
+// PoolTieOf : PoolTie pour la poule nommée de la phase p, le départage configuré appliqué — ne
+// restent à départager par barrage que les ex æquo COMPLETS à la frontière des qualifiés.
+func PoolTieOf(p Phase, pool string) (tied []Ref, spots int) {
+	v := voir(&p)
+	if sec := v.section(pool); sec != nil {
+		return v.poolTie(*sec)
+	}
+	return nil, 0
+}
+
+func (v *vue) poolTie(sec Section) (tied []Ref, spots int) {
+	ids, clés := v.poolOrdre(sec)
+	q := v.Rules.Qualifiers
+	if q >= len(ids) || clés[ids[q-1]] != clés[ids[q]] {
+		return nil, 0
+	}
+	val := clés[ids[q-1]]
+	spots = q
+	for _, p := range ids {
+		if clés[p].devant(val) {
+			spots--
+		} else if clés[p] == val {
+			tied = append(tied, p)
+		}
+	}
+	return tied, spots
+}
+
+// FinalBarrageName : le barrage final d'une dernière phase de poules, entre les premiers de
+// poule (ou les co-premiers d'une poule unique). Il n'appartient à aucune poule.
+const FinalBarrageName = barragePrefix + "final"
+
+// poolBarragesDone : chaque barrage de poule a rendu ses places.
+func (v *vue) poolBarragesDone() bool {
+	for i := range v.Sections {
+		sec := v.Sections[i]
+		if sec.Kind != SectionPool {
+			continue
+		}
+		tied, _ := v.poolTie(sec)
+		if len(tied) == 0 {
+			continue
+		}
+		bs := v.section(BarrageSectionName(sec.Name))
+		if bs == nil || len(v.barrageAlive(bs)) > bs.Spots {
+			return false
+		}
+	}
+	return true
+}
+
+// finalistes : dans une DERNIÈRE phase de poules, les premiers de chaque poule — les
+// joueurs non retirés à la meilleure clé de leur poule, moins ceux que le barrage de la poule a
+// écartés. Plus d'un : ils se départagent sur le tapis, par le barrage final, à une place. nil
+// tant que les poules et leurs barrages ne sont pas finis, et hors de ce cas.
+func (v *vue) finalistes() []Ref {
+	if !v.Last || !v.Drawn {
+		return nil
+	}
+	n := 0
+	for i := range v.Sections {
+		if v.Sections[i].Kind == SectionPool {
+			n++
+			if !v.Sections[i].Done() {
+				return nil
+			}
+		}
+	}
+	if n == 0 || !v.poolBarragesDone() {
+		return nil
+	}
+	var out []Ref
+	for i := range v.Sections {
+		sec := v.Sections[i]
+		if sec.Kind != SectionPool {
+			continue
+		}
+		ids, clés := v.poolOrdre(sec)
+		écartés := map[Ref]bool{}
+		if bs := v.section(BarrageSectionName(sec.Name)); bs != nil {
+			for _, p := range bs.Players {
+				écartés[p] = true
+			}
+			for _, p := range v.barrageAlive(bs) {
+				écartés[p] = false
+			}
+		}
+		var tête *clé
+		for _, p := range ids {
+			if v.withdrawn[p] || écartés[p] {
+				continue
+			}
+			if tête == nil {
+				k := clés[p]
+				tête = &k
+			}
+			if clés[p] != *tête {
+				break
+			}
+			out = append(out, p)
+		}
+	}
+	return out
+}
+
+// champion : le vainqueur d'une dernière phase de poules — le seul premier de poule, ou
+// le survivant du barrage final. Vide tant qu'il n'est pas connu, et hors de ce cas.
+func (v *vue) champion() Ref {
+	c := v.finalistes()
+	if len(c) == 1 {
+		return c[0]
+	}
+	if bs := v.section(FinalBarrageName); bs != nil && len(c) > 1 {
+		if alive := v.barrageAlive(bs); len(alive) == 1 {
+			return alive[0]
+		}
+	}
+	return ""
+}
+
 // barrageLosses : défaites de chaque joueur d'un barrage, et ses matchs en cours.
 func (v *vue) barrageLosses(name string) (losses map[Ref]int, running int) {
 	losses = map[Ref]int{}
@@ -479,19 +637,12 @@ func (v *vue) section(name string) *Section {
 }
 
 func (v *vue) barragesDone() bool {
-	for i := range v.Sections {
-		sec := v.Sections[i]
-		if sec.Kind != SectionPool {
-			continue
-		}
-		tied, _ := PoolTie(sec, v.Rules.Qualifiers)
-		if len(tied) == 0 {
-			continue
-		}
-		bs := v.section(BarrageSectionName(sec.Name))
-		if bs == nil || len(v.barrageAlive(bs)) > bs.Spots {
-			return false
-		}
+	if !v.poolBarragesDone() {
+		return false
+	}
+	if c := v.finalistes(); len(c) > 1 {
+		bs := v.section(FinalBarrageName)
+		return bs != nil && len(v.barrageAlive(bs)) <= bs.Spots
 	}
 	return true
 }
@@ -551,7 +702,7 @@ func (v *vue) pairPools(seed Seed) []Pairing {
 		if sec.Kind != SectionPool || !sec.Done() {
 			continue
 		}
-		tied, spots := PoolTie(sec, v.Rules.Qualifiers)
+		tied, spots := v.poolTie(sec)
 		if len(tied) == 0 {
 			continue
 		}
@@ -561,6 +712,14 @@ func (v *vue) pairPools(seed Seed) []Pairing {
 			acts = append(acts, Pairing{Kind: PairDraw, Section: bname,
 				Label: Label{Kind: LabelDrawBarrage, Section: sec.Name, Players: len(tied), Spots: spots}, Groups: [][]Ref{tied}})
 			continue
+		}
+		acts = append(acts, v.pairBarrage(bs, busy, ailleurs, seed)...)
+	}
+	if c := v.finalistes(); len(c) > 1 {
+		bs := v.section(FinalBarrageName)
+		if bs == nil {
+			return append(acts, Pairing{Kind: PairDraw, Section: FinalBarrageName,
+				Label: Label{Kind: LabelDrawBarrage, Section: FinalBarrageName, Players: len(c), Spots: 1}, Groups: [][]Ref{c}})
 		}
 		acts = append(acts, v.pairBarrage(bs, busy, ailleurs, seed)...)
 	}
@@ -621,16 +780,15 @@ func (v *vue) qualifiedBase() []Ref {
 		if sec.Kind != SectionPool {
 			continue
 		}
-		w := PoolWins(sec)
-		ids := parVictoires(w)
-		tied, spots := PoolTie(sec, v.Rules.Qualifiers)
+		ids, clés := v.poolOrdre(sec)
+		tied, spots := v.poolTie(sec)
 		if len(tied) == 0 {
 			out = append(out, ids[:min(v.Rules.Qualifiers, len(ids))]...)
 			continue
 		}
-		val := w[tied[0]]
+		val := clés[tied[0]]
 		for _, p := range ids {
-			if w[p] > val {
+			if clés[p].devant(val) {
 				out = append(out, p)
 			}
 		}

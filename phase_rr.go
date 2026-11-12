@@ -34,13 +34,18 @@ func (s *State) applyRRDraw(ph *PhaseState, section string, d *Draw) error {
 	if len(d.Groups) != 1 {
 		return fmt.Errorf("barrage : un seul groupe attendu")
 	}
+	if section == rules.FinalBarrageName {
+		ph.Sections = append(ph.Sections, fromRulesSection(rules.Section{Name: section, Kind: rules.SectionBarrage,
+			Players: refs(d.Groups[0]), Spots: 1}))
+		return nil
+	}
 	// places : recalculées à partir de la poule
 	poule := ph.section(rules.PoolOfBarrage(section))
 	if poule == nil {
 		return fmt.Errorf("barrage : poule %q inconnue", section)
 	}
-	b := rules.BarrageSection(toRulesSection(poule), refs(d.Groups[0]), ph.Cfg.Qualifiers)
-	b.Name = section
+	_, spots := rules.PoolTieOf(s.snapshot(ph, nil), poule.Name)
+	b := rules.Section{Name: section, Kind: rules.SectionBarrage, Players: refs(d.Groups[0]), Spots: spots}
 	ph.Sections = append(ph.Sections, fromRulesSection(b))
 	return nil
 }

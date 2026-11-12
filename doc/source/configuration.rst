@@ -192,8 +192,8 @@ Signification des champs de phase
 |                    |                                | série protégées », c'est la culture du     |
 |                    |                                | backgammon. Refusé sur les autres formats  |
 +--------------------+--------------------------------+--------------------------------------------+
-| ``tiebreak``       | ``swiss_rounds``               | Départage arithmétique des ex æquo :       |
-|                    |                                | liste de ``point_diff``,                   |
+| ``tiebreak``       | ``swiss_rounds``,              | Départage arithmétique des ex æquo :       |
+|                    | ``round_robin``                | liste de ``point_diff``,                   |
 |                    |                                | ``points_scored``, ``buchholz``,           |
 |                    |                                | appliqués dans l'ordre après les points.   |
 |                    |                                | **Vide par défaut, par choix de            |

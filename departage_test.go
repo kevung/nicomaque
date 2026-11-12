@@ -202,7 +202,6 @@ func TestDepartageValidate(t *testing.T) {
 		"critère répété":  {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Tiebreak: []string{"buchholz", "buchholz"}},
 		"suisse à vies":   {Kind: tournoi.KindSwissLives, Length: 7, Tiebreak: []string{"buchholz"}},
 		"tableau":         {Kind: tournoi.KindBracket, Length: 7, Tiebreak: []string{"buchholz"}},
-		"poules":          {Kind: tournoi.KindRoundRobin, Length: 7, Tiebreak: []string{"buchholz"}},
 	}
 	for nom, p := range refus {
 		c := tournoi.Config{Phases: []tournoi.PhaseConfig{p}}

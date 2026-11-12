@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 12:52+0100\n"
+"POT-Creation-Date: 2026-11-12 13:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -108,8 +108,7 @@ msgstr "Number of lives (default 2). Forced to 2 for ``gsl``"
 msgid "``rounds``"
 msgstr "``rounds``"
 
-#: ../../source/configuration.rst:106 ../../source/configuration.rst:195
-#: ../../source/configuration.rst:202
+#: ../../source/configuration.rst:106 ../../source/configuration.rst:202
 msgid "``swiss_rounds``"
 msgstr "``swiss_rounds``"
 
@@ -391,6 +390,10 @@ msgstr ""
 #: ../../source/configuration.rst:195
 msgid "``tiebreak``"
 msgstr "``tiebreak``"
+
+#: ../../source/configuration.rst:195
+msgid "``swiss_rounds``, ``round_robin``"
+msgstr "``swiss_rounds``, ``round_robin``"
 
 #: ../../source/configuration.rst:195
 msgid ""

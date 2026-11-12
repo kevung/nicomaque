@@ -195,29 +195,39 @@ func (v *vue) rankBracket() []Standing {
 	return rangs(ps, scs, notes)
 }
 
+// rankPools : le vainqueur d'une dernière phase de poules d'abord, puis les qualifiés,
+// puis les autres ; dans chaque bloc, par victoires de poule, puis par le départage configuré.
 func (v *vue) rankPools() []Standing {
 	qual := refSet(v.repecher(v.qualifiedBase()))
-	score := map[Ref]int{}
+	champion := v.champion()
+	type rang [2 + 1 + maxCritères]int // vainqueur, qualifié, clé de poule
+	score := map[Ref]rang{}
 	note := map[Ref]Note{}
 	for i := range v.Sections {
 		sec := v.Sections[i]
 		if sec.Kind != SectionPool {
 			continue
 		}
-		for p, w := range PoolWins(sec) {
-			score[p] = w
-			note[p] = Note{Kind: NotePoolRecord, Section: sec.Name, Wins: w}
+		for p, k := range v.poolClés(sec) {
+			var r rang
+			copy(r[2:], k[:])
+			note[p] = Note{Kind: NotePoolRecord, Section: sec.Name, Wins: k[0]}
 			if v.withdrawn[p] {
 				// jamais parmi les qualifiés : classé sur ses victoires
-				note[p] = Note{Kind: NoteWithdrawn, Section: sec.Name, Wins: w}
+				note[p] = Note{Kind: NoteWithdrawn, Section: sec.Name, Wins: k[0]}
+				score[p] = r
 				continue
 			}
 			if qual[p] {
-				score[p] += 100
+				r[1] = 1
 				n := note[p]
 				n.Qualified = true
 				note[p] = n
 			}
+			if p == champion {
+				r[0] = 1
+			}
+			score[p] = r
 		}
 	}
 	ids := make([]Ref, len(v.Entrants))
@@ -225,8 +235,16 @@ func (v *vue) rankPools() []Standing {
 		ids[i] = e.Player
 	}
 	ids = sortedRefs(ids)
-	sort.SliceStable(ids, func(i, j int) bool { return score[ids[i]] > score[ids[j]] })
-	scs, notes := make([]int, len(ids)), make([]Note, len(ids))
+	devant := func(a, b rang) bool {
+		for i := range a {
+			if a[i] != b[i] {
+				return a[i] > b[i]
+			}
+		}
+		return false
+	}
+	sort.SliceStable(ids, func(i, j int) bool { return devant(score[ids[i]], score[ids[j]]) })
+	scs, notes := make([]rang, len(ids)), make([]Note, len(ids))
 	for i, p := range ids {
 		scs[i], notes[i] = score[p], note[p]
 	}

@@ -214,7 +214,7 @@ func (v *vue) restePoules() Remaining {
 			}
 			continue
 		}
-		tied, spots := PoolTie(sec, v.Rules.Qualifiers)
+		tied, spots := v.poolTie(sec)
 		if len(tied) == 0 {
 			continue
 		}
@@ -224,26 +224,67 @@ func (v *vue) restePoules() Remaining {
 			r.Max += 2*len(tied) - spots
 			continue
 		}
-		losses, running := v.barrageLosses(bs.Name)
-		alive := v.barrageAlive(bs)
-		if len(alive) <= bs.Spots {
-			r.Min += running
-			r.Max += running
+		lo, hi := v.resteBarrage(bs)
+		r.Min, r.Max = r.Min+lo, r.Max+hi
+	}
+	if !v.Last {
+		return r
+	}
+	// Dernière phase : le barrage final entre les premiers de poule.
+	if bs := v.section(FinalBarrageName); bs != nil {
+		lo, hi := v.resteBarrage(bs)
+		r.Min, r.Max = r.Min+lo, r.Max+hi
+		return r
+	}
+	if c := v.finalistes(); c != nil {
+		if len(c) > 1 {
+			r.Min += 2 * (len(c) - 1)
+			r.Max += 2*len(c) - 1
+		}
+		return r
+	}
+	// Premiers pas encore connus : un par poule quand un seul se qualifie et que personne ne
+	// s'est retiré, sinon au plus toute la poule.
+	n := 0
+	for i := range v.Sections {
+		sec := v.Sections[i]
+		if sec.Kind != SectionPool {
 			continue
 		}
-		var vies []int
-		total := 0
-		for _, p := range alive {
-			vies = append(vies, 2-losses[p])
-			total += 2 - losses[p]
+		w := PoolWins(sec)
+		k := 1
+		if v.Rules.Qualifiers > 1 {
+			k = len(w)
 		}
-		sort.Ints(vies)
-		lo := 0
-		for _, n := range vies[:len(alive)-bs.Spots] {
-			lo += n
+		for p := range w {
+			if v.withdrawn[p] {
+				k = len(w)
+			}
 		}
-		r.Min += max(lo, running)
-		r.Max += max(total-bs.Spots, running)
+		n += k
+	}
+	if n > 1 {
+		r.Max += 2*n - 1
 	}
 	return r
+}
+
+// resteBarrage : les matchs qu'un barrage tiré doit encore jouer, au moins et au plus.
+func (v *vue) resteBarrage(bs *Section) (lo, hi int) {
+	losses, running := v.barrageLosses(bs.Name)
+	alive := v.barrageAlive(bs)
+	if len(alive) <= bs.Spots {
+		return running, running
+	}
+	var vies []int
+	total := 0
+	for _, p := range alive {
+		vies = append(vies, 2-losses[p])
+		total += 2 - losses[p]
+	}
+	sort.Ints(vies)
+	for _, n := range vies[:len(alive)-bs.Spots] {
+		lo += n
+	}
+	return max(lo, running), max(total-bs.Spots, running)
 }

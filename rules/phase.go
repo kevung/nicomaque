@@ -55,7 +55,8 @@ type PhaseRules struct {
 	Groups         int    `json:"groups,omitempty"` // poules : nombre de poules, à la place de GroupSize
 	Qualifiers     int    `json:"qualifiers,omitempty"`
 	Seeding        string `json:"seeding,omitempty"`
-	// Tiebreak : départage arithmétique des ex æquo d'un suisse classique. Vide : aucun.
+	// Tiebreak : départage arithmétique des ex æquo d'un suisse classique ou d'une poule. Vide :
+	// aucun.
 	Tiebreak []string `json:"tiebreak,omitempty"`
 	// Accelerated : suisse classique accéléré — un point virtuel à la moitié haute, pour
 	// l'appariement des rondes 1 et 2 seulement.
@@ -99,10 +100,13 @@ type Phase struct {
 	// Withdrawn : les retirés du tournoi. Un retiré n'a plus de vie ; dans un graphe, il perd par
 	// forfait le match qui l'attend.
 	Withdrawn []Ref `json:"withdrawn,omitempty"`
-	Drawn     bool  `json:"drawn,omitempty"`   // tableau, poules : tirage fait ; GSL : un bloc au moins
-	Round     int   `json:"round,omitempty"`   // suisse par rondes : dernière ronde ouverte ; GSL : bloc courant
-	Length    int   `json:"length"`            // longueur courante (un changement du directeur l'emporte)
-	Running   int   `json:"running,omitempty"` // matchs en cours dans la phase
+	// Last : la phase est la dernière du tournoi. Des poules y désignent UN vainqueur, par le
+	// barrage final de leurs premiers.
+	Last    bool `json:"last,omitempty"`
+	Drawn   bool `json:"drawn,omitempty"`   // tableau, poules : tirage fait ; GSL : un bloc au moins
+	Round   int  `json:"round,omitempty"`   // suisse par rondes : dernière ronde ouverte ; GSL : bloc courant
+	Length  int  `json:"length"`            // longueur courante (un changement du directeur l'emporte)
+	Running int  `json:"running,omitempty"` // matchs en cours dans la phase
 	// Sections : les graphes de la phase, résolus (Resolve).
 	Sections []Section `json:"sections,omitempty"`
 	// Busy : joueurs qui jouent un match en ce moment. Elsewhere : joueurs occupés hors de ce

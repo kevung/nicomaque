@@ -80,15 +80,15 @@ type PhaseConfig struct {
 	// MonradWiden : Monrad seulement. Quand le dernier groupe de points ne s'apparie qu'au prix
 	// d'une revanche, il s'élargit au groupe d'au-dessus, puis au suivant, tant que cela en évite
 	// une. Éteint par défaut : le Monrad joue alors la revanche du dernier groupe.
-	MonradWiden    bool   `json:"monrad_widen,omitempty"`
-	AvoidClubs     bool   `json:"avoid_clubs,omitempty"` // éviter les joueurs du même club quand c'est possible
-	AllowRematch   bool   `json:"allow_rematch,omitempty"`
-	Target         int    `json:"target,omitempty"`         // swiss_lives / gsl : figer quand la somme des vies vaut Target (puissance de 2)
-	Consolation    bool   `json:"consolation,omitempty"`    // bracket : consolante progressive (perdants du tableau principal)
-	LastChance     bool   `json:"last_chance,omitempty"`    // bracket : dernière chance (perdants de la consolante)
-	Reconciliation bool   `json:"reconciliation,omitempty"` // bracket : le vainqueur de la consolante joue le vainqueur du principal (double élimination)
-	Recharge       bool   `json:"recharge,omitempty"`       // bracket : en double élimination, le vainqueur du principal doit être battu deux fois
-	GroupSize      int    `json:"group_size,omitempty"`     // round_robin : taille des poules (défaut 4)
+	MonradWiden    bool `json:"monrad_widen,omitempty"`
+	AvoidClubs     bool `json:"avoid_clubs,omitempty"` // éviter les joueurs du même club quand c'est possible
+	AllowRematch   bool `json:"allow_rematch,omitempty"`
+	Target         int  `json:"target,omitempty"`         // swiss_lives / gsl : figer quand la somme des vies vaut Target (puissance de 2)
+	Consolation    bool `json:"consolation,omitempty"`    // bracket : consolante progressive (perdants du tableau principal)
+	LastChance     bool `json:"last_chance,omitempty"`    // bracket : dernière chance (perdants de la consolante)
+	Reconciliation bool `json:"reconciliation,omitempty"` // bracket : le vainqueur de la consolante joue le vainqueur du principal (double élimination)
+	Recharge       bool `json:"recharge,omitempty"`       // bracket : en double élimination, le vainqueur du principal doit être battu deux fois
+	GroupSize      int  `json:"group_size,omitempty"`     // round_robin : taille des poules (défaut 4)
 	// Groups : round_robin, le NOMBRE de poules, à la place de leur taille (group_size) — une
 	// seule poule fait un toutes-rondes complet. Jamais plus d'une poule pour deux joueurs.
 	Groups     int    `json:"groups,omitempty"`
@@ -99,7 +99,8 @@ type PhaseConfig struct {
 	// l'étude conclut « pas de têtes de série protégées », c'est la culture actuelle du
 	// backgammon. Voir seeding.go.
 	Seeding string `json:"seeding,omitempty"`
-	// Tiebreak : départage ARITHMÉTIQUE des ex æquo d'un suisse classique, critères appliqués
+	// Tiebreak : départage ARITHMÉTIQUE des ex æquo d'un suisse classique ou d'une poule (à la
+	// place du barrage, qui ne reste que pour une égalité complète), critères appliqués
 	// dans l'ordre après les points : TiebreakPointDiff, TiebreakPointsScored, TiebreakBuchholz.
 	// Le défaut VIDE est un choix de conception et non un oubli — l'étude conclut « aucun
 	// départage » : à égalité on reste ex æquo, ou on se départage sur le tapis. Ce champ sépare
@@ -110,6 +111,20 @@ type PhaseConfig struct {
 	// et 2, pour l'appariement seulement : il n'apparaît dans aucun classement. Exige seeding,
 	// que l'étude écarte par défaut : sans ordre de têtes de série, il n'y a pas de moitié haute.
 	Accelerated bool `json:"accelerated,omitempty"`
+}
+
+func (p *PhaseConfig) validateTiebreak(i int) error {
+	vus := map[string]bool{}
+	for _, c := range p.Tiebreak {
+		if c != TiebreakPointDiff && c != TiebreakPointsScored && c != TiebreakBuchholz {
+			return fmt.Errorf("phase %d : critère de départage %q inconnu (%q, %q, %q)", i, c, TiebreakPointDiff, TiebreakPointsScored, TiebreakBuchholz)
+		}
+		if vus[c] {
+			return fmt.Errorf("phase %d : critère de départage %q répété", i, c)
+		}
+		vus[c] = true
+	}
+	return nil
 }
 
 // Validate vérifie la cohérence d'une configuration et remplit les défauts.
@@ -196,15 +211,8 @@ func (c *Config) Validate() error {
 				return fmt.Errorf("phase %d : accelerated et pairing %q s'excluent", i, PairingMonrad)
 			}
 			p.Mode, p.Lives = "rounds", swissRoundsLives
-			vus := map[string]bool{}
-			for _, c := range p.Tiebreak {
-				if c != TiebreakPointDiff && c != TiebreakPointsScored && c != TiebreakBuchholz {
-					return fmt.Errorf("phase %d : critère de départage %q inconnu (%q, %q, %q)", i, c, TiebreakPointDiff, TiebreakPointsScored, TiebreakBuchholz)
-				}
-				if vus[c] {
-					return fmt.Errorf("phase %d : critère de départage %q répété", i, c)
-				}
-				vus[c] = true
+			if err := p.validateTiebreak(i); err != nil {
+				return err
 			}
 		case KindLivesBracket, KindBracket:
 			if p.Seeding != "" && p.Seeding != SeedingRating && p.Seeding != SeedingManual {
@@ -240,6 +248,9 @@ func (c *Config) Validate() error {
 			if p.Seeding != "" && p.Seeding != SeedingRating && p.Seeding != SeedingManual {
 				return fmt.Errorf("phase %d : seeding %q inconnu (vide, %q ou %q)", i, p.Seeding, SeedingRating, SeedingManual)
 			}
+			if err := p.validateTiebreak(i); err != nil {
+				return err
+			}
 		default:
 			return fmt.Errorf("phase %d : type %q inconnu", i, p.Kind)
 		}
@@ -252,8 +263,8 @@ func (c *Config) Validate() error {
 		if p.Accelerated && p.Kind != KindSwissRounds {
 			return fmt.Errorf("phase %d : accelerated ne s'applique qu'à %q, pas à %q", i, KindSwissRounds, p.Kind)
 		}
-		if len(p.Tiebreak) != 0 && p.Kind != KindSwissRounds {
-			return fmt.Errorf("phase %d : tiebreak ne s'applique qu'à %q, pas à %q", i, KindSwissRounds, p.Kind)
+		if len(p.Tiebreak) != 0 && p.Kind != KindSwissRounds && p.Kind != KindRoundRobin {
+			return fmt.Errorf("phase %d : tiebreak ne s'applique qu'à %q et %q, pas à %q", i, KindSwissRounds, KindRoundRobin, p.Kind)
 		}
 		if p.BatchMinutes != 0 && p.Kind != KindSwissLives {
 			return fmt.Errorf("phase %d : batch_minutes ne s'applique qu'au suisse continu, pas à %q", i, p.Kind)

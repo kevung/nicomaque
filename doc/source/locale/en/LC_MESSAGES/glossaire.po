@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 11:23+0100\n"
+"POT-Creation-Date: 2026-11-12 13:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -320,49 +320,57 @@ msgid "``barrage:C``"
 msgstr "``barrage:C``"
 
 #: ../../source/glossaire.rst:89
+msgid "Barrage final des poules"
+msgstr "Final pool play-off"
+
+#: ../../source/glossaire.rst:89
+msgid "``barrage:final``"
+msgstr "``barrage:final``"
+
+#: ../../source/glossaire.rst:90
 msgid "``GMatch`` de tableau"
 msgstr "Bracket ``GMatch``"
 
-#: ../../source/glossaire.rst:89
+#: ../../source/glossaire.rst:90
 msgid "``<section>.<tour>.<indice>``"
 msgstr "``<section>.<tour>.<indice>``"
 
-#: ../../source/glossaire.rst:89
+#: ../../source/glossaire.rst:90
 msgid "``main.2.1``, ``conso.3.0``"
 msgstr "``main.2.1``, ``conso.3.0``"
 
-#: ../../source/glossaire.rst:90
+#: ../../source/glossaire.rst:91
 msgid "``GMatch`` de grande finale"
 msgstr "Grand final ``GMatch``"
 
-#: ../../source/glossaire.rst:90
+#: ../../source/glossaire.rst:91
 msgid "``gf.<n>``"
 msgstr "``gf.<n>``"
 
-#: ../../source/glossaire.rst:90
+#: ../../source/glossaire.rst:91
 msgid "``gf.0``"
 msgstr "``gf.0``"
 
-#: ../../source/glossaire.rst:91
+#: ../../source/glossaire.rst:92
 msgid "``GMatch`` de groupe GSL"
 msgstr "GSL group ``GMatch``"
 
-#: ../../source/glossaire.rst:91
+#: ../../source/glossaire.rst:92
 msgid "``<section>.<n>``"
 msgstr "``<section>.<n>``"
 
-#: ../../source/glossaire.rst:91
+#: ../../source/glossaire.rst:92
 msgid "``B2G3.4``"
 msgstr "``B2G3.4``"
 
-#: ../../source/glossaire.rst:92
+#: ../../source/glossaire.rst:93
 msgid "``GMatch`` de poule"
 msgstr "Pool ``GMatch``"
 
-#: ../../source/glossaire.rst:92
+#: ../../source/glossaire.rst:93
 msgid "``<section>.<ronde>.<indice>``"
 msgstr "``<section>.<ronde>.<indice>``"
 
-#: ../../source/glossaire.rst:92
+#: ../../source/glossaire.rst:93
 msgid "``poule:A.1.0``"
 msgstr "``poule:A.1.0``"

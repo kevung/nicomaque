@@ -91,13 +91,15 @@ où intervenir et comment vérifier.
   plus proche avec retour arrière (`rules/suisse_rondes.go`). Sans départage les ex æquo le
   restent, y compris en tête ; `PhaseConfig.Tiebreak` (issue #3) les départage en option —
   différence de points de match plafonnés, points marqués, Buchholz — et reste VIDE par défaut.
-  Le départage des poules à la place du barrage est dans l'issue #8. `pairing: "monrad"`
-  (issue #4) tire l'adversaire au sort dans le groupe de mêmes points, avec flotteurs.
+  `pairing: "monrad"`
+  (issue #4) tire l'adversaire au sort dans le groupe de mêmes points, avec flotteurs ;
+  `monrad_widen` (éteint par défaut) élargit le dernier groupe pour éviter une revanche.
   `seeding: "seed"` (issue #6) place par tête de série SAISIE (`Player.Seed`) dans les tableaux
   et plie la ronde 1 du suisse classique. `accelerated` (issue #5) donne un point virtuel à la moitié
   haute aux rondes 1 et 2. `groups` fixe le nombre de poules et `seeding` les compose en serpentin
-  (issue #8, en partie). Restent le classement complet des poules par départage #8
-  et la colonne `seed` du CSV des joueurs.
+  (issue #8) ; avec `tiebreak` une poule est classée par le départage, le barrage ne restant que
+  pour une égalité complète, et des poules en dernière phase désignent un seul vainqueur par le
+  barrage final (`barrage:final`). Reste la colonne `seed` du CSV des joueurs.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que
   d'autres n'en ont pas eu » entre groupes différents (aujourd'hui par groupe). `pairGroup`.
