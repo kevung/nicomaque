@@ -232,8 +232,8 @@ func TestRefusALEcritureSeulement(t *testing.T) {
 		t.Fatalf("JournalVersion %d : les refus à l'écriture datent de la version 3", tournoi.JournalVersion)
 	}
 	for _, entry := range []string{"top:0", "top:-1", "top:x", "top:"} {
-		if _, _, err := tournoi.New(phases(entry), 1, now); err == nil {
-			t.Errorf("New accepte entry %q", entry)
+		if st, ev, err := tournoi.New(phases(entry), 1, now); err == nil || st != nil || ev.Kind != "" || ev.Config != nil {
+			t.Errorf("New, entry %q : erreur %v, état %v, événement %q — rien ne doit sortir d'un refus", entry, err, st != nil, ev.Kind)
 		}
 		st, _, err := tournoi.New(phases("top:4"), 1, now)
 		if err != nil {

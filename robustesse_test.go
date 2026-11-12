@@ -228,6 +228,8 @@ func FuzzApply(f *testing.F) {
 	f.Add([]byte{0x30, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 1, 1, 3, 0, 1, 6, 0, 0, 0, 0, 0})
 	// Phase manuelle : une exemption posée puis retirée, le joueur apparié ensuite dans la ronde.
 	f.Add([]byte{0x40, 0, 0, 17, 4, 1, 17, 4, 0x81, 16, 4, 21, 1, 0, 4})
+	// La même, menée jusqu'au passage de phase : le classement de la phase manuelle sert l'entrée du tableau.
+	f.Add([]byte{0x40, 7, 0, 17, 4, 1, 17, 4, 0x81, 16, 4, 21, 1, 0, 4, 0, 1, 0, 0, 0, 0})
 	f.Fuzz(func(t *testing.T, plan []byte) {
 		now := time.Date(2026, 9, 7, 9, 0, 0, 0, time.UTC)
 		// Le quartet haut du premier octet choisit le format : les plans d'avant gardent le leur.

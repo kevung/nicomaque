@@ -153,7 +153,7 @@ func New(cfg Config, seed int64, now time.Time) (*State, Event, error) {
 	ev := Event{Version: JournalVersion, Kind: EvCreated, Time: now, Config: &cfg, Seed: seed}
 	s := newState()
 	if err := s.Apply(ev); err != nil {
-		return nil, ev, err
+		return nil, Event{}, err
 	}
 	return s, ev, nil
 }
