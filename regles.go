@@ -168,7 +168,7 @@ func withdrawnRefs(w map[PlayerID]bool) []rules.Ref {
 
 func phaseRules(c PhaseConfig) rules.PhaseRules {
 	return rules.PhaseRules{Lives: c.Lives, Rounds: c.Rounds, Length: c.Length, FinalLength: c.FinalLength, Lengths: c.Lengths,
-		LengthLate: c.LengthLate, LateThreshold: c.LateThreshold, Mode: c.Mode, Pairing: c.Pairing,
+		LengthLate: c.LengthLate, LateThreshold: c.LateThreshold, Mode: c.Mode, Pairing: c.Pairing, MonradWiden: c.MonradWiden,
 		AvoidClubs: c.AvoidClubs, AllowRematch: c.AllowRematch, Target: c.Target, Consolation: c.Consolation,
 		LastChance: c.LastChance, Reconciliation: c.Reconciliation, Recharge: c.Recharge, GroupSize: c.GroupSize,
 		Qualifiers: c.Qualifiers, Seeding: c.Seeding, Tiebreak: c.Tiebreak, Accelerated: c.Accelerated}
