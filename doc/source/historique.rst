@@ -21,6 +21,7 @@ indépendamment (champ ``version`` de chaque événement, voir :ref:`annexe_test
 - Phase à appariement manuel (``manual``) : le directeur pose les matchs, le moteur classe.
 - Remplacement d'un joueur qui n'a pas joué (``player_replaced``) et échange de deux places
   (``players_swapped``).
+- Suisse classique au fil de l'eau (``swiss_rounds`` avec ``mode: "continuous"``).
 - Un tournoi commencé sous 0.8.0 se poursuit à l'identique : mêmes propositions, mêmes statuts,
   même classement.
 - Une phase d'un seul entrant ne bloque plus le tournoi ; ``entry: "top:1"`` est refusé.

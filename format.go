@@ -46,7 +46,11 @@ const swissRoundsLives = 1 << 20
 
 // byRounds : la phase s'apparie ronde par ronde — le suisse classique toujours, le suisse à
 // vies en mode « rounds ».
-func byRounds(c PhaseConfig) bool { return noLives(c.Kind) || c.Mode == "rounds" }
+func byRounds(c PhaseConfig) bool { return noLives(c.Kind) && !rolling(c) || c.Mode == "rounds" }
+
+// rolling : le suisse classique AU FIL DE L'EAU — la k-ième partie d'un joueur appartient à la
+// ronde k, et l'on n'attend pas la fin d'une ronde pour apparier la suivante.
+func rolling(c PhaseConfig) bool { return c.Kind == KindSwissRounds && c.Mode == "continuous" }
 
 // noLives : les phases sans élimination, jouées ronde par ronde et classées aux points.
 func noLives(k string) bool { return k == KindSwissRounds || k == KindManual }
@@ -222,8 +226,8 @@ func (c *Config) Validate() error {
 			if p.MonradWiden && p.Pairing != PairingMonrad {
 				return fmt.Errorf("phase %d : monrad_widen sans pairing %q", i, PairingMonrad)
 			}
-			if p.Mode != "" && p.Mode != "rounds" {
-				return fmt.Errorf("phase %d : mode %q inconnu pour %q (rondes seulement)", i, p.Mode, p.Kind)
+			if p.Mode != "" && p.Mode != "rounds" && p.Mode != "continuous" {
+				return fmt.Errorf("phase %d : mode %q inconnu pour %q (vide, %q ou %q)", i, p.Mode, p.Kind, "rounds", "continuous")
 			}
 			if p.Lives != 0 && p.Lives != swissRoundsLives {
 				return fmt.Errorf("phase %d : lives ne se règle pas sur %q — personne n'y est éliminé", i, p.Kind)
@@ -237,7 +241,10 @@ func (c *Config) Validate() error {
 			if p.Accelerated && p.Pairing == PairingMonrad {
 				return fmt.Errorf("phase %d : accelerated et pairing %q s'excluent", i, PairingMonrad)
 			}
-			p.Mode, p.Lives = "", 0
+			if p.Mode == "rounds" {
+				p.Mode = "" // le défaut, jamais écrit
+			}
+			p.Lives = 0
 			if err := p.validateTiebreak(i); err != nil {
 				return err
 			}

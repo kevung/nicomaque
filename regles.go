@@ -168,7 +168,10 @@ func withdrawnRefs(w map[PlayerID]bool) []rules.Ref {
 
 func phaseRules(c PhaseConfig) rules.PhaseRules {
 	if noLives(c.Kind) {
-		c.Mode, c.Lives = "rounds", swissRoundsLives
+		c.Lives = swissRoundsLives
+		if !rolling(c) {
+			c.Mode = "rounds"
+		}
 	}
 	return rules.PhaseRules{Lives: c.Lives, Rounds: c.Rounds, Length: c.Length, FinalLength: c.FinalLength, Lengths: c.Lengths,
 		LengthLate: c.LengthLate, LateThreshold: c.LateThreshold, Mode: c.Mode, Pairing: c.Pairing, MonradWiden: c.MonradWiden,

@@ -23,6 +23,15 @@ func (v *vue) roundsDone() bool {
 	if v.Running > 0 {
 		return false
 	}
+	if v.Rules.Mode != ModeRounds {
+		// Au fil de l'eau : chacun a joué ses rondes.
+		for _, p := range v.alive() {
+			if v.entrant(p).parties() < v.Rules.Rounds {
+				return len(v.alive()) <= 1
+			}
+		}
+		return true
+	}
 	return v.Round >= v.Rules.Rounds || len(v.alive()) <= 1
 }
 
@@ -442,6 +451,16 @@ func (v *vue) rankRounds() []Standing {
 // resteRondes : les matchs encore à jouer d'un suisse classique — ceux en cours, plus une ronde
 // complète des joueurs en lice par ronde à venir. Min suppose la ronde ouverte entièrement lancée.
 func (v *vue) resteRondes() Remaining {
+	if v.Rules.Mode != ModeRounds {
+		// Au fil de l'eau : les parties que chacun doit encore, deux par match — une
+		// estimation, les exemptions à venir n'étant pas connues.
+		dues := 0
+		for _, p := range v.alive() {
+			dues += max(v.Rules.Rounds-v.entrant(p).parties(), 0)
+		}
+		n := max(v.Running, (dues+1)/2)
+		return Remaining{n, n}
+	}
 	n := len(v.alive()) / 2
 	àVenir := max(v.Rules.Rounds-v.Round, 0) * n
 	hi := àVenir + v.Running
@@ -449,4 +468,60 @@ func (v *vue) resteRondes() Remaining {
 		hi = àVenir + max(v.Running, n) // la ronde ouverte peut ne pas être entièrement lancée
 	}
 	return Remaining{àVenir + v.Running, hi}
+}
+
+// ---- Suisse classique au fil de l'eau ----
+
+// parties : les parties terminées d'un joueur, exemptions comprises. Sa prochaine partie
+// appartient à la ronde parties + 1.
+func (e Entrant) parties() int { return e.Wins + e.Losses + e.Byes + e.HalfByes }
+
+// pairRolling : après la ronde 1, sans attendre la fin d'une ronde. Pour chaque nombre de
+// parties k, le plus petit d'abord, les joueurs libres qui ont joué k parties sont appariés par
+// points, dans la ronde k + 1. Tant qu'un joueur joue encore sa k-ième partie, il les
+// rejoindra : appariement glouton sans aucune revanche, et qui ne trouve personne attend.
+// Sinon plus personne ne viendra : la ronde est appariée en entier, exemption comprise — et
+// l'on s'arrête là, l'exempté passant au compte suivant.
+func (v *vue) pairRolling(seed Seed) []Pairing {
+	libres, occupés := refSet(v.Free), refSet(v.Busy)
+	groupes, attendus := map[int][]Ref{}, map[int]bool{}
+	for _, p := range v.alive() {
+		k := v.entrant(p).parties()
+		switch {
+		case occupés[p]:
+			attendus[k+1] = true
+		case libres[p] && k < v.Rules.Rounds:
+			groupes[k] = append(groupes[k], p)
+		}
+	}
+	var ks []int
+	for k := range groupes {
+		ks = append(ks, k)
+	}
+	sort.Ints(ks)
+	var out []Pairing
+	for _, k := range ks {
+		r := k + 1
+		rng := generateur(seed.Round(r))
+		if !attendus[k] {
+			prs := v.pairClassicRound(r, groupes[k], rng)
+			out = append(out, prs...)
+			if n := len(prs); n > 0 && prs[n-1].Kind == PairBye {
+				break
+			}
+			continue
+		}
+		ordre := v.ordreClassement(groupes[k], rng)
+		pris := make([]bool, len(ordre))
+		for i := range ordre {
+			for j := i + 1; j < len(ordre) && !pris[i]; j++ {
+				if !pris[j] && !v.met(ordre[i], ordre[j]) {
+					pris[i], pris[j] = true, true
+					out = append(out, Pairing{Kind: PairMatch, Label: Label{Kind: LabelRound, N: r}, Round: r,
+						A: ordre[i], B: ordre[j], Length: v.Length})
+				}
+			}
+		}
+	}
+	return out
 }

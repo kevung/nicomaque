@@ -140,6 +140,9 @@ func (v *vue) pairSwiss(seed Seed) []Pairing {
 	if v.swissDone() {
 		return nil
 	}
+	if v.Format == FormatSwissRounds && v.Rules.Mode != ModeRounds {
+		return v.pairRolling(seed)
+	}
 	if v.Rules.Mode == ModeRounds {
 		if v.Running > 0 {
 			return nil

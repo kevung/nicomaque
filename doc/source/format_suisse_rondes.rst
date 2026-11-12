@@ -143,6 +143,26 @@ L'option est éteinte par défaut.
 Le tirage vient de ``Seed.Round`` : il se rejoue à l'identique, et deux graines donnent deux
 tournois.
 
+Au fil de l'eau (``mode: "continuous"``)
+----------------------------------------
+
+Avec ``mode: "continuous"``, le suisse classique n'attend pas la fin d'une ronde : la *k*-ième
+partie d'un joueur — exemption comprise — appartient à la ronde *k*. La **ronde 1** se lance
+comme une ronde ordinaire ; ensuite, à chaque proposition (``rules.Pair``, ``pairRolling``), pour
+chaque nombre de parties *k*, le plus petit d'abord, les joueurs libres qui ont joué *k* parties
+sont appariés dans la ronde *k* + 1, dans l'ordre du classement :
+
+- **tant qu'un joueur joue encore sa k-ième partie**, il les rejoindra : appariement glouton,
+  chacun avec le premier joueur qu'il n'a pas rencontré, **sans aucune revanche** ; qui ne trouve
+  personne attend ;
+- **sinon** plus personne ne viendra : la ronde est appariée en entier, comme une ronde
+  ordinaire (revanches au plus juste, exemption en effectif impair). Une exemption proposée
+  arrête la proposition : confirmée, son joueur passe au compte suivant.
+
+La phase est finie quand aucun match ne joue et que chaque joueur en lice a joué ``rounds``
+parties. Les demi-exemptions annoncées sont refusées (il n'y a pas de ronde à manquer), et
+``rules.RemainingMatches`` rend une estimation : la moitié des parties encore dues.
+
 Fin de la phase
 ---------------
 
