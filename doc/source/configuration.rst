@@ -76,6 +76,7 @@ Structures
        BatchMinutes   int    `json:"batch_minutes,omitempty"`
        Seeding        string `json:"seeding,omitempty"`
        Tiebreak       []string `json:"tiebreak,omitempty"`
+       Accelerated    bool   `json:"accelerated,omitempty"`
    }
 
 Deux formes anciennes restent lisibles : ``"tables": 12`` (un nombre) devient
@@ -193,6 +194,10 @@ Signification des champs de phase
 |                    |                                | **Vide par défaut, par choix de            |
 |                    |                                | conception** (aucun départage)             |
 +--------------------+--------------------------------+--------------------------------------------+
+| ``accelerated``    | ``swiss_rounds``               | Point virtuel de la moitié haute aux       |
+|                    |                                | rondes 1 et 2, pour l'appariement          |
+|                    |                                | seulement. Exige ``seeding``               |
++--------------------+--------------------------------+--------------------------------------------+
 
 Validation et valeurs par défaut
 --------------------------------
@@ -230,6 +235,7 @@ Algorithme :
              si p.Lives saisi                      → erreur (personne n'est éliminé)
              p.Mode = "rounds"
              si un critère de p.Tiebreak est inconnu ou répété → erreur
+             si p.Accelerated et (p.Seeding == "" ou p.Pairing == monrad) → erreur
              si p.Seeding ∉ {"", "rating", "seed"} → erreur « seeding inconnu »
          swiss_lives :
              si p.Lives <= 0                       → p.Lives = 2
@@ -259,6 +265,7 @@ Algorithme :
        si p.BatchMinutes != 0 et p.Kind != swiss_lives → erreur
        si p.Seeding != "" et p.Kind ∉ {bracket, lives_bracket, swiss_rounds} → erreur
        si p.Tiebreak non vide et p.Kind != swiss_rounds        → erreur
+       si p.Accelerated et p.Kind != swiss_rounds              → erreur
 
 ``Entry`` n'est pas vérifiée : une valeur inconnue fait entrer les survivants, mais avec les vies
 par défaut du format (pas leurs vies restantes), et un ``top:N`` illisible donne une phase vide

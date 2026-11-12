@@ -107,12 +107,27 @@ func (v *vue) pairClassicRound(r int, players []Ref, rng *rand.Rand) []Pairing {
 	lbl := Label{Kind: LabelRound, N: r}
 	var pairs [][2]Ref
 	var bye Ref
-	if r == 1 && v.Rules.Seeding != "" {
+	switch {
+	case r == 1 && v.Rules.Accelerated:
+		pairs, bye = plierAccéléré(v.têtes(players))
+	case r == 1 && v.Rules.Seeding != "":
 		pairs, bye = plier(v.têtes(players))
-	} else if v.Rules.Pairing == PairingMonrad {
+	case v.Rules.Pairing == PairingMonrad:
 		pairs, bye = v.pairMonrad(players, rng)
-	} else {
+	default:
 		ordre := v.ordreClassement(players, rng)
+		if v.Rules.Accelerated && r <= acceleratedRounds {
+			// Le point virtuel : pour l'ordre d'appariement, jamais au classement. Le tri est
+			// stable — à total égal, l'ordre du classement réel est gardé.
+			total := func(p Ref) int {
+				e := v.entrant(p)
+				if e.TopHalf {
+					return e.points() + 1
+				}
+				return e.points()
+			}
+			sort.SliceStable(ordre, func(i, j int) bool { return total(ordre[i]) > total(ordre[j]) })
+		}
 		pairs, bye = v.pairNearest(ordre, len(ordre)%2 == 1)
 	}
 	acts := make([]Pairing, 0, len(pairs)+1)
@@ -152,6 +167,31 @@ func (v *vue) têtes(players []Ref) []Ref {
 		return byStrength(ordre, ratings)
 	}
 	return bySeed(ordre, v.seeds())
+}
+
+// acceleratedRounds : le point virtuel de la moitié haute joue aux rondes 1 et 2.
+const acceleratedRounds = 2
+
+// TopHalf : la moitié haute d'un suisse accéléré — les floor(n/2) premières têtes de série des
+// joueurs de la ronde 1. En effectif impair, la tête du milieu reste en bas.
+func TopHalf(p Phase, players []Ref) []Ref {
+	ordre := voir(&p).têtes(players)
+	return ordre[:len(ordre)/2]
+}
+
+// plierAccéléré : la ronde 1 d'un suisse accéléré — chaque moitié pliée séparément. Moitié haute
+// impaire : sa dernière tête descend en tête de la moitié basse ; moitié basse impaire : sa
+// dernière tête est exemptée.
+func plierAccéléré(ordre []Ref) (pairs [][2]Ref, bye Ref) {
+	n := len(ordre) / 2
+	haut, bas := append([]Ref{}, ordre[:n]...), append([]Ref{}, ordre[n:]...)
+	if len(haut)%2 == 1 {
+		bas = append([]Ref{haut[len(haut)-1]}, bas...)
+		haut = haut[:len(haut)-1]
+	}
+	pairs, _ = plier(haut)
+	reste, bye := plier(bas)
+	return append(pairs, reste...), bye
 }
 
 // plier : la ronde 1 d'un suisse à têtes de série — la moitié haute contre la moitié basse, la

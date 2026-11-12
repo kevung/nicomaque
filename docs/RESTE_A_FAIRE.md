@@ -94,7 +94,8 @@ où intervenir et comment vérifier.
   Le départage des poules à la place du barrage est dans l'issue #8. `pairing: "monrad"`
   (issue #4) tire l'adversaire au sort dans le groupe de mêmes points, avec flotteurs.
   `seeding: "seed"` (issue #6) place par tête de série SAISIE (`Player.Seed`) dans les tableaux
-  et plie la ronde 1 du suisse classique. Restent l'accélération #5, le serpentin des poules #8
+  et plie la ronde 1 du suisse classique. `accelerated` (issue #5) donne un point virtuel à la moitié
+  haute aux rondes 1 et 2. Restent le serpentin des poules #8
   et la colonne `seed` du CSV des joueurs.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que

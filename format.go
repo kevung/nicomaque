@@ -102,6 +102,11 @@ type PhaseConfig struct {
 	// départage » : à égalité on reste ex æquo, ou on se départage sur le tapis. Ce champ sépare
 	// des joueurs au même parcours sur leurs points de match et la force de leurs adversaires.
 	Tiebreak []string `json:"tiebreak,omitempty"`
+	// Accelerated : suisse classique accéléré (méthode de Bakou). La moitié haute du champ — les
+	// premières têtes de série des joueurs de la ronde 1 — reçoit un point VIRTUEL aux rondes 1
+	// et 2, pour l'appariement seulement : il n'apparaît dans aucun classement. Exige seeding,
+	// que l'étude écarte par défaut : sans ordre de têtes de série, il n'y a pas de moitié haute.
+	Accelerated bool `json:"accelerated,omitempty"`
 }
 
 // Validate vérifie la cohérence d'une configuration et remplit les défauts.
@@ -181,6 +186,12 @@ func (c *Config) Validate() error {
 			if p.Seeding != "" && p.Seeding != SeedingRating && p.Seeding != SeedingManual {
 				return fmt.Errorf("phase %d : seeding %q inconnu (vide, %q ou %q)", i, p.Seeding, SeedingRating, SeedingManual)
 			}
+			if p.Accelerated && p.Seeding == "" {
+				return fmt.Errorf("phase %d : accelerated sans seeding — la moitié haute se lit dans les têtes de série", i)
+			}
+			if p.Accelerated && p.Pairing == PairingMonrad {
+				return fmt.Errorf("phase %d : accelerated et pairing %q s'excluent", i, PairingMonrad)
+			}
 			p.Mode, p.Lives = "rounds", swissRoundsLives
 			vus := map[string]bool{}
 			for _, c := range p.Tiebreak {
@@ -225,6 +236,9 @@ func (c *Config) Validate() error {
 		}
 		if p.Rounds != 0 && p.Kind != KindSwissRounds {
 			return fmt.Errorf("phase %d : rounds ne s'applique qu'à %q, pas à %q", i, KindSwissRounds, p.Kind)
+		}
+		if p.Accelerated && p.Kind != KindSwissRounds {
+			return fmt.Errorf("phase %d : accelerated ne s'applique qu'à %q, pas à %q", i, KindSwissRounds, p.Kind)
 		}
 		if len(p.Tiebreak) != 0 && p.Kind != KindSwissRounds {
 			return fmt.Errorf("phase %d : tiebreak ne s'applique qu'à %q, pas à %q", i, KindSwissRounds, p.Kind)
