@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"strings"
 	"testing"
 	"time"
 
@@ -314,6 +315,9 @@ func FuzzApply(f *testing.F) {
 				ev = st.ManualMatchEvent(int(c)%4, joueur(b), joueur(c>>2), now)
 			case 17:
 				ev = st.ManualByeEvent(int(c)%4, joueur(b), now)
+				if c&0x80 != 0 {
+					ev = st.ManualByeCancelledEvent(int(c)%4, joueur(b), now)
+				}
 			case 18:
 				ev = tournoi.PlayerReplacedEvent(joueur(b), tournoi.Player{ID: tournoi.PlayerID(fmt.Sprintf("r%d", c%4)), Name: "R"}, now)
 			case 19:
@@ -363,4 +367,25 @@ func FuzzReplayJournal(f *testing.F) {
 			}
 		}
 	})
+}
+
+// TestRejeuRefuseUneVersionFuture : un journal écrit par un moteur plus récent est refusé avec
+// une erreur qui le dit, plutôt que rejoué de travers.
+func TestRejeuRefuseUneVersionFuture(t *testing.T) {
+	b, err := os.ReadFile("testdata/journal_v0.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	j, err := tournoi.ParseJournal(b)
+	if err != nil {
+		t.Fatal(err)
+	}
+	j[3].Version = tournoi.JournalVersion + 1
+	st, err := tournoi.Replay(j)
+	if err == nil || !strings.Contains(err.Error(), "version") || !strings.Contains(err.Error(), "événement 3") {
+		t.Fatalf("version future acceptée ou erreur muette : %v", err)
+	}
+	if st == nil || len(st.Players) == 0 {
+		t.Error("l'état d'avant le refus devrait être rendu")
+	}
 }

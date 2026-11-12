@@ -172,17 +172,21 @@ func TestBarrageFinalCorrectionAvertit(t *testing.T) {
 	d.rejouable()
 }
 
-// TestUnSeulQualifie : une phase d'un seul entrant ne bloque pas le tournoi — elle est refusée
-// à la validation quand la configuration le dit (top:1), et son entrant est le vainqueur quand
-// cela arrive en cours.
+// TestUnSeulQualifie : une phase d'un seul entrant ne bloque pas le tournoi — son entrant en
+// est le vainqueur, que la configuration le dise (top:1, admis : un journal v0.8.0 peut le
+// porter) ou que cela arrive en cours.
 func TestUnSeulQualifie(t *testing.T) {
-	refusée := tournoi.Config{Phases: []tournoi.PhaseConfig{
-		{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3}, {Kind: tournoi.KindBracket, Length: 5, Entry: "top:1"}}}
-	if refusée.Validate() == nil {
-		t.Error("entry top:1 accepté")
+	for nom, cfg := range map[string]tournoi.Config{
+		"top:1": {Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3}, {Kind: tournoi.KindBracket, Length: 5, Entry: "top:1"}}},
+		"un qualifié": {Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 1, Qualifiers: 1}, {Kind: tournoi.KindBracket, Length: 5}}},
+	} {
+		t.Run(nom, func(t *testing.T) { unSeulQualifie(t, cfg) })
 	}
-	cfg := tournoi.Config{Phases: []tournoi.PhaseConfig{
-		{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 1, Qualifiers: 1}, {Kind: tournoi.KindBracket, Length: 5}}}
+}
+
+func unSeulQualifie(t *testing.T, cfg tournoi.Config) {
 	d := piloter(t, cfg, 2, champClubs(5, 0))
 	d.jouer(nil)
 	if !d.st.Finished {
@@ -195,4 +199,58 @@ func TestUnSeulQualifie(t *testing.T) {
 		t.Errorf("statut du vainqueur : %+v", s)
 	}
 	d.rejouable()
+}
+
+// TestBarrageFinalRetraitNAvertitPas : le retrait d'un finaliste, barrage final tiré, ne change
+// pas les premiers de poule — aucun résultat n'est corrigé, donc aucun avertissement, ni au
+// retrait ni jusqu'à la clôture.
+func TestBarrageFinalRetraitNAvertitPas(t *testing.T) {
+	cfg := tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 2, Qualifiers: 1, FinalBarrage: true}}}
+	for graine := int64(0); graine < 4; graine++ {
+		for i := 0; i < 2; i++ {
+			d := piloter(t, cfg, graine, champClubs(8, 0))
+			var final *tournoi.Section
+			d.jouer(func() bool {
+				for _, sec := range d.st.Phases[0].Sections {
+					if sec.Name == "barrage:final" {
+						final = sec
+					}
+				}
+				return final != nil
+			})
+			if final == nil || len(final.Players) != 2 {
+				t.Fatalf("graine %d : barrage final à deux attendu", graine)
+			}
+			d.must(tournoi.PlayerWithdrawnEvent(final.Players[i], d.now))
+			if len(d.st.Warnings) != 0 {
+				t.Fatalf("graine %d, retrait du finaliste %d : %v", graine, i, d.st.Warnings)
+			}
+			d.jouer(nil)
+			if !d.st.Finished || len(d.st.Warnings) != 0 {
+				t.Fatalf("graine %d, retrait du finaliste %d : fini %v, avertissements %v", graine, i, d.st.Finished, d.st.Warnings)
+			}
+			d.rejouable()
+		}
+		// Retrait d'un premier de poule AVANT le tirage : le suivant de sa poule est tiré à
+		// bon droit, sans avertissement non plus.
+		d := piloter(t, cfg, graine, champClubs(8, 0))
+		tirage := func() bool {
+			for _, a := range d.st.Propose() {
+				if a.Kind == tournoi.ActDraw && a.Section == "barrage:final" {
+					return true
+				}
+			}
+			return false
+		}
+		d.jouer(tirage)
+		if !tirage() {
+			t.Fatalf("graine %d : tirage du barrage final attendu", graine)
+		}
+		d.must(tournoi.PlayerWithdrawnEvent(d.st.Ranking()[0].Player, d.now))
+		d.jouer(nil)
+		if !d.st.Finished || len(d.st.Warnings) != 0 {
+			t.Fatalf("graine %d, retrait avant le tirage : fini %v, avertissements %v", graine, d.st.Finished, d.st.Warnings)
+		}
+		d.rejouable()
+	}
 }

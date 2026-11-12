@@ -77,6 +77,7 @@ Structure d'un événement
        EvResultCorrected EventKind = "result_corrected"
        EvMatchCancelled  EventKind = "match_cancelled"
        EvBye             EventKind = "bye"
+       EvByeCancelled    EventKind = "bye_cancelled"
        EvDraw            EventKind = "draw"
        EvNextPhase       EventKind = "next_phase"
        EvRepechage       EventKind = "repechage"
@@ -128,7 +129,8 @@ désérialisation polymorphe.
 (version 0) vient d'un journal antérieur aux codes structurés et est **converti à la lecture** :
 ``Replay`` applique ``Event.upgraded()`` à chaque événement, qui transforme un libellé texte
 « Ronde k » en ``Label{Kind: round, N: k}`` et renseigne ``Round`` (voir
-:ref:`annexe_tests` pour la compatibilité ascendante). La version 2 ne change que la règle de
+:ref:`annexe_tests` pour la compatibilité ascendante). ``Replay`` refuse un événement dont la
+version dépasse ``JournalVersion`` : il vient d'un moteur plus récent. La version 2 ne change que la règle de
 ``config_changed`` (voir « Journaux anciens » à la section ``config_changed``). Les constructeurs d'événements de
 ``events.go`` posent la version : un ``Event`` écrit à la main sans version serait relu comme un
 journal ancien.
@@ -189,6 +191,8 @@ Champs utilisés par type
 | ``match_cancelled``    | ``MatchID``                                                             |
 +------------------------+-------------------------------------------------------------------------+
 | ``bye``                | ``Phase``, ``ID``, ``Round``, ``Label``                                 |
++------------------------+-------------------------------------------------------------------------+
+| ``bye_cancelled``      | ``Phase``, ``ID``, ``Round``                                            |
 +------------------------+-------------------------------------------------------------------------+
 | ``draw``               | ``Phase``, ``Section`` (barrage), ``Draw`` (obligatoire), ``Label``     |
 +------------------------+-------------------------------------------------------------------------+
@@ -257,6 +261,7 @@ explicitement, mais l'hôte ne doit jamais le produire.
 ::
 
    si ev.Player == nil ou ev.Player.ID == "" → erreur « joueur sans identifiant »
+   si ev.Player.ID == "BYE" → erreur « identifiant réservé à l'exemption »
    si l'identifiant est inconnu → l'ajouter à s.Order
    s.Players[id] = copie de *ev.Player     (réinscription = mise à jour de la fiche)
    supprimer id de s.Withdrawn             (une réinscription annule un forfait)
@@ -315,15 +320,17 @@ figure (``remplacement.go``).
        inconnu, ou retiré                                  → erreur
        un match non annulé le porte (lancé ou terminé)     → erreur « a déjà joué »
        une demi-exemption annoncée                         → erreur « la retirer d'abord »
-   player_replaced : Player sans identifiant, ou déjà inscrit → erreur ;
+   player_replaced : Player sans identifiant, nommé "BYE", ou déjà inscrit → erreur ;
+                     l'indisponibilité de l'ancien joueur est levée ;
                      partout dans l'état, ID devient Player.ID ; la fiche est celle du
                      remplaçant, avec la tête de série (Seed) de la place
-   players_swapped : A == B → erreur ; dans les phases, l'ordre d'inscription et les matchs
-                     annulés, A et B s'échangent ; les fiches restent à leurs joueurs, leurs
-                     têtes de série (Seed) s'échangent
+   players_swapped : A == B → erreur ; dans les phases, l'ordre d'inscription, les matchs
+                     annulés, Infos et Final, A et B s'échangent ; les fiches restent à
+                     leurs joueurs, leurs têtes de série (Seed) s'échangent
 
-Une exemption déjà reçue reste à la place : un exempté n'a rien joué. L'ancien joueur d'un
-remplacement n'existe plus dans l'état, ni au classement.
+Une exemption déjà reçue reste à la place : un exempté n'a rien joué. Une indisponibilité est
+au joueur, pas à la place : le remplaçant n'en hérite pas, et un échange la laisse à celui qui
+l'a déclarée. L'ancien joueur d'un remplacement n'existe plus dans l'état, ni au classement.
 
 ``half_bye`` et ``half_bye_cancelled``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -517,6 +524,18 @@ Un bye ne compte ni victoire ni défaite. Il **appartient à sa ronde** : le con
 pas la ronde, ses matchs restent proposés. Il est mémorisé pour éviter d'en donner deux au même
 joueur (voir :ref:`format_suisse`).
 
+``bye_cancelled``
+~~~~~~~~~~~~~~~~~
+
+Le retrait d'une exemption posée par erreur dans une phase à appariement manuel
+(``ManualByeCancelledEvent``, voir :ref:`format_manuel`).
+
+::
+
+   si la phase est inconnue, n'est pas manual, ou est finie → erreur
+   si ev.Round n'est pas dans ph.ByeRounds[ev.ID]           → erreur
+   ph.ByeRounds[ev.ID] -= ev.Round ; ph.Byes[ev.ID]--
+
 ``draw``
 ~~~~~~~~
 
@@ -551,6 +570,7 @@ joueur (voir :ref:`format_suisse`).
 
    ph := phase courante
    si ph == nil ou s.Current+1 >= len(Config.Phases) → erreur « pas de phase suivante »
+   si ph est manual et qu'un de ses matchs joue      → erreur « match(s) en cours »
    ph.Done = true
    next := newPhaseState(s.Current+1, Config.Phases[s.Current+1])
    s.Phases += next ; s.Current++

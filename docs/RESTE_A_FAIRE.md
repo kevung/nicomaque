@@ -107,7 +107,8 @@ où intervenir et comment vérifier.
 - [x] **Phase à appariement manuel** (issue #13). `KindManual` : `Propose` ne rend que l'attente
   `manual` et, sans match en cours, le passage ou la clôture ; `ManualMatchEvent` et
   `ManualByeEvent` posent une ronde, `manualCheck` (phase_manual.go) refuse le joueur hors phase,
-  retiré ou déjà placé dans la ronde. Une exemption posée ne se retire pas.
+  retiré ou déjà placé dans la ronde. Une exemption posée par erreur se retire
+  (`ManualByeCancelledEvent`, `bye_cancelled`) ; `next_phase` est refusé pendant un match.
 - [x] **Remplacement et échange de places** (issue #12). `player_replaced` et `players_swapped`
   (remplacement.go) : refusés dès qu'un match non annulé porte le joueur, s'il est retiré ou s'il
   a une demi-exemption annoncée ; l'état renomme l'identifiant partout (`renamePlayers`). Reste :

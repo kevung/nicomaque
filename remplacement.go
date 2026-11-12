@@ -12,7 +12,8 @@ import (
 // reçues. Tant que son joueur n'a lancé aucun match, la place peut changer de joueur : le
 // journal n'est pas réécrit, l'état dérive la substitution en renommant l'identifiant partout où
 // il figure. Une demi-exemption annoncée appartient au joueur qui l'a demandée, pas à la place :
-// elle se retire d'abord.
+// elle se retire d'abord. Une indisponibilité aussi est au joueur : le remplaçant n'en hérite
+// pas, et un échange la laisse à qui l'a déclarée.
 
 // seatLocked : ce qui interdit de changer le joueur de la place de p.
 func (s *State) seatLocked(p PlayerID) error {
@@ -39,6 +40,9 @@ func (s *State) applyReplace(ev Event) error {
 	if ev.Player == nil || ev.Player.ID == "" {
 		return fmt.Errorf("remplaçant sans identifiant")
 	}
+	if ev.Player.ID == BYE {
+		return fmt.Errorf("identifiant %s réservé à l'exemption", BYE)
+	}
 	if _, ok := s.Players[ev.Player.ID]; ok {
 		return fmt.Errorf("joueur %s déjà inscrit", ev.Player.ID)
 	}
@@ -47,6 +51,7 @@ func (s *State) applyReplace(ev Event) error {
 	}
 	fiche := *ev.Player
 	fiche.Seed = s.Players[ev.ID].Seed // la tête de série est celle de la place
+	delete(s.Unavailable, ev.ID)       // l'indisponibilité est celle du joueur, qui s'en va
 	renamePlayers(reflect.ValueOf(s).Elem(), map[PlayerID]PlayerID{ev.ID: fiche.ID})
 	s.Players[fiche.ID] = &fiche
 	s.Warnings = s.check()
@@ -68,6 +73,8 @@ func (s *State) applySwap(ev Event) error {
 	renamePlayers(reflect.ValueOf(&s.Phases).Elem(), éch)
 	renamePlayers(reflect.ValueOf(&s.Order).Elem(), éch)
 	renamePlayers(reflect.ValueOf(&s.Matches).Elem(), éch) // les matchs annulés suivent la place
+	renamePlayers(reflect.ValueOf(&s.Infos).Elem(), éch)
+	renamePlayers(reflect.ValueOf(&s.Final).Elem(), éch)
 	a, b := s.Players[ev.A], s.Players[ev.B]
 	a.Seed, b.Seed = b.Seed, a.Seed
 	s.Warnings = s.check()
