@@ -174,9 +174,10 @@ func plier(ordre []Ref) (pairs [][2]Ref, bye Ref) {
 // Groupe impossible à apparier sans revanche : il rejoint entier le suivant. Le dernier groupe
 // s'apparie comme un suisse (pairNearest) : le moins de revanches, l'exemption en bas.
 //
-// Si le dernier groupe ne s'apparie qu'au prix d'une revanche, on recommence en lui adjoignant
-// le groupe d'au-dessus, puis le suivant : une revanche qu'un groupe plus large évite n'est pas
-// jouée. Tous les groupes réunis, c'est l'appariement du suisse, au minimum de revanches.
+// Avec Rules.MonradWiden, si le dernier groupe ne s'apparie qu'au prix d'une revanche, on
+// recommence en lui adjoignant le groupe d'au-dessus, puis le suivant : une revanche qu'un groupe
+// plus large évite n'est pas jouée. Tous les groupes réunis, c'est l'appariement du suisse, au
+// minimum de revanches. Sans l'option, la revanche du dernier groupe est jouée.
 func (v *vue) pairMonrad(players []Ref, rng *rand.Rand) (pairs [][2]Ref, bye Ref) {
 	g := sortedRefs(players)
 	rng.Shuffle(len(g), func(i, j int) { g[i], g[j] = g[j], g[i] })
@@ -186,6 +187,9 @@ func (v *vue) pairMonrad(players []Ref, rng *rand.Rand) (pairs [][2]Ref, bye Ref
 		if i == 0 || v.entrant(g[i]).points() != v.entrant(g[i-1]).points() {
 			bornes = append(bornes, i)
 		}
+	}
+	if !v.Rules.MonradWiden {
+		return v.monradAvecQueue(g, bornes)
 	}
 	moins := 1 << 30
 	for queue := 1; queue <= len(bornes); queue++ {
