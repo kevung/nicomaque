@@ -12,7 +12,9 @@ qualificative ne sont **pas** départagées arithmétiquement : elles déclenche
 vies entre les joueurs concernés.
 
 Les défauts sont posés par ``Config.Validate`` : ``group_size`` vaut 4, ``qualifiers`` vaut 2, et
-``qualifiers`` doit être strictement inférieur à ``group_size``. La règle est dans ``rules``
+``qualifiers`` doit être strictement inférieur à ``group_size``. ``groups`` fixe à la place le
+**nombre** de poules (une seule fait un toutes-rondes complet) ; ``groups`` et ``group_size``
+s'excluent. La règle est dans ``rules``
 (``rules/graphes_phase.go`` : ``Pair``, ``PoolSections``, ``PoolWins``, ``PoolTie``,
 ``BarrageSection``, ``PoolQualified`` ; ``rules/classement.go`` : ``Rank``) ; ``phase_rr.go`` en
 est l'enveloppe.
@@ -24,13 +26,20 @@ Tirage des poules
 
    si non Drawn :
        n := len(Entrants) ; si n < 2 → nil
-       rng := générateur(seed.Draw())
-       ids := tri par identifiant puis rng.Shuffle(ids)
-       ng := ceil(n / GroupSize)   (au minimum 1)
-       répartir en « serpentin simple » : groups[i mod ng] += ids[i]
+       ng := Groups borné à n/2 (jamais plus d'une poule pour deux joueurs) s'il est donné,
+             sinon ceil(n / GroupSize)   (au minimum 1)
+       sans seeding :
+           rng := générateur(seed.Draw())
+           ids := tri par identifiant puis rng.Shuffle(ids)
+           groups[i mod ng] += ids[i]
+       avec seeding ("seed" ou "rating") :
+           ids := les entrants dans l'ordre des têtes de série
+           en serpentin : 1, 2, …, ng, puis ng, …, 2, 1, et ainsi de suite
        → une action draw, Label = draw_pools{N: ng}, Draw = { Groups }   (sans Lives)
 
-La distribution ``i mod ng`` équilibre les tailles à un joueur près.
+Les deux distributions équilibrent les tailles à un joueur près. Le serpentin donne des poules de
+force comparable ; comme dans un tableau, les têtes de série sont une option nommée et le tirage
+au sort reste le défaut.
 
 .. code:: go
 

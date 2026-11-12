@@ -49,6 +49,7 @@ type PhaseRules struct {
 	Reconciliation bool   `json:"reconciliation,omitempty"`
 	Recharge       bool   `json:"recharge,omitempty"`
 	GroupSize      int    `json:"group_size,omitempty"`
+	Groups         int    `json:"groups,omitempty"` // poules : nombre de poules, à la place de GroupSize
 	Qualifiers     int    `json:"qualifiers,omitempty"`
 	Seeding        string `json:"seeding,omitempty"`
 	// Tiebreak : départage arithmétique des ex æquo d'un suisse classique. Vide : aucun.

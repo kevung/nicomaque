@@ -93,11 +93,7 @@ func (v *vue) tirageFictif() []Ref {
 }
 
 func (v *vue) poulesFictives() [][]Ref {
-	n := len(v.Entrants)
-	ng := (n + v.Rules.GroupSize - 1) / v.Rules.GroupSize
-	if ng < 1 {
-		ng = 1
-	}
+	ng := v.nbPoules()
 	groups := make([][]Ref, ng)
 	for i, e := range v.Entrants {
 		groups[i%ng] = append(groups[i%ng], e.Player)

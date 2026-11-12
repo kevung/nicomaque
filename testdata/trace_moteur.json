@@ -10358,6 +10358,1160 @@
     ]
   },
   {
+    "name": "poules8_serpentin_tableau P=2 k=0",
+    "steps": 8,
+    "events": 11,
+    "digest": "c6d7831a38557944e9fa4aa1e28b271ece29d1f2c547700cd06c858b91eb19a2",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P1]",
+      "poule:A [1:P2 2:P1]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=2 k=0 perturbé",
+    "steps": 11,
+    "events": 12,
+    "digest": "758be5957b9b2be9f4342fed657e7ea7c2ed81544ba10e3e8eda4e0a12e265d5",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P1]",
+      "poule:A [1:P2 2:P1]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=2 k=1",
+    "steps": 8,
+    "events": 11,
+    "digest": "d95dfe48c7f231366e2a002e8e07991595fba4963378deb8983f1193231c4ab5",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P1]",
+      "poule:A [1:P1 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=2 k=1 perturbé",
+    "steps": 11,
+    "events": 12,
+    "digest": "447afbd455c4db8c8127fa243d8326f681a23b83b34f50e374976217aebea8db",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P1]",
+      "poule:A [1:P1 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=2 k=2",
+    "steps": 8,
+    "events": 11,
+    "digest": "d1ace741f2979ae38e919092ed8e4f07305bca31bf380c74c10e9279d15d1cdd",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P1 2:P2]",
+      "poule:A [1:P1 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=2 k=2 perturbé",
+    "steps": 11,
+    "events": 12,
+    "digest": "d01b30faca6b94eac9b7ced42c5e8c7971a540c4841a4f06daf6434a0e17405f",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P1 2:P2]",
+      "poule:A [1:P1 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=3 k=0",
+    "steps": 12,
+    "events": 16,
+    "digest": "d200370209f38c9b18156568f72e5298e5a9b433f0d40321ede1d3c35e693bd2",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P3 2:P2]",
+      "poule:A [1:P3 2:P2 3:P1]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=3 k=0 perturbé",
+    "steps": 20,
+    "events": 24,
+    "digest": "dabdc757f58079f758d69636540cf05a594e67f180d911225a3f51b881d631f0",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"withdrawn\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "barrage:A []",
+      "main [1:P3 2:P2]",
+      "poule:A [1:P3 2:P2 3:P1]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=3 k=1",
+    "steps": 12,
+    "events": 16,
+    "digest": "ea388f601679daff4bca189cc89cdc9fb2e44776be96979585b04993e0b779ad",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P3 2:P2]",
+      "poule:A [1:P2 2:P3 3:P1]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=3 k=1 perturbé",
+    "steps": 12,
+    "events": 15,
+    "digest": "7f9ba29e5c946b8be1f9e5ed07a6c81b9bc455c5f55fec69a5636a8612d8d094",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"withdrawn\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P3 2:P2]",
+      "poule:A [1:P2 2:P3 3:P1]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=3 k=2",
+    "steps": 19,
+    "events": 23,
+    "digest": "f085df88b3feb07b5f6295398b5f3b274b154ce9b6249414fbfd7b0e3dbe6f78",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "barrage:A []",
+      "main [1:P1 2:P2]",
+      "poule:A [1:P2 1:P3 1:P1]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=3 k=2 perturbé",
+    "steps": 9,
+    "events": 15,
+    "digest": "a500a9b1bba2ba2d1447b6d855ede69a3f25e9c162f7ab60fa348a3035f38f04",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"withdrawn\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P2 2:P3]",
+      "poule:A [1:P2 2:P3 3:P1]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=4 k=0",
+    "steps": 12,
+    "events": 19,
+    "digest": "5e8b38bb86f111fd7c2df3cc898b144649182c1b04c6a44655aae55b086b06e4",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P1 3:P3 3:P4]",
+      "poule:A [1:P4 2:P1]",
+      "poule:B [1:P3 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=4 k=0 perturbé",
+    "steps": 14,
+    "events": 19,
+    "digest": "7d9d28941e913bec9414d2751a9e2d3f6edc8a8b4dd4c6cf181b45376c6e20ce",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "4 P1 {\"kind\":\"withdrawn\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P2 2:P3 3:P4]",
+      "poule:A [1:P4 2:P1]",
+      "poule:B [1:P3 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=4 k=1",
+    "steps": 12,
+    "events": 19,
+    "digest": "c9731083df18ae2d35594b3d768eec4792ece15e5c0637cf60ab231c845e1b6a",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}"
+    ],
+    "sections": [
+      "main [1:P3 2:P4 3:P1 3:P2]",
+      "poule:A [1:P1 2:P4]",
+      "poule:B [1:P3 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=4 k=1 perturbé",
+    "steps": 11,
+    "events": 19,
+    "digest": "353ff23636151b5e394dcbec4f1961daa2be59a1d02eab2e7df56a5ea6b18b13",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "4 P1 {\"kind\":\"withdrawn\",\"wins\":1,\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P3 2:P2 3:P4]",
+      "poule:A [1:P1 2:P4]",
+      "poule:B [1:P3 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=4 k=2",
+    "steps": 12,
+    "events": 19,
+    "digest": "09b8532402c3562c46e348490d76a891b8ff4a30f4235cddc86901f15f3c060d",
+    "final": [
+      "1 P4 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}"
+    ],
+    "sections": [
+      "main [1:P4 2:P1 3:P3 3:P2]",
+      "poule:A [1:P1 2:P4]",
+      "poule:B [1:P3 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=4 k=2 perturbé",
+    "steps": 14,
+    "events": 19,
+    "digest": "ab94633325448a414c5b261e4a087ed371e0339e3005397939fdcd997e6e70fe",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "4 P1 {\"kind\":\"withdrawn\",\"wins\":1,\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P2 2:P3 3:P4]",
+      "poule:A [1:P1 2:P4]",
+      "poule:B [1:P3 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=5 k=0",
+    "steps": 16,
+    "events": 24,
+    "digest": "49b6aa68a142079b8be76da84ef0c74e66aa6f38ed287cf7ff93f65f4b36775f",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P4 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P3 2:P2 3:P1 3:P5]",
+      "poule:A [1:P5 2:P1 3:P4]",
+      "poule:B [1:P3 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=5 k=0 perturbé",
+    "steps": 19,
+    "events": 30,
+    "digest": "0321ec3ee7c795242906f37345f741bc64b6848901faadae716814aad030f6cc",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P4 {\"kind\":\"withdrawn\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "barrage:A []",
+      "main [1:P3 2:P1 3:P5 3:P2]",
+      "poule:A [1:P5 2:P1 3:P4]",
+      "poule:B [1:P3 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=5 k=1",
+    "steps": 16,
+    "events": 24,
+    "digest": "3004633fd99115de7d684640208bc1ce4991cfad7b8ef011bbf6072fdc72aec5",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P2 2:P5 3:P3 3:P4]",
+      "poule:A [1:P4 2:P5 3:P1]",
+      "poule:B [1:P3 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=5 k=1 perturbé",
+    "steps": 14,
+    "events": 23,
+    "digest": "6d20e3b36f517539c3174c49bd89df4c45cc28b72ec814f37ebf49811221c00b",
+    "final": [
+      "1 P4 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "4 P1 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}",
+      "4 P3 {\"kind\":\"withdrawn\",\"section\":\"poule:B\"}"
+    ],
+    "sections": [
+      "main [1:P4 2:P5 3:P2]",
+      "poule:A [1:P4 2:P5 3:P1]",
+      "poule:B [1:P2 2:P3]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=5 k=2",
+    "steps": 16,
+    "events": 24,
+    "digest": "06dd078b24a63754d68348dc473d371f5aae1bd3d6d1b087a58a231149f4b3a4",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P5 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P1 2:P4 3:P2 3:P3]",
+      "poule:A [1:P1 2:P4 3:P5]",
+      "poule:B [1:P3 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=5 k=2 perturbé",
+    "steps": 15,
+    "events": 25,
+    "digest": "9cacfb29d287c89d5e694c6f504b03be676443c019afafed1c1bebdde6391009",
+    "final": [
+      "1 P5 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P4 {\"kind\":\"withdrawn\",\"wins\":1,\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P5 2:P3 3:P1 3:P2]",
+      "poule:A [1:P1 2:P4 3:P5]",
+      "poule:B [1:P3 2:P2]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=7 k=0",
+    "steps": 20,
+    "events": 32,
+    "digest": "82e8e09ef7b358528fc3468bff8fe1ab4d37f1625ef968b1341efc989285a0a5",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "7 P6 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P2 2:P3 3:P5 3:P1 5:P4 5:P7]",
+      "poule:A [1:P1 2:P7 3:P6]",
+      "poule:B [1:P2 2:P5]",
+      "poule:C [1:P3 2:P4]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=7 k=0 perturbé",
+    "steps": 19,
+    "events": 33,
+    "digest": "fa5a6a6c11a8b5d0049be601ea9f2e50df88261a330d37c3a914f18b1858b4a7",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "6 P4 {\"kind\":\"withdrawn\",\"section\":\"poule:C\"}",
+      "6 P6 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P1 2:P2 3:P3 3:P5 5:P7]",
+      "poule:A [1:P1 2:P7 3:P6]",
+      "poule:B [1:P2 2:P5]",
+      "poule:C [1:P3 2:P4]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=7 k=1",
+    "steps": 20,
+    "events": 32,
+    "digest": "84cead9c07b06921169954bb8778a6f6bfd3a1e129e9b8a070d3721705bc472b",
+    "final": [
+      "1 P6 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "7 P1 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P6 2:P4 3:P2 3:P5 5:P7 5:P3]",
+      "poule:A [1:P6 2:P7 3:P1]",
+      "poule:B [1:P5 2:P2]",
+      "poule:C [1:P4 2:P3]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=7 k=1 perturbé",
+    "steps": 25,
+    "events": 40,
+    "digest": "4c7f7bf9adcfbd7f74d4ab5caf278cc75e28160de2533b6b555eaf5dd381cbdc",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "6 P6 {\"kind\":\"withdrawn\",\"wins\":1,\"section\":\"poule:A\"}",
+      "7 P4 {\"kind\":\"withdrawn\",\"section\":\"poule:C\"}"
+    ],
+    "sections": [
+      "barrage:A []",
+      "main [1:P2 2:P7 3:P1 3:P3 5:P5]",
+      "poule:A [1:P6 1:P7 1:P1]",
+      "poule:B [1:P5 2:P2]",
+      "poule:C [1:P3 2:P4]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=7 k=2",
+    "steps": 20,
+    "events": 32,
+    "digest": "8cda69ba24885d09bd6d55375b71e305e739b63401d3f64b34430c61838386dc",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "7 P6 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P2 2:P1 3:P7 3:P5 5:P4 5:P3]",
+      "poule:A [1:P1 2:P7 3:P6]",
+      "poule:B [1:P2 2:P5]",
+      "poule:C [1:P4 2:P3]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=7 k=2 perturbé",
+    "steps": 18,
+    "events": 31,
+    "digest": "b84f4652542e44fdf6b012e52346024923fa9e3cf2ba7ce6d2376a2693088b4c",
+    "final": [
+      "1 P5 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "6 P3 {\"kind\":\"withdrawn\",\"section\":\"poule:C\"}",
+      "6 P6 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P5 2:P2 3:P4 3:P7 5:P1]",
+      "poule:A [1:P1 2:P7 3:P6]",
+      "poule:B [1:P5 2:P2]",
+      "poule:C [1:P4 2:P3]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=8 k=0",
+    "steps": 20,
+    "events": 35,
+    "digest": "5d103006a25d7cc11f17807094e521b99e48d98f8d3854ad44fccfc5dccda457",
+    "final": [
+      "1 P8 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P8 2:P7 3:P4 3:P3 5:P5 5:P2 5:P1 5:P6]",
+      "poule:A [1:P1 2:P8]",
+      "poule:B [1:P2 2:P7]",
+      "poule:C [1:P6 2:P3]",
+      "poule:D [1:P4 2:P5]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=8 k=0 perturbé",
+    "steps": 20,
+    "events": 36,
+    "digest": "f1696918f2b767e878e22905f9dced2bfdee0a3ffe587dcd72a37a0126029c92",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "8 P5 {\"kind\":\"withdrawn\",\"section\":\"poule:D\"}"
+    ],
+    "sections": [
+      "main [1:P1 2:P7 3:P3 3:P4 5:P8 5:P2 5:P6]",
+      "poule:A [1:P1 2:P8]",
+      "poule:B [1:P2 2:P7]",
+      "poule:C [1:P6 2:P3]",
+      "poule:D [1:P4 2:P5]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=8 k=1",
+    "steps": 20,
+    "events": 35,
+    "digest": "80c021b5f8aa63658dba5daec85447a8683a737054c9bec4b481f5a63f63f2dc",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P3 2:P2 3:P7 3:P5 5:P6 5:P4 5:P1 5:P8]",
+      "poule:A [1:P1 2:P8]",
+      "poule:B [1:P7 2:P2]",
+      "poule:C [1:P6 2:P3]",
+      "poule:D [1:P5 2:P4]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=8 k=1 perturbé",
+    "steps": 18,
+    "events": 34,
+    "digest": "302dfaed2c990d8daa446437ddf6946909fb1d4283f3df38f77429f690aaa859",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "8 P5 {\"kind\":\"withdrawn\",\"section\":\"poule:D\"}"
+    ],
+    "sections": [
+      "main [1:P1 2:P6 3:P2 3:P8 5:P4 5:P7 5:P3]",
+      "poule:A [1:P1 2:P8]",
+      "poule:B [1:P7 2:P2]",
+      "poule:C [1:P6 2:P3]",
+      "poule:D [1:P4 2:P5]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=8 k=2",
+    "steps": 20,
+    "events": 35,
+    "digest": "486c9f63fc47b1754ece327116054e199c4fe72a70013ad3c48d3e306134ba8a",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P1 2:P3 3:P5 3:P7 5:P6 5:P8 5:P4 5:P2]",
+      "poule:A [1:P1 2:P8]",
+      "poule:B [1:P2 2:P7]",
+      "poule:C [1:P6 2:P3]",
+      "poule:D [1:P4 2:P5]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=8 k=2 perturbé",
+    "steps": 19,
+    "events": 35,
+    "digest": "9bea5b2dee49acced60ad7bf54acf456191f3c10a08edbbf594282192c682ce9",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "8 P5 {\"kind\":\"withdrawn\",\"section\":\"poule:D\"}"
+    ],
+    "sections": [
+      "main [1:P2 2:P4 3:P3 3:P1 5:P7 5:P8 5:P6]",
+      "poule:A [1:P1 2:P8]",
+      "poule:B [1:P2 2:P7]",
+      "poule:C [1:P6 2:P3]",
+      "poule:D [1:P4 2:P5]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=13 k=0",
+    "steps": 32,
+    "events": 56,
+    "digest": "387808162b4160830ab88749a0f1eddf01f82ccbf6550e7d102e133faeaf7f93",
+    "final": [
+      "1 P7 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "13 P13 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P7 2:P6 3:P4 3:P3 5:P12 5:P11 5:P5 5:P8 9:P2 9:P9 9:P1 9:P10]",
+      "poule:A [1:P12 2:P1 3:P13]",
+      "poule:B [1:P2 2:P11]",
+      "poule:C [1:P3 2:P10]",
+      "poule:D [1:P4 2:P9]",
+      "poule:E [1:P5 2:P8]",
+      "poule:F [1:P7 2:P6]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=13 k=0 perturbé",
+    "steps": 29,
+    "events": 56,
+    "digest": "bcd2067308b93671ffe814e93f74cef26ab78d289b36dd33854b5f484b233f08",
+    "final": [
+      "1 P7 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P8 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "12 P11 {\"kind\":\"withdrawn\",\"section\":\"poule:B\"}",
+      "12 P13 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P7 2:P2 3:P4 3:P3 5:P6 5:P10 5:P8 5:P9 9:P1 9:P5 9:P12]",
+      "poule:A [1:P12 2:P1 3:P13]",
+      "poule:B [1:P2 2:P11]",
+      "poule:C [1:P3 2:P10]",
+      "poule:D [1:P4 2:P9]",
+      "poule:E [1:P5 2:P8]",
+      "poule:F [1:P7 2:P6]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=13 k=1",
+    "steps": 32,
+    "events": 56,
+    "digest": "2ef0d0e5b354e2a58dde6731c353d912efa560c803a86943668ac866e19bca79",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "13 P1 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P3 2:P7 3:P4 3:P11 5:P8 5:P9 5:P13 5:P2 9:P5 9:P10 9:P6 9:P12]",
+      "poule:A [1:P13 2:P12 3:P1]",
+      "poule:B [1:P11 2:P2]",
+      "poule:C [1:P3 2:P10]",
+      "poule:D [1:P9 2:P4]",
+      "poule:E [1:P5 2:P8]",
+      "poule:F [1:P7 2:P6]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=13 k=1 perturbé",
+    "steps": 29,
+    "events": 56,
+    "digest": "8feb441cfc4edffffbbd17c54704e8cff6f33a7a07b7727d2b18b580edea5630",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P8 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "12 P1 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}",
+      "12 P7 {\"kind\":\"withdrawn\",\"section\":\"poule:F\"}"
+    ],
+    "sections": [
+      "main [1:P2 2:P11 3:P5 3:P10 5:P12 5:P4 5:P8 5:P9 9:P3 9:P13 9:P6]",
+      "poule:A [1:P13 2:P12 3:P1]",
+      "poule:B [1:P11 2:P2]",
+      "poule:C [1:P3 2:P10]",
+      "poule:D [1:P4 2:P9]",
+      "poule:E [1:P8 2:P5]",
+      "poule:F [1:P6 2:P7]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=13 k=2",
+    "steps": 32,
+    "events": 56,
+    "digest": "8f6a06783f710f1a329e37678fa734b445e93d2fe764f244a748ea5871ede760",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "13 P13 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}"
+    ],
+    "sections": [
+      "main [1:P3 2:P5 3:P1 3:P8 5:P10 5:P9 5:P7 5:P2 9:P11 9:P4 9:P12 9:P6]",
+      "poule:A [1:P1 2:P12 3:P13]",
+      "poule:B [1:P2 2:P11]",
+      "poule:C [1:P10 2:P3]",
+      "poule:D [1:P4 2:P9]",
+      "poule:E [1:P8 2:P5]",
+      "poule:F [1:P6 2:P7]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=13 k=2 perturbé",
+    "steps": 30,
+    "events": 57,
+    "digest": "8302d6045d281145810bb50b256b986a4af0d059af35fe8a0e95dc913989afca",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P5 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "12 P13 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}",
+      "12 P4 {\"kind\":\"withdrawn\",\"section\":\"poule:D\"}"
+    ],
+    "sections": [
+      "main [1:P2 2:P8 3:P7 3:P6 5:P11 5:P5 5:P12 5:P10 9:P1 9:P3 9:P9]",
+      "poule:A [1:P1 2:P12 3:P13]",
+      "poule:B [1:P2 2:P11]",
+      "poule:C [1:P10 2:P3]",
+      "poule:D [1:P9 2:P4]",
+      "poule:E [1:P8 2:P5]",
+      "poule:F [1:P6 2:P7]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=32 k=0",
+    "steps": 99,
+    "events": 170,
+    "digest": "d16e857dc0a9a85065d6263ecc24121afe71f5fba6ed1e8f5d3be183ee5a9289",
+    "final": [
+      "1 P5 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P26 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P25 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P16 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P19 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P29 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P27 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P17 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P15 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P14 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P28 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "17 P1 {\"kind\":\"pool_record\",\"wins\":2,\"section\":\"poule:A\"}",
+      "18 P10 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:G\"}",
+      "18 P12 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:E\"}",
+      "18 P18 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:B\"}",
+      "18 P20 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:D\"}",
+      "18 P21 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:E\"}",
+      "18 P22 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:F\"}",
+      "18 P24 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:H\"}",
+      "18 P3 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:C\"}",
+      "18 P30 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:C\"}",
+      "18 P6 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:F\"}",
+      "28 P23 {\"kind\":\"pool_record\",\"section\":\"poule:G\"}",
+      "28 P31 {\"kind\":\"pool_record\",\"section\":\"poule:B\"}",
+      "28 P32 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}",
+      "28 P4 {\"kind\":\"pool_record\",\"section\":\"poule:D\"}",
+      "28 P8 {\"kind\":\"pool_record\",\"section\":\"poule:H\"}"
+    ],
+    "sections": [
+      "barrage:A []",
+      "main [1:P5 2:P2 3:P25 3:P26 5:P27 5:P19 5:P16 5:P29 9:P28 9:P13 9:P14 9:P7 9:P17 9:P9 9:P15 9:P11]",
+      "poule:A [1:P1 1:P16 1:P17 4:P32]",
+      "poule:B [1:P2 2:P15 3:P18 4:P31]",
+      "poule:C [1:P14 1:P19 3:P3 3:P30]",
+      "poule:D [1:P13 2:P29 3:P20 4:P4]",
+      "poule:E [1:P5 1:P28 3:P12 3:P21]",
+      "poule:F [1:P27 1:P11 3:P6 3:P22]",
+      "poule:G [1:P26 2:P7 3:P10 4:P23]",
+      "poule:H [1:P25 2:P9 3:P24 4:P8]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=32 k=0 perturbé",
+    "steps": 110,
+    "events": 194,
+    "digest": "97dee2587f9622c057a02f95cde1a0963c78f09265f5fd633f7505737d8746ef",
+    "final": [
+      "1 P15 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P31 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P28 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P23 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P16 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P17 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P30 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P29 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P13 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P27 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P6 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "17 P14 {\"kind\":\"withdrawn\",\"wins\":2,\"section\":\"poule:C\"}",
+      "17 P19 {\"kind\":\"withdrawn\",\"wins\":2,\"section\":\"poule:C\"}",
+      "17 P32 {\"kind\":\"pool_record\",\"wins\":2,\"section\":\"poule:A\"}",
+      "20 P11 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:F\"}",
+      "20 P12 {\"kind\":\"withdrawn\",\"wins\":1,\"section\":\"poule:E\"}",
+      "20 P18 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:B\"}",
+      "20 P2 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:B\"}",
+      "20 P20 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:D\"}",
+      "20 P24 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:H\"}",
+      "20 P25 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:H\"}",
+      "20 P26 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:G\"}",
+      "20 P4 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:D\"}",
+      "20 P7 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:G\"}",
+      "30 P1 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}",
+      "30 P21 {\"kind\":\"withdrawn\",\"section\":\"poule:E\"}",
+      "30 P22 {\"kind\":\"pool_record\",\"section\":\"poule:F\"}"
+    ],
+    "sections": [
+      "barrage:A []",
+      "barrage:B []",
+      "barrage:D []",
+      "main [1:P15 2:P10 3:P3 3:P31 5:P5 5:P23 5:P8 5:P28 9:P30 9:P9 9:P29 9:P27 9:P13 9:P17 9:P16 9:P6]",
+      "poule:A [1:P32 1:P16 1:P17 4:P1]",
+      "poule:B [1:P15 2:P2 2:P31 2:P18]",
+      "poule:C [1:P3 1:P14 1:P19 4:P30]",
+      "poule:D [1:P29 2:P4 2:P13 2:P20]",
+      "poule:E [1:P5 2:P28 3:P12 4:P21]",
+      "poule:F [1:P27 2:P6 3:P11 4:P22]",
+      "poule:G [1:P10 1:P23 3:P7 3:P26]",
+      "poule:H [1:P8 1:P9 3:P25 3:P24]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=32 k=1",
+    "steps": 101,
+    "events": 172,
+    "digest": "2e3701b201565fa03d265790ecbe7892dd0abf4fdd1e20e6685b9af80b8bbeba",
+    "final": [
+      "1 P5 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P31 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P18 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P21 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P25 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P17 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P14 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P19 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P29 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P27 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "17 P12 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:E\"}",
+      "17 P13 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:D\"}",
+      "17 P15 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:B\"}",
+      "17 P20 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:D\"}",
+      "17 P22 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:F\"}",
+      "17 P23 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:G\"}",
+      "17 P24 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:H\"}",
+      "17 P26 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:G\"}",
+      "17 P28 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:E\"}",
+      "17 P3 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:C\"}",
+      "17 P30 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:C\"}",
+      "17 P32 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:A\"}",
+      "17 P6 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:F\"}",
+      "30 P16 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}",
+      "30 P2 {\"kind\":\"pool_record\",\"section\":\"poule:B\"}",
+      "30 P8 {\"kind\":\"pool_record\",\"section\":\"poule:H\"}"
+    ],
+    "sections": [
+      "barrage:G []",
+      "main [1:P5 2:P1 3:P31 3:P18 5:P21 5:P9 5:P25 5:P11 9:P27 9:P4 9:P10 9:P17 9:P29 9:P14 9:P7 9:P19]",
+      "poule:A [1:P17 2:P1 3:P32 4:P16]",
+      "poule:B [1:P31 2:P18 3:P15 4:P2]",
+      "poule:C [1:P14 1:P19 3:P3 3:P30]",
+      "poule:D [1:P4 1:P29 3:P13 3:P20]",
+      "poule:E [1:P5 1:P21 3:P28 3:P12]",
+      "poule:F [1:P27 1:P11 3:P6 3:P22]",
+      "poule:G [1:P7 2:P26 2:P10 2:P23]",
+      "poule:H [1:P9 2:P25 3:P24 4:P8]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=32 k=1 perturbé",
+    "steps": 126,
+    "events": 209,
+    "digest": "f28fe21d83ca47154e8921413d7f9b6d5007d0fd3722965872cae67ab0b4d667",
+    "final": [
+      "1 P5 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P32 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P30 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P31 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P20 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P28 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P22 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P24 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "17 P23 {\"kind\":\"withdrawn\",\"wins\":3,\"section\":\"poule:G\"}",
+      "18 P27 {\"kind\":\"pool_record\",\"wins\":2,\"section\":\"poule:F\"}",
+      "19 P12 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:E\"}",
+      "19 P14 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:C\"}",
+      "19 P15 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:B\"}",
+      "19 P17 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:A\"}",
+      "19 P19 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:C\"}",
+      "19 P21 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:E\"}",
+      "19 P25 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:H\"}",
+      "19 P26 {\"kind\":\"withdrawn\",\"wins\":1,\"section\":\"poule:G\"}",
+      "19 P4 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:D\"}",
+      "28 P16 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}",
+      "28 P18 {\"kind\":\"pool_record\",\"section\":\"poule:B\"}",
+      "28 P29 {\"kind\":\"withdrawn\",\"section\":\"poule:D\"}",
+      "28 P6 {\"kind\":\"pool_record\",\"section\":\"poule:F\"}",
+      "28 P8 {\"kind\":\"withdrawn\",\"section\":\"poule:H\"}"
+    ],
+    "sections": [
+      "barrage:D []",
+      "barrage:E []",
+      "barrage:F []",
+      "barrage:G []",
+      "barrage:H []",
+      "main [1:P5 2:P32 3:P9 3:P30 5:P11 5:P7 5:P10 5:P31 9:P20 9:P2 9:P3 9:P22 9:P24 9:P13 9:P1 9:P28]",
+      "poule:A [1:P1 2:P32 3:P17 4:P16]",
+      "poule:B [1:P31 2:P2 3:P15 4:P18]",
+      "poule:C [1:P3 1:P30 3:P14 3:P19]",
+      "poule:D [1:P13 2:P20 3:P4 4:P29]",
+      "poule:E [1:P28 2:P5 2:P12 2:P21]",
+      "poule:F [1:P27 1:P11 1:P22 4:P6]",
+      "poule:G [1:P23 2:P7 2:P26 2:P10]",
+      "poule:H [1:P9 2:P24 3:P25 4:P8]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=32 k=2",
+    "steps": 112,
+    "events": 183,
+    "digest": "dbd5cfb35039c5aa9c889ed25166dfd722cd97a6e42660984eff951bf90cb882",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P17 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P29 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P28 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P15 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P19 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P22 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "17 P11 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:F\"}",
+      "17 P13 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:D\"}",
+      "17 P14 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:C\"}",
+      "17 P16 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:A\"}",
+      "17 P18 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:B\"}",
+      "17 P21 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:E\"}",
+      "17 P23 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:G\"}",
+      "17 P24 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:H\"}",
+      "17 P25 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:H\"}",
+      "17 P26 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:G\"}",
+      "17 P27 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:F\"}",
+      "17 P30 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:C\"}",
+      "17 P31 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:B\"}",
+      "17 P32 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:A\"}",
+      "17 P5 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:E\"}",
+      "32 P20 {\"kind\":\"pool_record\",\"section\":\"poule:D\"}"
+    ],
+    "sections": [
+      "barrage:C []",
+      "barrage:G []",
+      "main [1:P3 2:P12 3:P9 3:P17 5:P29 5:P7 5:P28 5:P1 9:P10 9:P2 9:P22 9:P19 9:P4 9:P15 9:P8 9:P6]",
+      "poule:A [1:P1 1:P17 3:P32 3:P16]",
+      "poule:B [1:P2 1:P15 3:P31 3:P18]",
+      "poule:C [1:P3 2:P30 2:P14 2:P19]",
+      "poule:D [1:P4 2:P29 3:P13 4:P20]",
+      "poule:E [1:P28 1:P12 3:P5 3:P21]",
+      "poule:F [1:P6 1:P22 3:P27 3:P11]",
+      "poule:G [1:P7 2:P26 2:P10 2:P23]",
+      "poule:H [1:P8 1:P9 3:P25 3:P24]"
+    ]
+  },
+  {
+    "name": "poules8_serpentin_tableau P=32 k=2 perturbé",
+    "steps": 121,
+    "events": 202,
+    "digest": "f2fb1cd4c6161d4cd547e0fd42803c3e75bce2b8b6be5d5a2b82e07251e05a2b",
+    "final": [
+      "1 P7 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P32 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P17 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P31 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P19 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P20 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P28 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P26 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "17 P4 {\"kind\":\"withdrawn\",\"wins\":3,\"section\":\"poule:D\"}",
+      "18 P16 {\"kind\":\"withdrawn\",\"wins\":2,\"section\":\"poule:A\"}",
+      "18 P27 {\"kind\":\"pool_record\",\"wins\":2,\"section\":\"poule:F\"}",
+      "20 P14 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:C\"}",
+      "20 P15 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:B\"}",
+      "20 P18 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:B\"}",
+      "20 P23 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:G\"}",
+      "20 P29 {\"kind\":\"withdrawn\",\"wins\":1,\"section\":\"poule:D\"}",
+      "20 P30 {\"kind\":\"pool_record\",\"wins\":1,\"section\":\"poule:C\"}",
+      "26 P1 {\"kind\":\"pool_record\",\"section\":\"poule:A\"}",
+      "26 P10 {\"kind\":\"withdrawn\",\"section\":\"poule:G\"}",
+      "26 P21 {\"kind\":\"pool_record\",\"section\":\"poule:E\"}",
+      "26 P22 {\"kind\":\"pool_record\",\"section\":\"poule:F\"}",
+      "26 P24 {\"kind\":\"pool_record\",\"section\":\"poule:H\"}",
+      "26 P25 {\"kind\":\"withdrawn\",\"section\":\"poule:H\"}",
+      "26 P5 {\"kind\":\"withdrawn\",\"section\":\"poule:E\"}"
+    ],
+    "sections": [
+      "barrage:A []",
+      "barrage:C []",
+      "barrage:D []",
+      "barrage:F []",
+      "main [1:P7 2:P2 3:P3 3:P11 5:P17 5:P32 5:P8 5:P31 9:P9 9:P20 9:P26 9:P19 9:P13 9:P12 9:P28 9:P6]",
+      "poule:A [1:P32 1:P16 1:P17 4:P1]",
+      "poule:B [1:P2 1:P31 3:P15 3:P18]",
+      "poule:C [1:P3 2:P30 2:P14 2:P19]",
+      "poule:D [1:P4 2:P29 2:P13 2:P20]",
+      "poule:E [1:P28 2:P12 3:P21 4:P5]",
+      "poule:F [1:P6 1:P27 1:P11 4:P22]",
+      "poule:G [1:P7 2:P26 3:P23 4:P10]",
+      "poule:H [1:P8 2:P9 3:P24 4:P25]"
+    ]
+  },
+  {
     "name": "poules_tableau P=2 k=0",
     "steps": 8,
     "events": 11,

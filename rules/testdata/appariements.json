@@ -31635,6 +31635,1828 @@
       }
     },
     {
+      "name": "poules8_serpentin_tableau P=5 pas 3",
+      "seed": {
+        "base": 0,
+        "events": 9,
+        "phase": 0
+      },
+      "phase": {
+        "format": "round_robin",
+        "name": "Poules",
+        "rules": {
+          "length": 5,
+          "groups": 8,
+          "qualifiers": 2,
+          "seeding": "rating"
+        },
+        "entrants": [
+          {
+            "player": "P1",
+            "lives": 1,
+            "club": "Club 0",
+            "rating": 3.946159528966618
+          },
+          {
+            "player": "P2",
+            "lives": 1,
+            "club": "club1",
+            "rating": 7.6246768015988255
+          },
+          {
+            "player": "P3",
+            "lives": 1,
+            "club": "Club 2",
+            "rating": 7.666048341737641
+          },
+          {
+            "player": "P4",
+            "lives": 1,
+            "club": "Club 3",
+            "rating": 8.822085659403301
+          },
+          {
+            "player": "P5",
+            "lives": 1,
+            "club": "club0",
+            "rating": 8.884571841122204
+          }
+        ],
+        "drawn": true,
+        "length": 5,
+        "running": 2,
+        "sections": [
+          {
+            "name": "poule:A",
+            "kind": "poule",
+            "group": 1,
+            "nodes": [
+              {
+                "key": "poule:A.0.1",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 1
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P4",
+                    "from": -1
+                  },
+                  {
+                    "player": "P5",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P4",
+                  "P5"
+                ],
+                "match": "M1"
+              },
+              {
+                "key": "poule:A.1.0",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 2
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P1",
+                    "from": -1
+                  },
+                  {
+                    "player": "P5",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P1",
+                  "P5"
+                ]
+              },
+              {
+                "key": "poule:A.2.0",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 3
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P1",
+                    "from": -1
+                  },
+                  {
+                    "player": "P4",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P1",
+                  "P4"
+                ]
+              }
+            ],
+            "rounds": [
+              [
+                0
+              ],
+              [
+                1
+              ],
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "name": "poule:B",
+            "kind": "poule",
+            "group": 2,
+            "nodes": [
+              {
+                "key": "poule:B.0.0",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 1
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P2",
+                    "from": -1
+                  },
+                  {
+                    "player": "P3",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P2",
+                  "P3"
+                ],
+                "match": "M2"
+              }
+            ],
+            "rounds": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "busy": [
+          "P4",
+          "P5",
+          "P2",
+          "P3"
+        ]
+      },
+      "out": {
+        "pairs": [],
+        "done": false,
+        "rank": [
+          {
+            "player": "P2",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:B",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P3",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:B",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 3,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:A"
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 3,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:A"
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 3,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:A"
+            }
+          }
+        ],
+        "sections": {
+          "poule:A": [
+            {
+              "player": "P4",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:A"
+              }
+            },
+            {
+              "player": "P5",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:A"
+              }
+            },
+            {
+              "player": "P1",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:A"
+              }
+            }
+          ],
+          "poule:B": [
+            {
+              "player": "P2",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:B"
+              }
+            },
+            {
+              "player": "P3",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:B"
+              }
+            }
+          ]
+        },
+        "qualified": [
+          "P2",
+          "P3"
+        ],
+        "remaining": {
+          "min": 4,
+          "max": 9
+        }
+      }
+    },
+    {
+      "name": "poules8_serpentin_tableau P=5 pas 15",
+      "seed": {
+        "base": 0,
+        "events": 22,
+        "phase": 1
+      },
+      "phase": {
+        "format": "bracket",
+        "name": "Tableau",
+        "rules": {
+          "length": 9
+        },
+        "entrants": [
+          {
+            "player": "P5",
+            "lives": 1,
+            "losses": 1,
+            "club": "club0",
+            "rating": 8.884571841122204
+          },
+          {
+            "player": "P1",
+            "lives": 1,
+            "losses": 1,
+            "club": "Club 0",
+            "rating": 3.946159528966618
+          },
+          {
+            "player": "P3",
+            "lives": 1,
+            "wins": 1,
+            "club": "Club 2",
+            "rating": 7.666048341737641
+          },
+          {
+            "player": "P2",
+            "lives": 1,
+            "wins": 1,
+            "club": "club1",
+            "rating": 7.6246768015988255
+          }
+        ],
+        "eliminated": [
+          "P5",
+          "P1"
+        ],
+        "drawn": true,
+        "length": 9,
+        "running": 1,
+        "sections": [
+          {
+            "name": "main",
+            "kind": "main",
+            "nodes": [
+              {
+                "key": "main.0.0",
+                "label": {
+                  "kind": "semi_final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P3",
+                    "from": -1
+                  },
+                  {
+                    "player": "P1",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P3",
+                  "P1"
+                ],
+                "match": "M5",
+                "winner": "P3",
+                "loser": "P1",
+                "done": true
+              },
+              {
+                "key": "main.0.1",
+                "label": {
+                  "kind": "semi_final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P5",
+                    "from": -1
+                  },
+                  {
+                    "player": "P2",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P5",
+                  "P2"
+                ],
+                "match": "M6",
+                "winner": "P2",
+                "loser": "P5",
+                "done": true
+              },
+              {
+                "key": "main.1.0",
+                "label": {
+                  "kind": "final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "from": 0
+                  },
+                  {
+                    "from": 1
+                  }
+                ],
+                "players": [
+                  "P3",
+                  "P2"
+                ],
+                "match": "M7"
+              }
+            ],
+            "rounds": [
+              [
+                0,
+                1
+              ],
+              [
+                2
+              ]
+            ]
+          }
+        ],
+        "busy": [
+          "P3",
+          "P2"
+        ]
+      },
+      "out": {
+        "pairs": [],
+        "done": false,
+        "rank": [
+          {
+            "player": "P3",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 3,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "semi_final"
+              }
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 3,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "semi_final"
+              }
+            }
+          }
+        ],
+        "sections": {
+          "main": [
+            {
+              "player": "P3",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P2",
+              "rank": 1,
+              "note": {
+                "kind": "section_winner",
+                "section": "main"
+              }
+            },
+            {
+              "player": "P1",
+              "rank": 3,
+              "note": {
+                "kind": "section_exit",
+                "section": "main",
+                "sub": {
+                  "kind": "semi_final"
+                }
+              }
+            },
+            {
+              "player": "P5",
+              "rank": 3,
+              "note": {
+                "kind": "section_exit",
+                "section": "main",
+                "sub": {
+                  "kind": "semi_final"
+                }
+              }
+            }
+          ]
+        },
+        "remaining": {
+          "min": 1,
+          "max": 1
+        }
+      }
+    },
+    {
+      "name": "poules8_serpentin_tableau P=13 perturbé pas 3",
+      "seed": {
+        "base": 0,
+        "events": 21,
+        "phase": 0
+      },
+      "phase": {
+        "format": "round_robin",
+        "name": "Poules",
+        "rules": {
+          "length": 5,
+          "groups": 8,
+          "qualifiers": 2,
+          "seeding": "rating"
+        },
+        "entrants": [
+          {
+            "player": "P1",
+            "lives": 1,
+            "club": "Club 0",
+            "rating": 4.1984530957787705
+          },
+          {
+            "player": "P2",
+            "lives": 1,
+            "club": "club1",
+            "rating": 4.723551644193424
+          },
+          {
+            "player": "P3",
+            "lives": 1,
+            "club": "Club 2",
+            "rating": 5.064981159227004
+          },
+          {
+            "player": "P4",
+            "lives": 1,
+            "club": "Club 3",
+            "rating": 5.625565270981094
+          },
+          {
+            "player": "P5",
+            "lives": 1,
+            "club": "club0",
+            "rating": 6.525720284658867
+          },
+          {
+            "player": "P6",
+            "lives": 1,
+            "club": "Club 0",
+            "rating": 6.859884965799685
+          },
+          {
+            "player": "P7",
+            "lives": 1,
+            "club": "Club 1",
+            "rating": 6.879091995136401
+          },
+          {
+            "player": "P8",
+            "lives": 1,
+            "club": "club3",
+            "rating": 7.024693633927019
+          },
+          {
+            "player": "P9",
+            "lives": 1,
+            "club": "Club 3",
+            "rating": 7.207027840597041
+          },
+          {
+            "player": "P10",
+            "lives": 1,
+            "club": "Club 4",
+            "rating": 7.416723835503722
+          },
+          {
+            "player": "P11",
+            "lives": 1,
+            "club": "club2",
+            "rating": 8.409442305368984
+          },
+          {
+            "player": "P12",
+            "lives": 1,
+            "club": "Club 1",
+            "rating": 8.660685714325359
+          },
+          {
+            "player": "P13",
+            "lives": 1,
+            "club": "Club 2",
+            "rating": 9.738466530418485
+          }
+        ],
+        "drawn": true,
+        "length": 5,
+        "running": 6,
+        "sections": [
+          {
+            "name": "poule:A",
+            "kind": "poule",
+            "group": 1,
+            "nodes": [
+              {
+                "key": "poule:A.0.1",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 1
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P12",
+                    "from": -1
+                  },
+                  {
+                    "player": "P13",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P12",
+                  "P13"
+                ],
+                "match": "M1"
+              },
+              {
+                "key": "poule:A.1.0",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 2
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P1",
+                    "from": -1
+                  },
+                  {
+                    "player": "P13",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P1",
+                  "P13"
+                ]
+              },
+              {
+                "key": "poule:A.2.0",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 3
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P1",
+                    "from": -1
+                  },
+                  {
+                    "player": "P12",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P1",
+                  "P12"
+                ]
+              }
+            ],
+            "rounds": [
+              [
+                0
+              ],
+              [
+                1
+              ],
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "name": "poule:B",
+            "kind": "poule",
+            "group": 2,
+            "nodes": [
+              {
+                "key": "poule:B.0.0",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 1
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P2",
+                    "from": -1
+                  },
+                  {
+                    "player": "P11",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P2",
+                  "P11"
+                ],
+                "match": "M2"
+              }
+            ],
+            "rounds": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "name": "poule:C",
+            "kind": "poule",
+            "group": 3,
+            "nodes": [
+              {
+                "key": "poule:C.0.0",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 1
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P3",
+                    "from": -1
+                  },
+                  {
+                    "player": "P10",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P3",
+                  "P10"
+                ],
+                "match": "M3"
+              }
+            ],
+            "rounds": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "name": "poule:D",
+            "kind": "poule",
+            "group": 4,
+            "nodes": [
+              {
+                "key": "poule:D.0.0",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 1
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P4",
+                    "from": -1
+                  },
+                  {
+                    "player": "P9",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P4",
+                  "P9"
+                ],
+                "match": "M4"
+              }
+            ],
+            "rounds": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "name": "poule:E",
+            "kind": "poule",
+            "group": 5,
+            "nodes": [
+              {
+                "key": "poule:E.0.0",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 1
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P5",
+                    "from": -1
+                  },
+                  {
+                    "player": "P8",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P5",
+                  "P8"
+                ],
+                "match": "M5"
+              }
+            ],
+            "rounds": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "name": "poule:F",
+            "kind": "poule",
+            "group": 6,
+            "nodes": [
+              {
+                "key": "poule:F.0.0",
+                "label": {
+                  "kind": "pool_round",
+                  "n": 1
+                },
+                "length": 5,
+                "src": [
+                  {
+                    "player": "P6",
+                    "from": -1
+                  },
+                  {
+                    "player": "P7",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P6",
+                  "P7"
+                ],
+                "match": "M6"
+              }
+            ],
+            "rounds": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "busy": [
+          "P12",
+          "P13",
+          "P2",
+          "P11",
+          "P3",
+          "P10",
+          "P4",
+          "P9",
+          "P5",
+          "P8",
+          "P6",
+          "P7"
+        ]
+      },
+      "out": {
+        "pairs": [],
+        "done": false,
+        "rank": [
+          {
+            "player": "P10",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:C",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P11",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:B",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:B",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P3",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:C",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:D",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:E",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P6",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:F",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P7",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:F",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P8",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:E",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P9",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:D",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 11,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:A"
+            }
+          },
+          {
+            "player": "P12",
+            "rank": 11,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:A"
+            }
+          },
+          {
+            "player": "P13",
+            "rank": 11,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:A"
+            }
+          }
+        ],
+        "sections": {
+          "poule:A": [
+            {
+              "player": "P12",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:A"
+              }
+            },
+            {
+              "player": "P13",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:A"
+              }
+            },
+            {
+              "player": "P1",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:A"
+              }
+            }
+          ],
+          "poule:B": [
+            {
+              "player": "P2",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:B"
+              }
+            },
+            {
+              "player": "P11",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:B"
+              }
+            }
+          ],
+          "poule:C": [
+            {
+              "player": "P3",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:C"
+              }
+            },
+            {
+              "player": "P10",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:C"
+              }
+            }
+          ],
+          "poule:D": [
+            {
+              "player": "P4",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:D"
+              }
+            },
+            {
+              "player": "P9",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:D"
+              }
+            }
+          ],
+          "poule:E": [
+            {
+              "player": "P5",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:E"
+              }
+            },
+            {
+              "player": "P8",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:E"
+              }
+            }
+          ],
+          "poule:F": [
+            {
+              "player": "P6",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:F"
+              }
+            },
+            {
+              "player": "P7",
+              "rank": 1,
+              "note": {
+                "kind": "pool_record",
+                "section": "poule:F"
+              }
+            }
+          ]
+        },
+        "qualified": [
+          "P11",
+          "P2",
+          "P10",
+          "P3",
+          "P4",
+          "P9",
+          "P5",
+          "P8",
+          "P6",
+          "P7"
+        ],
+        "remaining": {
+          "min": 8,
+          "max": 13
+        }
+      }
+    },
+    {
+      "name": "poules8_serpentin_tableau P=13 perturbé pas 15",
+      "seed": {
+        "base": 0,
+        "events": 35,
+        "phase": 1
+      },
+      "phase": {
+        "format": "bracket",
+        "name": "Tableau",
+        "rules": {
+          "length": 9
+        },
+        "entrants": [
+          {
+            "player": "P12",
+            "lives": 1,
+            "club": "Club 1",
+            "rating": 8.660685714325359
+          },
+          {
+            "player": "P1",
+            "lives": 1,
+            "club": "Club 0",
+            "rating": 4.1984530957787705
+          },
+          {
+            "player": "P2",
+            "lives": 1,
+            "club": "club1",
+            "rating": 4.723551644193424
+          },
+          {
+            "player": "P3",
+            "lives": 1,
+            "club": "Club 2",
+            "rating": 5.064981159227004
+          },
+          {
+            "player": "P10",
+            "lives": 1,
+            "club": "Club 4",
+            "rating": 7.416723835503722
+          },
+          {
+            "player": "P4",
+            "lives": 1,
+            "club": "Club 3",
+            "rating": 5.625565270981094
+          },
+          {
+            "player": "P9",
+            "lives": 1,
+            "club": "Club 3",
+            "rating": 7.207027840597041
+          },
+          {
+            "player": "P5",
+            "lives": 1,
+            "club": "club0",
+            "rating": 6.525720284658867
+          },
+          {
+            "player": "P8",
+            "lives": 1,
+            "club": "club3",
+            "rating": 7.024693633927019
+          },
+          {
+            "player": "P7",
+            "lives": 1,
+            "club": "Club 1",
+            "rating": 6.879091995136401
+          },
+          {
+            "player": "P6",
+            "lives": 1,
+            "club": "Club 0",
+            "rating": 6.859884965799685
+          }
+        ],
+        "withdrawn": [
+          "P11"
+        ],
+        "drawn": true,
+        "length": 9,
+        "sections": [
+          {
+            "name": "main",
+            "kind": "main",
+            "nodes": [
+              {
+                "key": "main.0.0",
+                "label": {
+                  "kind": "bracket_round",
+                  "n": 1
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P4",
+                    "from": -1
+                  },
+                  {
+                    "player": "BYE",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P4",
+                  "BYE"
+                ],
+                "winner": "P4",
+                "loser": "BYE",
+                "done": true,
+                "walkover": true
+              },
+              {
+                "key": "main.0.1",
+                "label": {
+                  "kind": "bracket_round",
+                  "n": 1
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P6",
+                    "from": -1
+                  },
+                  {
+                    "player": "BYE",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P6",
+                  "BYE"
+                ],
+                "winner": "P6",
+                "loser": "BYE",
+                "done": true,
+                "walkover": true
+              },
+              {
+                "key": "main.0.2",
+                "label": {
+                  "kind": "bracket_round",
+                  "n": 1
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P7",
+                    "from": -1
+                  },
+                  {
+                    "player": "BYE",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P7",
+                  "BYE"
+                ],
+                "winner": "P7",
+                "loser": "BYE",
+                "done": true,
+                "walkover": true
+              },
+              {
+                "key": "main.0.3",
+                "label": {
+                  "kind": "bracket_round",
+                  "n": 1
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P10",
+                    "from": -1
+                  },
+                  {
+                    "player": "BYE",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P10",
+                  "BYE"
+                ],
+                "winner": "P10",
+                "loser": "BYE",
+                "done": true,
+                "walkover": true
+              },
+              {
+                "key": "main.0.4",
+                "label": {
+                  "kind": "bracket_round",
+                  "n": 1
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P8",
+                    "from": -1
+                  },
+                  {
+                    "player": "BYE",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P8",
+                  "BYE"
+                ],
+                "winner": "P8",
+                "loser": "BYE",
+                "done": true,
+                "walkover": true
+              },
+              {
+                "key": "main.0.5",
+                "label": {
+                  "kind": "bracket_round",
+                  "n": 1
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P3",
+                    "from": -1
+                  },
+                  {
+                    "player": "P1",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P3",
+                  "P1"
+                ]
+              },
+              {
+                "key": "main.0.6",
+                "label": {
+                  "kind": "bracket_round",
+                  "n": 1
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P5",
+                    "from": -1
+                  },
+                  {
+                    "player": "P2",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P5",
+                  "P2"
+                ]
+              },
+              {
+                "key": "main.0.7",
+                "label": {
+                  "kind": "bracket_round",
+                  "n": 1
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "player": "P12",
+                    "from": -1
+                  },
+                  {
+                    "player": "P9",
+                    "from": -1
+                  }
+                ],
+                "players": [
+                  "P12",
+                  "P9"
+                ]
+              },
+              {
+                "key": "main.1.0",
+                "label": {
+                  "kind": "quarter_final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "from": 0
+                  },
+                  {
+                    "from": 1
+                  }
+                ],
+                "players": [
+                  "P4",
+                  "P6"
+                ]
+              },
+              {
+                "key": "main.1.1",
+                "label": {
+                  "kind": "quarter_final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "from": 2
+                  },
+                  {
+                    "from": 3
+                  }
+                ],
+                "players": [
+                  "P7",
+                  "P10"
+                ]
+              },
+              {
+                "key": "main.1.2",
+                "label": {
+                  "kind": "quarter_final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "from": 4
+                  },
+                  {
+                    "from": 5
+                  }
+                ],
+                "players": [
+                  "P8",
+                  ""
+                ]
+              },
+              {
+                "key": "main.1.3",
+                "label": {
+                  "kind": "quarter_final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "from": 6
+                  },
+                  {
+                    "from": 7
+                  }
+                ],
+                "players": [
+                  "",
+                  ""
+                ]
+              },
+              {
+                "key": "main.2.0",
+                "label": {
+                  "kind": "semi_final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "from": 8
+                  },
+                  {
+                    "from": 9
+                  }
+                ],
+                "players": [
+                  "",
+                  ""
+                ]
+              },
+              {
+                "key": "main.2.1",
+                "label": {
+                  "kind": "semi_final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "from": 10
+                  },
+                  {
+                    "from": 11
+                  }
+                ],
+                "players": [
+                  "",
+                  ""
+                ]
+              },
+              {
+                "key": "main.3.0",
+                "label": {
+                  "kind": "final"
+                },
+                "length": 9,
+                "src": [
+                  {
+                    "from": 12
+                  },
+                  {
+                    "from": 13
+                  }
+                ],
+                "players": [
+                  "",
+                  ""
+                ]
+              }
+            ],
+            "rounds": [
+              [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ],
+              [
+                8,
+                9,
+                10,
+                11
+              ],
+              [
+                12,
+                13
+              ],
+              [
+                14
+              ]
+            ]
+          }
+        ]
+      },
+      "out": {
+        "pairs": [
+          {
+            "kind": "match",
+            "section": "main",
+            "key": "main.0.5",
+            "label": {
+              "kind": "bracket_round",
+              "n": 1
+            },
+            "a": "P3",
+            "b": "P1",
+            "length": 9
+          },
+          {
+            "kind": "match",
+            "section": "main",
+            "key": "main.0.6",
+            "label": {
+              "kind": "bracket_round",
+              "n": 1
+            },
+            "a": "P5",
+            "b": "P2",
+            "length": 9
+          },
+          {
+            "kind": "match",
+            "section": "main",
+            "key": "main.0.7",
+            "label": {
+              "kind": "bracket_round",
+              "n": 1
+            },
+            "a": "P12",
+            "b": "P9",
+            "length": 9
+          },
+          {
+            "kind": "match",
+            "section": "main",
+            "key": "main.1.0",
+            "label": {
+              "kind": "quarter_final"
+            },
+            "a": "P4",
+            "b": "P6",
+            "length": 9
+          },
+          {
+            "kind": "match",
+            "section": "main",
+            "key": "main.1.1",
+            "label": {
+              "kind": "quarter_final"
+            },
+            "a": "P7",
+            "b": "P10",
+            "length": 9
+          }
+        ],
+        "done": false,
+        "rank": [
+          {
+            "player": "P12",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P3",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P10",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P9",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P8",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P7",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          },
+          {
+            "player": "P6",
+            "rank": 1,
+            "note": {
+              "kind": "running"
+            }
+          }
+        ],
+        "sections": {
+          "main": [
+            {
+              "player": "P4",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P6",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P7",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P10",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P8",
+              "rank": 1,
+              "note": {
+                "kind": "section_winner",
+                "section": "main"
+              }
+            },
+            {
+              "player": "P3",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P1",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P5",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P2",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P12",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            },
+            {
+              "player": "P9",
+              "rank": 1,
+              "note": {
+                "kind": "running"
+              }
+            }
+          ]
+        },
+        "remaining": {
+          "min": 10,
+          "max": 10
+        }
+      }
+    },
+    {
       "name": "poules_tableau P=5 pas 3",
       "seed": {
         "base": 0,
@@ -55779,6 +57601,544 @@
           "note": {
             "kind": "withdrawn",
             "losses": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "poules8_serpentin_tableau P=5 fin",
+      "by_phase": [
+        [
+          {
+            "player": "P5",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "wins": 2,
+              "section": "poule:A",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 2,
+            "note": {
+              "kind": "pool_record",
+              "wins": 1,
+              "section": "poule:A",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P3",
+            "rank": 2,
+            "note": {
+              "kind": "pool_record",
+              "wins": 1,
+              "section": "poule:B",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 4,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:B",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 5,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:A"
+            }
+          }
+        ],
+        [
+          {
+            "player": "P3",
+            "rank": 1,
+            "note": {
+              "kind": "section_winner",
+              "section": "main"
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 2,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "final"
+              }
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 3,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "semi_final"
+              }
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 3,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "semi_final"
+              }
+            }
+          }
+        ]
+      ],
+      "out": [
+        {
+          "player": "P3",
+          "rank": 1,
+          "note": {
+            "kind": "section_winner",
+            "section": "main"
+          }
+        },
+        {
+          "player": "P2",
+          "rank": 2,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "final"
+            }
+          }
+        },
+        {
+          "player": "P5",
+          "rank": 3,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "semi_final"
+            }
+          }
+        },
+        {
+          "player": "P1",
+          "rank": 3,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "semi_final"
+            }
+          }
+        },
+        {
+          "player": "P4",
+          "rank": 5,
+          "note": {
+            "kind": "pool_record",
+            "section": "poule:A"
+          }
+        }
+      ]
+    },
+    {
+      "name": "poules8_serpentin_tableau P=13 perturbé fin",
+      "by_phase": [
+        [
+          {
+            "player": "P12",
+            "rank": 1,
+            "note": {
+              "kind": "pool_record",
+              "wins": 2,
+              "section": "poule:A",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 2,
+            "note": {
+              "kind": "pool_record",
+              "wins": 1,
+              "section": "poule:A",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 2,
+            "note": {
+              "kind": "pool_record",
+              "wins": 1,
+              "section": "poule:B",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P3",
+            "rank": 2,
+            "note": {
+              "kind": "pool_record",
+              "wins": 1,
+              "section": "poule:C",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 2,
+            "note": {
+              "kind": "pool_record",
+              "wins": 1,
+              "section": "poule:D",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 2,
+            "note": {
+              "kind": "pool_record",
+              "wins": 1,
+              "section": "poule:E",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P7",
+            "rank": 2,
+            "note": {
+              "kind": "pool_record",
+              "wins": 1,
+              "section": "poule:F",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P10",
+            "rank": 8,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:C",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P6",
+            "rank": 8,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:F",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P9",
+            "rank": 8,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:D",
+              "qualified": true
+            }
+          },
+          {
+            "player": "P11",
+            "rank": 11,
+            "note": {
+              "kind": "withdrawn",
+              "section": "poule:B"
+            }
+          },
+          {
+            "player": "P13",
+            "rank": 11,
+            "note": {
+              "kind": "pool_record",
+              "section": "poule:A"
+            }
+          },
+          {
+            "player": "P8",
+            "rank": 11,
+            "note": {
+              "kind": "withdrawn",
+              "section": "poule:E"
+            }
+          }
+        ],
+        [
+          {
+            "player": "P7",
+            "rank": 1,
+            "note": {
+              "kind": "section_winner",
+              "section": "main"
+            }
+          },
+          {
+            "player": "P2",
+            "rank": 2,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "final"
+              }
+            }
+          },
+          {
+            "player": "P3",
+            "rank": 3,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "semi_final"
+              }
+            }
+          },
+          {
+            "player": "P4",
+            "rank": 3,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "semi_final"
+              }
+            }
+          },
+          {
+            "player": "P10",
+            "rank": 5,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "quarter_final"
+              }
+            }
+          },
+          {
+            "player": "P9",
+            "rank": 5,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "quarter_final"
+              }
+            }
+          },
+          {
+            "player": "P8",
+            "rank": 5,
+            "note": {
+              "kind": "withdrawn",
+              "section": "main",
+              "sub": {
+                "kind": "quarter_final"
+              }
+            }
+          },
+          {
+            "player": "P6",
+            "rank": 5,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "quarter_final"
+              }
+            }
+          },
+          {
+            "player": "P12",
+            "rank": 9,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "bracket_round",
+                "n": 1
+              }
+            }
+          },
+          {
+            "player": "P1",
+            "rank": 9,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "bracket_round",
+                "n": 1
+              }
+            }
+          },
+          {
+            "player": "P5",
+            "rank": 9,
+            "note": {
+              "kind": "section_exit",
+              "section": "main",
+              "sub": {
+                "kind": "bracket_round",
+                "n": 1
+              }
+            }
+          }
+        ]
+      ],
+      "out": [
+        {
+          "player": "P7",
+          "rank": 1,
+          "note": {
+            "kind": "section_winner",
+            "section": "main"
+          }
+        },
+        {
+          "player": "P2",
+          "rank": 2,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "final"
+            }
+          }
+        },
+        {
+          "player": "P3",
+          "rank": 3,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "semi_final"
+            }
+          }
+        },
+        {
+          "player": "P4",
+          "rank": 3,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "semi_final"
+            }
+          }
+        },
+        {
+          "player": "P10",
+          "rank": 5,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "quarter_final"
+            }
+          }
+        },
+        {
+          "player": "P9",
+          "rank": 5,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "quarter_final"
+            }
+          }
+        },
+        {
+          "player": "P8",
+          "rank": 5,
+          "note": {
+            "kind": "withdrawn",
+            "section": "main",
+            "sub": {
+              "kind": "quarter_final"
+            }
+          }
+        },
+        {
+          "player": "P6",
+          "rank": 5,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "quarter_final"
+            }
+          }
+        },
+        {
+          "player": "P12",
+          "rank": 9,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "bracket_round",
+              "n": 1
+            }
+          }
+        },
+        {
+          "player": "P1",
+          "rank": 9,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "bracket_round",
+              "n": 1
+            }
+          }
+        },
+        {
+          "player": "P5",
+          "rank": 9,
+          "note": {
+            "kind": "section_exit",
+            "section": "main",
+            "sub": {
+              "kind": "bracket_round",
+              "n": 1
+            }
+          }
+        },
+        {
+          "player": "P11",
+          "rank": 12,
+          "note": {
+            "kind": "withdrawn",
+            "section": "poule:B"
+          }
+        },
+        {
+          "player": "P13",
+          "rank": 12,
+          "note": {
+            "kind": "pool_record",
+            "section": "poule:A"
           }
         }
       ]

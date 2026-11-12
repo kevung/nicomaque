@@ -95,7 +95,8 @@ où intervenir et comment vérifier.
   (issue #4) tire l'adversaire au sort dans le groupe de mêmes points, avec flotteurs.
   `seeding: "seed"` (issue #6) place par tête de série SAISIE (`Player.Seed`) dans les tableaux
   et plie la ronde 1 du suisse classique. `accelerated` (issue #5) donne un point virtuel à la moitié
-  haute aux rondes 1 et 2. Restent le serpentin des poules #8
+  haute aux rondes 1 et 2. `groups` fixe le nombre de poules et `seeding` les compose en serpentin
+  (issue #8, en partie). Restent le classement complet des poules par départage #8
   et la colonne `seed` du CSV des joueurs.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que

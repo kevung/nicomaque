@@ -71,6 +71,7 @@ Structures
        Reconciliation bool   `json:"reconciliation,omitempty"`
        Recharge       bool   `json:"recharge,omitempty"`
        GroupSize      int    `json:"group_size,omitempty"`
+       Groups         int    `json:"groups,omitempty"`
        Qualifiers     int    `json:"qualifiers,omitempty"`
        Entry          string `json:"entry,omitempty"`
        BatchMinutes   int    `json:"batch_minutes,omitempty"`
@@ -164,6 +165,9 @@ Signification des champs de phase
 +--------------------+--------------------------------+--------------------------------------------+
 | ``group_size``     | ``round_robin``                | Taille des poules (défaut 4)               |
 +--------------------+--------------------------------+--------------------------------------------+
+| ``groups``         | ``round_robin``                | Nombre de poules, à la place de            |
+|                    |                                | ``group_size`` (les deux s'excluent)       |
++--------------------+--------------------------------+--------------------------------------------+
 | ``qualifiers``     | ``round_robin``                | Qualifiés par poule (défaut 2)             |
 +--------------------+--------------------------------+--------------------------------------------+
 | ``entry``          | toutes sauf la première        | ``survivors`` (défaut : les survivants,    |
@@ -171,13 +175,14 @@ Signification des champs de phase
 |                    |                                | à vies), ``all``, ``top:N``                |
 +--------------------+--------------------------------+--------------------------------------------+
 | ``seeding``        | ``bracket``, ``lives_bracket``,| ``""`` (défaut) : tirage intégralement     |
-|                    | ``swiss_rounds``               | aléatoire. ``"rating"`` : placement        |
-|                    |                                | classique par cote d'entrée (1 contre 16,  |
+|                    | ``swiss_rounds``,              | aléatoire. ``"rating"`` : placement        |
+|                    | ``round_robin``                | classique par cote d'entrée (1 contre 16,  |
 |                    |                                | 2 contre 15… ; ``rules.SeedOrder``), les   |
 |                    |                                | joueurs à 2 vies d'abord. ``"seed"`` : le  |
 |                    |                                | même placement, par tête de série saisie   |
 |                    |                                | (``Player.Seed``). Sur ``swiss_rounds`` :  |
-|                    |                                | la ronde 1 est pliée. **Le défaut vide     |
+|                    |                                | la ronde 1 est pliée ; sur ``round_robin``:|
+|                    |                                | poules en serpentin. **Le défaut vide      |
 |                    |                                | est un choix de conception**, pas un       |
 |                    |                                | oubli : l'étude conclut « pas de têtes de  |
 |                    |                                | série protégées », c'est la culture du     |
@@ -251,14 +256,17 @@ Algorithme :
              p.Lives = 2   (forcé)
              si p.Target != 0 et Target n'est pas une puissance de 2 → erreur
          round_robin :
-             si p.GroupSize <= 0   → p.GroupSize = 4
+             si p.Groups < 0, ou p.Groups > 0 et p.GroupSize > 0 → erreur
+             si p.Groups == 0 et p.GroupSize <= 0 → p.GroupSize = 4
              si p.Qualifiers <= 0  → p.Qualifiers = 2
-             si p.Qualifiers >= p.GroupSize → erreur « qualifiers doit être < group_size »
+             si p.Groups == 0 et p.Qualifiers >= p.GroupSize → erreur « qualifiers doit être < group_size »
+             si p.Seeding ∉ {"", "rating", "seed"} → erreur « seeding inconnu »
          défaut : erreur « type inconnu »
 
        si p.Entry == ""  → p.Entry = "survivors"
        si p.BatchMinutes != 0 et p.Kind != swiss_lives → erreur
-       si p.Seeding != "" et p.Kind ∉ {bracket, lives_bracket, swiss_rounds} → erreur
+       si p.Seeding != "" et p.Kind ∉ {bracket, lives_bracket, swiss_rounds, round_robin} → erreur
+       si p.Groups != 0 et p.Kind != round_robin               → erreur
        si p.Tiebreak non vide et p.Kind != swiss_rounds        → erreur
        si p.Accelerated et p.Kind != swiss_rounds              → erreur
 

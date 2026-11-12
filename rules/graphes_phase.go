@@ -496,6 +496,16 @@ func (v *vue) barragesDone() bool {
 	return true
 }
 
+// nbPoules : le nombre de poules — Groups s'il est donné (jamais plus d'une poule pour deux
+// joueurs), sinon ce qu'il faut de poules de GroupSize joueurs au plus.
+func (v *vue) nbPoules() int {
+	n := len(v.Entrants)
+	if v.Rules.Groups > 0 {
+		return max(min(v.Rules.Groups, n/2), 1)
+	}
+	return max((n+v.Rules.GroupSize-1)/v.Rules.GroupSize, 1)
+}
+
 func (v *vue) pairPools(seed Seed) []Pairing {
 	if !v.Drawn {
 		n := len(v.Entrants)
@@ -507,15 +517,24 @@ func (v *vue) pairPools(seed Seed) []Pairing {
 		for i, e := range v.Entrants {
 			ids[i] = e.Player
 		}
-		ids = sortedRefs(ids)
-		rng.Shuffle(len(ids), func(i, j int) { ids[i], ids[j] = ids[j], ids[i] })
-		ng := (n + v.Rules.GroupSize - 1) / v.Rules.GroupSize
-		if ng < 1 {
-			ng = 1
-		}
+		ng := v.nbPoules()
 		groups := make([][]Ref, ng)
-		for i, p := range ids {
-			groups[i%ng] = append(groups[i%ng], p)
+		if v.Rules.Seeding != "" {
+			// Têtes de série : en serpentin — 1, 2, …, ng, puis ng, …, 2, 1 —, pour des poules
+			// de force comparable.
+			for i, p := range v.têtes(ids) {
+				k := i % ng
+				if (i/ng)%2 == 1 {
+					k = ng - 1 - k
+				}
+				groups[k] = append(groups[k], p)
+			}
+		} else {
+			ids = sortedRefs(ids)
+			rng.Shuffle(len(ids), func(i, j int) { ids[i], ids[j] = ids[j], ids[i] })
+			for i, p := range ids {
+				groups[i%ng] = append(groups[i%ng], p)
+			}
 		}
 		return []Pairing{{Kind: PairDraw, Label: Label{Kind: LabelDrawPools, N: ng}, Groups: groups}}
 	}

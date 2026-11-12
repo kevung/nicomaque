@@ -85,8 +85,11 @@ type PhaseConfig struct {
 	Reconciliation bool   `json:"reconciliation,omitempty"` // bracket : le vainqueur de la consolante joue le vainqueur du principal (double élimination)
 	Recharge       bool   `json:"recharge,omitempty"`       // bracket : en double élimination, le vainqueur du principal doit être battu deux fois
 	GroupSize      int    `json:"group_size,omitempty"`     // round_robin : taille des poules (défaut 4)
-	Qualifiers     int    `json:"qualifiers,omitempty"`     // round_robin : qualifiés par poule (défaut 2)
-	Entry          string `json:"entry,omitempty"`          // "survivors" (défaut : joueurs encore en vie de la phase précédente), "all", "top:N"
+	// Groups : round_robin, le NOMBRE de poules, à la place de leur taille (group_size) — une
+	// seule poule fait un toutes-rondes complet. Jamais plus d'une poule pour deux joueurs.
+	Groups     int    `json:"groups,omitempty"`
+	Qualifiers int    `json:"qualifiers,omitempty"` // round_robin : qualifiés par poule (défaut 2)
+	Entry      string `json:"entry,omitempty"`      // "survivors" (défaut : joueurs encore en vie de la phase précédente), "all", "top:N"
 	// Seeding place les joueurs d'un tableau par cote au lieu de les tirer au hasard :
 	// "" (défaut) ou SeedingRating. Le défaut VIDE est un choix de conception et non un oubli —
 	// l'étude conclut « pas de têtes de série protégées », c'est la culture actuelle du
@@ -212,14 +215,23 @@ func (c *Config) Validate() error {
 				return fmt.Errorf("phase %d : target doit être une puissance de 2", i)
 			}
 		case KindRoundRobin:
-			if p.GroupSize <= 0 {
+			if p.Groups < 0 {
+				return fmt.Errorf("phase %d : groups négatif (%d)", i, p.Groups)
+			}
+			if p.Groups > 0 && p.GroupSize > 0 {
+				return fmt.Errorf("phase %d : groups et group_size s'excluent — le nombre de poules OU leur taille", i)
+			}
+			if p.Groups == 0 && p.GroupSize <= 0 {
 				p.GroupSize = 4
 			}
 			if p.Qualifiers <= 0 {
 				p.Qualifiers = 2
 			}
-			if p.Qualifiers >= p.GroupSize {
+			if p.Groups == 0 && p.Qualifiers >= p.GroupSize {
 				return fmt.Errorf("phase %d : qualifiers doit être < group_size", i)
+			}
+			if p.Seeding != "" && p.Seeding != SeedingRating && p.Seeding != SeedingManual {
+				return fmt.Errorf("phase %d : seeding %q inconnu (vide, %q ou %q)", i, p.Seeding, SeedingRating, SeedingManual)
 			}
 		default:
 			return fmt.Errorf("phase %d : type %q inconnu", i, p.Kind)
@@ -239,8 +251,11 @@ func (c *Config) Validate() error {
 		if p.BatchMinutes != 0 && p.Kind != KindSwissLives {
 			return fmt.Errorf("phase %d : batch_minutes ne s'applique qu'au suisse continu, pas à %q", i, p.Kind)
 		}
-		if p.Seeding != "" && p.Kind != KindBracket && p.Kind != KindLivesBracket && p.Kind != KindSwissRounds {
-			return fmt.Errorf("phase %d : seeding ne s'applique qu'aux tableaux et au suisse classique, pas à %q", i, p.Kind)
+		if p.Groups != 0 && p.Kind != KindRoundRobin {
+			return fmt.Errorf("phase %d : groups ne s'applique qu'à %q, pas à %q", i, KindRoundRobin, p.Kind)
+		}
+		if p.Seeding != "" && p.Kind != KindBracket && p.Kind != KindLivesBracket && p.Kind != KindSwissRounds && p.Kind != KindRoundRobin {
+			return fmt.Errorf("phase %d : seeding ne s'applique qu'aux tableaux, au suisse classique et aux poules, pas à %q", i, p.Kind)
 		}
 	}
 	return nil
