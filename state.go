@@ -129,6 +129,12 @@ func newPhaseState(i int, cfg PhaseConfig) *PhaseState {
 func Replay(j Journal) (*State, error) {
 	s := newState()
 	for i := range j {
+		// Un journal écrit par un moteur plus récent porte des événements ou des options que
+		// celui-ci ignorerait en silence : mieux vaut un refus qu'un autre tournoi.
+		if j[i].Version > JournalVersion {
+			return s, fmt.Errorf("événement %d (%s) : version %d du journal, ce moteur lit jusqu'à la version %d — mettre le moteur à jour",
+				i, j[i].Kind, j[i].Version, JournalVersion)
+		}
 		// Un journal antérieur aux codes structurés est converti à la lecture, pour que le
 		// moteur ne voie jamais de libellé texte (voir upgrade dans events.go).
 		if err := s.Apply(j[i].upgraded()); err != nil {
@@ -367,6 +373,10 @@ func (s *State) Apply(ev Event) error {
 		if ev.Round > ph.Round && swissKind(ph.Cfg.Kind) {
 			ph.Round = ev.Round
 		}
+	case EvByeCancelled:
+		if err := s.applyByeCancelled(ev); err != nil {
+			return err
+		}
 	case EvDraw:
 		ph := s.phaseOf(ev.Phase)
 		if ph == nil {
@@ -382,6 +392,11 @@ func (s *State) Apply(ev Event) error {
 		ph := s.phase()
 		if ph == nil || s.Current+1 >= len(s.Config.Phases) {
 			return fmt.Errorf("pas de phase suivante")
+		}
+		// Une phase manuelle ne finit que sur l'ordre du directeur : rien d'autre ne retient
+		// un passage envoyé pendant un match, qui resterait à jouer dans une phase close.
+		if ph.Cfg.Kind == KindManual && s.runningInPhase(ph) > 0 {
+			return fmt.Errorf("phase %d : %d match(s) en cours", ph.Index, s.runningInPhase(ph))
 		}
 		ph.Done = true
 		next := newPhaseState(s.Current+1, s.Config.Phases[s.Current+1])

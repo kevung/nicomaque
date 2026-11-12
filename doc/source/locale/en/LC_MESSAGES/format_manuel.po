@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 14:39+0100\n"
+"POT-Creation-Date: 2026-11-12 16:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -47,7 +47,7 @@ msgstr ""
 msgid "Poser une ronde"
 msgstr "Placing a round"
 
-#: ../../source/format_manuel.rst:23
+#: ../../source/format_manuel.rst:24
 msgid ""
 "``ManualMatchEvent`` rend un ``match_started`` et ``ManualByeEvent`` un "
 "``bye``, tous deux dans la ronde ``round`` de la phase courante. Une "
@@ -61,19 +61,19 @@ msgstr ""
 "to the last open round plus one. A round may stay partial, and an earlier"
 " round can still be completed."
 
-#: ../../source/format_manuel.rst:28
+#: ../../source/format_manuel.rst:29
 msgid "``Apply`` ne refuse que ce qui rendrait la ronde incohérente :"
 msgstr "``Apply`` refuses only what would make the round inconsistent:"
 
-#: ../../source/format_manuel.rst:30
+#: ../../source/format_manuel.rst:31
 msgid "un match contre soi-même ;"
 msgstr "a match against oneself;"
 
-#: ../../source/format_manuel.rst:31
+#: ../../source/format_manuel.rst:32
 msgid "un joueur qui n'est pas dans la phase, ou qui est retiré ;"
 msgstr "a player who is not in the phase, or who has withdrawn;"
 
-#: ../../source/format_manuel.rst:32
+#: ../../source/format_manuel.rst:33
 msgid ""
 "un joueur déjà placé dans la ronde — par un match non annulé ou par une "
 "exemption ;"
@@ -81,40 +81,47 @@ msgstr ""
 "a player already placed in the round — by a match that is not cancelled "
 "or by a bye;"
 
-#: ../../source/format_manuel.rst:33
+#: ../../source/format_manuel.rst:34
 msgid "une ronde qui laisserait un trou dans la numérotation."
 msgstr "a round that would leave a gap in the numbering."
 
-#: ../../source/format_manuel.rst:35
+#: ../../source/format_manuel.rst:36
 msgid ""
 "Un match posé par erreur s'annule (``match_cancelled``) : ses deux "
-"joueurs redeviennent libres dans la ronde. Une exemption posée ne se "
-"retire pas."
+"joueurs redeviennent libres dans la ronde. Une exemption posée par erreur"
+" se retire de même (``ManualByeCancelledEvent``, événement "
+"``bye_cancelled``) tant que la phase n'est pas finie : le joueur "
+"redevient libre dans la ronde, qui reste ouverte même vide."
 msgstr ""
 "A match placed by mistake is cancelled (``match_cancelled``): its two "
-"players become free again in the round. A placed bye cannot be removed."
+"players become free again in the round. A bye placed by mistake is "
+"removed the same way (``ManualByeCancelledEvent``, event "
+"``bye_cancelled``) as long as the phase is not over: the player becomes "
+"free again in the round, which stays open even when empty."
 
-#: ../../source/format_manuel.rst:39
+#: ../../source/format_manuel.rst:42
 msgid "Propositions et fin de phase"
 msgstr "Proposals and end of phase"
 
-#: ../../source/format_manuel.rst:41
+#: ../../source/format_manuel.rst:44
 msgid ""
 "``Propose`` rend l'attente ``manual`` et, dès qu'aucun match de la phase "
 "ne joue, le passage à la phase suivante (``next_phase``) ou la clôture "
 "(``finish``) — proposés, jamais imposés : c'est le directeur qui dit "
 "quand la phase est finie, y compris sans avoir posé aucun match. "
-"``rules.PhaseDone`` reste faux et ``rules.RemainingMatches`` rend zéro : "
-"le moteur ne sait pas ce que le directeur posera encore."
+"``Apply`` refuse un ``next_phase`` envoyé pendant qu'un match de la phase"
+" joue. ``rules.PhaseDone`` reste faux et ``rules.RemainingMatches`` rend "
+"zéro : le moteur ne sait pas ce que le directeur posera encore."
 msgstr ""
 "``Propose`` returns the ``manual`` wait and, as soon as no match of the "
 "phase is running, the move to the next phase (``next_phase``) or the "
 "closing (``finish``) — proposed, never imposed: the director says when "
-"the phase is over, even without having placed any match. "
+"the phase is over, even without having placed any match. ``Apply`` "
+"rejects a ``next_phase`` sent while a match of the phase is running. "
 "``rules.PhaseDone`` stays false and ``rules.RemainingMatches`` returns "
 "zero: the engine does not know what the director will still place."
 
-#: ../../source/format_manuel.rst:47
+#: ../../source/format_manuel.rst:51
 msgid ""
 "La phase suivante reçoit ses entrants comme après un suisse classique "
 "(``survivors`` : tous les joueurs non retirés ; ``top:N`` : les premiers "

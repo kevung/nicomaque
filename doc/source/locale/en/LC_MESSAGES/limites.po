@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 14:43+0100\n"
+"POT-Creation-Date: 2026-11-12 16:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -142,14 +142,16 @@ msgid ""
 "**Entrée** ``top:N`` **et ex æquo** : ``top:N`` coupe dans l'ordre du "
 "classement de la phase précédente, sans départager des ex æquo à la "
 "frontière ; sans ``tiebreak``, deux joueurs à égalité peuvent se trouver "
-"de part et d'autre de la coupe. ``top:1`` est refusé."
+"de part et d'autre de la coupe. ``top:1`` est admis : la phase n'a qu'un "
+"entrant, qui en est le vainqueur sans jouer."
 msgstr ""
 "**Entry** ``top:N`` **and ties**: ``top:N`` cuts in the order of the "
 "previous phase's ranking, without separating tied players at the "
-"boundary; without ``tiebreak``, two tied players may end up on either "
-"side of the cut. ``top:1`` is refused."
+"boundary; without ``tiebreak``, two tied players can end up on either "
+"side of the cut. ``top:1`` is accepted: the phase has a single entrant, "
+"who wins it without playing."
 
-#: ../../source/limites.rst:43
+#: ../../source/limites.rst:44
 msgid ""
 "**Plus de rondes que d'adversaires** : un suisse classique dont "
 "``rounds`` dépasse le nombre d'adversaires possibles (effectif moins un) "
@@ -163,7 +165,7 @@ msgstr ""
 "``Validate`` does not bound ``rounds``: the field size is not known at "
 "configuration time."
 
-#: ../../source/limites.rst:47
+#: ../../source/limites.rst:48
 msgid ""
 "**Remplacement** : la place d'un joueur retiré ne se reprend pas "
 "(``player_replaced`` est refusé) ; le remplaçant s'inscrit alors comme un"
@@ -173,7 +175,7 @@ msgstr ""
 "(``player_replaced`` is refused); the replacement then registers as a "
 "latecomer."
 
-#: ../../source/limites.rst:49
+#: ../../source/limites.rst:50
 msgid ""
 "**Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a "
 "pas été éprouvée en conditions réelles (durée du barrage)."
@@ -181,7 +183,7 @@ msgstr ""
 "**Pools**: the three-way tie for two places, settled by a play-off, has "
 "not been tested under real conditions (play-off duration)."
 
-#: ../../source/limites.rst:51
+#: ../../source/limites.rst:52
 msgid ""
 "**Classement des places non gagnantes** : les règles (par tour atteint en"
 " tableau, par victoires au suisse, ex æquo partagés) restent à valider "
@@ -191,11 +193,11 @@ msgstr ""
 "bracket, by wins in the Swiss, ties shared) remain to be validated with "
 "the FFBG."
 
-#: ../../source/limites.rst:55
+#: ../../source/limites.rst:56
 msgid "Affichage"
 msgstr "Display"
 
-#: ../../source/limites.rst:57
+#: ../../source/limites.rst:58
 msgid ""
 "Pas d'écran joueur (« votre prochain match, votre table ») dans le paquet"
 " ``render``."
@@ -203,11 +205,11 @@ msgstr ""
 "No player screen (\"your next match, your table\") in the ``render`` "
 "package."
 
-#: ../../source/limites.rst:60
+#: ../../source/limites.rst:61
 msgid "Modèle de l'étude"
 msgstr "Study model"
 
-#: ../../source/limites.rst:62
+#: ../../source/limites.rst:63
 msgid ""
 "L'effet de la longueur de match (exposant α) n'est pas fixé par les "
 "données disponibles."
@@ -215,7 +217,7 @@ msgstr ""
 "The effect of match length (exponent α) is not settled by the available "
 "data."
 
-#: ../../source/limites.rst:63
+#: ../../source/limites.rst:64
 msgid ""
 "Le modèle de durée est une moyenne par point, indépendante du niveau et "
 "de la longueur."
@@ -223,7 +225,7 @@ msgstr ""
 "The duration model is a per-point average, independent of level and "
 "length."
 
-#: ../../source/limites.rst:64
+#: ../../source/limites.rst:65
 msgid ""
 "Le simulateur de l'étude et ``sim`` diffèrent de 1 à 2 écarts types sur "
 "les probabilités de la double élimination et du GSL ; la cause n'est pas "

@@ -39,7 +39,8 @@ Règles
   (``no_pairing``) ; retirer une demi-exemption débloque la ronde.
 - **Entrée** ``top:N`` **et ex æquo** : ``top:N`` coupe dans l'ordre du classement de la phase précédente,
   sans départager des ex æquo à la frontière ; sans ``tiebreak``, deux joueurs à égalité peuvent
-  se trouver de part et d'autre de la coupe. ``top:1`` est refusé.
+  se trouver de part et d'autre de la coupe. ``top:1`` est admis : la phase n'a qu'un entrant,
+  qui en est le vainqueur sans jouer.
 - **Plus de rondes que d'adversaires** : un suisse classique dont ``rounds`` dépasse le nombre
   d'adversaires possibles (effectif moins un) reste jouable, par revanches, mais ``Propose``
   y ralentit nettement. ``Validate`` ne borne pas ``rounds`` : l'effectif n'est pas connu à la
