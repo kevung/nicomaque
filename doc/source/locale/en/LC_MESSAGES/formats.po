@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"POT-Creation-Date: 2026-11-12 11:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "``Kind``"
 msgstr "``Kind``"
 
-#: ../../source/formats.rst:15 ../../source/formats.rst:73
+#: ../../source/formats.rst:15 ../../source/formats.rst:78
 msgid "Format"
 msgstr "Format"
 
@@ -66,14 +66,31 @@ msgstr ""
 " power of 2."
 
 #: ../../source/formats.rst:22
+msgid "``swiss_rounds``"
+msgstr "``swiss_rounds``"
+
+#: ../../source/formats.rst:23
+msgid "Suisse classique"
+msgstr "Classic Swiss"
+
+#: ../../source/formats.rst:24
+msgid ""
+"Nombre de rondes fixe, personne n'est éliminé, classement aux points. "
+"Variante nommée : sans départage, les ex æquo le restent, y compris en "
+"tête."
+msgstr ""
+"Fixed number of rounds, nobody is eliminated, ranking by points. A named "
+"variant: with no tie-break, tied players stay tied, including at the top."
+
+#: ../../source/formats.rst:26
 msgid "``lives_bracket``"
 msgstr "``lives_bracket``"
 
-#: ../../source/formats.rst:23
+#: ../../source/formats.rst:27
 msgid "Tableau à vies"
 msgstr "Lives bracket"
 
-#: ../../source/formats.rst:24
+#: ../../source/formats.rst:28
 msgid ""
 "Élimination directe où un joueur arrivé avec 2 vies est exempt du premier"
 " tour. Suite naturelle d'un suisse arrêté par ``target``."
@@ -81,15 +98,15 @@ msgstr ""
 "Direct elimination where a player arriving with 2 lives gets a bye in the"
 " first round. The natural follow-up to a Swiss stopped by ``target``."
 
-#: ../../source/formats.rst:26
+#: ../../source/formats.rst:30
 msgid "``bracket``"
 msgstr "``bracket``"
 
-#: ../../source/formats.rst:27
+#: ../../source/formats.rst:31
 msgid "Tableau"
 msgstr "Bracket"
 
-#: ../../source/formats.rst:28
+#: ../../source/formats.rst:32
 msgid ""
 "Élimination simple ; options consolante, dernière chance, réconciliation "
 "et recharge (double élimination)."
@@ -97,15 +114,15 @@ msgstr ""
 "Single elimination; options consolation, last chance, reconciliation and "
 "recharge (bracket reset) (double elimination)."
 
-#: ../../source/formats.rst:30 ../../source/formats.rst:94
+#: ../../source/formats.rst:34 ../../source/formats.rst:99
 msgid "``gsl``"
 msgstr "``gsl``"
 
-#: ../../source/formats.rst:31 ../../source/formats.rst:79
+#: ../../source/formats.rst:35 ../../source/formats.rst:84
 msgid "Blocs GSL"
 msgstr "GSL blocks"
 
-#: ../../source/formats.rst:32
+#: ../../source/formats.rst:36
 msgid ""
 "Groupes de 4 (ou 3, ou 2) à double élimination interne ; l'appariement "
 "est figé par les résultats du bloc, pas par l'heure."
@@ -113,15 +130,15 @@ msgstr ""
 "Groups of 4 (or 3, or 2) with internal double elimination; pairing is "
 "frozen by the results of the block, not by the clock."
 
-#: ../../source/formats.rst:34 ../../source/formats.rst:96
+#: ../../source/formats.rst:38 ../../source/formats.rst:101
 msgid "``round_robin``"
 msgstr "``round_robin``"
 
-#: ../../source/formats.rst:35
+#: ../../source/formats.rst:39
 msgid "Poules"
 msgstr "Pools"
 
-#: ../../source/formats.rst:36
+#: ../../source/formats.rst:40
 msgid ""
 "Poules toutes rondes (table de Berger), *k* qualifiés par poule ; une "
 "égalité à une place qualificative se règle par barrage à 2 vies."
@@ -129,17 +146,17 @@ msgstr ""
 "Round-robin pools (Berger table), *k* qualifiers per pool; a tie for a "
 "qualifying place is settled by a play-off with 2 lives."
 
-#: ../../source/formats.rst:39
+#: ../../source/formats.rst:43
 msgid ""
 "Les chapitres suivants décrivent chaque format jusqu'au niveau de "
 "l'algorithme :"
 msgstr "The following chapters describe each format down to the algorithm level:"
 
-#: ../../source/formats.rst:50
+#: ../../source/formats.rst:55
 msgid "Longueurs de match"
 msgstr "Match lengths"
 
-#: ../../source/formats.rst:52
+#: ../../source/formats.rst:57
 msgid ""
 "Chaque phase a une longueur (``Length``) et, pour les tableaux, une "
 "longueur de finale (``FinalLength``) ou une liste de longueurs par tour "
@@ -153,11 +170,11 @@ msgstr ""
 "13-point semi-finals, 11-point quarter-finals and 9 points for the "
 "earlier rounds. See :ref:`configuration`."
 
-#: ../../source/formats.rst:58
+#: ../../source/formats.rst:63
 msgid "Têtes de série"
 msgstr "Seeding"
 
-#: ../../source/formats.rst:60
+#: ../../source/formats.rst:65
 msgid ""
 "Par défaut, le tirage d'un tableau est entièrement aléatoire. L'option "
 "``seeding: \"rating\"`` place les joueurs par cote selon la construction "
@@ -171,11 +188,11 @@ msgstr ""
 " meet in the final. The justification for the default is in "
 ":ref:`annexe_conception`."
 
-#: ../../source/formats.rst:66
+#: ../../source/formats.rst:71
 msgid "Comparaison"
 msgstr "Comparison"
 
-#: ../../source/formats.rst:68
+#: ../../source/formats.rst:73
 msgid ""
 "Mesures sur 1 500 tournois simulés de 64 joueurs, matchs en 7 points "
 "(détail et incertitudes dans :ref:`annexe_etude`). « P(meilleur) » est la"
@@ -187,156 +204,156 @@ msgstr ""
 "is the probability that the strongest player wins the tournament; "
 "duration is the playing-hall time with an unlimited number of tables."
 
-#: ../../source/formats.rst:73
+#: ../../source/formats.rst:78
 msgid "P(meilleur)"
 msgstr "P(best)"
 
-#: ../../source/formats.rst:73
+#: ../../source/formats.rst:78
 msgid "Matchs"
 msgstr "Matches"
 
-#: ../../source/formats.rst:73
+#: ../../source/formats.rst:78
 msgid "Durée"
 msgstr "Duration"
 
-#: ../../source/formats.rst:75
+#: ../../source/formats.rst:80
 msgid "Élimination simple"
 msgstr "Single elimination"
 
-#: ../../source/formats.rst:75
+#: ../../source/formats.rst:80
 msgid "3,8 %"
 msgstr "3.8%"
 
-#: ../../source/formats.rst:75
+#: ../../source/formats.rst:80
 msgid "63,0"
 msgstr "63.0"
 
-#: ../../source/formats.rst:75
+#: ../../source/formats.rst:80
 msgid "7 h 00"
 msgstr "7h00"
 
-#: ../../source/formats.rst:76
+#: ../../source/formats.rst:81
 msgid "Suisse 2 vies, continu"
 msgstr "Swiss 2 lives, continuous"
 
-#: ../../source/formats.rst:76
+#: ../../source/formats.rst:81
 msgid "3,5 %"
 msgstr "3.5%"
 
-#: ../../source/formats.rst:76 ../../source/formats.rst:77
-#: ../../source/formats.rst:79 ../../source/formats.rst:80
+#: ../../source/formats.rst:81 ../../source/formats.rst:82
+#: ../../source/formats.rst:84 ../../source/formats.rst:85
 msgid "126,5"
 msgstr "126.5"
 
-#: ../../source/formats.rst:76
+#: ../../source/formats.rst:81
 msgid "10 h 20"
 msgstr "10h20"
 
-#: ../../source/formats.rst:77
+#: ../../source/formats.rst:82
 msgid "Suisse 2 vies, par rondes"
 msgstr "Swiss 2 lives, by rounds"
 
-#: ../../source/formats.rst:77
+#: ../../source/formats.rst:82
 msgid "3,7 %"
 msgstr "3.7%"
 
-#: ../../source/formats.rst:77
+#: ../../source/formats.rst:82
 msgid "14 h 12"
 msgstr "14h12"
 
-#: ../../source/formats.rst:78
+#: ../../source/formats.rst:83
 msgid "Suisse 2 vies → tableau de 16"
 msgstr "Swiss 2 lives → bracket of 16"
 
-#: ../../source/formats.rst:78
+#: ../../source/formats.rst:83
 msgid "4,2 %"
 msgstr "4.2%"
 
-#: ../../source/formats.rst:78
+#: ../../source/formats.rst:83
 msgid "124,3"
 msgstr "124.3"
 
-#: ../../source/formats.rst:78
+#: ../../source/formats.rst:83
 msgid "9 h 45"
 msgstr "9h45"
 
-#: ../../source/formats.rst:79
+#: ../../source/formats.rst:84
 msgid "4,5 %"
 msgstr "4.5%"
 
-#: ../../source/formats.rst:79
+#: ../../source/formats.rst:84
 msgid "14 h 25"
 msgstr "14h25"
 
-#: ../../source/formats.rst:80
+#: ../../source/formats.rst:85
 msgid "Double élimination avec recharge"
 msgstr "Double elimination with recharge"
 
-#: ../../source/formats.rst:80
+#: ../../source/formats.rst:85
 msgid "5,7 %"
 msgstr "5.7%"
 
-#: ../../source/formats.rst:80
+#: ../../source/formats.rst:85
 msgid "13 h 35"
 msgstr "13h35"
 
-#: ../../source/formats.rst:84
+#: ../../source/formats.rst:89
 msgid "Choisir un format"
 msgstr "Choosing a format"
 
-#: ../../source/formats.rst:87
+#: ../../source/formats.rst:92
 msgid "Objectif"
 msgstr "Goal"
 
-#: ../../source/formats.rst:87
+#: ../../source/formats.rst:92
 msgid "Configuration"
 msgstr "Configuration"
 
-#: ../../source/formats.rst:89
+#: ../../source/formats.rst:94
 msgid "Meilleur compromis qualité / durée (format recommandé)"
 msgstr "Best quality / duration trade-off (recommended format)"
 
-#: ../../source/formats.rst:89
+#: ../../source/formats.rst:94
 msgid "Suisse 2 vies continu, ``target: 16``, puis ``lives_bracket``"
 msgstr "Swiss 2 lives continuous, ``target: 16``, then ``lives_bracket``"
 
-#: ../../source/formats.rst:91
+#: ../../source/formats.rst:96
 msgid "Durée la plus courte"
 msgstr "Shortest duration"
 
-#: ../../source/formats.rst:91
+#: ../../source/formats.rst:96
 msgid "``bracket`` (élimination simple)"
 msgstr "``bracket`` (single elimination)"
 
-#: ../../source/formats.rst:92
+#: ../../source/formats.rst:97
 msgid "Aucun joueur éliminé après un seul match"
 msgstr "No player eliminated after a single match"
 
-#: ../../source/formats.rst:92
+#: ../../source/formats.rst:97
 msgid "Suisse 2 vies, ou ``bracket`` avec consolante"
 msgstr "Swiss 2 lives, or ``bracket`` with consolation"
 
-#: ../../source/formats.rst:94
+#: ../../source/formats.rst:99
 msgid "Programme connu à l'avance, appariement non"
 msgstr "Schedule known in advance, pairing that cannot"
 
-#: ../../source/formats.rst:95
+#: ../../source/formats.rst:100
 msgid "manipulable"
 msgstr "be manipulated"
 
-#: ../../source/formats.rst:96
+#: ../../source/formats.rst:101
 msgid "Petit effectif, beaucoup de matchs"
 msgstr "Small field, many matches"
 
-#: ../../source/formats.rst:97
+#: ../../source/formats.rst:102
 msgid "Vainqueur battu deux fois au moins"
 msgstr "Winner beaten at least twice"
 
-#: ../../source/formats.rst:97
+#: ../../source/formats.rst:102
 msgid "``bracket`` avec réconciliation et recharge"
 msgstr "``bracket`` with reconciliation and recharge"
 
-#: ../../source/formats.rst:101
+#: ../../source/formats.rst:106
 msgid ""
 "Les configurations nommées des outils ``tournoi-demo`` et ``tournoi-td`` "
 "(``suisse``, ``suisse_rondes``, ``suisse_tableau``, ``gsl``, ``elim``, "

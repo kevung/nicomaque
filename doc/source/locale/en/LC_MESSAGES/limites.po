@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"POT-Creation-Date: 2026-11-12 11:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -75,6 +75,16 @@ msgstr ""
 
 #: ../../source/limites.rst:24
 msgid ""
+"**Suisse classique** (``swiss_rounds``) : aucun départage. Les joueurs à "
+"égalité de points restent ex æquo, y compris en tête ; l'ordre de la "
+"ronde 1 est tiré au sort."
+msgstr ""
+"**Classic Swiss** (``swiss_rounds``): no tie-break. Players level on "
+"points stay tied, including at the top; the order of round 1 is drawn at "
+"random."
+
+#: ../../source/limites.rst:26
+msgid ""
 "**Consolante et dernière chance** : pas d'option de saut (perdants du "
 "premier tour seulement, entrée jusqu'au tour *k*, consolante à tirage "
 "avec heure limite d'entrée)."
@@ -82,7 +92,7 @@ msgstr ""
 "**Consolation and last chance**: no skip option (first-round losers only,"
 " entry up to round *k*, consolation drawn with an entry deadline)."
 
-#: ../../source/limites.rst:26
+#: ../../source/limites.rst:28
 msgid ""
 "**Revanches en consolante** : l'ordre inversé d'entrée évite la revanche "
 "immédiate, pas les suivantes ; leur fréquence n'est pas mesurée."
@@ -91,7 +101,7 @@ msgstr ""
 "immediate rematch, not the following ones; their frequency has not been "
 "measured."
 
-#: ../../source/limites.rst:28
+#: ../../source/limites.rst:30
 msgid ""
 "**Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a "
 "pas été éprouvée en conditions réelles (durée du barrage)."
@@ -99,7 +109,7 @@ msgstr ""
 "**Pools**: the three-way tie for two places, settled by a play-off, has "
 "not been tested under real conditions (play-off duration)."
 
-#: ../../source/limites.rst:30
+#: ../../source/limites.rst:32
 msgid ""
 "**Classement des places non gagnantes** : les règles (par tour atteint en"
 " tableau, par victoires au suisse, ex æquo partagés) restent à valider "
@@ -109,11 +119,11 @@ msgstr ""
 "bracket, by wins in the Swiss, ties shared) remain to be validated with "
 "the FFBG."
 
-#: ../../source/limites.rst:34
+#: ../../source/limites.rst:36
 msgid "Affichage"
 msgstr "Display"
 
-#: ../../source/limites.rst:36
+#: ../../source/limites.rst:38
 msgid ""
 "Pas d'écran joueur (« votre prochain match, votre table ») dans le paquet"
 " ``render``."
@@ -121,11 +131,11 @@ msgstr ""
 "No player screen (\"your next match, your table\") in the ``render`` "
 "package."
 
-#: ../../source/limites.rst:39
+#: ../../source/limites.rst:41
 msgid "Modèle de l'étude"
 msgstr "Study model"
 
-#: ../../source/limites.rst:41
+#: ../../source/limites.rst:43
 msgid ""
 "L'effet de la longueur de match (exposant α) n'est pas fixé par les "
 "données disponibles."
@@ -133,7 +143,7 @@ msgstr ""
 "The effect of match length (exponent α) is not settled by the available "
 "data."
 
-#: ../../source/limites.rst:42
+#: ../../source/limites.rst:44
 msgid ""
 "Le modèle de durée est une moyenne par point, indépendante du niveau et "
 "de la longueur."
@@ -141,7 +151,7 @@ msgstr ""
 "The duration model is a per-point average, independent of level and "
 "length."
 
-#: ../../source/limites.rst:43
+#: ../../source/limites.rst:45
 msgid ""
 "Le simulateur de l'étude et ``sim`` diffèrent de 1 à 2 écarts types sur "
 "les probabilités de la double élimination et du GSL ; la cause n'est pas "

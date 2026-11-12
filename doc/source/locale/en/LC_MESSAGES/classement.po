@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 14:03+0100\n"
+"POT-Creation-Date: 2026-11-12 11:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -96,29 +96,37 @@ msgstr "``swiss_lives``, ``gsl``"
 msgid "``rankLives`` (voir :ref:`format_suisse`)"
 msgstr "``rankLives`` (see :ref:`format_suisse`)"
 
-#: ../../source/classement.rst:58
+#: ../../source/classement.rst:56
+msgid "``swiss_rounds``"
+msgstr "``swiss_rounds``"
+
+#: ../../source/classement.rst:56
+msgid "``rankRounds`` (voir :ref:`format_suisse_rondes`)"
+msgstr "``rankRounds`` (see :ref:`format_suisse_rondes`)"
+
+#: ../../source/classement.rst:59
 msgid ""
 "Les notes (``Note``) sont des codes structurés, jamais des phrases : "
 "``winner``, ``finalist``, ``alive``, ``record``, ``forfeit``, "
 "``withdrawn``, ``running``, ``awaiting_draw``, ``unranked``, "
 "``section_exit``, ``section_winner``, ``pool_record``, avec leurs "
-"paramètres (``wins``, ``losses``, ``lives``, ``section``, ``qualified``, "
-"``sub``). Leur rendu français (``Note.String``, ``fr.go``) ne sert que la"
-" console, la démo, ``render/`` et l'export CSV."
+"paramètres (``wins``, ``losses``, ``byes``, ``lives``, ``section``, "
+"``qualified``, ``sub``). Leur rendu français (``Note.String``, ``fr.go``)"
+" ne sert que la console, la démo, ``render/`` et l'export CSV."
 msgstr ""
 "Notes (``Note``) are structured codes, never sentences: ``winner``, "
 "``finalist``, ``alive``, ``record``, ``forfeit``, ``withdrawn``, "
 "``running``, ``awaiting_draw``, ``unranked``, ``section_exit``, "
 "``section_winner``, ``pool_record``, with their parameters (``wins``, "
-"``losses``, ``lives``, ``section``, ``qualified``, ``sub``). Their French"
-" rendering (``Note.String``, ``fr.go``) serves only the console, the "
-"demo, ``render/`` and the CSV export."
+"``losses``, ``byes``, ``lives``, ``section``, ``qualified``, ``sub``). "
+"Their French rendering (``Note.String``, ``fr.go``) serves only the "
+"console, the demo, ``render/`` and the CSV export."
 
-#: ../../source/classement.rst:65
+#: ../../source/classement.rst:66
 msgid "Prix"
 msgstr "Prizes"
 
-#: ../../source/classement.rst:72
+#: ../../source/classement.rst:73
 msgid ""
 "Les prix sont indexés par place : ``prizes[0]`` est la dotation du "
 "premier, ``prizes[1]`` du deuxième, etc. Les ex æquo **partagent à parts "
@@ -128,7 +136,7 @@ msgstr ""
 "``prizes[1]`` for second, and so on. Tied players **share equally the "
 "prizes of the places they occupy**:"
 
-#: ../../source/classement.rst:83
+#: ../../source/classement.rst:84
 msgid ""
 "Exemple : deux joueurs ex æquo au rang 3, dotations ``[100, 60, 40, 20, "
 "10]`` → ils se partagent 40 + 20 = 60, soit 30 chacun ; le joueur suivant"
@@ -138,7 +146,7 @@ msgstr ""
 "they share 40 + 20 = 60, i.e. 30 each; the next player is at rank 5 and "
 "receives 10."
 
-#: ../../source/classement.rst:86
+#: ../../source/classement.rst:87
 msgid ""
 "L'unité est libre (montant, pourcentage, part) : le moteur ne fait "
 "qu'additionner et diviser. Cette fonction est le partage entre ex æquo, "
@@ -150,11 +158,11 @@ msgstr ""
 "else; where the per-place amounts come from is described in the next "
 "section."
 
-#: ../../source/classement.rst:91
+#: ../../source/classement.rst:92
 msgid "Pool, retenue, barème par section"
 msgstr "Pool, organiser's retention, per-section prize scale"
 
-#: ../../source/classement.rst:124
+#: ../../source/classement.rst:125
 msgid ""
 "Une affiche de tournoi annonce « 50/30/20 % » et non « 216/130/86 € » : "
 "le pool dépend du nombre d'inscrits, qu'on ne connaît qu'à la clôture des"
@@ -164,7 +172,7 @@ msgstr ""
 " pool depends on the number of entrants, which is only known when "
 "registration closes."
 
-#: ../../source/classement.rst:132
+#: ../../source/classement.rst:133
 #, no-python-format
 msgid ""
 "``PrizeAmounts(sec)`` (enveloppe de ``rules.PlaceAmounts``) : une section"
@@ -203,7 +211,7 @@ msgstr ""
 "10 make 2.5 each; the two remaining units go to the first two, hence "
 "3/3/2/2."
 
-#: ../../source/classement.rst:146
+#: ../../source/classement.rst:147
 msgid ""
 "``SectionPrizes(sec)`` applique ``Prizes`` aux montants de "
 "``PrizeAmounts(sec)`` sur le classement de la section : "
@@ -215,7 +223,7 @@ msgstr ""
 " for a section, and for ``all`` the standings frozen at closing "
 "(``State.Final``) if they exist, otherwise ``Ranking()``."
 
-#: ../../source/classement.rst:150
+#: ../../source/classement.rst:151
 msgid ""
 "``Sections`` est indexée par identifiant de section (``main``, ``conso``,"
 " ``last``, ``gf``, ``poule:A``\\ …), plus la clé réservée ``all`` pour le"
@@ -227,7 +235,7 @@ msgstr ""
 " overall standings — the one ``Ranking()`` returns, and the only one that"
 " exists in a tournament without a bracket."
 
-#: ../../source/classement.rst:154
+#: ../../source/classement.rst:155
 msgid ""
 "``SectionRanking(sec)`` est le classement PROPRE d'une section : ses "
 "joueurs, par tour atteint dans cette section, le vainqueur en tête. Il "
@@ -264,7 +272,7 @@ msgstr ""
 " the wrapper looks for the section from the last phase to the first, the "
 "most recent one bearing that name counting."
 
-#: ../../source/classement.rst:167
+#: ../../source/classement.rst:168
 #, no-python-format
 msgid ""
 "``Config.Validate`` refuse une dotation incohérente : pourcentages ET "
@@ -280,7 +288,7 @@ msgstr ""
 " A wrong prize distribution only shows when it is time to pay, in front "
 "of the players."
 
-#: ../../source/classement.rst:172
+#: ../../source/classement.rst:173
 msgid ""
 "La forme liste (``\"prizes\": [100, 60, 40]``, une simple liste de "
 "montants) est également lue (``PrizePool.UnmarshalJSON``) et devient le "
@@ -292,11 +300,11 @@ msgstr ""
 "of the overall standings (``Sections[\"all\"].Amounts``): journals that "
 "use it are re-read without being rewritten."
 
-#: ../../source/classement.rst:177
+#: ../../source/classement.rst:178
 msgid "Export CSV"
 msgstr "CSV export"
 
-#: ../../source/classement.rst:183
+#: ../../source/classement.rst:184
 msgid ""
 "Séparateur ``;``, en-tête ``section;rang;id;nom;club;note;prix``. La "
 "première colonne dit à quel classement la ligne appartient : ``all`` pour"

@@ -62,7 +62,7 @@ func fromRulesLabel(l rules.Label) Label {
 }
 
 func fromRulesNote(n rules.Note) Note {
-	out := Note{Kind: NoteKind(n.Kind), Wins: n.Wins, Losses: n.Losses, Lives: n.Lives, Section: n.Section, Qualified: n.Qualified}
+	out := Note{Kind: NoteKind(n.Kind), Wins: n.Wins, Losses: n.Losses, Byes: n.Byes, Lives: n.Lives, Section: n.Section, Qualified: n.Qualified}
 	if n.Sub != nil {
 		sub := fromRulesLabel(*n.Sub)
 		out.Sub = &sub
@@ -167,7 +167,7 @@ func withdrawnRefs(w map[PlayerID]bool) []rules.Ref {
 // ---- Instantané d'une phase ----
 
 func phaseRules(c PhaseConfig) rules.PhaseRules {
-	return rules.PhaseRules{Lives: c.Lives, Length: c.Length, FinalLength: c.FinalLength, Lengths: c.Lengths,
+	return rules.PhaseRules{Lives: c.Lives, Rounds: c.Rounds, Length: c.Length, FinalLength: c.FinalLength, Lengths: c.Lengths,
 		LengthLate: c.LengthLate, LateThreshold: c.LateThreshold, Mode: c.Mode, Pairing: c.Pairing,
 		AvoidClubs: c.AvoidClubs, AllowRematch: c.AllowRematch, Target: c.Target, Consolation: c.Consolation,
 		LastChance: c.LastChance, Reconciliation: c.Reconciliation, Recharge: c.Recharge, GroupSize: c.GroupSize,
@@ -190,7 +190,7 @@ func (s *State) instantané(ph *PhaseState, free []PlayerID, apparier bool) rule
 		Eliminated: refs(ph.ElimOrder), Withdrawn: withdrawnRefs(s.Withdrawn), Drawn: ph.Drawn, Round: ph.Round,
 		Length: ph.Length, Running: s.runningInPhase(ph), Free: refs(free)}
 	// Seul un suisse lit les adversaires ; seules les poules lisent les barrages.
-	suisse, poules := apparier && ph.Cfg.Kind == KindSwissLives, ph.Cfg.Kind == KindRoundRobin
+	suisse, poules := apparier && swissKind(ph.Cfg.Kind), ph.Cfg.Kind == KindRoundRobin
 	p.Entrants = make([]rules.Entrant, len(ph.Entrants))
 	for i, id := range ph.Entrants {
 		e := rules.Entrant{Player: ref(id), Lives: ph.Lives[id], Wins: ph.Wins[id], Losses: ph.Losses[id],
@@ -293,7 +293,7 @@ func (s *State) RulesPhase(i int) *rules.Phase {
 		return nil
 	}
 	var free []PlayerID
-	if ph.Cfg.Kind == KindSwissLives {
+	if swissKind(ph.Cfg.Kind) {
 		v := *s
 		v.clock = s.Last
 		r := 0

@@ -252,7 +252,7 @@ explicitement, mais l'hôte ne doit jamais le produire.
    ph := phase courante
    si ev.Slot != "" :
        takeSlot(phaseOf(ev.Phase), ev.Section, ev.Slot, id)   ← erreur si la place n'est plus libre
-   sinon si ph.Index == 0 et non ph.Drawn et (ph.Kind == swiss_lives ou non ph.Started) :
+   sinon si ph.Index == 0 et non ph.Drawn et (ph est un suisse ou non ph.Started) :
        enter(ph, id, livesFor(ph.Cfg))
 
 **Retardataires.** Trois chemins, et un seul interdit : refaire le tirage.
@@ -297,7 +297,7 @@ joueur retiré.
    player_unavailable :
        a := Absence{Until: *ev.Until (si présent), Round: ev.Round, Phase: s.Current}
        si Until et Round sont tous deux renseignés → erreur (une heure OU une ronde)
-       si Round > 0 et la phase courante n'est pas un suisse (swiss_lives) en mode "rounds" → erreur
+       si Round > 0 et la phase courante n'est pas un suisse en mode "rounds" → erreur
        s.Unavailable[ID] = a                 (remplace une absence précédente)
 
 Un joueur **indisponible** n'est plus apparié, et ne perd rien : ni vie, ni victoire, ni rang, ni
@@ -392,14 +392,14 @@ Puis :
 
    ph (si elle existe) :
        ph.Started = true
-       si ph.Kind == swiss_lives et ev.Round > ph.Round → ph.Round = ev.Round
+       si ph est un suisse et ev.Round > ph.Round → ph.Round = ev.Round
        ph.Opponents[A] += B ; ph.Opponents[B] += A
        si un GMatch (Section, Key) existe → son MatchID = ID
    (puis check(), comme pour tout match_started)
 
 ``ev.Round`` (relu du libellé ``"Ronde %d"`` pour un journal de version 0, voir ``Event.upgraded``)
 est le seul mécanisme qui fait avancer le compteur de rondes du suisse synchrone. ``openRound``
-n'agit que dans un ``swiss_lives`` en mode ``rounds`` et pour ``ev.Round > ph.Round`` : au premier
+n'agit que dans un suisse en mode ``rounds`` et pour ``ev.Round > ph.Round`` : au premier
 événement d'une ronde (match ou bye) et avant de l'appliquer, il relève les joueurs libres de la
 phase (``free(ph, r)``) ; ce sont les joueurs appelés à la ronde (voir :ref:`format_suisse`).
 
@@ -458,7 +458,7 @@ ignoré par tous les calculs (comptabilité, adversaires rencontrés, graphes).
    openRound(ph, ev.Round)
    ph.Byes[ev.ID]++
    si ev.Round > 0 → ajouter ev.Round à la liste ph.ByeRounds[ev.ID]
-   si ph.Kind == swiss_lives et ev.Round > ph.Round → ph.Round = ev.Round
+   si ph est un suisse et ev.Round > ph.Round → ph.Round = ev.Round
 
 Un bye ne compte ni victoire ni défaite. Il **appartient à sa ronde** : le confirmer seul ne clôt
 pas la ronde, ses matchs restent proposés. Il est mémorisé pour éviter d'en donner deux au même

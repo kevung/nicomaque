@@ -28,6 +28,8 @@ func Rank(p Phase) []Standing {
 		return v.rankBracket()
 	case FormatRoundRobin:
 		return v.rankPools()
+	case FormatSwissRounds:
+		return v.rankRounds()
 	}
 	return v.rankLives()
 }

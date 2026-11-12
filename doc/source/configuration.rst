@@ -55,6 +55,7 @@ Structures
        Kind           string `json:"kind"`
        Name           string `json:"name,omitempty"`
        Lives          int    `json:"lives,omitempty"`
+       Rounds         int    `json:"rounds,omitempty"`
        Length         int    `json:"length"`
        FinalLength    int    `json:"final_length,omitempty"`
        Lengths        []int  `json:"lengths,omitempty"`
@@ -90,13 +91,16 @@ Signification des champs de phase
 | Champ              | Formats concernés              | Signification                              |
 +====================+================================+============================================+
 | ``kind``           | tous                           | ``swiss_lives``, ``lives_bracket``,        |
-|                    |                                | ``gsl``, ``bracket``, ``round_robin``      |
+|                    |                                | ``gsl``, ``bracket``, ``round_robin``,     |
+|                    |                                | ``swiss_rounds``                           |
 +--------------------+--------------------------------+--------------------------------------------+
 | ``name``           | tous                           | Nom saisi par le TD ; vide = nom par       |
 |                    |                                | défaut du format (``PhaseName``)           |
 +--------------------+--------------------------------+--------------------------------------------+
 | ``lives``          | ``swiss_lives``                | Nombre de vies (défaut 2). Forcé à 2 pour  |
 |                    |                                | ``gsl``                                    |
++--------------------+--------------------------------+--------------------------------------------+
+| ``rounds``         | ``swiss_rounds``               | Nombre de rondes (obligatoire, > 0)        |
 +--------------------+--------------------------------+--------------------------------------------+
 | ``length``         | tous                           | Longueur des matchs en points              |
 |                    |                                | (obligatoire, > 0)                         |
@@ -132,7 +136,7 @@ Signification des champs de phase
 |                    |                                | d'abord les joueurs les plus victorieux du |
 |                    |                                | groupe)                                    |
 +--------------------+--------------------------------+--------------------------------------------+
-| ``avoid_clubs``    | ``swiss_lives``                | Éviter les rencontres entre joueurs d'un   |
+| ``avoid_clubs``    | les deux suisses               | Éviter les rencontres entre joueurs d'un   |
 |                    |                                | même club quand c'est possible             |
 +--------------------+--------------------------------+--------------------------------------------+
 | ``allow_rematch``  | ``swiss_lives``                | Autoriser une seconde rencontre entre deux |
@@ -200,6 +204,12 @@ Algorithme :
        si p.LengthLate > 0 et p.LateThreshold <= 0  → erreur « length_late sans late_threshold »
 
        selon p.Kind :
+         swiss_rounds :
+             si p.Rounds <= 0                      → erreur « combien de rondes ? »
+             si p.Target, p.LengthLate ou p.Pairing renseigné → erreur
+             si p.Mode ∉ {"", rounds}              → erreur
+             si p.Lives saisi                      → erreur (personne n'est éliminé)
+             p.Mode = "rounds"
          swiss_lives :
              si p.Lives <= 0                       → p.Lives = 2
              si p.Mode == ""                       → p.Mode = "continuous"

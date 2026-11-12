@@ -219,7 +219,7 @@ func (s *State) Apply(ev Event) error {
 			if err := s.takeSlot(s.phaseOf(ev.Phase), ev.Section, ev.Slot, p.ID); err != nil {
 				return err
 			}
-		case ph.Index == 0 && !ph.Drawn && (ph.Cfg.Kind == KindSwissLives || !ph.Started):
+		case ph.Index == 0 && !ph.Drawn && (swissKind(ph.Cfg.Kind) || !ph.Started):
 			s.enter(ph, p.ID, livesFor(ph.Cfg)) // admis avec toutes ses vies (suisse) ou avant le tirage
 		}
 	case EvPlayerUpdated:
@@ -286,7 +286,7 @@ func (s *State) Apply(ev Event) error {
 		delete(s.Revived, m.B)
 		if ph := s.phaseOf(ev.Phase); ph != nil {
 			ph.Started = true
-			if ev.Round > ph.Round && ph.Cfg.Kind == KindSwissLives {
+			if ev.Round > ph.Round && swissKind(ph.Cfg.Kind) {
 				ph.Round = ev.Round
 			}
 			ph.Opponents[m.A] = append(ph.Opponents[m.A], m.B)
@@ -340,7 +340,7 @@ func (s *State) Apply(ev Event) error {
 		if ev.Round > 0 {
 			ph.ByeRounds[ev.ID] = append(ph.ByeRounds[ev.ID], ev.Round)
 		}
-		if ev.Round > ph.Round && ph.Cfg.Kind == KindSwissLives {
+		if ev.Round > ph.Round && swissKind(ph.Cfg.Kind) {
 			ph.Round = ev.Round
 		}
 	case EvDraw:
@@ -488,7 +488,8 @@ func (s *State) entryLives(next, prev *PhaseState, p PlayerID) int {
 	if next.Cfg.Entry != "survivors" && next.Cfg.Entry != "" {
 		return livesFor(next.Cfg)
 	}
-	if next.Cfg.Kind != KindLivesBracket && next.Cfg.Kind != KindGSL && next.Cfg.Kind != KindSwissLives {
+	// Un suisse classique n'a pas de vies à transmettre : celles qu'il porte ne sont qu'un artifice.
+	if prev.Cfg.Kind == KindSwissRounds || (next.Cfg.Kind != KindLivesBracket && next.Cfg.Kind != KindGSL && next.Cfg.Kind != KindSwissLives) {
 		return livesFor(next.Cfg)
 	}
 	return s.remainingLives(prev, p)
@@ -496,7 +497,7 @@ func (s *State) entryLives(next, prev *PhaseState, p PlayerID) int {
 
 func livesFor(cfg PhaseConfig) int {
 	switch cfg.Kind {
-	case KindSwissLives:
+	case KindSwissLives, KindSwissRounds:
 		return cfg.Lives
 	case KindGSL:
 		return 2

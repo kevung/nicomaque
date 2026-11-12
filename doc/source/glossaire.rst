@@ -31,7 +31,7 @@ Glossaire
 
    Format
       Type d'une phase (``Kind``) : ``swiss_lives``, ``lives_bracket``, ``gsl``, ``bracket``,
-      ``round_robin``.
+      ``round_robin``, ``swiss_rounds``.
 
    GMatch
       Case d'un graphe de matchs : deux places, une longueur, un résultat éventuel. Un

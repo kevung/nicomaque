@@ -43,7 +43,7 @@ et le rejeu l'ignore.
 
    ph := phase courante
    selon ph.Cfg.Kind :
-       swiss_lives :
+       swiss_lives, swiss_rounds :
            si micro-rondes actives, now < échéance et la phase n'est pas finie :
                → withAbsences([ Wait, raison waiting_batch, Until = échéance ])
            acts := proposeSwiss(ph)
@@ -97,6 +97,7 @@ Fin de phase
 Kind                           Condition (``rules.PhaseDone``)
 ============================== ========================================================
 ``swiss_lives``                ``swissDone`` (voir :ref:`format_suisse`)
+``swiss_rounds``               ``roundsDone``, et la dernière ronde entièrement lancée
 ``gsl``                        ``gslDone`` (voir :ref:`format_gsl`)
 ``round_robin``                ``Drawn && AllDone(Sections) && barragesDone``
 ``bracket``, ``lives_bracket`` ``Drawn && AllDone(Sections)``

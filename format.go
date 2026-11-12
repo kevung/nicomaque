@@ -12,7 +12,16 @@ const (
 	KindGSL          = "gsl"           // blocs de groupes GSL (2 vies)
 	KindBracket      = "bracket"       // élimination simple, consolante, dernière chance, double élimination
 	KindRoundRobin   = "round_robin"   // poules toutes rondes puis qualification (barrage si égalité)
+	// KindSwissRounds : le suisse classique, à nombre de rondes FIXE et sans vies. Une variante
+	// nommée, à part du suisse à vies que l'étude retient : personne n'est éliminé, et sans
+	// départage ses ex æquo le restent, y compris en tête.
+	KindSwissRounds = "swiss_rounds"
 )
+
+// swissRoundsLives : dans un suisse classique personne n'est éliminé. Chacun porte un nombre de
+// vies qu'aucun nombre de rondes n'épuise — un artifice de la mécanique partagée avec le suisse
+// à vies, pas un réglage : il ne dépend pas de Rounds, qui peut changer en cours de tournoi.
+const swissRoundsLives = 1 << 20
 
 // Config décrit un tournoi : une suite de phases.
 type Config struct {
@@ -35,6 +44,7 @@ type PhaseConfig struct {
 	Kind        string `json:"kind"`
 	Name        string `json:"name,omitempty"`
 	Lives       int    `json:"lives,omitempty"`        // swiss_lives : nombre de vies (défaut 2)
+	Rounds      int    `json:"rounds,omitempty"`       // swiss_rounds : nombre de rondes (obligatoire)
 	Length      int    `json:"length"`                 // longueur des matchs (points)
 	FinalLength int    `json:"final_length,omitempty"` // longueur de la finale (tableaux), 0 = Length
 	// Lengths donne la longueur tour par tour d'un tableau, DU DERNIER TOUR VERS LE PREMIER
@@ -126,6 +136,20 @@ func (c *Config) Validate() error {
 			if p.BatchMinutes > 0 && p.Mode == "rounds" {
 				return fmt.Errorf("phase %d : batch_minutes en mode rondes — une ronde EST un lot", i)
 			}
+		case KindSwissRounds:
+			if p.Rounds <= 0 {
+				return fmt.Errorf("phase %d : swiss_rounds sans rounds — combien de rondes ?", i)
+			}
+			if p.Target != 0 || p.LengthLate != 0 || p.Pairing != "" {
+				return fmt.Errorf("phase %d : target, length_late et pairing sont ceux du suisse à vies, pas de %q", i, p.Kind)
+			}
+			if p.Mode != "" && p.Mode != "rounds" {
+				return fmt.Errorf("phase %d : mode %q inconnu pour %q (rondes seulement)", i, p.Mode, p.Kind)
+			}
+			if p.Lives != 0 && p.Lives != swissRoundsLives {
+				return fmt.Errorf("phase %d : lives ne se règle pas sur %q — personne n'y est éliminé", i, p.Kind)
+			}
+			p.Mode, p.Lives = "rounds", swissRoundsLives
 		case KindLivesBracket, KindBracket:
 			if p.Seeding != "" && p.Seeding != SeedingRating {
 				return fmt.Errorf("phase %d : seeding %q inconnu (vide ou %q)", i, p.Seeding, SeedingRating)
@@ -156,6 +180,9 @@ func (c *Config) Validate() error {
 		}
 		if p.Entry == "" {
 			p.Entry = "survivors"
+		}
+		if p.Rounds != 0 && p.Kind != KindSwissRounds {
+			return fmt.Errorf("phase %d : rounds ne s'applique qu'à %q, pas à %q", i, KindSwissRounds, p.Kind)
 		}
 		if p.BatchMinutes != 0 && p.Kind != KindSwissLives {
 			return fmt.Errorf("phase %d : batch_minutes ne s'applique qu'au suisse continu, pas à %q", i, p.Kind)

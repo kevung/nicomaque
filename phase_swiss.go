@@ -14,7 +14,19 @@ func (s *State) sumLives(ph *PhaseState) int {
 }
 
 // swissDone : la phase suisse n'a plus rien à jouer (rules.PhaseDone).
-func (s *State) swissDone(ph *PhaseState) bool { return rules.PhaseDone(s.bilan(ph)) }
+//
+// Suisse classique : la dernière ronde peut se lancer en plusieurs vagues. Tant qu'il en reste à
+// confirmer, la phase n'est pas finie, même sans match en cours.
+func (s *State) swissDone(ph *PhaseState) bool {
+	if !rules.PhaseDone(s.bilan(ph)) {
+		return false
+	}
+	return ph.Cfg.Kind != KindSwissRounds || ph.Round == 0 || len(s.roundRest(ph, ph.Round)) == 0
+}
+
+// swissKind : les deux suisses — à vies, ou classique à rondes fixes — partagent la mécanique
+// des rondes, des absences et des retardataires.
+func swissKind(k string) bool { return k == KindSwissLives || k == KindSwissRounds }
 
 // free : joueurs en vie sans match en cours, ni ici ni dans une autre épreuve de la salle, et
 // disponibles pour la ronde r (0 = hors rondes ; voir absence.go).
@@ -85,7 +97,7 @@ func (s *State) proposeSwiss(ph *PhaseState) []Action {
 // ceux qu'un Propose de cet instant aurait appariés. Appelée par Apply AVANT d'appliquer
 // l'événement, quand ses joueurs sont encore libres.
 func (s *State) openRound(ph *PhaseState, r int) {
-	if ph.Cfg.Kind != KindSwissLives || ph.Cfg.Mode != "rounds" || r <= ph.Round {
+	if !swissKind(ph.Cfg.Kind) || ph.Cfg.Mode != "rounds" || r <= ph.Round {
 		return
 	}
 	ph.Roster = s.free(ph, r)

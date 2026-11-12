@@ -36,6 +36,8 @@ func RemainingMatches(p Phase) Remaining {
 	switch p.Format {
 	case FormatSwissLives, FormatGSL:
 		return v.resteVies()
+	case FormatSwissRounds:
+		return v.resteRondes()
 	case FormatBracket, FormatLivesBracket:
 		if !p.Drawn {
 			if len(p.Entrants) < 2 {

@@ -128,6 +128,7 @@ type Note struct {
 	Kind      NoteKind `json:"kind,omitempty"`
 	Wins      int      `json:"wins,omitempty"`
 	Losses    int      `json:"losses,omitempty"`
+	Byes      int      `json:"byes,omitempty"` // suisse classique : exemptions, qui valent une victoire
 	Lives     int      `json:"lives,omitempty"`
 	Section   string   `json:"section,omitempty"`
 	Qualified bool     `json:"qualified,omitempty"`

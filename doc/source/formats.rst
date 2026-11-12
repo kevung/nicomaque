@@ -19,6 +19,10 @@ suivante est à vies.
      - Chaque joueur a *L* vies (2 par défaut) et en perd une par défaite. Appariement dans le
        groupe de même nombre de défaites, en continu, en micro-rondes ou par rondes. Option
        ``target`` : arrêt quand la somme des vies restantes atteint une puissance de 2.
+   * - ``swiss_rounds``
+     - Suisse classique
+     - Nombre de rondes fixe, personne n'est éliminé, classement aux points. Variante nommée :
+       sans départage, les ex æquo le restent, y compris en tête.
    * - ``lives_bracket``
      - Tableau à vies
      - Élimination directe où un joueur arrivé avec 2 vies est exempt du premier tour. Suite
@@ -42,6 +46,7 @@ Les chapitres suivants décrivent chaque format jusqu'au niveau de l'algorithme 
    :maxdepth: 1
 
    format_suisse
+   format_suisse_rondes
    format_tableaux
    format_gsl
    format_poules
