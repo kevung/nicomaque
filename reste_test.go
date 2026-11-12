@@ -14,6 +14,7 @@ import (
 // encadre le nombre de matchs que la phase en cours terminera encore, compté à la fin du
 // tournoi. Exact (Min = Max) dans un tableau sans recharge.
 func TestRemainingMatchesEncadre(t *testing.T) {
+	t.Parallel() // indépendant des autres : la boucle -short garde de la marge
 	effectifs, graines := []int{2, 3, 5, 8, 13, 32}, 3
 	if testing.Short() {
 		effectifs, graines = []int{2, 3, 5, 8, 13}, 2

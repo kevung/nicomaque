@@ -182,7 +182,7 @@ func cohérent(t *testing.T, st *tournoi.State) {
 // puis les formats plus récents, pour que leurs événements (half_bye) et leurs appariements
 // soient atteints.
 func cfgFuzz(k byte) tournoi.Config {
-	switch k % 5 {
+	switch k % 6 {
 	case 1:
 		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3, Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakBuchholz},
@@ -191,6 +191,9 @@ func cfgFuzz(k byte) tournoi.Config {
 	case 2:
 		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 4, Pairing: tournoi.PairingMonrad, MonradWiden: true}}}
+	case 5:
+		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 4, Mode: "continuous", Seeding: tournoi.SeedingManual}}}
 	case 4:
 		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindManual, Length: 5, Tiebreak: []string{tournoi.TiebreakBuchholz}},
@@ -221,6 +224,7 @@ func FuzzApply(f *testing.F) {
 	f.Add([]byte{0x2e, 2, 1, 0, 0, 0, 0, 0, 0, 2, 0, 1, 2, 1, 0, 3, 0, 0, 0, 0, 0})
 	f.Add([]byte{0x40, 0, 0, 16, 0, 5, 16, 2, 13, 17, 4, 1, 2, 0, 0, 2, 1, 1, 16, 0, 10, 0, 1, 0})
 	f.Add([]byte{18, 1, 0, 19, 2, 3, 0, 0, 0, 18, 4, 1, 0, 0, 0, 2, 0, 0, 19, 5, 6, 0, 0, 0})
+	f.Add([]byte{0x50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 6, 2, 0, 0, 0, 0})
 	f.Add([]byte{0x30, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 1, 1, 3, 0, 1, 6, 0, 0, 0, 0, 0})
 	// Phase manuelle : une exemption posée puis retirée, le joueur apparié ensuite dans la ronde.
 	f.Add([]byte{0x40, 0, 0, 17, 4, 1, 17, 4, 0x81, 16, 4, 21, 1, 0, 4})

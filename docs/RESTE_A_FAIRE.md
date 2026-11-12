@@ -113,6 +113,11 @@ où intervenir et comment vérifier.
   (remplacement.go) : refusés dès qu'un match non annulé porte le joueur, s'il est retiré ou s'il
   a une demi-exemption annoncée ; l'état renomme l'identifiant partout (`renamePlayers`). Reste :
   reprendre la place d'un retiré.
+- [x] **Suisse classique au fil de l'eau** (issue #9). `mode: "continuous"` sur `swiss_rounds` :
+  `pairRolling` (rules/suisse_rondes.go) apparie par nombre de parties, sans revanche tant qu'un
+  joueur du même compte joue encore ; la ronde 1 passe par la mécanique des rondes. Reste :
+  `batch_minutes` sur ce mode, et la comparaison de durée dans `TestParity` (aujourd'hui dans
+  `TestFilDeLEauSimulation`).
 - [ ] **Ronde de demi-exemptés seuls et barrage périmé** : une ronde dont tous les joueurs
   restants sont demi-exemptés attend (`no_pairing`) ; un barrage dont la poule est corrigée après
   le tirage n'est pas refait (avertissement `barrage_stale`). Les deux sont dans `limites.rst` ;

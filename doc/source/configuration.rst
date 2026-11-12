@@ -130,7 +130,10 @@ Signification des champs de phase
 | ``late_threshold`` | ``swiss_lives``                | Nombre de joueurs en vie à partir duquel   |
 |                    |                                | ``length_late`` s'applique                 |
 +--------------------+--------------------------------+--------------------------------------------+
-| ``mode``           | ``swiss_lives``                | ``continuous`` (défaut) ou ``rounds``      |
+| ``mode``           | ``swiss_lives``,               | ``swiss_lives`` : ``continuous`` (défaut)  |
+|                    | ``swiss_rounds``               | ou ``rounds``. ``swiss_rounds`` : vide     |
+|                    |                                | (par rondes) ou ``continuous`` (au fil de  |
+|                    |                                | l'eau)                                     |
 +--------------------+--------------------------------+--------------------------------------------+
 | ``batch_minutes``  | ``swiss_lives`` continu        | Micro-rondes : les joueurs libres          |
 |                    |                                | attendent l'échéance du prochain lot, puis |
@@ -256,7 +259,7 @@ Algorithme :
              si p.Target ou p.LengthLate renseigné → erreur
              si p.Pairing ∉ {"", monrad}           → erreur
              si p.MonradWiden sans monrad          → erreur
-             si p.Mode ∉ {"", rounds}              → erreur
+             si p.Mode ∉ {"", rounds, continuous}  → erreur
              si p.Lives saisi                      → erreur (personne n'est éliminé)
              p.Mode = "rounds"
              si un critère de p.Tiebreak est inconnu ou répété → erreur
@@ -301,9 +304,9 @@ Algorithme :
        si p.MonradWiden sans p.Pairing == "monrad"             → erreur
        si p.Accelerated et p.Kind != swiss_rounds              → erreur
 
-Dans un ``swiss_rounds``, ``lives`` et ``mode`` ne se règlent pas : ``Validate`` les efface (un
-journal plus ancien peut porter ``lives: 1048576`` et ``mode: "rounds"``, qui restent lus), et le
-moteur les calcule.
+Dans un ``swiss_rounds``, ``lives`` ne se règle pas et ``mode`` ne s'écrit que pour le fil de
+l'eau (``"continuous"``) : ``Validate`` efface les autres valeurs (un journal plus ancien peut
+porter ``lives: 1048576`` et ``mode: "rounds"``, qui restent lus), et le moteur les calcule.
 
 Hors ``top:N``, ``Entry`` n'est pas vérifiée : une valeur inconnue fait entrer les survivants, mais avec les vies
 par défaut du format (pas leurs vies restantes). Un ``top:N`` sans entier N ≥ 1 (``top:0``, ``top:x``) est

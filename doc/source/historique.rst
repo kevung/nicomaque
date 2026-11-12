@@ -22,6 +22,7 @@ indépendamment (champ ``version`` de chaque événement, voir :ref:`annexe_test
   retire celles posées par erreur (``bye_cancelled``), le moteur classe.
 - Remplacement d'un joueur qui n'a pas joué (``player_replaced``) et échange de deux places
   (``players_swapped``).
+- Suisse classique au fil de l'eau (``swiss_rounds`` avec ``mode: "continuous"``).
 - Un tournoi commencé sous 0.8.0 se relit et se poursuit à l'identique : mêmes propositions,
   mêmes statuts, même classement — jusqu'à un joueur inscrit sous l'identifiant ``BYE``, relu
   comme 0.8.0 l'a joué. Deux écarts, voulus. Une phase d'un seul entrant

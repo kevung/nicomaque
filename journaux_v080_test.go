@@ -16,7 +16,7 @@ import (
 // Un tournoi commencé sous v0.8.0 se poursuit à l'identique : ses journaux, rejoués pas à pas,
 // rendent les mêmes propositions, les mêmes statuts, le même classement, le même reste à jouer
 // et les mêmes avertissements. Les empreintes du fichier témoin viennent de v0.8.0 et ne se
-// régénèrent pas ; un champ ajouté à Action, à PlayerStatus ou à Warning doit donc être omis
+// régénèrent pas (générateur : testdata/journaux_v080_gen_test.go.txt, à lancer sous v0.8.0) ; un champ ajouté à Action, à PlayerStatus ou à Warning doit donc être omis
 // quand il est vide. Les journaux « perturbe/ » portent retraits, corrections et annulations.
 // Les journaux « bye/ » inscrivent un joueur d'identifiant BYE, que v0.8.0 acceptait : classé
 // premier d'un tableau sans jouer, ou tirage GSL proposé sans fin (journal tronqué) — relus tels quels.

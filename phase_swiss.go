@@ -25,6 +25,9 @@ func (s *State) swissDone(ph *PhaseState) bool {
 	if !rules.PhaseDone(s.bilan(ph)) {
 		return false
 	}
+	if rolling(ph.Cfg) {
+		return true
+	}
 	return ph.Cfg.Kind != KindSwissRounds || ph.Round == 0 || len(s.roundRest(ph, ph.Round)) == 0
 }
 
@@ -52,6 +55,19 @@ func (s *State) swissLength(ph *PhaseState) int { return rules.SwissLength(s.bil
 func (s *State) proposeSwiss(ph *PhaseState) []Action {
 	if s.swissDone(ph) {
 		return nil
+	}
+	if rolling(ph.Cfg) && ph.Round <= 1 {
+		// La ronde 1 se lance comme une ronde ordinaire : son plan, une fois ouvert, se
+		// repropose à l'identique. Le fil de l'eau commence quand elle est entièrement lancée.
+		if ph.Round == 1 {
+			if rest := s.roundRest(ph, 1); len(rest) > 0 {
+				return rest
+			}
+		} else {
+			avant := s.snapshot(ph, s.free(ph, 1))
+			avant.Rules.Mode = rules.ModeRounds
+			return s.actions(ph, rules.Pair(avant, s.seed()))
+		}
 	}
 	r := 0
 	if byRounds(ph.Cfg) {
@@ -101,7 +117,7 @@ func (s *State) proposeSwiss(ph *PhaseState) []Action {
 // ceux qu'un Propose de cet instant aurait appariés. Appelée par Apply AVANT d'appliquer
 // l'événement, quand ses joueurs sont encore libres.
 func (s *State) openRound(ph *PhaseState, r int) {
-	if !swissKind(ph.Cfg.Kind) || !byRounds(ph.Cfg) || r <= ph.Round {
+	if !swissKind(ph.Cfg.Kind) || !(byRounds(ph.Cfg) || rolling(ph.Cfg) && r == 1) || r <= ph.Round {
 		return
 	}
 	ph.Roster = s.free(ph, r)
@@ -229,6 +245,9 @@ func (s *State) applyHalfBye(ev Event) error {
 	cfg := s.Config.Phases[ev.Phase]
 	if cfg.Kind != KindSwissRounds {
 		return fmt.Errorf("demi-exemption : la phase %d n'est pas un suisse classique", ev.Phase)
+	}
+	if rolling(cfg) {
+		return fmt.Errorf("demi-exemption : la phase %d se joue au fil de l'eau, sans ronde à manquer", ev.Phase)
 	}
 	if ev.Round < 1 || ev.Round > cfg.Rounds {
 		return fmt.Errorf("demi-exemption : ronde %d hors de 1..%d", ev.Round, cfg.Rounds)

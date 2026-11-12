@@ -169,6 +169,7 @@ func TestAccelereMoitieFigee(t *testing.T) {
 // TestAccelereInvariants : ceux du suisse classique, sur la matrice, et la simulation complète de
 // 32 × 6 et 31 × 6.
 func TestAccelereInvariants(t *testing.T) {
+	t.Parallel() // indépendant des autres : la boucle -short garde de la marge
 	cfg := func(rondes int) tournoi.Config {
 		c := accéléré(rondes)
 		c.Phases[0].Seeding = tournoi.SeedingRating // sim.Champ ne numérote personne

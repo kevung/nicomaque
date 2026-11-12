@@ -23,6 +23,7 @@ Nom                  Phases
 ``suisse_departage`` suisse classique en 5 rondes, têtes de série saisies, départage (écart
                      de points, Buchholz)
 ``suisse_accelere``  suisse classique accéléré en 5 rondes, départage
+``suisse_fil``       suisse classique en 5 rondes au fil de l'eau, départage
 ``gsl``              blocs GSL, ``target: 16``, puis tableau à vies
 ``elim``             élimination simple (9 points, finale en 11)
 ``conso``            tableau principal, consolante et dernière chance

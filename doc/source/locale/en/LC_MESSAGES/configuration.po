@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 17:28+0100\n"
+"POT-Creation-Date: 2026-11-12 17:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -95,8 +95,8 @@ msgid "``lives``"
 msgstr "``lives``"
 
 #: ../../source/configuration.rst:107 ../../source/configuration.rst:124
-#: ../../source/configuration.rst:130 ../../source/configuration.rst:133
-#: ../../source/configuration.rst:165 ../../source/configuration.rst:323
+#: ../../source/configuration.rst:130 ../../source/configuration.rst:168
+#: ../../source/configuration.rst:326
 msgid "``swiss_lives``"
 msgstr "``swiss_lives``"
 
@@ -108,8 +108,8 @@ msgstr "Number of lives (default 2). Forced to 2 for ``gsl``"
 msgid "``rounds``"
 msgstr "``rounds``"
 
-#: ../../source/configuration.rst:110 ../../source/configuration.rst:159
-#: ../../source/configuration.rst:220
+#: ../../source/configuration.rst:110 ../../source/configuration.rst:162
+#: ../../source/configuration.rst:223
 msgid "``swiss_rounds``"
 msgstr "``swiss_rounds``"
 
@@ -180,18 +180,26 @@ msgid "``mode``"
 msgstr "``mode``"
 
 #: ../../source/configuration.rst:133
-msgid "``continuous`` (défaut) ou ``rounds``"
-msgstr "``continuous`` (default) or ``rounds``"
+msgid "``swiss_lives``, ``swiss_rounds``"
+msgstr "``swiss_lives``, ``swiss_rounds``"
 
-#: ../../source/configuration.rst:135
+#: ../../source/configuration.rst:133
+msgid ""
+"``swiss_lives`` : ``continuous`` (défaut) ou ``rounds``. ``swiss_rounds``"
+" : vide (par rondes) ou ``continuous`` (au fil de l'eau)"
+msgstr ""
+"``swiss_lives``: ``continuous`` (default) or ``rounds``. "
+"``swiss_rounds``: empty (by rounds) or ``continuous`` (rolling)"
+
+#: ../../source/configuration.rst:138
 msgid "``batch_minutes``"
 msgstr "``batch_minutes``"
 
-#: ../../source/configuration.rst:135
+#: ../../source/configuration.rst:138
 msgid "``swiss_lives`` continu"
 msgstr "continuous ``swiss_lives``"
 
-#: ../../source/configuration.rst:135
+#: ../../source/configuration.rst:138
 msgid ""
 "Micro-rondes : les joueurs libres attendent l'échéance du prochain lot, "
 "puis tous ceux d'un même groupe de défaites sont appariés d'un coup. 0 = "
@@ -202,16 +210,16 @@ msgstr ""
 "all those in the same same-losses group are paired at once. 0 = pairing "
 "as players become free. Refused in ``rounds`` mode — a round IS a batch"
 
-#: ../../source/configuration.rst:142
+#: ../../source/configuration.rst:145
 msgid "``pairing``"
 msgstr "``pairing``"
 
-#: ../../source/configuration.rst:142 ../../source/configuration.rst:153
-#: ../../source/configuration.rst:156 ../../source/configuration.rst:162
+#: ../../source/configuration.rst:145 ../../source/configuration.rst:156
+#: ../../source/configuration.rst:159 ../../source/configuration.rst:165
 msgid "les deux suisses"
 msgstr "both Swiss formats"
 
-#: ../../source/configuration.rst:142
+#: ../../source/configuration.rst:145
 msgid ""
 "``swiss_lives`` : ``random`` (défaut) ou ``wins`` (apparier d'abord les "
 "joueurs les plus victorieux du groupe). ``swiss_rounds`` : vide (le plus "
@@ -223,15 +231,15 @@ msgstr ""
 "ranking) or ``monrad`` (drawn at random within the group on the same "
 "points)"
 
-#: ../../source/configuration.rst:149
+#: ../../source/configuration.rst:152
 msgid "``monrad_widen``"
 msgstr "``monrad_widen``"
 
-#: ../../source/configuration.rst:149
+#: ../../source/configuration.rst:152
 msgid "``swiss_rounds``, ``monrad``"
 msgstr "``swiss_rounds``, ``monrad``"
 
-#: ../../source/configuration.rst:149
+#: ../../source/configuration.rst:152
 msgid ""
 "Élargir le dernier groupe de points aux groupes d'au-dessus quand cela "
 "évite une revanche. Éteint par défaut"
@@ -239,57 +247,57 @@ msgstr ""
 "Widen the last points group to the groups above it when that avoids a "
 "rematch. Off by default"
 
-#: ../../source/configuration.rst:153
+#: ../../source/configuration.rst:156
 msgid "``avoid_clubs``"
 msgstr "``avoid_clubs``"
 
-#: ../../source/configuration.rst:153
+#: ../../source/configuration.rst:156
 msgid "Éviter les rencontres entre joueurs d'un même club quand c'est possible"
 msgstr "Avoid matches between players of the same club when possible"
 
-#: ../../source/configuration.rst:156
+#: ../../source/configuration.rst:159
 msgid "``avoid_countries``"
 msgstr "``avoid_countries``"
 
-#: ../../source/configuration.rst:156
+#: ../../source/configuration.rst:159
 msgid "Éviter les rencontres entre joueurs d'un même pays quand c'est possible"
 msgstr "Avoid matches between players of the same country when possible"
 
-#: ../../source/configuration.rst:159
+#: ../../source/configuration.rst:162
 msgid "``avoid_rounds``"
 msgstr "``avoid_rounds``"
 
-#: ../../source/configuration.rst:159
+#: ../../source/configuration.rst:162
 msgid ""
 "Dernière ronde où ``avoid_clubs`` et ``avoid_countries`` jouent ; 0 = "
 "toutes"
 msgstr "Last round in which ``avoid_clubs`` and ``avoid_countries`` apply; 0 = all"
 
-#: ../../source/configuration.rst:162
+#: ../../source/configuration.rst:165
 msgid "``avoid_except``"
 msgstr "``avoid_except``"
 
-#: ../../source/configuration.rst:162
+#: ../../source/configuration.rst:165
 msgid "Clubs sortis de la comparaison de ``avoid_clubs`` (le club hôte)"
 msgstr "Clubs left out of the ``avoid_clubs`` comparison (the host club)"
 
-#: ../../source/configuration.rst:165
+#: ../../source/configuration.rst:168
 msgid "``allow_rematch``"
 msgstr "``allow_rematch``"
 
-#: ../../source/configuration.rst:165
+#: ../../source/configuration.rst:168
 msgid "Autoriser une seconde rencontre entre deux mêmes joueurs"
 msgstr "Allow a second match between the same two players"
 
-#: ../../source/configuration.rst:168
+#: ../../source/configuration.rst:171
 msgid "``target``"
 msgstr "``target``"
 
-#: ../../source/configuration.rst:168
+#: ../../source/configuration.rst:171
 msgid "``swiss_lives``, ``gsl``"
 msgstr "``swiss_lives``, ``gsl``"
 
-#: ../../source/configuration.rst:168
+#: ../../source/configuration.rst:171
 msgid ""
 "Figer la phase quand Σ vies ≤ ``target`` (puissance de 2 ; suisse : 2 "
 "vies exigées)"
@@ -297,86 +305,86 @@ msgstr ""
 "Freeze the phase when Σ lives ≤ ``target`` (power of 2; Swiss: 2 lives "
 "required)"
 
-#: ../../source/configuration.rst:171
+#: ../../source/configuration.rst:174
 msgid "``consolation``"
 msgstr "``consolation``"
 
-#: ../../source/configuration.rst:171
+#: ../../source/configuration.rst:174
 msgid "``bracket``, ``lives_bracket``"
 msgstr "``bracket``, ``lives_bracket``"
 
-#: ../../source/configuration.rst:171
+#: ../../source/configuration.rst:174
 msgid "Consolante progressive alimentée par les perdants du principal"
 msgstr "Progressive consolation fed by the losers of the main bracket"
 
-#: ../../source/configuration.rst:174
+#: ../../source/configuration.rst:177
 msgid "``last_chance``"
 msgstr "``last_chance``"
 
-#: ../../source/configuration.rst:174 ../../source/configuration.rst:177
-#: ../../source/configuration.rst:180
+#: ../../source/configuration.rst:177 ../../source/configuration.rst:180
+#: ../../source/configuration.rst:183
 msgid "idem"
 msgstr "same"
 
-#: ../../source/configuration.rst:174
+#: ../../source/configuration.rst:177
 msgid "Dernière chance alimentée par les perdants de la consolante"
 msgstr "Last chance fed by the losers of the consolation"
 
-#: ../../source/configuration.rst:177
+#: ../../source/configuration.rst:180
 msgid "``reconciliation``"
 msgstr "``reconciliation``"
 
-#: ../../source/configuration.rst:177
+#: ../../source/configuration.rst:180
 msgid "Le vainqueur de la consolante affronte celui du principal (grande finale)"
 msgstr "The consolation winner faces the main bracket winner (grand final)"
 
-#: ../../source/configuration.rst:180
+#: ../../source/configuration.rst:183
 msgid "``recharge``"
 msgstr "``recharge``"
 
-#: ../../source/configuration.rst:180
+#: ../../source/configuration.rst:183
 msgid ""
 "Double élimination vraie : le vainqueur du principal doit être battu deux"
 " fois"
 msgstr "True double elimination: the main bracket winner must be beaten twice"
 
-#: ../../source/configuration.rst:183
+#: ../../source/configuration.rst:186
 msgid "``group_size``"
 msgstr "``group_size``"
 
-#: ../../source/configuration.rst:183 ../../source/configuration.rst:185
-#: ../../source/configuration.rst:188 ../../source/configuration.rst:190
-#: ../../source/configuration.rst:328
+#: ../../source/configuration.rst:186 ../../source/configuration.rst:188
+#: ../../source/configuration.rst:191 ../../source/configuration.rst:193
+#: ../../source/configuration.rst:331
 msgid "``round_robin``"
 msgstr "``round_robin``"
 
-#: ../../source/configuration.rst:183
+#: ../../source/configuration.rst:186
 msgid "Taille des poules (défaut 4)"
 msgstr "Pool size (default 4)"
 
-#: ../../source/configuration.rst:185
+#: ../../source/configuration.rst:188
 msgid "``groups``"
 msgstr "``groups``"
 
-#: ../../source/configuration.rst:185
+#: ../../source/configuration.rst:188
 msgid "Nombre de poules, à la place de ``group_size`` (les deux s'excluent)"
 msgstr ""
 "Number of pools, instead of ``group_size`` (the two are mutually "
 "exclusive)"
 
-#: ../../source/configuration.rst:188
+#: ../../source/configuration.rst:191
 msgid "``qualifiers``"
 msgstr "``qualifiers``"
 
-#: ../../source/configuration.rst:188
+#: ../../source/configuration.rst:191
 msgid "Qualifiés par poule (défaut 2)"
 msgstr "Qualifiers per pool (default 2)"
 
-#: ../../source/configuration.rst:190
+#: ../../source/configuration.rst:193
 msgid "``final_barrage``"
 msgstr "``final_barrage``"
 
-#: ../../source/configuration.rst:190
+#: ../../source/configuration.rst:193
 msgid ""
 "En dernière phase, les premiers de poule se départagent par un barrage "
 "final qui désigne un seul vainqueur (éteint par défaut)"
@@ -384,15 +392,15 @@ msgstr ""
 "In a last phase, the pool firsts are separated by a final play-off that "
 "produces a single winner (off by default)"
 
-#: ../../source/configuration.rst:195
+#: ../../source/configuration.rst:198
 msgid "``entry``"
 msgstr "``entry``"
 
-#: ../../source/configuration.rst:195
+#: ../../source/configuration.rst:198
 msgid "toutes sauf la première"
 msgstr "all but the first"
 
-#: ../../source/configuration.rst:195
+#: ../../source/configuration.rst:198
 msgid ""
 "``survivors`` (défaut : les survivants, avec leurs vies restantes si la "
 "phase est à vies), ``all``, ``top:N``"
@@ -400,15 +408,15 @@ msgstr ""
 "``survivors`` (default: the survivors, with their remaining lives if the "
 "phase uses lives), ``all``, ``top:N``"
 
-#: ../../source/configuration.rst:199
+#: ../../source/configuration.rst:202
 msgid "``seeding``"
 msgstr "``seeding``"
 
-#: ../../source/configuration.rst:199
+#: ../../source/configuration.rst:202
 msgid "``bracket``, ``lives_bracket``, ``swiss_rounds``, ``round_robin``"
 msgstr "``bracket``, ``lives_bracket``, ``swiss_rounds``, ``round_robin``"
 
-#: ../../source/configuration.rst:199
+#: ../../source/configuration.rst:202
 msgid ""
 "``\"\"`` (défaut) : tirage intégralement aléatoire. ``\"rating\"`` : "
 "placement classique par cote d'entrée (1 contre 16, 2 contre 15… ; "
@@ -428,15 +436,15 @@ msgstr ""
 "protected seeded players\", which is the culture of backgammon. Refused "
 "on the other formats"
 
-#: ../../source/configuration.rst:213
+#: ../../source/configuration.rst:216
 msgid "``tiebreak``"
 msgstr "``tiebreak``"
 
-#: ../../source/configuration.rst:213
+#: ../../source/configuration.rst:216
 msgid "``swiss_rounds``, ``manual``, ``round_robin``"
 msgstr "``swiss_rounds``, ``manual``, ``round_robin``"
 
-#: ../../source/configuration.rst:213
+#: ../../source/configuration.rst:216
 msgid ""
 "Départage arithmétique des ex æquo : liste de ``point_diff``, "
 "``points_scored``, ``buchholz``, appliqués dans l'ordre après les points."
@@ -446,11 +454,11 @@ msgstr ""
 "``points_scored``, ``buchholz``, applied in order after the points. "
 "**Empty by default, by design** (no tie-break)"
 
-#: ../../source/configuration.rst:220
+#: ../../source/configuration.rst:223
 msgid "``accelerated``"
 msgstr "``accelerated``"
 
-#: ../../source/configuration.rst:220
+#: ../../source/configuration.rst:223
 msgid ""
 "Point virtuel de la moitié haute aux rondes 1 et 2, pour l'appariement "
 "seulement. Exige ``seeding``"
@@ -458,11 +466,11 @@ msgstr ""
 "Virtual point for the top half in rounds 1 and 2, for pairing only. "
 "Requires ``seeding``"
 
-#: ../../source/configuration.rst:226
+#: ../../source/configuration.rst:229
 msgid "Validation et valeurs par défaut"
 msgstr "Validation and default values"
 
-#: ../../source/configuration.rst:228
+#: ../../source/configuration.rst:231
 msgid ""
 "``Config.Validate() error`` **modifie la configuration en place** pour y "
 "écrire les défauts, et renvoie une erreur au premier problème. Elle est "
@@ -476,22 +484,24 @@ msgstr ""
 "``Apply`` on ``created`` and ``config_changed``: an invalid configuration"
 " therefore cannot enter a journal."
 
-#: ../../source/configuration.rst:233
+#: ../../source/configuration.rst:236
 msgid "Algorithme :"
 msgstr "Algorithm:"
 
-#: ../../source/configuration.rst:304
+#: ../../source/configuration.rst:307
 msgid ""
-"Dans un ``swiss_rounds``, ``lives`` et ``mode`` ne se règlent pas : "
-"``Validate`` les efface (un journal plus ancien peut porter ``lives: "
+"Dans un ``swiss_rounds``, ``lives`` ne se règle pas et ``mode`` ne "
+"s'écrit que pour le fil de l'eau (``\"continuous\"``) : ``Validate`` "
+"efface les autres valeurs (un journal plus ancien peut porter ``lives: "
 "1048576`` et ``mode: \"rounds\"``, qui restent lus), et le moteur les "
 "calcule."
 msgstr ""
-"In a ``swiss_rounds``, ``lives`` and ``mode`` cannot be set: ``Validate``"
-" clears them (an older journal may carry ``lives: 1048576`` and ``mode: "
+"In a ``swiss_rounds``, ``lives`` cannot be set and ``mode`` is written "
+"only for rolling pairing (``\"continuous\"``): ``Validate`` clears the "
+"other values (an older journal may carry ``lives: 1048576`` and ``mode: "
 "\"rounds\"``, which are still read), and the engine computes them."
 
-#: ../../source/configuration.rst:308
+#: ../../source/configuration.rst:311
 msgid ""
 "Hors ``top:N``, ``Entry`` n'est pas vérifiée : une valeur inconnue fait "
 "entrer les survivants, mais avec les vies par défaut du format (pas leurs"
@@ -509,7 +519,7 @@ msgstr ""
 "that carries it stays readable, and its phase stays empty (see "
 ":ref:`etat`)."
 
-#: ../../source/configuration.rst:313
+#: ../../source/configuration.rst:316
 msgid ""
 "Le test de puissance de deux est ``Target & (Target-1) == 0`` (vrai aussi"
 " pour 0, d'où la garde ``Target != 0``)."
@@ -517,7 +527,7 @@ msgstr ""
 "The power-of-two test is ``Target & (Target-1) == 0`` (also true for 0, "
 "hence the ``Target != 0`` guard)."
 
-#: ../../source/configuration.rst:316
+#: ../../source/configuration.rst:319
 msgid ""
 "``Validate`` ne remplit **pas** ``Name`` : un hôte multilingue fabrique "
 "son propre nom. Le nom par défaut français est donné par ``PhaseName(p "
@@ -529,63 +539,63 @@ msgstr ""
 "PhaseConfig) string`` (``fr.go``), which returns ``p.Name`` if it was "
 "entered, otherwise:"
 
-#: ../../source/configuration.rst:321
+#: ../../source/configuration.rst:324
 msgid "Kind"
 msgstr "Kind"
 
-#: ../../source/configuration.rst:321 ../../source/configuration.rst:378
+#: ../../source/configuration.rst:324 ../../source/configuration.rst:381
 msgid "Nom"
 msgstr "Name"
 
-#: ../../source/configuration.rst:323
+#: ../../source/configuration.rst:326
 msgid "``Suisse <Lives> vies``"
 msgstr "``Suisse <Lives> vies``"
 
-#: ../../source/configuration.rst:324
+#: ../../source/configuration.rst:327
 msgid "``lives_bracket``"
 msgstr "``lives_bracket``"
 
-#: ../../source/configuration.rst:324
+#: ../../source/configuration.rst:327
 msgid "``Tableau final``"
 msgstr "``Tableau final``"
 
-#: ../../source/configuration.rst:325 ../../source/configuration.rst:383
+#: ../../source/configuration.rst:328 ../../source/configuration.rst:386
 msgid "``gsl``"
 msgstr "``gsl``"
 
-#: ../../source/configuration.rst:325
+#: ../../source/configuration.rst:328
 msgid "``Blocs GSL``"
 msgstr "``Blocs GSL``"
 
-#: ../../source/configuration.rst:326
+#: ../../source/configuration.rst:329
 msgid "``bracket`` avec ``reconciliation``"
 msgstr "``bracket`` with ``reconciliation``"
 
-#: ../../source/configuration.rst:326
+#: ../../source/configuration.rst:329
 msgid "``Double élimination``"
 msgstr "``Double élimination``"
 
-#: ../../source/configuration.rst:327
+#: ../../source/configuration.rst:330
 msgid "``bracket`` sinon"
 msgstr "``bracket`` otherwise"
 
-#: ../../source/configuration.rst:327
+#: ../../source/configuration.rst:330
 msgid "``Tableau``"
 msgstr "``Tableau``"
 
-#: ../../source/configuration.rst:328
+#: ../../source/configuration.rst:331
 msgid "``Poules``"
 msgstr "``Poules``"
 
-#: ../../source/configuration.rst:329
+#: ../../source/configuration.rst:332
 msgid "(autre)"
 msgstr "(other)"
 
-#: ../../source/configuration.rst:329
+#: ../../source/configuration.rst:332
 msgid "``p.Kind``"
 msgstr "``p.Kind``"
 
-#: ../../source/configuration.rst:332
+#: ../../source/configuration.rst:335
 msgid ""
 "**Note d'implémentation importante** : ``Validate`` étant idempotente et "
 "appliquée au rejeu, la configuration écrite dans l'événement ``created`` "
@@ -599,11 +609,11 @@ msgstr ""
 " implementation that changed the defaults would therefore change the "
 "meaning of old journals: the defaults are part of the contract."
 
-#: ../../source/configuration.rst:338
+#: ../../source/configuration.rst:341
 msgid "Modification en cours de tournoi"
 msgstr "Changes during a tournament"
 
-#: ../../source/configuration.rst:340
+#: ../../source/configuration.rst:343
 msgid ""
 "L'événement ``config_changed`` porte la configuration **entière**, "
 "validée puis comparée à l'état (``acceptConfig``, ``reconfig.go``). "
@@ -617,15 +627,15 @@ msgstr ""
 " applying anything (preview for a settings form). A refusal is a "
 "``*ConfigRefusal``:"
 
-#: ../../source/configuration.rst:356
+#: ../../source/configuration.rst:359
 msgid "Règles :"
 msgstr "Rules:"
 
-#: ../../source/configuration.rst:358
+#: ../../source/configuration.rst:361
 msgid "moins de phases que de phases déjà ouvertes → ``removed`` ;"
 msgstr "fewer phases than phases already opened → ``removed``;"
 
-#: ../../source/configuration.rst:359
+#: ../../source/configuration.rst:362
 msgid ""
 "``kind`` changé pour une phase ouverte : ``finished`` si elle est passée,"
 " ``drawn`` si elle est tirée, ``started`` si des matchs y sont lancés ; "
@@ -637,7 +647,7 @@ msgstr ""
 "otherwise accepted (entrants receive the lives of the new format, and the"
 " current length that of the new configuration);"
 
-#: ../../source/configuration.rst:362
+#: ../../source/configuration.rst:365
 msgid ""
 "tableau (``bracket``, ``lives_bracket``) déjà tiré : ``consolation``, "
 "``last_chance``, ``reconciliation``, ``recharge`` et ``seeding`` sont "
@@ -649,7 +659,7 @@ msgstr ""
 "frozen (``drawn``) — from journal version 2 only; a ``config_changed`` of"
 " an earlier version is accepted, without effect;"
 
-#: ../../source/configuration.rst:365
+#: ../../source/configuration.rst:368
 msgid ""
 "tout le reste est accepté (bascule, longueurs, dotation, tables, pauses)."
 " La longueur courante d'une phase ouverte ne suit la configuration que si"
@@ -661,15 +671,15 @@ msgstr ""
 "configuration only if ``length`` actually changed, so as not to erase a "
 "``length_changed`` entered by the TD."
 
-#: ../../source/configuration.rst:369
+#: ../../source/configuration.rst:372
 msgid "Voir :ref:`journal`."
 msgstr "See :ref:`journal`."
 
-#: ../../source/configuration.rst:372
+#: ../../source/configuration.rst:375
 msgid "Configurations types"
 msgstr "Typical configurations"
 
-#: ../../source/configuration.rst:374
+#: ../../source/configuration.rst:377
 msgid ""
 "Chacun des deux binaires (``cmd/tournoi-demo``, ``cmd/tournoi-td``) a sa "
 "propre table ``formats`` de configurations nommées, à garder cohérentes ;"
@@ -679,31 +689,31 @@ msgstr ""
 "its own ``formats`` table of named configurations, which must be kept "
 "consistent; ``suisse_rondes`` exists only in ``tournoi-td``:"
 
-#: ../../source/configuration.rst:378
+#: ../../source/configuration.rst:381
 msgid "Phases"
 msgstr "Phases"
 
-#: ../../source/configuration.rst:380
+#: ../../source/configuration.rst:383
 msgid "``suisse``"
 msgstr "``suisse``"
 
-#: ../../source/configuration.rst:380
+#: ../../source/configuration.rst:383
 msgid "``swiss_lives`` 7 points"
 msgstr "``swiss_lives`` 7 points"
 
-#: ../../source/configuration.rst:381
+#: ../../source/configuration.rst:384
 msgid "``suisse_rondes``"
 msgstr "``suisse_rondes``"
 
-#: ../../source/configuration.rst:381
+#: ../../source/configuration.rst:384
 msgid "``swiss_lives`` 7 points, ``mode: rounds`` (``tournoi-td`` seulement)"
 msgstr "``swiss_lives`` 7 points, ``mode: rounds`` (``tournoi-td`` only)"
 
-#: ../../source/configuration.rst:382
+#: ../../source/configuration.rst:385
 msgid "``suisse_tableau``"
 msgstr "``suisse_tableau``"
 
-#: ../../source/configuration.rst:382
+#: ../../source/configuration.rst:385
 msgid ""
 "``swiss_lives`` 7 pts ``target: 16``, puis ``lives_bracket`` 9 pts, "
 "finale 11"
@@ -711,43 +721,43 @@ msgstr ""
 "``swiss_lives`` 7 pts ``target: 16``, then ``lives_bracket`` 9 pts, final"
 " 11"
 
-#: ../../source/configuration.rst:383
+#: ../../source/configuration.rst:386
 msgid "``gsl`` 7 pts ``target: 16``, puis ``lives_bracket`` 9 pts"
 msgstr "``gsl`` 7 pts ``target: 16``, then ``lives_bracket`` 9 pts"
 
-#: ../../source/configuration.rst:384
+#: ../../source/configuration.rst:387
 msgid "``elim``"
 msgstr "``elim``"
 
-#: ../../source/configuration.rst:384
+#: ../../source/configuration.rst:387
 msgid "``bracket`` 9 pts, finale 11"
 msgstr "``bracket`` 9 pts, final 11"
 
-#: ../../source/configuration.rst:385
+#: ../../source/configuration.rst:388
 msgid "``conso``"
 msgstr "``conso``"
 
-#: ../../source/configuration.rst:385
+#: ../../source/configuration.rst:388
 msgid "``bracket`` 9 pts, ``consolation`` + ``last_chance``"
 msgstr "``bracket`` 9 pts, ``consolation`` + ``last_chance``"
 
-#: ../../source/configuration.rst:386
+#: ../../source/configuration.rst:389
 msgid "``double``"
 msgstr "``double``"
 
-#: ../../source/configuration.rst:386
+#: ../../source/configuration.rst:389
 msgid "``bracket`` 7 pts, ``consolation`` + ``reconciliation`` + ``recharge``"
 msgstr "``bracket`` 7 pts, ``consolation`` + ``reconciliation`` + ``recharge``"
 
-#: ../../source/configuration.rst:387
+#: ../../source/configuration.rst:390
 msgid "``poules``"
 msgstr "``poules``"
 
-#: ../../source/configuration.rst:387
+#: ../../source/configuration.rst:390
 msgid "``round_robin`` 5 pts (poules de 4, 2 qualifiés), puis ``bracket`` 9 pts"
 msgstr "``round_robin`` 5 pts (pools of 4, 2 qualifiers), then ``bracket`` 9 pts"
 
-#: ../../source/configuration.rst:390
+#: ../../source/configuration.rst:393
 msgid ""
 "**Format recommandé par l'étude** : ``suisse_tableau`` — suisse 2 vies en"
 " continu, appariement aléatoire dans le groupe de même nombre de "
@@ -767,3 +777,6 @@ msgstr ""
 #~ "``random`` (default) or ``wins`` (pair "
 #~ "the group's players with the most "
 #~ "wins first)"
+
+#~ msgid "``continuous`` (défaut) ou ``rounds``"
+#~ msgstr "``continuous`` (default) or ``rounds``"

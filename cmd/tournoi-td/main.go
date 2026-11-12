@@ -38,6 +38,8 @@ var formats = map[string]tournoi.Config{
 		Seeding: tournoi.SeedingRating, Accelerated: true, Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakBuchholz}}}},
 	"poule_unique": {Name: "Poule unique", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 1, Qualifiers: 1,
 		Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakPointsScored}, FinalBarrage: true}}},
+	"suisse_fil": {Name: "Suisse classique au fil de l'eau", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5,
+		Mode: "continuous", Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakBuchholz}}}},
 	"gsl":    {Name: "Blocs GSL puis tableau", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindGSL, Length: 7, Target: 16}, {Kind: tournoi.KindLivesBracket, Length: 9}}},
 	"elim":   {Name: "Élimination simple", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindBracket, Length: 9, FinalLength: 11}}},
 	"conso":  {Name: "Principal, consolante, dernière chance", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindBracket, Length: 9, Consolation: true, LastChance: true}}},

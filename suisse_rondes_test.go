@@ -279,7 +279,7 @@ func TestSuisseRondesValidate(t *testing.T) {
 		"bascule":        {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Target: 8},
 		"vies":           {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Lives: 2},
 		"appariement":    {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Pairing: "random"},
-		"continu":        {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Mode: "continuous"},
+		"mode inconnu":   {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Mode: "lots"},
 		"micro-rondes":   {Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, BatchMinutes: 10},
 		"rondes à vies":  {Kind: tournoi.KindSwissLives, Length: 7, Rounds: 5},
 		"rondes tableau": {Kind: tournoi.KindBracket, Length: 7, Rounds: 5},

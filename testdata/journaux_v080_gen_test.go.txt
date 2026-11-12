@@ -1,0 +1,95 @@
+// Générateur des empreintes de testdata/journaux_v080.json.gz. Il ne se compile pas ici (suffixe
+// .txt) : il tourne dans un worktree du tag v0.8.0, pour que les empreintes viennent du moteur
+// publié et non de celui qu'elles jugent.
+//
+//	git worktree add /tmp/v080 v0.8.0
+//	cp testdata/journaux_v080_gen_test.go.txt /tmp/v080/zz_gen_test.go
+//	cd /tmp/v080 && GEN_IN=<témoins.json.gz> GEN_OUT=<sortie.json.gz> go test -run TestZZGen -count=1 .
+//
+// GEN_IN est un tableau de témoins (name, journal) ; GEN_OUT reçoit les mêmes avec leurs pas.
+// Relancé sur le fichier du dépôt, il doit rendre les mêmes pas (un w vide y est omis).
+package tournoi_test
+
+import (
+	"compress/gzip"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"os"
+	"testing"
+
+	tournoi "github.com/kevung/nicomaque"
+	"github.com/kevung/nicomaque/rules"
+)
+
+type genPas struct {
+	P string `json:"p"`
+	S string `json:"s"`
+	R string `json:"r"`
+	K string `json:"k"`
+	W string `json:"w"`
+}
+
+type genTemoin struct {
+	Name    string          `json:"name"`
+	Journal tournoi.Journal `json:"journal"`
+	Pas     []genPas        `json:"pas"`
+}
+
+func genEmpreinte(v any) string {
+	b, _ := json.Marshal(v)
+	h := sha256.Sum256(b)
+	return hex.EncodeToString(h[:6])
+}
+
+// Lit GEN_IN (témoins : name, journal ; les pas sont ignorés), écrit GEN_OUT avec les pas de CE moteur.
+func TestZZGen(t *testing.T) {
+	f, err := os.Open(os.Getenv("GEN_IN"))
+	if err != nil {
+		t.Skip(err)
+	}
+	z, err := gzip.NewReader(f)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var in []genTemoin
+	if err := json.NewDecoder(z).Decode(&in); err != nil {
+		t.Fatal(err)
+	}
+	for k := range in {
+		tm := &in[k]
+		tm.Pas = nil
+		s, err := tournoi.Replay(tm.Journal[:1])
+		if err != nil {
+			t.Fatalf("%s : %v", tm.Name, err)
+		}
+		for i := range tm.Journal {
+			if i > 0 {
+				if err := s.Apply(tm.Journal[i]); err != nil {
+					t.Fatalf("%s, pas %d : %v", tm.Name, i, err)
+				}
+			}
+			var reste string
+			if ph := s.RulesPhase(s.Current); ph != nil {
+				rm := rules.RemainingMatches(*ph)
+				reste = fmt.Sprintf("%d-%d", rm.Min, rm.Max)
+			}
+			avert := ""
+			if len(s.Warnings) > 0 {
+				avert = genEmpreinte(s.Warnings)
+			}
+			tm.Pas = append(tm.Pas, genPas{P: genEmpreinte(s.Propose()), S: genEmpreinte(s.Statuses()), R: reste, K: genEmpreinte(s.Ranking()), W: avert})
+		}
+	}
+	o, err := os.Create(os.Getenv("GEN_OUT"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	w, _ := gzip.NewWriterLevel(o, gzip.BestCompression)
+	if err := json.NewEncoder(w).Encode(in); err != nil {
+		t.Fatal(err)
+	}
+	w.Close()
+	o.Close()
+}
