@@ -57,7 +57,7 @@ Structure d'un événement
 
 .. code:: go
 
-   const JournalVersion = 2 // version écrite dans chaque nouvel événement
+   const JournalVersion = 3 // version écrite dans chaque nouvel événement
 
    type EventKind string
 
@@ -125,13 +125,16 @@ Un événement est une structure « plate » : tous les types partagent les mêm
 inutiles restant vides. C'est un choix délibéré — il rend le journal lisible et évite la
 désérialisation polymorphe.
 
-``Version`` est le format du journal (``JournalVersion`` = 2). Un événement sans ce champ
+``Version`` est le format du journal (``JournalVersion`` = 3). Un événement sans ce champ
 (version 0) vient d'un journal antérieur aux codes structurés et est **converti à la lecture** :
 ``Replay`` applique ``Event.upgraded()`` à chaque événement, qui transforme un libellé texte
 « Ronde k » en ``Label{Kind: round, N: k}`` et renseigne ``Round`` (voir
 :ref:`annexe_tests` pour la compatibilité ascendante). ``Replay`` refuse un événement dont la
 version dépasse ``JournalVersion`` : il vient d'un moteur plus récent. La version 2 ne change que la règle de
-``config_changed`` (voir « Journaux anciens » à la section ``config_changed``). Les constructeurs d'événements de
+``config_changed`` (voir « Journaux anciens » à la section ``config_changed``). La version 3 porte les refus
+ajoutés depuis — l'identifiant ``BYE`` dans ``player_added``, une entrée ``top:N`` sans N ≥ 1 dans ``created`` et
+``config_changed`` : ils ne valent que pour un événement de version 3 ou plus, parce que ``Replay`` passe par
+``Apply`` et qu'un journal écrit avant eux doit se relire comme il a été joué. Les constructeurs d'événements de
 ``events.go`` posent la version : un ``Event`` écrit à la main sans version serait relu comme un
 journal ancien.
 
@@ -248,6 +251,7 @@ générateur, ce qui garantit qu'une nouvelle proposition suit toujours un tirag
 
    si ev.Config == nil                → erreur « created sans config »
    cfg := *ev.Config ; cfg.Validate() → propage l'erreur éventuelle
+   si ev.Version ≥ 3 et une entrée « top:N » n'a pas un entier N ≥ 1 → erreur
    s.Config, s.Seed = copie profonde de cfg, ev.Seed
    s.Phases = [ newPhaseState(0, cfg.Phases[0]) ]
    s.Current = 0
@@ -261,7 +265,7 @@ explicitement, mais l'hôte ne doit jamais le produire.
 ::
 
    si ev.Player == nil ou ev.Player.ID == "" → erreur « joueur sans identifiant »
-   si ev.Player.ID == "BYE" → erreur « identifiant réservé à l'exemption »
+   si ev.Player.ID == "BYE" et ev.Version ≥ 3 → erreur « identifiant réservé à l'exemption »
    si l'identifiant est inconnu → l'ajouter à s.Order
    s.Players[id] = copie de *ev.Player     (réinscription = mise à jour de la fiche)
    supprimer id de s.Withdrawn             (une réinscription annule un forfait)
@@ -271,6 +275,9 @@ explicitement, mais l'hôte ne doit jamais le produire.
        takeSlot(phaseOf(ev.Phase), ev.Section, ev.Slot, id)   ← erreur si la place n'est plus libre
    sinon si ph.Index == 0 et non ph.Drawn et (ph est un suisse ou non ph.Started) :
        enter(ph, id, livesFor(ph.Cfg))
+
+Le refus de ``BYE`` ne vaut qu'à l'écriture : un journal de version 2 qui inscrit un joueur ``BYE`` se
+relit comme il a été joué, confusions avec l'exemption comprises.
 
 **Retardataires.** Trois chemins, et un seul interdit : refaire le tirage.
 
@@ -618,6 +625,7 @@ les journaux existants.
 
    si ev.Config == nil → erreur
    cfg := copie profonde de *ev.Config ; cfg.Validate() → erreur éventuelle
+   si ev.Version ≥ 3 et une entrée « top:N » n'a pas un entier N ≥ 1 → erreur
    acceptConfig(cfg, ev.Version) → erreur éventuelle (un *ConfigRefusal)
    setConfig(cfg) ; recompute()
 
@@ -831,7 +839,7 @@ horodatages abrégés) :
 .. code:: json
 
    [
-    {"seq": 0, "version": 2, "kind": "created", "time": "2026-01-01T09:00:00Z",
+    {"seq": 0, "version": 3, "kind": "created", "time": "2026-01-01T09:00:00Z",
      "config": {"name": "Suisse 2 vies puis tableau à vies",
                 "phases": [{"kind": "swiss_lives", "lives": 2, "length": 7, "mode": "continuous",
                             "pairing": "random", "target": 16, "entry": "survivors"},
@@ -839,20 +847,20 @@ horodatages abrégés) :
                             "entry": "survivors"}],
                 "min_per_point": 8},
      "seed": 1, "label": {}},
-    {"seq": 1, "version": 2, "kind": "player_added", "time": "2026-01-01T09:00:00Z",
+    {"seq": 1, "version": 3, "kind": "player_added", "time": "2026-01-01T09:00:00Z",
      "player": {"id": "P1", "name": "Joueur 1", "club": "Club 0", "rating": 3.5}, "label": {}},
-    {"seq": 7, "version": 2, "kind": "next_phase", "time": "2026-01-01T09:00:00Z",
+    {"seq": 7, "version": 3, "kind": "next_phase", "time": "2026-01-01T09:00:00Z",
      "label": {"kind": "phase", "text": "Tableau final"}},
-    {"seq": 8, "version": 2, "kind": "draw", "time": "2026-01-01T09:00:00Z", "phase": 1,
+    {"seq": 8, "version": 3, "kind": "draw", "time": "2026-01-01T09:00:00Z", "phase": 1,
      "label": {"kind": "draw_bracket", "n": 16, "sub": {"kind": "phase", "text": "Tableau final"}},
      "draw": {"slots": ["P1", "BYE", "P3", "BYE", "P4", "BYE", "P2", "BYE",
                         "P6", "BYE", "BYE", "BYE", "P5", "BYE", "BYE", "BYE"],
               "lives": {"P1": 2, "P2": 2, "P3": 2, "P4": 2, "P5": 2, "P6": 2}}},
-    {"seq": 9, "version": 2, "kind": "match_started", "time": "2026-01-01T09:00:00Z",
+    {"seq": 9, "version": 3, "kind": "match_started", "time": "2026-01-01T09:00:00Z",
      "match_id": "M1", "phase": 1, "section": "main", "key": "main.1.0",
      "label": {"kind": "quarter_final"}, "a": "P1", "b": "P3", "length": 9, "table": 1},
-    {"seq": 12, "version": 2, "kind": "result", "time": "2026-01-01T09:32:17Z",
+    {"seq": 12, "version": 3, "kind": "result", "time": "2026-01-01T09:32:17Z",
      "match_id": "M1", "label": {}, "winner": "P1", "score_a": 9, "score_b": 7},
-    {"seq": 19, "version": 2, "kind": "finished", "time": "2026-01-01T11:20:29Z",
+    {"seq": 19, "version": 3, "kind": "finished", "time": "2026-01-01T11:20:29Z",
      "phase": 1, "label": {}}
    ]

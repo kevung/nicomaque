@@ -24,13 +24,19 @@ indépendamment (champ ``version`` de chaque événement, voir :ref:`annexe_test
   (``players_swapped``).
 - Suisse classique au fil de l'eau (``swiss_rounds`` avec ``mode: "continuous"``).
 - Un tournoi commencé sous 0.8.0 se relit et se poursuit à l'identique : mêmes propositions,
-  mêmes statuts, même classement, mêmes avertissements. Un seul écart, voulu : une phase d'un
+  mêmes statuts, même classement, mêmes avertissements — jusqu'à un joueur inscrit sous
+  l'identifiant ``BYE``, relu comme 0.8.0 l'a joué. Un seul écart, voulu : une phase d'un
   seul entrant (``entry: "top:1"``, ou un seul qualifié), où 0.8.0 attendait sans fin, ne
   bloque plus le tournoi — son entrant en est le vainqueur.
+- Journal en version 3 : les refus nouveaux ne valent que pour les événements écrits depuis.
+  L'identifiant ``BYE`` n'est plus accepté à l'inscription, ni une entrée ``top:N`` sans
+  entier N ≥ 1 à la création ou au changement de configuration.
 - Avertissement ``barrage_stale`` : une poule corrigée après le tirage de son barrage.
 - **Compatibilité** : un journal écrit par 0.9 ne se relit pas avec un moteur 0.8, qui refuse
-  les types d'événements et les formats nouveaux. Un cas est silencieux : ``tiebreak`` sur
-  ``round_robin``, que 0.8.0 ignore et qui lui fait rendre un autre classement. Quand plusieurs
+  les types d'événements et les formats nouveaux. Trois cas sont silencieux, 0.8.0 ignorant
+  l'option : ``tiebreak`` sur ``round_robin`` (autre classement), ``groups`` sur
+  ``round_robin`` (autre tirage des poules) et ``avoid_countries`` sur ``swiss_lives`` (autre
+  appariement). Quand plusieurs
   programmes partagent un journal, tout lecteur passe donc à 0.9 avant le premier écrivain.
   Pour la suite, ``Replay`` refuse un événement dont la version dépasse ``JournalVersion``.
 

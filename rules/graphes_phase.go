@@ -543,53 +543,64 @@ func (v *vue) finale() bool { return v.Last && v.Rules.FinalBarrage }
 func (v *vue) finalistes() []Ref { return v.premiers(false) }
 
 // premiers : les finalistes ; avecRetirés les désigne sur les seuls résultats, un retiré
-// gardant sa place en tête de poule (ce que le tirage du barrage final a vu, à un retrait près).
+// gardant sa place en tête de poule.
 func (v *vue) premiers(avecRetirés bool) []Ref {
-	if !v.finale() || !v.Drawn {
+	if !v.finalePrête() {
 		return nil
+	}
+	var out []Ref
+	for i := range v.Sections {
+		if sec := v.Sections[i]; sec.Kind == SectionPool {
+			out = append(out, v.premiersDe(sec, func(p Ref) bool { return !avecRetirés && v.withdrawn[p] })...)
+		}
+	}
+	return out
+}
+
+// finalePrête : dernière phase à barrage final, poules et barrages de poule finis.
+func (v *vue) finalePrête() bool {
+	if !v.finale() || !v.Drawn {
+		return false
 	}
 	n := 0
 	for i := range v.Sections {
 		if v.Sections[i].Kind == SectionPool {
 			n++
 			if !v.Sections[i].Done() {
-				return nil
+				return false
 			}
 		}
 	}
-	if n == 0 || !v.poolBarragesDone() {
-		return nil
+	return n > 0 && v.poolBarragesDone()
+}
+
+// premiersDe : les premiers ex æquo d'une poule, barrage de poule compris, sans ceux que
+// saute écarte.
+func (v *vue) premiersDe(sec Section, saute func(Ref) bool) []Ref {
+	ids, clés := v.poolOrdre(sec)
+	écartés := map[Ref]bool{}
+	if bs := v.section(BarrageSectionName(sec.Name)); bs != nil {
+		for _, p := range bs.Players {
+			écartés[p] = true
+		}
+		for _, p := range v.barrageAlive(bs) {
+			écartés[p] = false
+		}
 	}
 	var out []Ref
-	for i := range v.Sections {
-		sec := v.Sections[i]
-		if sec.Kind != SectionPool {
+	var tête *clé
+	for _, p := range ids {
+		if saute(p) || écartés[p] {
 			continue
 		}
-		ids, clés := v.poolOrdre(sec)
-		écartés := map[Ref]bool{}
-		if bs := v.section(BarrageSectionName(sec.Name)); bs != nil {
-			for _, p := range bs.Players {
-				écartés[p] = true
-			}
-			for _, p := range v.barrageAlive(bs) {
-				écartés[p] = false
-			}
+		if tête == nil {
+			k := clés[p]
+			tête = &k
 		}
-		var tête *clé
-		for _, p := range ids {
-			if !avecRetirés && v.withdrawn[p] || écartés[p] {
-				continue
-			}
-			if tête == nil {
-				k := clés[p]
-				tête = &k
-			}
-			if clés[p] != *tête {
-				break
-			}
-			out = append(out, p)
+		if clés[p] != *tête {
+			break
 		}
+		out = append(out, p)
 	}
 	return out
 }
@@ -843,45 +854,77 @@ func StaleBarrages(p Phase) []string {
 		if bs.Kind != SectionBarrage {
 			continue
 		}
-		var attendus, promus []Ref
+		stale := false
 		if bs.Name == FinalBarrageName {
-			// Sur les seuls résultats : sans cela le retrait d'un finaliste promouvrait le
-			// suivant de sa poule, absent du tirage, et l'avertissement se lèverait sans correction.
-			if attendus = v.premiers(true); attendus == nil {
+			if !v.finalePrête() {
 				continue
 			}
-			// Retrait AVANT le tirage : le suivant de la poule a été tiré à bon droit.
-			promus = v.premiers(false)
+			stale = v.finalPérimé(bs)
 		} else {
+			var attendus []Ref
 			for j := range v.Sections {
 				if pool := v.Sections[j]; pool.Kind == SectionPool && BarrageSectionName(pool.Name) == bs.Name {
 					attendus, _ = v.poolTie(pool)
 				}
 			}
-		}
-		a, b, promu := map[Ref]bool{}, map[Ref]bool{}, map[Ref]bool{}
-		for _, x := range attendus {
-			a[x] = !v.withdrawn[x]
-		}
-		for _, x := range bs.Players {
-			b[x] = !v.withdrawn[x]
-		}
-		stale := false
-		for x, ok := range a {
-			stale = stale || ok && !b[x]
-		}
-		for _, x := range promus {
-			if _, vu := a[x]; !vu {
-				a[x] = false // admis dans le tirage, pas exigé
-				promu[x] = true
-			}
-		}
-		for x, ok := range b {
-			stale = stale || ok && !a[x] && !promu[x]
+			stale = !v.mêmesPrésents(attendus, bs.Players)
 		}
 		if stale {
 			out = append(out, bs.Name)
 		}
 	}
 	return out
+}
+
+// finalPérimé juge le barrage final POULE PAR POULE : un critère global laisserait le suivant
+// promu d'une poule excuser une égalité née d'une correction dans la même poule. Le tirage ne
+// dit pas quand un retrait est tombé, mais qui il a tiré : un retiré absent du tirage s'est
+// retiré avant (le suivant a été tiré à bon droit, lui est sauté), un retiré tiré garde sa
+// place (sinon son retrait promouvrait un absent du tirage, sans correction).
+func (v *vue) finalPérimé(bs Section) bool {
+	tiré := map[Ref]bool{}
+	for _, x := range bs.Players {
+		tiré[x] = true
+	}
+	vus := 0
+	for i := range v.Sections {
+		pool := v.Sections[i]
+		if pool.Kind != SectionPool {
+			continue
+		}
+		var tirés []Ref
+		membres, _ := v.poolOrdre(pool)
+		for _, x := range membres {
+			if tiré[x] {
+				tirés = append(tirés, x)
+			}
+		}
+		vus += len(tirés)
+		attendus := v.premiersDe(pool, func(x Ref) bool { return v.withdrawn[x] && !tiré[x] })
+		if !v.mêmesPrésents(attendus, tirés) {
+			return true
+		}
+	}
+	return vus != len(bs.Players)
+}
+
+// mêmesPrésents : deux listes égales, retirés mis à part.
+func (v *vue) mêmesPrésents(a, b []Ref) bool {
+	dans := map[Ref]int{}
+	for _, x := range a {
+		if !v.withdrawn[x] {
+			dans[x] |= 1
+		}
+	}
+	for _, x := range b {
+		if !v.withdrawn[x] {
+			dans[x] |= 2
+		}
+	}
+	for _, m := range dans {
+		if m != 3 {
+			return false
+		}
+	}
+	return true
 }

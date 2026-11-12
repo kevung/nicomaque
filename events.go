@@ -11,7 +11,13 @@ import (
 // 2 : config_changed ne peut plus changer les options de construction d'un tableau déjà tiré
 // (consolante, dernière chance, réconciliation, recharge, têtes de série) ; un événement de
 // version 1 qui le faisait reste accepté, sans effet, comme il l'a été.
-const JournalVersion = 2
+// 3 : player_added refuse l'identifiant BYE, created et config_changed une entrée top:N sans
+// N ≥ 1 ; un événement de version 2 qui les portait a été joué ainsi et se rejoue ainsi.
+const JournalVersion = 3
+
+// versionRefus : la version du journal à partir de laquelle les refus ajoutés depuis valent.
+// Un refus neuf ne s'applique jamais à un événement écrit avant lui : Replay passe par Apply.
+const versionRefus = 3
 
 // EventKind est le type d'un événement du journal.
 type EventKind string

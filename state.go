@@ -146,7 +146,7 @@ func Replay(j Journal) (*State, error) {
 
 // New crée l'état initial d'un tournoi et l'événement de création correspondant.
 func New(cfg Config, seed int64, now time.Time) (*State, Event, error) {
-	if err := cfg.Validate(); err != nil {
+	if err := cfg.validateAt(JournalVersion); err != nil {
 		return nil, Event{}, err
 	}
 	ev := Event{Version: JournalVersion, Kind: EvCreated, Time: now, Config: &cfg, Seed: seed}
@@ -207,7 +207,7 @@ func (s *State) Apply(ev Event) error {
 			return fmt.Errorf("created sans config")
 		}
 		cfg := *ev.Config
-		if err := cfg.Validate(); err != nil {
+		if err := cfg.validateAt(ev.Version); err != nil {
 			return err
 		}
 		s.Config, s.Seed = cfg.clone(), ev.Seed
@@ -217,7 +217,9 @@ func (s *State) Apply(ev Event) error {
 		if ev.Player == nil || ev.Player.ID == "" {
 			return fmt.Errorf("joueur sans identifiant")
 		}
-		if ev.Player.ID == BYE {
+		// À l'écriture seulement : un journal antérieur qui inscrit un joueur « BYE » a été
+		// joué ainsi (il est exempté partout) et se rejoue ainsi.
+		if ev.Player.ID == BYE && ev.Version >= versionRefus {
 			return fmt.Errorf("identifiant %s réservé à l'exemption", BYE)
 		}
 		if _, ok := s.Players[ev.Player.ID]; !ok {
@@ -427,7 +429,7 @@ func (s *State) Apply(ev Event) error {
 			return fmt.Errorf("config_changed sans configuration")
 		}
 		cfg := ev.Config.clone()
-		if err := cfg.Validate(); err != nil {
+		if err := cfg.validateAt(ev.Version); err != nil {
 			return err
 		}
 		if err := s.acceptConfig(cfg, ev.Version); err != nil {

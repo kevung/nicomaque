@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 16:12+0100\n"
+"POT-Creation-Date: 2026-11-12 17:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -97,46 +97,63 @@ msgstr "Rolling classic Swiss (``swiss_rounds`` with ``mode: \"continuous\"``)."
 #: ../../source/historique.rst:26
 msgid ""
 "Un tournoi commencé sous 0.8.0 se relit et se poursuit à l'identique : "
-"mêmes propositions, mêmes statuts, même classement, mêmes avertissements."
-" Un seul écart, voulu : une phase d'un seul entrant (``entry: "
+"mêmes propositions, mêmes statuts, même classement, mêmes avertissements "
+"— jusqu'à un joueur inscrit sous l'identifiant ``BYE``, relu comme 0.8.0 "
+"l'a joué. Un seul écart, voulu : une phase d'un seul entrant (``entry: "
 "\"top:1\"``, ou un seul qualifié), où 0.8.0 attendait sans fin, ne bloque"
 " plus le tournoi — son entrant en est le vainqueur."
 msgstr ""
 "A tournament started under 0.8.0 is read back and continues identically: "
-"same proposals, same statuses, same ranking, same warnings. One "
-"deliberate difference: a phase with a single entrant (``entry: "
+"same proposals, same statuses, same ranking, same warnings — down to a "
+"player registered under the identifier ``BYE``, read back as 0.8.0 played"
+" it. One deliberate difference: a phase with a single entrant (``entry: "
 "\"top:1\"``, or a single qualifier), where 0.8.0 waited forever, no "
 "longer blocks the tournament — its entrant is its winner."
 
-#: ../../source/historique.rst:30
+#: ../../source/historique.rst:31
+msgid ""
+"Journal en version 3 : les refus nouveaux ne valent que pour les "
+"événements écrits depuis. L'identifiant ``BYE`` n'est plus accepté à "
+"l'inscription, ni une entrée ``top:N`` sans entier N ≥ 1 à la création ou"
+" au changement de configuration."
+msgstr ""
+"Journal in version 3: the new rejections only apply to events written "
+"since. The identifier ``BYE`` is no longer accepted at registration, nor "
+"a ``top:N`` entry without an integer N ≥ 1 at creation or on a "
+"configuration change."
+
+#: ../../source/historique.rst:34
 msgid ""
 "Avertissement ``barrage_stale`` : une poule corrigée après le tirage de "
 "son barrage."
 msgstr "``barrage_stale`` warning: a pool corrected after its play-off was drawn."
 
-#: ../../source/historique.rst:31
+#: ../../source/historique.rst:35
 msgid ""
 "**Compatibilité** : un journal écrit par 0.9 ne se relit pas avec un "
-"moteur 0.8, qui refuse les types d'événements et les formats nouveaux. Un"
-" cas est silencieux : ``tiebreak`` sur ``round_robin``, que 0.8.0 ignore "
-"et qui lui fait rendre un autre classement. Quand plusieurs programmes "
-"partagent un journal, tout lecteur passe donc à 0.9 avant le premier "
-"écrivain. Pour la suite, ``Replay`` refuse un événement dont la version "
-"dépasse ``JournalVersion``."
+"moteur 0.8, qui refuse les types d'événements et les formats nouveaux. "
+"Trois cas sont silencieux, 0.8.0 ignorant l'option : ``tiebreak`` sur "
+"``round_robin`` (autre classement), ``groups`` sur ``round_robin`` (autre"
+" tirage des poules) et ``avoid_countries`` sur ``swiss_lives`` (autre "
+"appariement). Quand plusieurs programmes partagent un journal, tout "
+"lecteur passe donc à 0.9 avant le premier écrivain. Pour la suite, "
+"``Replay`` refuse un événement dont la version dépasse "
+"``JournalVersion``."
 msgstr ""
 "**Compatibility**: a journal written by 0.9 cannot be read back by a 0.8 "
-"engine, which rejects the new event types and formats. One case is "
-"silent: ``tiebreak`` on ``round_robin``, which 0.8.0 ignores and which "
-"makes it return a different ranking. When several programs share a "
-"journal, every reader therefore moves to 0.9 before the first writer. "
-"From now on, ``Replay`` rejects an event whose version exceeds "
-"``JournalVersion``."
+"engine, which rejects the new event types and formats. Three cases are "
+"silent, 0.8.0 ignoring the option: ``tiebreak`` on ``round_robin`` (a "
+"different ranking), ``groups`` on ``round_robin`` (a different draw of "
+"the pools) and ``avoid_countries`` on ``swiss_lives`` (a different "
+"pairing). When several programs share a journal, every reader therefore "
+"moves to 0.9 before the first writer. From now on, ``Replay`` rejects an "
+"event whose version exceeds ``JournalVersion``."
 
-#: ../../source/historique.rst:38
+#: ../../source/historique.rst:44
 msgid "0.8.0 — 28 octobre 2026"
 msgstr "0.8.0 — 28 October 2026"
 
-#: ../../source/historique.rst:40
+#: ../../source/historique.rst:46
 msgid ""
 "Le projet est repris sous ``github.com/kevung/nicomaque``. Le code est "
 "celui de 0.7.0 ; seul le chemin de module change."
@@ -144,7 +161,7 @@ msgstr ""
 "The project is taken over under ``github.com/kevung/nicomaque``. The code"
 " is that of 0.7.0; only the module path changes."
 
-#: ../../source/historique.rst:42
+#: ../../source/historique.rst:48
 msgid ""
 "L'ancien module ``github.com/PileOfCells/backgammon-tournoi`` est "
 "déprécié à partir de sa version 0.7.1, qui renvoie au nouveau."
@@ -152,15 +169,15 @@ msgstr ""
 "The former module ``github.com/PileOfCells/backgammon-tournoi`` is "
 "deprecated from its version 0.7.1, which points to the new one."
 
-#: ../../source/historique.rst:44
+#: ../../source/historique.rst:50
 msgid "La documentation est réorganisée et publiée en français et en anglais."
 msgstr "The documentation is reorganised and published in French and English."
 
-#: ../../source/historique.rst:47
+#: ../../source/historique.rst:53
 msgid "0.7.0 — 22 octobre 2026"
 msgstr "0.7.0 — 22 October 2026"
 
-#: ../../source/historique.rst:49
+#: ../../source/historique.rst:55
 msgid ""
 "Appariements, classement et matchs restants en fonctions pures du paquet "
 "``rules`` (``Pair``, ``Rank``, ``RemainingMatches``), sans changement de "
@@ -170,7 +187,7 @@ msgstr ""
 "``rules`` package (``Pair``, ``Rank``, ``RemainingMatches``), with no "
 "rule change."
 
-#: ../../source/historique.rst:51
+#: ../../source/historique.rst:57
 msgid ""
 "Dotation répartie à l'unité par la méthode du plus fort reste : avec un "
 "barème à 100 %, la somme distribuée égale exactement le pool après "
@@ -180,11 +197,11 @@ msgstr ""
 "with a 100% scale, the sum distributed exactly equals the pool after "
 "retention."
 
-#: ../../source/historique.rst:55
+#: ../../source/historique.rst:61
 msgid "0.6.0 — 22 octobre 2026"
 msgstr "0.6.0 — 22 October 2026"
 
-#: ../../source/historique.rst:57
+#: ../../source/historique.rst:63
 msgid ""
 "Paquet ``rules`` : dotation, prévision de fin et feuille d'appariements "
 "en fonctions pures, sans changement de règle."
@@ -192,19 +209,19 @@ msgstr ""
 "``rules`` package: prize distribution, end-time forecast and pairing "
 "sheet as pure functions, with no rule change."
 
-#: ../../source/historique.rst:61
+#: ../../source/historique.rst:67
 msgid "0.5.1 et 0.5.2 — 5 octobre 2026"
 msgstr "0.5.1 and 0.5.2 — 5 October 2026"
 
-#: ../../source/historique.rst:63
+#: ../../source/historique.rst:69
 msgid "Licence MIT ; Nicolas Harmand et Kévin Unger titulaires du droit d'auteur."
 msgstr "MIT licence; Nicolas Harmand and Kévin Unger hold the copyright."
 
-#: ../../source/historique.rst:66
+#: ../../source/historique.rst:72
 msgid "0.5.0 — 4 octobre 2026"
 msgstr "0.5.0 — 4 October 2026"
 
-#: ../../source/historique.rst:68
+#: ../../source/historique.rst:74
 msgid ""
 "Statut de chaque joueur (``State.Statuses``) : en jeu, exempté, qualifié,"
 " pas encore fixé, éliminé, vainqueur, retiré."
@@ -212,7 +229,7 @@ msgstr ""
 "Status of each player (``State.Statuses``): in play, bye, qualified, not "
 "yet determined, eliminated, winner, withdrawn."
 
-#: ../../source/historique.rst:70
+#: ../../source/historique.rst:76
 msgid ""
 "Repêchage proposé d'un qualifié de poule retiré avant le tirage "
 "(événement ``repechage``)."
@@ -220,11 +237,11 @@ msgstr ""
 "Proposed repechage of a pool qualifier withdrawn before the draw "
 "(``repechage`` event)."
 
-#: ../../source/historique.rst:73
+#: ../../source/historique.rst:79
 msgid "0.4.1 — 26 septembre 2026"
 msgstr "0.4.1 — 26 September 2026"
 
-#: ../../source/historique.rst:75
+#: ../../source/historique.rst:81
 msgid ""
 "Un joueur retiré d'un tableau est classé avec les perdants du match qui "
 "l'attendait."
@@ -232,11 +249,11 @@ msgstr ""
 "A player withdrawn from a bracket is ranked with the losers of the match "
 "that was waiting for them."
 
-#: ../../source/historique.rst:78
+#: ../../source/historique.rst:84
 msgid "0.4.0 — 26 septembre 2026"
 msgstr "0.4.0 — 26 September 2026"
 
-#: ../../source/historique.rst:80
+#: ../../source/historique.rst:86
 msgid ""
 "``External.BusyPlayers`` : un joueur occupé dans une autre épreuve de la "
 "salle n'est pas apparié, sans rien écrire au journal."
@@ -244,11 +261,11 @@ msgstr ""
 "``External.BusyPlayers``: a player busy in another event of the playing "
 "hall is not paired, without writing anything to the journal."
 
-#: ../../source/historique.rst:84
+#: ../../source/historique.rst:90
 msgid "0.3.0 — 26 septembre 2026"
 msgstr "0.3.0 — 26 September 2026"
 
-#: ../../source/historique.rst:86
+#: ../../source/historique.rst:92
 msgid ""
 "Indisponibilité d'un joueur sans retrait (``player_unavailable``, "
 "``player_available``)."
@@ -256,15 +273,15 @@ msgstr ""
 "Player unavailability without withdrawal (``player_unavailable``, "
 "``player_available``)."
 
-#: ../../source/historique.rst:87
+#: ../../source/historique.rst:93
 msgid "Un joueur retiré est classé sur son parcours, avec la note ``withdrawn``."
 msgstr "A withdrawn player is ranked on their record, with the note ``withdrawn``."
 
-#: ../../source/historique.rst:88
+#: ../../source/historique.rst:94
 msgid "Correction de fiche sans toucher à l'état (``player_updated``)."
 msgstr "Record correction without touching the state (``player_updated``)."
 
-#: ../../source/historique.rst:89
+#: ../../source/historique.rst:95
 msgid ""
 "Table partagée signalée (``table_shared``) ; tables occupées par une "
 "autre épreuve (``External.BusyTables``)."
@@ -272,7 +289,7 @@ msgstr ""
 "Shared table flagged (``table_shared``); tables occupied by another event"
 " (``External.BusyTables``)."
 
-#: ../../source/historique.rst:91
+#: ../../source/historique.rst:97
 msgid ""
 "Au suisse, une correction qui élimine un joueur en match ou lui rend une "
 "vie est signalée."
@@ -280,13 +297,13 @@ msgstr ""
 "In the Swiss, a correction that eliminates a player in a match or gives "
 "them back a life is flagged."
 
-#: ../../source/historique.rst:92
+#: ../../source/historique.rst:98
 msgid ""
 "Mode par rondes : une ronde reste ouverte jusqu'à ce que tous ses joueurs"
 " y soient engagés."
 msgstr "Rounds mode: a round stays open until all its players are engaged in it."
 
-#: ../../source/historique.rst:93
+#: ../../source/historique.rst:99
 msgid ""
 "Les options de construction d'un tableau tiré sont figées (journal en "
 "version 2)."
@@ -294,19 +311,19 @@ msgstr ""
 "The construction options of a drawn bracket are frozen (journal version "
 "2)."
 
-#: ../../source/historique.rst:96
+#: ../../source/historique.rst:102
 msgid "0.2.1 — 7 septembre 2026"
 msgstr "0.2.1 — 7 September 2026"
 
-#: ../../source/historique.rst:98
+#: ../../source/historique.rst:104
 msgid "Rendu : la table n'est affichée qu'une fois attribuée."
 msgstr "Rendering: the table is displayed only once assigned."
 
-#: ../../source/historique.rst:101
+#: ../../source/historique.rst:107
 msgid "0.2.0 — 7 septembre 2026"
 msgstr "0.2.0 — 7 September 2026"
 
-#: ../../source/historique.rst:103
+#: ../../source/historique.rst:109
 msgid ""
 "Configuration modifiable en cours de tournoi (``config_changed``) et "
 "réouverture d'un tournoi clos (``reopened``)."
@@ -314,39 +331,39 @@ msgstr ""
 "Configuration changeable during the tournament (``config_changed``) and "
 "reopening of a closed tournament (``reopened``)."
 
-#: ../../source/historique.rst:105
+#: ../../source/historique.rst:111
 msgid ""
 "Micro-rondes (``batch_minutes``) et pauses programmées "
 "(``Config.Breaks``)."
 msgstr "Micro-rounds (``batch_minutes``) and scheduled breaks (``Config.Breaks``)."
 
-#: ../../source/historique.rst:106
+#: ../../source/historique.rst:112
 msgid "Réparation proposée d'un graphe désaccordé après une correction."
 msgstr "Proposed repair of an out-of-sync graph after a correction."
 
-#: ../../source/historique.rst:107
+#: ../../source/historique.rst:113
 msgid "Dotation : droit d'entrée, retenue, barème par section."
 msgstr "Prize distribution: entry fee, organiser's retention, scale per section."
 
-#: ../../source/historique.rst:108
+#: ../../source/historique.rst:114
 msgid ""
 "Têtes de série en option (``seeding: \"rating\"``), désactivées par "
 "défaut."
 msgstr "Optional seeding (``seeding: \"rating\"``), disabled by default."
 
-#: ../../source/historique.rst:109
+#: ../../source/historique.rst:115
 msgid "Retardataires installés sur une place d'exemption libre."
 msgstr "Latecomers placed on a free bye slot."
 
-#: ../../source/historique.rst:110
+#: ../../source/historique.rst:116
 msgid "Longueurs de match par tour ; fin de suisse allongée."
 msgstr "Match lengths per round; lengthened end of Swiss."
 
-#: ../../source/historique.rst:111
+#: ../../source/historique.rst:117
 msgid "Export CSV des joueurs."
 msgstr "CSV export of the players."
 
-#: ../../source/historique.rst:112
+#: ../../source/historique.rst:118
 msgid ""
 "Rendu traduisible (``Labeler``) et pages autonomes ; feuille "
 "d'appariements imprimable."
@@ -354,17 +371,17 @@ msgstr ""
 "Translatable rendering (``Labeler``) and standalone pages; printable "
 "pairing sheet."
 
-#: ../../source/historique.rst:113
+#: ../../source/historique.rst:119
 msgid ""
 "Fuzzing d'``Apply`` et du rejeu de journal ; lecture des journaux en "
 "version 0."
 msgstr "Fuzzing of ``Apply`` and of journal replay; reading of version 0 journals."
 
-#: ../../source/historique.rst:116
+#: ../../source/historique.rst:122
 msgid "0.1.0 — 7 septembre 2026"
 msgstr "0.1.0 — 7 September 2026"
 
-#: ../../source/historique.rst:118
+#: ../../source/historique.rst:124
 msgid ""
 "Première version publiée : journal d'événements, suisse à vies, tableaux,"
 " blocs GSL, poules, rendu, simulation, console de direction et "
@@ -374,15 +391,15 @@ msgstr ""
 "blocks, pools, rendering, simulation, direction console and "
 "demonstration."
 
-#: ../../source/historique.rst:120
+#: ../../source/historique.rst:126
 msgid "Codes structurés à la place des textes, journal versionné."
 msgstr "Structured codes instead of texts, versioned journal."
 
-#: ../../source/historique.rst:121
+#: ../../source/historique.rst:127
 msgid "Tables indisponibles, réservées et déplaçables."
 msgstr "Unavailable, reserved and movable tables."
 
-#: ../../source/historique.rst:122
+#: ../../source/historique.rst:128
 msgid "Score facultatif, forfait sur un seul match, remarque, retrait différé."
 msgstr "Optional score, forfeit on a single match, remark, deferred withdrawal."
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 14:50+0100\n"
+"POT-Creation-Date: 2026-11-12 17:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -488,7 +488,7 @@ msgstr ""
 msgid "Algorithme :"
 msgstr "Algorithm:"
 
-#: ../../source/configuration.rst:308
+#: ../../source/configuration.rst:307
 msgid ""
 "Dans un ``swiss_rounds``, ``lives`` ne se règle pas et ``mode`` ne "
 "s'écrit que pour le fil de l'eau (``\"continuous\"``) : ``Validate`` "
@@ -501,16 +501,22 @@ msgstr ""
 "other values (an older journal may carry ``lives: 1048576`` and ``mode: "
 "\"rounds\"``, which are still read), and the engine computes them."
 
-#: ../../source/configuration.rst:312
+#: ../../source/configuration.rst:311
 msgid ""
 "Hors ``top:N``, ``Entry`` n'est pas vérifiée : une valeur inconnue fait "
 "entrer les survivants, mais avec les vies par défaut du format (pas leurs"
-" vies restantes), et un ``top:N`` illisible donne une phase vide (voir "
+" vies restantes). Un ``top:N`` sans entier N ≥ 1 (``top:0``, ``top:x``) "
+"est refusé à l'écriture — par ``New``, ``CheckConfig`` et un "
+"``config_changed`` de version 3 —, pas par ``Validate`` : un journal plus"
+" ancien qui le porte reste lisible, et sa phase reste vide (voir "
 ":ref:`etat`)."
 msgstr ""
 "Apart from ``top:N``, ``Entry`` is not checked: an unknown value makes "
 "the survivors enter, but with the format's default lives (not their "
-"remaining lives), and an unreadable ``top:N`` gives an empty phase (see "
+"remaining lives). A ``top:N`` without an integer N ≥ 1 (``top:0``, "
+"``top:x``) is rejected on writing — by ``New``, ``CheckConfig`` and a "
+"version 3 ``config_changed`` —, not by ``Validate``: an older journal "
+"that carries it stays readable, and its phase stays empty (see "
 ":ref:`etat`)."
 
 #: ../../source/configuration.rst:316
