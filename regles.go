@@ -171,7 +171,7 @@ func phaseRules(c PhaseConfig) rules.PhaseRules {
 		LengthLate: c.LengthLate, LateThreshold: c.LateThreshold, Mode: c.Mode, Pairing: c.Pairing,
 		AvoidClubs: c.AvoidClubs, AllowRematch: c.AllowRematch, Target: c.Target, Consolation: c.Consolation,
 		LastChance: c.LastChance, Reconciliation: c.Reconciliation, Recharge: c.Recharge, GroupSize: c.GroupSize,
-		Qualifiers: c.Qualifiers, Seeding: c.Seeding, Tiebreak: c.Tiebreak}
+		Qualifiers: c.Qualifiers, Seeding: c.Seeding, Tiebreak: c.Tiebreak, Accelerated: c.Accelerated}
 }
 
 // snapshot : l'instantané de la phase ph pour rules.Pair. free : les joueurs appariables d'un
@@ -206,6 +206,9 @@ func (s *State) instantané(ph *PhaseState, free []PlayerID, apparier bool) rule
 	if len(ph.Cfg.Tiebreak) > 0 {
 		s.départage(ph, p.Entrants)
 	}
+	if ph.Cfg.Accelerated && ph.Round >= 1 {
+		s.moitiéHaute(ph, &p)
+	}
 	p.Sections = toRulesSections(ph.Sections)
 	for _, id := range s.MatchOrder {
 		if !apparier && !poules {
@@ -233,6 +236,27 @@ func (s *State) instantané(ph *PhaseState, free []PlayerID, apparier bool) rule
 		}
 	}
 	return p
+}
+
+// moitiéHaute : suisse accéléré, marque les entrants de la moitié haute. Elle est FIGÉE à la
+// ronde 1 : ce sont les premières têtes de série des joueurs engagés à la ronde 1 (match ou
+// exemption), relus du journal — un retrait ou un retardataire ne fait franchir la ligne à
+// personne.
+func (s *State) moitiéHaute(ph *PhaseState, p *rules.Phase) {
+	engagés := s.engagedIn(ph, 1)
+	var joueurs []rules.Ref
+	for _, id := range ph.Entrants {
+		if engagés[id] {
+			joueurs = append(joueurs, ref(id))
+		}
+	}
+	haut := map[rules.Ref]bool{}
+	for _, r := range rules.TopHalf(*p, joueurs) {
+		haut[r] = true
+	}
+	for i := range p.Entrants {
+		p.Entrants[i].TopHalf = haut[p.Entrants[i].Player]
+	}
 }
 
 // départage : ce que les critères de départage lisent des matchs TERMINÉS de la phase — points

@@ -13974,6 +13974,978 @@
     ]
   },
   {
+    "name": "suisse_accelere_tableau P=2 k=0",
+    "steps": 15,
+    "events": 18,
+    "digest": "b7f1c011f36ba5d202e44a0247af557265378b67c6db62ec3f7e815ca6fbb3fc",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P1]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=2 k=0 perturbé",
+    "steps": 16,
+    "events": 19,
+    "digest": "59b3ee6ca9d624098b0779231ae672ee9d48fe8c5ea9c186e25b9abbbd077606",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P1 2:P2]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=2 k=1",
+    "steps": 15,
+    "events": 18,
+    "digest": "20b1278e378d38ae6f3316e47fab5ba438f553dc5eedd2f68360618c938fbc68",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P1 2:P2]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=2 k=1 perturbé",
+    "steps": 16,
+    "events": 19,
+    "digest": "fce556dbfd9202e816a93c2780229392d8cffb4c38f43be3678c1352de61a69b",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P1]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=2 k=2",
+    "steps": 15,
+    "events": 18,
+    "digest": "edf674101ae8d85cc1e555ef3b8d15375ff168764fbb9feb4a35e84e0ce85174",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P1 2:P2]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=2 k=2 perturbé",
+    "steps": 16,
+    "events": 19,
+    "digest": "9cf2bc9d4ffd31f2414d527f7b107df7cad56a86e101607ecf1e5caf58277403",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P1]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=3 k=0",
+    "steps": 17,
+    "events": 26,
+    "digest": "9a1873cebd126e4a819f8fd4510034740faa68c526929414c99805eba972c094",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P3 3:P1]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=3 k=0 perturbé",
+    "steps": 15,
+    "events": 23,
+    "digest": "792521ef73f17c8424bffe4eee98e463e4acc3265023ce077325106abae2a051",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"withdrawn\",\"losses\":1,\"byes\":1}"
+    ],
+    "sections": [
+      "main [1:P2 2:P3]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=3 k=1",
+    "steps": 17,
+    "events": 26,
+    "digest": "95c588c59927c4812ccc420ba87eb1dbc1919e2f4014520ef2e5a1765f6c9574",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}"
+    ],
+    "sections": [
+      "main [1:P3 2:P1 3:P2]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=3 k=1 perturbé",
+    "steps": 16,
+    "events": 23,
+    "digest": "e37f6b25bc073e8b24571d49e83cb8b140a60b948d93ed64694477ec262a1c92",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P2 2:P3]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=3 k=2",
+    "steps": 17,
+    "events": 26,
+    "digest": "5ae8734b7638a656c72d7ae7d6d097b1a25799b26bc9acc5593e397ec06762df",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}"
+    ],
+    "sections": [
+      "main [1:P3 2:P1 3:P2]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=3 k=2 perturbé",
+    "steps": 15,
+    "events": 23,
+    "digest": "95455630df68e450ab13c64724c988efc05a42bd28c02fc064c5a6fdf799d172",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P2 2:P3]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=4 k=0",
+    "steps": 23,
+    "events": 34,
+    "digest": "5dd021c12592dca9fe208f50e8e1edefe49f03a9428a0e30123d3464d0dfb498",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}"
+    ],
+    "sections": [
+      "main [1:P1 2:P4 3:P2 3:P3]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=4 k=0 perturbé",
+    "steps": 19,
+    "events": 30,
+    "digest": "802fe07e0d3b458e700bfdd2cacb1067fdd4a271e900842aaaf8a5b776210331",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "4 P1 {\"kind\":\"withdrawn\",\"losses\":2}"
+    ],
+    "sections": [
+      "main [1:P3 2:P2 3:P4]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=4 k=1",
+    "steps": 23,
+    "events": 34,
+    "digest": "9d1027e23ee1559b0e4068297259804990fffdcbc3b3331ab412fa6a3d69e753",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}"
+    ],
+    "sections": [
+      "main [1:P1 2:P3 3:P2 3:P4]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=4 k=1 perturbé",
+    "steps": 19,
+    "events": 30,
+    "digest": "e843769332b58551e4543af0574697a5b05e70d212be63260280ef882105d873",
+    "final": [
+      "1 P4 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "4 P1 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P4 2:P3 3:P2]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=4 k=2",
+    "steps": 23,
+    "events": 34,
+    "digest": "77d13edd5519babad950beed941e57490b3a608c35481bedc8f40eb19bd5ac41",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}"
+    ],
+    "sections": [
+      "main [1:P3 2:P1 3:P4 3:P2]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=4 k=2 perturbé",
+    "steps": 19,
+    "events": 30,
+    "digest": "cf08e8e0421f7d50280997037e3b4fab171bb2e98dd6753e7a8273dbb12e549d",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "4 P1 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P2 2:P3 3:P4]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=5 k=0",
+    "steps": 25,
+    "events": 42,
+    "digest": "90db739fb2c19940ec9f9d7a89e9912962d7886853200ce4da298eb7e40f60c1",
+    "final": [
+      "1 P4 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P4 2:P2 3:P5 3:P3 5:P1]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=5 k=0 perturbé",
+    "steps": 23,
+    "events": 38,
+    "digest": "770d8d8a393e17e9de376918bac697e75705fe4215da1fc6f5f383e2e5bd5106",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P4 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P3 2:P5 3:P2 3:P1]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=5 k=1",
+    "steps": 25,
+    "events": 42,
+    "digest": "cfd6e079e9604c545a7feb679b83b92e6febb63b7ac35d4a64c460285f265f5d",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P1 2:P3 3:P5 3:P4 5:P2]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=5 k=1 perturbé",
+    "steps": 23,
+    "events": 39,
+    "digest": "2a1b960801026b4fe1ebe1aace8db0cf4d9da8ab09d331f4e5ea56f943b9427b",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P3 {\"kind\":\"withdrawn\",\"losses\":1,\"byes\":1}"
+    ],
+    "sections": [
+      "main [1:P1 2:P4 3:P2 3:P5]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=5 k=2",
+    "steps": 25,
+    "events": 42,
+    "digest": "dafc0e00d7a72368511733e418622469ca55432d6f960b21f1d204cb3258e208",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P3 2:P5 3:P1 3:P2 5:P4]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=5 k=2 perturbé",
+    "steps": 23,
+    "events": 38,
+    "digest": "45a4a4e1f50dacf94900f195dfaa2425afcb129a4a76ef805ee3b77dee22ab18",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P4 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P3 2:P2 3:P1 3:P5]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=7 k=0",
+    "steps": 33,
+    "events": 58,
+    "digest": "82b9dad3f662a1235d9d05520bf49b5327a408c09f5a91541b6986bad6e61557",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P4 3:P3 3:P7 5:P5 5:P1 5:P6]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=7 k=0 perturbé",
+    "steps": 32,
+    "events": 55,
+    "digest": "f289f31626fdaa97154efce45c5d9c1cbf19553f35e493a58acca05322794d73",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "6 P3 {\"kind\":\"withdrawn\",\"wins\":3,\"losses\":2}",
+      "7 P4 {\"kind\":\"withdrawn\",\"wins\":1}"
+    ],
+    "sections": [
+      "main [1:P2 2:P1 3:P5 3:P7 5:P6]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=7 k=1",
+    "steps": 33,
+    "events": 58,
+    "digest": "4eb23ec26cd0c756e626e19d9eef88dee62566f01c772419375e0991cdd7af14",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P3 3:P5 3:P1 5:P7 5:P6 5:P4]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=7 k=1 perturbé",
+    "steps": 32,
+    "events": 55,
+    "digest": "6dad049b14af1d9657817ba13c265faf9a763c3ea9ba4111ff174890912b58cf",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "6 P6 {\"kind\":\"withdrawn\",\"wins\":4,\"losses\":1}",
+      "7 P4 {\"kind\":\"withdrawn\",\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P2 2:P5 3:P7 3:P3 5:P1]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=7 k=2",
+    "steps": 33,
+    "events": 58,
+    "digest": "0e1fb685ba0e28042462bd582e4be623fb7c950a66232ed116e95e8c6838d7b8",
+    "final": [
+      "1 P5 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P5 2:P1 3:P2 3:P3 5:P4 5:P7 5:P6]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=7 k=2 perturbé",
+    "steps": 31,
+    "events": 54,
+    "digest": "4441dc4e80af1a63f814af1b8e60e1fb0e912106de2263d8ab4997d516e01771",
+    "final": [
+      "1 P5 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "6 P1 {\"kind\":\"withdrawn\",\"wins\":3,\"losses\":2}",
+      "7 P3 {\"kind\":\"withdrawn\",\"wins\":1}"
+    ],
+    "sections": [
+      "main [1:P5 2:P6 3:P2 3:P4 5:P7]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=8 k=0",
+    "steps": 39,
+    "events": 66,
+    "digest": "35cb7e645e1d48de75945ce127d875f2f2a46d2d58c62a9fbc0de6364a38938e",
+    "final": [
+      "1 P7 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P7 2:P3 3:P5 3:P8 5:P4 5:P2 5:P1 5:P6]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=8 k=0 perturbé",
+    "steps": 34,
+    "events": 61,
+    "digest": "8593a4fe213267977017141d4dfa26a31b99218c818d334c43f7f626b4961a99",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "7 P4 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":3,\"byes\":1}",
+      "8 P5 {\"kind\":\"withdrawn\",\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P3 2:P6 3:P8 3:P2 5:P1 5:P7]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=8 k=1",
+    "steps": 39,
+    "events": 66,
+    "digest": "3ad8488acd3a889ea1d02e9eb740f7546f5a7b2936be517778f1c9050e375f8e",
+    "final": [
+      "1 P6 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P6 2:P8 3:P5 3:P2 5:P3 5:P4 5:P7 5:P1]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=8 k=1 perturbé",
+    "steps": 34,
+    "events": 61,
+    "digest": "aaac25e17dbe306c18c88ac6f8383a3b759a177cebe64f7c48ade9e9856cad01",
+    "final": [
+      "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "7 P8 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":2,\"byes\":1}",
+      "8 P5 {\"kind\":\"withdrawn\",\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P3 2:P7 3:P2 3:P4 5:P6 5:P1]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=8 k=2",
+    "steps": 39,
+    "events": 66,
+    "digest": "7b4e10bd0a903c82fcee581e7f498951e7ed73db13e7bd24df616fe57ccbd6b0",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+    ],
+    "sections": [
+      "main [1:P2 2:P5 3:P1 3:P3 5:P7 5:P6 5:P4 5:P8]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=8 k=2 perturbé",
+    "steps": 33,
+    "events": 60,
+    "digest": "ef3979e515fe89465723d0ab425cf382bed5e26440cfc36a97e615982d739f33",
+    "final": [
+      "1 P8 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "7 P1 {\"kind\":\"withdrawn\",\"wins\":3,\"losses\":2}",
+      "8 P5 {\"kind\":\"withdrawn\",\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P8 2:P6 3:P7 3:P3 5:P4 5:P2]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=13 k=0",
+    "steps": 55,
+    "events": 104,
+    "digest": "07f1189314b0819a7965905c7d2e509cb84b2fa2a5c084856f3a0206a9a565f8",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "13 P10 {\"kind\":\"record\",\"losses\":4,\"byes\":1}"
+    ],
+    "sections": [
+      "main [1:P1 2:P3 3:P9 3:P8 5:P4 5:P13 5:P7 5:P5 9:P11 9:P12 9:P6 9:P2]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=13 k=0 perturbé",
+    "steps": 51,
+    "events": 98,
+    "digest": "128b60de8023378be1ca7f85f95f9f5b4712c21d225a6f014626e163fb858d79",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P2 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "11 P8 {\"kind\":\"withdrawn\",\"wins\":2,\"losses\":1}",
+      "12 P12 {\"kind\":\"record\",\"losses\":4,\"byes\":1}",
+      "13 P11 {\"kind\":\"withdrawn\",\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P1 2:P9 3:P13 3:P4 5:P3 5:P2 5:P7 5:P5 9:P6 9:P10]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=13 k=1",
+    "steps": 57,
+    "events": 106,
+    "digest": "5a16ef5fcf2b65df5b9ce58e6ae8030041dc253382293a4caf18af8cfa5c8058",
+    "final": [
+      "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}"
+    ],
+    "sections": [
+      "main [1:P1 2:P2 3:P4 3:P6 5:P13 5:P3 5:P8 5:P7 9:P9 9:P10 9:P11 9:P12 9:P5]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=13 k=1 perturbé",
+    "steps": 48,
+    "events": 97,
+    "digest": "765a0a29797d9c30e9a7110eb37cc5cdf03dd5955fa17b39596ec08f8a22409c",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "11 P3 {\"kind\":\"record\",\"losses\":4,\"byes\":1}",
+      "11 P8 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":3}",
+      "13 P7 {\"kind\":\"withdrawn\",\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P2 2:P9 3:P5 3:P10 5:P12 5:P4 5:P6 5:P13 9:P11 9:P1]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=13 k=2",
+    "steps": 55,
+    "events": 104,
+    "digest": "0db0120a61ec013e45e725bed04c4108631f935a418f2b5eea2997fa1d3eb4bb",
+    "final": [
+      "1 P9 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "13 P4 {\"kind\":\"record\",\"losses\":4,\"byes\":1}"
+    ],
+    "sections": [
+      "main [1:P9 2:P13 3:P7 3:P10 5:P5 5:P3 5:P2 5:P12 9:P6 9:P8 9:P11 9:P1]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=13 k=2 perturbé",
+    "steps": 51,
+    "events": 98,
+    "digest": "049b10b5111921dd29fdc6595869da643b4298ee541cc6f1a2e8b32eb6c84a2c",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P7 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "11 P5 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":2}",
+      "11 P12 {\"kind\":\"record\",\"losses\":4,\"byes\":1}",
+      "13 P4 {\"kind\":\"withdrawn\",\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P2 2:P1 3:P11 3:P13 5:P9 5:P3 5:P8 5:P10 9:P6 9:P7]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=32 k=0",
+    "steps": 111,
+    "events": 226,
+    "digest": "3a8f11333f1651b81d9163ab8dd252c85f6322e5efad944385bd67103d854310",
+    "final": [
+      "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P17 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P15 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P29 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P25 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P26 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P21 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P22 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P31 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "17 P4 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P7 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P8 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P10 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P16 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P19 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P20 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P24 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P27 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P30 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P32 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "28 P13 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "28 P14 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "28 P23 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "28 P28 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "32 P18 {\"kind\":\"record\",\"losses\":5}"
+    ],
+    "sections": [
+      "main [1:P2 2:P17 3:P12 3:P1 5:P9 5:P15 5:P3 5:P29 9:P25 9:P22 9:P26 9:P21 9:P6 9:P11 9:P5 9:P31]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=32 k=0 perturbé",
+    "steps": 105,
+    "events": 222,
+    "digest": "c97496ff65ccaa99f6e9b306a9d52defc09becc2110d83840ed5654cf2b51f4e",
+    "final": [
+      "1 P24 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P28 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P31 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P17 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P25 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P27 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "15 P19 {\"kind\":\"withdrawn\",\"wins\":3,\"losses\":2}",
+      "16 P3 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P4 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P11 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P13 {\"kind\":\"withdrawn\",\"wins\":2,\"losses\":3}",
+      "16 P16 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P18 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P22 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P26 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P29 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P30 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P32 {\"kind\":\"record\",\"wins\":1,\"losses\":3,\"byes\":1}",
+      "27 P15 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "27 P20 {\"kind\":\"record\",\"losses\":4,\"byes\":1}",
+      "27 P23 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "30 P12 {\"kind\":\"withdrawn\",\"losses\":2}",
+      "30 P14 {\"kind\":\"withdrawn\",\"losses\":2}",
+      "30 P21 {\"kind\":\"withdrawn\",\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P24 2:P9 3:P1 3:P2 5:P5 5:P28 5:P10 5:P7 9:P8 9:P31 9:P17 9:P6 9:P25 9:P27]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=32 k=1",
+    "steps": 111,
+    "events": 226,
+    "digest": "613122db923d788ea358ee13c0b8ca068230d3b3278bd5de1ce04b440b142dff",
+    "final": [
+      "1 P4 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P26 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P16 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P20 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P19 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P31 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P17 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P24 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P25 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P27 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "17 P6 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P8 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P9 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P12 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P14 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P21 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P22 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P23 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P28 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P29 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "27 P2 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "27 P5 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "27 P15 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "27 P18 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "27 P32 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "32 P30 {\"kind\":\"record\",\"losses\":5}"
+    ],
+    "sections": [
+      "main [1:P4 2:P26 3:P3 3:P1 5:P10 5:P19 5:P20 5:P16 9:P31 9:P27 9:P25 9:P11 9:P17 9:P24 9:P13 9:P7]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=32 k=1 perturbé",
+    "steps": 107,
+    "events": 224,
+    "digest": "596d071f36415ed6ffcbf39897721f8122b263f3839d5d1e28c1758c7922aede",
+    "final": [
+      "1 P18 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P19 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P23 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P22 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P25 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P27 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P28 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P30 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "17 P4 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P5 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P9 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P15 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P17 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P20 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P21 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P24 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P31 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "26 P11 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "26 P14 {\"kind\":\"record\",\"losses\":4,\"byes\":1}",
+      "26 P16 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "26 P26 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":3}",
+      "26 P32 {\"kind\":\"record\",\"losses\":4,\"byes\":1}",
+      "31 P8 {\"kind\":\"withdrawn\",\"losses\":2}",
+      "31 P29 {\"kind\":\"withdrawn\",\"losses\":1}"
+    ],
+    "sections": [
+      "main [1:P18 2:P2 3:P3 3:P12 5:P23 5:P10 5:P7 5:P19 9:P1 9:P27 9:P13 9:P30 9:P22 9:P28 9:P6 9:P25]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=32 k=2",
+    "steps": 111,
+    "events": 226,
+    "digest": "14b3484654256af4bc4fdc41ebd9f2f313fc4333533db129f4f3fa5cd29accb0",
+    "final": [
+      "1 P16 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P18 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P21 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P25 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P20 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P27 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P30 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P14 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P23 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P29 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "17 P1 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P9 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P10 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P12 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P13 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P19 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P22 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P26 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P28 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P31 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "17 P32 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "28 P4 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "28 P15 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "28 P24 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "31 P6 {\"kind\":\"record\",\"losses\":5}",
+      "31 P17 {\"kind\":\"record\",\"losses\":5}"
+    ],
+    "sections": [
+      "main [1:P16 2:P18 3:P5 3:P21 5:P3 5:P27 5:P25 5:P20 9:P14 9:P29 9:P30 9:P11 9:P8 9:P23 9:P7 9:P2]"
+    ]
+  },
+  {
+    "name": "suisse_accelere_tableau P=32 k=2 perturbé",
+    "steps": 105,
+    "events": 222,
+    "digest": "d9a6fac07fb90ae1b53b0743dd777572b4cbd7caf4b0226c29ab6bcb107651cd",
+    "final": [
+      "1 P6 {\"kind\":\"section_winner\",\"section\":\"main\"}",
+      "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
+      "3 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P18 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P22 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P23 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "9 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P16 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P24 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P27 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "9 P32 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
+      "16 P1 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P13 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P14 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P17 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P19 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P21 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P28 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "16 P29 {\"kind\":\"withdrawn\",\"wins\":2,\"losses\":2}",
+      "16 P30 {\"kind\":\"record\",\"wins\":1,\"losses\":3,\"byes\":1}",
+      "16 P31 {\"kind\":\"record\",\"wins\":1,\"losses\":3,\"byes\":1}",
+      "26 P4 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":4}",
+      "26 P15 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "26 P20 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "26 P25 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":1}",
+      "26 P26 {\"kind\":\"record\",\"losses\":4,\"byes\":1}",
+      "31 P5 {\"kind\":\"withdrawn\",\"losses\":1}",
+      "31 P10 {\"kind\":\"withdrawn\",\"losses\":3}"
+    ],
+    "sections": [
+      "main [1:P6 2:P2 3:P18 3:P11 5:P22 5:P23 5:P9 5:P3 9:P27 9:P8 9:P16 9:P7 9:P32 9:P12 9:P24]"
+    ]
+  },
+  {
     "name": "suisse_classique_tableau P=2 k=0",
     "steps": 15,
     "events": 18,

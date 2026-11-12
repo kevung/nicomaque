@@ -53,6 +53,9 @@ type PhaseRules struct {
 	Seeding        string `json:"seeding,omitempty"`
 	// Tiebreak : départage arithmétique des ex æquo d'un suisse classique. Vide : aucun.
 	Tiebreak []string `json:"tiebreak,omitempty"`
+	// Accelerated : suisse classique accéléré — un point virtuel à la moitié haute, pour
+	// l'appariement des rondes 1 et 2 seulement.
+	Accelerated bool `json:"accelerated,omitempty"`
 }
 
 // Entrant : un joueur de la phase et son parcours dans la phase.
@@ -72,6 +75,9 @@ type Entrant struct {
 	Club          string  `json:"club,omitempty"`
 	Rating        float64 `json:"rating,omitempty"` // PR, plus bas = meilleur ; 0 = inconnu
 	Seed          int     `json:"seed,omitempty"`   // tête de série saisie, 1 = la meilleure ; 0 = aucune
+	// TopHalf : suisse accéléré, le joueur est de la moitié haute, figée à la ronde 1. L'hôte
+	// le relève des joueurs engagés à la ronde 1 (TopHalf) ; ignoré à la ronde 1 elle-même.
+	TopHalf bool `json:"top_half,omitempty"`
 }
 
 // Phase est l'instantané d'une phase : tout ce que les règles d'appariement et de classement

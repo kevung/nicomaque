@@ -51,6 +51,9 @@ func configs() map[string]tournoi.Config {
 		"suisse_classique_tetes": {Name: "Suisse classique à têtes de série puis tableau", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 4, Seeding: tournoi.SeedingRating},
 			{Kind: tournoi.KindBracket, Length: 9, Entry: "top:4", Seeding: tournoi.SeedingRating}}},
+		"suisse_accelere_tableau": {Name: "Suisse accéléré puis tableau", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Seeding: tournoi.SeedingRating, Accelerated: true},
+			{Kind: tournoi.KindBracket, Length: 9, Entry: "top:8"}}},
 		"gsl": {Name: "Blocs GSL", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindGSL, Length: 7}}},
 		"gsl_tableau16": {Name: "GSL puis tableau", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindGSL, Length: 7, Target: 16},

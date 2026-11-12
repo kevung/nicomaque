@@ -75,6 +75,24 @@ exemptée. Aux rondes suivantes, deux joueurs à égalité complète sont pris d
 de série au lieu d'être tirés au sort. Le défaut reste le tirage : les têtes de série sont une
 option nommée (voir :ref:`annexe_conception`).
 
+Accélération (``accelerated``)
+------------------------------
+
+L'accélération donne un **point virtuel** à la moitié haute du champ aux rondes 1 et 2, pour
+l'appariement seulement : il n'apparaît dans aucun classement. Elle exige ``seeding`` — sans ordre
+de têtes de série il n'y a pas de moitié haute — et ``Validate`` la refuse avec ``pairing:
+"monrad"``.
+
+- **Moitié haute** (``rules.TopHalf``) : les ⌊*n*/2⌋ premières têtes de série des joueurs de la
+  ronde 1 ; en effectif impair, la tête du milieu reste en bas. Elle est **figée à la ronde 1** :
+  le moteur la relit des joueurs engagés à cette ronde, si bien qu'un retrait ou un retardataire ne
+  fait franchir la ligne à personne.
+- **Ronde 1** : chaque moitié est pliée séparément. Moitié haute impaire : sa dernière tête
+  descend en tête de la moitié basse ; moitié basse impaire : sa dernière tête est exemptée.
+- **Ronde 2** : l'ordre du classement est retrié (stable) par points + point virtuel, puis
+  apparié comme toute ronde.
+- **Rondes suivantes** : plus de point virtuel.
+
 Monrad (``pairing: "monrad"``)
 ------------------------------
 
