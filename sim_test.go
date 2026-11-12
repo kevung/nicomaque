@@ -61,7 +61,7 @@ func configs() map[string]tournoi.Config {
 			{Kind: tournoi.KindBracket, Length: 9}}},
 		// Dernière phase : le départage classe chaque poule, le barrage final désigne le vainqueur.
 		"poules8_departage": {Name: "Huit poules départagées", Phases: []tournoi.PhaseConfig{
-			{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 8, Qualifiers: 1,
+			{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 8, Qualifiers: 1, FinalBarrage: true,
 				Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakPointsScored, tournoi.TiebreakBuchholz}}}},
 		"gsl": {Name: "Blocs GSL", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindGSL, Length: 7}}},
 		"gsl_tableau16": {Name: "GSL puis tableau", Phases: []tournoi.PhaseConfig{

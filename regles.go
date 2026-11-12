@@ -171,7 +171,7 @@ func phaseRules(c PhaseConfig) rules.PhaseRules {
 		LengthLate: c.LengthLate, LateThreshold: c.LateThreshold, Mode: c.Mode, Pairing: c.Pairing, MonradWiden: c.MonradWiden,
 		AvoidClubs: c.AvoidClubs, AllowRematch: c.AllowRematch, Target: c.Target, Consolation: c.Consolation,
 		LastChance: c.LastChance, Reconciliation: c.Reconciliation, Recharge: c.Recharge, GroupSize: c.GroupSize, Groups: c.Groups,
-		Qualifiers: c.Qualifiers, Seeding: c.Seeding, Tiebreak: c.Tiebreak, Accelerated: c.Accelerated}
+		Qualifiers: c.Qualifiers, Seeding: c.Seeding, Tiebreak: c.Tiebreak, Accelerated: c.Accelerated, FinalBarrage: c.FinalBarrage}
 }
 
 // snapshot : l'instantané de la phase ph pour rules.Pair. free : les joueurs appariables d'un

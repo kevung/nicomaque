@@ -91,9 +91,14 @@ type PhaseConfig struct {
 	GroupSize      int  `json:"group_size,omitempty"`     // round_robin : taille des poules (défaut 4)
 	// Groups : round_robin, le NOMBRE de poules, à la place de leur taille (group_size) — une
 	// seule poule fait un toutes-rondes complet. Jamais plus d'une poule pour deux joueurs.
-	Groups     int    `json:"groups,omitempty"`
-	Qualifiers int    `json:"qualifiers,omitempty"` // round_robin : qualifiés par poule (défaut 2)
-	Entry      string `json:"entry,omitempty"`      // "survivors" (défaut : joueurs encore en vie de la phase précédente), "all", "top:N"
+	Groups     int `json:"groups,omitempty"`
+	Qualifiers int `json:"qualifiers,omitempty"` // round_robin : qualifiés par poule (défaut 2)
+	// FinalBarrage : round_robin en DERNIÈRE phase, les premiers de poule (ou les co-premiers
+	// d'une poule unique) se départagent sur le tapis par un barrage final, qui désigne UN
+	// vainqueur. Éteint par défaut : chaque poule garde son premier, et la phase se clôt à la fin
+	// des poules et de leurs barrages de qualification.
+	FinalBarrage bool   `json:"final_barrage,omitempty"`
+	Entry        string `json:"entry,omitempty"` // "survivors" (défaut : joueurs encore en vie de la phase précédente), "all", "top:N"
 	// Seeding place les joueurs d'un tableau par cote au lieu de les tirer au hasard :
 	// "" (défaut) ou SeedingRating. Le défaut VIDE est un choix de conception et non un oubli —
 	// l'étude conclut « pas de têtes de série protégées », c'est la culture actuelle du
@@ -268,6 +273,9 @@ func (c *Config) Validate() error {
 		}
 		if p.BatchMinutes != 0 && p.Kind != KindSwissLives {
 			return fmt.Errorf("phase %d : batch_minutes ne s'applique qu'au suisse continu, pas à %q", i, p.Kind)
+		}
+		if p.FinalBarrage && p.Kind != KindRoundRobin {
+			return fmt.Errorf("phase %d : final_barrage ne vaut que pour round_robin", i)
 		}
 		if p.Groups != 0 && p.Kind != KindRoundRobin {
 			return fmt.Errorf("phase %d : groups ne s'applique qu'à %q, pas à %q", i, KindRoundRobin, p.Kind)
