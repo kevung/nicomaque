@@ -126,7 +126,8 @@ désérialisation polymorphe.
 (version 0) vient d'un journal antérieur aux codes structurés et est **converti à la lecture** :
 ``Replay`` applique ``Event.upgraded()`` à chaque événement, qui transforme un libellé texte
 « Ronde k » en ``Label{Kind: round, N: k}`` et renseigne ``Round`` (voir
-:ref:`annexe_tests` pour la compatibilité ascendante). La version 2 ne change que la règle de
+:ref:`annexe_tests` pour la compatibilité ascendante). ``Replay`` refuse un événement dont la
+version dépasse ``JournalVersion`` : il vient d'un moteur plus récent. La version 2 ne change que la règle de
 ``config_changed`` (voir « Journaux anciens » à la section ``config_changed``). Les constructeurs d'événements de
 ``events.go`` posent la version : un ``Event`` écrit à la main sans version serait relu comme un
 journal ancien.
