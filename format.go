@@ -74,9 +74,13 @@ type PhaseConfig struct {
 	// BatchMinutes : micro-rondes d'un suisse continu. Les joueurs libres attendent l'échéance,
 	// puis tous ceux d'un même groupe de défaites sont appariés d'un coup. 0 = appariement au
 	// fil de l'eau. L'échéance est dérivée du journal (horaires.go), jamais stockée à part.
-	BatchMinutes   int    `json:"batch_minutes,omitempty"`
-	Mode           string `json:"mode,omitempty"`        // swiss_lives : "continuous" (défaut) ou "rounds"
-	Pairing        string `json:"pairing,omitempty"`     // swiss_lives : "random" (défaut) ou "wins"
+	BatchMinutes int    `json:"batch_minutes,omitempty"`
+	Mode         string `json:"mode,omitempty"`    // swiss_lives : "continuous" (défaut) ou "rounds"
+	Pairing      string `json:"pairing,omitempty"` // swiss_lives : "random" (défaut) ou "wins"
+	// MonradWiden : Monrad seulement. Quand le dernier groupe de points ne s'apparie qu'au prix
+	// d'une revanche, il s'élargit au groupe d'au-dessus, puis au suivant, tant que cela en évite
+	// une. Éteint par défaut : le Monrad joue alors la revanche du dernier groupe.
+	MonradWiden    bool   `json:"monrad_widen,omitempty"`
 	AvoidClubs     bool   `json:"avoid_clubs,omitempty"` // éviter les joueurs du même club quand c'est possible
 	AllowRematch   bool   `json:"allow_rematch,omitempty"`
 	Target         int    `json:"target,omitempty"`         // swiss_lives / gsl : figer quand la somme des vies vaut Target (puissance de 2)
@@ -172,6 +176,9 @@ func (c *Config) Validate() error {
 			}
 			if p.Pairing != "" && p.Pairing != PairingMonrad {
 				return fmt.Errorf("phase %d : pairing %q inconnu pour %q (vide ou %q)", i, p.Pairing, p.Kind, PairingMonrad)
+			}
+			if p.MonradWiden && p.Pairing != PairingMonrad {
+				return fmt.Errorf("phase %d : monrad_widen sans pairing %q", i, PairingMonrad)
 			}
 			if p.Mode != "" && p.Mode != "rounds" {
 				return fmt.Errorf("phase %d : mode %q inconnu pour %q (rondes seulement)", i, p.Mode, p.Kind)

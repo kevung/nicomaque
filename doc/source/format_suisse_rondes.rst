@@ -113,9 +113,10 @@ classement. Le départage, s'il y en a un, n'y joue aucun rôle.
 
 Un match oppose donc deux joueurs de mêmes points, sauf un flotteur par groupe impair.
 
-Si le dernier groupe ne s'apparie qu'au prix d'une revanche, la ronde est refaite en lui adjoignant
-le groupe d'au-dessus, puis le suivant, jusqu'à ne plus en avoir : une revanche qu'un groupe plus
-large évite n'est pas jouée. Tous les groupes réunis, c'est l'appariement du suisse.
+Le dernier groupe peut donc jouer une revanche qu'un groupe plus large aurait évitée. Avec
+``monrad_widen: true``, la ronde est alors refaite en lui adjoignant le groupe d'au-dessus, puis le
+suivant, jusqu'à ne plus avoir de revanche ; tous les groupes réunis, c'est l'appariement du suisse.
+L'option est éteinte par défaut.
 
 Le tirage vient de ``Seed.Round`` : il se rejoue à l'identique, et deux graines donnent deux
 tournois.

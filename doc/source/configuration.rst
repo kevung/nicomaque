@@ -142,6 +142,10 @@ Signification des champs de phase
 |                    |                                | classement) ou ``monrad`` (tiré au sort    |
 |                    |                                | dans le groupe de mêmes points)            |
 +--------------------+--------------------------------+--------------------------------------------+
+| ``monrad_widen``   | ``swiss_rounds``, ``monrad``   | Élargir le dernier groupe de points aux    |
+|                    |                                | groupes d'au-dessus quand cela évite une   |
+|                    |                                | revanche. Éteint par défaut                |
++--------------------+--------------------------------+--------------------------------------------+
 | ``avoid_clubs``    | les deux suisses               | Éviter les rencontres entre joueurs d'un   |
 |                    |                                | même club quand c'est possible             |
 +--------------------+--------------------------------+--------------------------------------------+
@@ -231,6 +235,7 @@ Algorithme :
              si p.Rounds <= 0                      → erreur « combien de rondes ? »
              si p.Target ou p.LengthLate renseigné → erreur
              si p.Pairing ∉ {"", monrad}           → erreur
+             si p.MonradWiden sans monrad          → erreur
              si p.Mode ∉ {"", rounds}              → erreur
              si p.Lives saisi                      → erreur (personne n'est éliminé)
              p.Mode = "rounds"

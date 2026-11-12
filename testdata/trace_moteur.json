@@ -9673,7 +9673,7 @@
     "name": "monrad_tableau P=5 k=1",
     "steps": 25,
     "events": 42,
-    "digest": "7c8e642d2f9ddf0cea48874a4fd315f5384fd8f56f667c5d83d505e88831aa21",
+    "digest": "7d9e6fd7c1ebe122f69d4d234af231abab6bdd408dfdbfee0ea9e780a1d2235d",
     "final": [
       "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
@@ -9689,7 +9689,7 @@
     "name": "monrad_tableau P=5 k=1 perturbé",
     "steps": 23,
     "events": 38,
-    "digest": "2de8953ab63bbc2fdfd03b4f2f59d482e2cc6f98676dc300f7a0f4654636fce8",
+    "digest": "c143068d387fbd0a2c41fec49720c357dcebd70c6b74c99925213e87ae0b4077",
     "final": [
       "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
@@ -9721,7 +9721,7 @@
     "name": "monrad_tableau P=5 k=2 perturbé",
     "steps": 23,
     "events": 38,
-    "digest": "18c263639c68b5a4e7cba3cc53f965a083b5037c0705af777c17425cf0f1e657",
+    "digest": "17214b552528729fe6c2c9af93b959df086eb49db82f07b9e0b124785036ba6a",
     "final": [
       "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
@@ -9755,14 +9755,14 @@
     "name": "monrad_tableau P=7 k=0 perturbé",
     "steps": 31,
     "events": 53,
-    "digest": "21bcd93aacae735582e4b345a455fa0d515ea2abccac5e37b62730e60b7efeab",
+    "digest": "2b161a2e3d9ac466a51ed60a55961c15b8da7386ac0d4d0eaf0246353e1ea899",
     "final": [
       "1 P1 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
       "3 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
       "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
       "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
-      "6 P3 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":4}",
+      "6 P3 {\"kind\":\"withdrawn\",\"wins\":2,\"losses\":3}",
       "7 P4 {\"kind\":\"withdrawn\",\"losses\":1}"
     ],
     "sections": [
@@ -9773,7 +9773,7 @@
     "name": "monrad_tableau P=7 k=1",
     "steps": 33,
     "events": 58,
-    "digest": "9f6d876149bb0c16140b0924754f35501e87cef40e29616127f7435ebb56e1eb",
+    "digest": "8f19a20ff60e305f440423999a1b55144d1ffe985d08b3500c704dc5e792da9e",
     "final": [
       "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
@@ -9791,7 +9791,7 @@
     "name": "monrad_tableau P=7 k=1 perturbé",
     "steps": 31,
     "events": 53,
-    "digest": "d052fe8a40fa0adcb7e610d3a6c4895e04f863a8dffcccd0f2bb38a8acc0f19e",
+    "digest": "b2898c536c03623e4c819c8fb828b6a33a27ed592a0c51e5c6eadb9254477e5f",
     "final": [
       "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
@@ -9809,7 +9809,7 @@
     "name": "monrad_tableau P=7 k=2",
     "steps": 33,
     "events": 58,
-    "digest": "a8d4514b3c2233f94b08a115558c9f9c6a46db519b9e5c38c456b29334ab6380",
+    "digest": "e0758f9be6c9537ca2d8a6ba82408f5e8c6119578ac3007f00da7c8d39c33a05",
     "final": [
       "1 P5 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
@@ -9827,7 +9827,7 @@
     "name": "monrad_tableau P=7 k=2 perturbé",
     "steps": 31,
     "events": 54,
-    "digest": "dc7abc5e29f6f51b5f21e3462b281a5c2f4c719a0460304209c4988f03f4cdeb",
+    "digest": "d79bfe706462184df9d8d71b2988cc92faff3202e1a0dbc66e3d20d326047b88",
     "final": [
       "1 P5 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
@@ -9845,16 +9845,16 @@
     "name": "monrad_tableau P=8 k=0",
     "steps": 39,
     "events": 66,
-    "digest": "6545d29f6c1590fa9700341c41679f8f1c8e03712d5ddb551c004e98b506d62c",
+    "digest": "77fafcbdf86bdb9e93aa01e8eda4043d6f3a32101a8304cc5830cbb2d8f1e310",
     "final": [
       "1 P7 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
       "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
       "3 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
       "5 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
       "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
-      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
-      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+      "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
     ],
     "sections": [
       "main [1:P7 2:P3 3:P5 3:P8 5:P4 5:P2 5:P1 5:P6]"
@@ -9883,16 +9883,16 @@
     "name": "monrad_tableau P=8 k=1",
     "steps": 39,
     "events": 66,
-    "digest": "fde84fbbdd6edff26c27b4e6ce06821cd4b5e14f22a025afb391a282d922b4af",
+    "digest": "40b8d5ecec0e480fc8375746c33a397e29ed67ea843c5e855b49e06c7e9dedfd",
     "final": [
       "1 P6 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
       "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
       "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
       "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
       "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
-      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
-      "5 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+      "5 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
     ],
     "sections": [
       "main [1:P6 2:P8 3:P5 3:P2 5:P3 5:P4 5:P7 5:P1]"
@@ -9921,16 +9921,16 @@
     "name": "monrad_tableau P=8 k=2",
     "steps": 39,
     "events": 66,
-    "digest": "173adbc6185b68ce434e63cefe42dfd16be9a674b0e02b7bcf2fa7243eb670ab",
+    "digest": "654cd1eec1ec79d99737da3fbc6992f74d2bc25ee1b841338c5ee7e8dd60f4d0",
     "final": [
       "1 P2 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
-      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
       "3 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
+      "3 P3 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
       "5 P8 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
       "5 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
-      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
-      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
+      "5 P7 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}"
     ],
     "sections": [
       "main [1:P2 2:P5 3:P1 3:P3 5:P7 5:P6 5:P4 5:P8]"
@@ -9940,7 +9940,7 @@
     "name": "monrad_tableau P=8 k=2 perturbé",
     "steps": 33,
     "events": 60,
-    "digest": "16b19bf8a6aa3c5c088ef2559d34a8c404933ca9aa73157548104db516d98d0f",
+    "digest": "fe5f5b9d6c8df05a1415117ea989cd6ae17d6b35adcf85a474587937ec362775",
     "final": [
       "1 P8 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P6 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
@@ -10031,31 +10031,31 @@
     "name": "monrad_tableau P=13 k=1 perturbé",
     "steps": 49,
     "events": 97,
-    "digest": "e267b507e4310dcf1843a913b3047377b4eaff02a82888d3818abd5627236cda",
+    "digest": "6b00be7822541318e7c8691de82cfdf86c53ea699741bf132e7d40dd528bd528",
     "final": [
       "1 P3 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P4 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
       "3 P2 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
       "3 P5 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"semi_final\"}}",
       "5 P9 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
+      "5 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
       "5 P6 {\"kind\":\"withdrawn\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
-      "5 P11 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
       "5 P13 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"quarter_final\"}}",
       "9 P12 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
-      "9 P10 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
-      "11 P1 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "9 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"bracket_round\",\"n\":1}}",
       "11 P8 {\"kind\":\"withdrawn\",\"wins\":1,\"losses\":3}",
+      "11 P11 {\"kind\":\"record\",\"losses\":4,\"byes\":1}",
       "13 P7 {\"kind\":\"withdrawn\",\"losses\":1}"
     ],
     "sections": [
-      "main [1:P3 2:P4 3:P5 3:P2 5:P13 5:P9 5:P6 5:P11 9:P12 9:P10]"
+      "main [1:P3 2:P4 3:P5 3:P2 5:P13 5:P9 5:P6 5:P10 9:P12 9:P1]"
     ]
   },
   {
     "name": "monrad_tableau P=13 k=2",
     "steps": 49,
     "events": 96,
-    "digest": "e4468e527e8171b14be40d1d4f1c59fc056df008dce37c514aefdb028c7648d4",
+    "digest": "e31ed550cc7e8deb0a4c9498b9a01a2edbb6d65bb2e07a77196a108a98fbcc6b",
     "final": [
       "1 P12 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P1 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
@@ -10318,7 +10318,7 @@
     "name": "monrad_tableau P=32 k=2 perturbé",
     "steps": 102,
     "events": 218,
-    "digest": "9db8abfa6c2d4bfd16bbe4f6391c5260343594b704f3c5ad7e42edb1f5bdddfa",
+    "digest": "99d7f0611eb7240ee9dede9d8a560f00a23eb22973896dd07b01c2cbc7e2ea98",
     "final": [
       "1 P17 {\"kind\":\"section_winner\",\"section\":\"main\"}",
       "2 P28 {\"kind\":\"section_exit\",\"section\":\"main\",\"sub\":{\"kind\":\"final\"}}",
@@ -10336,22 +10336,22 @@
       "14 P4 {\"kind\":\"withdrawn\",\"wins\":3,\"losses\":2}",
       "15 P3 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
       "15 P6 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
+      "15 P7 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
       "15 P9 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
       "15 P10 {\"kind\":\"withdrawn\",\"wins\":2,\"losses\":1}",
       "15 P12 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
       "15 P14 {\"kind\":\"record\",\"wins\":2,\"losses\":2}",
+      "15 P15 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
       "15 P21 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
       "15 P23 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
-      "15 P24 {\"kind\":\"record\",\"wins\":2,\"losses\":3}",
       "15 P29 {\"kind\":\"withdrawn\",\"wins\":2,\"losses\":2}",
-      "25 P5 {\"kind\":\"withdrawn\",\"wins\":1}",
-      "25 P7 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
-      "25 P15 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
-      "25 P26 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
-      "25 P27 {\"kind\":\"record\",\"losses\":3,\"byes\":1}",
-      "25 P30 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
-      "25 P31 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
-      "32 P25 {\"kind\":\"withdrawn\",\"losses\":2}"
+      "26 P5 {\"kind\":\"withdrawn\",\"wins\":1}",
+      "26 P24 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "26 P26 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "26 P27 {\"kind\":\"record\",\"losses\":3,\"byes\":1}",
+      "26 P31 {\"kind\":\"record\",\"wins\":1,\"losses\":4}",
+      "31 P25 {\"kind\":\"withdrawn\",\"losses\":2}",
+      "31 P30 {\"kind\":\"record\",\"losses\":5}"
     ],
     "sections": [
       "main [1:P17 2:P28 3:P18 3:P1 5:P32 5:P13 5:P8 5:P20 9:P22 9:P16 9:P2 9:P11 9:P19]"
