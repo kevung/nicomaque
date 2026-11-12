@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 16:10+0100\n"
+"POT-Creation-Date: 2026-11-12 18:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -117,15 +117,30 @@ msgid ""
 "n'est pas recalculé. Si une correction de résultat de poule, passée après"
 " son tirage, change les joueurs que la poule désigne, le barrage se joue "
 "entre ceux du tirage et l'avertissement ``barrage_stale`` le signale ; au"
-" directeur d'annuler ses matchs s'il veut le refaire."
+" directeur d'annuler ses matchs s'il veut le refaire. Pour le barrage "
+"final, l'avertissement se trompe dans deux cas, tous deux après un "
+"retrait postérieur au tirage suivi de corrections. Il manque quand un "
+"joueur qui n'a pas été tiré se retire après le tirage, puis qu'une "
+"correction le ferait passer premier de sa poule : le moteur le prend pour"
+" un retiré d'avant le tirage. Il se lève à tort quand le tiré d'une poule"
+" et un autre joueur de cette poule se retirent après le tirage, puis que "
+"des corrections font passer premiers des joueurs retirés : le tirage "
+"reste juste."
 msgstr ""
 "**Play-off drawn, then pool corrected**: a play-off (pool or final) is "
-"not recomputed. If a pool result correction, made after its draw, changes"
-" the players the pool designates, the play-off is played between those of"
-" the draw and the ``barrage_stale`` warning reports it; it is up to the "
-"director to cancel its matches to redo it."
+"not recomputed. If a correction of a pool result, made after its draw, "
+"changes the players the pool designates, the play-off is played between "
+"those of the draw and the ``barrage_stale`` warning reports it; it is up "
+"to the director to cancel its matches to redo it. For the final play-off,"
+" the warning is wrong in two cases, both after a withdrawal later than "
+"the draw followed by corrections. It is missing when a player who was not"
+" drawn withdraws after the draw, and a correction would then make them "
+"first of their pool: the engine takes them for a player withdrawn before "
+"the draw. It is raised wrongly when the drawn player of a pool and "
+"another player of that pool withdraw after the draw, and corrections then"
+" put withdrawn players first: the draw is still right."
 
-#: ../../source/limites.rst:37
+#: ../../source/limites.rst:43
 msgid ""
 "**Ronde de demi-exemptés seuls** : si, après des retraits, tous les "
 "joueurs restants d'une ronde de suisse classique sont demi-exemptés, rien"
@@ -137,7 +152,7 @@ msgstr ""
 "the engine waits (``no_pairing``); removing a half-bye unblocks the "
 "round."
 
-#: ../../source/limites.rst:40
+#: ../../source/limites.rst:46
 msgid ""
 "**Entrée** ``top:N`` **et ex æquo** : ``top:N`` coupe dans l'ordre du "
 "classement de la phase précédente, sans départager des ex æquo à la "
@@ -151,7 +166,7 @@ msgstr ""
 "side of the cut. ``top:1`` is accepted: the phase has a single entrant, "
 "who wins it without playing."
 
-#: ../../source/limites.rst:44
+#: ../../source/limites.rst:50
 msgid ""
 "**Plus de rondes que d'adversaires** : un suisse classique dont "
 "``rounds`` dépasse le nombre d'adversaires possibles (effectif moins un) "
@@ -165,7 +180,7 @@ msgstr ""
 "``Validate`` does not bound ``rounds``: the field size is not known at "
 "configuration time."
 
-#: ../../source/limites.rst:48
+#: ../../source/limites.rst:54
 msgid ""
 "**Remplacement** : la place d'un joueur retiré ne se reprend pas "
 "(``player_replaced`` est refusé) ; le remplaçant s'inscrit alors comme un"
@@ -175,7 +190,7 @@ msgstr ""
 "(``player_replaced`` is refused); the replacement then registers as a "
 "latecomer."
 
-#: ../../source/limites.rst:50
+#: ../../source/limites.rst:56
 msgid ""
 "**Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a "
 "pas été éprouvée en conditions réelles (durée du barrage)."
@@ -183,7 +198,7 @@ msgstr ""
 "**Pools**: the three-way tie for two places, settled by a play-off, has "
 "not been tested under real conditions (play-off duration)."
 
-#: ../../source/limites.rst:52
+#: ../../source/limites.rst:58
 msgid ""
 "**Classement des places non gagnantes** : les règles (par tour atteint en"
 " tableau, par victoires au suisse, ex æquo partagés) restent à valider "
@@ -193,11 +208,11 @@ msgstr ""
 "bracket, by wins in the Swiss, ties shared) remain to be validated with "
 "the FFBG."
 
-#: ../../source/limites.rst:56
+#: ../../source/limites.rst:62
 msgid "Affichage"
 msgstr "Display"
 
-#: ../../source/limites.rst:58
+#: ../../source/limites.rst:64
 msgid ""
 "Pas d'écran joueur (« votre prochain match, votre table ») dans le paquet"
 " ``render``."
@@ -205,11 +220,11 @@ msgstr ""
 "No player screen (\"your next match, your table\") in the ``render`` "
 "package."
 
-#: ../../source/limites.rst:61
+#: ../../source/limites.rst:67
 msgid "Modèle de l'étude"
 msgstr "Study model"
 
-#: ../../source/limites.rst:63
+#: ../../source/limites.rst:69
 msgid ""
 "L'effet de la longueur de match (exposant α) n'est pas fixé par les "
 "données disponibles."
@@ -217,7 +232,7 @@ msgstr ""
 "The effect of match length (exponent α) is not settled by the available "
 "data."
 
-#: ../../source/limites.rst:64
+#: ../../source/limites.rst:70
 msgid ""
 "Le modèle de durée est une moyenne par point, indépendante du niveau et "
 "de la longueur."
@@ -225,7 +240,7 @@ msgstr ""
 "The duration model is a per-point average, independent of level and "
 "length."
 
-#: ../../source/limites.rst:65
+#: ../../source/limites.rst:71
 msgid ""
 "Le simulateur de l'étude et ``sim`` diffèrent de 1 à 2 écarts types sur "
 "les probabilités de la double élimination et du GSL ; la cause n'est pas "
@@ -246,3 +261,26 @@ msgstr ""
 #~ "ne borne pas ``rounds`` : l'effectif "
 #~ "n'est pas connu à la configuration."
 #~ msgstr ""
+
+#~ msgid ""
+#~ "**Barrage tiré puis poule corrigée** :"
+#~ " un barrage (de poule ou final) "
+#~ "n'est pas recalculé. Si une correction"
+#~ " de résultat de poule, passée après"
+#~ " son tirage, change les joueurs que"
+#~ " la poule désigne, le barrage se "
+#~ "joue entre ceux du tirage et "
+#~ "l'avertissement ``barrage_stale`` le signale ;"
+#~ " au directeur d'annuler ses matchs "
+#~ "s'il veut le refaire."
+#~ msgstr ""
+#~ "**Play-off drawn, then pool corrected**:"
+#~ " a play-off (pool or final) is"
+#~ " not recomputed. If a pool result "
+#~ "correction, made after its draw, changes"
+#~ " the players the pool designates, the"
+#~ " play-off is played between those "
+#~ "of the draw and the ``barrage_stale``"
+#~ " warning reports it; it is up "
+#~ "to the director to cancel its "
+#~ "matches to redo it."
