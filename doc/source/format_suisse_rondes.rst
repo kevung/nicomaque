@@ -83,7 +83,7 @@ l'appariement seulement : il n'apparaît dans aucun classement. Elle exige ``see
 de têtes de série il n'y a pas de moitié haute — et ``Validate`` la refuse avec ``pairing:
 "monrad"``.
 
-- **Moitié haute** (``rules.TopHalf``) : les ⌊*n*/2⌋ premières têtes de série des joueurs de la
+- **Moitié haute** (``rules.TopHalf``) : les ``⌊n/2⌋`` premières têtes de série des joueurs de la
   ronde 1 ; en effectif impair, la tête du milieu reste en bas. Elle est **figée à la ronde 1** :
   le moteur la relit des joueurs engagés à cette ronde, si bien qu'un retrait ou un retardataire ne
   fait franchir la ligne à personne.

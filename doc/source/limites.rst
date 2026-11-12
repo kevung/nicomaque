@@ -22,13 +22,15 @@ Règles
   n'en ont pas eu » s'applique à l'intérieur d'un groupe de même nombre de défaites, pas entre
   groupes.
 - **Suisse classique** (``swiss_rounds``) : sans ``tiebreak``, les joueurs à égalité de points
-  restent ex æquo, y compris en tête. Les têtes de série saisies ne s'appliquent pas aux poules
-  (tirées au sort) et ne se lisent pas dans le CSV des joueurs. Le départage
-  arithmétique ne s'applique pas aux poules, qui se règlent par barrage.
+  restent ex æquo, y compris en tête. Les têtes de série saisies ne se lisent pas dans le CSV des
+  joueurs.
 - **Consolante et dernière chance** : pas d'option de saut (perdants du premier tour seulement,
   entrée jusqu'au tour *k*, consolante à tirage avec heure limite d'entrée).
 - **Revanches en consolante** : l'ordre inversé d'entrée évite la revanche immédiate, pas les
   suivantes ; leur fréquence n'est pas mesurée.
+- **Poules en dernière phase** : sans ``final_barrage``, plusieurs poules donnent un premier par
+  poule, et une poule unique ne désigne un vainqueur que si ``qualifiers`` vaut 1 ou si son
+  premier est seul en tête. Un tableau d'un seul qualifié ne se tire pas.
 - **Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a pas été éprouvée en
   conditions réelles (durée du barrage).
 - **Classement des places non gagnantes** : les règles (par tour atteint en tableau, par

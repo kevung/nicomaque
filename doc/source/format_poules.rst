@@ -11,8 +11,24 @@ Les entrants sont répartis en poules ; chaque poule est une toutes rondes (tabl
 qualificative ne sont **pas** départagées arithmétiquement : elles déclenchent un **barrage** à 2
 vies entre les joueurs concernés.
 
+Avec ``tiebreak``, chaque poule est classée **par le départage** : après les victoires, les
+critères configurés dans l'ordre (``point_diff``, ``points_scored``, ``buchholz`` — ici la somme
+des victoires de poule des adversaires rencontrés), sur les seuls matchs de poule. Le barrage ne
+reste que pour une égalité **complète** à la place qualificative, et le classement de la phase
+suit le même ordre.
+
+Quand les poules sont la **dernière phase**, chaque poule garde son premier : la phase se clôt à
+la fin des poules et de leurs barrages de qualification, et plusieurs poules donnent plusieurs
+premiers. L'option ``final_barrage``, éteinte par défaut, désigne à la place un seul vainqueur :
+les premiers de chaque poule — les joueurs non retirés à la meilleure clé de leur poule, moins
+ceux que le barrage de la poule a écartés — se départagent par le **barrage final** (section
+``barrage:final``, une place), tiré quand les poules et leurs barrages sont finis. Un seul
+premier : il est le vainqueur, sans barrage.
+
 Les défauts sont posés par ``Config.Validate`` : ``group_size`` vaut 4, ``qualifiers`` vaut 2, et
-``qualifiers`` doit être strictement inférieur à ``group_size``. La règle est dans ``rules``
+``qualifiers`` doit être strictement inférieur à ``group_size``. ``groups`` fixe à la place le
+**nombre** de poules (une seule fait un toutes-rondes complet) ; ``groups`` et ``group_size``
+s'excluent. La règle est dans ``rules``
 (``rules/graphes_phase.go`` : ``Pair``, ``PoolSections``, ``PoolWins``, ``PoolTie``,
 ``BarrageSection``, ``PoolQualified`` ; ``rules/classement.go`` : ``Rank``) ; ``phase_rr.go`` en
 est l'enveloppe.
@@ -24,13 +40,20 @@ Tirage des poules
 
    si non Drawn :
        n := len(Entrants) ; si n < 2 → nil
-       rng := générateur(seed.Draw())
-       ids := tri par identifiant puis rng.Shuffle(ids)
-       ng := ceil(n / GroupSize)   (au minimum 1)
-       répartir en « serpentin simple » : groups[i mod ng] += ids[i]
+       ng := Groups borné à n/2 (jamais plus d'une poule pour deux joueurs) s'il est donné,
+             sinon ceil(n / GroupSize)   (au minimum 1)
+       sans seeding :
+           rng := générateur(seed.Draw())
+           ids := tri par identifiant puis rng.Shuffle(ids)
+           groups[i mod ng] += ids[i]
+       avec seeding ("seed" ou "rating") :
+           ids := les entrants dans l'ordre des têtes de série
+           en serpentin : 1, 2, …, ng, puis ng, …, 2, 1, et ainsi de suite
        → une action draw, Label = draw_pools{N: ng}, Draw = { Groups }   (sans Lives)
 
-La distribution ``i mod ng`` équilibre les tailles à un joueur près.
+Les deux distributions équilibrent les tailles à un joueur près. Le serpentin donne des poules de
+force comparable ; comme dans un tableau, les têtes de série sont une option nommée et le tirage
+au sort reste le défaut.
 
 .. code:: go
 
@@ -151,6 +174,8 @@ survivants en dessous du nombre de places.
    func (v *vue) barragesDone() bool   // paquet rules
 
 Pour chaque poule ayant une égalité : le barrage doit exister **et** ``len(barrageAlive) <= Spots``.
+En dernière phase et avec ``final_barrage``, de même pour le barrage final s'il y a plus d'un
+premier de poule.
 La phase est finie (``rules.PhaseDone``) quand elle est tirée, que tous les nœuds de ses sections
 sont terminés et que ``barragesDone`` est vrai.
 
@@ -193,13 +218,14 @@ Qualifiés et classement
 ::
 
    qualifiedBase — pour chaque poule :
-       w   := PoolWins ; ids := tri par identifiant puis tri stable décroissant sur w
-       tied, spots := PoolTie
+       clé := (victoires, critères de tiebreak) ; ids := tri par identifiant puis tri stable
+              décroissant sur la clé
+       tied, spots := les ex æquo de clé à la frontière des qualifiés (PoolTieOf)
        si pas d'égalité :
            → les `Qualifiers` premiers de ids
        sinon :
-           v := w[tied[0]]
-           → tous ceux qui ont strictement plus de v victoires
+           v := clé[tied[0]]
+           → tous ceux dont la clé est strictement devant v
            + si un barrage existe et len(barrageAlive) <= spots → les survivants du barrage
 
    repecher — pour chaque qualifié p de la base :

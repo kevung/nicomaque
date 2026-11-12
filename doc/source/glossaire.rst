@@ -86,6 +86,7 @@ Section de tableau            ``main``, ``conso``, ``last``,    ``conso``
 Section de groupe GSL         ``B<bloc>G<groupe>``              ``B2G3``
 Section de poule              ``poule:<lettre>``                ``poule:C``
 Section de barrage            ``barrage:<lettre>``              ``barrage:C``
+Barrage final des poules      ``barrage:final``                 ``barrage:final``
 ``GMatch`` de tableau         ``<section>.<tour>.<indice>``     ``main.2.1``, ``conso.3.0``
 ``GMatch`` de grande finale   ``gf.<n>``                        ``gf.0``
 ``GMatch`` de groupe GSL      ``<section>.<n>``                 ``B2G3.4``

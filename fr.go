@@ -1,6 +1,10 @@
 package tournoi
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/kevung/nicomaque/rules"
+)
 
 // Rendu français des codes (codes.go). C'est le seul endroit du moteur où une phrase destinée
 // à un humain est écrite. Il sert la console tournoi-td, la démo et le paquet render ; un
@@ -65,13 +69,13 @@ func (l Label) String() string {
 	case LabelInSection:
 		return fmt.Sprintf("%s, %s", sectionName(l.Section), sub)
 	case LabelBarrage:
-		return "Barrage " + sectionName(l.Section)
+		return "Barrage " + barrageDe(l.Section)
 	case LabelBarrageCross:
-		return "Barrage " + sectionName(l.Section) + " (croisé)"
+		return "Barrage " + barrageDe(l.Section) + " (croisé)"
 	case LabelDrawPools:
 		return fmt.Sprintf("%d poules", l.N)
 	case LabelDrawBarrage:
-		return fmt.Sprintf("Barrage %s : %d joueurs pour %d place(s)", sectionName(l.Section), l.Players, l.Spots)
+		return fmt.Sprintf("Barrage %s : %d joueurs pour %d place(s)", barrageDe(l.Section), l.Players, l.Spots)
 	case LabelRepechage:
 		if l.Players > 1 {
 			return fmt.Sprintf("Repêchage %s (%d ex æquo, au choix)", sectionName(l.Section), l.Players)
@@ -125,10 +129,21 @@ func sectionName(name string) string {
 	if letter, ok := poolLetter(name); ok {
 		return "poule " + letter
 	}
+	if name == rules.FinalBarrageName {
+		return "barrage final"
+	}
 	if letter, ok := barragePoolLetter(name); ok {
 		return "barrage poule " + letter
 	}
 	return name
+}
+
+// barrageDe : ce que départage un barrage — sa poule, ou « final » entre premiers de poule.
+func barrageDe(section string) string {
+	if section == rules.FinalBarrageName {
+		return "final"
+	}
+	return sectionName(section)
 }
 
 // String rend une note de classement en français.

@@ -182,7 +182,7 @@ func TestTetesSaisiesRonde1(t *testing.T) {
 }
 
 func TestTetesSaisiesValidate(t *testing.T) {
-	for _, k := range []string{tournoi.KindSwissLives, tournoi.KindGSL, tournoi.KindRoundRobin} {
+	for _, k := range []string{tournoi.KindSwissLives, tournoi.KindGSL} {
 		c := tournoi.Config{Phases: []tournoi.PhaseConfig{{Kind: k, Length: 7, Seeding: tournoi.SeedingManual}}}
 		if err := c.Validate(); err == nil {
 			t.Errorf("seeding seed accepté sur %s", k)

@@ -54,6 +54,15 @@ func configs() map[string]tournoi.Config {
 		"suisse_accelere_tableau": {Name: "Suisse accéléré puis tableau", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindSwissRounds, Length: 7, Rounds: 5, Seeding: tournoi.SeedingRating, Accelerated: true},
 			{Kind: tournoi.KindBracket, Length: 9, Entry: "top:8"}}},
+		// Huit poules : à 100 joueurs elles restent petites. Une poule unique de 100 joueurs fait
+		// 4950 matchs par tournoi — elle est couverte à effectif borné par poules_nombre_test.go.
+		"poules8_serpentin_tableau": {Name: "Huit poules en serpentin puis tableau", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 8, Qualifiers: 2, Seeding: tournoi.SeedingRating},
+			{Kind: tournoi.KindBracket, Length: 9}}},
+		// Dernière phase : le départage classe chaque poule, le barrage final désigne le vainqueur.
+		"poules8_departage": {Name: "Huit poules départagées", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindRoundRobin, Length: 5, Groups: 8, Qualifiers: 1, FinalBarrage: true,
+				Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakPointsScored, tournoi.TiebreakBuchholz}}}},
 		"gsl": {Name: "Blocs GSL", Phases: []tournoi.PhaseConfig{{Kind: tournoi.KindGSL, Length: 7}}},
 		"gsl_tableau16": {Name: "GSL puis tableau", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindGSL, Length: 7, Target: 16},

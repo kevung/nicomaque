@@ -170,8 +170,8 @@ func phaseRules(c PhaseConfig) rules.PhaseRules {
 	return rules.PhaseRules{Lives: c.Lives, Rounds: c.Rounds, Length: c.Length, FinalLength: c.FinalLength, Lengths: c.Lengths,
 		LengthLate: c.LengthLate, LateThreshold: c.LateThreshold, Mode: c.Mode, Pairing: c.Pairing, MonradWiden: c.MonradWiden,
 		AvoidClubs: c.AvoidClubs, AllowRematch: c.AllowRematch, Target: c.Target, Consolation: c.Consolation,
-		LastChance: c.LastChance, Reconciliation: c.Reconciliation, Recharge: c.Recharge, GroupSize: c.GroupSize,
-		Qualifiers: c.Qualifiers, Seeding: c.Seeding, Tiebreak: c.Tiebreak, Accelerated: c.Accelerated}
+		LastChance: c.LastChance, Reconciliation: c.Reconciliation, Recharge: c.Recharge, GroupSize: c.GroupSize, Groups: c.Groups,
+		Qualifiers: c.Qualifiers, Seeding: c.Seeding, Tiebreak: c.Tiebreak, Accelerated: c.Accelerated, FinalBarrage: c.FinalBarrage}
 }
 
 // snapshot : l'instantané de la phase ph pour rules.Pair. free : les joueurs appariables d'un
@@ -188,7 +188,7 @@ func (s *State) bilan(ph *PhaseState) rules.Phase { return s.instantané(ph, nil
 func (s *State) instantané(ph *PhaseState, free []PlayerID, apparier bool) rules.Phase {
 	p := rules.Phase{Format: rules.Format(ph.Cfg.Kind), Name: PhaseName(ph.Cfg), Rules: phaseRules(ph.Cfg),
 		Eliminated: refs(ph.ElimOrder), Withdrawn: withdrawnRefs(s.Withdrawn), Drawn: ph.Drawn, Round: ph.Round,
-		Length: ph.Length, Running: s.runningInPhase(ph), Free: refs(free)}
+		Length: ph.Length, Running: s.runningInPhase(ph), Free: refs(free), Last: ph.Index == len(s.Config.Phases)-1}
 	// Seul un suisse lit les adversaires ; seules les poules lisent les barrages.
 	suisse, poules := apparier && swissKind(ph.Cfg.Kind), ph.Cfg.Kind == KindRoundRobin
 	p.Entrants = make([]rules.Entrant, len(ph.Entrants))
@@ -272,6 +272,9 @@ func (s *State) départage(ph *PhaseState, entrants []rules.Entrant) {
 		m := s.Matches[id]
 		if m.Phase != ph.Index || m.Status != Finished || (ph.sansRonde > 0 && m.Round == ph.sansRonde) {
 			continue
+		}
+		if strings.HasPrefix(m.Section, barragePrefix) {
+			continue // un barrage départage sur le tapis : il n'entre pas dans le départage de la poule
 		}
 		a, b := idx[m.A], idx[m.B]
 		if a == nil || b == nil {
