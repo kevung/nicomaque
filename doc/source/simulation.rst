@@ -43,6 +43,7 @@ Exécution d'un tournoi
        MinPerPoint float64          // défaut 8
        Start       time.Time        // défaut 2026-01-01 09:00 UTC
        MaxSteps    int              // défaut 100000
+       Search      *tournoi.SearchBudget // un compteur pour toute la simulation ; nil : sans limite
        Hook        func(s *tournoi.State, ev tournoi.Event) error
    }
 
@@ -53,8 +54,11 @@ Exécution d'un tournoi
        Minutes  float64
        NMatches int
        Steps    int
+       SearchSteps int64 // pas de recherche d'appariement dépensés
        Err      error
    }
+
+   var ErrStalled error // « blocage » : plus rien à proposer, aucun match en cours
 
    func Run(cfg tournoi.Config, players []tournoi.Player, opt Options) Result
 
@@ -64,7 +68,7 @@ Boucle de simulation :
 
    New(cfg, Seed, Start), puis PlayerAddedEvent pour chaque joueur
    tant que non terminé (au plus MaxSteps tours, sinon erreur « simulation sans fin ») :
-       acts := ProposeAt(now)
+       acts := ProposeSearch(now, External{}, Search) ; budget épuisé → erreur ErrSearchBudget
        pour chaque action non-Wait :
            événement := EventFromAction ; Apply ; ajouter au journal ; appeler Hook
            si start_match → enregistrer sa fin prévue (now + Duree(...))
@@ -73,7 +77,7 @@ Boucle de simulation :
        échéance := le Until le plus récent des Wait encore à venir (micro-rondes)
        si aucun match en cours :
            échéance connue → now := échéance, recommencer
-           rien n'a progressé → erreur « blocage »
+           rien n'a progressé → erreur ErrStalled (« blocage »)
        si l'échéance précède la fin du premier match → now := échéance, recommencer
        sinon : avancer l'horloge jusqu'à la fin du match le plus proche,
                tirer son vainqueur selon PGain, appliquer ResultEvent
@@ -85,6 +89,14 @@ résultat porte ``Winner`` (le vainqueur, ``Final[0]``), ``Minutes`` (durée tot
 
 ``Hook`` est appelé après chaque événement appliqué : c'est le point d'accroche des tests
 d'invariants. Une erreur renvoyée par le hook interrompt la simulation.
+
+``Search`` est **un seul** compteur passé à chaque proposition (:ref:`budget_recherche`) : sa
+limite borne la recherche d'appariement de toute la simulation, et le hook peut en lire ``Used``
+au fil du tournoi. Épuisé, ``Err`` vérifie ``errors.Is(Err, tournoi.ErrSearchBudget)`` ; un
+tournoi qui ne propose plus rien vérifie ``errors.Is(Err, ErrStalled)``. Les deux ne se
+confondent pas : le premier est un calcul que l'appelant n'a pas voulu attendre, le second un
+tournoi sans appariement possible. ``SearchSteps`` est rempli dans tous les cas, ``Search`` fixé
+ou non.
 
 .. code:: go
 

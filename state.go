@@ -45,6 +45,9 @@ type State struct {
 	// (External.BusyPlayers). Posé sur la copie que fait ProposeWith, jamais par Apply : ce
 	// n'est pas l'histoire du tournoi, et un appariement à la main reste accepté.
 	ailleurs map[PlayerID]bool
+	// recherche : le compteur de recherche d'appariement de l'appelant (ProposeSearch), posé
+	// sur la copie qu'elle fait, jamais par Apply.
+	recherche *rules.Search
 }
 
 // PhaseState est l'état d'une phase.

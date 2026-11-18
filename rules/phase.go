@@ -134,6 +134,9 @@ type Phase struct {
 	Barrages []Match `json:"barrages,omitempty"`
 	// Repechages : poules, qualifié retiré → joueur repêché à sa place.
 	Repechages map[Ref]Ref `json:"repechages,omitempty"`
+	// Search : le compteur de la recherche d'appariement que l'appelant accorde (voir
+	// Search). nil : la recherche n'est ni comptée ni bornée par l'appelant.
+	Search *Search `json:"-"`
 }
 
 // vue : l'instantané et ses index, construits une fois par appel.

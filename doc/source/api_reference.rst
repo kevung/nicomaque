@@ -76,6 +76,7 @@ Fonctions et méthodes
    func (s *State) Propose() []Action              // = ProposeAt(s.Last)
    func (s *State) ProposeAt(now time.Time) []Action // = ProposeWith(now, External{})
    func (s *State) ProposeWith(now time.Time, ext External) []Action // tables et joueurs pris par une autre épreuve
+   func (s *State) ProposeSearch(now time.Time, ext External, b *SearchBudget) ([]Action, error) // recherche bornée
    func (s *State) EventFromAction(a Action, now time.Time) (Event, error)
    func (s *State) CheckConfig(next Config) error  // prévisualisation ; refus = *ConfigRefusal
 

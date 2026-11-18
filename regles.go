@@ -222,6 +222,9 @@ func (s *State) instantané(ph *PhaseState, free []PlayerID, apparier bool) rule
 		s.moitiéHaute(ph, &p)
 	}
 	p.Sections = toRulesSections(ph.Sections)
+	if apparier {
+		p.Search = s.recherche
+	}
 	for _, id := range s.MatchOrder {
 		if !apparier && !poules {
 			break
