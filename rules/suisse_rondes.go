@@ -2,7 +2,9 @@ package rules
 
 import (
 	"math/rand"
+	"slices"
 	"sort"
+	"strings"
 )
 
 // ---- Suisse classique : nombre de rondes fixe, sans vies ----
@@ -11,8 +13,10 @@ import (
 // Rules.Rounds rondes, et le classement est celui des points (victoires + exemptions). Sans
 // départage, les ex æquo le restent — y compris en tête.
 
-// swissRoundsBudget borne une recherche en profondeur ; au-delà, on passe à l'exempté ou au
-// nombre de revanches suivant, pour qu'un grand champ ne bloque jamais.
+// swissRoundsBudget borne une tentative de recherche en profondeur ; au-delà, on passe à
+// l'exempté ou au nombre de revanches suivant, pour qu'un grand champ ne bloque jamais. C'est
+// une part de la règle, qui décide des appariements ; ce que coûte l'appariement entier, toutes
+// tentatives comprises, l'appelant le compte et le borne avec Phase.Search.
 const swissRoundsBudget = 200000
 
 // points : en DEMI-POINTS, pour rester en entiers — deux par victoire et par exemption (une
@@ -262,7 +266,7 @@ func (v *vue) pairMonrad(players []Ref, rng *rand.Rand) (pairs [][2]Ref, bye Ref
 		if n < moins {
 			pairs, bye, moins = got, exempté, n
 		}
-		if n == 0 {
+		if n == 0 || v.Search.Exhausted() {
 			break
 		}
 	}
@@ -274,6 +278,9 @@ func (v *vue) pairMonrad(players []Ref, rng *rand.Rand) (pairs [][2]Ref, bye Ref
 func (v *vue) monradAvecQueue(g []Ref, bornes []int) (pairs [][2]Ref, bye Ref) {
 	var report []Ref // flotteur, ou groupe entier reporté
 	for b, i := range bornes {
+		if v.Search.Exhausted() {
+			return nil, "" // l'appelant jette l'appariement
+		}
 		if b == len(bornes)-1 { // le dernier groupe
 			groupe := append(append([]Ref{}, report...), g[i:]...)
 			reste, exempté := v.pairNearest(groupe, len(groupe)%2 == 1)
@@ -290,7 +297,7 @@ func (v *vue) monradAvecQueue(g []Ref, bornes []int) (pairs [][2]Ref, bye Ref) {
 			continue
 		}
 		report = groupe
-		for k := len(groupe) - 1; k >= 0; k-- {
+		for k := len(groupe) - 1; k >= 0 && !v.Search.Exhausted(); k-- {
 			reste := append(append([]Ref{}, groupe[:k]...), groupe[k+1:]...)
 			if got, ok := v.sansRevanche(reste); ok {
 				pairs, report = append(pairs, got...), []Ref{groupe[k]}
@@ -312,6 +319,9 @@ func (v *vue) sansRevanche(groupe []Ref) ([][2]Ref, bool) {
 		budget := swissRoundsBudget
 		if got, ok := v.chercher(groupe, 0, sansClub, &budget); ok {
 			return got, true
+		}
+		if v.Search.Exhausted() {
+			break
 		}
 	}
 	return nil, false
@@ -354,6 +364,9 @@ func (v *vue) pairNearest(ordre []Ref, exempter bool) (pairs [][2]Ref, bye Ref) 
 				if got, ok := v.chercher(reste, limite, sansClub, &budget); ok {
 					return got, c
 				}
+				if v.Search.Exhausted() {
+					return nil, "" // l'appelant jette l'appariement
+				}
 			}
 		}
 	}
@@ -364,12 +377,38 @@ func (v *vue) pairNearest(ordre []Ref, exempter bool) (pairs [][2]Ref, bye Ref) 
 // sansClub : aucune paire de même club.
 func (v *vue) chercher(reste []Ref, limite int, sansClub bool, budget *int) ([][2]Ref, bool) {
 	n := len(reste)
+	if !v.Search.spend(n * n) { // les deux tables
+		return nil, false
+	}
+	// Les tables valent met et sameClub case par case, mais lisent chaque entrant une fois :
+	// une case coûte alors ce que coûte un pas de la recherche.
+	pos := make(map[Ref]int, n)
+	for i, p := range reste {
+		pos[p] = i
+	}
+	clubs, pays := make([]string, n), make([]string, n)
 	vus, exclus := make([][]bool, n), make([][]bool, n)
-	for i := range vus {
+	for i, p := range reste {
 		vus[i], exclus[i] = make([]bool, n), make([]bool, n)
-		for j := range vus[i] {
-			vus[i][j] = v.met(reste[i], reste[j])
-			exclus[i][j] = sansClub && v.sameClub(reste[i], reste[j])
+		e := v.entrant(p)
+		for _, o := range e.Opponents {
+			if j, ok := pos[o]; ok {
+				vus[i][j] = true
+			}
+		}
+		if v.Rules.AvoidClubs && e.Club != "" && !slices.Contains(v.Rules.AvoidExcept, e.Club) {
+			clubs[i] = e.Club
+		}
+		if v.Rules.AvoidCountries {
+			pays[i] = strings.TrimSpace(e.Country)
+		}
+	}
+	if sansClub {
+		for i := range exclus {
+			for j := range exclus[i] {
+				exclus[i][j] = clubs[i] != "" && clubs[i] == clubs[j] ||
+					pays[i] != "" && strings.EqualFold(pays[i], pays[j])
+			}
 		}
 	}
 	pris := make([]bool, n)
@@ -385,6 +424,11 @@ func (v *vue) chercher(reste []Ref, limite int, sansClub bool, budget *int) ([][
 		}
 		pris[i] = true
 		for j := i + 1; j < n; j++ {
+			// Search compte toute paire regardée, même écartée : un club qui remplit le champ
+			// fait écarter presque toutes celles que la recherche parcourt.
+			if !v.Search.spend(1) {
+				break
+			}
 			if pris[j] || exclus[i][j] {
 				continue
 			}

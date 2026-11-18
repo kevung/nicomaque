@@ -1,6 +1,7 @@
 package tournoi
 
 import (
+	"errors"
 	"fmt"
 	"sort"
 	"time"
@@ -46,6 +47,48 @@ type External struct {
 // tables et la disponibilité des joueurs en dépendent ; les tirages et passages de phase restent
 // fonction du seul journal.
 func (s *State) ProposeWith(now time.Time, ext External) []Action {
+	return s.proposeWith(now, ext, nil)
+}
+
+// SearchBudget : le compteur de pas de la recherche d'appariement, à l'appelant (rules.Search).
+// Un compteur neuf par appel borne un appariement ; un même compteur passé à chaque appel borne
+// toute une suite de propositions. Limit à 0 : la recherche est comptée sans être bornée.
+type SearchBudget = rules.Search
+
+// ErrSearchBudget : la recherche d'appariement a dépassé les pas que l'appelant lui accordait.
+// Ce n'est pas un appariement impossible — le moteur en trouve toujours un, au prix de
+// revanches —, c'est une recherche que l'appelant n'a pas voulu attendre ; le même état, la même
+// graine et le même budget donnent le même verdict sur toute machine.
+var ErrSearchBudget = errors.New("tournoi: budget de recherche d'appariement épuisé")
+
+// SearchBudgetError : l'erreur de ProposeSearch quand le budget est épuisé ; errors.Is la
+// reconnaît comme ErrSearchBudget.
+type SearchBudgetError struct {
+	Limit, Used int64
+}
+
+func (e *SearchBudgetError) Error() string {
+	return fmt.Sprintf("%v : %d pas dépensés pour %d accordés", ErrSearchBudget, e.Used, e.Limit)
+}
+
+func (e *SearchBudgetError) Is(target error) bool { return target == ErrSearchBudget }
+
+// ProposeSearch est ProposeWith sous un budget de recherche d'appariement : b compte les pas que
+// la recherche dépense (b.Used) et, si b.Limit > 0, l'arrête au-delà. Épuisé, il rend un
+// *SearchBudgetError et aucune action — un appariement interrompu n'en est pas un. Un b nil
+// revient à ProposeWith.
+//
+// Seule la proposition est bornée. Apply ne cherche aucun appariement ; Statuses relit le plan
+// de la ronde ouverte sans compteur, mais seulement tant qu'un joueur appelé est encore libre.
+func (s *State) ProposeSearch(now time.Time, ext External, b *SearchBudget) ([]Action, error) {
+	acts := s.proposeWith(now, ext, b)
+	if b.Exhausted() {
+		return nil, &SearchBudgetError{Limit: b.Limit, Used: b.Used}
+	}
+	return acts, nil
+}
+
+func (s *State) proposeWith(now time.Time, ext External, b *SearchBudget) []Action {
 	if s.Current < 0 || s.Finished {
 		return nil
 	}
@@ -53,6 +96,7 @@ func (s *State) ProposeWith(now time.Time, ext External) []Action {
 	// dépendent, et Propose ne modifie pas l'état (un hôte peut l'appeler sous verrou de lecture).
 	v := *s
 	v.clock = now
+	v.recherche = b
 	if len(ext.BusyPlayers) > 0 {
 		v.ailleurs = make(map[PlayerID]bool, len(ext.BusyPlayers))
 		for _, p := range ext.BusyPlayers {

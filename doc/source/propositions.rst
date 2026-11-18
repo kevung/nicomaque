@@ -11,6 +11,7 @@ Moteur de propositions
    func (s *State) Propose() []Action                // = ProposeAt(s.Last)
    func (s *State) ProposeAt(now time.Time) []Action // = ProposeWith(now, External{})
    func (s *State) ProposeWith(now time.Time, ext External) []Action
+   func (s *State) ProposeSearch(now time.Time, ext External, b *SearchBudget) ([]Action, error)
 
    type External struct {
        BusyTables  []int      `json:"busy_tables,omitempty"`  // tables occupées hors de ce tournoi
@@ -36,6 +37,43 @@ barrages de poule) et la file porte, au suisse, une attente par joueur en vie (`
 raison ``player_busy``, sans table. Une indisponibilité (``player_unavailable``), écrite au journal,
 l'emporte dans la raison. Rien n'est écrit : le TD qui lance quand même le match à la main est obéi,
 et le rejeu l'ignore.
+
+.. _budget_recherche:
+
+Budget de recherche d'appariement
+---------------------------------
+
+.. code:: go
+
+   type SearchBudget struct {
+       Limit int64 // pas accordés ; 0 : compter sans borner
+       Used  int64 // pas dépensés, cumulés d'un appel à l'autre
+   }
+
+   var ErrSearchBudget error
+   type SearchBudgetError struct{ Limit, Used int64 } // errors.Is(err, ErrSearchBudget)
+
+Le suisse par rondes cherche ses appariements (:ref:`format_suisse_rondes`) ; dans un champ
+défavorable — un club qui dépasse la moitié des joueurs avec ``avoid_clubs``, ou une ronde
+tardive sans appariement sans revanche — la recherche épuise chacune de ses tentatives et une
+proposition peut coûter des milliards de pas. ``ProposeSearch`` laisse l'hôte la compter et la
+borner : ``b.Used`` reçoit les pas dépensés et, si ``b.Limit > 0``, la proposition s'arrête
+au-delà et rend un ``*SearchBudgetError``, sans aucune action — un appariement interrompu n'en
+est pas un. Un ``b`` nil revient à ``ProposeWith``.
+
+Un pas est une paire examinée : une case des tables de rencontres et de clubs qu'une tentative
+construit, ou une paire regardée en profondeur, écartée ou non. Le compte ne dépend que du journal, de ``now``, de
+``External`` et de la graine : le même état sous le même budget donne le **même verdict sur
+toute machine**. Le compteur est à l'hôte, qui en choisit la portée : un compteur neuf à chaque
+appel borne un appariement, un même compteur passé à chaque appel borne une suite de
+propositions (une simulation entière, voir :ref:`simulation`).
+
+Le budget ne change aucun appariement : non atteint, la proposition est celle de ``ProposeWith``.
+Il est distinct du plafond de 200 000 essais par tentative, qui fait partie de la règle. Un budget
+épuisé n'est pas un appariement impossible : le moteur en trouve toujours un, au prix de
+revanches. Seule la proposition est bornée. ``Apply`` ne cherche aucun appariement ;
+``Statuses`` relit le plan de la ronde ouverte sans compteur, mais seulement tant qu'un joueur
+appelé est encore libre : une ronde entièrement lancée ne se recherche plus.
 
 ::
 

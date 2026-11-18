@@ -58,7 +58,9 @@ La recherche (``chercher``) est en profondeur d'abord, avec retour arrière : le
 libre essaie ses adversaires du plus proche au plus lointain. Un appariement glouton ne suffit
 pas — il apparie proprement la tête et accule les derniers à une revanche qu'un autre choix plus
 haut évitait. Chaque tentative est bornée à 200 000 essais, après quoi la recherche passe au
-candidat ou à la limite suivante : un grand champ ne bloque jamais.
+candidat ou à la limite suivante : un grand champ ne bloque jamais. Ce plafond fait partie de la
+règle ; ce que coûte l'appariement entier, toutes tentatives comprises, l'hôte le compte et le
+borne lui-même (:ref:`budget_recherche`).
 
 ``avoid_clubs`` est une **préférence** : à nombre de revanches égal, un appariement sans rencontre
 de club est essayé d'abord ; il n'est jamais payé d'une revanche.

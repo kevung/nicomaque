@@ -4,6 +4,7 @@
 package sim
 
 import (
+	"errors"
 	"fmt"
 	"math/rand"
 	"sort"
@@ -34,8 +35,17 @@ type Result struct {
 	Minutes  float64
 	NMatches int
 	Steps    int
-	Err      error
+	// SearchSteps : les pas de recherche d'appariement dépensés par toute la simulation
+	// (tournoi.SearchBudget), qu'Options.Search soit fixé ou non.
+	SearchSteps int64
+	// Err : errors.Is(Err, tournoi.ErrSearchBudget) quand Options.Search est épuisé,
+	// errors.Is(Err, ErrStalled) quand le tournoi ne propose plus rien à jouer.
+	Err error
 }
+
+// ErrStalled : le tournoi n'a plus rien à proposer, aucun match en cours, et il n'est pas fini
+// — un appariement impossible, non un budget de recherche épuisé.
+var ErrStalled = errors.New("blocage")
 
 // Options de simulation.
 type Options struct {
@@ -43,6 +53,10 @@ type Options struct {
 	MinPerPoint float64
 	Start       time.Time
 	MaxSteps    int
+	// Search : le budget de recherche d'appariement de TOUTE la simulation, un seul compteur
+	// passé à chaque proposition ; nil, la recherche est comptée sans être bornée. Le Hook peut
+	// lire Search.Used au fil du tournoi.
+	Search *tournoi.SearchBudget
 	// Hook est appelé après chaque événement appliqué (tests d'invariants).
 	Hook func(s *tournoi.State, ev tournoi.Event) error
 }
@@ -65,6 +79,9 @@ func Run(cfg tournoi.Config, players []tournoi.Player, opt Options) Result {
 	}
 	if opt.MaxSteps <= 0 {
 		opt.MaxSteps = 100000
+	}
+	if opt.Search == nil {
+		opt.Search = &tournoi.SearchBudget{}
 	}
 	now := opt.Start
 	st, ev, err := tournoi.New(cfg, opt.Seed, now)
@@ -96,7 +113,10 @@ func Run(cfg tournoi.Config, players []tournoi.Player, opt Options) Result {
 		if steps > opt.MaxSteps {
 			return Result{Err: fmt.Errorf("simulation sans fin (%d étapes)", steps), Journal: journal, State: st}
 		}
-		acts := st.ProposeAt(now)
+		acts, err := st.ProposeSearch(now, tournoi.External{}, opt.Search)
+		if err != nil {
+			return Result{Err: err, Journal: journal, State: st, Steps: steps, SearchSteps: opt.Search.Used}
+		}
 		progressed := false
 		for _, a := range acts {
 			if a.Kind == tournoi.ActWait {
@@ -134,7 +154,7 @@ func Run(cfg tournoi.Config, players []tournoi.Player, opt Options) Result {
 				continue
 			}
 			if !progressed {
-				return Result{Err: fmt.Errorf("blocage : %v", acts), Journal: journal, State: st}
+				return Result{Err: fmt.Errorf("%w : %v", ErrStalled, acts), Journal: journal, State: st}
 			}
 			continue
 		}
@@ -166,7 +186,8 @@ func Run(cfg tournoi.Config, players []tournoi.Player, opt Options) Result {
 	if len(st.Final) > 0 {
 		winner = st.Final[0].Player
 	}
-	return Result{State: st, Journal: journal, Winner: winner, Minutes: now.Sub(opt.Start).Minutes(), NMatches: len(st.MatchOrder), Steps: steps}
+	return Result{State: st, Journal: journal, Winner: winner, Minutes: now.Sub(opt.Start).Minutes(), NMatches: len(st.MatchOrder), Steps: steps,
+		SearchSteps: opt.Search.Used}
 }
 
 // Champ crée P joueurs de PR tirés dans N(mu, sigma) tronquée à [min, max] ; le meilleur a l'ID "P1".

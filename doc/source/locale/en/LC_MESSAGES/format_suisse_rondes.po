@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 16:17+0100\n"
+"POT-Creation-Date: 2026-11-18 22:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -117,7 +117,9 @@ msgid ""
 "proprement la tête et accule les derniers à une revanche qu'un autre "
 "choix plus haut évitait. Chaque tentative est bornée à 200 000 essais, "
 "après quoi la recherche passe au candidat ou à la limite suivante : un "
-"grand champ ne bloque jamais."
+"grand champ ne bloque jamais. Ce plafond fait partie de la règle ; ce que"
+" coûte l'appariement entier, toutes tentatives comprises, l'hôte le "
+"compte et le borne lui-même (:ref:`budget_recherche`)."
 msgstr ""
 "The search (``chercher``) is depth-first with backtracking: the first "
 "free player tries opponents from the nearest to the farthest. A greedy "
@@ -125,9 +127,11 @@ msgstr ""
 "players into a rematch that a different choice higher up would have "
 "avoided. Each attempt is capped at 200,000 tries, after which the search "
 "moves on to the next candidate or the next limit: a large field never "
-"hangs."
+"hangs. This cap is part of the rule; what the whole pairing costs, all "
+"attempts included, the host counts and bounds itself "
+"(:ref:`budget_recherche`)."
 
-#: ../../source/format_suisse_rondes.rst:63
+#: ../../source/format_suisse_rondes.rst:65
 msgid ""
 "``avoid_clubs`` est une **préférence** : à nombre de revanches égal, un "
 "appariement sans rencontre de club est essayé d'abord ; il n'est jamais "
@@ -137,7 +141,7 @@ msgstr ""
 "pairing with no same-club match is tried first; it is never paid for with"
 " a rematch."
 
-#: ../../source/format_suisse_rondes.rst:66
+#: ../../source/format_suisse_rondes.rst:68
 msgid ""
 "``avoid_countries`` fait de même pour le pays (``Player.Country``, sans "
 "égard à la casse), et les deux options se cumulent. ``avoid_except`` sort"
@@ -153,15 +157,15 @@ msgstr ""
 " N + 1 is paired on the ranking alone. An empty club or country is shared"
 " with nobody."
 
-#: ../../source/format_suisse_rondes.rst:71
+#: ../../source/format_suisse_rondes.rst:73
 msgid "Un joueur seul à apparier (les autres absents ou retirés) est exempté."
 msgstr "A player left alone to pair (the others absent or withdrawn) gets a bye."
 
-#: ../../source/format_suisse_rondes.rst:74
+#: ../../source/format_suisse_rondes.rst:76
 msgid "Têtes de série (``seeding``)"
 msgstr "Seeding (``seeding``)"
 
-#: ../../source/format_suisse_rondes.rst:76
+#: ../../source/format_suisse_rondes.rst:78
 msgid ""
 "Sans ``seeding``, la ronde 1 est tirée au sort. Avec ``seeding: "
 "\"seed\"`` (têtes de série saisies, ``Player.Seed``) ou ``\"rating\"`` "
@@ -180,11 +184,11 @@ msgstr ""
 "instead of being drawn at random. The default remains the draw: seeding "
 "is a named option (see :ref:`annexe_conception`)."
 
-#: ../../source/format_suisse_rondes.rst:84
+#: ../../source/format_suisse_rondes.rst:86
 msgid "Accélération (``accelerated``)"
 msgstr "Acceleration (``accelerated``)"
 
-#: ../../source/format_suisse_rondes.rst:86
+#: ../../source/format_suisse_rondes.rst:88
 msgid ""
 "L'accélération donne un **point virtuel** à la moitié haute du champ aux "
 "rondes 1 et 2, pour l'appariement seulement : il n'apparaît dans aucun "
@@ -197,7 +201,7 @@ msgstr ""
 "``seeding`` — with no seeding order there is no top half — and "
 "``Validate`` rejects it with ``pairing: \"monrad\"``."
 
-#: ../../source/format_suisse_rondes.rst:91
+#: ../../source/format_suisse_rondes.rst:93
 msgid ""
 "**Moitié haute** (``rules.TopHalf``) : les ``⌊n/2⌋`` premières têtes de "
 "série des joueurs de la ronde 1 ; en effectif impair, la tête du milieu "
@@ -214,7 +218,7 @@ msgstr ""
 "nobody across the line; until then, a registration or a withdrawal still "
 "moves it, as it moves the folding of round 1."
 
-#: ../../source/format_suisse_rondes.rst:96
+#: ../../source/format_suisse_rondes.rst:98
 msgid ""
 "**Ronde 1** : chaque moitié est pliée séparément. Moitié haute impaire : "
 "sa dernière tête descend en tête de la moitié basse ; moitié basse "
@@ -224,7 +228,7 @@ msgstr ""
 "drops to the head of the bottom half; odd bottom half: its last seed gets"
 " the bye."
 
-#: ../../source/format_suisse_rondes.rst:98
+#: ../../source/format_suisse_rondes.rst:100
 msgid ""
 "**Ronde 2** : l'ordre du classement est retrié (stable) par points + "
 "point virtuel, puis apparié comme toute ronde."
@@ -232,15 +236,15 @@ msgstr ""
 "**Round 2**: the ranking order is re-sorted (stably) by points + virtual "
 "point, then paired like any round."
 
-#: ../../source/format_suisse_rondes.rst:100
+#: ../../source/format_suisse_rondes.rst:102
 msgid "**Rondes suivantes** : plus de point virtuel."
 msgstr "**Later rounds**: no virtual point any more."
 
-#: ../../source/format_suisse_rondes.rst:103
+#: ../../source/format_suisse_rondes.rst:105
 msgid "Demi-exemptions annoncées"
 msgstr "Announced half-byes"
 
-#: ../../source/format_suisse_rondes.rst:105
+#: ../../source/format_suisse_rondes.rst:107
 msgid ""
 "Un joueur peut annoncer **à l'avance** qu'il ne jouera pas une ronde : "
 "l'événement ``half_bye`` (``HalfByeEvent(joueur, phase, ronde, now)``) le"
@@ -260,7 +264,7 @@ msgstr ""
 "The quota per player and the acceptance of the request are the host's "
 "business."
 
-#: ../../source/format_suisse_rondes.rst:112
+#: ../../source/format_suisse_rondes.rst:114
 msgid ""
 "Les points se comptent alors en demi-points : deux par victoire ou par "
 "exemption, un par demi-exemption. Le classement, les groupes du Monrad et"
@@ -276,11 +280,11 @@ msgstr ""
 "remaining players are odd in number, one of them receives the usual full "
 "bye."
 
-#: ../../source/format_suisse_rondes.rst:119
+#: ../../source/format_suisse_rondes.rst:121
 msgid "Monrad (``pairing: \"monrad\"``)"
 msgstr "Monrad (``pairing: \"monrad\"``)"
 
-#: ../../source/format_suisse_rondes.rst:121
+#: ../../source/format_suisse_rondes.rst:123
 msgid ""
 "Le Monrad garde les rondes, les points et le classement du suisse "
 "classique ; seul change le choix de l'adversaire, **tiré au sort dans le "
@@ -292,7 +296,7 @@ msgstr ""
 "on the same points** instead of being the nearest in the ranking. The "
 "tie-break, if there is one, plays no part in it."
 
-#: ../../source/format_suisse_rondes.rst:136
+#: ../../source/format_suisse_rondes.rst:138
 msgid ""
 "Un match oppose donc deux joueurs de mêmes points, sauf un flotteur par "
 "groupe impair."
@@ -300,7 +304,7 @@ msgstr ""
 "A match therefore opposes two players on the same points, except for one "
 "floater per odd group."
 
-#: ../../source/format_suisse_rondes.rst:138
+#: ../../source/format_suisse_rondes.rst:140
 msgid ""
 "Le dernier groupe peut donc jouer une revanche qu'un groupe plus large "
 "aurait évitée. Avec ``monrad_widen: true``, la ronde est alors refaite en"
@@ -314,7 +318,7 @@ msgstr ""
 "with every group merged, this is the Swiss pairing. The option is off by "
 "default."
 
-#: ../../source/format_suisse_rondes.rst:143
+#: ../../source/format_suisse_rondes.rst:145
 msgid ""
 "Le tirage vient de ``Seed.Round`` : il se rejoue à l'identique, et deux "
 "graines donnent deux tournois."
@@ -322,11 +326,11 @@ msgstr ""
 "The draw comes from ``Seed.Round``: it replays identically, and two seeds"
 " give two tournaments."
 
-#: ../../source/format_suisse_rondes.rst:147
+#: ../../source/format_suisse_rondes.rst:149
 msgid "Au fil de l'eau (``mode: \"continuous\"``)"
 msgstr "Rolling pairing (``mode: \"continuous\"``)"
 
-#: ../../source/format_suisse_rondes.rst:149
+#: ../../source/format_suisse_rondes.rst:151
 msgid ""
 "Avec ``mode: \"continuous\"``, le suisse classique n'attend pas la fin "
 "d'une ronde : la *k*-ième partie d'un joueur — exemption comprise — "
@@ -343,7 +347,7 @@ msgstr ""
 " lowest first, the free players who have played *k* games are paired in "
 "round *k* + 1, in ranking order:"
 
-#: ../../source/format_suisse_rondes.rst:155
+#: ../../source/format_suisse_rondes.rst:157
 msgid ""
 "**tant qu'un joueur joue encore sa k-ième partie**, il les rejoindra : "
 "appariement glouton, chacun avec le premier joueur qu'il n'a pas "
@@ -359,7 +363,7 @@ msgstr ""
 "``avoid_countries``): only a round paired in full avoids them, within the"
 " limit of ``avoid_rounds`` counted on the round being paired;"
 
-#: ../../source/format_suisse_rondes.rst:160
+#: ../../source/format_suisse_rondes.rst:162
 msgid ""
 "**sinon** plus personne ne viendra : la ronde est appariée en entier, "
 "comme une ronde ordinaire (revanches au plus juste, exemption en effectif"
@@ -371,7 +375,7 @@ msgstr ""
 "A proposed bye stops the proposal: once confirmed, its player moves on to"
 " the next count."
 
-#: ../../source/format_suisse_rondes.rst:164
+#: ../../source/format_suisse_rondes.rst:166
 msgid ""
 "La phase est finie quand aucun match ne joue et que chaque joueur en lice"
 " a joué ``rounds`` parties. Les demi-exemptions annoncées sont refusées "
@@ -383,11 +387,11 @@ msgstr ""
 " round to miss), and ``rules.RemainingMatches`` returns an estimate: half"
 " of the games still due."
 
-#: ../../source/format_suisse_rondes.rst:169
+#: ../../source/format_suisse_rondes.rst:171
 msgid "Fin de la phase"
 msgstr "End of the phase"
 
-#: ../../source/format_suisse_rondes.rst:171
+#: ../../source/format_suisse_rondes.rst:173
 msgid ""
 "La phase est finie quand la ronde ``rounds`` est entièrement lancée et "
 "tous ses matchs terminés, ou quand il reste au plus un joueur non retiré."
@@ -399,7 +403,7 @@ msgstr ""
 "``RemainingMatches`` counts the running matches plus one full round of "
 "the remaining players per round still to come."
 
-#: ../../source/format_suisse_rondes.rst:175
+#: ../../source/format_suisse_rondes.rst:177
 msgid ""
 "Les joueurs ne portent pas de vies qui aient un sens : la mécanique "
 "partagée avec le suisse à vies leur en donne un nombre qu'aucun nombre de"
@@ -411,11 +415,11 @@ msgstr ""
 " the next phase, ``survivors`` admits every player who has not withdrawn,"
 " each with that phase's entry lives."
 
-#: ../../source/format_suisse_rondes.rst:180
+#: ../../source/format_suisse_rondes.rst:182
 msgid "Départage (``tiebreak``)"
 msgstr "Tie-break (``tiebreak``)"
 
-#: ../../source/format_suisse_rondes.rst:182
+#: ../../source/format_suisse_rondes.rst:184
 msgid ""
 "``tiebreak`` est une liste de critères, appliqués dans l'ordre **après "
 "les points**. Elle est **vide par défaut**, et ce défaut est un choix de "
@@ -429,39 +433,39 @@ msgstr ""
 "Filling it means accepting to separate two players with the same record "
 "on their match points and on the strength of their opponents."
 
-#: ../../source/format_suisse_rondes.rst:191
+#: ../../source/format_suisse_rondes.rst:193
 msgid "Critère"
 msgstr "Criterion"
 
-#: ../../source/format_suisse_rondes.rst:192
+#: ../../source/format_suisse_rondes.rst:194
 msgid "Valeur"
 msgstr "Value"
 
-#: ../../source/format_suisse_rondes.rst:193
+#: ../../source/format_suisse_rondes.rst:195
 msgid "``point_diff``"
 msgstr "``point_diff``"
 
-#: ../../source/format_suisse_rondes.rst:194
+#: ../../source/format_suisse_rondes.rst:196
 msgid "Points de match marqués moins points encaissés."
 msgstr "Match points scored minus match points conceded."
 
-#: ../../source/format_suisse_rondes.rst:195
+#: ../../source/format_suisse_rondes.rst:197
 msgid "``points_scored``"
 msgstr "``points_scored``"
 
-#: ../../source/format_suisse_rondes.rst:196
+#: ../../source/format_suisse_rondes.rst:198
 msgid "Points de match marqués."
 msgstr "Match points scored."
 
-#: ../../source/format_suisse_rondes.rst:197
+#: ../../source/format_suisse_rondes.rst:199
 msgid "``buchholz``"
 msgstr "``buchholz``"
 
-#: ../../source/format_suisse_rondes.rst:198
+#: ../../source/format_suisse_rondes.rst:200
 msgid "Somme des points des adversaires rencontrés, une fois par rencontre."
 msgstr "Sum of the points of the opponents met, once per meeting."
 
-#: ../../source/format_suisse_rondes.rst:200
+#: ../../source/format_suisse_rondes.rst:202
 msgid ""
 "Seuls les matchs **terminés** comptent. Les points de match sont "
 "**plafonnés à la longueur du match** : 9-3 dans un match en 7 points "
@@ -474,7 +478,7 @@ msgstr ""
 "length–0. A result entered without a score counts only for the opponent "
 "met. A bye brings neither match points nor an opponent."
 
-#: ../../source/format_suisse_rondes.rst:205
+#: ../../source/format_suisse_rondes.rst:207
 msgid ""
 "Le départage n'ordonne que des ex æquo : il ne passe jamais un joueur "
 "devant un autre qui a plus de points. Deux joueurs égaux sur les points "
@@ -487,7 +491,7 @@ msgstr ""
 "criterion **stay tied** — there is no hidden sort by identifier. The "
 "pairing order of a round follows the same ranking."
 
-#: ../../source/format_suisse_rondes.rst:209
+#: ../../source/format_suisse_rondes.rst:211
 msgid ""
 "``Validate`` refuse un critère inconnu ou répété, et ``tiebreak`` sur "
 "tout autre format."
@@ -495,11 +499,11 @@ msgstr ""
 "``Validate`` rejects an unknown or repeated criterion, and ``tiebreak`` "
 "on any other format."
 
-#: ../../source/format_suisse_rondes.rst:212
+#: ../../source/format_suisse_rondes.rst:214
 msgid "Classement"
 msgstr "Ranking"
 
-#: ../../source/format_suisse_rondes.rst:222
+#: ../../source/format_suisse_rondes.rst:224
 msgid ""
 "Un retiré garde son parcours et son rang parmi les joueurs au même nombre"
 " de points."

@@ -2,6 +2,7 @@ package tournoi
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/kevung/nicomaque/rules"
 )
@@ -186,6 +187,15 @@ func (s *State) roundRest(ph *PhaseState, r int) []Action {
 		return nil
 	}
 	engagé := s.engagedIn(ph, r)
+	libre := func(p PlayerID) bool {
+		return !engagé[p] && s.remainingLives(ph, p) > 0 && !s.busy(p) && !s.absent(p, r) && !s.ailleurs[p]
+	}
+	// Le plan n'apparie que des joueurs appelés : si aucun n'est libre, il ne reste rien à
+	// proposer, et le plan n'est pas recalculé. Sans cela chaque proposition d'une ronde lancée
+	// refait toute la recherche de la ronde, pour la jeter.
+	if !slices.ContainsFunc(ph.Roster, libre) {
+		return nil
+	}
 	v := s.beforeRound(ph, r)
 	avant := s.snapshot(v, nil)
 	graine := rules.Seed{Base: s.Seed, Events: s.NEvents, Phase: ph.Index}
@@ -194,9 +204,6 @@ func (s *State) roundRest(ph *PhaseState, r int) []Action {
 		return nil
 	}
 	plan := s.actions(ph, prévu)
-	libre := func(p PlayerID) bool {
-		return !engagé[p] && s.remainingLives(ph, p) > 0 && !s.busy(p) && !s.absent(p, r) && !s.ailleurs[p]
-	}
 	longueur := s.swissLength(ph) // la longueur est celle d'aujourd'hui (length_changed)
 	var acts []Action
 	pris := map[PlayerID]bool{}
