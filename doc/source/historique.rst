@@ -7,6 +7,18 @@ Les versions suivent la numérotation sémantique. Une sortie du moteur qui chan
 (proposition, classement) donne une version mineure. Le format du journal est versionné
 indépendamment (champ ``version`` de chaque événement, voir :ref:`annexe_tests`).
 
+0.10.0 — 19 novembre 2026
+-------------------------
+
+- Budget de recherche déterministe de l'appariement : ``ProposeSearch`` propose avec un budget
+  compté en pas (``SearchBudget``), fixé par l'appelant et indépendant de la machine ; une
+  recherche qui l'épuise renvoie ``ErrSearchBudget``. Dans la simulation, ``sim.Options.Search``
+  fixe ce budget, ``Result.SearchSteps`` rapporte les pas consommés, et ``ErrStalled`` signale
+  un tournoi qui ne progresse plus.
+- L'appariement suisse est plus rapide, avec des appariements identiques.
+- Près de la borne, l'admission d'un format peut dépendre de ``seed`` : le nombre de pas d'une
+  recherche varie avec le tirage.
+
 0.9.0 — 12 novembre 2026
 ------------------------
 
