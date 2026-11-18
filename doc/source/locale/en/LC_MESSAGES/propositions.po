@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 22:49+0100\n"
+"POT-Creation-Date: 2026-11-18 23:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -116,21 +116,22 @@ msgstr ""
 #: ../../source/propositions.rst:64
 msgid ""
 "Un pas est une paire examinée : une case des tables de rencontres et de "
-"clubs qu'une tentative construit, ou une paire essayée en profondeur. Le "
-"compte ne dépend que du journal, de ``now``, de ``External`` et de la "
-"graine : le même état sous le même budget donne le **même verdict sur "
-"toute machine**. Le compteur est à l'hôte, qui en choisit la portée : un "
-"compteur neuf à chaque appel borne un appariement, un même compteur passé"
-" à chaque appel borne une suite de propositions (une simulation entière, "
-"voir :ref:`simulation`)."
+"clubs qu'une tentative construit, ou une paire regardée en profondeur, "
+"écartée ou non. Le compte ne dépend que du journal, de ``now``, de "
+"``External`` et de la graine : le même état sous le même budget donne le "
+"**même verdict sur toute machine**. Le compteur est à l'hôte, qui en "
+"choisit la portée : un compteur neuf à chaque appel borne un appariement,"
+" un même compteur passé à chaque appel borne une suite de propositions "
+"(une simulation entière, voir :ref:`simulation`)."
 msgstr ""
 "A step is one examined pair: a cell of the meetings and clubs tables an "
-"attempt builds, or a pair tried depth-first. The count depends only on "
-"the journal, ``now``, ``External`` and the seed: the same state under the"
-" same budget gives the **same verdict on every machine**. The counter "
-"belongs to the host, which chooses its scope: a fresh counter on every "
-"call bounds one pairing, the same counter passed to every call bounds a "
-"sequence of proposals (a whole simulation, see :ref:`simulation`)."
+"attempt builds, or a pair looked at depth-first, kept or not. The count "
+"depends only on the journal, ``now``, ``External`` and the seed: the same"
+" state under the same budget gives the **same verdict on every machine**."
+" The counter belongs to the host, which chooses its scope: a fresh "
+"counter on every call bounds one pairing, the same counter passed to "
+"every call bounds a sequence of proposals (a whole simulation, see "
+":ref:`simulation`)."
 
 #: ../../source/propositions.rst:71
 msgid ""
@@ -138,18 +139,21 @@ msgid ""
 "celle de ``ProposeWith``. Il est distinct du plafond de 200 000 essais "
 "par tentative, qui fait partie de la règle. Un budget épuisé n'est pas un"
 " appariement impossible : le moteur en trouve toujours un, au prix de "
-"revanches. Seule la proposition est bornée ; ``Apply`` ne cherche pas "
-"d'appariement, hors le contrôle de fin d'une ronde ouverte, qui n'est pas"
-" compté."
+"revanches. Seule la proposition est bornée. ``Apply`` ne cherche aucun "
+"appariement ; ``Statuses`` relit le plan de la ronde ouverte sans "
+"compteur, mais seulement tant qu'un joueur appelé est encore libre : une "
+"ronde entièrement lancée ne se recherche plus."
 msgstr ""
 "The budget changes no pairing: when it is not reached, the proposal is "
 "that of ``ProposeWith``. It is distinct from the cap of 200,000 tries per"
 " attempt, which is part of the rule. An exhausted budget is not an "
 "impossible pairing: the engine always finds one, at the cost of "
-"rematches. Only the proposal is bounded; ``Apply`` searches no pairing, "
-"except the end check of an open round, which is not counted."
+"rematches. Only the proposal is bounded. ``Apply`` searches no pairing; "
+"``Statuses`` reads the plan of the open round again without a counter, "
+"but only while a called player is still free: a fully launched round is "
+"no longer searched."
 
-#: ../../source/propositions.rst:111
+#: ../../source/propositions.rst:112
 msgid ""
 "``withAbsences`` ne fait rien hors d'un suisse ; dans un suisse, elle "
 "ajoute une attente ``player_unavailable`` par joueur en vie indisponible "
@@ -163,7 +167,7 @@ msgstr ""
 " player busy elsewhere, neither absent nor in a match here. A player has "
 "only one wait."
 
-#: ../../source/propositions.rst:116
+#: ../../source/propositions.rst:117
 msgid ""
 "Les raisons d'attente sont des codes (``ReasonCode``, ``codes.go``) : "
 "``matches_running``, ``no_pairing``, ``waiting_batch``, "
@@ -181,7 +185,7 @@ msgstr ""
 "the phase name entered by the organiser (or the default name from "
 "``PhaseName``)."
 
-#: ../../source/propositions.rst:122
+#: ../../source/propositions.rst:123
 msgid ""
 "L'ordre du repli est important : **attendre la fin des matchs en cours a "
 "priorité sur la clôture de la phase**. Le cas ``no_pairing`` ne devrait "
@@ -197,59 +201,59 @@ msgstr ""
 "disabled — a situation the Swiss fallbacks avoid, see "
 ":ref:`format_suisse`)."
 
-#: ../../source/propositions.rst:128
+#: ../../source/propositions.rst:129
 msgid "Fin de phase"
 msgstr "End of phase"
 
-#: ../../source/propositions.rst:135
+#: ../../source/propositions.rst:136
 msgid "Kind"
 msgstr "Kind"
 
-#: ../../source/propositions.rst:135
+#: ../../source/propositions.rst:136
 msgid "Condition (``rules.PhaseDone``)"
 msgstr "Condition (``rules.PhaseDone``)"
 
-#: ../../source/propositions.rst:137
+#: ../../source/propositions.rst:138
 msgid "``swiss_lives``"
 msgstr "``swiss_lives``"
 
-#: ../../source/propositions.rst:137
+#: ../../source/propositions.rst:138
 msgid "``swissDone`` (voir :ref:`format_suisse`)"
 msgstr "``swissDone`` (see :ref:`format_suisse`)"
 
-#: ../../source/propositions.rst:138
+#: ../../source/propositions.rst:139
 msgid "``swiss_rounds``"
 msgstr "``swiss_rounds``"
 
-#: ../../source/propositions.rst:138
+#: ../../source/propositions.rst:139
 msgid "``roundsDone``, et la dernière ronde entièrement lancée"
 msgstr "``roundsDone``, and the last round fully started"
 
-#: ../../source/propositions.rst:139
+#: ../../source/propositions.rst:140
 msgid "``gsl``"
 msgstr "``gsl``"
 
-#: ../../source/propositions.rst:139
+#: ../../source/propositions.rst:140
 msgid "``gslDone`` (voir :ref:`format_gsl`)"
 msgstr "``gslDone`` (see :ref:`format_gsl`)"
 
-#: ../../source/propositions.rst:140
+#: ../../source/propositions.rst:141
 msgid "``round_robin``"
 msgstr "``round_robin``"
 
-#: ../../source/propositions.rst:140
+#: ../../source/propositions.rst:141
 msgid "``Drawn && AllDone(Sections) && barragesDone``"
 msgstr "``Drawn && AllDone(Sections) && barragesDone``"
 
-#: ../../source/propositions.rst:141
+#: ../../source/propositions.rst:142
 msgid "``bracket``, ``lives_bracket``"
 msgstr "``bracket``, ``lives_bracket``"
 
-#: ../../source/propositions.rst:141
+#: ../../source/propositions.rst:142
 msgid "``Drawn && AllDone(Sections)``"
 msgstr "``Drawn && AllDone(Sections)``"
 
-#: ../../source/propositions.rst:144
+#: ../../source/propositions.rst:145
 msgid ""
 "``rules.AllDone`` : tous les nœuds de toutes les sections sont ``Done`` "
 "(un match sauté compte comme fait). Une phase de tableau non encore tirée"
@@ -262,15 +266,15 @@ msgstr ""
 "``s.bilan(ph)`` is the ``rules.Phase`` snapshot of the phase, built by "
 "``regles.go`` without the opponents or the busy players."
 
-#: ../../source/propositions.rst:150
+#: ../../source/propositions.rst:151
 msgid "Matchs en cours"
 msgstr "Matches in progress"
 
-#: ../../source/propositions.rst:159
+#: ../../source/propositions.rst:160
 msgid "Réparation d'un graphe désaccordé"
 msgstr "Repair of an out-of-sync graph"
 
-#: ../../source/propositions.rst:161
+#: ../../source/propositions.rst:162
 msgid ""
 "Corriger un résultat de tableau après coup recalcule l'état et lève "
 "l'avertissement ``bracket_wrong_players`` ; le directeur se trouve alors "
@@ -284,7 +288,7 @@ msgstr ""
 "people. ``proposeRepair`` (``reparation.go``) issues the repair as "
 "ORDINARY proposals, at the head of the list:"
 
-#: ../../source/propositions.rst:173
+#: ../../source/propositions.rst:174
 msgid ""
 "Un demi-finaliste faux fait une finale fausse, même si la finale oppose "
 "bien les deux joueurs que le graphe attendait : elle les attendait pour "
@@ -298,7 +302,7 @@ msgstr ""
 " the deepest to the shallowest — the most recent is undone first, as on "
 "paper."
 
-#: ../../source/propositions.rst:178
+#: ../../source/propositions.rst:179
 msgid ""
 "Les relances correctes ne sont pas fabriquées : une fois les annulations "
 "confirmées, les places redeviennent libres et sont proposées comme "
@@ -310,7 +314,7 @@ msgstr ""
 "match, at the next call. As long as the TD has confirmed nothing, there "
 "is nothing to restart."
 
-#: ../../source/propositions.rst:182
+#: ../../source/propositions.rst:183
 msgid ""
 "**Rien n'est appliqué d'office.** Ne rien confirmer laisse l'état tel "
 "quel, avertissement compris : un directeur peut préférer laisser le "
@@ -320,7 +324,7 @@ msgstr ""
 " as it is, warning included: a director may prefer to leave the bracket "
 "as it was played and note it by hand."
 
-#: ../../source/propositions.rst:185
+#: ../../source/propositions.rst:186
 msgid ""
 "**Dans un suisse**, il n'y a pas de graphe à réparer, mais une correction"
 " peut éliminer un joueur en plein match "
@@ -338,7 +342,7 @@ msgstr ""
 "The TD can also let the match finish: their opponent may lose a life "
 "against an eliminated player, and that is their decision."
 
-#: ../../source/propositions.rst:191
+#: ../../source/propositions.rst:192
 msgid ""
 "Corollaire dans ``recompute`` (``state.go``) : ``GMatch.MatchID`` repart "
 "**vide** au recalcul, et n'est reposé que pour les matchs non annulés ; "
@@ -356,11 +360,11 @@ msgstr ""
 "skip it, and the bracket would remain stuck at the very place one wants "
 "to replay."
 
-#: ../../source/propositions.rst:198
+#: ../../source/propositions.rst:199
 msgid "Micro-rondes et pauses"
 msgstr "Micro-rounds and breaks"
 
-#: ../../source/propositions.rst:200
+#: ../../source/propositions.rst:201
 msgid ""
 "Le moteur n'a pas d'horloge. Le temps entre par ``ProposeAt(now)`` — "
 "l'hôte donne la sienne — ou, à défaut, par l'horodatage du dernier "
@@ -379,11 +383,11 @@ msgstr ""
 "depends only on the journal, so the replay is unaffected: what is "
 "replayed is the events, not the proposals."
 
-#: ../../source/propositions.rst:208
+#: ../../source/propositions.rst:209
 msgid "Micro-rondes (``batch_minutes``)"
 msgstr "Micro-rounds (``batch_minutes``)"
 
-#: ../../source/propositions.rst:210
+#: ../../source/propositions.rst:211
 msgid ""
 "L'appariement au fil de l'eau rend le suisse continu manipulable par "
 "l'heure d'annonce d'un résultat : celui qui finit à 14 h 03 choisit son "
@@ -398,7 +402,7 @@ msgstr ""
 " (``batch_minutes``) closes this door: free players wait for the "
 "deadline, then all those of the same losses group are paired at once."
 
-#: ../../source/propositions.rst:228
+#: ../../source/propositions.rst:229
 msgid ""
 "L'horodatage du dernier lot **n'est stocké nulle part** : c'est le départ"
 " du dernier match lancé dans la phase, un lot étant exactement cela — un "
@@ -410,7 +414,7 @@ msgstr ""
 "bundle of matches started together. Deducing it avoids one more state "
 "field to keep correct right after a correction or a cancellation."
 
-#: ../../source/propositions.rst:232
+#: ../../source/propositions.rst:233
 msgid ""
 "``Action.Until`` porte l'échéance pour que l'hôte affiche un compte à "
 "rebours. ``Validate`` refuse ``batch_minutes`` négatif, en mode "
@@ -420,11 +424,11 @@ msgstr ""
 "countdown. ``Validate`` rejects a negative ``batch_minutes``, in "
 "``rounds`` mode (a round is already a batch) and outside ``swiss_lives``."
 
-#: ../../source/propositions.rst:238
+#: ../../source/propositions.rst:239
 msgid "Pauses (``Config.Breaks``)"
 msgstr "Breaks (``Config.Breaks``)"
 
-#: ../../source/propositions.rst:247
+#: ../../source/propositions.rst:248
 msgid ""
 "``Validate`` refuse une pause qui finit avant de commencer. "
 "``flagBreaks`` (``horaires.go``) :"
@@ -432,7 +436,7 @@ msgstr ""
 "``Validate`` rejects a break that ends before it starts. ``flagBreaks`` "
 "(``horaires.go``):"
 
-#: ../../source/propositions.rst:255
+#: ../../source/propositions.rst:256
 msgid ""
 "``Expected(n)`` est la durée attendue d'un match de *n* points "
 "(``rules.ExpectedDuration``, à partir de ``Config.MinPerPoint``, voir "
@@ -442,7 +446,7 @@ msgstr ""
 "(``rules.ExpectedDuration``, from ``Config.MinPerPoint``, see "
 ":ref:`horloge`)."
 
-#: ../../source/propositions.rst:258
+#: ../../source/propositions.rst:259
 msgid ""
 "**Rien n'est bloqué.** Le directeur sait des choses que le moteur ignore "
 "— que ces deux-là mangeront après, que la pause est indicative, que la "
@@ -454,7 +458,7 @@ msgstr ""
 "the playing hall closes anyway. They are told, they decide; this is the "
 "rule for all of the engine's warnings."
 
-#: ../../source/propositions.rst:262
+#: ../../source/propositions.rst:263
 msgid ""
 "L'avertissement tombe dès que le match **rencontre** la pause, et pas "
 "seulement s'il s'y termine : un match lancé à midi moins dix et attendu "
@@ -464,11 +468,11 @@ msgstr ""
 "only if it ends in it: a match started at ten to noon and expected to "
 "last until 13h30 makes people miss the meal just as much."
 
-#: ../../source/propositions.rst:266
+#: ../../source/propositions.rst:267
 msgid "Attribution des tables"
 msgstr "Table assignment"
 
-#: ../../source/propositions.rst:285
+#: ../../source/propositions.rst:286
 msgid ""
 "``AvailableFor`` (``tables.go``) écarte les tables hors service "
 "(``Tables.Unavailable``), celles au-delà de ``Count`` et celles qui sont "
@@ -492,11 +496,11 @@ msgstr ""
 "waits for one to free up. See :ref:`configuration` for the shape of "
 "``Config.Tables``."
 
-#: ../../source/propositions.rst:294
+#: ../../source/propositions.rst:295
 msgid "Générateur pseudo-aléatoire"
 msgstr "Pseudo-random generator"
 
-#: ../../source/propositions.rst:312
+#: ../../source/propositions.rst:313
 msgid ""
 "Le moteur construit la graine par ``State.seed()`` (``regles.go``) et la "
 "passe à ``rules.Pair`` ; le générateur est **recréé à chaque appel** et "
@@ -526,11 +530,11 @@ msgstr ""
 "journal, since the draws are materialised in it. That is the property "
 "that matters."
 
-#: ../../source/propositions.rst:323
+#: ../../source/propositions.rst:324
 msgid "Utilitaires d'ordre"
 msgstr "Ordering utilities"
 
-#: ../../source/propositions.rst:329
+#: ../../source/propositions.rst:330
 msgid ""
 "Renvoie une **copie** triée par ordre croissant de l'identifiant "
 "(comparaison de chaînes). C'est le préalable obligatoire à tout mélange "

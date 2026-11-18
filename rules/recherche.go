@@ -4,9 +4,9 @@ package rules
 // l'appelant le demande.
 //
 // Un pas est une paire examinée : une case des tables de rencontres et de clubs qu'une tentative
-// construit, ou une paire essayée par la recherche en profondeur. Le compte ne dépend que de
-// l'instantané et de la graine : la même entrée dépense les mêmes pas sur toute machine, si bien
-// qu'un budget épuisé est un verdict reproductible, pas une affaire d'horloge.
+// construit, ou une paire que la recherche en profondeur regarde, écartée ou non. Le compte ne
+// dépend que de l'instantané et de la graine : la même entrée dépense les mêmes pas sur toute
+// machine, si bien qu'un budget épuisé est un verdict reproductible, pas une affaire d'horloge.
 //
 // Le compteur est à l'appelant, qui en choisit la portée : un compteur neuf par proposition
 // borne un appariement, un compteur partagé borne une suite de propositions (une simulation

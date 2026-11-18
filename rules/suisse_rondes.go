@@ -2,7 +2,9 @@ package rules
 
 import (
 	"math/rand"
+	"slices"
 	"sort"
+	"strings"
 )
 
 // ---- Suisse classique : nombre de rondes fixe, sans vies ----
@@ -378,12 +380,35 @@ func (v *vue) chercher(reste []Ref, limite int, sansClub bool, budget *int) ([][
 	if !v.Search.spend(n * n) { // les deux tables
 		return nil, false
 	}
+	// Les tables valent met et sameClub case par case, mais lisent chaque entrant une fois :
+	// une case coûte alors ce que coûte un pas de la recherche.
+	pos := make(map[Ref]int, n)
+	for i, p := range reste {
+		pos[p] = i
+	}
+	clubs, pays := make([]string, n), make([]string, n)
 	vus, exclus := make([][]bool, n), make([][]bool, n)
-	for i := range vus {
+	for i, p := range reste {
 		vus[i], exclus[i] = make([]bool, n), make([]bool, n)
-		for j := range vus[i] {
-			vus[i][j] = v.met(reste[i], reste[j])
-			exclus[i][j] = sansClub && v.sameClub(reste[i], reste[j])
+		e := v.entrant(p)
+		for _, o := range e.Opponents {
+			if j, ok := pos[o]; ok {
+				vus[i][j] = true
+			}
+		}
+		if v.Rules.AvoidClubs && e.Club != "" && !slices.Contains(v.Rules.AvoidExcept, e.Club) {
+			clubs[i] = e.Club
+		}
+		if v.Rules.AvoidCountries {
+			pays[i] = strings.TrimSpace(e.Country)
+		}
+	}
+	if sansClub {
+		for i := range exclus {
+			for j := range exclus[i] {
+				exclus[i][j] = clubs[i] != "" && clubs[i] == clubs[j] ||
+					pays[i] != "" && strings.EqualFold(pays[i], pays[j])
+			}
 		}
 	}
 	pris := make([]bool, n)
@@ -399,10 +424,15 @@ func (v *vue) chercher(reste []Ref, limite int, sansClub bool, budget *int) ([][
 		}
 		pris[i] = true
 		for j := i + 1; j < n; j++ {
+			// Search compte toute paire regardée, même écartée : un club qui remplit le champ
+			// fait écarter presque toutes celles que la recherche parcourt.
+			if !v.Search.spend(1) {
+				break
+			}
 			if pris[j] || exclus[i][j] {
 				continue
 			}
-			if *budget--; *budget < 0 || !v.Search.spend(1) {
+			if *budget--; *budget < 0 {
 				break
 			}
 			coût := 0

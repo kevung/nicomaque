@@ -78,8 +78,8 @@ func (e *SearchBudgetError) Is(target error) bool { return target == ErrSearchBu
 // *SearchBudgetError et aucune action — un appariement interrompu n'en est pas un. Un b nil
 // revient à ProposeWith.
 //
-// Seule la proposition est bornée : Apply ne cherche pas d'appariement, hors le rare contrôle
-// de fin d'une ronde ouverte, qui n'est pas compté.
+// Seule la proposition est bornée. Apply ne cherche aucun appariement ; Statuses relit le plan
+// de la ronde ouverte sans compteur, mais seulement tant qu'un joueur appelé est encore libre.
 func (s *State) ProposeSearch(now time.Time, ext External, b *SearchBudget) ([]Action, error) {
 	acts := s.proposeWith(now, ext, b)
 	if b.Exhausted() {

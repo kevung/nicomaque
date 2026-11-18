@@ -118,3 +118,36 @@ func TestProposeSearch_ExhaustedProposesNothing(t *testing.T) {
 		t.Fatal("ProposeAt diffère d'une proposition sous budget suffisant")
 	}
 }
+
+// Une ronde entièrement lancée ne se recherche plus : tant que ses matchs se jouent, une
+// proposition ne dépense aucun pas.
+func TestProposeSearch_LaunchedRoundSearchesNothing(t *testing.T) {
+	cfg, players := suisseClubs(40, 7, 0)
+	now := time.Date(2026, 1, 1, 9, 0, 0, 0, time.UTC)
+	st, _, err := tournoi.New(cfg, 1, now)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, p := range players {
+		if err := st.Apply(tournoi.PlayerAddedEvent(p, now)); err != nil {
+			t.Fatal(err)
+		}
+	}
+	acts, err := st.ProposeSearch(now, tournoi.External{}, &tournoi.SearchBudget{})
+	if err != nil || len(acts) == 0 {
+		t.Fatalf("ronde 1 : %d actions, %v", len(acts), err)
+	}
+	for _, a := range acts {
+		e, err := st.EventFromAction(a, now)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err := st.Apply(e); err != nil {
+			t.Fatal(err)
+		}
+	}
+	compte := &tournoi.SearchBudget{}
+	if acts, err := st.ProposeSearch(now, tournoi.External{}, compte); err != nil || compte.Used != 0 {
+		t.Fatalf("ronde lancée : %d actions, %d pas, %v ; attendu aucun pas", len(acts), compte.Used, err)
+	}
+}

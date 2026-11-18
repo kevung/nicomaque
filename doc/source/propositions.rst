@@ -62,7 +62,7 @@ au-delà et rend un ``*SearchBudgetError``, sans aucune action — un appariemen
 est pas un. Un ``b`` nil revient à ``ProposeWith``.
 
 Un pas est une paire examinée : une case des tables de rencontres et de clubs qu'une tentative
-construit, ou une paire essayée en profondeur. Le compte ne dépend que du journal, de ``now``, de
+construit, ou une paire regardée en profondeur, écartée ou non. Le compte ne dépend que du journal, de ``now``, de
 ``External`` et de la graine : le même état sous le même budget donne le **même verdict sur
 toute machine**. Le compteur est à l'hôte, qui en choisit la portée : un compteur neuf à chaque
 appel borne un appariement, un même compteur passé à chaque appel borne une suite de
@@ -71,8 +71,9 @@ propositions (une simulation entière, voir :ref:`simulation`).
 Le budget ne change aucun appariement : non atteint, la proposition est celle de ``ProposeWith``.
 Il est distinct du plafond de 200 000 essais par tentative, qui fait partie de la règle. Un budget
 épuisé n'est pas un appariement impossible : le moteur en trouve toujours un, au prix de
-revanches. Seule la proposition est bornée ; ``Apply`` ne cherche pas d'appariement, hors le
-contrôle de fin d'une ronde ouverte, qui n'est pas compté.
+revanches. Seule la proposition est bornée. ``Apply`` ne cherche aucun appariement ;
+``Statuses`` relit le plan de la ronde ouverte sans compteur, mais seulement tant qu'un joueur
+appelé est encore libre : une ronde entièrement lancée ne se recherche plus.
 
 ::
 
