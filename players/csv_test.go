@@ -173,16 +173,16 @@ func TestBOMEtLignesVides(t *testing.T) {
 	}
 }
 
-// TestPaysEtTeteDeSerie : les colonnes pays et tête de série se relisent, et n'apparaissent que
-// si un joueur en porte.
+// TestPaysEtTeteDeSerie : les colonnes pays, tête de série et équipe se relisent, et
+// n'apparaissent que si un joueur en porte.
 func TestPaysEtTeteDeSerie(t *testing.T) {
 	in := []tournoi.Player{
-		{ID: "a", Name: "A", Club: "Paris", Country: "FR", Seed: 2},
+		{ID: "a", Name: "A", Club: "Paris", Country: "FR", Seed: 2, Team: "Nord"},
 		{ID: "b", Name: "B", Country: "BE"},
 		{ID: "c", Name: "C", Seed: 1},
 	}
 	b := players.ToCSV(in)
-	if tête := strings.TrimRight(strings.SplitN(string(b), "\n", 2)[0], "\r"); tête != "nom;club;cote;pays;tête de série" {
+	if tête := strings.TrimRight(strings.SplitN(string(b), "\n", 2)[0], "\r"); tête != "nom;club;cote;pays;tête de série;équipe" {
 		t.Errorf("en-tête %q", tête)
 	}
 	out, err := players.FromCSV(b)
@@ -190,12 +190,12 @@ func TestPaysEtTeteDeSerie(t *testing.T) {
 		t.Fatal(err)
 	}
 	for i := range in {
-		if out[i].Country != in[i].Country || out[i].Seed != in[i].Seed {
+		if out[i].Country != in[i].Country || out[i].Seed != in[i].Seed || out[i].Team != in[i].Team {
 			t.Errorf("joueur %d : relu %+v, écrit %+v", i, out[i], in[i])
 		}
 	}
-	out, err = players.FromCSV([]byte("Name,Country,Seed\nZoé,de,3\n"))
-	if err != nil || len(out) != 1 || out[0].Country != "de" || out[0].Seed != 3 {
+	out, err = players.FromCSV([]byte("Name,Country,Seed,Team\nZoé,de,3,Sud\n"))
+	if err != nil || len(out) != 1 || out[0].Country != "de" || out[0].Seed != 3 || out[0].Team != "Sud" {
 		t.Errorf("en-têtes anglais : %+v, %v", out, err)
 	}
 }

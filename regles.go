@@ -175,7 +175,7 @@ func phaseRules(c PhaseConfig) rules.PhaseRules {
 	}
 	return rules.PhaseRules{Lives: c.Lives, Rounds: c.Rounds, Length: c.Length, FinalLength: c.FinalLength, Lengths: c.Lengths,
 		LengthLate: c.LengthLate, LateThreshold: c.LateThreshold, Mode: c.Mode, Pairing: c.Pairing, MonradWiden: c.MonradWiden,
-		AvoidClubs: c.AvoidClubs, AvoidCountries: c.AvoidCountries, AvoidRounds: c.AvoidRounds, AvoidExcept: c.AvoidExcept, AllowRematch: c.AllowRematch, Target: c.Target, Consolation: c.Consolation,
+		AvoidClubs: c.AvoidClubs, AvoidCountries: c.AvoidCountries, AvoidRounds: c.AvoidRounds, AvoidExcept: c.AvoidExcept, AvoidTeams: c.AvoidTeams, AllowRematch: c.AllowRematch, Target: c.Target, Consolation: c.Consolation,
 		LastChance: c.LastChance, Reconciliation: c.Reconciliation, Recharge: c.Recharge, GroupSize: c.GroupSize, Groups: c.Groups,
 		Qualifiers: c.Qualifiers, Seeding: c.Seeding, Tiebreak: c.Tiebreak, Accelerated: c.Accelerated, FinalBarrage: c.FinalBarrage}
 }
@@ -211,7 +211,7 @@ func (s *State) instantané(ph *PhaseState, free []PlayerID, apparier bool) rule
 			}
 		}
 		if pl := s.Players[id]; pl != nil {
-			e.Club, e.Country, e.Rating, e.Seed = pl.Club, pl.Country, pl.Rating, pl.Seed
+			e.Club, e.Country, e.Rating, e.Seed, e.Team = pl.Club, pl.Country, pl.Rating, pl.Seed, pl.Team
 		}
 		p.Entrants[i] = e
 	}

@@ -132,9 +132,9 @@ func (v *vue) pairClassicRound(r int, players []Ref, rng *rand.Rand) []Pairing {
 	var bye Ref
 	switch {
 	case r == 1 && v.Rules.Accelerated:
-		pairs, bye = plierAccéléré(v.têtes(players))
+		pairs, bye = v.séparerCoéquipiers(plierAccéléré(v.têtes(players)))
 	case r == 1 && v.Rules.Seeding != "":
-		pairs, bye = plier(v.têtes(players))
+		pairs, bye = v.séparerCoéquipiers(plier(v.têtes(players)))
 	case v.Rules.Pairing == PairingMonrad:
 		pairs, bye = v.pairMonrad(players, rng)
 	default:
@@ -161,6 +161,48 @@ func (v *vue) pairClassicRound(r int, players []Ref, rng *rand.Rand) []Pairing {
 		acts = append(acts, Pairing{Kind: PairBye, Label: lbl, Round: r, A: bye})
 	}
 	return acts
+}
+
+// séparerCoéquipiers : avoid_teams sur une ronde 1 pliée. Une paire de coéquipiers échange son
+// second joueur avec la paire la plus proche qui le permet ; s'il en reste une, l'ordre des têtes
+// s'apparie par la recherche (pairNearest), qui n'en garde que si rien d'autre n'existe.
+func (v *vue) séparerCoéquipiers(pairs [][2]Ref, bye Ref) ([][2]Ref, Ref) {
+	if !v.Rules.AvoidTeams {
+		return pairs, bye
+	}
+	reste := false
+	for i := range pairs {
+		if !v.coéquipiers(pairs[i][0], pairs[i][1]) {
+			continue
+		}
+		fait := false
+		for d := 1; d < len(pairs) && !fait; d++ {
+			for _, j := range []int{i + d, i - d} {
+				if j < 0 || j >= len(pairs) || v.coéquipiers(pairs[i][0], pairs[j][1]) ||
+					v.coéquipiers(pairs[j][0], pairs[i][1]) {
+					continue
+				}
+				pairs[i][1], pairs[j][1] = pairs[j][1], pairs[i][1]
+				fait = true
+				break
+			}
+		}
+		reste = reste || !fait
+	}
+	if !reste {
+		return pairs, bye
+	}
+	ordre := make([]Ref, 0, 2*len(pairs)+1)
+	for _, pr := range pairs {
+		ordre = append(ordre, pr[0])
+	}
+	for _, pr := range pairs {
+		ordre = append(ordre, pr[1])
+	}
+	if bye != "" {
+		ordre = append(ordre, bye)
+	}
+	return v.pairNearest(ordre, bye != "")
 }
 
 // seeds : la tête de série saisie de chaque entrant.
@@ -386,7 +428,7 @@ func (v *vue) chercher(reste []Ref, limite int, sansClub bool, budget *int) ([][
 	for i, p := range reste {
 		pos[p] = i
 	}
-	clubs, pays := make([]string, n), make([]string, n)
+	clubs, pays, équipes := make([]string, n), make([]string, n), make([]string, n)
 	vus, exclus := make([][]bool, n), make([][]bool, n)
 	for i, p := range reste {
 		vus[i], exclus[i] = make([]bool, n), make([]bool, n)
@@ -396,11 +438,19 @@ func (v *vue) chercher(reste []Ref, limite int, sansClub bool, budget *int) ([][
 				vus[i][j] = true
 			}
 		}
+		if v.Rules.AvoidTeams {
+			équipes[i] = e.Team
+		}
 		if v.Rules.AvoidClubs && e.Club != "" && !slices.Contains(v.Rules.AvoidExcept, e.Club) {
 			clubs[i] = e.Club
 		}
 		if v.Rules.AvoidCountries {
 			pays[i] = strings.TrimSpace(e.Country)
+		}
+	}
+	for i := range vus {
+		for j := range vus[i] {
+			vus[i][j] = vus[i][j] || i != j && équipes[i] != "" && équipes[i] == équipes[j]
 		}
 	}
 	if sansClub {

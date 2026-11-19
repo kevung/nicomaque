@@ -67,6 +67,7 @@ Structures
        AvoidCountries bool   `json:"avoid_countries,omitempty"`
        AvoidRounds    int    `json:"avoid_rounds,omitempty"`
        AvoidExcept    []string `json:"avoid_except,omitempty"`
+       AvoidTeams     bool   `json:"avoid_teams,omitempty"`
        AllowRematch   bool   `json:"allow_rematch,omitempty"`
        Target         int    `json:"target,omitempty"`
        Consolation    bool   `json:"consolation,omitempty"`
@@ -164,6 +165,10 @@ Signification des champs de phase
 +--------------------+--------------------------------+--------------------------------------------+
 | ``avoid_except``   | les deux suisses               | Clubs sortis de la comparaison de          |
 |                    |                                | ``avoid_clubs`` (le club hôte)             |
++--------------------+--------------------------------+--------------------------------------------+
+| ``avoid_teams``    | les deux suisses               | Deux coéquipiers (``Player.Team``) comptent|
+|                    |                                | comme déjà rencontrés : ils ne s'affrontent|
+|                    |                                | que si rien d'autre n'existe               |
 +--------------------+--------------------------------+--------------------------------------------+
 | ``allow_rematch``  | ``swiss_lives``                | Autoriser une seconde rencontre entre deux |
 |                    |                                | mêmes joueurs                              |
@@ -299,6 +304,7 @@ Algorithme :
        si p.Tiebreak non vide et p.Kind ∉ {swiss_rounds, manual, round_robin} → erreur
        si p.Tiebreak porte un critère inconnu                  → erreur
        si p.AvoidCountries et p.Kind ∉ {swiss_lives, swiss_rounds} → erreur
+       si p.AvoidTeams et p.Kind ∉ {swiss_lives, swiss_rounds} → erreur
        si p.AvoidRounds < 0, ou p.AvoidRounds != 0 hors swiss_rounds ou sans avoid_clubs ni avoid_countries → erreur
        si p.AvoidExcept non vide sans avoid_clubs              → erreur
        si p.MonradWiden sans p.Pairing == "monrad"             → erreur
