@@ -62,6 +62,36 @@ Les notes (``Note``) sont des codes structurés, jamais des phrases : ``winner``
 ``losses``, ``byes``, ``half_byes``, ``point_diff``, ``points_scored``, ``buchholz``, ``lives``, ``section``, ``qualified``, ``sub``). Leur rendu français (``Note.String``,
 ``fr.go``) ne sert que la console, la démo, ``render/`` et l'export CSV.
 
+Classement par équipes
+----------------------
+
+Un tournoi individuel peut se jouer **par équipes** : chaque joueur porte une équipe
+(``Player.Team``), les matchs restent individuels, sans échiquiers.
+
+.. code:: go
+
+   func (s *State) TeamRanking() []TeamRank          // enveloppe de rules.RankTeams
+   func (s *State) TeamMeeting(a, b string) []MatchID
+   func RankTeams(t []TeamTally) []TeamStanding      // paquet rules, equipes.go
+
+Chaque membre, retiré ou non, apporte à son équipe ses points de toutes les phases, en
+**demi-points** (deux par victoire et par exemption, un par demi-exemption), et ses points de
+match marqués et encaissés, plafonnés à la longueur du match ; un forfait vaut la longueur au
+vainqueur, zéro au perdant. Les équipes se classent par points, puis par différence, puis par
+points marqués ; une égalité sur les trois reste un ex æquo (l'ordre des noms n'est qu'un ordre
+d'affichage). Un joueur sans équipe n'y figure pas ; le classement individuel n'en dépend pas.
+
+Une **rencontre** entre deux équipes est un regroupement après coup : ``TeamMeeting`` rend les
+matchs terminés entre un membre de l'une et un membre de l'autre, dans l'ordre du journal.
+
+Sous ``avoid_teams`` (les deux suisses), deux coéquipiers comptent comme **déjà rencontrés** :
+ils ne s'affrontent que si l'appariement ne peut l'éviter, au même titre qu'une revanche — donc
+librement sous ``allow_rematch``, et dans le secours d'un suisse à vies bloqué (revanche,
+« finale »). Le suisse à vies, dont l'appariement de groupe est glouton, cherche alors un
+appariement complet du groupe quand le glouton laisse des joueurs de côté. Une ronde 1 pliée
+par les têtes (``seeding``, ``accelerated``) échange le second joueur d'une paire de
+coéquipiers avec l'échiquier voisin qui le permet, sinon s'apparie par la recherche.
+
 Prix
 ----
 

@@ -104,6 +104,8 @@ où intervenir et comment vérifier.
   étendent `avoid_clubs` au pays, le bornent aux premières rondes et en sortent le club hôte ; le
   CSV des joueurs lit et écrit le pays et la tête de série. `half_bye` / `half_bye_cancelled`
   (issue #10) : demi-exemption annoncée avant la ronde, un demi-point, pas d'appariement.
+  Équipes (issue #11) : `Player.Team`, `avoid_teams` (coéquipiers tenus pour déjà rencontrés
+  sur les deux suisses), `State.TeamRanking` et `State.TeamMeeting` ; colonne `équipe` du CSV.
 - [x] **Phase à appariement manuel** (issue #13). `KindManual` : `Propose` ne rend que l'attente
   `manual` et, sans match en cours, le passage ou la clôture ; `ManualMatchEvent` et
   `ManualByeEvent` posent une ronde, `manualCheck` (phase_manual.go) refuse le joueur hors phase,

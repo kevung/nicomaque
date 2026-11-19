@@ -57,6 +57,7 @@ func FromCSV(b []byte) ([]tournoi.Player, error) {
 	iClub := col("club")
 	iPR := col("cote", "pr", "rating", "elo")
 	iPays := col("pays", "country")
+	iTeam := col("équipe", "equipe", "team")
 	iSeed := col("tête de série", "tete de serie", "tête", "tete", "seed")
 	if iName < 0 && iFirst < 0 {
 		return nil, fmt.Errorf("aucune colonne de nom reconnue dans %v", head)
@@ -85,7 +86,7 @@ func FromCSV(b []byte) ([]tournoi.Player, error) {
 			id = tournoi.PlayerID(fmt.Sprintf("%s-%d", slug(name), k))
 		}
 		seen[id] = true
-		p := tournoi.Player{ID: id, Name: name, Club: get(iClub), Country: get(iPays)}
+		p := tournoi.Player{ID: id, Name: name, Club: get(iClub), Country: get(iPays), Team: get(iTeam)}
 		if n, err := strconv.Atoi(get(iSeed)); err == nil && n > 0 {
 			p.Seed = n
 		}
@@ -158,16 +159,19 @@ func ToCSV(ps []tournoi.Player) []byte {
 	w := csv.NewWriter(&buf)
 	w.Comma = ';'
 	tête := []string{"nom", "club", "cote"}
-	// Pays et tête de série : des colonnes seulement quand un joueur au moins en porte.
-	avecPays, avecSeed := false, false
+	// Pays, tête de série, équipe : des colonnes seulement quand un joueur au moins en porte.
+	avecPays, avecSeed, avecÉquipe := false, false, false
 	for _, p := range ps {
-		avecPays, avecSeed = avecPays || p.Country != "", avecSeed || p.Seed > 0
+		avecPays, avecSeed, avecÉquipe = avecPays || p.Country != "", avecSeed || p.Seed > 0, avecÉquipe || p.Team != ""
 	}
 	if avecPays {
 		tête = append(tête, "pays")
 	}
 	if avecSeed {
 		tête = append(tête, "tête de série")
+	}
+	if avecÉquipe {
+		tête = append(tête, "équipe")
 	}
 	if avecID {
 		tête = append([]string{"id"}, tête...)
@@ -188,6 +192,9 @@ func ToCSV(ps []tournoi.Player) []byte {
 				seed = strconv.Itoa(p.Seed)
 			}
 			ligne = append(ligne, seed)
+		}
+		if avecÉquipe {
+			ligne = append(ligne, p.Team)
 		}
 		if avecID {
 			ligne = append([]string{string(p.ID)}, ligne...)

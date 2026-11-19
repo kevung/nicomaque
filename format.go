@@ -108,13 +108,17 @@ type PhaseConfig struct {
 	AvoidCountries bool     `json:"avoid_countries,omitempty"`
 	AvoidRounds    int      `json:"avoid_rounds,omitempty"`
 	AvoidExcept    []string `json:"avoid_except,omitempty"`
-	AllowRematch   bool     `json:"allow_rematch,omitempty"`
-	Target         int      `json:"target,omitempty"`         // swiss_lives / gsl : figer quand la somme des vies vaut Target (puissance de 2)
-	Consolation    bool     `json:"consolation,omitempty"`    // bracket : consolante progressive (perdants du tableau principal)
-	LastChance     bool     `json:"last_chance,omitempty"`    // bracket : dernière chance (perdants de la consolante)
-	Reconciliation bool     `json:"reconciliation,omitempty"` // bracket : le vainqueur de la consolante joue le vainqueur du principal (double élimination)
-	Recharge       bool     `json:"recharge,omitempty"`       // bracket : en double élimination, le vainqueur du principal doit être battu deux fois
-	GroupSize      int      `json:"group_size,omitempty"`     // round_robin : taille des poules (défaut 4)
+	// AvoidTeams : suisses. Deux coéquipiers (Player.Team) comptent comme déjà rencontrés : ils
+	// ne s'affrontent que si l'appariement ne peut l'éviter, au même titre qu'une revanche — donc
+	// librement sous allow_rematch.
+	AvoidTeams     bool `json:"avoid_teams,omitempty"`
+	AllowRematch   bool `json:"allow_rematch,omitempty"`
+	Target         int  `json:"target,omitempty"`         // swiss_lives / gsl : figer quand la somme des vies vaut Target (puissance de 2)
+	Consolation    bool `json:"consolation,omitempty"`    // bracket : consolante progressive (perdants du tableau principal)
+	LastChance     bool `json:"last_chance,omitempty"`    // bracket : dernière chance (perdants de la consolante)
+	Reconciliation bool `json:"reconciliation,omitempty"` // bracket : le vainqueur de la consolante joue le vainqueur du principal (double élimination)
+	Recharge       bool `json:"recharge,omitempty"`       // bracket : en double élimination, le vainqueur du principal doit être battu deux fois
+	GroupSize      int  `json:"group_size,omitempty"`     // round_robin : taille des poules (défaut 4)
 	// Groups : round_robin, le NOMBRE de poules, à la place de leur taille (group_size) — une
 	// seule poule fait un toutes-rondes complet. Jamais plus d'une poule pour deux joueurs.
 	Groups     int `json:"groups,omitempty"`
@@ -315,6 +319,9 @@ func (c *Config) Validate() error {
 		}
 		if p.AvoidCountries && p.Kind != KindSwissRounds && p.Kind != KindSwissLives {
 			return fmt.Errorf("phase %d : avoid_countries ne s'applique qu'aux suisses, pas à %q", i, p.Kind)
+		}
+		if p.AvoidTeams && p.Kind != KindSwissRounds && p.Kind != KindSwissLives {
+			return fmt.Errorf("phase %d : avoid_teams ne s'applique qu'aux suisses, pas à %q", i, p.Kind)
 		}
 		if p.BatchMinutes != 0 && p.Kind != KindSwissLives {
 			return fmt.Errorf("phase %d : batch_minutes ne s'applique qu'au suisse continu, pas à %q", i, p.Kind)

@@ -33,13 +33,25 @@ func (v *vue) swissLength() int {
 	return v.Length
 }
 
+// met : a a déjà rencontré b, ou en est le coéquipier sous avoid_teams.
 func (v *vue) met(a, b Ref) bool {
+	if v.coéquipiers(a, b) {
+		return true
+	}
 	for _, o := range v.entrant(a).Opponents {
 		if o == b {
 			return true
 		}
 	}
 	return false
+}
+
+func (v *vue) coéquipiers(a, b Ref) bool {
+	if !v.Rules.AvoidTeams {
+		return false
+	}
+	t := v.entrant(a).Team
+	return t != "" && t == v.entrant(b).Team
 }
 
 // sameClub : a et b partagent une affinité que la configuration demande d'éviter — le club
@@ -122,7 +134,32 @@ func (v *vue) pairGroup(g []Ref, rng *rand.Rand, allowRematch bool) (pairs [][2]
 		libres = append(libres[:found], libres[found+1:]...)
 	}
 	rest = append(rest, libres...)
+	if v.Rules.AvoidTeams && !allowRematch && !v.Rules.AllowRematch && len(rest) >= 2 {
+		if p2, r2, ok := v.pairGroupComplet(g); ok {
+			return p2, r2
+		}
+	}
 	return pairs, rest
+}
+
+// pairGroupComplet : sous avoid_teams, quand le glouton laisse au moins deux joueurs, une
+// recherche complète sans revanche ni coéquipier, dans le même ordre ; dans un groupe impair,
+// le mis de côté est pris en partant de la fin de l'ordre, là où le glouton l'aurait laissé.
+func (v *vue) pairGroupComplet(g []Ref) (pairs [][2]Ref, rest []Ref, ok bool) {
+	if len(g)%2 == 0 {
+		pairs, ok = v.sansRevanche(g)
+		return pairs, nil, ok
+	}
+	for i := len(g) - 1; i >= 0; i-- {
+		reste := append(append([]Ref{}, g[:i]...), g[i+1:]...)
+		if pairs, ok = v.sansRevanche(reste); ok {
+			return pairs, []Ref{g[i]}, true
+		}
+		if v.Search.Exhausted() {
+			break
+		}
+	}
+	return nil, nil, false
 }
 
 // groupe : les joueurs de players qui ont l perdu.

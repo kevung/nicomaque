@@ -26,6 +26,8 @@ type Player struct {
 	// Seed : tête de série SAISIE par l'organisateur (1 = la meilleure) ; 0 = aucune, derrière
 	// toutes les autres dans l'ordre d'inscription. Lue seulement par seeding: "seed".
 	Seed int `json:"seed,omitempty"`
+	// Team : l'équipe, saisie par l'hôte ; vide = aucune. Lue par avoid_teams et TeamRanking.
+	Team string `json:"team,omitempty"`
 }
 
 // MatchID identifie un match dans le tournoi.

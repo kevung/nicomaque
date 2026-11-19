@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 13:05+0100\n"
+"POT-Creation-Date: 2026-11-19 10:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -107,15 +107,15 @@ msgstr ""
 
 #: ../../source/joueurs_csv.rst:31
 msgid ""
-"le pays (``pays``, ``country``) et la tête de série saisie (``tête de "
-"série``, ``tête``, ``seed`` ; un entier positif, sinon aucune) sont lus "
-"s'ils sont là."
+"le pays (``pays``, ``country``), la tête de série saisie (``tête de "
+"série``, ``tête``, ``seed`` ; un entier positif, sinon aucune) et "
+"l'équipe (``équipe``, ``equipe``, ``team``) sont lus s'ils sont là."
 msgstr ""
-"the country (``pays``, ``country``) and the entered seed number (``tête "
-"de série``, ``tête``, ``seed``; a positive integer, otherwise none) are "
-"read when present."
+"the country (``pays``, ``country``), the entered seed number (``tête de "
+"série``, ``tête``, ``seed``; a positive integer, otherwise none) and the "
+"team (``équipe``, ``equipe``, ``team``) are read when present."
 
-#: ../../source/joueurs_csv.rst:34
+#: ../../source/joueurs_csv.rst:35
 msgid ""
 "Le slug conserve les minuscules ASCII, les chiffres et les caractères "
 "non-ASCII (donc les lettres accentuées), remplace espace, tiret, souligné"
@@ -127,7 +127,7 @@ msgstr ""
 "apostrophe with a hyphen, removes the rest, then trims hyphens at the "
 "ends."
 
-#: ../../source/joueurs_csv.rst:42
+#: ../../source/joueurs_csv.rst:43
 msgid ""
 "Export dans le format que ``FromCSV`` relit : séparateur point-virgule, "
 "colonnes ``nom``, ``club``, ``cote``. C'est l'annuaire de l'hôte, qu'on "
@@ -150,10 +150,10 @@ msgstr ""
 "collision suffixes), so that an identifier coming from elsewhere is not "
 "lost."
 
-#: ../../source/joueurs_csv.rst:49
+#: ../../source/joueurs_csv.rst:50
 msgid ""
-"Les colonnes ``pays`` et ``tête de série`` ne sont ajoutées, à la fin, "
-"que si un joueur au moins en porte."
+"Les colonnes ``pays``, ``tête de série`` et ``équipe`` ne sont ajoutées, "
+"à la fin, que si un joueur au moins en porte."
 msgstr ""
-"The ``pays`` and ``tête de série`` columns are added, at the end, only "
-"when at least one player has one."
+"The ``pays``, ``tête de série`` and ``équipe`` columns are added, at the "
+"end, only when at least one player has one."
