@@ -267,3 +267,25 @@ func TestEquipesPliageGarde(t *testing.T) {
 		t.Errorf("ronde 1 pliée : %v, attendu %v", got, want)
 	}
 }
+
+// TestEquipesPetitsChamps : 2 à 5 joueurs tous coéquipiers — rien d'autre n'existe, le tournoi
+// se joue quand même jusqu'au bout, sans panique.
+func TestEquipesPetitsChamps(t *testing.T) {
+	for _, pc := range []tournoi.PhaseConfig{
+		{Kind: tournoi.KindSwissRounds, Length: 3, Rounds: 3, AvoidTeams: true},
+		{Kind: tournoi.KindSwissRounds, Length: 3, Rounds: 2, AvoidTeams: true, Seeding: "rating"},
+		{Kind: tournoi.KindSwissLives, Length: 3, Lives: 2, Mode: "rounds", AvoidTeams: true},
+		{Kind: tournoi.KindSwissLives, Length: 3, Lives: 2, AvoidTeams: true},
+	} {
+		for P := 2; P <= 5; P++ {
+			pl := sim.Champ(P, 6, 2, 2, 10, rand.New(rand.NewSource(int64(P))))
+			for i := range pl {
+				pl[i].Team = "E"
+			}
+			r := sim.Run(tournoi.Config{Phases: []tournoi.PhaseConfig{pc}}, pl, sim.Options{Seed: int64(P)})
+			if r.Err != nil || len(r.State.Final) != P {
+				t.Errorf("%s %s, %d joueurs : %v, %d classés", pc.Kind, pc.Mode, P, r.Err, len(r.State.Final))
+			}
+		}
+	}
+}
