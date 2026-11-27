@@ -122,7 +122,9 @@ saisi par l'organisateur (ou le nom par défaut de ``PhaseName``).
 
 Avec des phases latérales (:ref:`format_consolante`), ``Propose`` ajoute aux propositions de la
 phase principale celles de chaque consolante ouverte, puis les ouvertures ``open_side_phase`` ; la
-clôture attend les consolantes.
+clôture attend les consolantes. Le renoncement ``waive_side_phase`` suit l'ouverture, ou les
+propositions d'une consolante ouverte sans match lancé ; une consolante abandonnée ne retient plus
+la clôture.
 
 L'ordre du repli est important : **attendre la fin des matchs en cours a priorité sur la clôture de
 la phase**. Le cas ``no_pairing`` ne devrait pas se produire dans un tournoi sain ; il signale une

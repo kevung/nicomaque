@@ -81,6 +81,7 @@ Structure d'un événement
        EvDraw            EventKind = "draw"
        EvNextPhase       EventKind = "next_phase"
        EvSidePhaseOpened EventKind = "side_phase_opened"
+       EvSidePhaseWaived EventKind = "side_phase_waived"
        EvRepechage       EventKind = "repechage"
        EvLengthChanged   EventKind = "length_changed"
        EvConfigChanged   EventKind = "config_changed"
@@ -204,6 +205,9 @@ Champs utilisés par type
 +------------------------+-------------------------------------------------------------------------+
 | ``side_phase_opened``  | ``Phase`` (latérale), ``Draw.Groups[0]`` (ses entrants),                |
 |                        | voir :ref:`format_consolante`                                           |
++------------------------+-------------------------------------------------------------------------+
+| ``side_phase_waived``  | ``Phase`` (latérale), ``Draw.Groups[0]`` facultatif (les entrants       |
+|                        | qu'elle aurait eus), voir :ref:`format_consolante`                      |
 +------------------------+-------------------------------------------------------------------------+
 | ``repechage``          | ``Phase`` (la phase de poules), ``Section`` (la poule), ``A`` (le       |
 |                        | qualifié retiré), ``B`` (le repêché)                                    |
@@ -599,6 +603,22 @@ Le retrait d'une exemption posée par erreur dans une phase à appariement manue
    Phases[Phase].Opened = true ; ses entrants y entrent avec les vies de son format
 
 ``State.Current`` ne change pas.
+
+``side_phase_waived``
+~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   si Phase n'est pas latérale, ou déjà abandonnée → erreur
+   si un match de Phase est lancé (en cours ou fini, pas annulé) → *WaiverRefusal (started)
+   si sa source n'a pas commencé → erreur
+   créer, fermées, les phases latérales jusqu'à Phase
+   si Draw : refusé si la phase est ouverte ou si Draw n'a pas un seul groupe de joueurs
+             distincts connus ; sinon ses joueurs y entrent
+   Phases[Phase].Waived = true
+
+La phase ne propose plus rien et ne retient plus la clôture ; ``side_phase_opened`` et
+``match_started`` la refusent.
 
 ``repechage``
 ~~~~~~~~~~~~~

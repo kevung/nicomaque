@@ -92,7 +92,10 @@ const (
 	ActFinish     ActionKind = "finish"      // clore le tournoi
 	// ActOpenSidePhase : ouvrir une phase latérale ; Draw.Groups[0] porte ses entrants.
 	ActOpenSidePhase ActionKind = "open_side_phase"
-	ActWait          ActionKind = "wait" // rien à faire : attendre la fin de matchs en cours
+	// ActWaiveSidePhase : renoncer à une phase latérale qui peut s'ouvrir, ou ouverte sans match
+	// lancé. Jamais implicite : un hôte qui confirme « tout » la laisse de côté.
+	ActWaiveSidePhase ActionKind = "waive_side_phase"
+	ActWait           ActionKind = "wait" // rien à faire : attendre la fin de matchs en cours
 	// ActCancelMatch : annuler un match devenu incohérent après une correction (reparation.go).
 	// Comme toute action, elle est PROPOSÉE : rien n'est annulé d'office.
 	ActCancelMatch ActionKind = "cancel_match"

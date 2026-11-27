@@ -68,11 +68,11 @@ type running struct {
 	n    int
 }
 
-// lançable : ce que l'hôte confirme. Un match retenu (sans table libre, joueur indisponible)
-// attend comme une ActWait : le lancer quand même ferait jouer plus de matchs que la salle n'a
-// de tables.
+// lançable : ce que l'hôte confirme — jamais un renoncement. Un match retenu (sans table libre,
+// joueur indisponible) attend comme une ActWait : le lancer quand même ferait jouer plus de
+// matchs que la salle n'a de tables.
 func lançable(a tournoi.Action) bool {
-	return a.Kind != tournoi.ActWait && (a.Kind != tournoi.ActStartMatch || a.Reason == tournoi.ReasonNone)
+	return a.Kind != tournoi.ActWait && a.Kind != tournoi.ActWaiveSidePhase && (a.Kind != tournoi.ActStartMatch || a.Reason == tournoi.ReasonNone)
 }
 
 // Run joue un tournoi complet.

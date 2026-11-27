@@ -130,7 +130,8 @@ où intervenir et comment vérifier.
   d'autres n'en ont pas eu » entre groupes différents (aujourd'hui par groupe). `pairGroup`.
 - [ ] **Consolante et dernière chance : options de saut** (jusqu'au tour k ; consolante non
   progressive « à tirage » avec une heure limite d'entrée). Les perdants d'UNE ronde ont leur
-  phase latérale (`consolation_of`, `consolante.go`), jouée en parallèle ; y restent à faire la
+  phase latérale (`consolation_of`, `consolante.go`), jouée en parallèle, à laquelle le directeur
+  peut renoncer avant son premier match lancé (`side_phase_waived`) ; y restent à faire la
   réparation proposée après correction de la ronde source (aujourd'hui un avertissement), le
   statut des joueurs de consolante et d'autres formats de consolante que `bracket` et
   `swiss_rounds`.

@@ -110,6 +110,7 @@ const (
 	NoteSectionExit   NoteKind = NoteKind(rules.NoteSectionExit)   // Section + Sub : sorti de cette section là — pas forcément éliminé (State.Statuses)
 	NoteSectionWinner NoteKind = NoteKind(rules.NoteSectionWinner) // Section
 	NotePoolRecord    NoteKind = NoteKind(rules.NotePoolRecord)    // Section, Wins, Qualified
+	NoteWaived        NoteKind = NoteKind(rules.NoteWaived)        // consolante abandonnée (side_phase_waived), rang 0
 )
 
 // Note est la note de classement d'un joueur : un code et ses paramètres, jamais une phrase.

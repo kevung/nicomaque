@@ -121,6 +121,7 @@ const (
 	NoteSectionExit   NoteKind = "section_exit"   // Section + Sub : sorti de cette section-là
 	NoteSectionWinner NoteKind = "section_winner" // Section
 	NotePoolRecord    NoteKind = "pool_record"    // Section, Wins, Qualified
+	NoteWaived        NoteKind = "waived"         // consolante abandonnée, rang 0
 )
 
 // Note est la note de classement d'un joueur : un code et ses paramètres.

@@ -84,8 +84,10 @@ type PhaseState struct {
 	// Side : phase latérale (PhaseConfig.ConsolationOf). Elle ne devient jamais Current ;
 	// Opened dit si ses entrants y sont (side_phase_opened). Une latérale sautée par le passage
 	// de phase reste dans Phases, fermée, pour que l'indice d'une phase reste sa position.
+	// Waived : le directeur y a renoncé (side_phase_waived) ; elle est close sans jeu.
 	Side   bool `json:"side,omitempty"`
 	Opened bool `json:"opened,omitempty"`
+	Waived bool `json:"waived,omitempty"`
 	// sansRonde : posé par beforeRound sur sa copie — la ronde mise de côté, que le départage
 	// ignore aussi. Jamais sérialisé.
 	sansRonde int
@@ -318,6 +320,9 @@ func (s *State) Apply(ev Event) error {
 		if _, dup := s.Matches[ev.MatchID]; dup || ev.MatchID == "" {
 			return fmt.Errorf("identifiant de match invalide ou déjà utilisé : %q", ev.MatchID)
 		}
+		if ph := s.phaseOf(ev.Phase); ph != nil && ph.Waived {
+			return fmt.Errorf("phase %d : consolante abandonnée, aucun match ne s'y joue", ev.Phase)
+		}
 		if ev.A == ev.B || ev.A == "" || ev.B == "" {
 			return fmt.Errorf("match %s : joueurs invalides", ev.MatchID)
 		}
@@ -440,6 +445,10 @@ func (s *State) Apply(ev Event) error {
 		s.enterFrom(next, ph)
 	case EvSidePhaseOpened:
 		if err := s.applySideOpened(ev); err != nil {
+			return err
+		}
+	case EvSidePhaseWaived:
+		if err := s.applySideWaived(ev); err != nil {
 			return err
 		}
 	case EvRepechage:

@@ -466,3 +466,277 @@ func TestConsolanteReconfigurationMotif(t *testing.T) {
 		t.Fatalf("refus : %v", err)
 	}
 }
+
+// ---- Renoncer à une consolante ----
+
+// trouve : la première proposition de ce type pour cette phase.
+func trouve(acts []tournoi.Action, kind tournoi.ActionKind, phase int) (tournoi.Action, bool) {
+	for _, a := range acts {
+		if a.Kind == kind && a.Phase == phase {
+			return a, true
+		}
+	}
+	return tournoi.Action{}, false
+}
+
+// confirme : l'événement de l'action, appliqué et ajouté au journal, une minute après le
+// dernier événement.
+func confirme(t *testing.T, st *tournoi.State, j *tournoi.Journal, a tournoi.Action) tournoi.Event {
+	t.Helper()
+	ev, err := st.EventFromAction(a, (*j)[len(*j)-1].Time.Add(time.Minute))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ev.Kind == tournoi.EvMatchStarted {
+		// sansLaterale a retiré des matchs : le numéro suivant peut être déjà pris.
+		ev.MatchID = tournoi.MatchID(fmt.Sprintf("C%d", len(*j)))
+	}
+	if err := st.Apply(ev); err != nil {
+		t.Fatalf("%s : %v", a.Kind, err)
+	}
+	*j = append(*j, ev)
+	return ev
+}
+
+func renonciation(phase int, now time.Time) tournoi.Event {
+	return tournoi.Event{Version: tournoi.JournalVersion, Kind: tournoi.EvSidePhaseWaived, Time: now, Phase: phase}
+}
+
+// La consolante qui peut s'ouvrir est proposée à l'ouverture ET au renoncement, pendant le
+// tournoi comme à sa fin ; le renoncement débloque la clôture, et le classement de la phase dit
+// « abandonnée » pour chacun de ses entrants, sans prix.
+func TestConsolanteRenoncement(t *testing.T) {
+	players := sim.Champ(8, 6, 2, 2, 10, rand.New(rand.NewSource(81)))
+	cfg := consoSuisse()
+	cfg.Prizes = tournoi.PrizePool{EntryFee: 10, Sections: map[string]tournoi.PrizeScale{
+		tournoi.PrizeSectionAll: {Percents: []float64{70}}, tournoi.SidePhaseSection(1): {Percents: []float64{30}}}}
+	r := sim.Run(cfg, players, sim.Options{Seed: 1})
+	if r.Err != nil {
+		t.Fatal(r.Err)
+	}
+	perdants := perdantsDeRonde(r.Journal, 1)
+	if len(perdants) < 2 {
+		t.Fatalf("%d perdant(s) à la ronde 1 : la graine ne sert pas le test", len(perdants))
+	}
+
+	// Pendant le tournoi : juste avant l'ouverture confirmée par la simulation.
+	ouvertures := 0
+	for i, ev := range r.Journal {
+		if ev.Kind != tournoi.EvSidePhaseOpened {
+			continue
+		}
+		ouvertures++
+		st, err := tournoi.Replay(r.Journal[:i])
+		if err != nil {
+			t.Fatal(err)
+		}
+		acts := st.Propose()
+		ouvre, ok1 := trouve(acts, tournoi.ActOpenSidePhase, 1)
+		renonce, ok2 := trouve(acts, tournoi.ActWaiveSidePhase, 1)
+		if !ok1 || !ok2 {
+			t.Fatalf("avant l'ouverture : ouverture %v, renoncement %v proposés", ok1, ok2)
+		}
+		if renonce.Draw == nil || !mêmesJoueurs(renonce.Draw.Groups[0], ouvre.Draw.Groups[0]) {
+			t.Fatalf("le renoncement ne porte pas les entrants de l'ouverture : %+v", renonce.Draw)
+		}
+	}
+	if ouvertures != 1 {
+		t.Fatalf("%d ouverture(s) de consolante dans la simulation", ouvertures)
+	}
+
+	// À la fin de la phase principale, consolante jamais ouverte.
+	j := sansLaterale(r.Journal, 1)
+	st, err := tournoi.Replay(j)
+	if err != nil {
+		t.Fatal(err)
+	}
+	acts := st.Propose()
+	if _, ok := trouve(acts, tournoi.ActFinish, 2); ok {
+		t.Fatalf("clôture proposée, consolante ouvrable")
+	}
+	renonce, ok := trouve(acts, tournoi.ActWaiveSidePhase, 1)
+	if !ok {
+		t.Fatalf("renoncement non proposé : %v", acts)
+	}
+	ev := confirme(t, st, &j, renonce)
+	if ev.Kind != tournoi.EvSidePhaseWaived || ev.Phase != 1 {
+		t.Fatalf("événement %s phase %d", ev.Kind, ev.Phase)
+	}
+	if !st.Phases[1].Waived || st.Phases[1].Opened {
+		t.Fatalf("phase 1 : abandonnée %v, ouverte %v", st.Phases[1].Waived, st.Phases[1].Opened)
+	}
+	acts = st.Propose()
+	if _, ok := trouve(acts, tournoi.ActOpenSidePhase, 1); ok {
+		t.Fatalf("consolante abandonnée encore proposée à l'ouverture")
+	}
+	if _, ok := trouve(acts, tournoi.ActWaiveSidePhase, 1); ok {
+		t.Fatalf("renoncement proposé deux fois")
+	}
+	fin, ok := trouve(acts, tournoi.ActFinish, 2)
+	if !ok {
+		t.Fatalf("clôture non proposée après le renoncement : %v", acts)
+	}
+	confirme(t, st, &j, fin)
+	if !rangsÉgaux(st.Final, r.State.Final) {
+		t.Fatalf("classement général changé par le renoncement")
+	}
+	conso := st.SectionRanking(tournoi.SidePhaseSection(1))
+	if !mêmesJoueurs(rangJoueurs(conso), perdants) {
+		t.Fatalf("classement de la consolante abandonnée : %v, perdants %v", conso, perdants)
+	}
+	for _, rk := range conso {
+		if rk.Rank != 0 || rk.Note.Kind != tournoi.NoteWaived {
+			t.Fatalf("classement de la consolante abandonnée : %v", conso)
+		}
+	}
+	prix := st.SectionPrizes(tournoi.SidePhaseSection(1))
+	if len(prix) != len(perdants) {
+		t.Fatalf("prix de la consolante abandonnée : %v", prix)
+	}
+	for p, v := range prix {
+		if v != 0 {
+			t.Fatalf("%s touche %.2f d'une consolante abandonnée", p, v)
+		}
+	}
+	re, err := tournoi.Replay(j)
+	if err != nil || !rangsÉgaux(re.SectionRanking(tournoi.SidePhaseSection(1)), conso) || !re.Finished {
+		t.Fatalf("rejeu du journal avec renoncement : %v", err)
+	}
+}
+
+// Ouverte, la consolante reste abandonnable tant qu'aucun match n'y est lancé ; un match lancé
+// puis annulé ne compte pas.
+func TestConsolanteRenoncementApresOuverture(t *testing.T) {
+	players := sim.Champ(8, 6, 2, 2, 10, rand.New(rand.NewSource(81)))
+	r := sim.Run(consoSuisse(), players, sim.Options{Seed: 1})
+	if r.Err != nil {
+		t.Fatal(r.Err)
+	}
+	j := sansLaterale(r.Journal, 1)
+	st, err := tournoi.Replay(j)
+	if err != nil {
+		t.Fatal(err)
+	}
+	ouvre, _ := trouve(st.Propose(), tournoi.ActOpenSidePhase, 1)
+	confirme(t, st, &j, ouvre)
+	tire, ok := trouve(st.Propose(), tournoi.ActDraw, 1)
+	if !ok {
+		t.Fatalf("aucun tirage proposé dans la consolante ouverte")
+	}
+	confirme(t, st, &j, tire)
+	if _, ok := trouve(st.Propose(), tournoi.ActWaiveSidePhase, 1); !ok {
+		t.Fatalf("consolante tirée, sans match : renoncement non proposé")
+	}
+	match, ok := trouve(st.Propose(), tournoi.ActStartMatch, 1)
+	if !ok {
+		t.Fatalf("aucun match proposé dans la consolante tirée")
+	}
+	lancé := confirme(t, st, &j, match)
+	if _, ok := trouve(st.Propose(), tournoi.ActWaiveSidePhase, 1); ok {
+		t.Fatalf("renoncement proposé, un match de la consolante en cours")
+	}
+	annule := tournoi.Event{Version: tournoi.JournalVersion, Kind: tournoi.EvMatchCancelled, Time: lancé.Time, MatchID: lancé.MatchID}
+	if err := st.Apply(annule); err != nil {
+		t.Fatal(err)
+	}
+	j = append(j, annule)
+	renonce, ok := trouve(st.Propose(), tournoi.ActWaiveSidePhase, 1)
+	if !ok || renonce.Draw != nil {
+		t.Fatalf("consolante ouverte, match annulé : renoncement proposé %v, tirage %+v", ok, renonce.Draw)
+	}
+	confirme(t, st, &j, renonce)
+	if _, ok := trouve(st.Propose(), tournoi.ActFinish, 2); !ok {
+		t.Fatalf("clôture non proposée après le renoncement")
+	}
+	conso := st.SectionRanking(tournoi.SidePhaseSection(1))
+	if len(conso) != len(st.Phases[1].Entrants) || len(conso) < 2 || conso[0].Note.Kind != tournoi.NoteWaived {
+		t.Fatalf("classement de la consolante abandonnée après ouverture : %v", conso)
+	}
+}
+
+// Un match de consolante lancé, en cours ou joué : le renoncement est refusé, par un
+// *WaiverRefusal qui nomme le match.
+func TestConsolanteRenoncementRefuse(t *testing.T) {
+	players := sim.Champ(8, 6, 2, 2, 10, rand.New(rand.NewSource(81)))
+	r := sim.Run(consoSuisse(), players, sim.Options{Seed: 1})
+	if r.Err != nil {
+		t.Fatal(r.Err)
+	}
+	j := sansLaterale(r.Journal, 1)
+	st, err := tournoi.Replay(j)
+	if err != nil {
+		t.Fatal(err)
+	}
+	ouvre, _ := trouve(st.Propose(), tournoi.ActOpenSidePhase, 1)
+	confirme(t, st, &j, ouvre)
+	tire, _ := trouve(st.Propose(), tournoi.ActDraw, 1)
+	confirme(t, st, &j, tire)
+	match, _ := trouve(st.Propose(), tournoi.ActStartMatch, 1)
+	lancé := confirme(t, st, &j, match)
+	refusé := func(quand string) {
+		t.Helper()
+		err := st.Apply(renonciation(1, lancé.Time))
+		var refus *tournoi.WaiverRefusal
+		if !errors.As(err, &refus) || refus.Phase != 1 || refus.Reason != tournoi.RefusalStarted || refus.Match != lancé.MatchID {
+			t.Fatalf("%s : renoncement %v, attendu un refus typé sur %s", quand, err, lancé.MatchID)
+		}
+		if st.Phases[1].Waived {
+			t.Fatalf("%s : refusé mais posé", quand)
+		}
+	}
+	refusé("match en cours")
+	if err := st.Apply(tournoi.ResultEvent(lancé.MatchID, lancé.A, 3, 0, lancé.Time)); err != nil {
+		t.Fatal(err)
+	}
+	refusé("match joué")
+	if _, ok := trouve(st.Propose(), tournoi.ActWaiveSidePhase, 1); ok {
+		t.Fatalf("renoncement proposé après un match joué")
+	}
+
+	// Les autres refus : une phase principale, une phase inconnue, deux renoncements, une
+	// ouverture après renoncement.
+	st2, err := tournoi.Replay(sansLaterale(r.Journal, 1))
+	if err != nil {
+		t.Fatal(err)
+	}
+	for nom, phase := range map[string]int{"principale": 2, "inconnue": 7} {
+		if err := st2.Apply(renonciation(phase, lancé.Time)); err == nil {
+			t.Errorf("renoncement à une phase %s accepté", nom)
+		}
+	}
+	if err := st2.Apply(renonciation(1, lancé.Time)); err != nil {
+		t.Fatal(err)
+	}
+	if err := st2.Apply(renonciation(1, lancé.Time)); err == nil {
+		t.Errorf("second renoncement accepté")
+	}
+	if err := st2.Apply(tournoi.Event{Version: tournoi.JournalVersion, Kind: tournoi.EvSidePhaseOpened, Time: lancé.Time,
+		Phase: 1, Draw: ouvre.Draw}); err == nil {
+		t.Errorf("ouverture d'une consolante abandonnée acceptée")
+	}
+	g := ouvre.Draw.Groups[0]
+	if err := st2.Apply(tournoi.Event{Version: tournoi.JournalVersion, Kind: tournoi.EvMatchStarted, Time: lancé.Time,
+		Phase: 1, MatchID: "X1", A: g[0], B: g[1], Length: 3}); err == nil {
+		t.Errorf("match lancé dans une consolante abandonnée")
+	}
+}
+
+func rangJoueurs(r []tournoi.Rank) []tournoi.PlayerID {
+	out := make([]tournoi.PlayerID, len(r))
+	for i, x := range r {
+		out[i] = x.Player
+	}
+	return out
+}
+
+func rangsÉgaux(a, b []tournoi.Rank) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i].Player != b[i].Player || a[i].Rank != b[i].Rank || a[i].Note.Kind != b[i].Note.Kind {
+			return false
+		}
+	}
+	return true
+}

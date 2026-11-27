@@ -54,6 +54,9 @@ const (
 	EvNextPhase    EventKind = "next_phase" // passage à la phase principale suivante
 	// EvSidePhaseOpened : Phase (latérale), Draw.Groups[0] = ses entrants.
 	EvSidePhaseOpened EventKind = "side_phase_opened"
+	// EvSidePhaseWaived : Phase (latérale). Le directeur renonce à la consolante, avant tout
+	// match lancé ; Draw.Groups[0], facultatif, porte les entrants qu'elle aurait eus.
+	EvSidePhaseWaived EventKind = "side_phase_waived"
 	EvRepechage       EventKind = "repechage"      // Phase, Section (poule), A (qualifié retiré), B (repêché)
 	EvLengthChanged   EventKind = "length_changed" // Phase, Length (matchs futurs de la phase)
 	EvConfigChanged   EventKind = "config_changed" // Config (la configuration ENTIÈRE, voir reconfig.go)
@@ -134,6 +137,9 @@ func (s *State) EventFromAction(a Action, now time.Time) (Event, error) {
 		ev.Kind = EvNextPhase
 	case ActOpenSidePhase:
 		ev.Kind = EvSidePhaseOpened
+		ev.Draw = a.Draw
+	case ActWaiveSidePhase:
+		ev.Kind = EvSidePhaseWaived
 		ev.Draw = a.Draw
 	case ActRepechage:
 		ev.Kind = EvRepechage

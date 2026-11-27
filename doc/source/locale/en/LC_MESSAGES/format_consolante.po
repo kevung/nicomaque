@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-27 14:37+0100\n"
+"POT-Creation-Date: 2026-11-27 15:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -194,10 +194,103 @@ msgstr ""
 "be opened or finished."
 
 #: ../../source/format_consolante.rst:81
+msgid "Renoncement"
+msgstr "Waiver"
+
+#: ../../source/format_consolante.rst:83
+msgid ""
+"Le directeur peut **renoncer** à une consolante : faute de tables, de "
+"temps ou de joueurs volontaires. ``Propose`` ajoute l'action "
+"``waive_side_phase`` (``Phase`` : la consolante) :"
+msgstr ""
+"The director can **waive** a consolation: for lack of tables, time or "
+"willing players. ``Propose`` adds the action ``waive_side_phase`` "
+"(``Phase``: the consolation):"
+
+#: ../../source/format_consolante.rst:86
+msgid ""
+"à côté de l'ouverture ``open_side_phase``, quand la consolante peut "
+"s'ouvrir ; elle porte alors les mêmes entrants (``Draw.Groups[0]``) ;"
+msgstr ""
+"next to the opening ``open_side_phase``, when the consolation can open; "
+"it then carries the same entrants (``Draw.Groups[0]``);"
+
+#: ../../source/format_consolante.rst:88
+msgid ""
+"après les propositions de la consolante ouverte, tant qu'**aucun match "
+"n'y est lancé** (le tirage d'un tableau ou l'exemption d'un suisse ne "
+"comptent pas)."
+msgstr ""
+"after the proposals of the opened consolation, as long as **no match has "
+"been started in it** (a bracket draw or a Swiss bye do not count)."
+
+#: ../../source/format_consolante.rst:91
+msgid ""
+"Confirmée, elle devient l'événement ``side_phase_waived``. La consolante "
+"est close sans jeu : plus aucune proposition, plus d'ouverture, et la "
+"clôture ne l'attend plus. Le renoncement est définitif ; un renoncement "
+"n'est jamais implicite (``sim.Run`` et la commande ``ok tous`` de la "
+"console le laissent de côté)."
+msgstr ""
+"Once confirmed, it becomes the event ``side_phase_waived``. The "
+"consolation is closed without play: no more proposals, no more opening, "
+"and the closing no longer waits for it. The waiver is final; a waiver is "
+"never implicit (``sim.Run`` and the console's ``ok tous`` command leave "
+"it aside)."
+
+#: ../../source/format_consolante.rst:96
+msgid ""
+"**Après un match lancé, on ne renonce plus.** Un match en cours ou joué a"
+" un résultat que le classement de la consolante et sa dotation doivent "
+"porter ; l'effacer de fait serait réécrire le tournoi. ``Apply`` refuse "
+"alors ``side_phase_waived`` par un ``*WaiverRefusal`` (``Phase``, "
+"``Reason`` : ``started``, ``Match`` : le premier match lancé). Un match "
+"annulé (``match_cancelled``) ne compte pas : annuler les matchs lancés "
+"rouvre le renoncement. Pour arrêter une consolante entamée, le directeur "
+"la mène à son terme, ou retire ses joueurs."
+msgstr ""
+"**Once a match has started, the consolation can no longer be waived.** A "
+"running or played match has a result that the consolation's ranking and "
+"prizes must carry; erasing it in practice would rewrite the tournament. "
+"``Apply`` then refuses ``side_phase_waived`` with a ``*WaiverRefusal`` "
+"(``Phase``, ``Reason``: ``started``, ``Match``: the first started match)."
+" A cancelled match (``match_cancelled``) does not count: cancelling the "
+"started matches makes the waiver possible again. To stop a consolation "
+"under way, the director plays it to the end, or withdraws its players."
+
+#: ../../source/format_consolante.rst:103
+msgid ""
+"``Apply`` accepte aussi un renoncement **anticipé**, avant que la ronde "
+"source soit soldée, dès que sa phase source a commencé ; il n'est pas "
+"proposé. Les entrants de l'événement sont facultatifs, refusés pour une "
+"consolante déjà ouverte."
+msgstr ""
+"``Apply`` also accepts an **early** waiver, before the source round is "
+"settled, as soon as its source phase has begun; it is not proposed. The "
+"event's entrants are optional, and refused for a consolation already "
+"opened."
+
+#: ../../source/format_consolante.rst:107
+msgid ""
+"Le classement propre d'une consolante abandonnée "
+"(``SectionRanking(\"phase:<i>\")``) liste ses entrants au rang 0, note "
+"``waived`` ; une consolante abandonnée avant toute ouverture, sans "
+"entrants dans l'événement, a un classement vide. Le rang 0 ne touche "
+"aucun prix : la part de dotation de la consolante n'est pas distribuée, "
+"et ``config_changed`` peut la reverser au classement général."
+msgstr ""
+"The own ranking of a waived consolation "
+"(``SectionRanking(\"phase:<i>\")``) lists its entrants at rank 0, note "
+"``waived``; a consolation waived before any opening, with no entrants in "
+"the event, has an empty ranking. Rank 0 wins no prize: the consolation's "
+"share of the prize pool is not distributed, and ``config_changed`` can "
+"move it to the overall ranking."
+
+#: ../../source/format_consolante.rst:114
 msgid "Classement"
 msgstr "Ranking"
 
-#: ../../source/format_consolante.rst:83
+#: ../../source/format_consolante.rst:116
 msgid ""
 "``Ranking()`` ignore les phases latérales. Le classement propre d'une "
 "consolante est ``SectionRanking(SidePhaseSection(i))``, soit la section "
@@ -211,11 +304,11 @@ msgstr ""
 "``SectionRanking(\"main\")`` and the other section names never search a "
 "side phase."
 
-#: ../../source/format_consolante.rst:89
+#: ../../source/format_consolante.rst:122
 msgid "Correction de la ronde source"
 msgstr "Correcting the source round"
 
-#: ../../source/format_consolante.rst:91
+#: ../../source/format_consolante.rst:124
 msgid ""
 "Une correction après l'ouverture peut changer les perdants. La consolante"
 " n'est **pas refaite** : ses entrants sont dans le journal. "
@@ -231,11 +324,11 @@ msgstr ""
 "``phase:<i>``, ``Player``); a second correction that restores the losers "
 "clears them."
 
-#: ../../source/format_consolante.rst:98
+#: ../../source/format_consolante.rst:131
 msgid "Reconfiguration"
 msgstr "Reconfiguration"
 
-#: ../../source/format_consolante.rst:100
+#: ../../source/format_consolante.rst:133
 msgid ""
 "``config_changed`` refuse d'ajouter, de retirer ou de déplacer une phase "
 "latérale parmi les phases déjà créées (``Field`` : ``consolation_of``) : "

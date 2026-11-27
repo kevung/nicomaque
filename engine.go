@@ -293,6 +293,8 @@ func (a Action) String() string {
 		return fmt.Sprintf("Annuler %s : %s contre %s (%s), devenu incohérent", a.Match, a.A, a.B, a.Label)
 	case ActOpenSidePhase:
 		return fmt.Sprintf("Ouvrir %s : %d entrants", a.Label, len(a.Draw.Groups[0]))
+	case ActWaiveSidePhase:
+		return fmt.Sprintf("Renoncer à %s", a.Label)
 	case ActFinish:
 		return "Clore le tournoi"
 	}
