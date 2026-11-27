@@ -7,6 +7,24 @@ Les versions suivent la numérotation sémantique. Une sortie du moteur qui chan
 (proposition, classement) donne une version mineure. Le format du journal est versionné
 indépendamment (champ ``version`` de chaque événement, voir :ref:`annexe_tests`).
 
+0.11.0 — 27 novembre 2026
+-------------------------
+
+- Consolante en parallèle (``consolation_of``) : une phase reçoit les perdants d'une seule ronde
+  d'un suisse par rondes ou d'un seul tour de tableau, et se joue en même temps que la phase
+  principale, sans jamais faire jouer deux matchs à la fois à un même joueur. Son ouverture est
+  proposée (``ActOpenSidePhase``) et écrite au journal (``side_phase_opened``). Son classement est
+  à part (``SectionRanking("phase:<i>")``), et la clôture attend qu'elle soit finie
+  (:ref:`format_consolante`).
+- Équipes : des coéquipiers sont tenus pour s'être déjà rencontrés (``avoid_teams``,
+  ``Player.Team``), et un classement par équipes est disponible.
+- Poules : le repêché d'un qualifié retiré est le suivant au classement de sa poule, départage
+  (``tiebreak``) compris.
+- Suisse par rondes : le plafond de recherche est partagé entre les candidats à l'exemption. Un
+  grand champ impair, avec ``avoid_clubs``, ne multiplie plus le coût par leur nombre.
+- Simulation et prévision (``sim.Run``, ``sim.Forecast``) : les tables de la salle les bornent.
+  Un match sans table libre attend au lieu d'être lancé.
+
 0.10.0 — 19 novembre 2026
 -------------------------
 
