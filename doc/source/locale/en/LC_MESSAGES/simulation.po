@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 22:49+0100\n"
+"POT-Creation-Date: 2026-11-27 14:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -113,6 +113,20 @@ msgstr ""
 
 #: ../../source/simulation.rst:90
 msgid ""
+"Un match retenu attend comme un ``Wait`` : sans table libre "
+"(``waiting_table``), il n'est pas lancé. Une salle de "
+"``Config.Tables.Count`` tables borne donc la simulation : jamais plus de "
+"matchs en cours que de tables, et la durée simulée est celle de cette "
+"salle ; ``Count = 0`` la laisse illimitée."
+msgstr ""
+"A held match waits like a ``Wait``: without a free table "
+"(``waiting_table``), it is not started. A room of ``Config.Tables.Count``"
+" tables therefore bounds the simulation: never more running matches than "
+"tables, and the simulated duration is that of this room; ``Count = 0`` "
+"leaves it unlimited."
+
+#: ../../source/simulation.rst:95
+msgid ""
 "``Hook`` est appelé après chaque événement appliqué : c'est le point "
 "d'accroche des tests d'invariants. Une erreur renvoyée par le hook "
 "interrompt la simulation."
@@ -120,7 +134,7 @@ msgstr ""
 "``Hook`` is called after each applied event: it is the hook point for "
 "invariant tests. An error returned by the hook interrupts the simulation."
 
-#: ../../source/simulation.rst:93
+#: ../../source/simulation.rst:98
 msgid ""
 "``Search`` est **un seul** compteur passé à chaque proposition "
 "(:ref:`budget_recherche`) : sa limite borne la recherche d'appariement de"
@@ -141,7 +155,7 @@ msgstr ""
 "tournament with no possible pairing. ``SearchSteps`` is filled in every "
 "case, whether ``Search`` is set or not."
 
-#: ../../source/simulation.rst:105
+#: ../../source/simulation.rst:110
 msgid ""
 "Crée ``P`` joueurs de PR tirés dans une loi normale ``N(mu, sigma)`` "
 "tronquée à ``[min, max]``, **triés du meilleur au moins bon** : ``P1`` "
@@ -157,11 +171,11 @@ msgstr ""
 "are ``Joueur 1``, ``Joueur 2``… The study's reference field is "
 "``Champ(64, 6, 2, 2, 10)``."
 
-#: ../../source/simulation.rst:112
+#: ../../source/simulation.rst:117
 msgid "Prévision de fin"
 msgstr "End forecast"
 
-#: ../../source/simulation.rst:119
+#: ../../source/simulation.rst:124
 msgid ""
 "Rejoue le journal, puis simule ``K`` fins de tournoi à partir de ``now`` "
 "(la ``k``-ième avec la graine ``seed + k``). Renvoie les durées restantes"
@@ -173,15 +187,15 @@ msgstr ""
 "in minutes, **sorted ascending**: the median is ``out[K/2]``, the 90% "
 "quantile ``out[9K/10]``."
 
-#: ../../source/simulation.rst:123
+#: ../../source/simulation.rst:128
 msgid "Particularités :"
 msgstr "Particularities:"
 
-#: ../../source/simulation.rst:125
+#: ../../source/simulation.rst:130
 msgid "``minPerPoint ≤ 0`` prend ``Config.MinPerPoint`` du tournoi ;"
 msgstr "``minPerPoint ≤ 0`` takes the tournament's ``Config.MinPerPoint``;"
 
-#: ../../source/simulation.rst:126
+#: ../../source/simulation.rst:131
 msgid ""
 "les PR inconnus (0) sont remplacés par la moyenne des PR connus, ou 6 "
 "s'il n'y en a aucun (``rules.MeanRating``) ;"
@@ -189,7 +203,7 @@ msgstr ""
 "unknown PRs (0) are replaced by the mean of the known PRs, or 6 if there "
 "are none (``rules.MeanRating``);"
 
-#: ../../source/simulation.rst:128
+#: ../../source/simulation.rst:133
 #, no-python-format
 msgid ""
 "pour un match déjà en cours, la durée restante est un tirage neuf moins "
@@ -200,7 +214,7 @@ msgstr ""
 "minus the time already elapsed, **floored at 10% of the expected "
 "duration** (``rules.RemainingDuration``);"
 
-#: ../../source/simulation.rst:130
+#: ../../source/simulation.rst:135
 msgid ""
 "le perdant d'un match simulé marque 0 ; chaque fin simulée est bornée à "
 "20 000 tours de boucle ;"
@@ -208,11 +222,15 @@ msgstr ""
 "the loser of a simulated match scores 0; each simulated ending is bounded"
 " to 20,000 loop iterations;"
 
-#: ../../source/simulation.rst:131
+#: ../../source/simulation.rst:136
+msgid "les tables de la configuration bornent chaque fin simulée, comme ``Run`` ;"
+msgstr "the configuration's tables bound each simulated ending, as in ``Run``;"
+
+#: ../../source/simulation.rst:137
 msgid "un tournoi déjà terminé renvoie ``[0]``."
 msgstr "an already finished tournament returns ``[0]``."
 
-#: ../../source/simulation.rst:133
+#: ../../source/simulation.rst:139
 msgid ""
 "Les règles de prévision elles-mêmes vivent dans ``rules`` "
 "(``WinProbability``, ``MeanRating``, ``RemainingDuration``, "
@@ -224,7 +242,7 @@ msgstr ""
 "``AfterBreaks``); ``Forecast`` is their journal wrapper (see "
 ":ref:`horloge`)."
 
-#: ../../source/simulation.rst:143
+#: ../../source/simulation.rst:149
 msgid ""
 "``Durations`` convertit les minutes de ``Forecast`` en ``time.Duration``."
 " ``EstimatedEnd`` donne l'heure de fin estimée : la médiane des ``K`` "
@@ -238,7 +256,7 @@ msgstr ""
 "(``Config.Breaks``, via ``rules.EstimatedEnd``). ``ok`` is false for a "
 "finished tournament or one with no simulated ending."
 
-#: ../../source/simulation.rst:148
+#: ../../source/simulation.rst:154
 msgid ""
 "La prévision est figée par un fichier témoin, "
 "``sim/testdata/prevision.json`` ; ``go test ./sim -update`` le réécrit "
