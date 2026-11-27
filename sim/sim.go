@@ -68,6 +68,13 @@ type running struct {
 	n    int
 }
 
+// lançable : ce que l'hôte confirme. Un match retenu (sans table libre, joueur indisponible)
+// attend comme une ActWait : le lancer quand même ferait jouer plus de matchs que la salle n'a
+// de tables.
+func lançable(a tournoi.Action) bool {
+	return a.Kind != tournoi.ActWait && (a.Kind != tournoi.ActStartMatch || a.Reason == tournoi.ReasonNone)
+}
+
 // Run joue un tournoi complet.
 func Run(cfg tournoi.Config, players []tournoi.Player, opt Options) Result {
 	rng := rand.New(rand.NewSource(opt.Seed))
@@ -119,7 +126,7 @@ func Run(cfg tournoi.Config, players []tournoi.Player, opt Options) Result {
 		}
 		progressed := false
 		for _, a := range acts {
-			if a.Kind == tournoi.ActWait {
+			if !lançable(a) {
 				continue
 			}
 			e, err := st.EventFromAction(a, now)
@@ -259,7 +266,7 @@ func Forecast(j tournoi.Journal, now time.Time, K int, minPerPoint float64, seed
 			acts := st.ProposeAt(t)
 			progressed := false
 			for _, a := range acts {
-				if a.Kind == tournoi.ActWait {
+				if !lançable(a) {
 					continue
 				}
 				e, err := st.EventFromAction(a, t)
