@@ -78,7 +78,8 @@ où intervenir et comment vérifier.
 - [x] **Qualifié de poule retiré avant le tableau** (issue #26, N26). Le moteur propose de
   repêcher le suivant de la poule (`ActRepechage`, événement `repechage`, `repechage.go`) avant le
   passage de phase, puis avant le tirage ; sans confirmation la place reste une exemption, et
-  après le tirage le retiré perd son match par forfait. Ex æquo : une proposition par candidat.
+  après le tirage le retiré perd son match par forfait. Le suivant se lit à la clé de poule
+  (victoires, puis `tiebreak`) ; ex æquo : une proposition par candidat.
 - [x] **« Est-ce que je joue ? »** (blunderDB #550). `State.Statuses` / `State.StatusOf`
   (`statut.go`) donnent le statut de chaque inscrit : en jeu, exempté (tour de tableau ou ronde
   de suisse où il entre), qualifié (pour quelle phase), indécis (entrée `top:N` pas encore

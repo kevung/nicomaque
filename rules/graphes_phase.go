@@ -792,6 +792,30 @@ func PoolQualified(p Phase) []Ref {
 	return v.repecher(v.qualifiedBase())
 }
 
+// PoolNext : les suivants de la poule section hors des joueurs exclus et des retirés — ceux qui
+// partagent la meilleure clé de poule (victoires, puis départage configuré). Plusieurs quand ils
+// restent ex æquo, dans l'ordre des identifiants ; aucun quand la poule est épuisée.
+func PoolNext(p Phase, section string, excluded []Ref) []Ref {
+	v := voir(&p)
+	sec := v.section(section)
+	if sec == nil {
+		return nil
+	}
+	exclu := refSet(excluded)
+	ids, clés := v.poolOrdre(*sec)
+	var out []Ref
+	for _, r := range ids {
+		if exclu[r] || v.withdrawn[r] {
+			continue
+		}
+		if len(out) > 0 && clés[out[0]].devant(clés[r]) {
+			break
+		}
+		out = append(out, r)
+	}
+	return sortedRefs(out)
+}
+
 func (v *vue) qualifiedBase() []Ref {
 	var out []Ref
 	for i := range v.Sections {

@@ -122,7 +122,8 @@ Pas de finale à handicap
 
 Repêchage proposé d'un qualifié de poule retiré
    Quand un qualifié se retire **avant le tirage** du tableau, le moteur propose sa place au
-   suivant de sa poule (le joueur non qualifié et non retiré qui a le plus de victoires). Le
+   suivant de sa poule (le joueur non qualifié et non retiré qui a le plus de victoires, puis le
+   meilleur départage si la poule en a un). Le
    directeur confirme (événement ``repechage``) ou passe à la phase suivante, et la place devient
    une exemption. Le repêchage n'est pas appliqué d'office : un règlement local ou un repêché
    absent peuvent faire préférer l'exemption, et les journaux existants se rejouent à

@@ -18,6 +18,8 @@ type banc struct {
 	now     time.Time
 	// vainqueur : qui gagne un match de poule ou de barrage (section, joueurs).
 	vainqueur func(section string, a, b tournoi.PlayerID) tournoi.PlayerID
+	// score : le score du vainqueur et du perdant ; nil : 5-0.
+	score func(gagnant, perdant tournoi.PlayerID) (int, int)
 }
 
 func nouveauBanc(t *testing.T, cfg tournoi.Config, ids []tournoi.PlayerID) *banc {
@@ -83,7 +85,20 @@ func (b *banc) poules(groupes [][]tournoi.PlayerID) {
 			return
 		}
 		for _, ev := range lancés {
-			b.applique(tournoi.ResultEvent(ev.MatchID, b.vainqueur(ev.Section, ev.A, ev.B), 5, 0, b.now))
+			w := b.vainqueur(ev.Section, ev.A, ev.B)
+			perdant := ev.A
+			if w == ev.A {
+				perdant = ev.B
+			}
+			sw, sp := 5, 0
+			if b.score != nil {
+				sw, sp = b.score(w, perdant)
+			}
+			sa, sb := sw, sp
+			if w != ev.A {
+				sa, sb = sp, sw
+			}
+			b.applique(tournoi.ResultEvent(ev.MatchID, w, sa, sb, b.now))
 		}
 	}
 	b.t.Fatal("les poules ne se terminent pas")
@@ -406,6 +421,46 @@ func TestN26_ExAequo(t *testing.T) {
 	b.confirme(acts[2])
 	if acts := actionsDe(b.st.Propose(), tournoi.ActRepechage); len(acts) != 0 {
 		t.Errorf("le choix du TD clôt la question : %v", acts)
+	}
+}
+
+// TestN26_ExAequoDépartagés : avec un départage configuré, le suivant de la poule est celui du
+// classement de la poule — les ex æquo aux victoires que le départage sépare ne sont plus tous
+// proposés.
+func TestN26_ExAequoDépartagés(t *testing.T) {
+	groupes := [][]tournoi.PlayerID{{"a", "b", "c", "d"}, {"e", "f", "g", "h"}}
+	b := nouveauBanc(t, tournoi.Config{Name: "T", Phases: []tournoi.PhaseConfig{
+		{Kind: tournoi.KindRoundRobin, GroupSize: 4, Qualifiers: 1, Length: 5, Tiebreak: []string{tournoi.TiebreakPointDiff}},
+		{Kind: tournoi.KindBracket, Length: 7},
+	}}, []tournoi.PlayerID{"a", "b", "c", "d", "e", "f", "g", "h"})
+	cycle := map[tournoi.PlayerID]tournoi.PlayerID{"b": "c", "c": "d", "d": "b", "f": "g", "g": "h", "h": "f"}
+	b.vainqueur = func(_ string, x, y tournoi.PlayerID) tournoi.PlayerID {
+		switch {
+		case x == "a" || x == "e":
+			return x
+		case y == "a" || y == "e":
+			return y
+		case cycle[x] == y:
+			return x
+		}
+		return y
+	}
+	// b bat c 5-4, c bat d 5-0, d bat b 5-0 : écarts b -9, c -1, d -5 (défaite 0-5 contre a comprise).
+	b.score = func(g, p tournoi.PlayerID) (int, int) {
+		if (g == "b" && p == "c") || (g == "f" && p == "g") {
+			return 5, 4
+		}
+		return 5, 0
+	}
+	b.poules(groupes)
+	b.retire("a")
+	acts := actionsDe(b.st.Propose(), tournoi.ActRepechage)
+	if len(acts) != 1 || acts[0].A != "a" || acts[0].B != "c" || acts[0].Label.Players != 1 {
+		t.Fatalf("c seul attendu, premier au départage : %+v", acts)
+	}
+	b.confirme(acts[0])
+	if _, err := tournoi.Replay(b.journal); err != nil {
+		t.Fatal(err)
 	}
 }
 
