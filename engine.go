@@ -140,10 +140,10 @@ func (s *State) propose(now time.Time, ext External) []Action {
 			return s.withAbsences(ph, []Action{{Kind: ActWait, Phase: ph.Index, Reason: ReasonMatchesRunning}})
 		}
 		if s.phaseDone(ph) {
-			if s.Current+1 < len(s.Config.Phases) {
+			if nx := s.Config.nextMain(s.Current); nx >= 0 {
 				// Un qualifié de poule retiré : le repêchage est proposé AVANT le passage, qui
 				// reste proposé — le confirmer sans repêcher laisse une exemption (N26).
-				return append(s.proposeRepechages(ph), Action{Kind: ActNextPhase, Phase: ph.Index, Label: Label{Kind: LabelPhase, Text: PhaseName(s.Config.Phases[s.Current+1])}})
+				return append(s.proposeRepechages(ph), Action{Kind: ActNextPhase, Phase: ph.Index, Label: Label{Kind: LabelPhase, Text: PhaseName(s.Config.Phases[nx])}})
 			}
 			return []Action{{Kind: ActFinish, Phase: ph.Index}}
 		}
@@ -151,7 +151,7 @@ func (s *State) propose(now time.Time, ext External) []Action {
 	}
 	if ph.Index > 0 && !ph.Drawn && !ph.Started {
 		// Passage confirmé, tirage pas encore fait : le repêchage reste possible (N26).
-		acts = append(s.proposeRepechages(s.phaseOf(ph.Index-1)), acts...)
+		acts = append(s.proposeRepechages(s.phaseOf(s.Config.prevMain(ph.Index))), acts...)
 	}
 	if !swissKind(ph.Cfg.Kind) {
 		s.holdAbsent(acts) // un suisse n'apparie pas les absents ; un graphe les retient

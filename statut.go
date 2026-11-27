@@ -98,6 +98,8 @@ type statusView struct {
 	undecided map[PlayerID]int
 	// winners : premiers du classement, quand la dernière phase est finie ou le tournoi clos.
 	winners map[PlayerID]bool
+	// nx : la phase principale suivante (-1 sans elle).
+	nx int
 	// champion : le vainqueur du tableau en cours, s'il est connu avant la fin de la phase
 	// (consolante encore en cours).
 	champion PlayerID
@@ -111,11 +113,15 @@ func (s *State) statusView() *statusView {
 	v := &statusView{s: s, cur: cur, last: map[PlayerID]int{}, next: map[PlayerID]bool{},
 		undecided: map[PlayerID]int{}, winners: map[PlayerID]bool{}}
 	for _, ph := range s.Phases {
+		if ph.Side {
+			continue
+		}
 		for _, p := range ph.Entrants {
 			v.last[p] = ph.Index
 		}
 	}
-	v.hasNext = s.Current+1 < len(s.Config.Phases)
+	v.nx = s.Config.nextMain(s.Current)
+	v.hasNext = v.nx >= 0
 	v.done = s.Finished || s.phaseDone(cur)
 	repechage := func(ph *PhaseState, into int) {
 		for _, a := range s.proposeRepechages(ph) {
@@ -136,15 +142,15 @@ func (s *State) statusView() *statusView {
 	case v.done:
 		// Le passage de phase lui-même (EvNextPhase) : enterFrom sur une phase neuve, sans
 		// toucher à l'état.
-		next := newPhaseState(s.Current+1, s.Config.Phases[s.Current+1])
+		next := newPhaseState(v.nx, s.Config.Phases[v.nx])
 		s.enterFrom(next, cur)
 		for _, p := range next.Entrants {
 			v.next[p] = true
 		}
-		repechage(cur, s.Current+1)
+		repechage(cur, v.nx)
 	default:
 		if cur.Index > 0 && !cur.Drawn && !cur.Started {
-			repechage(s.phaseOf(cur.Index-1), cur.Index)
+			repechage(s.phaseOf(s.Config.prevMain(cur.Index)), cur.Index)
 		}
 		if cur.Cfg.Kind == KindBracket || cur.Cfg.Kind == KindLivesBracket {
 			v.champion = bracketChampion(cur)
@@ -167,7 +173,7 @@ func (v *statusView) of(p PlayerID) PlayerStatus {
 		}
 		return PlayerStatus{Player: p, Kind: StatusEliminated, Phase: last}
 	case v.next[p]:
-		return PlayerStatus{Player: p, Kind: StatusQualified, Phase: s.Current + 1}
+		return PlayerStatus{Player: p, Kind: StatusQualified, Phase: v.nx}
 	}
 	if ph, ok := v.undecided[p]; ok {
 		return PlayerStatus{Player: p, Kind: StatusUndecided, Phase: ph}
@@ -177,11 +183,11 @@ func (v *statusView) of(p PlayerID) PlayerStatus {
 	}
 	if !contains(cur.Entrants, p) {
 		// Sorti à une phase précédente : il ne revient que par une phase ouverte à tous.
-		return v.eliminated(p, s.Current+1, last)
+		return v.eliminated(p, v.nx, last)
 	}
 	if v.done {
 		if v.hasNext {
-			return v.eliminated(p, s.Current+2, s.Current)
+			return v.eliminated(p, v.nx+1, s.Current)
 		}
 		return PlayerStatus{Player: p, Kind: StatusEliminated, Phase: s.Current}
 	}
@@ -205,7 +211,7 @@ func (v *statusView) of(p PlayerID) PlayerStatus {
 		if sec == nil {
 			if p == v.champion {
 				if v.hasNext {
-					return PlayerStatus{Player: p, Kind: StatusQualified, Phase: s.Current + 1}
+					return PlayerStatus{Player: p, Kind: StatusQualified, Phase: v.nx}
 				}
 				return PlayerStatus{Player: p, Kind: StatusWinner, Phase: s.Current}
 			}
@@ -230,15 +236,18 @@ func (v *statusView) phaseOver(p PlayerID) PlayerStatus {
 	if !v.hasNext {
 		return PlayerStatus{Player: p, Kind: StatusEliminated, Phase: s.Current}
 	}
-	if strings.HasPrefix(s.Config.Phases[s.Current+1].Entry, "top:") {
-		return PlayerStatus{Player: p, Kind: StatusUndecided, Phase: s.Current + 1}
+	if strings.HasPrefix(s.Config.Phases[v.nx].Entry, "top:") {
+		return PlayerStatus{Player: p, Kind: StatusUndecided, Phase: v.nx}
 	}
-	return v.eliminated(p, s.Current+1, s.Current)
+	return v.eliminated(p, v.nx, s.Current)
 }
 
 // eliminated : éliminé à la phase last, sauf si une phase à partir de from prend tout le monde
 // (entrée « all ») — il y entrera.
 func (v *statusView) eliminated(p PlayerID, from, last int) PlayerStatus {
+	if from < 0 {
+		from = len(v.s.Config.Phases) // pas de phase principale suivante
+	}
 	for i := from; i < len(v.s.Config.Phases); i++ {
 		if v.s.Config.Phases[i].Entry == "all" {
 			return PlayerStatus{Player: p, Kind: StatusQualified, Phase: i}

@@ -78,6 +78,11 @@ type PhaseState struct {
 	Started  bool               `json:"started"`
 	// Repechages : poules, qualifié retiré → joueur repêché à sa place (repechage.go).
 	Repechages map[PlayerID]PlayerID `json:"repechages,omitempty"`
+	// Side : phase latérale (PhaseConfig.ConsolationOf). Elle ne devient jamais Current ;
+	// Opened dit si ses entrants y sont (side_phase_opened). Une latérale sautée par le passage
+	// de phase reste dans Phases, fermée, pour que l'indice d'une phase reste sa position.
+	Side   bool `json:"side,omitempty"`
+	Opened bool `json:"opened,omitempty"`
 	// sansRonde : posé par beforeRound sur sa copie — la ronde mise de côté, que le départage
 	// ignore aussi. Jamais sérialisé.
 	sansRonde int
@@ -125,7 +130,21 @@ type Src struct {
 
 func newPhaseState(i int, cfg PhaseConfig) *PhaseState {
 	return &PhaseState{Index: i, Cfg: cfg, Lives: map[PlayerID]int{}, Losses: map[PlayerID]int{},
-		Wins: map[PlayerID]int{}, Byes: map[PlayerID]int{}, ByeRounds: map[PlayerID][]int{}, Opponents: map[PlayerID][]PlayerID{}, Length: cfg.Length}
+		Wins: map[PlayerID]int{}, Byes: map[PlayerID]int{}, ByeRounds: map[PlayerID][]int{}, Opponents: map[PlayerID][]PlayerID{}, Length: cfg.Length,
+		Side: cfg.Side()}
+}
+
+// growPhases crée, fermées, les phases latérales jusqu'à l'indice n exclu. Validate garantit
+// que toute phase entre la dernière créée et n est latérale.
+func (s *State) growPhases(n int) error {
+	for len(s.Phases) < n {
+		i := len(s.Phases)
+		if !s.Config.Phases[i].Side() {
+			return fmt.Errorf("phase %d : phase principale pas encore commencée", i)
+		}
+		s.Phases = append(s.Phases, newPhaseState(i, s.Config.Phases[i]))
+	}
+	return nil
 }
 
 // Replay reconstruit l'état à partir du journal.
@@ -399,7 +418,8 @@ func (s *State) Apply(ev Event) error {
 		}
 	case EvNextPhase:
 		ph := s.phase()
-		if ph == nil || s.Current+1 >= len(s.Config.Phases) {
+		nx := s.Config.nextMain(s.Current)
+		if ph == nil || nx < 0 {
 			return fmt.Errorf("pas de phase suivante")
 		}
 		// Une phase manuelle ne finit que sur l'ordre du directeur : rien d'autre ne retient
@@ -407,10 +427,13 @@ func (s *State) Apply(ev Event) error {
 		if ph.Cfg.Kind == KindManual && s.runningInPhase(ph) > 0 {
 			return fmt.Errorf("phase %d : %d match(s) en cours", ph.Index, s.runningInPhase(ph))
 		}
+		if err := s.growPhases(nx); err != nil || len(s.Phases) != nx {
+			return fmt.Errorf("phase %d : les phases latérales qui la précèdent sont incohérentes", nx)
+		}
 		ph.Done = true
-		next := newPhaseState(s.Current+1, s.Config.Phases[s.Current+1])
+		next := newPhaseState(nx, s.Config.Phases[nx])
 		s.Phases = append(s.Phases, next)
-		s.Current++
+		s.Current = nx
 		s.enterFrom(next, ph)
 	case EvRepechage:
 		if err := s.applyRepechage(ev); err != nil {
@@ -812,9 +835,11 @@ func (s *State) sharedTables() []Warning {
 // précédentes (joueurs éliminés plus tôt classés derrière), ex æquo conservés
 // (rules.MergeRankings sur les rules.Rank de chaque phase).
 func (s *State) Ranking() []Rank {
-	parPhase := make([][]rules.Standing, len(s.Phases))
-	for i, ph := range s.Phases {
-		parPhase[i] = rules.Rank(s.bilan(ph))
+	parPhase := make([][]rules.Standing, 0, len(s.Phases))
+	for _, ph := range s.Phases {
+		if !ph.Side {
+			parPhase = append(parPhase, rules.Rank(s.bilan(ph)))
+		}
 	}
 	return fromStandings(rules.MergeRankings(parPhase))
 }

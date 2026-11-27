@@ -311,8 +311,8 @@ func (s *State) départage(ph *PhaseState, entrants []rules.Entrant) {
 }
 
 // seed : la graine des propositions à l'état courant.
-func (s *State) seed() rules.Seed {
-	return rules.Seed{Base: s.Seed, Events: s.NEvents, Phase: s.Current}
+func (s *State) seed(ph *PhaseState) rules.Seed {
+	return rules.Seed{Base: s.Seed, Events: s.NEvents, Phase: ph.Index}
 }
 
 // actions : les propositions de rules, en actions du moteur. Le tirage d'un tableau ou d'un bloc
