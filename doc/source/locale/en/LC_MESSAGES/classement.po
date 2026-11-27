@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-27 14:15+0100\n"
+"POT-Creation-Date: 2026-11-27 15:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -109,8 +109,8 @@ msgid ""
 "Les notes (``Note``) sont des codes structurés, jamais des phrases : "
 "``winner``, ``finalist``, ``alive``, ``record``, ``forfeit``, "
 "``withdrawn``, ``running``, ``awaiting_draw``, ``unranked``, "
-"``section_exit``, ``section_winner``, ``pool_record``, avec leurs "
-"paramètres (``wins``, ``losses``, ``byes``, ``half_byes``, "
+"``section_exit``, ``section_winner``, ``pool_record``, ``waived``, avec "
+"leurs paramètres (``wins``, ``losses``, ``byes``, ``half_byes``, "
 "``point_diff``, ``points_scored``, ``buchholz``, ``lives``, ``section``, "
 "``qualified``, ``sub``). Leur rendu français (``Note.String``, ``fr.go``)"
 " ne sert que la console, la démo, ``render/`` et l'export CSV."
@@ -118,11 +118,11 @@ msgstr ""
 "Notes (``Note``) are structured codes, never sentences: ``winner``, "
 "``finalist``, ``alive``, ``record``, ``forfeit``, ``withdrawn``, "
 "``running``, ``awaiting_draw``, ``unranked``, ``section_exit``, "
-"``section_winner``, ``pool_record``, with their parameters (``wins``, "
-"``losses``, ``byes``, ``half_byes``, ``point_diff``, ``points_scored``, "
-"``buchholz``, ``lives``, ``section``, ``qualified``, ``sub``). Their "
-"French rendering (``Note.String``, ``fr.go``) serves only the console, "
-"the demo, ``render/`` and the CSV export."
+"``section_winner``, ``pool_record``, ``waived``, with their parameters "
+"(``wins``, ``losses``, ``byes``, ``half_byes``, ``point_diff``, "
+"``points_scored``, ``buchholz``, ``lives``, ``section``, ``qualified``, "
+"``sub``). Their French rendering (``Note.String``, ``fr.go``) only serves"
+" the console, the demo, ``render/`` and the CSV export."
 
 #: ../../source/classement.rst:66
 msgid "Classement par équipes"
@@ -307,12 +307,14 @@ msgstr ""
 msgid ""
 "``Ranking()`` ignore les phases latérales ; une consolante en parallèle "
 "se classe par ``SectionRanking(\"phase:<i>\")`` "
-"(:ref:`format_consolante`)."
+"(:ref:`format_consolante`). Abandonnée, elle classe ses entrants au rang "
+"0, note ``waived``, sans prix."
 msgstr ""
 "``Ranking()`` ignores side phases; a parallel consolation is ranked by "
-"``SectionRanking(\"phase:<i>\")`` (:ref:`format_consolante`)."
+"``SectionRanking(\"phase:<i>\")`` (:ref:`format_consolante`). Once "
+"waived, it ranks its entrants at rank 0, note ``waived``, with no prize."
 
-#: ../../source/classement.rst:188
+#: ../../source/classement.rst:189
 msgid ""
 "``SectionRanking(sec)`` est le classement PROPRE d'une section : ses "
 "joueurs, par tour atteint dans cette section, le vainqueur en tête. Il "
@@ -349,7 +351,7 @@ msgstr ""
 " the wrapper looks for the section from the last phase to the first, the "
 "most recent one bearing that name counting."
 
-#: ../../source/classement.rst:201
+#: ../../source/classement.rst:202
 #, no-python-format
 msgid ""
 "``Config.Validate`` refuse une dotation incohérente : pourcentages ET "
@@ -365,7 +367,7 @@ msgstr ""
 " A wrong prize distribution only shows when it is time to pay, in front "
 "of the players."
 
-#: ../../source/classement.rst:206
+#: ../../source/classement.rst:207
 msgid ""
 "La forme liste (``\"prizes\": [100, 60, 40]``, une simple liste de "
 "montants) est également lue (``PrizePool.UnmarshalJSON``) et devient le "
@@ -377,11 +379,11 @@ msgstr ""
 "of the overall standings (``Sections[\"all\"].Amounts``): journals that "
 "use it are re-read without being rewritten."
 
-#: ../../source/classement.rst:211
+#: ../../source/classement.rst:212
 msgid "Export CSV"
 msgstr "CSV export"
 
-#: ../../source/classement.rst:217
+#: ../../source/classement.rst:218
 msgid ""
 "Séparateur ``;``, en-tête ``section;rang;id;nom;club;note;prix``. La "
 "première colonne dit à quel classement la ligne appartient : ``all`` pour"

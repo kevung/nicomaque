@@ -337,7 +337,11 @@ func (t *td) exec(f []string) error {
 		}
 		var sel []tournoi.Action
 		if which == "tous" {
-			sel = t.acts
+			for _, a := range t.acts {
+				if a.Kind != tournoi.ActWaiveSidePhase { // un renoncement se confirme seul
+					sel = append(sel, a)
+				}
+			}
 		} else {
 			n, err := strconv.Atoi(which)
 			if err != nil || n < 1 || n > len(t.acts) {

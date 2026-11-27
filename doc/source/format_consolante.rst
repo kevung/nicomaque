@@ -77,6 +77,39 @@ chaque consolante ouverte soit finie et qu'aucune ne reste à ouvrir.
 Cette attente vaut pour tout format de dernière phase, phase manuelle comprise ; ``Apply`` refuse
 de même un ``finished`` tant qu'une consolante reste à ouvrir ou à finir.
 
+Renoncement
+-----------
+
+Le directeur peut **renoncer** à une consolante : faute de tables, de temps ou de joueurs
+volontaires. ``Propose`` ajoute l'action ``waive_side_phase`` (``Phase`` : la consolante) :
+
+- à côté de l'ouverture ``open_side_phase``, quand la consolante peut s'ouvrir ; elle porte alors
+  les mêmes entrants (``Draw.Groups[0]``) ;
+- après les propositions de la consolante ouverte, tant qu'**aucun match n'y est lancé** (le
+  tirage d'un tableau ou l'exemption d'un suisse ne comptent pas).
+
+Confirmée, elle devient l'événement ``side_phase_waived``. La consolante est close sans jeu :
+plus aucune proposition, plus d'ouverture, et la clôture ne l'attend plus. Le renoncement est
+définitif ; un renoncement n'est jamais implicite (``sim.Run`` et la commande ``ok tous`` de la
+console le laissent de côté).
+
+**Après un match lancé, on ne renonce plus.** Un match en cours ou joué a un résultat que le
+classement de la consolante et sa dotation doivent porter ; l'effacer de fait serait réécrire le
+tournoi. ``Apply`` refuse alors ``side_phase_waived`` par un ``*WaiverRefusal`` (``Phase``,
+``Reason`` : ``started``, ``Match`` : le premier match lancé). Un match annulé
+(``match_cancelled``) ne compte pas : annuler les matchs lancés rouvre le renoncement. Pour
+arrêter une consolante entamée, le directeur la mène à son terme, ou retire ses joueurs.
+
+``Apply`` accepte aussi un renoncement **anticipé**, avant que la ronde source soit soldée, dès que
+sa phase source a commencé ; il n'est pas proposé. Les entrants de l'événement sont facultatifs,
+refusés pour une consolante déjà ouverte.
+
+Le classement propre d'une consolante abandonnée (``SectionRanking("phase:<i>")``) liste ses
+entrants au rang 0, note ``waived`` ; une consolante abandonnée avant toute ouverture, sans
+entrants dans l'événement, a un classement vide. Le rang 0 ne touche aucun prix : la part de
+dotation de la consolante n'est pas distribuée, et ``config_changed`` peut la reverser au
+classement général.
+
 Classement
 ----------
 

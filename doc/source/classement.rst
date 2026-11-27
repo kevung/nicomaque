@@ -58,7 +58,7 @@ Kind                           Fonction (paquet ``rules``, ``classement.go``)
 
 Les notes (``Note``) sont des codes structurés, jamais des phrases : ``winner``, ``finalist``,
 ``alive``, ``record``, ``forfeit``, ``withdrawn``, ``running``, ``awaiting_draw``, ``unranked``,
-``section_exit``, ``section_winner``, ``pool_record``, avec leurs paramètres (``wins``,
+``section_exit``, ``section_winner``, ``pool_record``, ``waived``, avec leurs paramètres (``wins``,
 ``losses``, ``byes``, ``half_byes``, ``point_diff``, ``points_scored``, ``buchholz``, ``lives``, ``section``, ``qualified``, ``sub``). Leur rendu français (``Note.String``,
 ``fr.go``) ne sert que la console, la démo, ``render/`` et l'export CSV.
 
@@ -183,7 +183,8 @@ clôture (``State.Final``) s'il existe, sinon ``Ranking()``.
 renvoie, et le seul qui existe dans un tournoi sans tableau.
 
 ``Ranking()`` ignore les phases latérales ; une consolante en parallèle se classe par
-``SectionRanking("phase:<i>")`` (:ref:`format_consolante`).
+``SectionRanking("phase:<i>")`` (:ref:`format_consolante`). Abandonnée, elle classe ses entrants au
+rang 0, note ``waived``, sans prix.
 
 ``SectionRanking(sec)`` est le classement PROPRE d'une section : ses joueurs, par tour atteint dans
 cette section, le vainqueur en tête. Il diffère du classement général, qui mélange les sections par

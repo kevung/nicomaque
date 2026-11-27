@@ -88,6 +88,9 @@ func (s *State) bracketSurvivors(ph *PhaseState) []PlayerID {
 func (s *State) SectionRanking(name string) []Rank {
 	if i, ok := sidePhaseName(name); ok {
 		if ph := s.phaseOf(i); ph != nil && ph.Side {
+			if ph.Waived {
+				return waivedRanking(ph)
+			}
 			return s.phaseRanking(ph)
 		}
 		return nil

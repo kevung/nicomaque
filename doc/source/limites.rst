@@ -30,7 +30,9 @@ Règles
 - **Consolante en parallèle** : une correction de la ronde source après l'ouverture est signalée,
   sans réparation proposée ; le statut d'un joueur (``Statuses``) ne dit rien de sa consolante.
   Une demi-exemption ne s'annonce pas dans une consolante suisse qui précède la phase courante, et
-  une indisponibilité « jusqu'à la ronde *k* » compte les rondes de la phase principale.
+  une indisponibilité « jusqu'à la ronde *k* » compte les rondes de la phase principale. On n'y
+  renonce plus après son premier match lancé (``*WaiverRefusal``) : une consolante entamée se
+  mène à son terme, et le renoncement ne s'annule pas.
 - **Revanches en consolante** : l'ordre inversé d'entrée évite la revanche immédiate, pas les
   suivantes ; leur fréquence n'est pas mesurée.
 - **Poules en dernière phase** : sans ``final_barrage``, plusieurs poules donnent un premier par

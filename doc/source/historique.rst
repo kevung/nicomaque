@@ -7,6 +7,15 @@ Les versions suivent la numérotation sémantique. Une sortie du moteur qui chan
 (proposition, classement) donne une version mineure. Le format du journal est versionné
 indépendamment (champ ``version`` de chaque événement, voir :ref:`annexe_tests`).
 
+0.12.0 — 27 novembre 2026
+-------------------------
+
+- Consolante en parallèle : le directeur peut y renoncer (``ActWaiveSidePhase``,
+  ``side_phase_waived``) tant qu'aucun match n'y est lancé. Elle est close sans jeu, la clôture ne
+  l'attend plus, et son classement dit ``waived``. Après un match lancé, le renoncement est refusé
+  (``*WaiverRefusal``). Un journal sans renoncement se rejoue comme avant
+  (:ref:`format_consolante`).
+
 0.11.0 — 27 novembre 2026
 -------------------------
 

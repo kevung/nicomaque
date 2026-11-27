@@ -10,7 +10,8 @@ import (
 // Une phase latérale (PhaseConfig.ConsolationOf) se joue à côté de la phase principale, qui
 // reste State.Current. Elle s'ouvre par side_phase_opened, qui porte ses entrants comme un
 // tirage : rejouer un journal ne dépend pas de la règle « perdants de la ronde ». Elle finit
-// quand phaseDone le dit ; aucun événement ne la ferme.
+// quand phaseDone le dit, ou quand le directeur y renonce (side_phase_waived) avant tout match
+// lancé : close sans jeu, elle ne retient plus la clôture.
 //
 // Un joueur n'a jamais deux matchs à la fois (busy regarde toutes les phases). Quand les deux
 // phases le réclament, la principale l'emporte : la latérale ne lui propose rien tant qu'il
@@ -81,7 +82,7 @@ func (s *State) sideSource(k int) ([]PlayerID, bool) {
 // sideOpenable : la phase latérale k peut s'ouvrir — pas encore ouverte, ronde source soldée,
 // au moins deux perdants encore là. Rend ses entrants.
 func (s *State) sideOpenable(k int) ([]PlayerID, bool) {
-	if ph := s.phaseOf(k); ph != nil && ph.Opened {
+	if ph := s.phaseOf(k); ph != nil && (ph.Opened || ph.Waived) {
 		return nil, false
 	}
 	losers, ok := s.sideSource(k)
@@ -105,7 +106,7 @@ func (s *State) sidesPending() bool {
 			continue
 		}
 		if ph := s.phaseOf(k); ph != nil && ph.Opened {
-			if !s.phaseDone(ph) {
+			if !ph.Waived && !s.phaseDone(ph) {
 				return true
 			}
 			continue
@@ -117,6 +118,76 @@ func (s *State) sidesPending() bool {
 	return false
 }
 
+// WaiverRefusal : le renoncement à une phase latérale est refusé parce qu'un de ses matchs est
+// lancé (Reason : RefusalStarted ; Match : le premier). Un match annulé ne compte pas.
+type WaiverRefusal struct {
+	Phase  int     `json:"phase"`
+	Reason string  `json:"reason"`
+	Match  MatchID `json:"match"`
+}
+
+func (r *WaiverRefusal) Error() string {
+	return fmt.Sprintf("phase %d : on ne renonce plus à la consolante, le match %s y est lancé", r.Phase, r.Match)
+}
+
+// sideStarted : le premier match lancé, en cours ou fini, de la phase k.
+func (s *State) sideStarted(k int) (MatchID, bool) {
+	for _, id := range s.MatchOrder {
+		if m := s.Matches[id]; m.Phase == k && m.Status != Cancelled {
+			return id, true
+		}
+	}
+	return "", false
+}
+
+// applySideWaived : la phase latérale est close sans jeu. Fermée, elle garde les entrants que
+// porte l'événement (ceux qu'elle aurait eus), pour que son classement les dise abandonnés.
+func (s *State) applySideWaived(ev Event) error {
+	k := ev.Phase
+	if k < 0 || k >= len(s.Config.Phases) || !s.Config.Phases[k].Side() {
+		return fmt.Errorf("phase %d : pas une phase latérale", k)
+	}
+	if ph := s.phaseOf(k); ph != nil && ph.Waived {
+		return fmt.Errorf("phase %d : déjà abandonnée", k)
+	}
+	if id, ok := s.sideStarted(k); ok {
+		return &WaiverRefusal{Phase: k, Reason: RefusalStarted, Match: id}
+	}
+	if s.phaseOf(s.Config.Phases[k].ConsolationOf.Phase) == nil {
+		return fmt.Errorf("phase %d : sa phase source n'a pas commencé", k)
+	}
+	if err := s.growPhases(k + 1); err != nil {
+		return err
+	}
+	ph := s.Phases[k]
+	if ev.Draw != nil {
+		if ph.Opened || len(ev.Draw.Groups) != 1 {
+			return fmt.Errorf("phase %d : side_phase_waived porte des entrants d'une phase ouverte, ou plusieurs groupes", k)
+		}
+		vus := map[PlayerID]bool{}
+		for _, p := range ev.Draw.Groups[0] {
+			if _, ok := s.Players[p]; !ok || vus[p] {
+				return fmt.Errorf("phase %d : entrant %q inconnu ou répété", k, p)
+			}
+			vus[p] = true
+		}
+		for _, p := range ev.Draw.Groups[0] {
+			s.enter(ph, p, livesFor(ph.Cfg))
+		}
+	}
+	ph.Waived = true
+	return nil
+}
+
+// waivedRanking : chaque entrant d'une phase abandonnée, au rang 0 (aucun prix), note waived.
+func waivedRanking(ph *PhaseState) []Rank {
+	out := make([]Rank, len(ph.Entrants))
+	for i, p := range ph.Entrants {
+		out[i] = Rank{Player: p, Note: Note{Kind: NoteWaived}}
+	}
+	return out
+}
+
 func (s *State) applySideOpened(ev Event) error {
 	k := ev.Phase
 	if k < 0 || k >= len(s.Config.Phases) || !s.Config.Phases[k].Side() {
@@ -125,8 +196,8 @@ func (s *State) applySideOpened(ev Event) error {
 	if ev.Draw == nil || len(ev.Draw.Groups) != 1 || len(ev.Draw.Groups[0]) < 2 {
 		return fmt.Errorf("phase %d : side_phase_opened attend un groupe d'au moins deux entrants", k)
 	}
-	if ph := s.phaseOf(k); ph != nil && ph.Opened {
-		return fmt.Errorf("phase %d : déjà ouverte", k)
+	if ph := s.phaseOf(k); ph != nil && (ph.Opened || ph.Waived) {
+		return fmt.Errorf("phase %d : déjà ouverte ou abandonnée", k)
 	}
 	if src := s.phaseOf(s.Config.Phases[k].ConsolationOf.Phase); src == nil {
 		return fmt.Errorf("phase %d : sa phase source n'a pas commencé", k)
@@ -175,6 +246,10 @@ func (s *State) proposeSides(main []Action, now time.Time, ext External) []Actio
 			continue
 		}
 		ph := s.phaseOf(k)
+		nom := Label{Kind: LabelPhase, Text: PhaseName(p)}
+		if ph != nil && ph.Waived {
+			continue
+		}
 		if ph != nil && ph.Opened {
 			if s.phaseDone(ph) {
 				continue
@@ -183,11 +258,14 @@ func (s *State) proposeSides(main []Action, now time.Time, ext External) []Actio
 			as := v.proposeIn(ph, now, External{BusyTables: tables})
 			note(as)
 			acts = append(acts, as...)
+			if _, lancé := s.sideStarted(k); !lancé {
+				acts = append(acts, Action{Kind: ActWaiveSidePhase, Phase: k, Label: nom})
+			}
 			continue
 		}
 		if in, ok := s.sideOpenable(k); ok {
-			acts = append(acts, Action{Kind: ActOpenSidePhase, Phase: k, Label: Label{Kind: LabelPhase, Text: PhaseName(p)},
-				Draw: &Draw{Groups: [][]PlayerID{in}}})
+			acts = append(acts, Action{Kind: ActOpenSidePhase, Phase: k, Label: nom, Draw: &Draw{Groups: [][]PlayerID{in}}},
+				Action{Kind: ActWaiveSidePhase, Phase: k, Label: nom, Draw: &Draw{Groups: [][]PlayerID{in}}})
 		}
 	}
 	return acts
@@ -239,7 +317,7 @@ func (s *State) waitOccupied(ph *PhaseState) []Action {
 func (s *State) sideWarnings() []Warning {
 	var w []Warning
 	for _, ph := range s.Phases {
-		if !ph.Side || !ph.Opened {
+		if !ph.Side || !ph.Opened || ph.Waived {
 			continue
 		}
 		losers, ok := s.sideSource(ph.Index)

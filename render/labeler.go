@@ -60,6 +60,7 @@ const (
 	TermNoMatch     Term = "no_match"
 	TermVersus      Term = "versus"
 	TermCancel      Term = "cancel"
+	TermWaive       Term = "waive"
 )
 
 // Labeler traduit les codes du moteur, et les mots du rendu, dans la langue de l'utilisateur.
@@ -101,7 +102,7 @@ var motsFrançais = map[Term]string{
 	TermEliminated: "Éliminés", TermBye: "exempt", TermUnknown: "…",
 	TermUnavailable: "indisponible", TermReserved: "réservée", TermLosses: "défaite(s)",
 	TermPlayed: "matchs joués", TermInProgress: "en cours", TermNoMatch: "aucun match",
-	TermVersus: "contre", TermCancel: "Annuler",
+	TermVersus: "contre", TermCancel: "Annuler", TermWaive: "Renoncer à",
 }
 
 func (french) Term(t Term, count int) string {

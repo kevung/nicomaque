@@ -111,7 +111,8 @@ Rang
 La note est un **code** et ses paramètres, jamais une phrase : ``winner``, ``finalist``,
 ``alive`` (``Lives``), ``record`` (``Wins``, ``Losses``), ``forfeit``, ``withdrawn``, ``running``,
 ``awaiting_draw``, ``unranked``, ``section_exit`` (``Section`` + ``Sub``), ``section_winner``,
-``pool_record`` (``Section``, ``Wins``, ``Qualified``) — valeurs exactes dans ``rules/codes.go``.
+``pool_record`` (``Section``, ``Wins``, ``Qualified``) — valeurs exactes dans ``rules/codes.go`` —,
+et ``waived`` (consolante abandonnée, ``codes.go``).
 Le rendu français (``Note.String()``, ``fr.go``) ne sert que la console, la démo et ``render``.
 Voir :ref:`classement`.
 
@@ -129,6 +130,7 @@ Action
        ActCancelMatch ActionKind = "cancel_match" // annuler un match devenu incohérent
        ActRepechage   ActionKind = "repechage"    // repêcher B à la place du qualifié de poule A, retiré
        ActOpenSidePhase ActionKind = "open_side_phase" // ouvrir une phase latérale (consolation_of)
+       ActWaiveSidePhase ActionKind = "waive_side_phase" // y renoncer, avant tout match lancé
        ActFinish      ActionKind = "finish"       // clore le tournoi
        ActWait        ActionKind = "wait"         // rien à faire : attendre
    )

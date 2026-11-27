@@ -195,6 +195,8 @@ func (n Note) String() string {
 		return "en attente du tirage"
 	case NoteUnranked:
 		return "non classé"
+	case NoteWaived:
+		return "consolante abandonnée"
 	case NoteSectionExit:
 		return fmt.Sprintf("%s, %s", sectionName(n.Section), sub)
 	case NoteSectionWinner:
