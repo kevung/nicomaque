@@ -173,6 +173,8 @@ func sansLaterale(j tournoi.Journal, k int) tournoi.Journal {
 	var out tournoi.Journal
 	for _, ev := range j {
 		switch ev.Kind {
+		case tournoi.EvFinished:
+			continue // la consolante n'étant pas jouée, la clôture serait refusée
 		case tournoi.EvSidePhaseOpened, tournoi.EvDraw, tournoi.EvBye:
 			if ev.Phase == k {
 				continue
@@ -268,7 +270,7 @@ func TestConsolanteSuisseEnParallele(t *testing.T) {
 			if err != nil {
 				t.Fatalf("P=%d k=%d : rejeu sans la consolante : %v", P, k, err)
 			}
-			a, b := fmt.Sprint(r.State.Final), fmt.Sprint(seul.Final)
+			a, b := fmt.Sprint(r.State.Final), fmt.Sprint(seul.Ranking())
 			if a != b {
 				t.Fatalf("P=%d k=%d : la consolante change le classement général\n%s\n%s", P, k, a, b)
 			}
@@ -403,5 +405,64 @@ func TestConsolanteCorrectionSource(t *testing.T) {
 		if w.Section == tournoi.SidePhaseSection(1) {
 			t.Fatalf("avertissement resté après la seconde correction : %v", w)
 		}
+	}
+}
+
+// La clôture attend la consolante, quelle que soit la dernière phase principale et quelle que
+// soit la ronde source — y compris la dernière, qui ne se solde qu'à la fin de la phase.
+func TestConsolanteClotureAttend(t *testing.T) {
+	dernières := map[string]tournoi.PhaseConfig{
+		"manuelle": {Kind: tournoi.KindManual, Length: 5, Entry: "top:4"},
+		"tableau":  {Kind: tournoi.KindBracket, Length: 7, Entry: "top:4"},
+		"poules":   {Kind: tournoi.KindRoundRobin, Length: 5, Groups: 1, Qualifiers: 1, FinalBarrage: true, Entry: "top:4"},
+		"aucune":   {},
+	}
+	for nom, fin := range dernières {
+		for _, ronde := range []int{1, 3} {
+			phases := []tournoi.PhaseConfig{
+				{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3},
+				{Kind: tournoi.KindBracket, Length: 3, ConsolationOf: &tournoi.ConsolationSource{Phase: 0, Round: ronde}}}
+			if fin.Kind != "" {
+				phases = append(phases, fin)
+			}
+			players := sim.Champ(8, 6, 2, 2, 10, rand.New(rand.NewSource(int64(ronde))))
+			r := sim.Run(tournoi.Config{Phases: phases}, players, sim.Options{Seed: 1})
+			if r.Err != nil {
+				t.Fatalf("%s ronde %d : %v", nom, ronde, r.Err)
+			}
+			conso := r.State.SectionRanking(tournoi.SidePhaseSection(1))
+			if len(conso) != 4 || countRank1(conso) != 1 {
+				t.Fatalf("%s ronde %d : clos avec la consolante inachevée : %v", nom, ronde, conso)
+			}
+		}
+	}
+	// Un finished confirmé à la main avant la fin de la consolante est refusé.
+	now := time.Date(2026, 1, 1, 9, 0, 0, 0, time.UTC)
+	st, _, _ := tournoi.New(consoSuisse(), 1, now)
+	for _, id := range []tournoi.PlayerID{"a", "b", "c", "d"} {
+		_ = st.Apply(tournoi.PlayerAddedEvent(tournoi.Player{ID: id, Name: string(id)}, now))
+	}
+	if err := st.Apply(tournoi.Event{Version: tournoi.JournalVersion, Kind: tournoi.EvSidePhaseOpened, Time: now,
+		Phase: 1, Draw: &tournoi.Draw{Groups: [][]tournoi.PlayerID{{"a", "b"}}}}); err != nil {
+		t.Fatal(err)
+	}
+	if err := st.Apply(tournoi.Event{Version: tournoi.JournalVersion, Kind: tournoi.EvFinished, Time: now}); err == nil {
+		t.Fatalf("clôture acceptée pendant une consolante ouverte")
+	}
+}
+
+// Changer le format d'une consolante ouverte, la principale passée au-delà : refusé parce
+// qu'elle a commencé, pas parce qu'elle serait finie.
+func TestConsolanteReconfigurationMotif(t *testing.T) {
+	r := sim.Run(consoSuisse(), sim.Champ(8, 6, 2, 2, 10, rand.New(rand.NewSource(5))), sim.Options{Seed: 1})
+	if r.Err != nil {
+		t.Fatal(r.Err)
+	}
+	cfg := consoSuisse()
+	cfg.Phases[1].Kind, cfg.Phases[1].Rounds = tournoi.KindSwissRounds, 2
+	var refus *tournoi.ConfigRefusal
+	err := r.State.Apply(tournoi.ConfigChangedEvent(cfg, r.State.Last))
+	if !errors.As(err, &refus) || refus.Phase != 1 || refus.Reason == tournoi.RefusalFinished {
+		t.Fatalf("refus : %v", err)
 	}
 }

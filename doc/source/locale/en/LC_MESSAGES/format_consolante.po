@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-27 14:15+0100\n"
+"POT-Creation-Date: 2026-11-27 14:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -183,11 +183,21 @@ msgstr ""
 "closing (``finish``) waits until every open consolation is finished and "
 "none is left to open."
 
-#: ../../source/format_consolante.rst:78
+#: ../../source/format_consolante.rst:77
+msgid ""
+"Cette attente vaut pour tout format de dernière phase, phase manuelle "
+"comprise ; ``Apply`` refuse de même un ``finished`` tant qu'une "
+"consolante reste à ouvrir ou à finir."
+msgstr ""
+"This wait holds for any format of last phase, manual phase included; "
+"``Apply`` likewise refuses a ``finished`` while a consolation remains to "
+"be opened or finished."
+
+#: ../../source/format_consolante.rst:81
 msgid "Classement"
 msgstr "Ranking"
 
-#: ../../source/format_consolante.rst:80
+#: ../../source/format_consolante.rst:83
 msgid ""
 "``Ranking()`` ignore les phases latérales. Le classement propre d'une "
 "consolante est ``SectionRanking(SidePhaseSection(i))``, soit la section "
@@ -201,11 +211,11 @@ msgstr ""
 "``SectionRanking(\"main\")`` and the other section names never search a "
 "side phase."
 
-#: ../../source/format_consolante.rst:86
+#: ../../source/format_consolante.rst:89
 msgid "Correction de la ronde source"
 msgstr "Correcting the source round"
 
-#: ../../source/format_consolante.rst:88
+#: ../../source/format_consolante.rst:91
 msgid ""
 "Une correction après l'ouverture peut changer les perdants. La consolante"
 " n'est **pas refaite** : ses entrants sont dans le journal. "
@@ -221,11 +231,11 @@ msgstr ""
 "``phase:<i>``, ``Player``); a second correction that restores the losers "
 "clears them."
 
-#: ../../source/format_consolante.rst:95
+#: ../../source/format_consolante.rst:98
 msgid "Reconfiguration"
 msgstr "Reconfiguration"
 
-#: ../../source/format_consolante.rst:97
+#: ../../source/format_consolante.rst:100
 msgid ""
 "``config_changed`` refuse d'ajouter, de retirer ou de déplacer une phase "
 "latérale parmi les phases déjà créées (``Field`` : ``consolation_of``) : "

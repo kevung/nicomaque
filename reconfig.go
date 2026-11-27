@@ -113,7 +113,7 @@ func (s *State) acceptConfig(next Config, version int) error {
 		if next.Phases[i].Kind != ph.Cfg.Kind {
 			r := &ConfigRefusal{Phase: i, Field: "kind", From: ph.Cfg.Kind, To: next.Phases[i].Kind}
 			switch {
-			case i < s.Current:
+			case i < s.Current && !ph.Side: // une latérale vit à côté de la principale
 				r.Reason = RefusalFinished
 			case ph.Drawn:
 				r.Reason = RefusalDrawn

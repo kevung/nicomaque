@@ -3,6 +3,7 @@ package tournoi
 import (
 	"errors"
 	"fmt"
+	"slices"
 	"sort"
 	"time"
 
@@ -113,7 +114,12 @@ func (s *State) propose(now time.Time, ext External) []Action {
 		return s.proposeIn(s.phase(), now, ext)
 	}
 	ph := s.phase()
-	return s.proposeSides(s.occupiedFor(ph, nil).proposeIn(ph, now, ext), now, ext)
+	main := s.occupiedFor(ph, nil).proposeIn(ph, now, ext)
+	if s.sidesPending() {
+		// La clôture attend les phases latérales, quel que soit le format qui la propose.
+		main = slices.DeleteFunc(main, func(a Action) bool { return a.Kind == ActFinish })
+	}
+	return s.proposeSides(main, now, ext)
 }
 
 // proposeIn : les propositions d'une phase, la principale ou une latérale ouverte.
@@ -155,9 +161,6 @@ func (s *State) proposeIn(ph *PhaseState, now time.Time, ext External) []Action 
 				// Un qualifié de poule retiré : le repêchage est proposé AVANT le passage, qui
 				// reste proposé — le confirmer sans repêcher laisse une exemption (N26).
 				return append(s.proposeRepechages(ph), Action{Kind: ActNextPhase, Phase: ph.Index, Label: Label{Kind: LabelPhase, Text: PhaseName(s.Config.Phases[nx])}})
-			}
-			if s.sidesPending() {
-				return nil // la clôture attend les phases latérales
 			}
 			return []Action{{Kind: ActFinish, Phase: ph.Index}}
 		}

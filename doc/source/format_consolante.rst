@@ -74,6 +74,9 @@ par le fichier de son format (``Action.Phase`` la désigne) :
 La phase principale finie, le passage de phase reste proposé ; la clôture (``finish``) attend que
 chaque consolante ouverte soit finie et qu'aucune ne reste à ouvrir.
 
+Cette attente vaut pour tout format de dernière phase, phase manuelle comprise ; ``Apply`` refuse
+de même un ``finished`` tant qu'une consolante reste à ouvrir ou à finir.
+
 Classement
 ----------
 

@@ -477,6 +477,9 @@ func (s *State) Apply(ev Event) error {
 		}
 		s.Finished, s.Final = false, nil
 	case EvFinished:
+		if s.Config.hasSides() && s.sidesPending() {
+			return fmt.Errorf("une phase latérale reste à ouvrir ou à finir")
+		}
 		s.Finished = true
 		s.Final = s.Ranking()
 	case EvNote:
