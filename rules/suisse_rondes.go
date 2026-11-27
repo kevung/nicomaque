@@ -395,6 +395,9 @@ func (v *vue) pairNearest(ordre []Ref, exempter bool) (pairs [][2]Ref, bye Ref) 
 	}
 	for limite := 0; limite <= len(ordre)/2; limite++ {
 		for _, sansClub := range passes {
+			// Un plafond pour tous les candidats : propre à chacun, il se multiplierait par leur
+			// nombre quand aucun ne peut réussir.
+			budget := swissRoundsBudget
 			for _, c := range candidats {
 				reste := make([]Ref, 0, len(ordre))
 				for _, p := range ordre {
@@ -402,7 +405,6 @@ func (v *vue) pairNearest(ordre []Ref, exempter bool) (pairs [][2]Ref, bye Ref) 
 						reste = append(reste, p)
 					}
 				}
-				budget := swissRoundsBudget
 				if got, ok := v.chercher(reste, limite, sansClub, &budget); ok {
 					return got, c
 				}

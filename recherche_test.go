@@ -151,3 +151,14 @@ func TestProposeSearch_LaunchedRoundSearchesNothing(t *testing.T) {
 		t.Fatalf("ronde lancée : %d actions, %d pas, %v ; attendu aucun pas", len(acts), compte.Used, err)
 	}
 }
+
+// Le plafond d'une tentative ne se multiplie pas par le nombre de candidats à l'exemption : un
+// champ impair où le club rend toute ronde sans rencontre de club impossible reste du même ordre
+// qu'un champ pair voisin.
+func TestSearchBudget_ByeCandidatesShareTheCap(t *testing.T) {
+	cfg, players := suisseClubs(61, 11, 24)
+	r := sim.Run(cfg, players, sim.Options{Seed: 1, Search: &tournoi.SearchBudget{Limit: 30_000_000}})
+	if r.Err != nil {
+		t.Fatalf("61 joueurs, club à 40 %% : %v après %d pas", r.Err, r.SearchSteps)
+	}
+}
