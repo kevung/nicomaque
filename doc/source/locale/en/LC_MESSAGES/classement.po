@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-19 10:02+0100\n"
+"POT-Creation-Date: 2026-11-27 14:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -305,6 +305,15 @@ msgstr ""
 
 #: ../../source/classement.rst:185
 msgid ""
+"``Ranking()`` ignore les phases latérales ; une consolante en parallèle "
+"se classe par ``SectionRanking(\"phase:<i>\")`` "
+"(:ref:`format_consolante`)."
+msgstr ""
+"``Ranking()`` ignores side phases; a parallel consolation is ranked by "
+"``SectionRanking(\"phase:<i>\")`` (:ref:`format_consolante`)."
+
+#: ../../source/classement.rst:188
+msgid ""
 "``SectionRanking(sec)`` est le classement PROPRE d'une section : ses "
 "joueurs, par tour atteint dans cette section, le vainqueur en tête. Il "
 "diffère du classement général, qui mélange les sections par priorité (un "
@@ -340,7 +349,7 @@ msgstr ""
 " the wrapper looks for the section from the last phase to the first, the "
 "most recent one bearing that name counting."
 
-#: ../../source/classement.rst:198
+#: ../../source/classement.rst:201
 #, no-python-format
 msgid ""
 "``Config.Validate`` refuse une dotation incohérente : pourcentages ET "
@@ -356,7 +365,7 @@ msgstr ""
 " A wrong prize distribution only shows when it is time to pay, in front "
 "of the players."
 
-#: ../../source/classement.rst:203
+#: ../../source/classement.rst:206
 msgid ""
 "La forme liste (``\"prizes\": [100, 60, 40]``, une simple liste de "
 "montants) est également lue (``PrizePool.UnmarshalJSON``) et devient le "
@@ -368,11 +377,11 @@ msgstr ""
 "of the overall standings (``Sections[\"all\"].Amounts``): journals that "
 "use it are re-read without being rewritten."
 
-#: ../../source/classement.rst:208
+#: ../../source/classement.rst:211
 msgid "Export CSV"
 msgstr "CSV export"
 
-#: ../../source/classement.rst:214
+#: ../../source/classement.rst:217
 msgid ""
 "Séparateur ``;``, en-tête ``section;rang;id;nom;club;note;prix``. La "
 "première colonne dit à quel classement la ligne appartient : ``all`` pour"

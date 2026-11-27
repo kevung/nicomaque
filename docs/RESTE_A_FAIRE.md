@@ -128,8 +128,12 @@ où intervenir et comment vérifier.
 - [ ] **Byes et exemptions équitables sur plusieurs rondes** : en mode `rounds`, le bye va au
   joueur du groupe le plus bas n'en ayant pas eu ; vérifier la règle « pas de second bye tant que
   d'autres n'en ont pas eu » entre groupes différents (aujourd'hui par groupe). `pairGroup`.
-- [ ] **Consolante et dernière chance : options de saut** (les perdants du tour 1 seulement, ou
-  jusqu'au tour k ; consolante non progressive « à tirage » avec une heure limite d'entrée).
+- [ ] **Consolante et dernière chance : options de saut** (jusqu'au tour k ; consolante non
+  progressive « à tirage » avec une heure limite d'entrée). Les perdants d'UNE ronde ont leur
+  phase latérale (`consolation_of`, `consolante.go`), jouée en parallèle ; y restent à faire la
+  réparation proposée après correction de la ronde source (aujourd'hui un avertissement), le
+  statut des joueurs de consolante et d'autres formats de consolante que `bracket` et
+  `swiss_rounds`.
   Les constructeurs `consolationSection` / `bracketFromSrcs` prennent des sources : ajouter un
   filtre par tour d'origine.
 - [x] **Têtes de série optionnelles** dans les tableaux (issue #10). `PhaseConfig.Seeding` vaut

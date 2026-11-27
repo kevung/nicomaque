@@ -8,7 +8,7 @@ import "github.com/kevung/nicomaque/rules"
 // finale entre les deux derniers — sont dans rules (Pair, GSLBlockSections) ; ici, l'enveloppe.
 
 func (s *State) proposeGSL(ph *PhaseState) []Action {
-	return s.actions(ph, rules.Pair(s.snapshot(ph, nil), s.seed()))
+	return s.actions(ph, rules.Pair(s.snapshot(ph, nil), s.seed(ph)))
 }
 
 func (s *State) applyGSLDraw(ph *PhaseState, d *Draw) error {

@@ -80,6 +80,7 @@ Structure d'un événement
        EvByeCancelled    EventKind = "bye_cancelled"
        EvDraw            EventKind = "draw"
        EvNextPhase       EventKind = "next_phase"
+       EvSidePhaseOpened EventKind = "side_phase_opened"
        EvRepechage       EventKind = "repechage"
        EvLengthChanged   EventKind = "length_changed"
        EvConfigChanged   EventKind = "config_changed"
@@ -200,6 +201,9 @@ Champs utilisés par type
 | ``draw``               | ``Phase``, ``Section`` (barrage), ``Draw`` (obligatoire), ``Label``     |
 +------------------------+-------------------------------------------------------------------------+
 | ``next_phase``         | —                                                                       |
++------------------------+-------------------------------------------------------------------------+
+| ``side_phase_opened``  | ``Phase`` (latérale), ``Draw.Groups[0]`` (ses entrants),                |
+|                        | voir :ref:`format_consolante`                                           |
 +------------------------+-------------------------------------------------------------------------+
 | ``repechage``          | ``Phase`` (la phase de poules), ``Section`` (la poule), ``A`` (le       |
 |                        | qualifié retiré), ``B`` (le repêché)                                    |
@@ -575,13 +579,26 @@ Le retrait d'une exemption posée par erreur dans une phase à appariement manue
 
 ::
 
-   ph := phase courante
-   si ph == nil ou s.Current+1 >= len(Config.Phases) → erreur « pas de phase suivante »
-   si ph est manual et qu'un de ses matchs joue      → erreur « match(s) en cours »
+   ph := phase courante ; nx := phase principale suivante (latérales sautées)
+   si ph == nil ou nx < 0                       → erreur « pas de phase suivante »
+   si ph est manual et qu'un de ses matchs joue → erreur « match(s) en cours »
+   créer, fermées, les phases latérales jusqu'à nx
    ph.Done = true
-   next := newPhaseState(s.Current+1, Config.Phases[s.Current+1])
-   s.Phases += next ; s.Current++
+   next := newPhaseState(nx, Config.Phases[nx])
+   s.Phases += next ; s.Current = nx
    enterFrom(next, ph)
+
+``side_phase_opened``
+~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   si Phase n'est pas latérale, déjà ouverte, ou sa source pas commencée → erreur
+   si Draw.Groups n'est pas un groupe d'au moins deux joueurs distincts connus → erreur
+   créer, fermées, les phases latérales jusqu'à Phase
+   Phases[Phase].Opened = true ; ses entrants y entrent avec les vies de son format
+
+``State.Current`` ne change pas.
 
 ``repechage``
 ~~~~~~~~~~~~~

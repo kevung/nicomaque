@@ -182,6 +182,9 @@ clôture (``State.Final``) s'il existe, sinon ``Ranking()``.
 ``poule:A``\ …), plus la clé réservée ``all`` pour le classement général — celui que ``Ranking()``
 renvoie, et le seul qui existe dans un tournoi sans tableau.
 
+``Ranking()`` ignore les phases latérales ; une consolante en parallèle se classe par
+``SectionRanking("phase:<i>")`` (:ref:`format_consolante`).
+
 ``SectionRanking(sec)`` est le classement PROPRE d'une section : ses joueurs, par tour atteint dans
 cette section, le vainqueur en tête. Il diffère du classement général, qui mélange les sections par
 priorité (un vainqueur de consolante passe derrière un demi-finaliste du principal). Une section de

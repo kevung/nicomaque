@@ -463,7 +463,7 @@ func (r *Renderer) ActionsList(st *tournoi.State, acts []tournoi.Action) string 
 			s = fmt.Sprintf("%s — %s", r.t(TermBye, 0), r.name(st, a.A))
 		case tournoi.ActRepechage:
 			s = fmt.Sprintf("%s : %s → %s", r.L.Label(a.Label), r.name(st, a.A), r.name(st, a.B))
-		case tournoi.ActDraw, tournoi.ActNextPhase:
+		case tournoi.ActDraw, tournoi.ActNextPhase, tournoi.ActOpenSidePhase:
 			s = r.L.Label(a.Label)
 		case tournoi.ActWait:
 			s = r.L.Reason(a.Reason)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 18:44+0100\n"
+"POT-Creation-Date: 2026-11-27 14:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -83,14 +83,34 @@ msgstr ""
 
 #: ../../source/limites.rst:26
 msgid ""
-"**Consolante et dernière chance** : pas d'option de saut (perdants du "
-"premier tour seulement, entrée jusqu'au tour *k*, consolante à tirage "
-"avec heure limite d'entrée)."
+"**Consolante et dernière chance** : dans un tableau, pas d'option de saut"
+" (entrée jusqu'au tour *k*, consolante à tirage avec heure limite "
+"d'entrée). Une consolante des perdants d'une seule ronde se joue en "
+"parallèle (:ref:`format_consolante`), au format ``bracket`` ou "
+"``swiss_rounds`` seulement."
 msgstr ""
-"**Consolation and last chance**: no skip option (first-round losers only,"
-" entry up to round *k*, consolation drawn with an entry deadline)."
+"**Consolation and last chance**: within a bracket, no skip option (entry "
+"up to round *k*, drawn consolation with an entry deadline). A consolation"
+" for the losers of a single round is played in parallel "
+"(:ref:`format_consolante`), in the ``bracket`` or ``swiss_rounds`` format"
+" only."
 
-#: ../../source/limites.rst:28
+#: ../../source/limites.rst:30
+msgid ""
+"**Consolante en parallèle** : une correction de la ronde source après "
+"l'ouverture est signalée, sans réparation proposée ; le statut d'un "
+"joueur (``Statuses``) ne dit rien de sa consolante. Une demi-exemption ne"
+" s'annonce pas dans une consolante suisse qui précède la phase courante, "
+"et une indisponibilité « jusqu'à la ronde *k* » compte les rondes de la "
+"phase principale."
+msgstr ""
+"**Parallel consolation**: a correction of the source round after the "
+"opening is flagged, with no repair proposed; a player's status "
+"(``Statuses``) says nothing about their consolation. A half bye cannot be"
+" announced in a Swiss consolation that precedes the current phase, and an"
+" unavailability “until round *k*” counts the rounds of the main phase."
+
+#: ../../source/limites.rst:34
 msgid ""
 "**Revanches en consolante** : l'ordre inversé d'entrée évite la revanche "
 "immédiate, pas les suivantes ; leur fréquence n'est pas mesurée."
@@ -99,7 +119,7 @@ msgstr ""
 "immediate rematch, not the following ones; their frequency has not been "
 "measured."
 
-#: ../../source/limites.rst:30
+#: ../../source/limites.rst:36
 msgid ""
 "**Poules en dernière phase** : sans ``final_barrage``, plusieurs poules "
 "donnent un premier par poule, et une poule unique ne désigne un vainqueur"
@@ -111,7 +131,7 @@ msgstr ""
 " ``qualifiers`` is 1 or when its first stands alone at the top. A bracket"
 " with a single qualifier cannot be drawn."
 
-#: ../../source/limites.rst:33
+#: ../../source/limites.rst:39
 msgid ""
 "**Barrage tiré puis poule corrigée** : un barrage (de poule ou final) "
 "n'est pas recalculé. Si une correction de résultat de poule, passée après"
@@ -140,7 +160,7 @@ msgstr ""
 "another player of that pool withdraw after the draw, and corrections then"
 " put withdrawn players first: the draw is still right."
 
-#: ../../source/limites.rst:43
+#: ../../source/limites.rst:49
 msgid ""
 "**Ronde de demi-exemptés seuls** : si, après des retraits, tous les "
 "joueurs restants d'une ronde de suisse classique sont demi-exemptés, rien"
@@ -152,7 +172,7 @@ msgstr ""
 "the engine waits (``no_pairing``); removing a half-bye unblocks the "
 "round."
 
-#: ../../source/limites.rst:46
+#: ../../source/limites.rst:52
 msgid ""
 "**Entrée** ``top:N`` **et ex æquo** : ``top:N`` coupe dans l'ordre du "
 "classement de la phase précédente, sans départager des ex æquo à la "
@@ -166,7 +186,7 @@ msgstr ""
 "side of the cut. ``top:1`` is accepted: the phase has a single entrant, "
 "who wins it without playing."
 
-#: ../../source/limites.rst:50
+#: ../../source/limites.rst:56
 msgid ""
 "**Plus de rondes que d'adversaires** : un suisse classique dont "
 "``rounds`` dépasse le nombre d'adversaires possibles (effectif moins un) "
@@ -180,7 +200,7 @@ msgstr ""
 "``Validate`` does not bound ``rounds``: the field size is not known at "
 "configuration time."
 
-#: ../../source/limites.rst:54
+#: ../../source/limites.rst:60
 msgid ""
 "**Suisse classique au fil de l'eau** : après la ronde 1, le reste d'une "
 "ronde appariée en entier se recalcule à chaque proposition ; il peut "
@@ -198,7 +218,7 @@ msgstr ""
 "count is still playing — avoids neither club nor country; only round 1 "
 "and the round remainders paired in full avoid them."
 
-#: ../../source/limites.rst:60
+#: ../../source/limites.rst:66
 msgid ""
 "**Remplacement** : la place d'un joueur retiré ne se reprend pas "
 "(``player_replaced`` est refusé) ; le remplaçant s'inscrit alors comme un"
@@ -208,7 +228,7 @@ msgstr ""
 "(``player_replaced`` is refused); the replacement then registers as a "
 "latecomer."
 
-#: ../../source/limites.rst:62
+#: ../../source/limites.rst:68
 msgid ""
 "**Poules** : l'égalité à trois pour deux places, réglée par barrage, n'a "
 "pas été éprouvée en conditions réelles (durée du barrage)."
@@ -216,7 +236,7 @@ msgstr ""
 "**Pools**: the three-way tie for two places, settled by a play-off, has "
 "not been tested under real conditions (play-off duration)."
 
-#: ../../source/limites.rst:64
+#: ../../source/limites.rst:70
 msgid ""
 "**Classement des places non gagnantes** : les règles (par tour atteint en"
 " tableau, par victoires au suisse, ex æquo partagés) restent à valider "
@@ -226,11 +246,11 @@ msgstr ""
 "bracket, by wins in the Swiss, ties shared) remain to be validated with "
 "the FFBG."
 
-#: ../../source/limites.rst:68
+#: ../../source/limites.rst:74
 msgid "Affichage"
 msgstr "Display"
 
-#: ../../source/limites.rst:70
+#: ../../source/limites.rst:76
 msgid ""
 "Pas d'écran joueur (« votre prochain match, votre table ») dans le paquet"
 " ``render``."
@@ -238,11 +258,11 @@ msgstr ""
 "No player screen (\"your next match, your table\") in the ``render`` "
 "package."
 
-#: ../../source/limites.rst:73
+#: ../../source/limites.rst:79
 msgid "Modèle de l'étude"
 msgstr "Study model"
 
-#: ../../source/limites.rst:75
+#: ../../source/limites.rst:81
 msgid ""
 "L'effet de la longueur de match (exposant α) n'est pas fixé par les "
 "données disponibles."
@@ -250,7 +270,7 @@ msgstr ""
 "The effect of match length (exponent α) is not settled by the available "
 "data."
 
-#: ../../source/limites.rst:76
+#: ../../source/limites.rst:82
 msgid ""
 "Le modèle de durée est une moyenne par point, indépendante du niveau et "
 "de la longueur."
@@ -258,7 +278,7 @@ msgstr ""
 "The duration model is a per-point average, independent of level and "
 "length."
 
-#: ../../source/limites.rst:77
+#: ../../source/limites.rst:83
 msgid ""
 "Le simulateur de l'étude et ``sim`` diffèrent de 1 à 2 écarts types sur "
 "les probabilités de la double élimination et du GSL ; la cause n'est pas "
@@ -302,3 +322,15 @@ msgstr ""
 #~ " warning reports it; it is up "
 #~ "to the director to cancel its "
 #~ "matches to redo it."
+
+#~ msgid ""
+#~ "**Consolante et dernière chance** : pas"
+#~ " d'option de saut (perdants du "
+#~ "premier tour seulement, entrée jusqu'au "
+#~ "tour *k*, consolante à tirage avec "
+#~ "heure limite d'entrée)."
+#~ msgstr ""
+#~ "**Consolation and last chance**: no skip"
+#~ " option (first-round losers only, "
+#~ "entry up to round *k*, consolation "
+#~ "drawn with an entry deadline)."

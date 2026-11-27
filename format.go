@@ -146,6 +146,79 @@ type PhaseConfig struct {
 	// et 2, pour l'appariement seulement : il n'apparaît dans aucun classement. Exige seeding,
 	// que l'étude écarte par défaut : sans ordre de têtes de série, il n'y a pas de moitié haute.
 	Accelerated bool `json:"accelerated,omitempty"`
+	// ConsolationOf fait de la phase une phase LATÉRALE : elle reçoit les perdants d'une ronde
+	// d'une phase antérieure et se joue en parallèle, sans interrompre la chaîne principale —
+	// le passage de phase la saute, et le classement général l'ignore.
+	ConsolationOf *ConsolationSource `json:"consolation_of,omitempty"`
+}
+
+// ConsolationSource : la ronde dont les perdants alimentent une phase latérale. Round est la
+// ronde d'un suisse classique, ou le tour du tableau principal (section main), à partir de 1.
+type ConsolationSource struct {
+	Phase int `json:"phase"`
+	Round int `json:"round"`
+}
+
+// Side : la phase est latérale (consolation_of).
+func (p PhaseConfig) Side() bool { return p.ConsolationOf != nil }
+
+// nextMain : la phase principale qui suit la phase i, ou -1. Les phases latérales sont sautées.
+func (c *Config) nextMain(i int) int {
+	for j := i + 1; j < len(c.Phases); j++ {
+		if !c.Phases[j].Side() {
+			return j
+		}
+	}
+	return -1
+}
+
+// prevMain : la phase principale qui précède la phase i, ou -1.
+func (c *Config) prevMain(i int) int {
+	for j := i - 1; j >= 0; j-- {
+		if !c.Phases[j].Side() {
+			return j
+		}
+	}
+	return -1
+}
+
+// validateSide : une phase latérale suit sa source dans le bloc des phases latérales qui
+// précède la phase principale suivante. Sans cette contiguïté, l'ouverture d'une latérale
+// devrait créer l'état d'une phase principale qui n'a pas encore commencé.
+func (c *Config) validateSide(i int) error {
+	p := &c.Phases[i]
+	src := p.ConsolationOf
+	if p.Kind != KindBracket && p.Kind != KindSwissRounds {
+		return fmt.Errorf("phase %d : consolation_of n'admet qu'une consolante %q ou %q, pas %q", i, KindBracket, KindSwissRounds, p.Kind)
+	}
+	if src.Phase < 0 || src.Phase >= i {
+		return fmt.Errorf("phase %d : consolation_of désigne la phase %d, qui ne la précède pas", i, src.Phase)
+	}
+	from := c.Phases[src.Phase]
+	if from.Side() {
+		return fmt.Errorf("phase %d : consolation_of désigne la phase %d, elle-même latérale", i, src.Phase)
+	}
+	for j := src.Phase + 1; j < i; j++ {
+		if !c.Phases[j].Side() {
+			return fmt.Errorf("phase %d : consolation_of — la phase principale %d la sépare de sa source %d", i, j, src.Phase)
+		}
+	}
+	switch {
+	case from.Kind == KindBracket:
+	case from.Kind == KindSwissRounds && byRounds(from):
+		if src.Round > from.Rounds {
+			return fmt.Errorf("phase %d : consolation_of désigne la ronde %d d'un suisse en %d rondes", i, src.Round, from.Rounds)
+		}
+	default:
+		return fmt.Errorf("phase %d : consolation_of n'admet qu'une source %q par rondes ou %q, pas %q", i, KindSwissRounds, KindBracket, from.Kind)
+	}
+	if src.Round < 1 {
+		return fmt.Errorf("phase %d : consolation_of sans ronde (round ≥ 1)", i)
+	}
+	if p.Entry != "" && p.Entry != "survivors" {
+		return fmt.Errorf("phase %d : entry %q sur une phase consolation_of, dont les entrants sont les perdants de sa ronde", i, p.Entry)
+	}
+	return nil
 }
 
 func (p *PhaseConfig) validateTiebreak(i int) error {
@@ -298,6 +371,11 @@ func (c *Config) Validate() error {
 			}
 		default:
 			return fmt.Errorf("phase %d : type %q inconnu", i, p.Kind)
+		}
+		if p.Side() {
+			if err := c.validateSide(i); err != nil {
+				return err
+			}
 		}
 		if p.Entry == "" {
 			p.Entry = "survivors"

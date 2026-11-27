@@ -12,7 +12,7 @@ import (
 // (Pair, PoolSections, PoolTie, PoolQualified, Rank) ; ici, l'enveloppe.
 
 func (s *State) proposeRR(ph *PhaseState) []Action {
-	return s.actions(ph, rules.Pair(s.snapshot(ph, nil), s.seed()))
+	return s.actions(ph, rules.Pair(s.snapshot(ph, nil), s.seed(ph)))
 }
 
 // rrWins : victoires de chaque joueur dans une section (rules.PoolWins).

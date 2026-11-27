@@ -67,7 +67,7 @@ func (s *State) proposeSwiss(ph *PhaseState) []Action {
 		} else {
 			avant := s.snapshot(ph, s.free(ph, 1))
 			avant.Rules.Mode = rules.ModeRounds
-			return s.actions(ph, rules.Pair(avant, s.seed()))
+			return s.actions(ph, rules.Pair(avant, s.seed(ph)))
 		}
 	}
 	r := 0
@@ -80,9 +80,12 @@ func (s *State) proposeSwiss(ph *PhaseState) []Action {
 		if s.runningInPhase(ph) > 0 {
 			return nil
 		}
+		if w := s.waitOccupied(ph); len(w) > 0 {
+			return w
+		}
 		r = ph.Round + 1
 	}
-	return s.actions(ph, rules.Pair(s.snapshot(ph, s.free(ph, r)), s.seed()))
+	return s.actions(ph, rules.Pair(s.snapshot(ph, s.free(ph, r)), s.seed(ph)))
 }
 
 // Suisse par rondes : tous les matchs de la ronde en même temps, byes aux groupes impairs

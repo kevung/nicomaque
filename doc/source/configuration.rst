@@ -83,6 +83,7 @@ Structures
        Seeding        string `json:"seeding,omitempty"`
        Tiebreak       []string `json:"tiebreak,omitempty"`
        Accelerated    bool   `json:"accelerated,omitempty"`
+       ConsolationOf  *ConsolationSource `json:"consolation_of,omitempty"`
    }
 
 Deux formes anciennes restent lisibles : ``"tables": 12`` (un nombre) devient
@@ -228,6 +229,10 @@ Signification des champs de phase
 | ``accelerated``    | ``swiss_rounds``               | Point virtuel de la moitié haute aux       |
 |                    |                                | rondes 1 et 2, pour l'appariement          |
 |                    |                                | seulement. Exige ``seeding``               |
++--------------------+--------------------------------+--------------------------------------------+
+| ``consolation_of`` | ``bracket``, ``swiss_rounds``  | Phase latérale : les perdants d'une ronde  |
+|                    |                                | d'une phase antérieure, joués en parallèle |
+|                    |                                | (:ref:`format_consolante`)                 |
 +--------------------+--------------------------------+--------------------------------------------+
 
 Validation et valeurs par défaut

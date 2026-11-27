@@ -128,6 +128,7 @@ Action
        ActNextPhase   ActionKind = "next_phase"   // passer à la phase suivante
        ActCancelMatch ActionKind = "cancel_match" // annuler un match devenu incohérent
        ActRepechage   ActionKind = "repechage"    // repêcher B à la place du qualifié de poule A, retiré
+       ActOpenSidePhase ActionKind = "open_side_phase" // ouvrir une phase latérale (consolation_of)
        ActFinish      ActionKind = "finish"       // clore le tournoi
        ActWait        ActionKind = "wait"         // rien à faire : attendre
    )

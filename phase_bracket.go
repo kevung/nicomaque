@@ -37,8 +37,19 @@ func (s *State) applyDraw(ph *PhaseState, section string, d *Draw) error {
 	return nil
 }
 
+// SidePhaseSection : le nom de section qui désigne le classement propre d'une phase latérale.
+func SidePhaseSection(phase int) string { return fmt.Sprintf("phase:%d", phase) }
+
+func sidePhaseName(name string) (int, bool) {
+	var i int
+	if _, err := fmt.Sscanf(name, "phase:%d", &i); err != nil || SidePhaseSection(i) != name {
+		return 0, false
+	}
+	return i, true
+}
+
 func (s *State) proposeBracket(ph *PhaseState) []Action {
-	return s.actions(ph, rules.Pair(s.snapshot(ph, nil), s.seed()))
+	return s.actions(ph, rules.Pair(s.snapshot(ph, nil), s.seed(ph)))
 }
 
 // bracketSurvivors : vainqueur final si le tableau est terminé, sinon joueurs encore en course.
@@ -71,8 +82,20 @@ func (s *State) bracketSurvivors(ph *PhaseState) []PlayerID {
 // Enveloppe de rules.RankSection. La section est cherchée de la dernière phase vers la
 // première : c'est la plus récente qui porte ce nom qui compte, un tournoi pouvant enchaîner
 // deux tableaux.
+//
+// Une phase latérale (consolation_of) n'y est pas cherchée : ses sections portent les mêmes noms
+// que celles du tableau principal. Son classement propre s'adresse par « phase:<indice> ».
 func (s *State) SectionRanking(name string) []Rank {
+	if i, ok := sidePhaseName(name); ok {
+		if ph := s.phaseOf(i); ph != nil && ph.Side {
+			return s.phaseRanking(ph)
+		}
+		return nil
+	}
 	for i := len(s.Phases) - 1; i >= 0; i-- {
+		if s.Phases[i].Side {
+			continue
+		}
 		if sec := s.Phases[i].section(name); sec != nil {
 			return fromStandings(rules.RankSection(toRulesSection(sec), withdrawnRefs(s.Withdrawn)))
 		}

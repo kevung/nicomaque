@@ -98,10 +98,22 @@ func (s *State) acceptConfig(next Config, version int) error {
 		return &ConfigRefusal{Phase: len(next.Phases), Field: "phases", Reason: RefusalRemoved, Opened: len(s.Phases)}
 	}
 	for i, ph := range s.Phases {
+		if !sameSource(next.Phases[i].ConsolationOf, ph.Cfg.ConsolationOf) {
+			// Ajouter, retirer ou déplacer une phase latérale décale les indices que portent
+			// les événements déjà écrits, ou change qui entre dans une consolante ouverte.
+			r := &ConfigRefusal{Phase: i, Field: "consolation_of", Reason: RefusalFinished}
+			switch {
+			case ph.Drawn:
+				r.Reason = RefusalDrawn
+			case ph.Started || ph.Opened || i == s.Current:
+				r.Reason = RefusalStarted
+			}
+			return r
+		}
 		if next.Phases[i].Kind != ph.Cfg.Kind {
 			r := &ConfigRefusal{Phase: i, Field: "kind", From: ph.Cfg.Kind, To: next.Phases[i].Kind}
 			switch {
-			case i < s.Current:
+			case i < s.Current && !ph.Side: // une latérale vit à côté de la principale
 				r.Reason = RefusalFinished
 			case ph.Drawn:
 				r.Reason = RefusalDrawn
@@ -146,6 +158,13 @@ func (s *State) setConfig(next Config) {
 	}
 }
 
+func sameSource(a, b *ConsolationSource) bool {
+	if a == nil || b == nil {
+		return a == b
+	}
+	return *a == *b
+}
+
 // clone : copie profonde d'une configuration.
 //
 // Config porte des tranches ; sans copie, l'état et l'événement du journal partageraient le
@@ -156,6 +175,10 @@ func (c Config) clone() Config {
 	out.Phases = append([]PhaseConfig(nil), c.Phases...)
 	for i := range out.Phases {
 		out.Phases[i].Lengths = append([]int(nil), c.Phases[i].Lengths...)
+		if src := c.Phases[i].ConsolationOf; src != nil {
+			cp := *src
+			out.Phases[i].ConsolationOf = &cp
+		}
 	}
 	out.Prizes = c.Prizes.clone()
 	out.Tables.Unavailable = append([]int(nil), c.Tables.Unavailable...)

@@ -19,8 +19,8 @@ func (s *State) proposeManual(ph *PhaseState) []Action {
 	if s.runningInPhase(ph) > 0 {
 		return []Action{wait}
 	}
-	if s.Current+1 < len(s.Config.Phases) {
-		return []Action{wait, {Kind: ActNextPhase, Phase: ph.Index, Label: Label{Kind: LabelPhase, Text: PhaseName(s.Config.Phases[s.Current+1])}}}
+	if nx := s.Config.nextMain(s.Current); nx >= 0 {
+		return []Action{wait, {Kind: ActNextPhase, Phase: ph.Index, Label: Label{Kind: LabelPhase, Text: PhaseName(s.Config.Phases[nx])}}}
 	}
 	return []Action{wait, {Kind: ActFinish, Phase: ph.Index}}
 }

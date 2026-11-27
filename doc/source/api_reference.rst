@@ -40,7 +40,8 @@ Constantes
 - ``MatchStatus`` : ``Running``, ``Finished``, ``Cancelled`` ;
 - ``ActionKind`` : ``ActStartMatch``, ``ActBye``, ``ActDraw``, ``ActNextPhase``, ``ActFinish``,
   ``ActWait``, ``ActCancelMatch`` (annulation proposée d'un match devenu incohérent),
-  ``ActRepechage`` (repêchage proposé d'un suivant de poule) ;
+  ``ActRepechage`` (repêchage proposé d'un suivant de poule), ``ActOpenSidePhase`` (ouverture d'une
+  consolante en parallèle) ;
 - ``EventKind`` : ``EvCreated``, ``EvPlayerAdded``, ``EvPlayerWithdrawn``, ``EvPlayerUpdated``,
   ``EvPlayerUnavailable``, ``EvPlayerAvailable``, ``EvHalfBye``, ``EvHalfByeCancelled``,
   ``EvMatchStarted``, ``EvResult``,

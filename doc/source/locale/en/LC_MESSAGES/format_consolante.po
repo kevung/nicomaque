@@ -1,0 +1,248 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nicolas Harmand, Kévin Unger
+# This file is distributed under the same license as the Nicomaque package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Nicomaque \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-27 14:37+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/format_consolante.rst:4
+msgid "Consolante en parallèle (``consolation_of``)"
+msgstr "Parallel consolation (``consolation_of``)"
+
+#: ../../source/format_consolante.rst:7
+msgid "Principe"
+msgstr "Principle"
+
+#: ../../source/format_consolante.rst:9
+msgid ""
+"Une phase qui porte ``consolation_of`` est une **phase latérale** : elle "
+"reçoit les perdants d'**une seule ronde** d'une phase antérieure et se "
+"joue **en même temps** que la suite du tournoi. La chaîne principale ne "
+"la voit pas : le passage de phase la saute, ``State.Current`` ne la "
+"désigne jamais, et le classement général l'ignore. Elle a son propre "
+"classement, et sa propre dotation."
+msgstr ""
+"A phase carrying ``consolation_of`` is a **side phase**: it receives the "
+"losers of **a single round** of an earlier phase and is played **at the "
+"same time** as the rest of the tournament. The main chain does not see "
+"it: the phase transition skips it, ``State.Current`` never points to it, "
+"and the overall ranking ignores it. It has its own ranking, and its own "
+"prizes."
+
+#: ../../source/format_consolante.rst:23
+msgid ""
+"Ici les perdants de la ronde 1 du suisse jouent un tableau de consolante "
+"pendant les rondes 2 à 5 ; à la fin du suisse, le passage va directement "
+"à la phase 2."
+msgstr ""
+"Here the losers of round 1 of the Swiss play a consolation bracket during"
+" rounds 2 to 5; when the Swiss ends, the transition goes straight to "
+"phase 2."
+
+#: ../../source/format_consolante.rst:27
+msgid "Configuration"
+msgstr "Configuration"
+
+#: ../../source/format_consolante.rst:38
+msgid "``Validate`` refuse, en nommant ``consolation_of`` :"
+msgstr "``Validate`` refuses, naming ``consolation_of``:"
+
+#: ../../source/format_consolante.rst:40
+msgid ""
+"une consolante d'un autre format que ``bracket`` ou ``swiss_rounds`` par "
+"rondes ;"
+msgstr ""
+"a consolation in a format other than ``bracket`` or round-by-round "
+"``swiss_rounds``;"
+
+#: ../../source/format_consolante.rst:41
+msgid ""
+"une source qui ne la précède pas, une source elle-même latérale, ou une "
+"phase principale entre la source et la consolante — les phases latérales "
+"d'une source forment un bloc qui la suit directement ;"
+msgstr ""
+"a source that does not precede it, a source that is itself a side phase, "
+"or a main phase between the source and the consolation — the side phases "
+"of a source form a block that directly follows it;"
+
+#: ../../source/format_consolante.rst:44
+msgid ""
+"une source autre qu'un ``bracket`` (``round`` est alors le tour de la "
+"section ``main``) ou un ``swiss_rounds`` par rondes (``round`` ≤ "
+"``rounds``) ;"
+msgstr ""
+"a source other than a ``bracket`` (``round`` is then the round of the "
+"``main`` section) or a round-by-round ``swiss_rounds`` (``round`` ≤ "
+"``rounds``);"
+
+#: ../../source/format_consolante.rst:46
+msgid ""
+"``round`` < 1, et un ``entry`` autre que le défaut : les entrants sont "
+"les perdants."
+msgstr ""
+"``round`` < 1, and an ``entry`` other than the default: the entrants are "
+"the losers."
+
+#: ../../source/format_consolante.rst:49
+msgid "Ouverture"
+msgstr "Opening"
+
+#: ../../source/format_consolante.rst:51
+msgid ""
+"La ronde source est **soldée** quand tous ses appelés y sont engagés et "
+"que tous ses matchs sont finis (suisse), ou quand tous les matchs du tour"
+" sont résolus (tableau). Ses perdants sont ceux d'un match **joué** : ni "
+"une exemption, ni un forfait, ni un retiré. S'ils sont au moins deux, "
+"``Propose`` ajoute l'action ``open_side_phase`` (``Phase`` : la "
+"consolante, ``Draw.Groups[0]`` : ses entrants) ; confirmée, elle devient "
+"l'événement ``side_phase_opened``, qui matérialise les entrants comme un "
+"tirage. Rien ne s'ouvre d'office ; avec moins de deux perdants, la "
+"consolante ne s'ouvre pas, et ne retient rien."
+msgstr ""
+"The source round is **settled** when all its called players are engaged "
+"in it and all its matches are finished (Swiss), or when all the matches "
+"of the round are resolved (bracket). Its losers are those of a **played**"
+" match: not a bye, not a forfeit, not a withdrawn player. If there are at"
+" least two, ``Propose`` adds the ``open_side_phase`` action (``Phase``: "
+"the consolation, ``Draw.Groups[0]``: its entrants); once confirmed it "
+"becomes the ``side_phase_opened`` event, which records the entrants like "
+"a draw. Nothing opens automatically; with fewer than two losers, the "
+"consolation does not open, and holds nothing back."
+
+#: ../../source/format_consolante.rst:60
+msgid "Propositions"
+msgstr "Proposals"
+
+#: ../../source/format_consolante.rst:62
+msgid ""
+"``Propose`` rend les propositions de la phase principale, puis celles de "
+"chaque consolante ouverte et non finie, puis les ouvertures possibles, "
+"par indice de phase. Chaque consolante est proposée par le fichier de son"
+" format (``Action.Phase`` la désigne) :"
+msgstr ""
+"``Propose`` returns the main phase's proposals, then those of each open, "
+"unfinished consolation, then the possible openings, by phase index. Each "
+"consolation is proposed by the file of its format (``Action.Phase`` "
+"designates it):"
+
+#: ../../source/format_consolante.rst:66
+msgid ""
+"**un joueur n'a jamais deux matchs à la fois**. Un joueur qui joue dans "
+"une autre phase, ou que réclame déjà une proposition de la principale, "
+"compte comme occupé : un graphe garde son match proposé, retenu "
+"(``player_busy``, sans table), un suisse ne l'apparie pas ;"
+msgstr ""
+"**a player never has two matches at once**. A player who is playing in "
+"another phase, or already claimed by a proposal of the main phase, counts"
+" as busy: a graph keeps their match proposed but held (``player_busy``, "
+"no table), a Swiss does not pair them;"
+
+#: ../../source/format_consolante.rst:69
+msgid ""
+"**la phase principale a la priorité** : un joueur qu'elle propose n'est "
+"pas proposé ailleurs ;"
+msgstr ""
+"**the main phase has priority**: a player it proposes is not proposed "
+"elsewhere;"
+
+#: ../../source/format_consolante.rst:70
+msgid ""
+"un suisse par rondes **n'ouvre pas de ronde** tant qu'un de ses joueurs "
+"joue dans une autre phase (une attente ``player_busy`` par joueur) : il "
+"ne manque aucune ronde ;"
+msgstr ""
+"a round-by-round Swiss **does not open a round** while one of its players"
+" is playing in another phase (one ``player_busy`` wait per player): no "
+"one misses a round;"
+
+#: ../../source/format_consolante.rst:72
+msgid "les tables d'une proposition sont prises pour les suivantes."
+msgstr "the tables of a proposal are taken for the following ones."
+
+#: ../../source/format_consolante.rst:74
+msgid ""
+"La phase principale finie, le passage de phase reste proposé ; la clôture"
+" (``finish``) attend que chaque consolante ouverte soit finie et "
+"qu'aucune ne reste à ouvrir."
+msgstr ""
+"Once the main phase is over, the phase transition is still proposed; "
+"closing (``finish``) waits until every open consolation is finished and "
+"none is left to open."
+
+#: ../../source/format_consolante.rst:77
+msgid ""
+"Cette attente vaut pour tout format de dernière phase, phase manuelle "
+"comprise ; ``Apply`` refuse de même un ``finished`` tant qu'une "
+"consolante reste à ouvrir ou à finir."
+msgstr ""
+"This wait holds for any format of last phase, manual phase included; "
+"``Apply`` likewise refuses a ``finished`` while a consolation remains to "
+"be opened or finished."
+
+#: ../../source/format_consolante.rst:81
+msgid "Classement"
+msgstr "Ranking"
+
+#: ../../source/format_consolante.rst:83
+msgid ""
+"``Ranking()`` ignore les phases latérales. Le classement propre d'une "
+"consolante est ``SectionRanking(SidePhaseSection(i))``, soit la section "
+"``phase:<i>`` ; ``Prizes.Sections`` l'adresse sous ce nom. "
+"``SectionRanking(\"main\")`` et les autres noms de section ne cherchent "
+"jamais dans une phase latérale."
+msgstr ""
+"``Ranking()`` ignores side phases. A consolation's own ranking is "
+"``SectionRanking(SidePhaseSection(i))``, i.e. the section ``phase:<i>``; "
+"``Prizes.Sections`` addresses it under that name. "
+"``SectionRanking(\"main\")`` and the other section names never search a "
+"side phase."
+
+#: ../../source/format_consolante.rst:89
+msgid "Correction de la ronde source"
+msgstr "Correcting the source round"
+
+#: ../../source/format_consolante.rst:91
+msgid ""
+"Une correction après l'ouverture peut changer les perdants. La consolante"
+" n'est **pas refaite** : ses entrants sont dans le journal. "
+"``State.Warnings`` porte ``consolation_not_loser`` pour un entrant qui "
+"n'a plus perdu, ``consolation_missing`` pour un nouveau perdant resté "
+"dehors (``Section`` : ``phase:<i>``, ``Player``) ; une seconde correction"
+" qui rétablit les perdants les fait tomber."
+msgstr ""
+"A correction after the opening may change the losers. The consolation is "
+"**not redone**: its entrants are in the journal. ``State.Warnings`` "
+"carries ``consolation_not_loser`` for an entrant who no longer lost, "
+"``consolation_missing`` for a new loser left outside (``Section``: "
+"``phase:<i>``, ``Player``); a second correction that restores the losers "
+"clears them."
+
+#: ../../source/format_consolante.rst:98
+msgid "Reconfiguration"
+msgstr "Reconfiguration"
+
+#: ../../source/format_consolante.rst:100
+msgid ""
+"``config_changed`` refuse d'ajouter, de retirer ou de déplacer une phase "
+"latérale parmi les phases déjà créées (``Field`` : ``consolation_of``) : "
+"les événements écrits portent leurs indices. Au-delà, la configuration "
+"reste libre."
+msgstr ""
+"``config_changed`` refuses to add, remove or move a side phase among the "
+"phases already created (``Field``: ``consolation_of``): the events "
+"already written carry their indices. Beyond them, the configuration stays"
+" free."

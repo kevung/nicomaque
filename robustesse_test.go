@@ -182,7 +182,14 @@ func cohérent(t *testing.T, st *tournoi.State) {
 // puis les formats plus récents, pour que leurs événements (half_bye) et leurs appariements
 // soient atteints.
 func cfgFuzz(k byte) tournoi.Config {
-	switch k % 6 {
+	switch k % 7 {
+	case 6:
+		// Deux consolantes latérales, ouvertes en parallèle du suisse.
+		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
+			{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3},
+			{Kind: tournoi.KindBracket, Length: 3, ConsolationOf: &tournoi.ConsolationSource{Phase: 0, Round: 1}},
+			{Kind: tournoi.KindSwissRounds, Length: 3, Rounds: 2, ConsolationOf: &tournoi.ConsolationSource{Phase: 0, Round: 2}},
+			{Kind: tournoi.KindBracket, Length: 7, Entry: "top:4"}}}
 	case 1:
 		return tournoi.Config{Name: "Fuzz", Phases: []tournoi.PhaseConfig{
 			{Kind: tournoi.KindSwissRounds, Length: 5, Rounds: 3, Tiebreak: []string{tournoi.TiebreakPointDiff, tournoi.TiebreakBuchholz},
@@ -230,6 +237,8 @@ func FuzzApply(f *testing.F) {
 	f.Add([]byte{0x40, 0, 0, 17, 4, 1, 17, 4, 0x81, 16, 4, 21, 1, 0, 4})
 	// La même, menée jusqu'au passage de phase : le classement de la phase manuelle sert l'entrée du tableau.
 	f.Add([]byte{0x40, 7, 0, 17, 4, 1, 17, 4, 0x81, 16, 4, 21, 1, 0, 4, 0, 1, 0, 0, 0, 0})
+	// Consolantes latérales : des propositions confirmées, une correction, un retrait.
+	f.Add([]byte{0x60, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 1, 0, 1, 1, 1, 2, 1, 2, 3, 0, 0, 0, 0, 1, 0, 0, 2, 0, 2, 0, 1, 1, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0})
 	f.Fuzz(func(t *testing.T, plan []byte) {
 		now := time.Date(2026, 9, 7, 9, 0, 0, 0, time.UTC)
 		// Le quartet haut du premier octet choisit le format : les plans d'avant gardent le leur.
