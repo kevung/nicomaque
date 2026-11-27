@@ -7,7 +7,7 @@ project = 'Nicomaque'
 copyright = '2026, Nicolas Harmand, Kévin Unger'
 author = 'Nicolas Harmand, Kévin Unger'
 # Dernière étiquette du module ; à relever à chaque version publiée.
-release = '0.10.0'
+release = '0.11.0'
 
 extensions = [
         'sphinx_rtd_theme',
