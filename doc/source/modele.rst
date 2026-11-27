@@ -111,8 +111,8 @@ Rang
 La note est un **code** et ses paramètres, jamais une phrase : ``winner``, ``finalist``,
 ``alive`` (``Lives``), ``record`` (``Wins``, ``Losses``), ``forfeit``, ``withdrawn``, ``running``,
 ``awaiting_draw``, ``unranked``, ``section_exit`` (``Section`` + ``Sub``), ``section_winner``,
-``pool_record`` (``Section``, ``Wins``, ``Qualified``) — valeurs exactes dans ``rules/codes.go`` —,
-et ``waived`` (consolante abandonnée, ``codes.go``).
+``pool_record`` (``Section``, ``Wins``, ``Qualified``), ``waived`` (consolante abandonnée) — valeurs
+exactes dans ``rules/codes.go``.
 Le rendu français (``Note.String()``, ``fr.go``) ne sert que la console, la démo et ``render``.
 Voir :ref:`classement`.
 

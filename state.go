@@ -320,6 +320,9 @@ func (s *State) Apply(ev Event) error {
 		if _, dup := s.Matches[ev.MatchID]; dup || ev.MatchID == "" {
 			return fmt.Errorf("identifiant de match invalide ou déjà utilisé : %q", ev.MatchID)
 		}
+		if ph := s.phaseOf(ev.Phase); ph != nil && ph.Waived {
+			return fmt.Errorf("phase %d : consolante abandonnée, aucun match ne s'y joue", ev.Phase)
+		}
 		if ev.A == ev.B || ev.A == "" || ev.B == "" {
 			return fmt.Errorf("match %s : joueurs invalides", ev.MatchID)
 		}

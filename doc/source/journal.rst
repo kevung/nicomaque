@@ -617,7 +617,8 @@ Le retrait d'une exemption posée par erreur dans une phase à appariement manue
              distincts connus ; sinon ses joueurs y entrent
    Phases[Phase].Waived = true
 
-La phase ne propose plus rien et ne retient plus la clôture ; ``side_phase_opened`` la refuse.
+La phase ne propose plus rien et ne retient plus la clôture ; ``side_phase_opened`` et
+``match_started`` la refusent.
 
 ``repechage``
 ~~~~~~~~~~~~~

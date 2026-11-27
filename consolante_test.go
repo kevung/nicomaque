@@ -520,10 +520,12 @@ func TestConsolanteRenoncement(t *testing.T) {
 	}
 
 	// Pendant le tournoi : juste avant l'ouverture confirmée par la simulation.
+	ouvertures := 0
 	for i, ev := range r.Journal {
 		if ev.Kind != tournoi.EvSidePhaseOpened {
 			continue
 		}
+		ouvertures++
 		st, err := tournoi.Replay(r.Journal[:i])
 		if err != nil {
 			t.Fatal(err)
@@ -537,6 +539,9 @@ func TestConsolanteRenoncement(t *testing.T) {
 		if renonce.Draw == nil || !mêmesJoueurs(renonce.Draw.Groups[0], ouvre.Draw.Groups[0]) {
 			t.Fatalf("le renoncement ne porte pas les entrants de l'ouverture : %+v", renonce.Draw)
 		}
+	}
+	if ouvertures != 1 {
+		t.Fatalf("%d ouverture(s) de consolante dans la simulation", ouvertures)
 	}
 
 	// À la fin de la phase principale, consolante jamais ouverte.
@@ -584,7 +589,11 @@ func TestConsolanteRenoncement(t *testing.T) {
 			t.Fatalf("classement de la consolante abandonnée : %v", conso)
 		}
 	}
-	for p, v := range st.SectionPrizes(tournoi.SidePhaseSection(1)) {
+	prix := st.SectionPrizes(tournoi.SidePhaseSection(1))
+	if len(prix) != len(perdants) {
+		t.Fatalf("prix de la consolante abandonnée : %v", prix)
+	}
+	for p, v := range prix {
 		if v != 0 {
 			t.Fatalf("%s touche %.2f d'une consolante abandonnée", p, v)
 		}
@@ -704,6 +713,11 @@ func TestConsolanteRenoncementRefuse(t *testing.T) {
 	if err := st2.Apply(tournoi.Event{Version: tournoi.JournalVersion, Kind: tournoi.EvSidePhaseOpened, Time: lancé.Time,
 		Phase: 1, Draw: ouvre.Draw}); err == nil {
 		t.Errorf("ouverture d'une consolante abandonnée acceptée")
+	}
+	g := ouvre.Draw.Groups[0]
+	if err := st2.Apply(tournoi.Event{Version: tournoi.JournalVersion, Kind: tournoi.EvMatchStarted, Time: lancé.Time,
+		Phase: 1, MatchID: "X1", A: g[0], B: g[1], Length: 3}); err == nil {
+		t.Errorf("match lancé dans une consolante abandonnée")
 	}
 }
 

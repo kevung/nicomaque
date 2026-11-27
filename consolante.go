@@ -246,10 +246,10 @@ func (s *State) proposeSides(main []Action, now time.Time, ext External) []Actio
 			continue
 		}
 		ph := s.phaseOf(k)
-		nom := Label{Kind: LabelPhase, Text: PhaseName(p)}
 		if ph != nil && ph.Waived {
 			continue
 		}
+		nom := Label{Kind: LabelPhase, Text: PhaseName(p)}
 		if ph != nil && ph.Opened {
 			if s.phaseDone(ph) {
 				continue
