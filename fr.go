@@ -303,6 +303,10 @@ func (w Warning) String() string {
 		return fmt.Sprintf("match %s : %s n'a plus de vie depuis une correction, et joue encore", w.Match, w.Player)
 	case WarnBarrageStale:
 		return fmt.Sprintf("%s : une correction a changé les ex æquo de la poule, le barrage reste celui du tirage", sectionName(w.Section))
+	case WarnConsolationNotLoser:
+		return fmt.Sprintf("%s n'a plus perdu la ronde source depuis une correction, et reste dans la consolante %s", w.Player, w.Section)
+	case WarnConsolationMissing:
+		return fmt.Sprintf("%s a perdu la ronde source depuis une correction, sans être entré dans la consolante %s", w.Player, w.Section)
 	case WarnCorrectionRevives:
 		return fmt.Sprintf("%s retrouve une vie après une correction : de nouveau appariable", w.Player)
 	}

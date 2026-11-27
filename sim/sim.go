@@ -119,7 +119,7 @@ func Run(cfg tournoi.Config, players []tournoi.Player, opt Options) Result {
 		}
 		progressed := false
 		for _, a := range acts {
-			if a.Kind == tournoi.ActWait {
+			if a.Kind == tournoi.ActWait || a.Reason == tournoi.ReasonPlayerBusy { // retenue : le joueur joue ailleurs
 				continue
 			}
 			e, err := st.EventFromAction(a, now)
@@ -133,7 +133,7 @@ func Run(cfg tournoi.Config, players []tournoi.Player, opt Options) Result {
 			if a.Kind == tournoi.ActStartMatch {
 				enCours = append(enCours, running{e.MatchID, now.Add(Duree(a.Length, opt.MinPerPoint, rng)), a.A, a.B, a.Length})
 			}
-			if a.Kind == tournoi.ActDraw || a.Kind == tournoi.ActRepechage || a.Kind == tournoi.ActNextPhase || a.Kind == tournoi.ActFinish {
+			if a.Kind == tournoi.ActDraw || a.Kind == tournoi.ActRepechage || a.Kind == tournoi.ActNextPhase || a.Kind == tournoi.ActOpenSidePhase || a.Kind == tournoi.ActFinish {
 				break // l'état a changé : re-proposer
 			}
 		}
@@ -259,7 +259,7 @@ func Forecast(j tournoi.Journal, now time.Time, K int, minPerPoint float64, seed
 			acts := st.ProposeAt(t)
 			progressed := false
 			for _, a := range acts {
-				if a.Kind == tournoi.ActWait {
+				if a.Kind == tournoi.ActWait || a.Reason == tournoi.ReasonPlayerBusy { // retenue : le joueur joue ailleurs
 					continue
 				}
 				e, err := st.EventFromAction(a, t)
@@ -273,7 +273,7 @@ func Forecast(j tournoi.Journal, now time.Time, K int, minPerPoint float64, seed
 				if a.Kind == tournoi.ActStartMatch {
 					enCours = append(enCours, running{e.MatchID, t.Add(Duree(a.Length, minPerPoint, rng)), a.A, a.B, a.Length})
 				}
-				if a.Kind == tournoi.ActDraw || a.Kind == tournoi.ActRepechage || a.Kind == tournoi.ActNextPhase || a.Kind == tournoi.ActFinish {
+				if a.Kind == tournoi.ActDraw || a.Kind == tournoi.ActRepechage || a.Kind == tournoi.ActNextPhase || a.Kind == tournoi.ActOpenSidePhase || a.Kind == tournoi.ActFinish {
 					break
 				}
 			}

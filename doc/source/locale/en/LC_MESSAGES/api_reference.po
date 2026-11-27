@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nicomaque \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 17:28+0100\n"
+"POT-Creation-Date: 2026-11-27 14:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -106,14 +106,16 @@ msgid ""
 "``ActionKind`` : ``ActStartMatch``, ``ActBye``, ``ActDraw``, "
 "``ActNextPhase``, ``ActFinish``, ``ActWait``, ``ActCancelMatch`` "
 "(annulation proposée d'un match devenu incohérent), ``ActRepechage`` "
-"(repêchage proposé d'un suivant de poule) ;"
+"(repêchage proposé d'un suivant de poule), ``ActOpenSidePhase`` "
+"(ouverture d'une consolante en parallèle) ;"
 msgstr ""
 "``ActionKind``: ``ActStartMatch``, ``ActBye``, ``ActDraw``, "
 "``ActNextPhase``, ``ActFinish``, ``ActWait``, ``ActCancelMatch`` "
 "(proposed cancellation of a match that has become inconsistent), "
-"``ActRepechage`` (proposed repechage of a pool's next player);"
+"``ActRepechage`` (proposed repechage of a pool's next player), "
+"``ActOpenSidePhase`` (opening of a parallel consolation);"
 
-#: ../../source/api_reference.rst:44
+#: ../../source/api_reference.rst:45
 msgid ""
 "``EventKind`` : ``EvCreated``, ``EvPlayerAdded``, ``EvPlayerWithdrawn``, "
 "``EvPlayerUpdated``, ``EvPlayerUnavailable``, ``EvPlayerAvailable``, "
@@ -131,7 +133,7 @@ msgstr ""
 "``EvLengthChanged``, ``EvConfigChanged``, ``EvReopened``, "
 "``EvTableChanged``, ``EvFinished``, ``EvNote``;"
 
-#: ../../source/api_reference.rst:50
+#: ../../source/api_reference.rst:51
 msgid ""
 "formats (chaînes non typées, ``PhaseConfig.Kind``) : ``KindSwissLives``, "
 "``KindLivesBracket``, ``KindGSL``, ``KindBracket``, ``KindRoundRobin`` ;"
@@ -139,7 +141,7 @@ msgstr ""
 "formats (untyped strings, ``PhaseConfig.Kind``): ``KindSwissLives``, "
 "``KindLivesBracket``, ``KindGSL``, ``KindBracket``, ``KindRoundRobin``;"
 
-#: ../../source/api_reference.rst:52
+#: ../../source/api_reference.rst:53
 msgid ""
 "raisons d'un ``ConfigRefusal`` : ``RefusalRemoved``, ``RefusalFinished``,"
 " ``RefusalDrawn``, ``RefusalStarted`` ;"
@@ -147,7 +149,7 @@ msgstr ""
 "reasons for a ``ConfigRefusal``: ``RefusalRemoved``, ``RefusalFinished``,"
 " ``RefusalDrawn``, ``RefusalStarted``;"
 
-#: ../../source/api_reference.rst:54
+#: ../../source/api_reference.rst:55
 msgid ""
 "``JournalVersion`` (= 3, posée dans chaque événement par les "
 "constructeurs ; un journal ``Version: 0`` est converti à la lecture) ;"
@@ -155,7 +157,7 @@ msgstr ""
 "``JournalVersion`` (= 3, set in each event by the constructors; a "
 "``Version: 0`` journal is converted on reading);"
 
-#: ../../source/api_reference.rst:56
+#: ../../source/api_reference.rst:57
 msgid ""
 "``PrizeSectionAll`` (= ``\"all\"``, clé de la dotation du classement "
 "général) ;"
@@ -163,7 +165,7 @@ msgstr ""
 "``PrizeSectionAll`` (= ``\"all\"``, key of the overall standings' prize "
 "distribution);"
 
-#: ../../source/api_reference.rst:57
+#: ../../source/api_reference.rst:58
 msgid ""
 "``SeedingRating`` (``PhaseConfig.Seeding`` : placement par cote, même "
 "valeur que ``rules.SeedingRating``) ;"
@@ -171,7 +173,7 @@ msgstr ""
 "``SeedingRating`` (``PhaseConfig.Seeding``: placement by rating, same "
 "value as ``rules.SeedingRating``);"
 
-#: ../../source/api_reference.rst:59
+#: ../../source/api_reference.rst:60
 msgid ""
 "les codes ``Label*`` (``LabelNone``, ``LabelRound``, ``LabelFinal``, "
 "``LabelInSection``, ``LabelBarrage``, ``LabelPoolName``, "
@@ -187,11 +189,11 @@ msgstr ""
 "``Warn*``, ``Info*`` (``InfoEntersAt``, ``InfoNoEntry``), ``Reason*`` and"
 " ``Status*``."
 
-#: ../../source/api_reference.rst:65
+#: ../../source/api_reference.rst:66
 msgid "Fonctions et méthodes"
 msgstr "Functions and methods"
 
-#: ../../source/api_reference.rst:157
+#: ../../source/api_reference.rst:159
 msgid ""
 "Les règles elles-mêmes (appariements, tirages, résolution des graphes, "
 "classement, dotation, prévision) ne sont pas dans le paquet racine : "
@@ -209,15 +211,15 @@ msgstr ""
 "a change of algorithm does not break existing journals (see "
 ":ref:`journal`)."
 
-#: ../../source/api_reference.rst:164
+#: ../../source/api_reference.rst:166
 msgid "Paquets annexes"
 msgstr "Auxiliary packages"
 
-#: ../../source/api_reference.rst:166
+#: ../../source/api_reference.rst:168
 msgid "``rules`` (``github.com/kevung/nicomaque/rules``)"
 msgstr "``rules`` (``github.com/kevung/nicomaque/rules``)"
 
-#: ../../source/api_reference.rst:167
+#: ../../source/api_reference.rst:169
 msgid ""
 "Règles en fonctions pures, sans état, sans E/S ni horloge, sur ses "
 "propres types (``Ref``, ``Phase``, ``PhaseRules``, ``Seed``, ``Pairing``,"
@@ -258,11 +260,11 @@ msgstr ""
 "``EstimatedEnd``, ``AfterBreaks``, ``WinProbability``, ``MeanRating``, "
 "``RemainingDuration``; pairing sheet: ``Batches``, ``PairingSheet``."
 
-#: ../../source/api_reference.rst:181
+#: ../../source/api_reference.rst:183
 msgid "``render`` (``github.com/kevung/nicomaque/render``)"
 msgstr "``render`` (``github.com/kevung/nicomaque/render``)"
 
-#: ../../source/api_reference.rst:182
+#: ../../source/api_reference.rst:184
 msgid ""
 "``Labeler``, ``French()``, ``Term``, ``Renderer`` (``New``, "
 "``BracketBoardSVG``, ``LivesBoard``, ``TableGrid``, ``RunningTable``, "
@@ -274,11 +276,11 @@ msgstr ""
 "``ActionsList``, ``StandingsTable``, ``PairingSheet``, ``Page``), "
 "``Batches``, ``DefaultStyle``, ``DefaultCredit``. See :ref:`affichage`."
 
-#: ../../source/api_reference.rst:187
+#: ../../source/api_reference.rst:189
 msgid "``sim`` (``github.com/kevung/nicomaque/sim``)"
 msgstr "``sim`` (``github.com/kevung/nicomaque/sim``)"
 
-#: ../../source/api_reference.rst:188
+#: ../../source/api_reference.rst:190
 msgid ""
 "``PGain``, ``Duree``, ``Options``, ``Result``, ``Run``, ``Champ``, "
 "``Forecast``, ``Durations``, ``EstimatedEnd``. Voir :ref:`simulation`."
@@ -286,10 +288,10 @@ msgstr ""
 "``PGain``, ``Duree``, ``Options``, ``Result``, ``Run``, ``Champ``, "
 "``Forecast``, ``Durations``, ``EstimatedEnd``. See :ref:`simulation`."
 
-#: ../../source/api_reference.rst:191
+#: ../../source/api_reference.rst:193
 msgid "``players`` (``github.com/kevung/nicomaque/players``)"
 msgstr "``players`` (``github.com/kevung/nicomaque/players``)"
 
-#: ../../source/api_reference.rst:192
+#: ../../source/api_reference.rst:194
 msgid "``FromCSV``, ``ToCSV``. Voir :ref:`joueurs_csv`."
 msgstr "``FromCSV``, ``ToCSV``. See :ref:`joueurs_csv`."

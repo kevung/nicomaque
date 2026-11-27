@@ -120,6 +120,10 @@ Les raisons d'attente sont des codes (``ReasonCode``, ``codes.go``) : ``matches_
 libellé de ``next_phase`` est un ``Label`` de genre ``phase`` dont ``Text`` porte le nom de phase
 saisi par l'organisateur (ou le nom par défaut de ``PhaseName``).
 
+Avec des phases latérales (:ref:`format_consolante`), ``Propose`` ajoute aux propositions de la
+phase principale celles de chaque consolante ouverte, puis les ouvertures ``open_side_phase`` ; la
+clôture attend les consolantes.
+
 L'ordre du repli est important : **attendre la fin des matchs en cours a priorité sur la clôture de
 la phase**. Le cas ``no_pairing`` ne devrait pas se produire dans un tournoi sain ; il signale une
 impasse (par exemple deux joueurs libres qui se sont déjà rencontrés et ``allow_rematch``

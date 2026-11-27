@@ -161,6 +161,12 @@ const (
 	// changé les joueurs que la poule désigne. Le barrage n'est pas retiré : il se joue entre
 	// ceux du tirage. Dérivé : tombe si une autre correction rétablit l'égalité tirée.
 	WarnBarrageStale WarningCode = "barrage_stale"
+	// WarnConsolationNotLoser : une correction de la ronde source a fait de Player un vainqueur ;
+	// il reste entrant de la phase latérale Section (phase:<i>), qui n'est pas refaite.
+	WarnConsolationNotLoser WarningCode = "consolation_not_loser"
+	// WarnConsolationMissing : une correction a fait de Player un perdant de la ronde source, après
+	// l'ouverture de la phase latérale Section : il n'y entre pas d'office.
+	WarnConsolationMissing WarningCode = "consolation_missing"
 )
 
 // Warning est une incohérence : un code et de quoi la situer. Rien n'est bloqué par un

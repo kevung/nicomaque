@@ -109,7 +109,15 @@ func (s *State) proposeWith(now time.Time, ext External, b *SearchBudget) []Acti
 }
 
 func (s *State) propose(now time.Time, ext External) []Action {
+	if !s.Config.hasSides() {
+		return s.proposeIn(s.phase(), now, ext)
+	}
 	ph := s.phase()
+	return s.proposeSides(s.occupiedFor(ph, nil).proposeIn(ph, now, ext), now, ext)
+}
+
+// proposeIn : les propositions d'une phase, la principale ou une latérale ouverte.
+func (s *State) proposeIn(ph *PhaseState, now time.Time, ext External) []Action {
 	var acts []Action
 	switch ph.Cfg.Kind {
 	case KindManual:
@@ -140,16 +148,22 @@ func (s *State) propose(now time.Time, ext External) []Action {
 			return s.withAbsences(ph, []Action{{Kind: ActWait, Phase: ph.Index, Reason: ReasonMatchesRunning}})
 		}
 		if s.phaseDone(ph) {
+			if ph.Side {
+				return nil
+			}
 			if nx := s.Config.nextMain(s.Current); nx >= 0 {
 				// Un qualifié de poule retiré : le repêchage est proposé AVANT le passage, qui
 				// reste proposé — le confirmer sans repêcher laisse une exemption (N26).
 				return append(s.proposeRepechages(ph), Action{Kind: ActNextPhase, Phase: ph.Index, Label: Label{Kind: LabelPhase, Text: PhaseName(s.Config.Phases[nx])}})
 			}
+			if s.sidesPending() {
+				return nil // la clôture attend les phases latérales
+			}
 			return []Action{{Kind: ActFinish, Phase: ph.Index}}
 		}
 		return s.withAbsences(ph, []Action{{Kind: ActWait, Phase: ph.Index, Reason: ReasonNoPairing}})
 	}
-	if ph.Index > 0 && !ph.Drawn && !ph.Started {
+	if ph.Index > 0 && !ph.Drawn && !ph.Started && !ph.Side {
 		// Passage confirmé, tirage pas encore fait : le repêchage reste possible (N26).
 		acts = append(s.proposeRepechages(s.phaseOf(s.Config.prevMain(ph.Index))), acts...)
 	}
@@ -274,6 +288,8 @@ func (a Action) String() string {
 		return fmt.Sprintf("%s : %s à la place de %s, retiré", a.Label, a.B, a.A)
 	case ActCancelMatch:
 		return fmt.Sprintf("Annuler %s : %s contre %s (%s), devenu incohérent", a.Match, a.A, a.B, a.Label)
+	case ActOpenSidePhase:
+		return fmt.Sprintf("Ouvrir %s : %d entrants", a.Label, len(a.Draw.Groups[0]))
 	case ActFinish:
 		return "Clore le tournoi"
 	}

@@ -55,6 +55,7 @@ Les chapitres suivants décrivent chaque format jusqu'au niveau de l'algorithme 
    format_tableaux
    format_gsl
    format_poules
+   format_consolante
 
 Longueurs de match
 ------------------

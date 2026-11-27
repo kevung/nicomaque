@@ -45,6 +45,9 @@ type State struct {
 	// (External.BusyPlayers). Posé sur la copie que fait ProposeWith, jamais par Apply : ce
 	// n'est pas l'histoire du tournoi, et un appariement à la main reste accepté.
 	ailleurs map[PlayerID]bool
+	// occupés : le temps d'une proposition dans une phase, les joueurs que réclame une autre
+	// phase du tournoi (consolante.go). Jamais sérialisé.
+	occupés map[PlayerID]bool
 	// recherche : le compteur de recherche d'appariement de l'appelant (ProposeSearch), posé
 	// sur la copie qu'elle fait, jamais par Apply.
 	recherche *rules.Search
@@ -435,6 +438,10 @@ func (s *State) Apply(ev Event) error {
 		s.Phases = append(s.Phases, next)
 		s.Current = nx
 		s.enterFrom(next, ph)
+	case EvSidePhaseOpened:
+		if err := s.applySideOpened(ev); err != nil {
+			return err
+		}
 	case EvRepechage:
 		if err := s.applyRepechage(ev); err != nil {
 			return err
@@ -739,6 +746,7 @@ func (s *State) check() []Warning {
 		}
 	}
 	w = append(w, s.swissCorrections()...)
+	w = append(w, s.sideWarnings()...)
 	return append(w, s.sharedTables()...)
 }
 

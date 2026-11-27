@@ -23,8 +23,12 @@ Règles
   groupes.
 - **Suisse classique** (``swiss_rounds``) : sans ``tiebreak``, les joueurs à égalité de points
   restent ex æquo, y compris en tête.
-- **Consolante et dernière chance** : pas d'option de saut (perdants du premier tour seulement,
-  entrée jusqu'au tour *k*, consolante à tirage avec heure limite d'entrée).
+- **Consolante et dernière chance** : dans un tableau, pas d'option de saut (entrée jusqu'au tour
+  *k*, consolante à tirage avec heure limite d'entrée). Une consolante des perdants d'une seule
+  ronde se joue en parallèle (:ref:`format_consolante`), au format ``bracket`` ou
+  ``swiss_rounds`` seulement.
+- **Consolante en parallèle** : une correction de la ronde source après l'ouverture est signalée,
+  sans réparation proposée ; le statut d'un joueur (``Statuses``) ne dit rien de sa consolante.
 - **Revanches en consolante** : l'ordre inversé d'entrée évite la revanche immédiate, pas les
   suivantes ; leur fréquence n'est pas mesurée.
 - **Poules en dernière phase** : sans ``final_barrage``, plusieurs poules donnent un premier par

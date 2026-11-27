@@ -80,6 +80,9 @@ func (s *State) proposeSwiss(ph *PhaseState) []Action {
 		if s.runningInPhase(ph) > 0 {
 			return nil
 		}
+		if w := s.waitOccupied(ph); len(w) > 0 {
+			return w
+		}
 		r = ph.Round + 1
 	}
 	return s.actions(ph, rules.Pair(s.snapshot(ph, s.free(ph, r)), s.seed(ph)))
