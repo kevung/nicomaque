@@ -2,7 +2,8 @@ package tournoi
 
 import (
 	"fmt"
-	"sort"
+
+	"github.com/kevung/nicomaque/rules"
 )
 
 // ---- Repêchage d'un qualifié de poule retiré avant le tirage (règle N26) ----
@@ -48,27 +49,15 @@ func poolMembers(sec *Section) []PlayerID {
 	return sortedIDs(out)
 }
 
-// repechageCandidates : les suivants de la poule sec — non qualifiés, non retirés, au plus
-// grand nombre de victoires de poule. Plusieurs quand ils sont ex æquo ; aucun quand la poule
-// est épuisée.
-func (s *State) repechageCandidates(sec *Section, qualified map[PlayerID]bool) []PlayerID {
-	w := rrWins(sec)
-	var cands []PlayerID
-	for _, p := range poolMembers(sec) {
-		if !qualified[p] && !s.Withdrawn[p] {
-			cands = append(cands, p)
-		}
+// repechageCandidates : les suivants de la poule sec — non qualifiés, non retirés, en tête du
+// classement de la poule (victoires, puis départage s'il est configuré). Plusieurs quand ils
+// restent ex æquo ; aucun quand la poule est épuisée.
+func (s *State) repechageCandidates(ph *PhaseState, sec *Section, qualified map[PlayerID]bool) []PlayerID {
+	exclus := make([]rules.Ref, 0, len(qualified))
+	for p := range qualified {
+		exclus = append(exclus, ref(p))
 	}
-	if len(cands) == 0 {
-		return nil
-	}
-	sort.SliceStable(cands, func(i, j int) bool { return w[cands[i]] > w[cands[j]] })
-	best := w[cands[0]]
-	n := 0
-	for n < len(cands) && w[cands[n]] == best {
-		n++
-	}
-	return cands[:n]
+	return ids(rules.PoolNext(s.bilan(ph), sec.Name, exclus))
 }
 
 // proposeRepechages : une ActRepechage par candidat, pour le premier qualifié retiré non
@@ -97,7 +86,7 @@ func (s *State) proposeRepechages(ph *PhaseState) []Action {
 		if gone == "" {
 			continue
 		}
-		cands := s.repechageCandidates(sec, qualified)
+		cands := s.repechageCandidates(ph, sec, qualified)
 		for _, c := range cands {
 			acts = append(acts, Action{Kind: ActRepechage, Phase: ph.Index, Section: sec.Name, A: gone, B: c,
 				Label: Label{Kind: LabelRepechage, Section: sec.Name, Players: len(cands)}})
