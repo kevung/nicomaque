@@ -254,7 +254,8 @@ confirmer laisse la place vide, et elle devient une exemption du tableau. La rè
        pour chaque poule, dans l'ordre :
            gone := le premier joueur de la poule (ordre des identifiants) qualifié et retiré ;
                aucun → poule suivante
-           cands := joueurs de la poule ni dans qual ni retirés, au plus grand nombre de victoires
+           cands := joueurs de la poule ni dans qual ni retirés, à la meilleure clé de poule
+               (victoires, puis critères du départage tiebreak s'il est configuré)
            pour chaque c de cands (ordre des identifiants) :
                Action{repechage, Phase, Section = poule, A = gone, B = c,
                       Label{repechage, Section = poule, Players = len(cands)}}

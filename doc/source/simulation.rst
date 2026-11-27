@@ -69,7 +69,7 @@ Boucle de simulation :
    New(cfg, Seed, Start), puis PlayerAddedEvent pour chaque joueur
    tant que non terminé (au plus MaxSteps tours, sinon erreur « simulation sans fin ») :
        acts := ProposeSearch(now, External{}, Search) ; budget épuisé → erreur ErrSearchBudget
-       pour chaque action non-Wait :
+       pour chaque action lançable (ni Wait, ni start_match retenu : Reason non vide) :
            événement := EventFromAction ; Apply ; ajouter au journal ; appeler Hook
            si start_match → enregistrer sa fin prévue (now + Duree(...))
            si draw, repechage, next_phase ou finish → SORTIR de la boucle (l'état a changé)
@@ -86,6 +86,11 @@ Le score du vainqueur est ``n`` ; celui du perdant est tiré uniformément dans 
 résultat porte ``Winner`` (le vainqueur, ``Final[0]``), ``Minutes`` (durée totale depuis
 ``Start``), ``NMatches`` (matchs lancés) et ``Steps`` ; en cas d'erreur, ``Err`` est rempli et
 ``State``/``Journal`` sont ceux du moment de l'erreur.
+
+Un match retenu attend comme un ``Wait`` : sans table libre (``waiting_table``), il n'est pas
+lancé. Une salle de ``Config.Tables.Count`` tables borne donc la simulation : jamais plus de
+matchs en cours que de tables, et la durée simulée est celle de cette salle ; ``Count = 0`` la
+laisse illimitée.
 
 ``Hook`` est appelé après chaque événement appliqué : c'est le point d'accroche des tests
 d'invariants. Une erreur renvoyée par le hook interrompt la simulation.
@@ -128,6 +133,7 @@ Particularités :
 - pour un match déjà en cours, la durée restante est un tirage neuf moins le temps déjà écoulé,
   **plancher à 10 % de la durée attendue** (``rules.RemainingDuration``) ;
 - le perdant d'un match simulé marque 0 ; chaque fin simulée est bornée à 20 000 tours de boucle ;
+- les tables de la configuration bornent chaque fin simulée, comme ``Run`` ;
 - un tournoi déjà terminé renvoie ``[0]``.
 
 Les règles de prévision elles-mêmes vivent dans ``rules`` (``WinProbability``, ``MeanRating``,
